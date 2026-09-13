@@ -1,0 +1,56 @@
+# --- dependencies ---------------------------------------------------------
+node_modules/
+
+# --- build output ---------------------------------------------------------
+dist/
+*.tsbuildinfo
+.vite/
+# tsc -b leftovers. A vite.config.js at the root SHADOWS vite.config.ts, so a
+# stray one silently overrides the real config, base: './' included.
+vite.config.js
+vite.config.d.ts
+
+# --- local environment ----------------------------------------------------
+.env
+.env.*
+*.local
+
+# --- editor and OS cruft --------------------------------------------------
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# --- private team material: never commit ----------------------------------
+# Drive and Notion exports, meeting notes, finance and survey responses, and
+# anything with a password in it. Some of these carry personal data and
+# unpublished results, so they stay on Drive.
+#
+# These patterns are deliberately broad, and they are not the real safeguard:
+# look at what you are committing. `git status` before every `git add`. If you
+# need to cite one of these documents on the wiki, cite it by name in
+# docs/PROJECT_CONTENT.md rather than committing the file.
+#
+# Matched at any depth, as a folder or a file, so a renamed folder or a zipped
+# export is still caught.
+**/iGEM 20*
+**/igem 20*
+**/iGEM20*
+**/igem20*
+**/notion content*
+**/*Private & Shared*
+**/Screenshot *.png
+**/Screen Shot *.png
+
+# Office documents and archives. Wiki figures belong in public/ as png, svg or
+# pdf; a .docx or a .zip in here is almost always a Drive export. Add a `!`
+# exception below if the wiki genuinely needs one.
+*.docx
+*.doc
+*.xlsx
+*.xls
+*.pptx
+*.ppt
+*.zip
+*.csv

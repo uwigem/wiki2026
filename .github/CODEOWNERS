@@ -1,0 +1,18 @@
+# Web Dev reviews anything that can break the whole site at once.
+# Content files under src/site/content/ are deliberately not listed: those are
+# the files everyone edits, and requiring a review on each one would stall the
+# wiki. Replace the placeholder below with the real GitHub team or usernames.
+
+# TODO(webdev): replace @WA-iGEM/web-dev with the real team handle.
+/src/engine/                        @WA-iGEM/web-dev
+/src/components/PixelCanvas.tsx     @WA-iGEM/web-dev
+/src/hooks/useAmbientAudio.ts       @WA-iGEM/web-dev
+/src/App.tsx                        @WA-iGEM/web-dev
+/src/index.css                      @WA-iGEM/web-dev
+/src/site/components/               @WA-iGEM/web-dev
+/src/site/pages/                    @WA-iGEM/web-dev
+/vite.config.ts                     @WA-iGEM/web-dev
+/tsconfig.json                      @WA-iGEM/web-dev
+/tsconfig.node.json                 @WA-iGEM/web-dev
+/package.json                       @WA-iGEM/web-dev
+/.github/                           @WA-iGEM/web-dev

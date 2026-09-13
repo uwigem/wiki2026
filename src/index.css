@@ -1,0 +1,507 @@
+/* TODO(assets): self-host these two fonts under /public/fonts before the wiki
+   freeze. igem.wiki should not depend on fonts.googleapis.com at load time. */
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=Nunito:ital,wght@0,400..800;1,400..700&display=swap');
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------------- *
+ * COLOUR
+ *
+ * Every colour token points at a `--p-*` variable published from
+ * src/engine/palette.ts at startup (see site/palette-vars.ts), so the website is
+ * painted from the same palette as the garden and cannot drift from it. Editing
+ * `BASE` in palette.ts re-themes the panels, buttons, signs and borders along
+ * with the world.
+ *
+ * Where this scale has more steps than the engine has greens, steps collapse
+ * onto the same engine colour rather than inventing an in-between tint.
+ *
+ * Read the leaf scale as: 50-200 are surfaces, 300-600 are borders and rules,
+ * 700 is a border-only green, and 800-950 are text. 700 is too light to carry
+ * body text on cream (3.4:1), so text uses 800 or darker. See docs/STYLE_GUIDE.md.
+ * ------------------------------------------------------------------------- */
+@theme {
+  --font-pixel: 'Pixelify Sans', ui-monospace, 'Courier New', monospace;
+  --font-body: 'Nunito', ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Pinned in pixels. Tailwind v4 defaults these to rem, which moves them for
+     anyone whose browser font size is not 16px, and src/site/layout.ts measures
+     the same breakpoints in pixels to line the canvases up with the reading
+     column. Keep the two in step. */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+
+  /* Body type scale. Use these rather than an arbitrary `text-[0.94rem]`. */
+  --text-body: 0.98rem; /* paragraphs inside a panel */
+  --text-body-sm: 0.9rem; /* supporting copy, card bodies */
+  --text-note: 0.78rem; /* sources, captions, taglines */
+  --text-tag: 0.68rem; /* pixel eyebrow labels and tags */
+
+  /* greens: bushHi > bushLight > grass4 > grass2 > grass1 > grass3 > bushDark > shadow */
+  --color-leaf-50: var(--p-bushHi);
+  --color-leaf-100: var(--p-bushHi);
+  --color-leaf-200: var(--p-bushLight);
+  --color-leaf-300: var(--p-grass4);
+  --color-leaf-400: var(--p-grass2);
+  --color-leaf-500: var(--p-grass1);
+  --color-leaf-600: var(--p-grass3);
+  --color-leaf-700: var(--p-bushDark);
+  --color-leaf-800: var(--p-shadow);
+  --color-leaf-900: var(--p-shadow);
+  --color-leaf-950: var(--p-shadow);
+
+  /* water */
+  --color-pool-100: var(--p-foam);
+  --color-pool-200: var(--p-waterLight);
+  --color-pool-400: var(--p-water);
+  --color-pool-600: var(--p-waterDeep);
+
+  /* petals */
+  --color-petal-lilac: var(--p-lilacPetal);
+  --color-petal-pink: var(--p-pinkBud);
+  --color-petal-daisy: var(--p-daisyCore);
+  --color-petal-cream: var(--p-daisyPetal);
+  --color-petal-blue: var(--p-bluePetal);
+
+  /* wood: the hedgehog's quill tones, used for signboards */
+  --color-wood: var(--p-quill);
+  --color-wood-line: var(--p-quillDark);
+
+  /* stone */
+  --color-stone: var(--p-stoneLight);
+  --color-stone-dark: var(--p-stoneDark);
+}
+
+@layer base {
+  /*
+   * The two derived colours on the site. Everything else is a palette value
+   * used as-is. Both exist because the palette's darkest tones were mixed for
+   * pixel art on grass, not for small text on a panel, and they miss WCAG AA
+   * by a wide margin as ink.
+   *
+   * --ink       the palette's `shadow`, darkened. 11.3:1 on a cream panel and
+   *             5.9:1 on the page's grass, against 3.6:1 for `shadow` alone.
+   * --sign-ink  `quillDark`, darkened, for text on a wooden sign. 6.3:1 on the
+   *             sign's own quill brown, against 1.8:1 for `quillDark` alone.
+   *
+   * If you re-theme the palette, re-check both with a contrast checker.
+   */
+  :root {
+    --ink: color-mix(in srgb, var(--p-shadow) 62%, #000);
+    --sign-ink: color-mix(in srgb, var(--p-quillDark) 30%, #000);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+
+  html,
+  body,
+  #root {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    /* The garden's dominant grass tone. The baked terrain blends grass3, grass1
+       and grass2, and grass1 is the band that turns up most, so the page reads
+       as the same green as the animated meadow. Not grass2, the palest band,
+       which made the static pages look washed out beside the hero. */
+    background: var(--p-grass1);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Pixel type for headings, labels and buttons. Never for body copy: Pixelify
+     Sans is a display face and a paragraph of it is genuinely hard to read.
+     Covers h1 to h6 so a nested heading does not silently fall back. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .pixel {
+    font-family: var(--font-pixel);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    -webkit-font-smoothing: none;
+  }
+
+  canvas,
+  .pixelated {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  /* The playground is the full-screen toy: lock the page behind it. */
+  body.playground-open {
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  /*
+   * The reading panel. Flat cream, hard border, hard offset shadow, no
+   * gradients. Body copy lives on one of these. The grass shows around them,
+   * which is what makes the page feel like a garden without anything being
+   * printed on top of grass.
+   */
+  .panel {
+    background: var(--p-bushHi);
+    border: 3px solid var(--p-bushDark);
+    border-radius: 2px;
+    box-shadow: 4px 4px 0 var(--p-shadow);
+  }
+  .panel-flat {
+    background: var(--p-bushHi);
+    border: 3px solid var(--p-grass4);
+    border-radius: 2px;
+  }
+
+  /* A wooden garden signboard, in the engine's quill tones. */
+  .sign {
+    background: var(--p-quill);
+    border: 3px solid var(--p-quillDark);
+    border-radius: 2px;
+    box-shadow: 4px 4px 0 var(--p-shadow);
+    color: var(--sign-ink);
+  }
+
+  .pixel-btn {
+    font-family: var(--font-pixel);
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.05rem;
+    border: 3px solid var(--p-bushDark);
+    border-radius: 2px;
+    background: var(--p-bushLight);
+    color: var(--ink);
+    box-shadow: 3px 3px 0 var(--p-shadow);
+    cursor: pointer;
+    /* Colour only. No transform bounce. */
+    transition: background-color 120ms ease;
+  }
+  .pixel-btn:hover {
+    background: var(--p-grass4);
+  }
+  .pixel-btn:active {
+    box-shadow: 1px 1px 0 var(--p-shadow);
+  }
+  .pixel-btn-primary {
+    background: var(--p-water);
+  }
+  .pixel-btn-primary:hover {
+    background: var(--p-waterLight);
+  }
+
+  /*
+   * The focus ring. `--ink` and not a petal colour: the ring has to clear 3:1
+   * against whatever sits behind it, and it appears on both cream panels
+   * (11.3:1) and bare grass (5.9:1). The lilac this used to use measured 2.2:1
+   * and 1.2:1, which is to say invisible on the page background.
+   */
+  /* `[tabindex]:not([tabindex="-1"])` on purpose: the skip link moves focus to
+     <main tabindex="-1">, and a ring around the whole page is not a focus
+     indicator, it is a full-width green rule. */
+  :where(a, button, input, select, textarea, [tabindex]:not([tabindex='-1'])):focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .nav-link {
+    font-family: var(--font-pixel);
+    position: relative;
+    padding: 0.35rem 0.7rem 0.45rem;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    color: var(--ink);
+    cursor: pointer;
+    background: none;
+    transition: background-color 140ms ease;
+  }
+  .nav-link:hover {
+    background: var(--p-bushLight);
+  }
+
+  /*
+   * A nav group: the label links to the group's landing page, the caret button
+   * opens its menu. The two are separate controls so the menu can be opened
+   * from the keyboard, but they are painted as one sign so they read as a
+   * single nav item.
+   */
+  .nav-group {
+    font-family: var(--font-pixel);
+    display: flex;
+    align-items: center;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    color: var(--ink);
+    transition: background-color 140ms ease;
+  }
+  .nav-group:hover {
+    background: var(--p-bushLight);
+  }
+  .nav-group > a {
+    padding: 0.35rem 0.25rem 0.45rem 0.7rem;
+  }
+  .nav-group > button {
+    padding: 0.35rem 0.6rem 0.45rem 0.15rem;
+    cursor: pointer;
+  }
+  /* The current page. The border is what carries it: the two greens alone are a
+     1.1:1 difference, which many people cannot see at all. `aria-current="page"`
+     carries the same information to screen readers. */
+  .nav-link.is-active,
+  .nav-group.is-active {
+    background: var(--p-bushLight);
+    border-color: var(--p-shadow);
+  }
+
+  /*
+   * Keyboard-only jump past the nav to the page content. Off-screen until it
+   * takes focus, which is the first Tab press on every page.
+   */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 60;
+    font-family: var(--font-pixel);
+    padding: 0.6rem 1rem;
+    background: var(--p-bushHi);
+    color: var(--ink);
+    border: 3px solid var(--p-shadow);
+    border-radius: 2px;
+  }
+  .skip-link:focus-visible {
+    left: 0.5rem;
+    top: 0.5rem;
+  }
+
+  /* Visually hidden, still read aloud. Used for the route-change announcement. */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .prose-garden p {
+    margin: 0 0 0.9rem;
+    max-width: 68ch;
+  }
+  .prose-garden p:last-child {
+    margin-bottom: 0;
+  }
+
+  /*
+   * `**bold**` from the content files. Scoped to `strong` rather than to
+   * `.prose-garden strong`, so the same markup looks the same in a card as it
+   * does in a paragraph. `strong` on this site only ever comes from RichText.
+   */
+  strong {
+    color: var(--ink);
+    background: var(--p-daisyPetal);
+    padding: 0 2px;
+  }
+
+  /* Curly quotes around a pulled-out quote, wherever its paragraphs start and
+     end. Decorative, so they are not announced. */
+  .quote-sign p:first-child::before {
+    content: '\201C';
+  }
+  .quote-sign p:last-child::after {
+    content: '\201D';
+  }
+
+  /*
+   * Digits. Pixelify Sans renders 0/8 and 2/8 close enough to be misread at
+   * small sizes, and "22 Nov 2025" reading as "88 Nov 8085" is an error, not a
+   * style. Meaningful numbers use the body font with tabular figures.
+   */
+  .numeral {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* The pixel eyebrow label above a heading. */
+  .kicker {
+    font-family: var(--font-pixel);
+    font-size: var(--text-note);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    /* The dark ink, not a mid green: this often sits directly on grass. */
+    color: var(--ink);
+  }
+
+  /*
+   * A small numeric badge: the step number on a card, the date on a notebook
+   * entry, the position in the homepage path. One definition so they match.
+   */
+  .badge {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    flex-shrink: 0;
+    font-size: var(--text-tag);
+    padding: 0.1rem 0.4rem;
+    border: 2px solid var(--p-grass3);
+    border-radius: 2px;
+    background: var(--p-bushLight);
+    color: var(--ink);
+  }
+
+  /*
+   * The "not written yet" marker. Content that is still missing is visible on
+   * the page rather than hidden in a comment, so the gaps are obvious to
+   * everyone editing. These stay until the content lands.
+   */
+  .todo-note {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem 0.7rem;
+    border: 2px dashed var(--p-daisyCore);
+    border-radius: 2px;
+    background: var(--p-bushHi);
+    color: var(--ink);
+  }
+
+  /* The playground's sparkle slider. Its own look, kept as authored. */
+  .pond-range {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    background: var(--p-bushLight);
+    border: 2px solid var(--p-bushDark);
+  }
+  .pond-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 14px;
+    background: var(--p-water);
+    border: 2px solid var(--p-shadow);
+    cursor: pointer;
+  }
+  .pond-range::-moz-range-thumb {
+    width: 10px;
+    height: 14px;
+    background: var(--p-water);
+    border: 2px solid var(--p-shadow);
+    cursor: pointer;
+    border-radius: 0;
+  }
+}
+
+/* ------------------------------------------------------------------------- *
+ * MOTION
+ *
+ * There is no ambient CSS animation on this site. All movement in the garden,
+ * the water, the waterfall, ripples, sparkles, swaying plants and the
+ * hedgehog's hop-walk, is produced by the engine (game.ts, player.ts) on the
+ * canvas behind the page. The only CSS transitions here are UI reveals for the
+ * homepage's opening sequence, which fade, settle and then stop. The only
+ * keyframe on the site is `fade-up`, used by `.reveal`.
+ * ------------------------------------------------------------------------- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@layer components {
+  .reveal {
+    animation: fade-up 520ms ease-out both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    /* Delays go too: the reveals start at opacity 0 with fill-mode `both`, so a
+       surviving delay would hide content rather than stagger it. */
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ------------------------------------------------------------------------- *
+ * PRINT
+ *
+ * Judges and advisors do print wiki pages. Without these rules a printed page
+ * is mostly blank: content fades in on scroll, so anything below the fold is
+ * still at opacity 0 when the print snapshot is taken, and the fixed garden
+ * canvas covers the sheet.
+ * ------------------------------------------------------------------------- */
+@media print {
+  /* Undo the scroll-reveal initial state so every section actually prints. */
+  .opacity-0 {
+    opacity: 1 !important;
+  }
+  /* The garden is decoration; the pixel art in the page is <img>, not canvas,
+     so nothing meaningful is lost by dropping the canvas layers. */
+  canvas {
+    display: none !important;
+  }
+  /* Black on white, not palette greens: a printer has no garden behind the page
+     and pale green ink on white paper is close to unreadable. */
+  body {
+    background: white;
+    color: black;
+  }
+  .panel,
+  .panel-flat,
+  .sign {
+    box-shadow: none;
+    background: white;
+    color: black;
+    break-inside: avoid;
+  }
+  header,
+  .skip-link,
+  .pixel-btn {
+    display: none !important;
+  }
+}
