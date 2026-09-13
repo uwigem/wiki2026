@@ -9,9 +9,14 @@ or run the site on your laptop, read [CONTRIBUTING.md](CONTRIBUTING.md) instead.
 
 ## Before your first edit
 
-Ask Web Dev to add you to the **uwigem** GitHub organisation. The repo is
-private, so until they do, the link below will show "404". You need a free
-GitHub account first: <https://github.com/signup>.
+Two things, once:
+
+1. Make a free GitHub account if you do not have one: <https://github.com/signup>.
+2. Send your GitHub username to Web Dev and ask to be added to the **uwigem**
+   organisation.
+
+The repo is private, so until step 2 is done every link on this page will show
+you a "404" page. That is not you doing something wrong.
 
 ## Where the words are
 
