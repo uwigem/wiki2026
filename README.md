@@ -15,8 +15,10 @@ hedgehog and the site is a garden being tended.
 
 ## Start here
 
-- **Adding or editing content?** [CONTRIBUTING.md](CONTRIBUTING.md). That is
-  almost certainly the only document you need.
+- **Just changing some words?** [EDITING.md](EDITING.md). Five minutes, in your
+  browser, nothing to install. This is the right door for most of the team.
+- **Adding a page, or running the site on your laptop?**
+  [CONTRIBUTING.md](CONTRIBUTING.md).
 - **Writing or styling something new?** [docs/STYLE_GUIDE.md](docs/STYLE_GUIDE.md).
 - **Checking a claim against the team's own documents?**
   [docs/PROJECT_CONTENT.md](docs/PROJECT_CONTENT.md) maps what is on the wiki

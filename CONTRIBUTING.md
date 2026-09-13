@@ -3,6 +3,11 @@
 This guide assumes you have never touched a React project and do not intend to
 start. Almost every change to this wiki is editing a list of text in one file.
 
+> **If you only want to change some words, you do not need any of this.** You can
+> edit the wiki in your browser with nothing installed: see
+> [EDITING.md](EDITING.md). Come back here when you want to add a whole new page,
+> or to see the site running on your own laptop before you push it.
+
 If you get stuck at any point, ask on the Web Dev channel. Nobody here expects
 you to debug a build error on your own.
 

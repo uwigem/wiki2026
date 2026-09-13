@@ -1,0 +1,40 @@
+name: Request review
+
+# Asks for a review on every pull request.
+#
+# This exists because .github/CODEOWNERS cannot do it here: GitHub only applies
+# CODEOWNERS on a private repository when the organisation is on a paid plan,
+# and uwigem is on the free plan. Branch protection is unavailable for the same
+# reason, so nothing blocks a merge; this only makes sure the review is asked
+# for and nobody has to remember to add a reviewer by hand.
+#
+# To change who reviews, change REVIEWER below and the owner in CODEOWNERS.
+
+on:
+  pull_request:
+    types: [opened, ready_for_review, reopened]
+
+permissions:
+  pull-requests: write
+
+env:
+  REVIEWER: rishabhlgoenka
+
+jobs:
+  request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ask for a review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          # GitHub rejects a review request aimed at the person who opened the
+          # pull request, so skip rather than fail the job.
+          if [ "$AUTHOR" = "$REVIEWER" ]; then
+            echo "$REVIEWER opened this pull request, so there is nobody to ask."
+            exit 0
+          fi
+          gh pr edit "$PR" --repo "$GITHUB_REPOSITORY" --add-reviewer "$REVIEWER"
+          echo "Requested a review from $REVIEWER."
