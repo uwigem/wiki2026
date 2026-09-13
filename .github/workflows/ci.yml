@@ -1,0 +1,44 @@
+name: Checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Need main as well, so the frozen-engine check below can diff.
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Type-checks the project and enforces the house rules in
+      # docs/STYLE_GUIDE.md. Same command contributors run locally.
+      - run: npm run check
+
+      - run: npm run build
+
+      # The engine is the team's own and is frozen. Changing it here would
+      # re-colour or break every page at once, so a pull request that touches it
+      # has to be deliberate: ask a Web Dev lead to review and merge it directly.
+      - name: No changes to the frozen engine
+        if: github.event_name == 'pull_request'
+        run: |
+          changed=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- \
+            src/engine src/components/PixelCanvas.tsx src/hooks/useAmbientAudio.ts)
+          if [ -n "$changed" ]; then
+            echo "This pull request changes frozen engine files:"
+            echo "$changed"
+            echo ""
+            echo "See the 'Which files you may edit' section of CONTRIBUTING.md."
+            exit 1
+          fi
