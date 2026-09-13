@@ -21,3 +21,5 @@ export enum Water {
   DEEP = 4, // blocks
   FALL = 5, // waterfall column (blocks; animated on top)
 }
+
+// temporary line to prove the frozen-engine guard fails a pull request
