@@ -1,20 +1,23 @@
-# Web Dev reviews anything that can break the whole site at once.
-# Content files under src/site/content/ are deliberately not listed: those are
-# the files everyone edits, and requiring a review on each one would stall the
-# wiki. Replace the placeholder below with the real GitHub team or usernames.
+# Who reviews changes to this repo.
+#
+# Every file, so that every pull request goes past a second pair of eyes before
+# it reaches the published wiki.
+#
+# Note on plans: GitHub only applies CODEOWNERS on a PRIVATE repository if the
+# organisation is on a paid plan. uwigem is on the free plan today, so this file
+# does not auto-request anything on its own. It is here because it documents
+# ownership, and because it starts working the moment the org upgrades or the
+# repo is made public.
+#
+# What actually requests the review today is .github/workflows/request-review.yml,
+# which asks on every pull request. If you change the reviewer, change it in both
+# places.
+#
+# A team handle would be better than a single person once one exists. The
+# previous version of this file pointed at @uwigem/igem2026, which GitHub
+# rejected on all twelve lines: a team only counts as an owner if it is visible
+# and has write access to this repository. Check any change here with:
+#
+#   gh api repos/uwigem/wiki2026/codeowners/errors
 
-# TODO(webdev): @uwigem/igem2026 is the whole team, which is the only group that
-# exists today, so every one of these paths asks everyone for a review. Make a
-# narrower web-dev team in the org and swap it in here.
-/src/engine/                        @uwigem/igem2026
-/src/components/PixelCanvas.tsx     @uwigem/igem2026
-/src/hooks/useAmbientAudio.ts       @uwigem/igem2026
-/src/App.tsx                        @uwigem/igem2026
-/src/index.css                      @uwigem/igem2026
-/src/site/components/               @uwigem/igem2026
-/src/site/pages/                    @uwigem/igem2026
-/vite.config.ts                     @uwigem/igem2026
-/tsconfig.json                      @uwigem/igem2026
-/tsconfig.node.json                 @uwigem/igem2026
-/package.json                       @uwigem/igem2026
-/.github/                           @uwigem/igem2026
+*   @rishabhlgoenka
