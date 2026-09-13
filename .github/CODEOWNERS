@@ -3,16 +3,18 @@
 # the files everyone edits, and requiring a review on each one would stall the
 # wiki. Replace the placeholder below with the real GitHub team or usernames.
 
-# TODO(webdev): replace @WA-iGEM/web-dev with the real team handle.
-/src/engine/                        @WA-iGEM/web-dev
-/src/components/PixelCanvas.tsx     @WA-iGEM/web-dev
-/src/hooks/useAmbientAudio.ts       @WA-iGEM/web-dev
-/src/App.tsx                        @WA-iGEM/web-dev
-/src/index.css                      @WA-iGEM/web-dev
-/src/site/components/               @WA-iGEM/web-dev
-/src/site/pages/                    @WA-iGEM/web-dev
-/vite.config.ts                     @WA-iGEM/web-dev
-/tsconfig.json                      @WA-iGEM/web-dev
-/tsconfig.node.json                 @WA-iGEM/web-dev
-/package.json                       @WA-iGEM/web-dev
-/.github/                           @WA-iGEM/web-dev
+# TODO(webdev): @uwigem/igem2026 is the whole team, which is the only group that
+# exists today, so every one of these paths asks everyone for a review. Make a
+# narrower web-dev team in the org and swap it in here.
+/src/engine/                        @uwigem/igem2026
+/src/components/PixelCanvas.tsx     @uwigem/igem2026
+/src/hooks/useAmbientAudio.ts       @uwigem/igem2026
+/src/App.tsx                        @uwigem/igem2026
+/src/index.css                      @uwigem/igem2026
+/src/site/components/               @uwigem/igem2026
+/src/site/pages/                    @uwigem/igem2026
+/vite.config.ts                     @uwigem/igem2026
+/tsconfig.json                      @uwigem/igem2026
+/tsconfig.node.json                 @uwigem/igem2026
+/package.json                       @uwigem/igem2026
+/.github/                           @uwigem/igem2026

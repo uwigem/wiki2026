@@ -26,15 +26,15 @@ on Windows (it comes with Git). You will need two things installed first.
 - [Git](https://git-scm.com/downloads). Check it worked with `git --version`.
 - [Node](https://nodejs.org), version 20 or newer. Check with `node -v`.
 
-Then ask Web Dev for access to the team repository, and copy it onto your
-machine. Replace the URL with the one they give you:
+The repository is private, so ask Web Dev to add you to the `uwigem` GitHub
+organisation first. Then copy it onto your machine:
 
 ```bash
-git clone https://github.com/WA-iGEM/wa-igem-2026-wiki.git
+git clone https://github.com/uwigem/wiki2026.git
 ```
 
 ```bash
-cd wa-igem-2026-wiki
+cd wiki2026
 ```
 
 Every command in the rest of this guide is run from inside that folder.
