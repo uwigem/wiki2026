@@ -10,7 +10,7 @@
  * only there: `prose`, `cards` items, `steps` items and `quote`. Everywhere else
  * the characters are published literally. See docs/STYLE_GUIDE.md for the table.
  */
-
+import type { CycleData } from '../components/CycleWheel'
 export interface CardItem {
   title: string
   body: string
@@ -24,6 +24,8 @@ export type Block =
   | { kind: 'cards'; heading?: string; intro?: string; items: CardItem[]; source?: string }
   /** A numbered path of stepping stones, for pipelines and cycles. */
   | { kind: 'steps'; heading?: string; intro?: string; items: CardItem[]; source?: string }
+    /** The design/build/test/learn wheel, with one tab per cycle. */
+  | { kind: 'cycles'; heading?: string; intro?: string; cycles: CycleData[] }
   /** A pulled-out quote on a wooden sign. */
   | { kind: 'quote'; body: string[]; source?: string }
   /** Compact key/value facts. */
@@ -257,25 +259,29 @@ const engineering: Page = {
   intro: 'The build, test, learn cycles, in the order we actually ran them, including the parts that did not work the first time.',
   blocks: [
     {
-      kind: 'steps',
-      heading: 'Cycle 1: choosing the target',
-      intro: 'This cycle is complete. It is how the project became the project.',
-      items: [
+      kind: 'cycles',
+      cycles: [
         {
-          title: 'Design',
-          body: 'More than a dozen project proposals were developed across the team in early 2026, each with a target, a mechanism, and a feasibility argument.',
-        },
-        {
-          title: 'Build',
-          body: 'Proposals were presented to the full team, then narrowed by a top-three vote.',
-        },
-        {
-          title: 'Test',
-          body: 'The finalists were pressure-tested with the advisors against one repeated question. How are you going to test this, and are the assays actually feasible.',
-        },
-        {
-          title: 'Learn',
-          body: 'Feasibility decided it, not novelty. The MMM and SMO project won because the advising lab already has the cell lines, the reporters, and the readouts to test it.',
+          heading: 'Cycle 1: choosing the target',
+          intro: 'This cycle is complete. It is how the project became the project.',
+          items: [
+            {
+              title: 'Design',
+              body: 'More than a dozen project proposals were developed across the team in early 2026, each with a target, a mechanism, and a feasibility argument.',
+            },
+            {
+              title: 'Build',
+              body: 'Proposals were presented to the full team, then narrowed by a top-three vote.',
+            },
+            {
+              title: 'Test',
+              body: 'The finalists were pressure-tested with the advisors against one repeated question. How are you going to test this, and are the assays actually feasible.',
+            },
+            {
+              title: 'Learn',
+              body: 'Feasibility decided it, not novelty. The MMM and SMO project won because the advising lab already has the cell lines, the reporters, and the readouts to test it.',
+            },
+          ],
         },
       ],
     },
@@ -313,7 +319,7 @@ const engineering: Page = {
       body: [
         'TODO(protein design): add scored results for cycle 2 and the MEGF8 binders once they exist.',
         'TODO(wetlab): cycles 3 to 5 (expression and purification, binding validation, the cell-based functional assay) as data comes in.',
-        'TODO(webdev): add a diagram of the cycle, and consider making this page the hub that links out to each subteam.',
+        'TODO(webdev): consider making this page the hub that links out to each subteam.',
       ],
     },
   ],
