@@ -5,6 +5,7 @@ import FlowerBedCard from '../components/FlowerBedCard'
 import GardenSection, { Reveal, SectionDivider } from '../components/GardenSection'
 import PixelSign, { QuoteSign, TextPanel, TodoPanel } from '../components/PixelSign'
 import RichText from '../components/RichText'
+import CycleWheel from '../components/CycleWheel'
 
 /**
  * Generic content page, rendered from data in `content/pages.ts`.
@@ -99,7 +100,8 @@ function BlockView({ block }: { block: Block }) {
           {block.source && <p className="mt-3 text-note text-leaf-800">{block.source}</p>}
         </div>
       )
-
+    case 'cycles':
+      return <CycleWheel heading={block.heading} intro={block.intro} cycles={block.cycles} />
     case 'steps':
       return (
         <div className="panel px-5 py-5 sm:px-7 sm:py-6">
