@@ -1,0 +1,115 @@
+name: Publish live preview
+
+# Builds the site and publishes it to GitHub Pages, so the whole team can see
+# the current state of the wiki at https://uwigem.github.io/wiki2026/ while we
+# work on it.
+#
+# This is the team's working preview, not the competition wiki. The official
+# wiki is uploaded to igem.wiki separately; see "Deploying to igem.wiki" in the
+# README.
+#
+# Modelled on the uw-lavin.github.io deploy, minus its calendar sync.
+
+on:
+  # Every merge to main goes live, usually within a minute or two.
+  push:
+    branches: [main]
+
+  # Every 10 minutes, a quick check that the live site matches main. It only
+  # rebuilds when it does not, which catches a deploy that failed or was
+  # cancelled in the queue. Off the hour on purpose: GitHub delays scheduled
+  # runs most at :00. A run with nothing to do takes a few seconds.
+  #
+  # GitHub switches scheduled workflows off in a public repo after 60 days
+  # with no commits. That is harmless here: pushes still publish, and with no
+  # commits the live site is already current. Re-enable it from the Actions
+  # tab if it ever matters.
+  schedule:
+    - cron: '4,14,24,34,44,54 * * * *'
+
+  # "Run workflow" in the Actions tab: publish right now.
+  workflow_dispatch:
+
+# One publish at a time. A newer one waits rather than cancelling a deploy
+# halfway, which could leave the live site half updated.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      publish: ${{ steps.decide.outputs.publish }}
+    steps:
+      - uses: actions/checkout@v5
+
+      # A scheduled run publishes only if the live site is not built from the
+      # current main. The build stamps its commit into version.txt (below), and
+      # this reads it back.
+      - name: Decide whether to publish
+        id: decide
+        run: |
+          case "${{ github.event_name }}" in
+            push|workflow_dispatch) publish=true ;;
+            schedule)
+              live=$(curl -fsS "https://uwigem.github.io/wiki2026/version.txt?t=$(date +%s)" 2>/dev/null || echo none)
+              if [ "$live" = "$(git rev-parse HEAD)" ]; then publish=false; else publish=true; fi
+              echo "Live: $live"
+              echo "Main: $(git rev-parse HEAD)" ;;
+            *) publish=false ;;
+          esac
+          echo "publish=$publish" >> "$GITHUB_OUTPUT"
+          echo "Publish: $publish"
+
+      - uses: actions/setup-node@v5
+        if: steps.decide.outputs.publish == 'true'
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+        if: steps.decide.outputs.publish == 'true'
+
+      # `npm run build` type-checks and then bundles, so a page that would not
+      # compile never reaches the live site. The house-rule checks (em dashes,
+      # hard-coded colours) are deliberately NOT a gate here: a style slip shows
+      # as a red X on the pull request, but it should not take the preview down
+      # for the whole team.
+      - run: npm run build
+        if: steps.decide.outputs.publish == 'true'
+
+      - name: Prepare the preview build
+        if: steps.decide.outputs.publish == 'true'
+        run: |
+          # The commit this build came from, for the scheduled check above.
+          git rev-parse HEAD > dist/version.txt
+          # Tell GitHub Pages to serve the files as they are.
+          touch dist/.nojekyll
+          # Keep the preview out of search results, so a search for the project
+          # finds the official igem.wiki page and not this working copy. Added
+          # here and not in index.html, so it never ships to igem.wiki.
+          sed -i 's|<head>|<head>\n    <meta name="robots" content="noindex, nofollow" />|' dist/index.html
+          grep -q 'name="robots"' dist/index.html
+
+      - uses: actions/upload-pages-artifact@v5
+        if: steps.decide.outputs.publish == 'true'
+        with:
+          path: ./dist
+
+  deploy:
+    if: needs.build.outputs.publish == 'true'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

@@ -13,6 +13,24 @@ hedgehog and the site is a garden being tended.
 > lands, change `PROJECT_TITLE` in `src/site/content/site.ts` and it updates
 > everywhere.
 
+## See it live
+
+**<https://uwigem.github.io/wiki2026/>** always shows what is on `main`.
+
+It updates by itself. Every merge to `main` rebuilds the site and publishes it,
+usually within a minute or two, and a check every 10 minutes republishes if a
+deploy was ever missed. Nobody has to remember to do anything. The workflow is
+`.github/workflows/deploy.yml`; the Actions tab shows each publish, and its
+"Run workflow" button publishes on demand.
+
+This is the team's working preview, not the competition wiki. It is hidden from
+search engines, so a search for the project finds igem.wiki rather than this.
+The official wiki is uploaded separately, see
+[Deploying to igem.wiki](#deploying-to-igemwiki).
+
+This repository is public. Everything in it, including its history, can be read
+by anyone, so it holds the website and nothing else.
+
 ## Start here
 
 - **Just changing some words?** [EDITING.md](EDITING.md). Five minutes, in your
@@ -94,9 +112,8 @@ scripts/             the house-rule checker
 ```
 
 Every pull request runs `npm run check` and `npm run build`, and fails if it
-touches a frozen engine file. `.github/CODEOWNERS` routes anything that can
-break the whole site at once to the Web Dev leads; it currently names a
-placeholder team handle that needs replacing with the real one.
+touches a frozen engine file. Every merge to `main` publishes the live preview.
+`.github/CODEOWNERS` requests a review from Web Dev on every pull request.
 
 ### Where the content lives
 
@@ -161,6 +178,9 @@ on anyone remembering to type it.
 
 ## Deploying to igem.wiki
 
+The live preview above publishes itself. The competition wiki does not: it is a
+separate, deliberate step, done when the team is ready.
+
 `npm run build` writes `dist/`. Upload its contents to the team's wiki space, so
 that `dist/index.html` is served at `https://2026.igem.wiki/washington/`.
 
@@ -172,6 +192,9 @@ Two things make that work, and both are easy to undo by accident:
   subpath.
 - **Hash routing.** Every route is `#/something`, so the server only ever has to
   serve one file and needs no rewrite rules.
+
+The same two things are why the live preview works at
+`uwigem.github.io/wiki2026/`, which is also a subpath.
 
 To check a build locally the way it will actually be served:
 

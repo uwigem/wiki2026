@@ -1,22 +1,18 @@
 # Who reviews changes to this repo.
 #
 # Every file, so that every pull request goes past a second pair of eyes before
-# it reaches the published wiki.
+# it reaches the live site.
 #
-# Note on plans: GitHub only applies CODEOWNERS on a PRIVATE repository if the
-# organisation is on a paid plan. uwigem is on the free plan today, so this file
-# does not auto-request anything on its own. It is here because it documents
-# ownership, and because it starts working the moment the org upgrades or the
-# repo is made public.
+# The repo is public, so GitHub applies this file on the free plan and requests
+# the review automatically. .github/workflows/request-review.yml asks too; it
+# was the only thing that worked while the repo was private, and it has been
+# seen working on real pull requests. Once a review request from this file has
+# been seen on a teammate's PR, that workflow can be deleted. If you change the
+# reviewer, change it in both places until then.
 #
-# What actually requests the review today is .github/workflows/request-review.yml,
-# which asks on every pull request. If you change the reviewer, change it in both
-# places.
-#
-# A team handle would be better than a single person once one exists. The
-# previous version of this file pointed at @uwigem/igem2026, which GitHub
-# rejected on all twelve lines: a team only counts as an owner if it is visible
-# and has write access to this repository. Check any change here with:
+# A team handle would be better than one person once a web-dev team exists. A
+# team only counts as an owner if it is visible and has write access to this
+# repository, so check any change here with:
 #
 #   gh api repos/uwigem/wiki2026/codeowners/errors
 
