@@ -3,6 +3,9 @@
 **You do not need to install anything.** You can change any words on the wiki
 from your browser, on github.com, in about five minutes.
 
+**See the site as it is right now:** <https://uwigem.github.io/wiki2026/>. It
+updates by itself a minute or two after any change is merged.
+
 This page is for changing text: fixing a sentence, adding a paragraph, writing
 your bio, filling in your subteam's section. If you want to add a whole new page
 or run the site on your laptop, read [CONTRIBUTING.md](CONTRIBUTING.md) instead.
@@ -15,8 +18,8 @@ Two things, once:
 2. Send your GitHub username to Web Dev and ask to be added to the **uwigem**
    organisation.
 
-The repo is private, so until step 2 is done every link on this page will show
-you a "404" page. That is not you doing something wrong.
+Anyone can read the files without step 2. You need it so that your edit goes on
+a branch of the team's repo, which is what the steps below assume.
 
 ## Where the words are
 
@@ -54,7 +57,9 @@ Everything else is the machinery that draws the site. You do not need it.
      [If you get a red X](#if-you-get-a-red-x) below. Nothing is live yet and
      nothing is damaged.
 
-Your change goes onto the real wiki when someone reviews and merges it.
+Your change goes onto the live site when someone reviews and merges it. Give
+it a minute or two after the merge, then reload
+<https://uwigem.github.io/wiki2026/> to see it.
 
 ## The three rules
 
@@ -131,8 +136,11 @@ you are stuck. That is completely normal and it is much better than guessing.
 
 ## Things worth knowing
 
-- **Nothing you do here can break the live wiki.** Your change sits in a pull
+- **Nothing you do here can break the live site.** Your change sits in a pull
   request until someone merges it.
+- **This repo is public.** Anyone on the internet can read every file in it,
+  and every old version. Write here only what you would be happy to see on the
+  published wiki.
 - **You cannot lose work by making a mistake.** Every version is kept.
 - **Do not edit anything under `src/engine/`.** That is the code that draws the
   garden, and one number in it changes the colour of every page. A check will

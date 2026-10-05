@@ -2,11 +2,10 @@ name: Request review
 
 # Asks for a review on every pull request.
 #
-# This exists because .github/CODEOWNERS cannot do it here: GitHub only applies
-# CODEOWNERS on a private repository when the organisation is on a paid plan,
-# and uwigem is on the free plan. Branch protection is unavailable for the same
-# reason, so nothing blocks a merge; this only makes sure the review is asked
-# for and nobody has to remember to add a reviewer by hand.
+# Written while the repo was private, when .github/CODEOWNERS could not do this
+# on the free plan. The repo is public now, so CODEOWNERS requests the review
+# too and this is a backstop. It has been seen working on real pull requests;
+# delete it once a CODEOWNERS request has been seen on a teammate's PR.
 #
 # To change who reviews, change REVIEWER below and the owner in CODEOWNERS.
 
@@ -23,6 +22,9 @@ env:
 jobs:
   request:
     runs-on: ubuntu-latest
+    # A pull request from a fork gets a read-only token and cannot request a
+    # reviewer, so only run for branches pushed to this repo.
+    if: github.event.pull_request.head.repo.full_name == github.repository
     steps:
       - name: Ask for a review
         env:
