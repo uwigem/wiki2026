@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { SITE_PALETTE } from '../theme'
 
 /**
  * Design / Build / Test / Learn wheel with a cycle switcher.
@@ -9,8 +10,8 @@ import { useState } from 'react'
  * items[0] = Design, items[1] = Build, items[2] = Test, items[3] = Learn.
  *
  * Styling reuses classes the site already has (panel, kicker, badge, pixel-btn).
- * Only the four wedge colors are defined here; swap them for theme tokens if you
- * have flower/garden colors you would rather use.
+ * The four wedge colours are the garden's own flowers, taken from the engine
+ * palette like every other colour on the site, so they re-theme with it.
  */
 
 export interface CycleStep {
@@ -33,11 +34,17 @@ interface Props {
   cycles: CycleData[]
 }
 
+/**
+ * One flower colour per stage, each the palette's closest match in hue to the
+ * teal, amber, red and purple the wheel was first drawn in. The palette is
+ * pastel, so a stage's colour is never used for text: badge numbers use the
+ * page ink, which is readable on any of them.
+ */
 const STAGES = [
-  { name: 'Design', color: '#2E8B99' },
-  { name: 'Build', color: '#DFA23B' },
-  { name: 'Test', color: '#DD5C46' },
-  { name: 'Learn', color: '#7C5CB5' },
+  { name: 'Design', color: SITE_PALETTE.sparkle },
+  { name: 'Build', color: SITE_PALETTE.daisyCore },
+  { name: 'Test', color: SITE_PALETTE.pinkDark },
+  { name: 'Learn', color: SITE_PALETTE.lilacPetal },
 ] as const
 
 const CX = 220
@@ -172,14 +179,14 @@ export default function CycleWheel({ heading, intro, cycles }: Props) {
                   fill={stage.color}
                   transform={`translate(${tip.x.toFixed(2)}, ${tip.y.toFixed(2)}) rotate(${tangent.toFixed(2)})`}
                 />
-                <circle cx={badge.x} cy={badge.y} r={11} fill="#FBFCFA" stroke={stage.color} strokeWidth={1.6} />
+                <circle cx={badge.x} cy={badge.y} r={11} fill={SITE_PALETTE.bushHi} stroke={stage.color} strokeWidth={1.6} />
                 <text
                   x={badge.x}
                   y={badge.y + 4}
                   textAnchor="middle"
                   fontSize={10}
                   fontWeight={700}
-                  fill={stage.color}
+                  fill="currentColor"
                 >
                   {String(i + 1).padStart(2, '0')}
                 </text>
@@ -211,9 +218,16 @@ export default function CycleWheel({ heading, intro, cycles }: Props) {
       </div>
 
       {/* Detail panel */}
+      {/* The stage colour is an inset stripe inside the panel's own border, not a
+          replacement for it. Replacing the dark border with a pastel one made the
+          panel look like it had lost its left edge (sparkle on cream is 1.2:1).
+          The second shadow restates .panel's offset shadow, which an inline
+          box-shadow would otherwise override. */}
       <div
         className="panel px-5 py-5"
-        style={stageColor ? { borderLeft: `4px solid ${stageColor}` } : undefined}
+        style={
+          stageColor ? { boxShadow: `inset 8px 0 0 ${stageColor}, 4px 4px 0 var(--p-shadow)` } : undefined
+        }
         aria-live="polite"
       >
         {step && selected !== null ? (
