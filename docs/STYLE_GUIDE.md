@@ -353,8 +353,7 @@ keyboards. These are not optional polish.
 `scripts/check-conventions.mjs`, which enforces two rules a compiler cannot:
 
 1. No em dashes in any `.ts`, `.tsx`, `.css`, `.html`, `.md` or `.mjs` file
-   under `src/`, `docs/` or `scripts/`, plus the root README, CONTRIBUTING,
-   `index.html` and `vite.config.ts`.
+   under `src/`, `docs/` or `scripts/`, or anywhere at the repo root.
 2. No hex colour (3, 6 or 8 digit) in any `.ts`, `.tsx` or `.css` file under
    `src/`, except `src/engine/` (which is the palette) and the two pixel-art
    files. A `color-mix` line is allowed, and a line ending in `colour-ok` is an
