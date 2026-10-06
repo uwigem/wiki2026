@@ -28,8 +28,12 @@ jobs:
       - run: npm run build
 
       # The engine is the team's own and is frozen. Changing it here would
-      # re-colour or break every page at once, so a pull request that touches it
-      # has to be deliberate: ask a Web Dev lead to review and merge it directly.
+      # re-colour or break every page at once. This step fails the `check` job,
+      # and `check` is required by branch protection on main, admins included,
+      # so a pull request that touches the engine cannot be merged by anyone.
+      # If an engine change is genuinely needed, a repo admin removes the
+      # required check in Settings > Branches for that one merge and puts it
+      # straight back.
       - name: No changes to the frozen engine
         if: github.event_name == 'pull_request'
         run: |

@@ -115,6 +115,20 @@ Every pull request runs `npm run check` and `npm run build`, and fails if it
 touches a frozen engine file. Every merge to `main` publishes the live preview.
 `.github/CODEOWNERS` requests a review from Web Dev on every pull request.
 
+**`main` is protected**, and the rules apply to admins too:
+
+- Changes go in only through a pull request. Nobody can push to `main`
+  directly, force-push it, or delete it.
+- A pull request can be merged only once its `check` job has passed. That job
+  is `npm run check`, the build, and the frozen-engine guard.
+- No approval is required. A review is requested automatically, but making it
+  mandatory would hold the whole team's work on one person.
+- A branch does not have to be up to date with `main` first, which would mean
+  constant rebasing for people editing in the browser.
+
+To change any of this: Settings > Branches > `main`, or
+`gh api repos/uwigem/wiki2026/branches/main/protection`.
+
 ### Where the content lives
 
 **All copy is data.** You almost never need to open a component to edit the
