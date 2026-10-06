@@ -93,8 +93,12 @@ page reloads itself every time you save a file.
 6. Open a pull request. The `git push` above prints a link; open it, fill in the
    short template, and post it on the Web Dev channel so someone knows to look.
    A Web Dev lead reviews it and merges. Automated checks run on the pull
-   request and have to pass before it can go in; if one fails, the failure
-   message names the file and the line.
+   request, and **it cannot be merged until they pass**; if one fails, the
+   failure message names the file and the line.
+
+`main` is protected. You cannot push to it directly, and that includes Web Dev
+admins: every change goes in through a pull request whose checks are green.
+That is what keeps the live site from ever being built from a broken `main`.
 
 Write commit messages in plain English, in the imperative: "Add the MEGF8 binder
 table", not "added stuff". Say why in the body if the why is not obvious.
