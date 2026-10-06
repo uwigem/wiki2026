@@ -10,15 +10,19 @@
  *
  * Run it yourself any time:  node scripts/check-conventions.mjs
  */
-import { readFileSync, readdirSync, statSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 import { join, relative, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url))
 
-/** Where to look. Walked from disk, so a brand new file is checked before it is committed. */
+/**
+ * Where to look. Walked from disk, so a brand new file is checked before it is
+ * committed. Every file at the repo root is included as well, rather than a
+ * hand-kept list: a list missed EDITING.md when it was added, which let an em
+ * dash through in the guide most teammates read.
+ */
 const ROOTS = ['src', 'docs', 'scripts']
-const ALSO = ['README.md', 'CONTRIBUTING.md', 'index.html', 'vite.config.ts']
 const SKIP_DIRS = new Set(['node_modules', 'dist', '.git', '.vite'])
 
 /**
@@ -73,12 +77,8 @@ function walk(dir, out = []) {
 }
 
 const files = [...ROOTS.flatMap((r) => walk(join(ROOT, r)))]
-for (const f of ALSO) {
-  try {
-    if (statSync(join(ROOT, f)).isFile()) files.push(f)
-  } catch {
-    // not present in this checkout
-  }
+for (const e of readdirSync(ROOT, { withFileTypes: true })) {
+  if (e.isFile() && !e.name.startsWith('.')) files.push(e.name)
 }
 
 const problems = []
