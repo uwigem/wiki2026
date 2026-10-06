@@ -363,6 +363,9 @@ keyboards. These are not optional polish.
 It reads files from disk rather than from git, so a file you have not committed
 yet is still checked.
 
+These checks are required to merge. A pull request that fails them cannot go
+into `main`, which is protected for everyone, admins included.
+
 There is deliberately no ESLint or Prettier here. Adding them would mean a few
 hundred more packages and a config to argue about, for a team where most people
 are here to do biology. If a third rule earns its place, add it to that script
