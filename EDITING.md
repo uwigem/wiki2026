@@ -48,14 +48,16 @@ Everything else is the machinery that draws the site. You do not need it.
 4. **Click the green `Commit changes...` button**, top right. A box opens.
    - In the first line, say what you changed: `Fix the SMO sentence on Results`.
    - Choose **"Create a new branch for this commit and start a pull request"**.
-     This matters. Do not pick "Commit directly to the main branch".
+     It is the only option GitHub offers here, because nobody can write
+     straight to the main branch.
    - Click **Propose changes**, then **Create pull request** on the next screen.
 
 5. **Wait about a minute.** A check runs on your change.
    - **Green tick:** you are done. Post the link on the Web Dev channel.
    - **Red X:** something in the file is broken. See
      [If you get a red X](#if-you-get-a-red-x) below. Nothing is live yet and
-     nothing is damaged.
+     nothing is damaged. The pull request cannot be merged until it is fixed,
+     so a mistake cannot reach the live site by accident.
 
 Your change goes onto the live site when someone reviews and merges it. Give
 it a minute or two after the merge, then reload
