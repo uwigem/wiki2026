@@ -19,7 +19,7 @@ import type { Pillar } from '../components/ProgrammePillars'
 import type { Stakeholder } from '../components/StakeholderGarden'
 import type { TornadoRow } from '../components/TornadoChart'
 import type { ToolEntry } from '../components/ToolShed'
-import type { Structure } from './structures'
+import { SMO_5L7D, type Structure } from './structures'
 
 /**
  * Anything with an `id` can be linked to from anywhere else in the wiki, with
@@ -268,6 +268,7 @@ const design: Page = {
     },
     {
       kind: 'steps',
+      id: 'pipeline',
       heading: 'The pipeline',
       intro: 'Every candidate walks this path. Most do not finish it.',
       items: [
@@ -285,14 +286,63 @@ const design: Page = {
         },
         {
           title: 'Filter hard',
-          body: 'Keep a design only if it clears **ipTM above 0.8**, a low **minPAE** across the interface, and a **backbone RMSD under 2 Angstrom** against the design it came from. DiMaio told us minPAE is the single best predictor of a real binder.',
+          body: 'Keep a design only if it clears the **2 by 2 filter**: a **minPAE under 2** and a **backbone RMSD under 2 Angstrom** between the shape we asked for and the shape the sequence actually folds into. Both cutoffs are the published gold standard, and Dr. DiMaio told us minPAE is the single best predictor of a real binder.',
         },
         {
           title: 'Score the interface',
-          body: '**PyRosetta InterfaceAnalyzer** scores the survivors on interface energy, buried surface area, unsatisfied hydrogen bonds, and shape complementarity. **PyMOL** is used to look at each one by hand.',
+          body: 'Survivors get **pLDDT** for per-residue confidence, where we treat 80 as satisfactory, and **ddG** as a computational stand-in for binding strength, where we want a negative number. **PyRosetta InterfaceAnalyzer** adds buried surface area, unsatisfied hydrogen bonds and shape complementarity, and **PyMOL** is used to look at each one by hand.',
         },
       ],
       source: 'Protein Design pipeline docs (RFD3, MPNN, RF3 how-to; Hyak minidocs) and DiMaio mentorship sessions.',
+    },
+    {
+      kind: 'narration',
+      body: [
+        'Three programs, doing three jobs. The first **sculpts a shape** that should stick to the target. The second **picks an amino acid sequence** that might fold into that shape. The third **checks the sequence actually folds that way**, and still lands in the right place.',
+        'If the shape we asked for and the shape we got are more than about two atoms-widths apart, we throw it away.',
+      ],
+    },
+    {
+      kind: 'funnel',
+      id: 'funnel',
+      heading: 'How much gets thrown away',
+      intro:
+        'Almost all of it, which is the point. These are the numbers from our MOSMO and MEGF8 campaign.',
+      stages: [
+        {
+          label: 'binders designed and folded',
+          count: 5700,
+          note: 'backbones from RFdiffusion3, sequences from ProteinMPNN, folded by RoseTTAFold3',
+        },
+        {
+          label: 'cleared the 2 by 2 filter',
+          count: 255,
+          note: 'minPAE under 2 and backbone RMSD under 2 Angstrom',
+        },
+        {
+          label: 'survived the membrane checks',
+          count: 25,
+          note: 'refolded against the extracellular surfaces only, then checked for self-consistency',
+        },
+      ],
+      goal: { label: 'what we want to order and test', count: 96 },
+      footnote:
+        'The drop from 255 to about 25 is the interesting one. Our first filters were passing designs that bound a part of the target buried inside the membrane, where no protein could ever reach them. That is [the third engineering cycle](/project/engineering#cycles).',
+      source: 'Protein Design: binder design pipeline and engineering cycles, 2026.',
+    },
+    {
+      kind: 'structure',
+      id: 'smo-structure',
+      structure: SMO_5L7D,
+    },
+    {
+      kind: 'prose',
+      heading: 'Why this structure is here and not ours',
+      body: [
+        'The receptor above is **Smoothened**, the protein the whole project is aimed at, with a molecule of **cholesterol** bound in the domain that sits outside the cell. The helices below it cross the membrane seven times, which is the shape that makes it a GPCR. Cholesterol binding is the activation step [our kinetic model argues about](/project/model#sensitivity), so this is the picture that page is describing in equations.',
+        'It is a published structure rather than one of ours, and labelled that way on purpose. Our own targets, the MOSMO and MEGF8 interface, were solved by the Kong lab by cryo-EM and are not ours to publish. **Our designed binders are not here yet** because none has been validated at a bench. When they are, they drop into the same viewer.',
+      ],
+      source: 'PDB 5L7D, Byrne et al., Nature 2016. Viewer written for this site, no third-party 3D library.',
     },
     {
       kind: 'prose',
@@ -319,15 +369,6 @@ const design: Page = {
         'We have about **24 MOSMO binder backbones** carried through sequence design, most with two or three candidate sequences of roughly 160 residues. The MEGF8 binders are still in progress.',
       ],
       source: 'Minibinder sequence sheet (Mosmo/MEGF8), Protein Design, summer 2026.',
-    },
-    {
-      kind: 'todo',
-      body: [
-        'TODO(protein design): add the scored interface table for the 2026 MOSMO binders (ipTM, minPAE, RMSD, PyRosetta metrics).',
-        'TODO(protein design): add backbone renders and predicted complex structures.',
-        'TODO(protein design): add the MEGF8 binders once they clear the filters.',
-        'Pending: write up the target change from ATRN to the MMM complex on the Engineering page, since that is a real design decision worth showing.',
-      ],
     },
   ],
 }
