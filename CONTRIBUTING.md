@@ -123,7 +123,6 @@ const contribution: Page = {
   kicker: 'chapter 11 · contribution',  // the small label above it
   storyBeat: 'A gardener leaves the beds better than they found them.',
   intro: 'One or two sentences saying what this page is about.',
-  gardener: 'Your Name · Your Subteam',
   blocks: [
     { kind: 'prose', heading: 'Heading', body: ['A paragraph with **bold** in it.'] },
     { kind: 'cards', heading: 'Three things', items: [{ title: 'A card', body: 'Its body.' }] },
