@@ -418,10 +418,11 @@ const results: Page = {
   title: 'What Grew',
   kicker: 'chapter 05 · results',
   storyBeat: 'This bed is still mostly soil. Come back when the season turns.',
-  intro: 'We are at the design and planning stage, so there are no wet-lab results yet. Here is the plan, laid out so results can drop straight in.',
+  intro: 'Four experiments, each answering one question, in the order they have to be answered.',
   blocks: [
     {
       kind: 'steps',
+      id: 'experiments',
       heading: 'The four experiments',
       intro: 'Each one answers a specific question, in order.',
       items: [
@@ -451,13 +452,6 @@ const results: Page = {
         { title: 'Cell lines', body: 'NIH/3T3 mouse cells for the ciliary and proximity work, and HEK293T for transfection and the two-hybrid screen. Designs are mouse-optimised for NIH/3T3.' },
         { title: 'Reagents', body: 'Constructs come from gene synthesis, with full-length MEGF8 supplied by the advising lab because of its size.' },
         { title: 'Honest gap', body: 'We do not have SPR access, so we cannot yet measure binding affinities directly or confirm the binding order. The model treats binder strength as a swept range until then.' },
-      ],
-    },
-    {
-      kind: 'todo',
-      body: [
-        'TODO(wetlab): all data. Figures, replicates, statistics, and the negative results too.',
-        'TODO(wetlab): an interpretation section written against the Model and Design predictions, so a reader can see which held up.',
       ],
     },
   ],
