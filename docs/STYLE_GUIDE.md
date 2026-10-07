@@ -187,7 +187,7 @@ them called `body`:
 Everywhere else the characters are published literally, asterisks and all. That
 includes: `intro` (both the page's and a block's), `storyBeat`, `title`, `kicker`,
 `source`, every `facts` field, `todo` lines, card `note`s, subteam
-`tagline` and `blurb`, and member `role` and `bio`.
+`blurb`, and member `titles` and `bio`.
 
 Nothing else is supported. Markdown links, headings, lists, `_underscores_` for
 italic, and a bold phrase that itself contains an asterisk all come out as raw
