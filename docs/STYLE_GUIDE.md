@@ -50,10 +50,11 @@ More specifically:
 
 ### Marking things that are not finished
 
-Unfinished content is **visible on the page**, not hidden in a comment. Every
-wiki page carries a `todo` block, which renders as a dashed "still to come"
-panel, so a gap is obvious to everyone reading the site, not just to whoever
-opens the file.
+Unfinished content is tracked in [CONTENT_MAP.md](CONTENT_MAP.md), page by
+page, not shown on the live site. While you draft, a `todo` block renders as a
+dashed "still to come" panel so the gap is easy to see; take it out before the
+page is merged. If a reader needs to know something is missing, the page says
+so in plain words.
 
 In code and in content, the one marker is:
 
@@ -160,8 +161,8 @@ them. Curly quote marks are added for you; do not type them.
 
 ### `todo`
 
-The visible "still to come" panel. Every page has one until its content is
-finished.
+A dashed "still to come" panel, for drafting only. Take it out before the page
+is merged and list the gap in [CONTENT_MAP.md](CONTENT_MAP.md) instead.
 
 ```ts
 {

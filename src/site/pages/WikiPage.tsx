@@ -1,11 +1,23 @@
 import type { Block, Page } from '../content/pages'
 import { pageNeighbours } from '../content/pages'
-import { Link } from '../router'
+import { Link, useSectionJump } from '../router'
 import FlowerBedCard from '../components/FlowerBedCard'
 import GardenSection, { Reveal, SectionDivider } from '../components/GardenSection'
 import PixelSign, { QuoteSign, TextPanel, TodoPanel } from '../components/PixelSign'
 import RichText from '../components/RichText'
 import CycleWheel from '../components/CycleWheel'
+import BalanceLogo from '../components/BalanceLogo'
+import CapabilityMatrix from '../components/CapabilityMatrix'
+import DoseCurve from '../components/DoseCurve'
+import FunnelChart from '../components/FunnelChart'
+import TornadoChart from '../components/TornadoChart'
+import FigureFrame from '../components/FigureFrame'
+import HedgehogNote from '../components/HedgehogNote'
+import ProgrammePillars from '../components/ProgrammePillars'
+import StakeholderGarden from '../components/StakeholderGarden'
+import StatRow from '../components/StatRow'
+import StructureView from '../components/StructureView'
+import ToolShed from '../components/ToolShed'
 
 /**
  * Generic content page, rendered from data in `content/pages.ts`.
@@ -19,6 +31,9 @@ import CycleWheel from '../components/CycleWheel'
  */
 export default function WikiPage({ page }: { page: Page }) {
   const { prev, next } = pageNeighbours(page.slug)
+  // A link from another page can name a section; this scrolls to it once the
+  // page has rendered.
+  useSectionJump(page.slug)
 
   return (
     <article>
@@ -44,7 +59,10 @@ export default function WikiPage({ page }: { page: Page }) {
       <GardenSection>
         <div className="flex flex-col gap-6 pb-4">
           {page.blocks.map((block, i) => (
-            <Reveal key={i}>
+            // Blocks are flex items. Anything inside one that can be wider than
+            // the column (a table, a code line) has to be free to shrink, or it
+            // widens the page instead of scrolling inside itself.
+            <Reveal key={i} className="min-w-0" id={block.id}>
               <BlockView block={block} />
             </Reveal>
           ))}
@@ -130,6 +148,124 @@ function BlockView({ block }: { block: Block }) {
             ))}
           </dl>
         </TextPanel>
+      )
+
+    case 'narration':
+      return <HedgehogNote body={block.body} label={block.label} />
+
+    case 'stats':
+      return (
+        <StatRow
+          heading={block.heading}
+          intro={block.intro}
+          items={block.items}
+          footnote={block.footnote}
+          source={block.source}
+        />
+      )
+
+    case 'matrix':
+      return (
+        <CapabilityMatrix
+          heading={block.heading}
+          intro={block.intro}
+          columns={block.columns}
+          rows={block.rows}
+          source={block.source}
+        />
+      )
+
+    case 'toolshed':
+      return (
+        <ToolShed heading={block.heading} intro={block.intro} tools={block.tools} source={block.source} />
+      )
+
+    case 'tornado':
+      return (
+        <TornadoChart
+          heading={block.heading}
+          intro={block.intro}
+          rows={block.rows}
+          unit={block.unit}
+          positiveMeans={block.positiveMeans}
+          negativeMeans={block.negativeMeans}
+          footnote={block.footnote}
+          source={block.source}
+        />
+      )
+
+    case 'dose':
+      return (
+        <DoseCurve
+          heading={block.heading}
+          intro={block.intro}
+          points={block.points}
+          xLabel={block.xLabel}
+          yLabel={block.yLabel}
+          threshold={block.threshold}
+          footnote={block.footnote}
+          source={block.source}
+        />
+      )
+
+    case 'funnel':
+      return (
+        <FunnelChart
+          heading={block.heading}
+          intro={block.intro}
+          stages={block.stages}
+          goal={block.goal}
+          footnote={block.footnote}
+          source={block.source}
+        />
+      )
+
+    case 'pillars':
+      return (
+        <ProgrammePillars
+          heading={block.heading}
+          intro={block.intro}
+          pillars={block.pillars}
+          source={block.source}
+        />
+      )
+
+    case 'stakeholders':
+      return (
+        <StakeholderGarden
+          heading={block.heading}
+          intro={block.intro}
+          people={block.people}
+          pending={block.pending}
+          source={block.source}
+        />
+      )
+
+    case 'structure':
+      return <StructureView structure={block.structure} />
+
+    case 'logo':
+      return (
+        <figure className="panel m-0 flex flex-col items-center gap-3 px-5 py-6 sm:flex-row sm:gap-6 sm:px-7">
+          <BalanceLogo
+            width={240}
+            alt="Two hedgehogs sitting in the pans of a balance, which rocks gently between them."
+            className="shrink-0"
+          />
+          <figcaption className="text-body leading-relaxed">{block.caption}</figcaption>
+        </figure>
+      )
+
+    case 'figure':
+      return (
+        <FigureFrame
+          src={block.src}
+          alt={block.alt}
+          caption={block.caption}
+          owner={block.owner}
+          ratio={block.ratio}
+          source={block.source}
+        />
       )
 
     case 'todo':

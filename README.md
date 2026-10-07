@@ -41,6 +41,9 @@ by anyone, so it holds the website and nothing else.
 - **Checking a claim against the team's own documents?**
   [docs/PROJECT_CONTENT.md](docs/PROJECT_CONTENT.md) maps what is on the wiki
   back to the Drive file it came from, and lists what must not be published.
+- **Wondering where your section belongs?** [docs/CONTENT_MAP.md](docs/CONTENT_MAP.md)
+  goes page by page: what is written, what is still missing, who owns it, and
+  which kind of block to use for it.
 
 ## Run it
 
@@ -218,9 +221,9 @@ npm run build && npx vite preview
 
 ## Before the wiki freeze
 
-Content gaps are tracked on the site itself: every page ends in a dashed "still
-to come" panel, and `grep -rn "TODO(" src` lists the rest. The items that are
-not content:
+Content gaps are tracked page by page in
+[docs/CONTENT_MAP.md](docs/CONTENT_MAP.md), and `grep -rn "TODO(" src` lists the
+ones marked in code. The items that are not content:
 
 - **Self-host the two fonts** under `public/fonts/`. The site currently loads
   Pixelify Sans and Nunito from `fonts.googleapis.com` at page load, which is a
