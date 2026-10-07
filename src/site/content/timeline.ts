@@ -166,12 +166,6 @@ export const TIMELINE: TimelineEntry[] = [
     milestone: true,
   },
   {
-    date: '27 Jul 2026',
-    title: 'Wiki pages assigned',
-    body: 'Trevor takes Protein Design, Iris takes Human Practices, Rishabh takes Wet Lab, Ruhi takes the Model, Neel takes the Engineering Cycle and finds the required-pages list.',
-    team: 'Web Development',
-  },
-  {
     date: '18 Aug 2026',
     title: 'Web Dev presents',
     body: 'Web Dev\'s slot in the August all-hands rotation (HP 8/4, Creative + Wet Lab 8/11, Web Dev 8/18, Kinetic Modeling 8/25).',
