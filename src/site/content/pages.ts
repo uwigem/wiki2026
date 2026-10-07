@@ -1146,7 +1146,7 @@ const safety: Page = {
   title: 'Tending Safely',
   kicker: 'chapter 09 · safety',
   storyBeat: 'Gloves on. Some things in a garden bite.',
-  intro: 'This page is not finished. We are recording what we can state now, and marking the rest as pending until the safety form is done.',
+  intro: 'This page is not finished. It records what we can state now, and the rest follows once the iGEM safety form is done.',
   blocks: [
     {
       kind: 'facts',
@@ -1162,17 +1162,8 @@ const safety: Page = {
         },
         {
           title: 'The honest state',
-          body: 'There is no biosafety document written yet. The items below are pending, not decided.',
+          body: 'There is no biosafety document written yet. The exact biosafety level and a dual-use statement will be set out here once the safety form is done.',
         },
-      ],
-    },
-    {
-      kind: 'todo',
-      body: [
-        'TODO(ops): complete the official iGEM Safety and Security form and mirror the answers here.',
-        'TODO(ops): confirm the exact cell lines, hosts, and biosafety level with the advising lab.',
-        'TODO(ops): write a real dual-use paragraph. This is a tool that changes a developmental pathway, so it needs more than boilerplate.',
-        'TODO(wetlab): list the lab safety training each member completed.',
       ],
     },
   ],
