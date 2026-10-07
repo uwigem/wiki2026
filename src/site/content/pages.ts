@@ -596,13 +596,73 @@ const model: Page = {
       source: 'Kinetic Modeling: Dr. Herbert Sauro meeting notes (two meetings, summer 2026).',
     },
     {
-      kind: 'todo',
+      kind: 'narration',
+      label: 'what a sensitivity analysis is',
       body: [
-        'TODO(kinetic modeling): publish the Version 0 equations and the wiring diagram.',
-        'TODO(kinetic modeling): add the full parameter table with a source and assumption per value.',
-        'TODO(kinetic modeling): add the sensitivity analysis and say which parameter controls tunability.',
-        'Pending: the decisive comparison of model prediction against the wet-lab ciliary SMO readout, once that data exists.',
+        'The model has dozens of numbers in it, and most of them we had to look up or guess. So before trusting any prediction, we nudge each number by ten percent and see which ones actually move the answer.',
+        'The ones that move it are the ones worth measuring properly at a bench. The ones that do not, we can stop worrying about.',
       ],
+    },
+    {
+      kind: 'tornado',
+      id: 'sensitivity',
+      heading: 'What actually controls ciliary SMO',
+      intro:
+        'Each bar shows how strongly ciliary SMO responds when that one parameter is raised: a bar of 1.3 means SMO moves about 1.3 percent for every one percent change in the parameter.',
+      rows: [
+        { label: 'SMO made in the cytoplasm', note: 'k form, SMO-cyt', value: 1.3 },
+        { label: 'MMM complex made', note: 'k form, MMM', value: -1.28 },
+        { label: 'Tagging rate once bound', note: 'kcat', value: -1.28 },
+        { label: 'MMM complex degraded', note: 'k deg, MMM', value: 1.26 },
+        { label: 'Cooperativity in the three-way complex', note: 'alpha', value: -0.87 },
+        { label: 'Binder holding onto SMO', note: 'K SMO-Linker', value: 0.51 },
+        { label: 'Binder holding onto MMM', note: 'K MMM-Linker', value: 0.31 },
+        { label: 'SMO entering the cilium', note: 'k in', value: 0.28 },
+        { label: 'SMO cleared from the cytoplasm', note: 'k deg, SMO-cyt', value: -0.28 },
+      ],
+      positiveMeans: 'more of it means more SMO in the cilium',
+      negativeMeans: 'more of it means less SMO in the cilium',
+      footnote:
+        'Supply and disposal, almost exactly balanced. Turn the MMM pool up one percent and ciliary SMO falls about 1.3 percent, which is the graded response the whole device depends on. Note what is **missing** from the top of this list: how fast SMO enters the cilium, and PTCH1 itself, both come out near 0.28 or below. At these settings ciliary SMO sits around 3.1 nM against 17.9 nM in the cytoplasm.',
+      source:
+        'Kinetic Modeling: local sensitivity analysis of the recruitment model, run in Tellurium over a 120 hour simulation.',
+    },
+    {
+      kind: 'prose',
+      id: 'mc4r-safety',
+      heading: 'Checking it cannot do harm somewhere else',
+      body: [
+        '[The up arm](/project/description#two-arms) works by pulling the MMM complex apart. That frees MGRN1, and MGRN1 has another job: with a different partner called ATRN it controls **MC4R**, a receptor in the pathway that regulates appetite and body weight. If our binder released a flood of MGRN1 into that other role, we could be causing a metabolic side effect while congratulating ourselves on the ciliary result.',
+        'So we modelled it. Adding binder does shift MC4R, but the effect is **small and it saturates**: about 2.3 percent at 50 nM, and still only **2.75 percent at 500 nM**, well under the 20 percent we had set as the point where an effect becomes biologically meaningful. Past about 50 nM, adding more binder changes nothing. The reason is that MGRN1 is the scarce component at roughly 0.18 nM in total, so there is only so much of it to redistribute no matter how hard we push.',
+        'The useful part is that this holds regardless of how good our binder turns out to be. In the global sensitivity analysis the binder\'s own binding strength had **zero** influence on the MC4R result, which means we do not have to trade therapeutic dose against this particular risk.',
+      ],
+      source:
+        'Kinetic Modeling: MC4R safety model, mass-action kinetics in Tellurium. Abundances from PaxDb; Kong et al. 2020 and 2025.',
+    },
+    {
+      kind: 'dose',
+      id: 'mc4r-dose',
+      heading: 'How far off-target it actually goes',
+      points: [
+        { label: '0', value: 0 },
+        { label: '1', value: 0.23 },
+        { label: '5', value: 0.87 },
+        { label: '10', value: 1.33 },
+        { label: '50', value: 2.3 },
+        { label: '100', value: 2.53 },
+        { label: '250', value: 2.69 },
+        { label: '500', value: 2.75 },
+      ],
+      xLabel: 'minibinder added (nM)',
+      yLabel: 'drop in surface MC4R (percent)',
+      threshold: {
+        value: 20,
+        label:
+          'We set twenty percent as the point where an effect becomes biologically meaningful. The worst case, at a dose ten times higher than anything we would use, reaches 2.75 percent.',
+      },
+      footnote:
+        'The curve flattens by about 50 nM. Past that, adding more binder changes nothing, because MGRN1 is the scarce part at roughly 0.18 nM in total and there is only so much of it to redistribute.',
+      source: 'Kinetic Modeling: MC4R safety model.',
     },
   ],
 }
