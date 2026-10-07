@@ -49,8 +49,6 @@ export default function WikiPage({ page }: { page: Page }) {
           {page.intro && (
             <p className="panel max-w-2xl px-5 py-4 text-lg leading-relaxed">{page.intro}</p>
           )}
-
-          {page.gardener && <p className="kicker normal-case">tended by {page.gardener}</p>}
         </div>
       </GardenSection>
 

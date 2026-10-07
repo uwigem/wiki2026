@@ -80,7 +80,6 @@ Every wiki page is one object in `src/site/content/pages.ts`, with these fields.
 | `kicker` | yes | The small spaced label above the title. House style is lower case with a middle dot: `chapter 04 · engineering`. |
 | `storyBeat` | yes | One or two sentences in the hedgehog's voice, in a flat panel under the title. The one place the garden voice belongs. Plain text. |
 | `intro` | no | A lede paragraph in larger type. One or two sentences on what the page is about, in normal scientific English. Omit it and nothing renders in its place. Plain text. |
-| `gardener` | no | A byline, rendered as "tended by ...". Format: `Name · Subteam`. Omit it and no byline shows. Whether these stay public is still open, see the `TODO(pre-publish)` note on the field. |
 | `blocks` | yes | The body of the page, a list of blocks. An empty list gives you a header and nothing under it, which is a fine way to start a page. |
 
 ## The six block kinds
@@ -187,7 +186,7 @@ them called `body`:
 
 Everywhere else the characters are published literally, asterisks and all. That
 includes: `intro` (both the page's and a block's), `storyBeat`, `title`, `kicker`,
-`gardener`, `source`, every `facts` field, `todo` lines, card `note`s, subteam
+`source`, every `facts` field, `todo` lines, card `note`s, subteam
 `tagline` and `blurb`, and member `role` and `bio`.
 
 Nothing else is supported. Markdown links, headings, lists, `_underscores_` for
