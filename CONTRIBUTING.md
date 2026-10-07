@@ -163,58 +163,79 @@ unique across the whole site.
 ## Add yourself or a teammate to the team page
 
 Everything on the team page comes from
-[`src/site/content/team.ts`](src/site/content/team.ts).
+[`src/site/content/team.ts`](src/site/content/team.ts). Each student is one
+entry in `ROSTER`.
 
-### To add a person
+### To fill in your own profile
 
-Find your subteam in `SUBTEAMS` and add a line to its `members` list. Only
-`name` is required:
+Find your line in `ROSTER` and add any of these:
 
 ```ts
-{ name: 'Your Name' },
-{ name: 'Your Name', role: 'Subteam lead', avatar: 'short' },
+{
+  name: 'Your Name',
+  email: 'you@uw.edu',
+  subteams: ['wet-lab'],
+  major: 'Bioengineering',
+  bio: 'One or two sentences about you.',
+  linkedin: 'https://www.linkedin.com/in/your-handle',
+  website: 'https://your-site.com',
+  photo: 'team/your-name.jpg',
+  avatar: 'short',
+},
 ```
 
-- `role` (optional) shows under your name in your profile card.
-- `bio` (optional) is one sentence about you, shown in the same card. Without
-  one, the card shows a note asking you to write one.
-- `photo` (optional) is a path to your headshot, for example `/team/you.jpg`,
-  with the file in a `public/team/` folder. That folder does not exist yet; Ops
-  is collecting headshots. **Leaving `photo` out is the opt-out** if you would
-  rather not have a photo on a public site, and nothing is missing from the page
-  when you do: your pixel character stands in.
-- `avatar` (optional) is `'long'` or `'short'`, for your pixel character's hair.
-  Set it to whatever you prefer. If you leave it out, the template is guessed
-  from your first name, and that guess is wrong for some people. Correcting it
-  is this one word on your own line, and you do not need anyone's permission to
-  change your own.
+- `bio`, `linkedin`, `website` and `photo` are all optional. Anything you leave
+  out simply does not show. Nothing on the page says it is missing.
+- `linkedin` and `website` must be full addresses starting with `https://`.
+  Anything else is ignored.
+- `photo` is your headshot. Put the file in `public/team/` and write the path
+  without a leading slash, as above. A square or portrait crop works best; the
+  profile shows it at 3:4. **Leaving `photo` out is the opt-out** if you would
+  rather not have a photo on a public site: your pixel character stands in.
+- `avatar` is `'long'` or `'short'`, for your pixel character's hair. If you
+  leave it out, it is guessed from your first name, and that guess is wrong for
+  some people. Correcting your own is one word on your own line.
 
 Your character's colours (hair, skin, top, trousers) are picked from your name,
 so they are the same every time the page loads. If you want specific ones, ask
 Web Dev to pin them in `LOOK_OVERRIDES` in
 [`src/site/components/PixelPerson.tsx`](src/site/components/PixelPerson.tsx).
 
+**Everyone's email is public.** The site and this repository are both public,
+so the address on your line can be read by anyone.
+
+### To add or remove a person
+
+Add or delete one entry in `ROSTER`. `name`, `email` and `subteams` are
+required. Keep the list in order: student leaders first, then everyone else
+alphabetically by surname.
+
+- `subteams` lists the subteam ids you are on, from `SUBTEAMS` in the same
+  file. You appear in each of those subteams on the page.
+- `titles` (optional) are your positions, such as `'Wet Lab Lead'`. They show
+  under your name in your profile.
+- `leads` (optional) lists the subteams you lead, which tags your tile in that
+  subteam and puts you first in it.
+- `leader: true` puts you in the Leadership group at the top. It is for the
+  student leaders only.
+
 ### To add a subteam
 
-Add a whole object to `SUBTEAMS`:
+Add an object to `SUBTEAMS`, then add its id to the `SubteamId` type at the top
+of the file:
 
 ```ts
 {
   id: 'hardware',                         // unique, lower case, hyphens
   name: 'Hardware',
-  flower: 'fern',                         // see the list at team.ts line 12
-  tagline: 'builds the things that hold the things',
+  flower: 'fern',                         // the emblem beside the name
   blurb: 'One or two sentences on what this subteam does.',
-  members: [{ name: 'Someone' }],
-}
+},
 ```
 
-`flower` is the emblem shown beside the subteam's name. The nine allowed values
-are listed on line 12 of `team.ts` itself, and anything else is a build error
-that names the type. Eight are taken; `fern` is currently free. `tree` is a much
-bigger sprite, so it is drawn at 2x where the others are 3x, and it is used for
-Leadership. The plot colours behind each member come from the `id`, so changing
-`id` reshuffles that bed's colours.
+The allowed `flower` values are listed in `FlowerKind` in `team.ts`, and
+anything else is a build error. `fern` is currently free. The tile colours come
+from the `id`, so changing an `id` reshuffles that subteam's colours.
 
 ## Add an entry to the notebook timeline
 

@@ -102,9 +102,9 @@ const clamp01 = (v: number) => Math.max(0, Math.min(1, v))
  */
 const LONG_HAIR_FALLBACK = new Set<string>([
   'Samaira Bakshi', 'Eliza Dawley', 'Eva Trapido', 'Defne Dingiloglu', 'Aimee Furlan',
-  'Ruhi Gottumukkala', 'Sanjana Iyer', 'Lakshmi Osorio', 'Victoria Wang', 'Navya Gupta',
+  'Ruhi Gottumukkala', 'Sanjana Iyer', 'Victoria Wang', 'Navya Gupta',
   'Tanvi Penubothu', 'Selena Xu', 'Shannon Victor', 'Iris Guo', 'Sophia Nguyen',
-  'Selina Shah', 'Ivy Lee', 'Charlotte Hsu', 'Winnie Lin', 'Mansi Patwardhan', 'Zaina Sheikh',
+  'Selina Shah', 'Charlotte Hsu', 'Winnie Lin', 'Mansi Patwardhan', 'Zaina Sheikh',
   'Skyler Choi', 'Gurnoor Sandhu',
 ])
 

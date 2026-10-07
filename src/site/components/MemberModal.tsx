@@ -1,24 +1,34 @@
 import { useEffect, useRef } from 'react'
-import type { Member, Subteam } from '../content/team'
+import { SUBTEAM_NAME, type Member } from '../content/team'
 import { useEscape } from '../hooks'
 import PixelPerson, { looksFor } from './PixelPerson'
 
 interface Props {
   member: Member
-  subteam: Subteam
   onClose: () => void
 }
 
 /** Everything a keyboard can land on inside the dialog. */
 const FOCUSABLE = 'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
 
+/** Only full https addresses become links. Anything else in the data is dropped. */
+function safeUrl(url: string | undefined): string | undefined {
+  return url && url.startsWith('https://') ? url : undefined
+}
+
+/** `https://www.linkedin.com/in/someone/` reads as `linkedin.com/in/someone`. */
+function shortUrl(url: string): string {
+  return url.replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, '')
+}
+
 /**
  * A member's profile card, shown as a modal dialog.
  *
- * Clean panel, plain type, the person's real photo when we have one. Without
- * one, their pixel character stands in.
+ * Their headshot when we have one, otherwise their pixel character. Then their
+ * titles, subteams and major, their bio if they have written one, and how to
+ * reach them.
  */
-export default function MemberModal({ member, subteam, onClose }: Props) {
+export default function MemberModal({ member, onClose }: Props) {
   const dialogRef = useRef<HTMLDivElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
   useEscape(true, onClose)
@@ -57,10 +67,13 @@ export default function MemberModal({ member, subteam, onClose }: Props) {
     return () => {
       document.removeEventListener('keydown', onKeyDown)
       document.body.style.overflow = prevOverflow
-      // Put focus back on the bloom that opened this, not at the top of the page.
+      // Put focus back on the tile that opened this, not at the top of the page.
       opener?.focus()
     }
   }, [])
+
+  const linkedin = safeUrl(member.linkedin)
+  const website = safeUrl(member.website)
 
   return (
     <div
@@ -72,9 +85,9 @@ export default function MemberModal({ member, subteam, onClose }: Props) {
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-label={`${member.name}, ${subteam.name}`}
+        aria-label={member.name}
         tabIndex={-1}
-        className="panel relative w-full max-w-md"
+        className="panel relative max-h-full w-full max-w-md overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -88,8 +101,6 @@ export default function MemberModal({ member, subteam, onClose }: Props) {
         </button>
 
         <div className="flex items-center gap-4 border-b-[3px] border-leaf-300 bg-leaf-50 px-5 py-5 pr-12">
-          {/* The member's real photo when we have it, otherwise their pixel
-              character stands in. TODO(ops): headshots into /public/team/. */}
           {member.photo ? (
             <img
               src={member.photo}
@@ -103,20 +114,46 @@ export default function MemberModal({ member, subteam, onClose }: Props) {
           )}
           <div className="min-w-0">
             <h2 className="text-xl text-leaf-950">{member.name}</h2>
-            {member.role && <p className="text-sm text-leaf-900">{member.role}</p>}
-            <p className="kicker mt-1">{subteam.name}</p>
+            {member.titles?.map((t) => (
+              <p key={t} className="text-sm text-leaf-900">
+                {t}
+              </p>
+            ))}
+            <p className="kicker mt-1">{member.subteams.map((id) => SUBTEAM_NAME[id]).join(' · ')}</p>
+            {member.major && <p className="mt-1 text-note text-leaf-800">{member.major}</p>}
           </div>
         </div>
 
-        <div className="px-5 py-4">
-          {member.bio ? (
-            <p className="text-body-sm leading-relaxed">{member.bio}</p>
-          ) : (
-            <p className="todo-note">
-              <span aria-hidden>▸</span>
-              <span>TODO: {member.name} to write a one-line bio (and add a photo).</span>
-            </p>
-          )}
+        <div className="flex flex-col gap-3 px-5 py-4">
+          {member.bio && <p className="text-body-sm leading-relaxed">{member.bio}</p>}
+          <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-body-sm">
+            <dt className="pixel text-note text-leaf-800">Email</dt>
+            <dd className="min-w-0 break-words">
+              <a href={`mailto:${member.email}`} className="cross-link">
+                {member.email}
+              </a>
+            </dd>
+            {linkedin && (
+              <>
+                <dt className="pixel text-note text-leaf-800">LinkedIn</dt>
+                <dd className="min-w-0 break-words">
+                  <a href={linkedin} target="_blank" rel="noreferrer noopener" className="cross-link">
+                    {shortUrl(linkedin)}
+                  </a>
+                </dd>
+              </>
+            )}
+            {website && (
+              <>
+                <dt className="pixel text-note text-leaf-800">Website</dt>
+                <dd className="min-w-0 break-words">
+                  <a href={website} target="_blank" rel="noreferrer noopener" className="cross-link">
+                    {shortUrl(website)}
+                  </a>
+                </dd>
+              </>
+            )}
+          </dl>
         </div>
       </div>
     </div>

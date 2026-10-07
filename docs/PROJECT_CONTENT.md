@@ -84,8 +84,6 @@ Advance. Source: `Meeting 12.pptx`, `Meeting 14.pptx`, mid-quarter deck.
 - SSTR3 is NOT in these documents. The old Notion-based site copy mentions it.
   Drop it unless the team has a source.
 
-Project originator: Skyler Choi (Kong Lab). Sources across ideation decks.
-
 ## 2. Protein Design
 
 Sources: `stepwise pipeline_ RFD3, MPNN, RF3 _how to_.pptx`, `Hyak

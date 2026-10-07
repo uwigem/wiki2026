@@ -239,4 +239,4 @@ ones marked in code. The items that are not content:
 - **Get the wiki freeze and Jamboree dates** off the official iGEM calendar.
   Neither appears anywhere in the team's own notes.
 - **Project name and logo** from Creative.
-- **Roster, roles, and headshots** from Ops, into `public/team/`.
+- **Headshots, bios and links** from each member. Headshots go in `public/team/`.
