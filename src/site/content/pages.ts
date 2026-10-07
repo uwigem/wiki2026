@@ -1216,14 +1216,6 @@ const attributions: Page = {
         { title: 'Tellurium and SciPy', body: 'Modelling the ODE system.' },
       ],
     },
-    {
-      kind: 'todo',
-      body: [
-        'TODO(content): per-part and per-page attribution statements in the format iGEM requires.',
-        'TODO(content): clearly separate student work from advisor and lab-staff work.',
-        'TODO(webdev): credit the pixel garden and this site build in the footer.',
-      ],
-    },
   ],
 }
 
