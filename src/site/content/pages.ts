@@ -164,12 +164,13 @@ const description: Page = {
     },
     {
       kind: 'cards',
+      id: 'two-arms',
       heading: 'Two arms, opposite directions',
       intro: 'Both arms are engineered, both are genetically encodable, and they push the same pathway in opposite directions.',
       items: [
         {
           title: 'Up arm',
-          body: 'A **de novo minibinder** pries apart the MEGF8 and MOSMO interface. The MMM complex can no longer assemble, so it stops clearing SMO, so SMO stays in the cilium and Hedgehog signalling goes up.',
+          body: 'A **de novo minibinder** pries apart the MEGF8 and MOSMO interface. [How we design one](/project/design#pipeline). The MMM complex can no longer assemble, so it stops clearing SMO, so SMO stays in the cilium and Hedgehog signalling goes up.',
         },
         {
           title: 'Down arm',
@@ -185,18 +186,10 @@ const description: Page = {
       kind: 'prose',
       heading: 'From a therapy to a platform',
       body: [
-        'We started out framing this as a Hedgehog therapy. After talking with researchers it became clear the more useful thing is a **modular research platform**, a way for any cilia lab to raise or lower a receptor of their choice and watch what happens. SMO is the receptor where the ground truth is already known, so it is our proof, not our endpoint. The down arm test on GPR161 is how we show the same parts port to a receptor the complex has no natural relationship with.',
+        'We started out framing this as a Hedgehog therapy. After talking with researchers it became clear the more useful thing is a **modular research platform**, a way for any cilia lab to raise or lower a receptor of their choice and watch what happens. The reason that is worth doing is [the gap nothing else fills](/impact/human-practices#the-gap). SMO is the receptor where the ground truth is already known, so it is our proof, not our endpoint. The down arm test on GPR161 is how we show the same parts port to a receptor the complex has no natural relationship with.',
         'Dr. Ning Zheng, a ubiquitination expert we interviewed, pointed out that because we strengthen an interaction that already exists rather than forcing a brand new one, the right name for this is a **LockTAC**, not a PROTAC. He also noted a transmembrane version of this has not been shown in the literature, which is where the novelty sits.',
       ],
       source: 'Interview with Dr. Ning Zheng (UW Pharmacology); IHP wiki outline.',
-    },
-    {
-      kind: 'todo',
-      body: [
-        'TODO(creative): final project name and logo. The page uses a placeholder title until then.',
-        'TODO(creative): add the pathway schematic and the MMM complex figure.',
-        'TODO(content): add primary citations for the mechanism claims above.',
-      ],
     },
   ],
 }
