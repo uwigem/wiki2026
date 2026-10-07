@@ -210,6 +210,11 @@ const background: Page = {
     'Hedgehog signalling has to be kept in a narrow band. Too much drives cancer, too little breaks development, and the drugs we have can only shut it off.',
   blocks: [
     {
+      kind: 'logo',
+      caption:
+        'Hedgehog signalling is a balance, and both ends of it are dangerous. Tip it one way and you get cancer; tip it the other and development goes wrong. The drugs we have can only take one hedgehog off the scale entirely. What is missing is a way to set where the beam sits.',
+    },
+    {
       kind: 'prose',
       heading: 'Why the amount matters',
       body: [
@@ -220,10 +225,12 @@ const background: Page = {
     },
     {
       kind: 'prose',
+      id: 'current-drugs',
       heading: 'The limits of the current drugs',
       body: [
         'The approved SMO inhibitors, vismodegib and sonidegib, block the receptor directly. Tumours mutate SMO and become resistant, and the drugs carry harsh side effects, which is why they are not given to children. Blocking is a blunt move on a pathway that is really about amount.',
         'We also state the limit up front, from the same interview. This approach works on cases driven by too much SMO. It does not help cases driven by mutations further down the pathway, in **SUFU** or **GLI**.',
+        'What we propose instead is [a device with two arms](/project/description#two-arms), which sets the amount rather than blocking the receptor.',
       ],
       source: 'Interview with Dr. Stacey Ogden (St. Jude).',
     },
@@ -245,13 +252,6 @@ const background: Page = {
         },
       ],
       source: 'Kong lab MMM structure and interface preprint (biorxiv 2025.09.11.675358).',
-    },
-    {
-      kind: 'todo',
-      body: [
-        'TODO(content): add proper citations. This page currently paraphrases interviews and meeting notes.',
-        'TODO(content): add epidemiology numbers for SHH medulloblastoma and basal cell carcinoma with sources.',
-      ],
     },
   ],
 }
