@@ -542,39 +542,333 @@ const humanPractices: Page = {
       source: 'Integrated Human Practices: IHP wiki outline.',
     },
     {
-      kind: 'cards',
-      heading: 'Three interviews that changed the project',
-      intro: 'These are the conversations we have written notes for. Each one moved a real decision.',
-      items: [
-        {
-          title: 'Dr. Ning Zheng, UW Pharmacology',
-          body: 'A ubiquitination expert. He told us a transmembrane E3 PROTAC does not exist in the literature, so this is genuinely new. He also corrected our vocabulary. Because we strengthen an interaction that already exists, we are building a **LockTAC**, not a PROTAC. And he pushed us to stop thinking about only SMO and prove that any protein can be attached, which is the moment the project became a modular platform.',
-        },
-        {
-          title: 'Dr. Stacey Ogden, St. Jude',
-          body: 'A Hedgehog signalling researcher. She gave us the disease picture, that Hedgehog going up drives basal cell carcinoma and about 30 percent of medulloblastoma, and that you cannot give young children Hedgehog inhibitors, which is exactly why a tunable tool matters. She also set an honest limit. Our approach does not help cases driven by SUFU or GLI mutations.',
-        },
-        {
-          title: 'Dr. Herbert Sauro, UW Bioengineering',
-          body: 'A systems biologist who met with the modeling subteam twice. He moved us from one big model to a set of candidate models chosen by AIC and BIC, and gave us the sensitivity and uncertainty methods now on the Model page. See the Model page for the details.',
-        },
+      kind: 'narration',
+      body: [
+        'Nearly every cell in you grows a single tiny antenna, called the **primary cilium**. It is not decoration. Certain receptors only do their job while they are sitting in it.',
+        'So a protein can be in the right cell and still be in the wrong place. That one idea is what the rest of this page is about.',
       ],
     },
     {
       kind: 'prose',
-      heading: 'How the page will be built',
+      heading: 'Why location matters',
       body: [
-        'We are organising Integrated Human Practices around three pillars. **Adoption**, what cilia researchers actually need before they would use this. **Responsible use**, what it means to give people a tool that alters ciliary localization, including a case study on auditory cilia as an example of a system that needs extra care. **Design safety**, designing the tool so that it is used safely, for example checking whether neighbouring proteins get ubiquitinated by accident.',
+        'The primary cilium is an extension of the cell membrane, but it keeps its own separate contents. Barriers at its base control what gets in and out, so the cell can concentrate particular receptors inside it. That makes it a distinct signalling compartment rather than just another patch of surface.',
+        '**Smoothened is the clean example.** When Hedgehog signalling is switched on, SMO moves into the cilium and builds up there, and that is when it drives the GLI transcription factors. Engineer SMO so it can no longer enter the cilium and Hedgehog signalling cannot be activated properly, even though the protein is still in the cell. Being in the cilium is not incidental to what SMO does; it is the thing that makes it work.',
       ],
-      source: 'Integrated Human Practices: IHP wiki outline (three pillars and guiding question).',
+      source:
+        'Nachury and Mick, Nat Rev Mol Cell Biol 2019; Corbit et al., Nature 2005 (Vertebrate Smoothened functions at the primary cilium).',
     },
     {
-      kind: 'todo',
+      kind: 'prose',
+      heading: 'Why the amount matters too',
       body: [
-        'TODO(human practices): write up the fuller stakeholder set. Many are contacted but not yet confirmed, so do not list anyone as interviewed until the conversation has happened.',
-        'TODO(human practices): add the "what changed" line to every interview, and tie the interviews forward into Design and Results so this reads as one story.',
-        'TODO(human practices): build the auditory-cilia responsible-use case study.',
+        'Signalling pathways are not simple switches. Cells respond differently to a weak signal and a strong one, and during development small differences in Hedgehog signalling help decide which cell types form.',
+        'That holds inside the cilium. Reducing how much SMO is in the cilium impairs pathway activation, and a mutant SMO that cannot concentrate there properly fails to reach the highest levels of Hedgehog response. So a tool that removes a protein completely can only tell you whether it was necessary. Being able to move the amount up and down gradually is what reveals thresholds, and the intermediate states in between.',
       ],
+      source:
+        'Stamataki et al., Genes Dev 2005; Mahjoub, Organogenesis 2013; Gigante et al., Dev Biol 2018.',
+    },
+    {
+      kind: 'toolshed',
+      id: 'toolbox',
+      heading: 'What is already in the shed',
+      intro:
+        'Cilia labs are not short of tools. We went through the ones they actually reach for, and asked the same question of each: can it change one chosen protein, only inside the cilium, at a time you pick, by an amount you pick.',
+      tools: [
+        {
+          name: 'Genetic knockout (CRISPR-Cas9)',
+          how: 'A guide RNA directs Cas9 to cut a chosen DNA sequence. The cell repairs the break imperfectly, and the resulting mutations stop the gene making a working protein.',
+          good: 'The strongest way to ask whether a protein matters at all. If removing it changes ciliary structure or signalling, that is good evidence the protein has a real role, and it scales up into large genetic screens.',
+          gap: 'It removes the protein from the whole cell, not just the cilium, so it cannot separate what the protein was doing in the cilium from what it was doing elsewhere. It also offers little control over amount: the comparison is normal against near total loss.',
+        },
+        {
+          name: 'Gene silencing (CRISPRi and RNAi)',
+          how: 'CRISPRi parks a catalytically dead Cas9 on a gene to block transcription rather than cutting it. RNAi uses small RNAs that bind the matching mRNA so it is destroyed or never translated.',
+          good: 'Useful when a full knockout would be too disruptive and you want to reduce a protein rather than remove it. RNAi screens have already found genes involved in building and regulating cilia.',
+          gap: 'It controls how much protein the whole cell makes, not where the remaining protein ends up. How far you suppress a gene does not translate into a predictable amount left in the cilium.',
+        },
+        {
+          name: 'Small molecule antagonists',
+          how: 'Compounds that bind a protein and block its activity. They act within minutes of being added and leave the DNA untouched, and the dose can be varied.',
+          good: 'Fast, reversible, and dose dependent, which makes them good for watching how a pathway responds to partial inhibition. SMO antagonists have taught the field a great deal about how SMO activity relates to the pathway.',
+          gap: 'Blocking what a protein does is not the same as controlling how much of it is there. Some SMO antagonists keep SMO out of the cilium while others make it pile up inside, and Hedgehog signalling is inhibited either way, which is exactly the confound.',
+        },
+        {
+          name: 'Inducible degrons',
+          how: 'The target protein is fused to a degron tag. Adding the matching trigger, auxin in the AID system, recruits an E3 ubiquitin ligase that marks the protein for destruction by the proteasome.',
+          good: 'Excellent control over *when*. Cilia assemble and disassemble on short timescales, and auxin-inducible degradation has been used to strip out ciliary proteins fast enough to watch the consequences.',
+          gap: 'Almost no control over *where*. If the protein sits both in the cilium and elsewhere, the system cannot tell the two pools apart, and degradation tends to be close to total rather than tunable.',
+        },
+        {
+          name: 'Ciliary trafficking perturbation (IFT and the BBSome)',
+          how: 'The cilium has its own transport system. Intraflagellar transport moves cargo along the axoneme, and the BBSome couples membrane signalling proteins to that machinery.',
+          good: 'This does act inside the cilium. Losing IFT27 stops GPR161 being cleared out, so it accumulates, and BBSome-dependent transport is needed to move SMO in and out. Perturbing trafficking really does change ciliary protein levels.',
+          gap: 'The machinery carries everything. Disrupt it and many ciliary proteins shift at once, and depending on the part you break you can interfere with building the cilium at all. There is no way to single out one receptor.',
+        },
+        {
+          name: 'Targeted protein degradation (PROTACs, molecular glues, LYTACs, AbTACs)',
+          how: 'All of these force a chosen protein next to the cell\'s own disposal machinery. PROTACs and molecular glues bring a target to an E3 ligase for the proteasome; LYTACs and AbTACs route surface proteins to the lysosome or to a membrane E3 ligase.',
+          good: 'Genuinely target specific, and fast. LYTACs and AbTACs have shown the approach reaches cell surface receptors, which is the category most ciliary signalling proteins fall into.',
+          gap: 'Almost all of it is built to work across the whole cell or the whole cell surface. For a ciliary biologist that reintroduces the original problem: you cannot tell the ciliary pool from the rest.',
+        },
+        {
+          name: 'Cilia-targeted ubiquitination',
+          how: 'Certain ciliary GPCRs are tagged with K63-linked ubiquitin chains, which signal the BBSome to carry them out. Researchers can change this by targeting the enzymes that add or remove those chains inside the cilium.',
+          good: 'The closest existing approach to what we want, and it proves the principle. Targeting the deubiquitinase AMSH to strip K63 chains stopped GPR161, SSTR3 and SMO leaving the cilium, so ciliary ubiquitination really does control which receptors stay.',
+          gap: 'It changes the ubiquitination environment of the whole cilium rather than aiming at one receptor, and it gives little ability to set how much of a particular protein remains.',
+        },
+      ],
+      source:
+        'Integrated Human Practices: Community Need section, fully cited in the IHP draft (references 8 to 20).',
+    },
+    {
+      kind: 'matrix',
+      id: 'the-gap',
+      heading: 'The same gap, every time',
+      intro:
+        'Reading down the columns is the argument. Plenty of tools are target specific. A couple act only inside the cilium. None of them does both and lets you choose the amount.',
+      columns: ['target specific', 'cilium only', 'timing', 'tunable'],
+      rows: [
+        { label: 'Genetic knockout', levels: ['full', 'none', 'none', 'none'] },
+        { label: 'CRISPRi and RNAi', levels: ['full', 'none', 'full', 'partial'] },
+        { label: 'Small molecule antagonists', levels: ['full', 'none', 'full', 'partial'] },
+        { label: 'Inducible degrons', levels: ['full', 'none', 'full', 'partial'] },
+        { label: 'BBSome and IFT perturbation', levels: ['partial', 'full', 'partial', 'none'] },
+        { label: 'Targeted protein degradation', levels: ['full', 'none', 'full', 'partial'] },
+        { label: 'Cilia-targeted ubiquitination', levels: ['partial', 'full', 'partial', 'partial'] },
+        { label: 'What we are building', levels: ['full', 'full', 'full', 'full'], isGoal: true },
+      ],
+      source: 'Opportunity matrix, Integrated Human Practices. Assessment from the literature review above.',
+    },
+    {
+      kind: 'facts',
+      id: 'four-requirements',
+      heading: 'Four things a ciliary tool has to do',
+      items: [
+        { title: 'What', body: 'Act on one protein you choose, not on everything in the compartment.' },
+        { title: 'Where', body: 'Act inside the primary cilium, and leave the same protein elsewhere in the cell alone.' },
+        { title: 'When', body: 'Change on a timescale you control, rather than permanently from the start.' },
+        { title: 'How much', body: 'Set the amount that remains, instead of only all or nothing.' },
+      ],
+    },
+    {
+      kind: 'narration',
+      label: 'so what is the idea',
+      body: [
+        'The cell already owns a machine that clears one specific receptor out of the cilium. That is the **MMM complex**, and its usual job is keeping SMO in check.',
+        'We are not building a new machine. We are redirecting that one, so a researcher can point it at a protein of their choosing and decide how much of it stays.',
+      ],
+    },
+    {
+      kind: 'stats',
+      id: 'market',
+      heading: 'How big is this, really',
+      intro:
+        'We looked at whether a ciliary tool would matter to anyone outside our own lab. Two of these numbers are encouraging and one of them is the actual opportunity.',
+      items: [
+        { value: '516', label: 'approved drugs that target a GPCR', note: 'Nat Rev Drug Discov, 2025' },
+        { value: '36%', label: 'of all approved drugs, by the same count' },
+        { value: '30+', label: 'human diseases and syndromes linked to faulty cilia' },
+        {
+          value: '0',
+          label: 'approved drugs targeting a ciliary GPCR',
+          note: 'Saito et al., Front Mol Biosci 2023',
+          emphasis: true,
+        },
+      ],
+      footnote:
+        'Not every GPCR is ciliary, and our platform is a research tool rather than a therapeutic. But a receptor class that drives a third of the drug market, a compartment tied to more than thirty diseases, and nothing approved against it is a gap worth naming.',
+      source: 'Market model, Integrated Human Practices.',
+    },
+    {
+      kind: 'prose',
+      heading: 'And how many people would use it',
+      body: [
+        'There is no published market figure for cilia research tools, so we estimated one rather than quoting a number we could not source. Cilia papers are roughly **0.05 percent** of PubMed, about one in every two thousand. Applying that share to the NIH Bioengineering and Biotechnology funding categories gives on the order of **3.6 to 4.4 million dollars a year** of NIH-supported cilia research technology activity.',
+        'That is a small number, and it changed what we are building. It says our first users are not a mass market, they are the labs already working on ciliary signalling. So the platform should be cheap to adopt in a single lab and easy to point at a new target, rather than polished into a product. We have written the assumptions behind the estimate down, including that publication share is a poor proxy for spending.',
+      ],
+      source: 'Market model, Integrated Human Practices. Full working and limitations in the IHP draft.',
+    },
+    {
+      kind: 'stakeholders',
+      id: 'stakeholders',
+      heading: 'Who we asked, and what it changed',
+      intro:
+        'Thirteen conversations, planted by what each person knows. Each has a line saying what we did differently afterwards, or says plainly where that is not written up yet.',
+      people: [
+      {
+        name: 'Dr. Samuel Miller',
+        role:
+          'Professor in the UW Department of Medicine, Division of Allergy and Infectious Diseases, with extensive experience studying bacterial pathogenesis and developing biological research tools',
+        group: 'signalling researcher',
+        why:
+          'The team returned to him because his feedback during their 2025 project had stressed identifying a clear user and use case before investing heavily in technology development.',
+        said:
+          'He challenged the team to first establish whether changing receptor copy number produces a meaningful biological effect, noting that in some GPCR systems ligand availability or downstream signal amplification may matter more than receptor abundance itself, and recommended a well characterised system where receptor abundance is already known to influence a measurable phenotype as a rigorous proof of principle. He also highlighted that ubiquitin mediated control could alter protein abundance much more rapidly than transcriptional regulation, and that researchers weigh cost, technical difficulty, equipment requirements, reproducibility and the likelihood of false negatives or positives when adopting a tool.',
+        changed:
+          'The team will prioritise a biologically meaningful proof of principle system before expanding to additional GPCRs, and its adoption guide will include detailed methods, controls, validation data, reagent sources and construction procedures so other researchers can reproduce and evaluate the platform.',
+      },
+      {
+        name: 'Dr. Paul Pottinger',
+        role:
+          'Professor of Medicine in UW\'s Division of Allergy and Infectious Diseases and a practising infectious disease physician with experience in antimicrobial stewardship and medical education',
+        group: 'bioethics',
+        why:
+          'To understand what biological and safety considerations would need to be addressed before a system like this could be explored in more disease related contexts.',
+        said:
+          'He advised that the current goal of building a research platform and the long term potential of therapeutic application are not incompatible, but that the team should clearly communicate the distinction between what the technology can do now and what remains a future possibility. He also emphasised considering unintended effects at a systems level and seeking additional systems biology expertise to examine how perturbing one component of a pathway could influence broader pathways.',
+        changed:
+          'The team will build clear boundaries around validation and uncertainty into its responsible use material, test a validated platform in more physiologically complex models such as organoids, use system level modelling to explore off target consequences, and set clearer goalposts for what counts as successful platform development.',
+      },
+      {
+        name: 'Dr. Herbert Sauro',
+        role:
+          'Professor in the UW Department of Bioengineering and Principal Investigator of the Predictive Sys-Bio Lab, focused on in silico biological models and pathway analysis',
+        group: 'modelling expert',
+        why:
+          'To get feedback on the team\'s kinetic models while they were developing a representation of the Hedgehog signalling pathway and their two modulators, a binder inhibiting the MOSMO and MEGF8 interaction and a linker recruiting the MMM complex to SMO.',
+        said:
+          'He introduced the team to modelling platforms including BioModels, LibRoadRunner, WebIridium and Spyder, and explained how to use them to write and analyse kinetic models. He also guided the model development process by having the team create a wiring diagram to identify which components were most important, and gave detailed feedback as the model progressed.',
+        changed:
+          'The team simplified its kinetic model through a wiring diagram and used that process to work out which wet lab experimental data it needed.',
+      },
+      {
+        name: 'Dr. John B. Wallingford',
+        role:
+          'Professor at the University of Texas at Austin Department of Molecular Biosciences and the Mr. and Mrs. Robert P. Doherty, Jr. Regents Chair in Molecular Biology, whose lab works on morphogenesis, cilia and systems biology',
+        group: 'ciliary biologist',
+        why:
+          'To better understand how the foundational advancement could support ciliary researchers like those in his lab, and to get feedback on the current project.',
+        said:
+          'He set out what researchers and clinicians need to know when using a new tool, including degradation rate, effectiveness and efficiency. He explained that a primary limitation in ciliary research is the inability to study cilia dynamics, since expansion microscopy requires fixing cells and so disables a direct link between structure and dynamics.',
+        changed:
+          'The meeting narrowed down how the project could be used by ciliary researchers and what steps were needed to establish it as a foundational advancement, with live cell study of Hedgehog signalling without fixture as the intended contribution.',
+      },
+      {
+        name: 'Dr. Stacey Ogden',
+        role: 'Researcher at St. Jude who focuses on hedgehog signalling',
+        group: 'signalling researcher',
+        why:
+          'The team initially reached out to better understand what hedgehog signalling is implicated in, in order to grasp the project\'s scope.',
+        said:
+          'She advised on what the hedgehog signalling pathway is implicated in, discussing the majority of cancer cases coming from rhabdomyosarcoma and medulloblastoma, and the cardiovascular conditions that occur with hedgehog misregulation in children, many of which are diagnosed via amniocentesis. She also raised the implications of tampering with such a ubiquitous system.',
+        changed:
+          'Given the histories of developmental biology being used to support eugenics efforts, the team recognised how important responsible use of the tool is.',
+      },
+      {
+        name: 'Changho Chun and Justin Lee',
+        role:
+          'Co-founders of NuukBio, an early stage biotechnology company developing a live-cell phenotyping platform',
+        group: 'startup or industry',
+        why:
+          'The team\'s own platform is at a similar early stage, so they wanted to learn how NuukBio translated an academic scientific capability into a broader research platform.',
+        said:
+          'They emphasised that deep tech platforms cannot rely on assumed value and that the underlying science first needs rigorous experimental validation, with researchers acting as the first users. They encouraged the team to define the specific unanswered scientific questions the platform enables before identifying broad markets, users or applications, and to develop an evolving founder\'s theory, a clear hypothesis of why the platform is useful and what problem it solves, refined repeatedly through stakeholder feedback.',
+        changed:
+          'Wet lab and modelling teams will organise validation around clearly defined scientific questions, Human Practices will develop an initial value hypothesis and test it through interviews with potential end users, and the team will broaden outreach through referrals and local life science networks.',
+      },
+      {
+        name: 'Dr. Ning Zheng',
+        role:
+          'Professor of Pharmacology at the University of Washington School of Medicine, whose lab specialises in protein structure and ubiquitination',
+        group: 'signalling researcher',
+        why:
+          'To receive guidance on developing a modular platform that addresses a prominent gap in the field.',
+        said:
+          'He explained that because SMO is endogenously targeted and ubiquitinated by the MMM complex, the team would not be able to prove that regulation of SMO was due to their platform rather than the pre-existing biological relationship. He recommended selecting a protein that is not naturally targeted by MMM, to test whether the system can create a synthetic interaction and so demonstrate a truly modular tool.',
+        changed:
+          'The platform shifted from focusing only on SMO as a target to a modular system that can target and regulate any ciliary membrane protein.',
+      },
+      {
+        name: 'Dr. Thomas Matula',
+        role:
+          'President and CEO of Matchstick Technologies, where he developed PIXUL, an instrument using cavitation for fragmenting DNA for genetic and epigenetic analysis',
+        group: 'startup or industry',
+        why:
+          'To learn from his experience developing a research tool with a wide range of applications, since PIXUL started as an academic research tool before being commercialised.',
+        said:
+          'He described customer discovery and product development from working with UW CoMotion through to early grant applications, and urged the team to quickly develop small proof of concept technologies to attract early investors. He stressed staying utilitarian, iterating constantly on customer feedback rather than personal preference, and noted that people in labs are often set in how they already do things, so the key is finding a specific pain point the tool solves.',
+        changed: 'No change from this conversation is written up yet.',
+      },
+      {
+        name: 'Dr. David Younger',
+        role:
+          'Co-founder and CEO at A-Alpha Bio and a co-inventor of the AlphaSeq protein interaction platform',
+        group: 'startup or industry',
+        why:
+          'To better understand the tradeoffs of the team\'s protein, antibody and small molecule design strategies, and how a modular biological tool could be made accessible to other researchers as a platform.',
+        said:
+          'He raised no fundamental concerns with the de novo protein design approach but said the choice between a small molecule, a protein based PROTAC and an antibody system should depend on the intended application, with biologics and minibinders more feasible within the iGEM timeline. He cautioned that full length knob and hole antibodies are not easy to design, synthesise or screen, suggesting two minibinders connected by a flexible linker as a minimal proof of concept, and warned that fully open sourcing too early could reduce investor incentives before a defensible IP foundation exists.',
+        changed:
+          'The wet lab team will prioritise validating a smaller minibinder system before pursuing more complex antibody or small molecule formats, the protein modelling and kinetics team will focus on scalable candidate generation, and Human Practices will continue examining platform implementation strategies.',
+      },
+      {
+        name: 'Dr. Steven Vokes',
+        role:
+          'Professor at the University of Texas at Austin\'s Department of Molecular Biosciences, whose lab focuses on transcriptional response to Hedgehog signalling with GLI transcription activators and repressors',
+        group: 'signalling researcher',
+        why:
+          'To learn how the platform could be useful to and adopted by scientists working with ciliary transmembrane proteins, and to hear his views on the linker system and potential off target effects.',
+        said:
+          'He suggested expanding wet lab experimentation to NIH/3T3 cells, an embryonic murine cell line with Hh signalling present, and using levels of the ciliary protein ARL13B as a control when testing effects on Smoothened in the cilia. As an in vivo researcher he was concerned about applying antibodies in murine or other live models, explaining that in vitro cancer lines lose ciliary response quite quickly. He also asked what advantages the system offers over cheap pre-existing small molecules, pointing to less druggable targets such as PTCH1 or GPR161, and noted the lack of quantitative live cell imaging in vivo at molecular or single cell resolution.',
+        changed:
+          'The team decided to use minibinders for its linker system, giving an easier delivery route for in vivo researchers studying downregulation of transmembrane ciliary proteins while remaining usable in cell culture.',
+      },
+      {
+        name: 'Zach Chamberlain',
+        role:
+          'Manager of CoMotion Labs at UW CoMotion, working closely with student and faculty teams translating research into startups and licensed technologies',
+        group: 'commercialisation',
+        why:
+          'To better understand what it actually takes for a research tool like theirs to be adopted outside of iGEM, and what CoMotion typically looks for when supporting student projects.',
+        said:
+          'He emphasised flexibility, awareness of the target audience, and simplifying the project down to its core point of innovation. On funding, he explained that investors want to see robust proof and results but also evidence that a team is flexible and aware of its surrounding environment, rather than locked into building a perfect product before ever engaging with its target audience.',
+        changed:
+          'The team plans to keep its scope realistic and grounded in what its current data actually supports, focusing on demonstrating a clear pain point the platform solves for cilia researchers.',
+      },
+      {
+        name: 'Roi Eisenkot',
+        role:
+          'Associate Director of Bioengineering at UW CoMotion, managing a portfolio of bioengineering technologies and helping UW researchers think through translation, commercialisation and routes for getting technologies beyond the university',
+        group: 'commercialisation',
+        why:
+          'To understand what realistic translational pathways the platform could take, and what decisions on dissemination, intellectual property and commercialisation should be made this early.',
+        said:
+          'He emphasised that the first step is defining the end goal, since patenting, open sourcing or distributing directly to researchers depend heavily on whether the priority is commercial sustainability or broad nonprofit dissemination. He noted that patents require significant resources and a plausible mechanism for recovering that investment, while distributing a biological technology as a black box may limit adoption because users cannot understand or adapt the system. His major recommendation was to ramp up customer discovery, since actions speak louder than words, and to define the minimum features the platform must have.',
+        changed:
+          'Wet lab and modelling teams will focus on establishing convincing and reproducible proof of concept and clarifying what the minimum viable research tool should contain, while Human Practices will expand customer discovery around existing workflows and unmet needs.',
+      },
+      {
+        name: 'Dr. Mark Bothwell',
+        role:
+          'UW neurobiologist and member of faculty at the Institute for Stem Cell and Regenerative Medicine (ISCRM), with a long standing interest in primary cilia and receptor localisation',
+        group: 'ciliary biologist',
+        why:
+          'To identify meaningful biological systems for the proposed platform and to evaluate whether tuning ciliary receptor abundance would address a real experimental need.',
+        said:
+          'He said a major gap in cilia research is that existing approaches typically disrupt formation of the entire cilium rather than selectively manipulating the localisation or abundance of an individual ciliary receptor. He identified promising systems including the GLP-1 receptor in pancreatic beta cells, ciliary GPCRs in hypothalamic control of appetite and body weight, PC1 in renal epithelial cells, somatostatin receptor 3 and serotonin receptor 6, and suggested eventually expanding beyond GPCRs to cilia enriched receptor tyrosine kinases such as FGF and PDGF. He recommended moving beyond HEK293T cells after initial proof of concept toward iPSC derived neuronal, renal or pancreatic beta cell models, stressed selectivity as a critical control, and said developmental and unintended effects should be carefully evaluated but are not unique to this platform.',
+        changed:
+          'The wet lab team can incorporate localisation and negative control assays and consider a disease relevant cell model after the SMO proof of concept, modelling teams can evaluate adapting the platform to additional receptor classes, and Human Practices will sharpen the proposed user need around selective receptor level perturbation.',
+      },
+      ],
+      source: 'Integrated Human Practices: stakeholder interview write-ups, 2026.',
+    },
+    {
+      kind: 'quote',
+      body: [
+        'A useful research tool should give researchers control over **which** protein changes, and over **when**, **where**, and **by how much** it changes. A tool that can set those independently lets scientists find the thresholds and the cilium-specific jobs that current methods cannot separate.',
+      ],
+      source: 'our founder\'s theory, written after the interviews and still being revised',
+    },
+    {
+      kind: 'prose',
+      heading: 'Where this goes next',
+      body: [
+        'We are organising Integrated Human Practices around three pillars. **Adoption**, what cilia researchers actually need before they would use this. **Responsible use**, what it means to give people a tool that alters ciliary localization, including a case study on auditory cilia as an example of a system that needs extra care. **Design safety**, designing the tool so that it is used safely, for example checking whether neighbouring proteins get ubiquitinated by accident.',
+        'On openness we have moved from a yes or no question to a sequence. Roi Eisenkot at UW CoMotion reframed patents for us: a patent is not only a way to keep control, it can also be the thing that keeps a technology in the open. His stronger point was about evidence. A researcher saying an idea sounds interesting is not evidence they would adopt it, so we need to find out what labs currently spend time and money doing to work around this limit.',
+      ],
+      source:
+        'Integrated Human Practices: IHP wiki outline; interview with Roi Eisenkot (UW CoMotion); NuukBio and Matchstick Technologies interviews.',
     },
   ],
 }
