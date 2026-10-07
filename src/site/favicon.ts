@@ -1,37 +1,58 @@
-import { BLOB_DOWN } from '../engine/sprites'
-import { drawSprite, rect } from '../engine/paint'
+import { TEAM_LOGO, logoPath } from './content/teamLogo'
 import { SITE_PALETTE } from './theme'
 
 /**
- * The favicon is the hedgehog, and it blinks.
+ * The browser-tab icon: the team logo on a cream tile.
  *
- * Both frames are drawn from the engine's own sprite and its own blink. The open
- * frame is `BLOB_DOWN`; the closed frame repaints the eye band with the face
- * colour, which is what `Player.draw` does:
+ * Drawn here from the logo's own pixel data, like everything else on the site,
+ * rather than shipped as an image file.
  *
- *     rect(ctx, ox + 3, oy + 9, sprite.w - 6, 2, pal.hogSkin)
+ * The tile is there for dark tab bars. The logo is a dark purple, and on a dark
+ * browser theme a bare dark icon all but disappears; on the panel cream it
+ * reads on light and dark tabs alike. The cream comes from the site palette.
  *
- * The timing is `player.ts`'s too: a 110ms blink every couple of seconds.
+ * At 32 pixels the logo's thin strings and leash fall below one pixel, so the
+ * icon reads as the balance and its two pans rather than in detail. That is
+ * expected for a drawing this intricate. The path is drawn antialiased, which
+ * keeps those thin lines as a faint trace instead of dropping them outright.
  */
 
-const SCALE = 2 // 16×16 sprite → a 32×32 icon, the size browsers actually want
-const BLINK_MS = 110
-const GAP_MS = 2600
+/** Browsers want a 32 × 32 tab icon; it covers 16-point tabs on high-density screens. */
+const SIZE = 32
 
-function frame(blinking: boolean): string {
-  const pal = SITE_PALETTE
+function roundedSquare(ctx: CanvasRenderingContext2D, size: number, radius: number) {
+  ctx.beginPath()
+  ctx.moveTo(radius, 0)
+  ctx.arcTo(size, 0, size, size, radius)
+  ctx.arcTo(size, size, 0, size, radius)
+  ctx.arcTo(0, size, 0, 0, radius)
+  ctx.arcTo(0, 0, size, 0, radius)
+  ctx.closePath()
+}
+
+function drawIcon(size: number): string {
   const canvas = document.createElement('canvas')
-  canvas.width = BLOB_DOWN.w * SCALE
-  canvas.height = BLOB_DOWN.h * SCALE
-  const ctx = canvas.getContext('2d')!
-  ctx.imageSmoothingEnabled = false
-  ctx.scale(SCALE, SCALE)
-  drawSprite(ctx, BLOB_DOWN, 0, 0, pal)
-  if (blinking) rect(ctx, 3, 9, BLOB_DOWN.w - 6, 2, pal.hogSkin)
+  canvas.width = size
+  canvas.height = size
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return ''
+
+  roundedSquare(ctx, size, size * 0.18)
+  ctx.fillStyle = SITE_PALETTE.bushHi
+  ctx.fill()
+
+  // The logo is wider than it is tall, so its width sets the scale.
+  const pad = size * 0.07
+  const scale = (size - pad * 2) / TEAM_LOGO.width
+  ctx.translate(pad, (size - TEAM_LOGO.height * scale) / 2)
+  ctx.scale(scale, scale)
+  ctx.fillStyle = '#' + TEAM_LOGO.ink
+  ctx.fill(new Path2D(logoPath()))
+
   return canvas.toDataURL('image/png')
 }
 
-export function installBlinkingFavicon() {
+export function installFavicon() {
   let link = document.querySelector<HTMLLinkElement>('link[rel="icon"]')
   if (!link) {
     link = document.createElement('link')
@@ -39,18 +60,6 @@ export function installBlinkingFavicon() {
     document.head.appendChild(link)
   }
   link.type = 'image/png'
-
-  const open = frame(false)
-  const shut = frame(true)
-  link.href = open
-
-  // A blink is a brief close, not a 50/50 flicker. Same rhythm as the sprite in
-  // the garden, so the tab and the page read as the same creature.
-  const tick = () => {
-    link!.href = shut
-    window.setTimeout(() => {
-      link!.href = open
-    }, BLINK_MS)
-  }
-  window.setInterval(tick, GAP_MS)
+  link.sizes.value = `${SIZE}x${SIZE}`
+  link.href = drawIcon(SIZE)
 }

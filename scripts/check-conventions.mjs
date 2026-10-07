@@ -34,6 +34,8 @@ const COLOUR_EXEMPT = [
   'src/engine/',
   'src/site/refSprites.ts',
   'src/site/components/PixelPerson.tsx',
+  'src/site/content/balanceLogo.ts',
+  'src/site/content/teamLogo.ts',
 ]
 
 /** The character itself, by code point, so this file does not trip its own rule. */
