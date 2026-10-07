@@ -104,7 +104,7 @@ src/
     rng.ts           seeded randomness
     hooks.ts         reduced motion, the intro sequence, scroll reveals
     palette-vars.ts  publishes the engine palette as CSS variables
-    favicon.ts       the blinking hedgehog favicon
+    favicon.ts       the browser-tab icon, drawn from the team logo
   index.css          theme tokens and shared classes
   App.tsx            the app shell: routing, nav, footer, skip link
 docs/                the style guide and the content sourcing reference
