@@ -1,5 +1,5 @@
 import { pageBySlug } from '../content/pages'
-import { SUBTEAMS } from '../content/team'
+import { ROSTER, SUBTEAMS } from '../content/team'
 import { PROJECT_BLURB } from '../content/site'
 import { Link } from '../router'
 import type { IntroStage } from '../hooks'
@@ -87,10 +87,10 @@ export default function Home({ at, stage, playing, onSkip }: Props) {
         <div className="grid gap-5 md:grid-cols-2">
           <Reveal>
             <div className="panel flex h-full flex-col px-5 py-6">
-              <h3 className="text-xl sm:text-2xl">The gardeners</h3>
+              <h3 className="text-xl sm:text-2xl">The team</h3>
               <p className="mt-2 text-body-sm leading-relaxed">
-                {SUBTEAMS.length} subteams, planted as {SUBTEAMS.length} flower beds. Click any bloom to
-                meet the person tending it.
+                {ROSTER.length} students across {SUBTEAMS.length} subteams, each with a profile and a way to get in
+                touch.
               </p>
               <Link to="/team" className="pixel-btn mt-auto self-start">
                 Meet the Team →
