@@ -1,8 +1,7 @@
-import { BLOB_DOWN } from '../../engine/sprites'
 import { ALL_ROUTES } from '../content/nav'
-import { FOOTER_LINKS, PROJECT_TITLE, REPO_NOTE, TEAM_LONG } from '../content/site'
+import { FOOTER_LINKS, PROJECT_TITLE, TEAM_LONG } from '../content/site'
 import { Link } from '../router'
-import PixelSprite from './PixelSprite'
+import BalanceLogo from './BalanceLogo'
 
 /** The bottom of the page: opaque, quiet, and out of the garden's way. */
 export default function FooterGarden({ onReplayIntro }: { onReplayIntro?: () => void }) {
@@ -11,14 +10,14 @@ export default function FooterGarden({ onReplayIntro }: { onReplayIntro?: () => 
       <div className="mx-auto grid max-w-5xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-3">
-            {/* the engine's hedgehog, still */}
-            <PixelSprite sprite={BLOB_DOWN} scale={3} />
+            {/* The project mark. A balance, because the claim is that the
+                amount can be set rather than switched off. */}
+            <BalanceLogo width={118} />
             <div>
               <p className="pixel text-base">{PROJECT_TITLE}</p>
               <p className="pixel text-tag tracking-[0.15em] text-leaf-800">{TEAM_LONG}</p>
             </div>
           </div>
-          <p className="mt-3 max-w-sm text-sm">{REPO_NOTE}</p>
           {onReplayIntro && (
             <button type="button" onClick={onReplayIntro} className="pixel-btn mt-4 text-xs">
               ↻ replay the intro
@@ -52,13 +51,7 @@ export default function FooterGarden({ onReplayIntro }: { onReplayIntro?: () => 
           </ul>
         </div>
       </div>
-
-      <div className="border-t-2 border-leaf-300 bg-leaf-300/60 px-4 py-3 text-center">
-        <p className="pixel text-tag tracking-wide text-leaf-800">
-          the garden is the team's own pixel engine, rendered live in code. No image assets.
-        </p>
-        {/* TODO(pre-publish): add iGEM's required competition attribution + CC licence line. */}
-      </div>
+      {/* TODO(pre-publish): add iGEM's required competition attribution + CC licence line. */}
     </footer>
   )
 }

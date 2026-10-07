@@ -1,10 +1,9 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { PROJECT_TITLE, TEAM_NAME, TEAM_YEAR } from '../content/site'
+import TeamLogo from './TeamLogo'
 import { NAV, activeGroup, type NavGroup } from '../content/nav'
-import { BLOB_DOWN } from '../../engine/sprites'
 import { Link, useRoute } from '../router'
 import { useEscape } from '../hooks'
-import PixelSprite from './PixelSprite'
 
 /**
  * Top navigation, styled as little wooden garden signs.
@@ -47,7 +46,8 @@ export default function TopNav({ visible = true }: { visible?: boolean }) {
     >
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-3 py-2 sm:px-5">
         <Link to="/" className="group flex shrink-0 items-center gap-2" title={PROJECT_TITLE}>
-          <PixelSprite sprite={BLOB_DOWN} scale={2} alt="" />
+          {/* Decorative here: the team name beside it is the link text. */}
+          <TeamLogo height={38} />
           <span className="leading-none">
             <span className="pixel block text-sm text-leaf-950 sm:text-base">{TEAM_NAME}</span>
             {/* Body font, not pixel: Pixelify Sans's 6 and 8 are hard to tell

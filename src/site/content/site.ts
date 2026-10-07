@@ -43,6 +43,3 @@ export const FOOTER_LINKS = [
   { label: 'Donate', href: 'https://sites.google.com/uw.edu/washington-igem-donate/home' },
   // TODO(content): add Instagram / GitHub org links once confirmed with Creative + Neel.
 ]
-
-export const REPO_NOTE =
-  'This site is a scaffold. Copy is drawn from the 2026 meeting notes; anything unresolved is flagged inline.'
