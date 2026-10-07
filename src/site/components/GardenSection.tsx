@@ -37,10 +37,26 @@ export function SectionDivider() {
  * fires. Print styles in index.css force it back to 1, or printed pages would
  * be blank below the fold.
  */
-export function Reveal({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
+export function Reveal({
+  children,
+  delay = 0,
+  className,
+  id,
+}: {
+  children: ReactNode
+  delay?: number
+  className?: string
+  /** Makes this block a link target. See `useSectionJump` in the router. */
+  id?: string
+}) {
   const { ref, shown } = useRevealOnScroll<HTMLDivElement>()
   return (
-    <div ref={ref} className={shown ? 'reveal' : 'opacity-0'} style={{ animationDelay: `${delay}s` }}>
+    <div
+      id={id}
+      ref={ref}
+      className={(shown ? 'reveal' : 'opacity-0') + (className ? ' ' + className : '')}
+      style={{ animationDelay: `${delay}s` }}
+    >
       {children}
     </div>
   )

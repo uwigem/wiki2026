@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { PAGES, pageBySlug } from './site/content/pages'
 import { PROJECT_TITLE, TEAM_NAME } from './site/content/site'
 import { useIntro, type Intro } from './site/hooks'
-import { Link, useRoute } from './site/router'
+import { Link, currentAnchor, useRoute } from './site/router'
 import FooterGarden from './site/components/FooterGarden'
 import HedgehogGuide from './site/components/HedgehogGuide'
 import PageGarden, { variantFor } from './site/components/PageGarden'
@@ -42,6 +42,11 @@ export default function App() {
   const lastPath = useRef<string | null>(null)
 
   useEffect(() => {
+    // A new page normally starts at the top. The exception is a link that
+    // named a section: `#/project/design#pipeline` is a request to land part
+    // way down, and jumping to the top first would fight the scroll that
+    // `useSectionJump` is about to do.
+    if (currentAnchor()) return
     window.scrollTo({ top: 0, behavior: 'auto' })
   }, [path])
 

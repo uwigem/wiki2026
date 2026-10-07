@@ -7,7 +7,7 @@
 - [ ] I ran `npm run check` and it passed
 - [ ] I looked at the change in the browser
 - [ ] I did not edit anything under `src/engine/`, `PixelCanvas.tsx` or `useAmbientAudio.ts`
-- [ ] Any content that is still missing is marked with a `TODO(owner):` rather than left blank
+- [ ] Anything still missing is listed in `docs/CONTENT_MAP.md`, not left as a TODO panel on the page
 
 ## Anything the reviewer should know
 
