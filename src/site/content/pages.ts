@@ -587,48 +587,114 @@ const education: Page = {
   intro: 'We built our outreach around one idea: synthetic biology should be engaging, accessible, fun for kids, fun for the elderly, and inspiring. Here is what that looked like.',
   blocks: [
     {
-      kind: 'cards',
-      heading: 'What we made',
-      items: [
+      kind: 'pillars',
+      id: 'programme',
+      heading: 'What we built, and the gap each one fills',
+      intro:
+        'Nine activities, grouped under those qualities, with fun for kids and fun for the elderly sharing one bed.',
+      pillars: [
         {
-          title: 'iGEM Alchemy',
-          body: 'A browser game where you drag and combine atoms into bigger and bigger pieces of biology, from a single amino acid all the way up to a GFP plasmid, across four levels. Recipes and descriptions from Human Practices, art from Creative, built by Web Dev. The name is not final.',
+          word: 'engaging',
+          activities: [
+            {
+              name: 'SynBio Hotline',
+              audience: 'anyone with a question, online',
+              why:
+                'Synthetic biology has not been well understood and the field often feels out of reach for a general audience, possibly due to a lack of familiarity with the phrase in popular media, confusion surrounding what SynBio is, or hesitation to jump into a new, unknown field of study. Most people do not have a scientist in their life.',
+              what:
+                'An interactive, judgement free space where anyone could ask anything about synbio and get a detailed answer and explanation. People emailed in their questions relating to synbio, the team researched them and responded with short form content, with the platform chosen to lower barriers to access and meet audiences where they were.',
+            },
+            {
+              name: 'Trivia Tabling',
+              audience: 'high school and college students',
+              why:
+                'Students learn fundamental concepts of each science subject in school but often have fewer chances to explore the real world applications of science.',
+              what:
+                'An interactive trivia challenge hosted at club fairs. Participants spun a wheel to choose a trivia category. Four categories, Sustainable Synthetic Biology, (Bio)Ethics/Policy, Synthetic Biology Techniques, and Famous Scientists, covered everything from lab procedures to ethical considerations, representing the considerations made across all iGEM subteams. A fifth wild card category, Washington iGEM, covered the design principles behind the team\'s past projects. The ethics section used open ended questions to open dialogue about public perceptions of synbio.',
+            },
+          ],
         },
         {
-          title: 'Paper-reading video series',
-          body: 'Each episode takes one real UW research paper and decodes it for a general audience, teaching a reusable roadmap of title, abstract, figures, and discussion, then interviews the author. Episode one is on firefly luciferase in cancer research, with Prof. Elizabeth Wayne.',
+          word: 'accessible',
+          activities: [
+            {
+              name: 'Can You Beat DNA Polymerase',
+              audience: 'school students, plus their parents and teachers',
+              why:
+                'People of all ages and backgrounds are familiar with the term DNA and with it being the blueprint of life, but public understanding largely stops there.',
+              what:
+                'Students acted as DNA polymerase, attaching corresponding base pairs to a given template strand using the basis of widely recognised stacking toys, racing another player to build a complementary strand. Run at the University of Washington\'s Engineering Discovery Days, where the activity was adapted on the fly: errors were used to discuss mutations, and older participants used Uracil instead of Thymine so they acted as RNA polymerase instead. After educators and parents asked to reproduce it, the team made a pamphlet or handbook on how to recreate the activity, using universal design principles, written and visual instructions for constructing each station, and colorblind friendly graphics.',
+              numbers:
+                'Run at Engineering Discovery Days, a free two-day campus festival that invited over 12,000 students in years 4 to 8, with their parents and teachers, from across Washington State. The take-home kit costs under five dollars a set.',
+            },
+            {
+              name: 'How to Read Scientific Papers (Video Series)',
+              audience: 'students meeting research papers for the first time',
+              why:
+                'Science is often inaccessible due to jargon filled literature and institutional paywalls, and undergraduate students often struggle with getting started on reading scientific literature.',
+              what:
+                'A tutorial series on how to read research papers, built as recorded interviews with first authors of academic publications: Dr. Swati Mishra of UW Medicine, UT Austin grad students Kangsan Kim and Clay Kosonocky, and postdoc Dr. Nikol Kaderabkova. Short associated worksheets were provided for educators to distribute to students.',
+            },
+          ],
         },
         {
-          title: 'Trivia tabling',
-          body: 'A spin-the-wheel game with five categories, from synthetic biology techniques to ethics and policy, each with a question, an explanation, and a discussion prompt. Run at the ASUW Spring Fair and Admitted Students Day.',
+          word: 'fun for all ages',
+          activities: [
+            {
+              name: 'A SynBio Whodunnit!',
+              audience: 'younger students',
+              why:
+                'Most education events targeted at a younger audience give little detail into the given field and opt to focus on the scientific method, which leaves many children lacking a sense of what science actually looks like.',
+              what:
+                'A murder mystery activity taking inspiration from the board game CLUE, giving a high level overview of basic laboratory techniques in three parts. Determine who committed the crime: students extracted DNA from a strawberry sample, a visual demonstration of the basics of genomics. Determine where the crime was done: students used pH strips on samples taken in different rooms to learn how different chemicals have unique properties like acidity. Determine the poison used: students performed paper chromatography with paper towels and food dyes to see a visual representation of polarity in action. The team also created a document outlining the procedure so the activity stays open source and easy to adopt.',
+            },
+            {
+              name: 'Build a Baselet',
+              audience: 'any age, with a harder version for older students',
+              why:
+                'The central dogma is the foundation of biology and advanced science builds on it, yet it is often not fully understood. Many younger students struggle to comprehend how DNA, RNA and proteins work together and find it difficult to visualize the microscopic processes.',
+              what:
+                'A hands on bracelet building kit introducing the central dogma. Each kit contains 12 colored beads, 2 charms, string, and a detailed handbook. Students string 6 colored beads, each color a different nitrogenous base, then string 6 complementary beads using RNA base pairing rules. The RNA is split into groups of 3 to model codons, and students use the handbook\'s amino acid chart to work out which amino acids their RNA codes for, each represented by a charm, so they add a miniature protein to the bracelet. For students who already understand the central dogma, the handbook provides mutations they can experiment with on their bracelet.',
+            },
+            {
+              name: 'SYNBIngO',
+              audience: 'older adults',
+              why:
+                'Most education efforts are directed to younger age ranges, which leaves the elderly and most adults disconnected from the sciences, and in America today academics and the life sciences have only grown farther away from the general public. People are also more likely to trust and stick to a treatment when they understand what it is doing in their body.',
+              what:
+                'An education event geared towards the elderly: a presentation on how synthetic biology impacts their lives by outlining how many common medications work, paired with bingo boards and a prize for the first BINGO to help with attention. The event closed with discussion prompts to foster open dialogue, asking participants to question the sciences and how involved they are in their lives, and inviting both the anxieties and the excitements they have about the future of synthetic biology.',
+            },
+          ],
         },
         {
-          title: 'Build a Baselet',
-          body: 'A take-home bracelet that models the central dogma with colour-coded nucleotide beads and a codon chart. Scan the QR at the end to see an AlphaFold model of the protein you just built. Aimed at ages 8 to 18, about 20 cents per person.',
-        },
-        {
-          title: 'Talking with elders',
-          body: 'A two-way session at an elderly home that teaches the central dogma and cell signalling, with a survey before and after, built to listen as much as to explain.',
-        },
-        {
-          title: 'Scientists You Might Not Know',
-          body: 'Short profiles of overlooked scientists, from Osamu Shimomura, who discovered GFP, to Alice Ball, a UW chemistry alumna.',
+          word: 'inspiring',
+          activities: [
+            {
+              name: 'Conversations in Synthetic Biology',
+              audience: 'students new to the field',
+              why:
+                'SynBio is not included in a typical K-12 curriculum and most extracurricular resources contain extremely technical language, so the field remains relatively unfamiliar and daunting to many students.',
+              what:
+                'A welcome week panel event. Speakers opened with an introduction of their career journey, followed by a guided Q&A led by iGEM members, after which students asked their own questions and participated in conversations with the panelists. The objectives were to showcase the many disciplines SynBio intersects with and to give students the opportunity to interact with professionals in the field, keeping the information easy to understand for students at different familiarity levels.',
+            },
+            {
+              name: 'Scientists You Might Not Know',
+              audience: 'middle and high school students',
+              why:
+                'When we hear about major scientific accomplishments we often hear the same few names, yet many discoveries we take for granted are already integrated into everyday science, among wet lab protocols, new therapeutics, or medical practices, without us knowing the people behind these innovations.',
+              what:
+                'A set of profiles highlighting scientists whose work changed medicine and biotechnology even though their names do not always appear in textbooks, showing that progress can come from asking an unexpected question, challenging what people thought was possible, or continuing to investigate when others might have stopped.',
+            },
+          ],
         },
       ],
+      source: 'Education and Outreach draft, 2026.',
     },
     {
       kind: 'prose',
       heading: 'And this website',
       body: [
         'The garden you are reading is part of the outreach, not decoration around it. The **Playground** is a small space where anyone can walk the hedgehog around and plant flowers, which is exactly the audience that will not sit through a paragraph about ubiquitin ligases.',
-      ],
-    },
-    {
-      kind: 'todo',
-      body: [
-        'TODO(education): link the finished iGEM Alchemy build next to the meadow in the Playground.',
-        'TODO(education): add participation numbers, age groups, and photos from each event.',
-        'TODO(education): add the feedback we collected and what we changed because of it.',
       ],
     },
   ],
