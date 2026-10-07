@@ -137,11 +137,6 @@ export interface Page {
   storyBeat: string
   /** Lede paragraph, rendered large under the title. */
   intro?: string
-  /**
-   * Wiki page owner, from the WebDev page-split on 7/27/26.
-   * TODO(pre-publish): decide whether to keep these bylines public.
-   */
-  gardener?: string
   blocks: Block[]
 }
 
@@ -266,7 +261,6 @@ const design: Page = {
   title: 'Designing the Binder',
   kicker: 'chapter 03 · design',
   storyBeat: 'We went to the design shed and grew proteins that never existed before, aimed at one small, stubborn interface.',
-  gardener: 'Trevor White · Protein Design',
   intro:
     'The up arm needs a minibinder that pries apart the MEGF8 and MOSMO interface. We design these de novo on the computer and filter them hard before anything reaches a bench.',
   blocks: [
@@ -350,7 +344,6 @@ const engineering: Page = {
   title: 'Build, Test, Learn',
   kicker: 'chapter 04 · engineering',
   storyBeat: 'Nothing in a garden works the first time. You plant, you watch, you move it two feet to the left.',
-  gardener: 'Neel Sundar · Web Development',
   intro: 'The build, test, learn cycles, in the order we actually ran them, including the parts that did not work the first time.',
   blocks: [
     {
@@ -425,7 +418,6 @@ const results: Page = {
   title: 'What Grew',
   kicker: 'chapter 05 · results',
   storyBeat: 'This bed is still mostly soil. Come back when the season turns.',
-  gardener: 'Rishabh Goenka · Wet Lab',
   intro: 'We are at the design and planning stage, so there are no wet-lab results yet. Here is the plan, laid out so results can drop straight in.',
   blocks: [
     {
@@ -476,7 +468,6 @@ const model: Page = {
   title: 'The Model',
   kicker: 'chapter 06 · model',
   storyBeat: 'Before you dig, it helps to know how fast things grow. So we did the maths, and then we asked a systems biologist to tell us where the maths was wrong.',
-  gardener: 'Ruhi · Kinetic Modeling',
   intro:
     'A kinetic model of the Hedgehog and MMM system, built to answer one question. Can the binder bring ciliary SMO back to a normal level, or is tunable just a nice word.',
   blocks: [
@@ -538,7 +529,6 @@ const humanPractices: Page = {
   title: 'Who the Garden Is For',
   kicker: 'chapter 07 · human practices',
   storyBeat: 'A garden nobody visits is just a field. So we went and asked people, and one of those conversations changed what the project even is.',
-  gardener: 'Jaiden Poon · Integrated Human Practices',
   intro:
     'We are handing other researchers a tool that changes what stays in the primary cilium. This page is about what that means, and the people who told us how to do it responsibly.',
   blocks: [
