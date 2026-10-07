@@ -42,15 +42,19 @@ export default function NotebookPage() {
           ))}
         </ol>
 
-        <div className="mt-6">
-          <TodoPanel
-            items={[
-              `TODO(ops): dates still missing (${MISSING_DATES.join(', ')}). Get these off the official iGEM calendar.`,
-              'Wet-lab protocol summaries, linked out to the Benchling record.',
-              'Mark each entry complete / in-progress so this reads as a live log rather than a history.',
-            ]}
-          />
-        </div>
+        {/* A drafting aid: shown by `npm run dev`, left out of the published
+            site. What is missing is also tracked in docs/CONTENT_MAP.md. */}
+        {import.meta.env.DEV && (
+          <div className="mt-6">
+            <TodoPanel
+              items={[
+                `TODO(ops): dates still missing (${MISSING_DATES.join(', ')}). Get these off the official iGEM calendar.`,
+                'Wet-lab protocol summaries, linked out to the Benchling record.',
+                'Mark each entry complete / in-progress so this reads as a live log rather than a history.',
+              ]}
+            />
+          </div>
+        )}
       </GardenSection>
     </article>
   )

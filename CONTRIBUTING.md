@@ -127,13 +127,14 @@ const contribution: Page = {
   blocks: [
     { kind: 'prose', heading: 'Heading', body: ['A paragraph with **bold** in it.'] },
     { kind: 'cards', heading: 'Three things', items: [{ title: 'A card', body: 'Its body.' }] },
-    { kind: 'todo', body: ['TODO(wetlab): the assay figures.'] },
   ],
 }
 ```
 
-There are six kinds of block. Each one is documented with an example in
+The original six kinds of block are documented with examples in
 [the style guide](docs/STYLE_GUIDE.md#the-six-block-kinds).
+[docs/CONTENT_MAP.md](docs/CONTENT_MAP.md) lists every kind, including the newer
+ones, and when to use each.
 
 ### Adding a brand new page
 
