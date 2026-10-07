@@ -66,41 +66,57 @@ export function variantFor(path: string): Variant {
   return 'meadow'
 }
 
+/**
+ * How crowded a margin gets.
+ *
+ * Plants are placed in one pass with a spacing rule, so no two overlap and the
+ * margin never competes with the reading column. The grass texture does the
+ * work, and plants are occasional punctuation in it. If a margin ever looks
+ * busy, raise `step` before adding anything else.
+ */
+
+/** Closest two plants may sit, in logical px, measured centre to centre. */
+const MIN_GAP = 42
+
 interface Spec {
   seed: number
   pondSide: 'left' | 'right' | 'none'
   low: Sprite[]
   tall: Sprite[]
-  /** logical px between tall plants down a margin */
-  tallStep: number
-  /** logical px between big cream flowers down a margin */
-  bigStep: number
+  /** Average logical rows between one plant and the next, down a single margin. */
+  step: number
+  /** Share of plants that are the tall, shadow-casting kind. */
+  tallShare: number
 }
 
 const SPECS: Record<Variant, Spec> = {
+  // The `low` lists are weighted by repetition rather than by a separate table.
+  // Grass tufts and pebbles come first and repeat, because they read as
+  // texture; the pale flowers are what catches the eye across a green page, so
+  // they are a minority of the draws rather than half of them.
   meadow: {
     seed: 0x11a1,
     pondSide: 'left',
-    low: [LILAC, DAISY, WHITE_FLOWER, PINK_BELL, BLUEBELL, TUFT, PEBBLE],
-    tall: [TREE, BUSH, FERN, ROCK, BERRY_BUSH],
-    tallStep: 62,
-    bigStep: 96,
+    low: [TUFT, TUFT, TUFT, PEBBLE, LILAC, BLUEBELL, PINK_BELL, DAISY, WHITE_FLOWER],
+    tall: [BUSH, BUSH, FERN, BERRY_BUSH, ROCK, TREE],
+    step: 124,
+    tallShare: 0.34,
   },
   wetland: {
     seed: 0x2b0d,
     pondSide: 'right',
-    low: [BLUEBELL, WHITE_FLOWER, DAISY, TUFT, LILAC, PEBBLE],
+    low: [TUFT, TUFT, TUFT, PEBBLE, BLUEBELL, LILAC, DAISY, WHITE_FLOWER],
     tall: [REED, FERN, BUSH, CATTAIL, HEART_PLANT],
-    tallStep: 58,
-    bigStep: 104,
+    step: 118,
+    tallShare: 0.36,
   },
   orchard: {
     seed: 0x3c77,
     pondSide: 'none',
-    low: [DAISY, LILAC, PINK_BELL, TUFT, WHITE_FLOWER, PEBBLE],
-    tall: [TREE, TREE, BERRY_BUSH, BUSH, ROCK],
-    tallStep: 52,
-    bigStep: 110,
+    low: [TUFT, TUFT, TUFT, PEBBLE, LILAC, PINK_BELL, DAISY, WHITE_FLOWER],
+    tall: [BUSH, BERRY_BUSH, ROCK, TREE, TREE],
+    step: 128,
+    tallShare: 0.36,
   },
 }
 
@@ -165,7 +181,9 @@ function bake(variant: Variant, lw: number, rows: number, band: number): HTMLCan
   // ---- ponds down the variant's side (organic) ----
   const ponds: Pond[] = []
   if (spec.pondSide !== 'none' && band >= 18) {
-    const n = Math.max(1, Math.round(rows / 620))
+    // Spaced well apart: a pond is a big feature, and two of them within a
+    // screen of each other make the margin feel crowded.
+    const n = Math.max(1, Math.round(rows / 900))
     const cxBase = spec.pondSide === 'left' ? band * 0.5 : lw - band * 0.5
     for (let i = 0; i < n; i++) {
       ponds.push({
@@ -241,45 +259,49 @@ function bake(variant: Variant, lw: number, rows: number, band: number): HTMLCan
     return side === 0 ? inset : lw - 1 - inset
   }
 
-  // Plants are placed one row-step at a time down each margin. The step is
-  // fixed, so on a wide screen the band gets wider while the count stays the
-  // same and the sides thin out. Scale the per-row count with the band to keep
-  // the density even, capped so a very wide window does not turn into a wall.
-  const perRow = Math.max(1, Math.min(3, Math.round(band / 64)))
+  /**
+   * Rejects a position that would crowd something already placed. Without this
+   * the margins grow clumps: random placement will happily stack a tree, a bush
+   * and a daisy on the same few pixels.
+   */
+  const tooClose = (x: number, y: number) => {
+    for (const p of placed) {
+      const dx = p.x - x
+      const dy = p.y - y
+      if (dx * dx + dy * dy < MIN_GAP * MIN_GAP) return true
+    }
+    return false
+  }
 
+  // One pass per margin. Each step offers a single plant, and the plant is
+  // dropped entirely if it would land on top of a neighbour, so the sides stay
+  // mostly grass with something to look at every so often.
   for (const side of [0, 1] as const) {
-    // Low flowers and tufts: dense, spread across the whole band.
-    for (let y = rng() * 24; y < rows - 3; y += 20 + rng() * 18) {
-      for (let i = 0; i < perRow; i++) {
-        const x = sideX(side, rng())
-        if (inWater(x, y)) continue
-        placed.push({ sprite: spec.low[(rng() * spec.low.length) | 0], x, y, tall: false })
-      }
-    }
-    // Big cream flowers get their own, more frequent pass, so there are plenty.
-    for (let y = rng() * spec.bigStep; y < rows - 4; y += spec.bigStep * (0.7 + rng() * 0.5)) {
-      for (let i = 0; i < perRow; i++) {
-        const x = sideX(side, 0.2 + rng() * 0.6)
-        if (inWater(x, y)) continue
-        placed.push({ sprite: BIG_FLOWER, x, y, tall: false })
-      }
-    }
-    // Tall plants hug the outer edge so they never lean over the reading column,
-    // which is why this pass stays at one per step.
-    for (let y = rng() * spec.tallStep; y < rows - 6; y += spec.tallStep * (0.7 + rng() * 0.6)) {
-      const x = sideX(side, rng() * 0.4)
-      if (inWater(x, y)) continue
-      placed.push({ sprite: spec.tall[(rng() * spec.tall.length) | 0], x, y, tall: true })
+    for (let y = rng() * spec.step; y < rows - 6; y += spec.step * (0.6 + rng() * 0.8)) {
+      const isTall = rng() < spec.tallShare
+      // Tall plants hug the outer edge so they never lean over the reading
+      // column; low ones may sit anywhere across the band.
+      const x = sideX(side, isTall ? rng() * 0.38 : rng())
+      if (inWater(x, y) || tooClose(x, y)) continue
+      const sprite = isTall
+        ? spec.tall[(rng() * spec.tall.length) | 0]
+        : rng() < 0.05
+          ? BIG_FLOWER
+          : spec.low[(rng() * spec.low.length) | 0]
+      placed.push({ sprite, x, y, tall: isTall })
     }
   }
-  // waterline plants around each pond
+  // A little planting at each waterline, enough to read as a pond edge.
   for (const pd of ponds) {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 3; i++) {
       const a = rng() * Math.PI * 2
+      const x = pd.cx + Math.cos(a) * pd.r * pd.sx * 0.85
+      const y = pd.cy + Math.sin(a) * pd.r * pd.sy * 0.9
+      if (tooClose(x, y)) continue
       placed.push({
         sprite: rng() < 0.4 ? LILYPAD : rng() < 0.5 ? LILY_FLOWER : WATER_GRASS,
-        x: pd.cx + Math.cos(a) * pd.r * pd.sx * 0.85,
-        y: pd.cy + Math.sin(a) * pd.r * pd.sy * 0.9,
+        x,
+        y,
         tall: false,
       })
     }
@@ -320,14 +342,23 @@ export default function PageGarden({ variant }: { variant: Variant }) {
     let raf = 0
 
     /**
-     * Resize the canvas to the viewport and repaint from whatever is already
-     * baked. Cheap, so it runs on every resize event: the canvas carries an
-     * inline width, and leaving that stale during a window drag shows a bare
-     * strip of flat body-green down the side with no garden in it.
+     * Match the backing store to the box CSS has already given the canvas, and
+     * repaint from whatever is baked. Cheap, so it runs on every resize event:
+     * leaving the bitmap stale during a window drag shows a bare strip of flat
+     * body-green down the side with no garden in it.
+     *
+     * The size is MEASURED, never assigned. Do not set a width from
+     * `window.innerWidth`: on a phone that is the layout viewport, which grows
+     * when anything on the page overflows sideways. One table wider than the
+     * screen would stretch it, the canvas would paint itself that wide, and the
+     * page would stay stretched because the canvas had become the widest thing
+     * on it. A background that never declares its own width cannot get into
+     * that loop.
      */
     const resizeCanvas = () => {
-      const vw = window.innerWidth
-      const vh = window.innerHeight
+      const rect = canvas.getBoundingClientRect()
+      const vw = Math.round(rect.width)
+      const vh = Math.round(rect.height)
       if (vw < 2 || vh < 2) return
       scale = Math.max(2, Math.round(pixelScale(vw, vh) * 0.75))
       lw = Math.ceil(vw / scale)
@@ -335,6 +366,10 @@ export default function PageGarden({ variant }: { variant: Variant }) {
       if (canvas.width !== vw || canvas.height !== vh) {
         canvas.width = vw
         canvas.height = vh
+        // Pin the CSS box to the same whole number as the bitmap. The measured
+        // box can be fractional, and half a pixel of scaling is enough to turn
+        // crisp pixel art soft. Derived from the measurement rather than from
+        // the layout viewport, so it still cannot inflate itself.
         canvas.style.width = vw + 'px'
         canvas.style.height = vh + 'px'
       }
@@ -346,8 +381,9 @@ export default function PageGarden({ variant }: { variant: Variant }) {
      * this is the half that gets debounced.
      */
     const rebakeIfNeeded = () => {
-      const vw = window.innerWidth
-      const vh = window.innerHeight
+      const rect = canvas.getBoundingClientRect()
+      const vw = Math.round(rect.width)
+      const vh = Math.round(rect.height)
       if (vw < 2 || vh < 2) return
       const docH = Math.max(document.documentElement.scrollHeight, vh)
       rows = Math.min(MAX_BAKED_ROWS, Math.ceil(docH / scale))
