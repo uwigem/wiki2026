@@ -382,6 +382,7 @@ const engineering: Page = {
   blocks: [
     {
       kind: 'cycles',
+      id: 'cycles',
       cycles: [
         {
           heading: 'Cycle 1: choosing the target',
@@ -402,6 +403,72 @@ const engineering: Page = {
             {
               title: 'Learn',
               body: 'Feasibility decided it, not novelty. The MMM and SMO project won because the advising lab already has the cell lines, the reporters, and the readouts to test it.',
+            },
+          ],
+        },
+        {
+          heading: 'Cycle 2: generating binders',
+          intro: 'Complete. Getting a pipeline to produce candidate binders at all.',
+          items: [
+            {
+              title: 'Design',
+              body: 'We set the generation parameters from our own earlier campaigns, from Dr. DiMaio, and from the Kong lab preprint: a small helical bundle, 50 to 150 amino acids. The usual advice is to aim hotspots at hydrophobic residues, but this interface is largely polar, so we aimed instead at the beta sheet contacts the preprint identified as the ones holding MOSMO and MEGF8 together.',
+            },
+            {
+              title: 'Build',
+              body: 'We set up a Washington iGEM workspace on **Hyak** and pulled the RosettaCommons **Foundry** container into it, which carries RFdiffusion3, ProteinMPNN and RoseTTAFold3 together.',
+            },
+            {
+              title: 'Test',
+              body: 'We wrote Bash and Python to drive each model in turn, generated binders, and then looked at which hotspots the surviving designs had come from.',
+            },
+            {
+              title: 'Learn',
+              body: 'The result was flat. How often a hotspot succeeded tracked **how many designs we had attempted with it**, and not the chemistry of the residues. Talking it through with Dr. DiMaio, the reading is that hotspots tell RFdiffusion3 roughly where to aim rather than specifying residue to residue contacts. We also folded the separate scripts into one that runs the whole pipeline, so any future Washington iGEM team can design binders with a single command.',
+            },
+          ],
+        },
+        {
+          heading: 'Cycle 3: learning to throw designs away',
+          intro: 'Complete, and the cycle we learned the most from. Our first filter was passing designs that could never work.',
+          items: [
+            {
+              title: 'Design',
+              body: 'With several thousand candidates we needed a cutoff. We took the two published gold standards: backbone **RMSD under 2 Angstrom** between the shape we asked for and the shape we got, and **minPAE under 2**. We call it the 2 by 2 filter.',
+            },
+            {
+              title: 'Build',
+              body: 'A Python script aligned every folded output against the backbone it came from, computed the RMSD, and pulled minPAE out of the RoseTTAFold3 confidence files.',
+            },
+            {
+              title: 'Test',
+              body: 'Of about **5,700 designs, 255 passed**. Then we opened a few in PyMOL and found the problem: most of them were binding parts of MOSMO and MEGF8 that are **buried inside the membrane**. On the metrics they looked excellent. In a cell no protein could ever reach them. We had been designing against an incomplete picture of our own target.',
+            },
+            {
+              title: 'Learn',
+              body: 'Good numbers are not the same as a good binder. We rebuilt the filtering around what is physically reachable: re-fold every survivor against only the **extracellular** parts of the targets and apply the 2 by 2 filter again, then run a custom check that rejects anything still sitting within 5 to 10 Angstrom of the transmembrane helices. Dr. DiMaio added a third test, folding the binder **on its own** with no target present, to confirm it holds its shape rather than being propped up by the thing it is supposed to bind. About **25 designs** survived all of it. The filters are listed in order on [the Design page](/project/design#pipeline).',
+            },
+          ],
+        },
+        {
+          heading: 'Cycle 4: rescuing the near misses',
+          intro: 'In progress. Twenty five binders is not enough to fill a 96-well plate.',
+          items: [
+            {
+              title: 'Design',
+              body: 'We were about 70 designs short of the 96 we want to order. Rather than generate more backbones from scratch, we re-ran **ProteinMPNN and RoseTTAFold3** on two groups: the near misses, and the designs that had already passed. Giving a backbone a fresh sequence is known to lower RMSD and raise prediction confidence, so a slightly misaligned design gets another chance to settle into the shape we asked for.',
+            },
+            {
+              title: 'Build',
+              body: 'We targeted near misses at **minPAE under 4 and RMSD under 6**, loose enough to catch designs that were close without reopening the whole pool.',
+            },
+            {
+              title: 'Test',
+              body: 'Running now. The rescue rate is not in yet.',
+            },
+            {
+              title: 'Learn',
+              body: 'Too early for a rescue rate, but one cost is already clear. Redesigning sequences onto backbones that already passed means more of the final set comes from the **same few backbone shapes**, so the plate is less diverse than the count suggests.',
             },
           ],
         },
@@ -435,14 +502,6 @@ const engineering: Page = {
         },
       ],
       source: 'Wet Lab construct planning and Induced Proximity Assay protocol.',
-    },
-    {
-      kind: 'todo',
-      body: [
-        'TODO(protein design): add scored results for cycle 2 and the MEGF8 binders once they exist.',
-        'TODO(wetlab): cycles 3 to 5 (expression and purification, binding validation, the cell-based functional assay) as data comes in.',
-        'TODO(webdev): consider making this page the hub that links out to each subteam.',
-      ],
     },
   ],
 }
