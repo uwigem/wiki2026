@@ -296,6 +296,60 @@
     top: 0.5rem;
   }
 
+  /*
+   * A cross-reference in body copy. Underlined rather than coloured: the
+   * palette's accents are pastels, and none of them clears 3:1 against cream,
+   * so colour alone would be a link only for people who can see it well.
+   */
+  .cross-link {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+    text-decoration-color: var(--p-grass3);
+    font-weight: 700;
+  }
+  .cross-link:hover {
+    text-decoration-color: var(--ink);
+    background: var(--p-bushLight);
+  }
+
+  /*
+   * The flash on a section somebody was just sent to.
+   *
+   * Following a link into the middle of a long page drops the reader somewhere
+   * with no indication of which part they were meant to read. This outlines the
+   * target for a moment and then lets go. It animates `outline-color` and not
+   * layout, so nothing moves.
+   */
+  [data-jump-flash] {
+    animation: jump-flash 2s ease-out 1;
+  }
+  @keyframes jump-flash {
+    0%,
+    55% {
+      outline: 3px solid var(--p-daisyCore);
+      outline-offset: 5px;
+    }
+    100% {
+      outline: 3px solid transparent;
+      outline-offset: 5px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-jump-flash] {
+      animation-duration: 1ms;
+    }
+  }
+
+  /*
+   * Every linkable block keeps clear of the sticky nav when it is scrolled to.
+   * `html { scroll-padding-top }` already does this for native anchor jumps,
+   * but `scrollIntoView` from script needs it on the element itself.
+   */
+  [id] {
+    scroll-margin-top: 5.5rem;
+  }
+
   /* Visually hidden, still read aloud. Used for the route-change announcement. */
   .sr-only {
     position: absolute;

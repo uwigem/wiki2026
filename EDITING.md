@@ -108,15 +108,17 @@ two or three terms a reader should come away with, not for general emphasis.
 
 ## Marking something you cannot finish
 
-If you are leaving a gap, say so in the file rather than leaving it blank. Write:
+If you are leaving a gap, do not leave it blank and do not fill it with a guess.
+Add it to the page's "Still needed" list in
+[docs/CONTENT_MAP.md](docs/CONTENT_MAP.md), in the form:
 
 ```
 TODO(wetlab): add the binding numbers once the assay runs.
 ```
 
-Put your subteam in the brackets. These show up as a dashed **still to come**
-panel on the page, which is deliberate: it is better for everyone to see what is
-missing than to find a page that quietly says nothing.
+Put your subteam in the brackets. The live site does not show TODO notes, so if
+a reader needs to know something is missing, say it on the page in plain words,
+for example "The binding numbers are not in yet."
 
 ## If you get a red X
 

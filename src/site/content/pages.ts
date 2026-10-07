@@ -11,13 +11,33 @@
  * the characters are published literally. See docs/STYLE_GUIDE.md for the table.
  */
 import type { CycleData } from '../components/CycleWheel'
+import type { MatrixRow } from '../components/CapabilityMatrix'
+import type { Stat } from '../components/StatRow'
+import type { DosePoint } from '../components/DoseCurve'
+import type { FunnelStage } from '../components/FunnelChart'
+import type { Pillar } from '../components/ProgrammePillars'
+import type { Stakeholder } from '../components/StakeholderGarden'
+import type { TornadoRow } from '../components/TornadoChart'
+import type { ToolEntry } from '../components/ToolShed'
+import type { Structure } from './structures'
+
+/**
+ * Anything with an `id` can be linked to from anywhere else in the wiki, with
+ * `[label](/project/design#that-id)`. Ids are kebab-case and have to be unique
+ * within their page. Add one the moment a section is worth pointing at.
+ */
+export interface Anchored {
+  id?: string
+}
+
 export interface CardItem {
   title: string
   body: string
   note?: string
 }
 
-export type Block =
+export type Block = Anchored &
+  (
   /** Paragraphs in a clean cream panel. The default. */
   | { kind: 'prose'; heading?: string; body: string[]; source?: string }
   /** A grid of flower-bed cards. */
@@ -30,8 +50,83 @@ export type Block =
   | { kind: 'quote'; body: string[]; source?: string }
   /** Compact key/value facts. */
   | { kind: 'facts'; heading?: string; items: { title: string; body: string }[] }
+  /** The guide explaining the paragraph above in plain words. */
+  | { kind: 'narration'; body: string[]; label?: string }
+  /** A row of figures that carry an argument. */
+  | { kind: 'stats'; heading?: string; intro?: string; items: Stat[]; footnote?: string; source?: string }
+  /** What existing tools can and cannot do, side by side. */
+  | {
+      kind: 'matrix'
+      heading?: string
+      intro?: string
+      columns: string[]
+      rows: MatrixRow[]
+      source?: string
+    }
+  /** The garden shed: the tools researchers already have, and where each stops. */
+  | { kind: 'toolshed'; heading?: string; intro?: string; tools: ToolEntry[]; source?: string }
+  /** Which parameters in a model actually move the answer. */
+  | {
+      kind: 'tornado'
+      heading?: string
+      intro?: string
+      rows: TornadoRow[]
+      unit?: string
+      positiveMeans?: string
+      negativeMeans?: string
+      footnote?: string
+      source?: string
+    }
+  /** A dose against response curve, with the limit it has to stay under. */
+  | {
+      kind: 'dose'
+      heading?: string
+      intro?: string
+      points: DosePoint[]
+      xLabel: string
+      yLabel: string
+      threshold?: { value: number; label: string }
+      footnote?: string
+      source?: string
+    }
+  /** How many candidates survive each filter. */
+  | {
+      kind: 'funnel'
+      heading?: string
+      intro?: string
+      stages: FunnelStage[]
+      goal?: { label: string; count: number }
+      footnote?: string
+      source?: string
+    }
+  /** The outreach programme, under the team's own four principles. */
+  | { kind: 'pillars'; heading?: string; intro?: string; pillars: Pillar[]; source?: string }
+  /** The people who shaped the project, as beds of flowers. */
+  | {
+      kind: 'stakeholders'
+      heading?: string
+      intro?: string
+      people: Stakeholder[]
+      pending?: string[]
+      source?: string
+    }
+  /** A protein structure, drawn from coordinates. */
+  | { kind: 'structure'; structure: Structure }
+  /** The animated project mark, with a line saying what it is getting at. */
+  | { kind: 'logo'; caption: string }
+  /** A figure, or the marked hole where one is going. */
+  | {
+      kind: 'figure'
+      src?: string
+      alt?: string
+      caption: string
+      owner?: string
+      ratio?: 'wide' | 'square' | 'tall'
+      source?: string
+    }
   /** A visible "not written yet" marker. */
   | { kind: 'todo'; body: string[] }
+  )
 
 export interface Page {
   slug: string
