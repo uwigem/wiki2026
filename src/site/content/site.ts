@@ -15,14 +15,14 @@ export const TEAM_LONG = 'Washington iGEM · University of Washington'
  */
 export const PROJECT_TITLE = 'Tending the Hedge'
 
-export const PROJECT_TAGLINE = 'A dial for Hedgehog signaling, not a switch.'
+export const PROJECT_TAGLINE = 'A dial for the cell’s antenna, not a switch.'
 
 export const PROJECT_SUBTITLE =
-  'A modular device that borrows a natural degradation complex to raise or lower how much of a receptor stays in the primary cilium. We prove it on Hedgehog signaling, then show the same parts work on other receptors.'
+  'Almost every cell grows a single antenna called the primary cilium, and some receptors only work while they are sitting in it. We are building a modular tool that sets how much of a chosen receptor stays there. Hedgehog signaling is where we prove it works.'
 
 /** One-sentence version for cards, meta description, and social previews. */
 export const PROJECT_BLURB =
-  'We build a modular tool that controls how much of a receptor stays in the primary cilium, using the cell’s own MMM degradation complex instead of blocking the receptor outright.'
+  'We build a modular tool that sets how much of a chosen receptor stays in the primary cilium, by redirecting the cell’s own MMM degradation complex rather than blocking the receptor outright.'
 
 export interface Cta {
   label: string
