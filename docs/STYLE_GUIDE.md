@@ -76,7 +76,7 @@ Every wiki page is one object in `src/site/content/pages.ts`, with these fields.
 | Field | Required | What it is |
 | --- | --- | --- |
 | `slug` | yes | The address of the page, everything after the `#` in the URL. Starts with `/`, unique, no trailing slash. This exact string also goes in `nav.ts`. |
-| `title` | yes | The large heading on the wooden sign at the top. Also the browser tab title, as `Title · Tending the Hedge · Washington iGEM`. |
+| `title` | yes | The large heading on the wooden sign at the top. Also the browser tab title, as `Title · HedgehogSense · Washington iGEM`. |
 | `kicker` | yes | The small spaced label above the title. House style is lower case with a middle dot: `chapter 04 · engineering`. |
 | `storyBeat` | yes | One or two sentences in the hedgehog's voice, in a flat panel under the title. The one place the garden voice belongs. Plain text. |
 | `intro` | no | A lede paragraph in larger type. One or two sentences on what the page is about, in normal scientific English. Omit it and nothing renders in its place. Plain text. |
