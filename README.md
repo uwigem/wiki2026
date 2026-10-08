@@ -1,4 +1,4 @@
-# Tending the Hedge, the Washington iGEM 2026 wiki
+# HedgehogSense, the Washington iGEM 2026 wiki
 
 The team wiki, built as a pixel garden. The homepage opens with a live canvas
 garden; every other page is flat grass, cream reading panels, and a hedgehog
@@ -8,10 +8,10 @@ The theme is the team's own, from the 16 July wiki-theme brainstorm, and it is a
 pun with a point: the project is about **Hedgehog signalling**, so the guide is a
 hedgehog and the site is a garden being tended.
 
-> **The project name is a placeholder.** "Tending the Hedge" is from that
-> brainstorm. The official name and logo are a Creative deliverable. When it
-> lands, change `PROJECT_TITLE` in `src/site/content/site.ts` and it updates
-> everywhere.
+> **The project is called HedgehogSense.** It replaced the brainstorm
+> placeholder "Tending the Hedge". The name lives in one place,
+> `PROJECT_TITLE` in `src/site/content/site.ts`, and changing it there updates
+> the nav, the footer, the homepage sign and every tab title.
 
 ## See it live
 

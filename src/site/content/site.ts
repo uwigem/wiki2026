@@ -10,10 +10,11 @@ export const TEAM_YEAR = '2026'
 export const TEAM_LONG = 'Washington iGEM · University of Washington'
 
 /**
- * TODO(creative): project name and logo are not final. "Tending the Hedge" is a
- * placeholder from the wiki-theme brainstorm. Swap it once Creative delivers.
+ * The project's name. It replaced the brainstorm placeholder "Tending the
+ * Hedge" in October 2026. Changing it here updates the nav, the footer, the
+ * homepage sign and every browser tab title.
  */
-export const PROJECT_TITLE = 'Tending the Hedge'
+export const PROJECT_TITLE = 'HedgehogSense'
 
 export const PROJECT_TAGLINE = 'A dial for the cell’s antenna, not a switch.'
 
