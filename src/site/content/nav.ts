@@ -24,7 +24,10 @@ export interface NavGroup {
 }
 
 export const NAV: NavGroup[] = [
-  { label: 'Home', to: '/' },
+  // Two homepages while the team compares them. Delete one of these, and its
+  // page, once a version is chosen.
+  { label: 'Home 1', to: '/' },
+  { label: 'Home 2', to: '/home-alt' },
   {
     label: 'Project',
     to: '/project/description',

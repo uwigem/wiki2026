@@ -13,6 +13,12 @@ hedgehog and the site is a garden being tended.
 > `PROJECT_TITLE` in `src/site/content/site.ts`, and changing it there updates
 > the nav, the footer, the homepage sign and every tab title.
 
+> **There are two homepages for now, so the team can compare them.** The nav
+> has **Home 1** (`#/`, the original garden intro) and **Home 2**
+> (`#/home-alt`, a minimal version told one sentence at a time, modelled on
+> the Duke, Barcelona-UB and McGill wikis). Once the team picks one, delete
+> the other and its nav entry in `src/site/content/nav.ts`.
+
 ## See it live
 
 **<https://uwigem.github.io/wiki2026/>** always shows what is on `main`.
