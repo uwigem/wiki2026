@@ -2,7 +2,7 @@ import { pageBySlug } from '../content/pages'
 import { ROSTER, SUBTEAMS } from '../content/team'
 import { Link } from '../router'
 import type { IntroStage } from '../hooks'
-import CiliumScene from '../components/CiliumScene'
+import SignalDial from '../components/SignalDial'
 import GardenHero from '../components/GardenHero'
 import GardenSection, { Reveal, SectionDivider } from '../components/GardenSection'
 import HedgehogNote from '../components/HedgehogNote'
@@ -46,10 +46,11 @@ export default function Home({ at, stage, playing, onSkip }: Props) {
           data-hero-fold). */}
       <div data-hero-fold aria-hidden className="relative z-10 h-1.5 w-full bg-leaf-800" />
 
-      {/* The hook. Everything else on this page is downstream of this picture. */}
+      {/* The hook. It plays once as a short film, then hands over the dial.
+          Everything else on this page is downstream of this one idea. */}
       <GardenSection className="pt-6">
         <Reveal>
-          <CiliumScene />
+          <SignalDial />
         </Reveal>
       </GardenSection>
 

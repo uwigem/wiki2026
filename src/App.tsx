@@ -10,6 +10,7 @@ import GardenSection from './site/components/GardenSection'
 import PixelSign from './site/components/PixelSign'
 import TopNav from './site/components/TopNav'
 import Home from './site/pages/Home'
+import HomeAlt from './site/pages/HomeAlt'
 import NotebookPage from './site/pages/NotebookPage'
 import PlaygroundPage from './site/pages/PlaygroundPage'
 import TeamPage from './site/pages/TeamPage'
@@ -32,6 +33,9 @@ export default function App() {
   const intro = useIntro()
   const isHome = path === '/'
   const isPlayground = path === '/playground'
+  // The alternate homepage is the minimal one, modelled on the cleanest iGEM
+  // wikis: flat background, no garden margins, no scroll hedgehog.
+  const isQuietHome = path === '/home-alt'
   const mainRef = useRef<HTMLElement>(null)
   // Empty until the visitor actually navigates. A live region that already has
   // text when it is inserted can be read out to someone who has only just
@@ -62,8 +66,10 @@ export default function App() {
     <>
       {/* Garden in the margins, clean grass down the middle. One variant per
           page family. The homepage hero paints the live garden on top. */}
-      <PageGarden variant={variantFor(path)} />
-      <HedgehogGuide />
+      {/* The minimal homepage paints its own flat background: no garden in
+          the margins and no hedgehog walking down beside the text. */}
+      {!isQuietHome && <PageGarden variant={variantFor(path)} />}
+      {!isQuietHome && <HedgehogGuide />}
 
       {/* Everything readable lives above the garden in one z-10 layer. */}
       <div className="relative z-10 flex min-h-screen flex-col">
@@ -109,6 +115,7 @@ function titleFor(path: string): string {
 
 /** Routes whose copy lives in a component rather than in `content/pages.ts`. */
 const SPECIAL_TITLES: Record<string, string> = {
+  '/home-alt': 'Home 2',
   '/team': 'Team',
   '/playground': 'Playground',
   '/project/notebook': 'Notebook',
@@ -117,6 +124,7 @@ const SPECIAL_TITLES: Record<string, string> = {
 function RouteView({ path, intro }: { path: string; intro: Intro }) {
   if (path === '/')
     return <Home at={intro.at} stage={intro.stage} playing={intro.playing} onSkip={intro.skip} />
+  if (path === '/home-alt') return <HomeAlt />
   if (path === '/team') return <TeamPage />
   if (path === '/project/notebook') return <NotebookPage />
 
