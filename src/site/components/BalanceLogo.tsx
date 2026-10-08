@@ -39,9 +39,15 @@ interface Props {
   /** Describes the drawing. Leave empty where it is pure decoration. */
   alt?: string
   className?: string
+  /**
+   * Fill the container up to `width` instead of sitting at exactly `width`, so
+   * a large hero logo still fits a phone. Off by default, because a fixed size
+   * is what keeps the footer logo on a whole-pixel scale.
+   */
+  fluid?: boolean
 }
 
-export default function BalanceLogo({ width = 260, onGreen = false, alt = '', className }: Props) {
+export default function BalanceLogo({ width = 260, onGreen = false, alt = '', className, fluid = false }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const reduced = useReducedMotion()
 
@@ -270,7 +276,11 @@ export default function BalanceLogo({ width = 260, onGreen = false, alt = '', cl
       aria-label={alt || undefined}
       aria-hidden={alt ? undefined : true}
       className={'pixelated block ' + (className ?? '')}
-      style={{ width, height: (width * L.h) / L.w }}
+      style={
+        fluid
+          ? { width: '100%', maxWidth: width, aspectRatio: `${L.w} / ${L.h}` }
+          : { width, height: (width * L.h) / L.w }
+      }
     />
   )
 }
