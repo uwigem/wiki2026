@@ -1,16 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { PAGES, pageBySlug } from './site/content/pages'
 import { PROJECT_TITLE, TEAM_NAME } from './site/content/site'
-import { useIntro, type Intro } from './site/hooks'
 import { Link, currentAnchor, useRoute } from './site/router'
+import ExploreCards from './site/components/ExploreCards'
 import FooterGarden from './site/components/FooterGarden'
 import HedgehogGuide from './site/components/HedgehogGuide'
 import PageGarden, { variantFor } from './site/components/PageGarden'
 import GardenSection from './site/components/GardenSection'
 import PixelSign from './site/components/PixelSign'
 import TopNav from './site/components/TopNav'
-import Home from './site/pages/Home'
-import HomeAlt from './site/pages/HomeAlt'
+import Home3 from './site/pages/Home3'
 import NotebookPage from './site/pages/NotebookPage'
 import PlaygroundPage from './site/pages/PlaygroundPage'
 import TeamPage from './site/pages/TeamPage'
@@ -30,12 +29,10 @@ import WikiPage from './site/pages/WikiPage'
  */
 export default function App() {
   const path = useRoute()
-  const intro = useIntro()
-  const isHome = path === '/'
   const isPlayground = path === '/playground'
-  // The alternate homepage is the minimal one, modelled on the cleanest iGEM
-  // wikis: flat background, no garden margins, no scroll hedgehog.
-  const isQuietHome = path === '/home-alt'
+  // The homepage paints its own flat background: no garden in the margins and
+  // no hedgehog walking down beside the text.
+  const isHome = path === '/'
   const mainRef = useRef<HTMLElement>(null)
   // Empty until the visitor actually navigates. A live region that already has
   // text when it is inserted can be read out to someone who has only just
@@ -47,7 +44,7 @@ export default function App() {
 
   useEffect(() => {
     // A new page normally starts at the top. The exception is a link that
-    // named a section: `#/project/design#pipeline` is a request to land part
+    // named a section: `#/drylab/model#sensitivity` is a request to land part
     // way down, and jumping to the top first would fight the scroll that
     // `useSectionJump` is about to do.
     if (currentAnchor()) return
@@ -65,11 +62,10 @@ export default function App() {
   return (
     <>
       {/* Garden in the margins, clean grass down the middle. One variant per
-          page family. The homepage hero paints the live garden on top. */}
-      {/* The minimal homepage paints its own flat background: no garden in
-          the margins and no hedgehog walking down beside the text. */}
-      {!isQuietHome && <PageGarden variant={variantFor(path)} />}
-      {!isQuietHome && <HedgehogGuide />}
+          page family. The quiet homepages paint their own flat background:
+          no garden in the margins and no hedgehog walking down beside the text. */}
+      {!isHome && <PageGarden variant={variantFor(path)} />}
+      {!isHome && <HedgehogGuide />}
 
       {/* Everything readable lives above the garden in one z-10 layer. */}
       <div className="relative z-10 flex min-h-screen flex-col">
@@ -87,15 +83,18 @@ export default function App() {
           Skip to content
         </a>
 
-        {/* On the homepage the nav stays hidden until the intro has played. */}
-        <TopNav visible={!isHome || intro.at('done')} />
+        <TopNav visible />
 
         {/* tabIndex -1 so the skip link can move focus here. */}
         <main id="garden-main" ref={mainRef} tabIndex={-1} className="flex-1">
-          <RouteView path={path} intro={intro} />
+          <RouteView path={path} />
         </main>
 
-        <FooterGarden onReplayIntro={isHome ? intro.replay : undefined} />
+        {/* Every page ends with a way on to the next part of the site. The
+            homepage has its own ending, and the playground never gets here. */}
+        {!isHome && <ExploreCards path={path} />}
+
+        <FooterGarden />
       </div>
 
       {/* Announces the new page to screen readers after a hash navigation,
@@ -115,18 +114,15 @@ function titleFor(path: string): string {
 
 /** Routes whose copy lives in a component rather than in `content/pages.ts`. */
 const SPECIAL_TITLES: Record<string, string> = {
-  '/home-alt': 'Home 2',
   '/team': 'Team',
   '/playground': 'Playground',
-  '/project/notebook': 'Notebook',
+  '/wetlab/notebook': 'Notebook',
 }
 
-function RouteView({ path, intro }: { path: string; intro: Intro }) {
-  if (path === '/')
-    return <Home at={intro.at} stage={intro.stage} playing={intro.playing} onSkip={intro.skip} />
-  if (path === '/home-alt') return <HomeAlt />
+function RouteView({ path }: { path: string }) {
+  if (path === '/') return <Home3 />
   if (path === '/team') return <TeamPage />
-  if (path === '/project/notebook') return <NotebookPage />
+  if (path === '/wetlab/notebook') return <NotebookPage />
 
   const page = pageBySlug(path)
   if (page) return <WikiPage page={page} />

@@ -5,15 +5,15 @@ import { useEffect, useState, type ReactNode } from 'react'
  *
  * Deliberately not react-router: iGEM serves each wiki as static files from a
  * subpath, and hash routes survive that with no server rewrite rules and no
- * extra dependency. Routes look like `#/project/design`.
+ * extra dependency. Routes look like `#/drylab/model`.
  */
 
 /**
  * The current route, normalised.
  *
  * Trailing slashes and query strings are stripped so that a link someone pasted
- * from a browser bar (`#/project/design/`) or one a share tool decorated
- * (`#/project/design?utm_source=x`) still finds the page instead of falling
+ * from a browser bar (`#/drylab/model/`) or one a share tool decorated
+ * (`#/drylab/model?utm_source=x`) still finds the page instead of falling
  * through to the 404.
  */
 export function currentPath(): string {
@@ -24,7 +24,7 @@ export function currentPath(): string {
 }
 
 /**
- * The section a link asked for, from a SECOND hash: `#/project/design#pipeline`
+ * The section a link asked for, from a SECOND hash: `#/drylab/model#pipeline`
  * points at the block with `id: 'pipeline'` on the Design page.
  *
  * Two hashes in one URL looks odd, but the first one belongs to the router and
@@ -83,7 +83,7 @@ export function navigate(to: string) {
   window.location.hash = to
 }
 
-/** Current route path, for example `/`, `/project/design`, `/team`. */
+/** Current route path, for example `/`, `/drylab/model`, `/team`. */
 export function useRoute(): string {
   const [path, setPath] = useState(currentPath)
   useEffect(() => {

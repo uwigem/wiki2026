@@ -6,6 +6,7 @@ import GardenSection, { Reveal, SectionDivider } from '../components/GardenSecti
 import PixelSign, { QuoteSign, TextPanel, TodoPanel } from '../components/PixelSign'
 import RichText from '../components/RichText'
 import CycleWheel from '../components/CycleWheel'
+import SignalDial from '../components/SignalDial'
 import BalanceLogo from '../components/BalanceLogo'
 import CapabilityMatrix from '../components/CapabilityMatrix'
 import DoseCurve from '../components/DoseCurve'
@@ -253,6 +254,9 @@ function BlockView({ block }: { block: Block }) {
           <figcaption className="text-body leading-relaxed">{block.caption}</figcaption>
         </figure>
       )
+
+    case 'explainer':
+      return <SignalDial />
 
     case 'figure':
       return (

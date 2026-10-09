@@ -13,11 +13,23 @@ hedgehog and the site is a garden being tended.
 > `PROJECT_TITLE` in `src/site/content/site.ts`, and changing it there updates
 > the nav, the footer, the homepage sign and every tab title.
 
-> **There are two homepages for now, so the team can compare them.** The nav
-> has **Home 1** (`#/`, the original garden intro) and **Home 2**
-> (`#/home-alt`, a minimal version told one sentence at a time, modelled on
-> the Duke, Barcelona-UB and McGill wikis). Once the team picks one, delete
-> the other and its nav entry in `src/site/content/nav.ts`.
+> **The homepage** (`#/`) is the team's scroll-driven script, planned in
+> `docs/HOME3_PLAN.md`. The two homepages it was compared with are archived in
+> `src/site/pages/archive/`: the code is kept, nothing routes to it, and the
+> addresses they used (`#/home-alt`, `#/home-3`) are dead.
+
+> **The site structure is the team's final architecture** (agreed 2026-10-08):
+> Home, Project, Wetlab, Drylab, Human Practices, and Team and Resources, plus
+> the Playground. It lives in `src/site/content/nav.ts`, and every page in
+> `src/site/content/pages.ts` has to appear in it. Running `npm run dev` warns
+> in the browser console about a page missing from the nav, a nav link with no
+> page, or a link in the copy pointing at an address that moved.
+
+> **Medal pages need extra attention.** The homepage, Engineering, Model,
+> Integrated Human Practices, Education and Contribution are the evidence for
+> medal criteria, so they have to be finished and specific. Those pages carry
+> `medal: true` in `pages.ts`, and the dev check warns while one of them still
+> has a `todo` block on it.
 
 ## See it live
 
@@ -86,7 +98,7 @@ itself**, and two deliberate omissions:
 
 - **No router library.** Routing is one small file, `src/site/router.tsx`. iGEM
   serves each wiki as static files from a subpath, and hash routes
-  (`#/project/design`) survive that with no server rewrite rules.
+  (`#/drylab/model`) survive that with no server rewrite rules.
 - **No markdown library.** Body copy supports `**bold**`, `*italic*` and
   `` `code` `` through one regular expression in
   `src/site/components/RichText.tsx`, which cannot inject markup into the page.
