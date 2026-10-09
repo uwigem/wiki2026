@@ -61,8 +61,8 @@ const MAX_BAKED_ROWS = 16000
 export type Variant = 'meadow' | 'wetland' | 'orchard'
 
 export function variantFor(path: string): Variant {
-  if (path.startsWith('/impact')) return 'wetland'
-  if (path.startsWith('/team') || path.startsWith('/attributions')) return 'orchard'
+  if (path.startsWith('/human-practices')) return 'wetland'
+  if (path.startsWith('/team')) return 'orchard'
   return 'meadow'
 }
 

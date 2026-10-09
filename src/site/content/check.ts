@@ -15,7 +15,10 @@ import { ALL_ROUTES } from './nav'
  */
 
 /** Routes that are real pages but are not built from `pages.ts`. */
-const HAND_WRITTEN_ROUTES = new Set(['/', '/team', '/project/notebook', '/playground'])
+const HAND_WRITTEN_ROUTES = new Set(['/', '/team', '/wetlab/notebook', '/playground'])
+
+/** `[label](/some/page#section)` inside any string of a page's content. */
+const LINK = /\]\((\/[^)\s]*)\)/g
 
 export function checkContent() {
   const problems: string[] = []
@@ -64,6 +67,51 @@ export function checkContent() {
       )
     }
   })
+
+  /*
+   * Links written inside the copy, for example
+   * `[the pipeline](/project/engineering#pipeline)`.
+   *
+   * These are plain strings, so moving a page silently turns every link to it
+   * into a trip to "This bed is empty". That is exactly what happened when the
+   * site moved to the team's final architecture, so it is checked now. Every
+   * string of a page is searched, whatever block it belongs to.
+   */
+  const idsByPage = new Map(
+    PAGES.map((p) => [p.slug, new Set(p.blocks.map((b) => b.id).filter(Boolean) as string[])]),
+  )
+  for (const page of PAGES) {
+    const content = JSON.stringify(page.blocks)
+    for (const [, target] of content.matchAll(LINK)) {
+      const [path, anchor] = target.split('#')
+      if (!navPaths.has(path) && !HAND_WRITTEN_ROUTES.has(path)) {
+        problems.push(
+          `"${page.title}" links to "${target}", but no page lives at "${path}", so the link ` +
+            `lands on "This bed is empty". Pages moved on 2026-10-08: check src/site/content/nav.ts ` +
+            `for the address it has now.`,
+        )
+        continue
+      }
+      const ids = idsByPage.get(path)
+      if (anchor && ids && !ids.has(anchor)) {
+        problems.push(
+          `"${page.title}" links to "${target}", and that page exists, but nothing on it has ` +
+            `the id "${anchor}", so the link opens the page at the top. Add "id: '${anchor}'" to ` +
+            `the block it should land on.`,
+        )
+      }
+    }
+  }
+
+  // Pages that are evidence for a medal cannot ship with a placeholder on them.
+  for (const page of PAGES) {
+    if (page.medal && page.blocks.some((b) => b.kind === 'todo')) {
+      problems.push(
+        `"${page.title}" (${page.slug}) is a medal page and still has a todo block on it. ` +
+          `It has to be finished and specific before the wiki freeze.`,
+      )
+    }
+  }
 
   if (problems.length > 0) {
     console.warn(
