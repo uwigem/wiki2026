@@ -57,9 +57,10 @@ All page content is data in `src/site/content/pages.ts`. Each item in a page's
 | `todo` | A visible "still to come" panel | Drafting only. No page ships one. |
 
 **Link between pages.** Any block can take an `id`, and any body text can then
-point at it: `[the pipeline](/project/design#pipeline)` opens the Design page
-scrolled to that exact section and flashes it. Use this instead of writing "see
-the Design page". Link targets must start with `/` or `https://`; anything else
+point at it: `[the pipeline](/project/engineering#pipeline)` opens the
+Engineering page scrolled to that exact section and flashes it. Use this instead
+of writing "see the Engineering page". `npm run dev` warns in the console if a
+link points at a page or a section that does not exist. Link targets must start with `/` or `https://`; anything else
 renders as plain text.
 
 **Use `figure` while drafting a diagram that does not exist yet.** Give it a
@@ -97,7 +98,11 @@ limits of vismodegib and sonidegib, and what the Kong lab structure gives us.
 **Still needed:** epidemiology numbers with real sources. The medulloblastoma and
 basal cell carcinoma figures currently trace to slides, not papers.
 
-### Designing the Binder (`/project/design`)
+### The design pipeline (part of `/project/engineering`)
+
+This was a Design page of its own until the site moved to the team's final
+architecture, which has no Design page. It is now the first half of Engineering,
+as `designBlocks` in `pages.ts`.
 
 **Now:** the target, the five-step pipeline, the hedgehog explaining what the
 three programs do, the 5,700 to 255 to 25 funnel, and the Smoothened structure
@@ -109,9 +114,9 @@ renders; the MEGF8 binders. When a binder is validated, add it to
 viewer. A hotspot map and the minPAE against RMSD scatter plot would both work as
 `figure` blocks once the images exist.
 
-### Build, Test, Learn (`/project/engineering`)
+### Build, Test, Learn (`/project/engineering`), a medal page
 
-**Now:** four cycles. Choosing the target, generating binders, learning to throw
+**Now:** the design pipeline above, then four cycles. Choosing the target, generating binders, learning to throw
 designs away (the membrane-binding discovery), and rescuing near misses.
 
 **Still needed:** the rescue rate for cycle 4. Wet lab cycles for expression,
@@ -121,16 +126,16 @@ purification, binding validation and the cell assay, as data arrives.
 cycle 3 is currently the strongest thing on the wiki because it describes
 something that went wrong.
 
-### What Grew (`/project/results`)
+### What Grew (`/wetlab/experiments`)
 
 **Now:** the four planned experiments, what we test in, and an honest note that
 there is no SPR access.
 
 **Still needed:** everything. This page is a frame waiting for data. Write the
-interpretation against what the Model and Design pages predicted, so a reader can
-see which predictions held.
+interpretation against what the Model and the design pipeline predicted, so a
+reader can see which predictions held.
 
-### The Model (`/project/model`)
+### The Model (`/drylab/model`), a medal page
 
 **Now:** what the model is for, the wild-type against PTCH1-knockout test, where
 the parameters come from, Dr. Sauro's model-selection guidance, the sensitivity
@@ -142,7 +147,7 @@ Michaelis-Menten error is reported as both 0.2 and 0.02 against 0.14 for the
 linear model. The plan to proceed with the linear model rests on that comparison.
 The equations, the wiring diagram and the full parameter table.
 
-### Who the Garden Is For (`/impact/human-practices`)
+### Who the Garden Is For (`/human-practices/integrated`), a medal page
 
 The most complete page, and the longest. **Now:** the guiding question, why
 location and amount matter, the seven-tool shed, the capability matrix, the four
@@ -163,7 +168,7 @@ saying what the team changed where the draft records one.
 write-ups will double it. The natural cut is the community need and the market
 model into their own pages under Impact.
 
-### Sharing the Garden (`/impact/education`)
+### Sharing the Garden (`/human-practices/education`), a medal page
 
 **Now:** all nine activities, grouped under the team's own principles, each
 leading with who it was for and the gap it fills.
@@ -174,7 +179,7 @@ reach figure, the speaker series has no speaker names or poll results, and the
 Scientists You Might Not Know profiles name no scientists. Fill those in the
 draft first.
 
-### Tending Safely (`/impact/safety`)
+### Tending Safely (`/team/safety`)
 
 **Now:** what can honestly be stated, and an admission that no biosafety document
 exists yet.
@@ -183,7 +188,7 @@ exists yet.
 real dual-use paragraph. This is a tool that changes a developmental pathway, so
 boilerplate will not do.
 
-### Notebook (`/project/notebook`)
+### Notebook (`/wetlab/notebook`)
 
 **Now:** the season as a timeline, built from `content/timeline.ts`.
 
@@ -230,3 +235,15 @@ drafting aids, and none of them ships. What is still missing is tracked in this
 document instead, which is where someone looking for work to do should come.
 What that does NOT license is quietly turning a gap into a claim: if a number is
 not known, the page says so in its own words, or says nothing.
+
+### Pages the architecture asks for that are not written yet
+
+Four pages exist with an address, a nav entry and a `todo` block saying what
+belongs on them, so the structure is right from the first day:
+
+| Page | Address | Note |
+| --- | --- | --- |
+| Out of the Greenhouse | `/project/implementation` | proposed implementation |
+| Seeds We Logged | `/wetlab/parts` | parts and registry |
+| What We Leave Behind | `/team/contribution` | **medal page** |
+| The Checklist | `/team/judging` | where each criterion is evidenced |

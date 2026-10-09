@@ -182,6 +182,30 @@
     color: var(--sign-ink);
   }
 
+  /*
+   * A gate in the row of section cards at the foot of a page. Its own class
+   * rather than `.panel` plus utilities, because the panel sets `background`
+   * and a hover or current-page utility would be fighting it for the same
+   * property.
+   */
+  .explore-card {
+    background: var(--p-bushHi);
+    border: 3px solid var(--p-bushDark);
+    border-radius: 2px;
+    box-shadow: 4px 4px 0 var(--p-shadow);
+    transition: background-color 120ms ease;
+  }
+  .explore-card:hover {
+    background: var(--p-grass4);
+  }
+  /* The section you are reading. Marked by colour and by a heavier edge, so it
+     does not depend on colour alone. */
+  .explore-card[aria-current] {
+    background: var(--p-grass4);
+    border-color: var(--p-stem);
+    box-shadow: inset 0 0 0 2px var(--p-bushHi), 4px 4px 0 var(--p-shadow);
+  }
+
   .pixel-btn {
     font-family: var(--font-pixel);
     font-size: 0.95rem;
@@ -547,7 +571,8 @@
   }
   .panel,
   .panel-flat,
-  .sign {
+  .sign,
+  .explore-card {
     box-shadow: none;
     background: white;
     color: black;

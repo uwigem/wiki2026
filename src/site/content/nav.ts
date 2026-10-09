@@ -1,14 +1,16 @@
 /**
- * Navigation structure.
+ * Navigation structure: the team's final site architecture, agreed 2026-10-08.
  *
- * Grouped rather than flat: 13 top-level signs would not fit a laptop nav, and
- * iGEM judges expect the standard page families. Groups open on hover (desktop)
+ * Grouped rather than flat, because a flat list of every page would not fit a
+ * laptop nav and judges expect these families. Groups open on hover (desktop)
  * and as an accordion (mobile).
  *
- * TODO(wiki): cross-check against the official 2026 required-pages list.
- * WebDev 7/27/26 has "Neel Task: Find required pages and make repo", and
- * "Things to Ask: Gold Categories" is still open. Contribution / Collaborations
- * / Judging-form pages may need to be added here.
+ * The group labels are the architecture's own words. Page labels are the names
+ * iGEM uses, so a judge can find a required page by its official name; the
+ * titles inside the pages are written in the site's own voice.
+ *
+ * Playground is not in the architecture document. It is kept because it is the
+ * team's own toy, as a single sign at the end rather than inside a group.
  */
 
 export interface NavItem {
@@ -24,38 +26,48 @@ export interface NavGroup {
 }
 
 export const NAV: NavGroup[] = [
-  // Two homepages while the team compares them. Delete one of these, and its
-  // page, once a version is chosen.
-  { label: 'Home 1', to: '/' },
-  { label: 'Home 2', to: '/home-alt' },
+  { label: 'Home', to: '/' },
   {
     label: 'Project',
     to: '/project/description',
     items: [
       { label: 'Description', to: '/project/description' },
       { label: 'Background', to: '/project/background' },
-      { label: 'Design', to: '/project/design' },
       { label: 'Engineering', to: '/project/engineering' },
-      { label: 'Results', to: '/project/results' },
-      { label: 'Model', to: '/project/model' },
-      { label: 'Notebook', to: '/project/notebook' },
+      { label: 'Proposed Implementation', to: '/project/implementation' },
     ],
   },
   {
-    label: 'Impact',
-    to: '/impact/human-practices',
+    label: 'Wetlab',
+    to: '/wetlab/experiments',
     items: [
-      { label: 'Human Practices', to: '/impact/human-practices' },
-      { label: 'Education & Outreach', to: '/impact/education' },
-      { label: 'Safety', to: '/impact/safety' },
+      { label: 'Experiments', to: '/wetlab/experiments' },
+      { label: 'Notebook', to: '/wetlab/notebook' },
+      { label: 'Parts and Registry', to: '/wetlab/parts' },
     ],
   },
   {
-    label: 'Team',
-    to: '/team',
+    label: 'Drylab',
+    to: '/drylab/model',
+    items: [{ label: 'Model', to: '/drylab/model' }],
+  },
+  {
+    label: 'Human Practices',
+    to: '/human-practices/integrated',
     items: [
+      { label: 'Integrated Human Practices', to: '/human-practices/integrated' },
+      { label: 'Education', to: '/human-practices/education' },
+    ],
+  },
+  {
+    label: 'Team and Resources',
+    to: '/team/contribution',
+    items: [
+      { label: 'Contribution', to: '/team/contribution' },
+      { label: 'Judging', to: '/team/judging' },
       { label: 'The Team', to: '/team' },
-      { label: 'Attributions', to: '/attributions' },
+      { label: 'Attributions', to: '/team/attributions' },
+      { label: 'Safety', to: '/team/safety' },
     ],
   },
   { label: 'Playground', to: '/playground' },

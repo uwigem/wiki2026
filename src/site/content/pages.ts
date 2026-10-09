@@ -23,7 +23,7 @@ import { SMO_5L7D, type Structure } from './structures'
 
 /**
  * Anything with an `id` can be linked to from anywhere else in the wiki, with
- * `[label](/project/design#that-id)`. Ids are kebab-case and have to be unique
+ * `[label](/drylab/model#that-id)`. Ids are kebab-case and have to be unique
  * within their page. Add one the moment a section is worth pointing at.
  */
 export interface Anchored {
@@ -114,6 +114,12 @@ export type Block = Anchored &
   | { kind: 'structure'; structure: Structure }
   /** The animated project mark, with a line saying what it is getting at. */
   | { kind: 'logo'; caption: string }
+  /**
+   * The interactive explainer: SMO in, SMO out, a blocker and a recruiter,
+   * and the hedgehog reading the level. It used to open Home 1 and Home 2;
+   * Home 3 tells the story its own way, so it lives here with the two arms.
+   */
+  | { kind: 'explainer' }
   /** A figure, or the marked hole where one is going. */
   | {
       kind: 'figure'
@@ -133,6 +139,14 @@ export interface Page {
   title: string
   /** Pixel eyebrow label above the title. */
   kicker: string
+  /**
+   * This page is evidence for a medal criterion, so it has to be finished and
+   * specific. The homepage counts too, and is not in this file.
+   *
+   * Marked so `content/check.ts` can shout while a medal page still has a
+   * `todo` block in it.
+   */
+  medal?: true
   /** The guide's narration for this stop in the garden. */
   storyBeat: string
   /** Lede paragraph, rendered large under the title. */
@@ -170,7 +184,7 @@ const description: Page = {
       items: [
         {
           title: 'Up arm',
-          body: 'A **de novo minibinder** pries apart the MEGF8 and MOSMO interface. [How we design one](/project/design#pipeline). The MMM complex can no longer assemble, so it stops clearing SMO, so SMO stays in the cilium and Hedgehog signalling goes up.',
+          body: 'A **de novo minibinder** pries apart the MEGF8 and MOSMO interface. [How we design one](/project/engineering#pipeline). The MMM complex can no longer assemble, so it stops clearing SMO, so SMO stays in the cilium and Hedgehog signalling goes up.',
         },
         {
           title: 'Down arm',
@@ -182,11 +196,12 @@ const description: Page = {
         },
       ],
     },
+    { kind: 'explainer', id: 'explainer' },
     {
       kind: 'prose',
       heading: 'From a therapy to a platform',
       body: [
-        'We started out framing this as a Hedgehog therapy. After talking with researchers it became clear the more useful thing is a **modular research platform**, a way for any cilia lab to raise or lower a receptor of their choice and watch what happens. The reason that is worth doing is [the gap nothing else fills](/impact/human-practices#the-gap). SMO is the receptor where the ground truth is already known, so it is our proof, not our endpoint. The down arm test on GPR161 is how we show the same parts port to a receptor the complex has no natural relationship with.',
+        'We started out framing this as a Hedgehog therapy. After talking with researchers it became clear the more useful thing is a **modular research platform**, a way for any cilia lab to raise or lower a receptor of their choice and watch what happens. The reason that is worth doing is [the gap nothing else fills](/human-practices/integrated#the-gap). SMO is the receptor where the ground truth is already known, so it is our proof, not our endpoint. The down arm test on GPR161 is how we show the same parts port to a receptor the complex has no natural relationship with.',
         'Dr. Ning Zheng, a ubiquitination expert we interviewed, pointed out that because we strengthen an interaction that already exists rather than forcing a brand new one, the right name for this is a **LockTAC**, not a PROTAC. He also noted a transmembrane version of this has not been shown in the literature, which is where the novelty sits.',
       ],
       source: 'Interview with Dr. Ning Zheng (UW Pharmacology); IHP wiki outline.',
@@ -249,14 +264,13 @@ const background: Page = {
   ],
 }
 
-const design: Page = {
-  slug: '/project/design',
-  title: 'Designing the Binder',
-  kicker: 'chapter 03 · design',
-  storyBeat: 'We went to the design shed and grew proteins that never existed before, aimed at one small, stubborn interface.',
-  intro:
-    'The up arm needs a minibinder that pries apart the MEGF8 and MOSMO interface. We design these de novo on the computer and filter them hard before anything reaches a bench.',
-  blocks: [
+/**
+ * How the binder is designed. These were a Design page of their own until the
+ * team settled its final architecture (2026-10-08), which has no Design page,
+ * so they now open the Engineering page: first how a design is made and
+ * filtered, then the cycles of what went wrong and what changed.
+ */
+const designBlocks: Block[] = [
     {
       kind: 'prose',
       heading: 'What we are designing against',
@@ -339,7 +353,7 @@ const design: Page = {
       kind: 'prose',
       heading: 'Why this structure is here and not ours',
       body: [
-        'The receptor above is **Smoothened**, the protein the whole project is aimed at, with a molecule of **cholesterol** bound in the domain that sits outside the cell. The helices below it cross the membrane seven times, which is the shape that makes it a GPCR. Cholesterol binding is the activation step [our kinetic model argues about](/project/model#sensitivity), so this is the picture that page is describing in equations.',
+        'The receptor above is **Smoothened**, the protein the whole project is aimed at, with a molecule of **cholesterol** bound in the domain that sits outside the cell. The helices below it cross the membrane seven times, which is the shape that makes it a GPCR. Cholesterol binding is the activation step [our kinetic model argues about](/drylab/model#sensitivity), so this is the picture that page is describing in equations.',
         'It is a published structure rather than one of ours, and labelled that way on purpose. Our own targets, the MOSMO and MEGF8 interface, were solved by the Kong lab by cryo-EM and are not ours to publish. **Our designed binders are not here yet** because none has been validated at a bench. When they are, they drop into the same viewer.',
       ],
       source: 'PDB 5L7D, Byrne et al., Nature 2016. Viewer written for this site, no third-party 3D library.',
@@ -369,17 +383,19 @@ const design: Page = {
         'We have about **24 MOSMO binder backbones** carried through sequence design, most with two or three candidate sequences of roughly 160 residues. The MEGF8 binders are still in progress.',
       ],
       source: 'Minibinder sequence sheet (Mosmo/MEGF8), Protein Design, summer 2026.',
-    },
-  ],
-}
+  },
+]
 
 const engineering: Page = {
   slug: '/project/engineering',
   title: 'Build, Test, Learn',
-  kicker: 'chapter 04 · engineering',
+  kicker: 'chapter 03 · engineering',
+  medal: true,
   storyBeat: 'Nothing in a garden works the first time. You plant, you watch, you move it two feet to the left.',
-  intro: 'The build, test, learn cycles, in the order we actually ran them, including the parts that did not work the first time.',
+  intro:
+    'How we design a binder and filter it down, and then the build, test, learn cycles in the order we actually ran them, including the parts that did not work the first time.',
   blocks: [
+    ...designBlocks,
     {
       kind: 'cycles',
       id: 'cycles',
@@ -446,7 +462,7 @@ const engineering: Page = {
             },
             {
               title: 'Learn',
-              body: 'Good numbers are not the same as a good binder. We rebuilt the filtering around what is physically reachable: re-fold every survivor against only the **extracellular** parts of the targets and apply the 2 by 2 filter again, then run a custom check that rejects anything still sitting within 5 to 10 Angstrom of the transmembrane helices. Dr. DiMaio added a third test, folding the binder **on its own** with no target present, to confirm it holds its shape rather than being propped up by the thing it is supposed to bind. About **25 designs** survived all of it. The filters are listed in order on [the Design page](/project/design#pipeline).',
+              body: 'Good numbers are not the same as a good binder. We rebuilt the filtering around what is physically reachable: re-fold every survivor against only the **extracellular** parts of the targets and apply the 2 by 2 filter again, then run a custom check that rejects anything still sitting within 5 to 10 Angstrom of the transmembrane helices. Dr. DiMaio added a third test, folding the binder **on its own** with no target present, to confirm it holds its shape rather than being propped up by the thing it is supposed to bind. About **25 designs** survived all of it. The filters are listed in order in [the pipeline](/project/engineering#pipeline) above.',
             },
           ],
         },
@@ -479,7 +495,7 @@ const engineering: Page = {
       heading: 'Cycle 2: designing a binder against a hard surface',
       body: [
         'This cycle is in progress. The first real change came before any protein was made. We began aiming at ATRN, then switched to the **MMM complex** once it was clear MMM had cryo-EM and an accessible interface while ATRN only had an AlphaFold model. Better data to design against was worth the switch.',
-        'A second problem showed up in the pipeline itself. RoseTTAFold3 could not fold our targets well because the sequence databases were thin, so the designs were failing the fold check for the wrong reason. We fixed it by **templating MOSMO and MEGF8** during forward folding. We now have about 24 MOSMO binder backbones through sequence design. The Design page has the full pipeline.',
+        'A second problem showed up in the pipeline itself. RoseTTAFold3 could not fold our targets well because the sequence databases were thin, so the designs were failing the fold check for the wrong reason. We fixed it by **templating MOSMO and MEGF8** during forward folding. We now have about 24 MOSMO binder backbones through sequence design. [The pipeline](/project/engineering#pipeline) above has every step.',
       ],
       source: 'Protein Design ideation notes and pipeline docs, 2026.',
     },
@@ -506,10 +522,10 @@ const engineering: Page = {
   ],
 }
 
-const results: Page = {
-  slug: '/project/results',
+const experiments: Page = {
+  slug: '/wetlab/experiments',
   title: 'What Grew',
-  kicker: 'chapter 05 · results',
+  kicker: 'chapter 05 · experiments',
   storyBeat: 'This bed is still mostly soil. Come back when the season turns.',
   intro: 'Four experiments, each answering one question, in the order they have to be answered.',
   blocks: [
@@ -551,9 +567,10 @@ const results: Page = {
 }
 
 const model: Page = {
-  slug: '/project/model',
+  slug: '/drylab/model',
   title: 'The Model',
-  kicker: 'chapter 06 · model',
+  kicker: 'chapter 07 · model',
+  medal: true,
   storyBeat: 'Before you dig, it helps to know how fast things grow. So we did the maths, and then we asked a systems biologist to tell us where the maths was wrong.',
   intro:
     'A kinetic model of the Hedgehog and MMM system, built to answer one question. Can the binder bring ciliary SMO back to a normal level, or is tunable just a nice word.',
@@ -672,9 +689,10 @@ const model: Page = {
  * ===================================================================== */
 
 const humanPractices: Page = {
-  slug: '/impact/human-practices',
+  slug: '/human-practices/integrated',
   title: 'Who the Garden Is For',
-  kicker: 'chapter 07 · human practices',
+  kicker: 'chapter 08 · integrated human practices',
+  medal: true,
   storyBeat: 'A garden nobody visits is just a field. So we went and asked people, and one of those conversations changed what the project even is.',
   intro:
     'We are handing other researchers a tool that changes what stays in the primary cilium. This page is about what that means, and the people who told us how to do it responsibly.',
@@ -1021,9 +1039,10 @@ const humanPractices: Page = {
 }
 
 const education: Page = {
-  slug: '/impact/education',
+  slug: '/human-practices/education',
   title: 'Sharing the Garden',
-  kicker: 'chapter 08 · education & outreach',
+  kicker: 'chapter 09 · education',
+  medal: true,
   storyBeat: 'The best part of a garden is showing someone else around it.',
   intro: 'We built our outreach around one idea: synthetic biology should be engaging, accessible, fun for kids, fun for the elderly, and inspiring. Here is what that looked like.',
   blocks: [
@@ -1142,9 +1161,9 @@ const education: Page = {
 }
 
 const safety: Page = {
-  slug: '/impact/safety',
+  slug: '/team/safety',
   title: 'Tending Safely',
-  kicker: 'chapter 09 · safety',
+  kicker: 'chapter 13 · safety',
   storyBeat: 'Gloves on. Some things in a garden bite.',
   intro: 'This page is not finished. It records what we can state now, and the rest follows once the iGEM safety form is done.',
   blocks: [
@@ -1174,9 +1193,9 @@ const safety: Page = {
  * ===================================================================== */
 
 const attributions: Page = {
-  slug: '/attributions',
+  slug: '/team/attributions',
   title: 'Who Helped Us Dig',
-  kicker: 'attributions',
+  kicker: 'chapter 12 · attributions',
   storyBeat: 'None of this was one hedgehog.',
   intro: 'What we did ourselves, and what we had help with.',
   blocks: [
@@ -1220,20 +1239,118 @@ const attributions: Page = {
 }
 
 /* ===================================================================== *
+ * PAGES THE ARCHITECTURE ASKS FOR THAT ARE NOT WRITTEN YET
+ *
+ * Each one is a real page with a real address, so the nav is the agreed
+ * architecture from the first day rather than growing into it. Each says what
+ * belongs on it. Delete the `todo` block as the content arrives.
+ * ===================================================================== */
+
+const implementation: Page = {
+  slug: '/project/implementation',
+  title: 'Out of the Greenhouse',
+  kicker: 'chapter 04 · proposed implementation',
+  storyBeat: 'A seedling is not a garden. Who plants this, and where?',
+  intro: 'Who would use this tool outside our lab, how it would reach them, and what has to be true first.',
+  blocks: [
+    {
+      kind: 'todo',
+      body: [
+        'Not written yet. What belongs here:',
+        'Who the user is. Our Human Practices work points at cilia labs who want to raise or lower one receptor, not at patients, so say that plainly and say why.',
+        'What they would receive: a plasmid, a registry part, a protocol, or a service.',
+        'What has to be true before any of that: a validated binder, a delivery route, and the safety position.',
+        'The honest limits, including what we would not claim this is ready for.',
+      ],
+    },
+  ],
+}
+
+const parts: Page = {
+  slug: '/wetlab/parts',
+  title: 'Seeds We Logged',
+  kicker: 'chapter 06 · parts and registry',
+  storyBeat: 'Every seed saved and labelled, so the next gardener can plant it.',
+  intro: 'The parts we designed, built and submitted to the iGEM Registry.',
+  blocks: [
+    {
+      kind: 'todo',
+      body: [
+        'Not written yet. What belongs here:',
+        'Each part: its registry number, what it is, and the sequence.',
+        'Which are basic parts and which are composite.',
+        'The characterisation data for each one, and a link to the experiment it came from.',
+        'Which parts we improved rather than made, and what the improvement was.',
+      ],
+    },
+  ],
+}
+
+const contribution: Page = {
+  slug: '/team/contribution',
+  title: 'What We Leave Behind',
+  kicker: 'chapter 10 · contribution',
+  medal: true,
+  storyBeat: 'The part of the garden that is for whoever comes next.',
+  intro: 'The documented thing a future team gets to start from.',
+  blocks: [
+    {
+      kind: 'todo',
+      body: [
+        'Not written yet, and this one is a medal page, so it needs to be specific.',
+        'The contribution itself: the part, the data, the method or the documentation another team can pick up.',
+        'Why it is useful to someone who is not us, with the evidence that it works.',
+        'Where it lives, so it can be found: registry entry, repository, or protocol.',
+      ],
+    },
+  ],
+}
+
+const judging: Page = {
+  slug: '/team/judging',
+  title: 'The Checklist',
+  kicker: 'chapter 11 · judging',
+  storyBeat: 'Everything we claim, and where on this wiki to check it.',
+  intro: 'Where each medal criterion is evidenced, so nothing has to be hunted for.',
+  blocks: [
+    {
+      kind: 'todo',
+      body: [
+        'Not written yet. What belongs here:',
+        'One row per medal criterion we are claiming, each with a link straight to the page and section that evidences it.',
+        'The safety and security form, the attributions, and the deliverables, each ticked off or honestly marked as outstanding.',
+        'Cross-check against the official 2026 requirements before the wiki freeze. WebDev 7/27/26 left this open.',
+      ],
+    },
+  ],
+}
+
+/* ===================================================================== *
  * Registry
  * ===================================================================== */
 
+/**
+ * Every page built from this file, in reading order. The order drives the
+ * previous and next links at the foot of each page and the chapter numbers in
+ * the kickers, and it follows the nav groups in `nav.ts`.
+ *
+ * Two routes are pages but are not here, because their content is a component
+ * rather than blocks: the Team page and the Notebook.
+ */
 export const PAGES: Page[] = [
   description,
   background,
-  design,
   engineering,
-  results,
+  implementation,
+  experiments,
+  parts,
   model,
   humanPractices,
   education,
-  safety,
+  contribution,
+  judging,
   attributions,
+  safety,
 ]
 
 export function pageBySlug(slug: string): Page | undefined {

@@ -118,9 +118,9 @@ A page is one object. Full field-by-field reference is in
 
 ```ts
 const contribution: Page = {
-  slug: '/project/contribution',        // the address, after the # in the URL
-  title: 'What We Left Behind',         // the big heading on the wooden sign
-  kicker: 'chapter 11 · contribution',  // the small label above it
+  slug: '/wetlab/protocols',            // the address, after the # in the URL
+  title: 'How We Work',                 // the big heading on the wooden sign
+  kicker: 'chapter 14 · protocols',     // the small label above it
   storyBeat: 'A gardener leaves the beds better than they found them.',
   intro: 'One or two sentences saying what this page is about.',
   blocks: [
@@ -307,9 +307,9 @@ these, and changing it is a Web Dev job:
 
 | Route | Where its content lives |
 | --- | --- |
-| `/` (home) | Hero strings in `content/site.ts`; the three lower panels are written into `src/site/pages/Home.tsx` |
+| `/` (home) | The scroll-driven story: every word is in `content/homeStory.ts` |
 | `/team` | Roster in `content/team.ts`; the header text in `src/site/pages/TeamPage.tsx` |
-| `/project/notebook` | Entries in `content/timeline.ts`; the header text in `src/site/pages/NotebookPage.tsx` |
+| `/wetlab/notebook` | Entries in `content/timeline.ts`; the header text in `src/site/pages/NotebookPage.tsx` |
 | `/playground` | No text content. The full-screen garden toy |
 
 The notebook is also skipped by the previous and next buttons, because those
