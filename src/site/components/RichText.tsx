@@ -16,7 +16,7 @@ import { Link } from '../router'
  * the wiki is public; the parser should not be the thing standing between a
  * pasted string and a script URL.
  *
- * A route may carry a section: `[the pipeline](/project/design#pipeline)` opens
+ * A route may carry a section: `[the pipeline](/project/engineering#pipeline)` opens
  * the Design page scrolled to the block with `id: 'pipeline'`, and flashes it so
  * the reader can see what they were sent to look at.
  */

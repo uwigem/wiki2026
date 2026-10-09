@@ -1,11 +1,15 @@
+/*
+ * ARCHIVED. Nothing routes here: this page is not reachable on the site.
+ * Kept as a record of a homepage the team tried. See ./README.md.
+ */
 import type { ReactNode } from 'react'
-import { Link, useSectionJump } from '../router'
-import { pageBySlug } from '../content/pages'
-import { PROJECT_TITLE } from '../content/site'
-import BalanceLogo from '../components/BalanceLogo'
-import SignalDial from '../components/SignalDial'
-import StoryArt, { type StoryArtKind } from '../components/StoryArt'
-import { Reveal } from '../components/GardenSection'
+import { Link, useSectionJump } from '../../router'
+import { pageBySlug } from '../../content/pages'
+import { PROJECT_TITLE } from '../../content/site'
+import BalanceLogo from '../../components/BalanceLogo'
+import SignalDial from '../../components/SignalDial'
+import StoryArt, { type StoryArtKind } from '../../components/StoryArt'
+import { Reveal } from '../../components/GardenSection'
 
 /**
  * The minimal homepage.
@@ -82,12 +86,15 @@ const NEXT: { slug: string; label: string }[] = [
  * references this page follows use weight alone, and a highlight on every key
  * word is exactly the kind of busyness this page exists to remove.
  */
+/** The address this page had while it was on the site. Nothing routes here now. */
+const SELF = '/archive/home-2'
+
 function B({ children }: { children: ReactNode }) {
   return <span className="font-extrabold">{children}</span>
 }
 
 export default function HomeAlt() {
-  useSectionJump('/home-alt')
+  useSectionJump(SELF)
 
   return (
     <div className="bg-leaf-50 text-leaf-950">
@@ -98,7 +105,7 @@ export default function HomeAlt() {
         <h1 className="mt-6 text-4xl leading-none min-[400px]:text-5xl sm:text-7xl lg:text-8xl">{PROJECT_TITLE}</h1>
         <p className="pixel mt-5 text-xl leading-snug text-leaf-800 sm:text-3xl">{TAGLINE}</p>
         <Link
-          to="/home-alt#story"
+          to={`${SELF}#story`}
           className="pixel mt-12 text-sm text-leaf-800 underline decoration-2 underline-offset-4 hover:text-leaf-950"
         >
           Scroll for the story &darr;

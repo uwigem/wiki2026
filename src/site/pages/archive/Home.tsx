@@ -1,12 +1,16 @@
-import { pageBySlug } from '../content/pages'
-import { ROSTER, SUBTEAMS } from '../content/team'
-import { Link } from '../router'
-import type { IntroStage } from '../hooks'
-import SignalDial from '../components/SignalDial'
-import GardenHero from '../components/GardenHero'
-import GardenSection, { Reveal, SectionDivider } from '../components/GardenSection'
-import HedgehogNote from '../components/HedgehogNote'
-import PixelSign from '../components/PixelSign'
+/*
+ * ARCHIVED. Nothing routes here: this page is not reachable on the site.
+ * Kept as a record of a homepage the team tried. See ./README.md.
+ */
+import { pageBySlug } from '../../content/pages'
+import { ROSTER, SUBTEAMS } from '../../content/team'
+import { Link } from '../../router'
+import type { IntroStage } from '../../hooks'
+import SignalDial from '../../components/SignalDial'
+import GardenHero from '../../components/GardenHero'
+import GardenSection, { Reveal, SectionDivider } from '../../components/GardenSection'
+import HedgehogNote from '../../components/HedgehogNote'
+import PixelSign from '../../components/PixelSign'
 
 /**
  * The homepage, told as one argument rather than as a menu.
