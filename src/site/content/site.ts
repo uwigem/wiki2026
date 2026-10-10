@@ -38,7 +38,7 @@ export const HOME_CTAS: Cta[] = [
 ]
 
 export const FOOTER_LINKS = [
-  { label: 'iGEM 2025 wiki', href: 'https://2025.igem.wiki/washington/' },
+  { label: 'Washington iGEM team', href: 'https://students.washington.edu/uwigem/' },
   { label: 'Linktree', href: 'https://linktr.ee/WAigem' },
   { label: 'Donate', href: 'https://sites.google.com/uw.edu/washington-igem-donate/home' },
   // TODO(content): add Instagram / GitHub org links.

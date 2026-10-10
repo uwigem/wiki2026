@@ -1,5 +1,6 @@
 import { NAV, activeGroup } from '../content/nav'
 import { Link } from '../router'
+import PixelIcon from './PixelIcon'
 
 /**
  * The row of gates at the foot of every page: one card per part of the site,
@@ -8,9 +9,8 @@ import { Link } from '../router'
  *
  * One simple pixel glyph each, drawn here rather than taken from the engine:
  * the engine's sprites are plants and creatures, and these have to say
- * "experiments" and "model". They are single colour on purpose. Each is a
- * grid of characters, turned into runs of rectangles, so they stay crisp at
- * any size and cost a handful of DOM nodes.
+ * "experiments" and "model". They are single colour on purpose. See
+ * PixelIcon for how the grids are drawn.
  */
 
 interface Section {
@@ -126,39 +126,6 @@ const SECTIONS: Section[] = [
   { to: '/team/contribution', label: 'Team and Resources', blurb: 'people and paperwork', colour: 'var(--p-spikeMid)', icon: SIGNPOST },
 ]
 
-/** Horizontal runs of set pixels in a row, as [start, length]. */
-function runs(row: string): [number, number][] {
-  const out: [number, number][] = []
-  let start = -1
-  for (let x = 0; x <= row.length; x++) {
-    const on = row[x] === '#'
-    if (on && start < 0) start = x
-    if (!on && start >= 0) {
-      out.push([start, x - start])
-      start = -1
-    }
-  }
-  return out
-}
-
-function PixelIcon({ rows, small = false }: { rows: string[]; small?: boolean }) {
-  const w = rows[0].length
-  return (
-    <svg
-      viewBox={`0 0 ${w} ${rows.length}`}
-      className={small ? 'h-8 w-8 shrink-0' : 'h-10 w-10 shrink-0'}
-      shapeRendering="crispEdges"
-      fill="currentColor"
-      aria-hidden="true"
-      focusable="false"
-    >
-      {rows.flatMap((row, y) =>
-        runs(row).map(([x, len]) => <rect key={`${y}-${x}`} x={x} y={y} width={len} height={1} />),
-      )}
-    </svg>
-  )
-}
-
 /**
  * `compact` is the homepage's closing screen, where the cards share the sky
  * with the logo, the name and the line above the garden: icons and names only,
@@ -181,7 +148,7 @@ export default function ExploreCards({ path, compact = false }: { path: string; 
             <li key={s.to} className="w-[calc((100%-1rem)/3)] sm:w-32">
               <Link to={s.to} className="explore-card flex h-full flex-col items-center gap-1.5 px-2 py-3 text-center">
                 <span style={{ color: s.colour }}>
-                  <PixelIcon rows={s.icon} small />
+                  <PixelIcon rows={s.icon} className="h-8 w-8 shrink-0" />
                 </span>
                 <span className="pixel text-xs leading-tight sm:text-sm">{s.label}</span>
               </Link>
