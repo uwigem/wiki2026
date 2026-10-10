@@ -34,13 +34,19 @@ const SHIRT: string[] = [
 ]
 const TROUSERS: string[] = ['#3f5fa0', '#565b70', '#5b3a2a', '#3f6b46', '#333844']
 
-const HOODIE = '#33333c'
 const JEANS = '#3f5fa0'
 
-type Recolor = Partial<Record<'skin' | 'hair' | 'top' | 'pants', string>>
+type Recolor = Partial<Record<'skin' | 'hair' | 'top' | 'pants' | 'eyes', string>>
+
+/** Small additions people asked for on the avatar form. */
+export type Extra = 'glasses' | 'flower' | 'stripe' | 'necklace'
+
 export interface Look {
   base: number
   recolor: Recolor
+  /** The row under the jaw takes the hair colour instead of the skin's. */
+  beard?: true
+  extras?: Extra[]
 }
 
 /* ---- HSL helpers ---- */
@@ -92,35 +98,103 @@ const clamp01 = (v: number) => Math.max(0, Math.min(1, v))
 /* ---- deterministic assignment ---- */
 
 /**
- * Fallback for people who have not set `avatar` on their own entry in
- * content/team.ts: these names get the longer-haired template.
- *
- * This is a guess from first names and it is wrong for some people. The fix is
- * not to edit this list, it is to set `avatar: 'long' | 'short'` next to your
- * own name in team.ts, which takes priority over anything here. Unisex names in
- * particular (Skyler, Jaiden, Gurnoor) were guessed.
+ * Fallback for people with no pinned look below and no `avatar` on their own
+ * entry in content/team.ts: these names get the longer-haired template. It is
+ * a guess, so it only covers the three people who did not fill in the avatar
+ * form. Anyone can override it with `avatar: 'long' | 'short'` on their line.
  */
-const LONG_HAIR_FALLBACK = new Set<string>([
-  'Samaira Bakshi', 'Eliza Dawley', 'Eva Trapido', 'Defne Dingiloglu', 'Aimee Furlan',
-  'Ruhi Gottumukkala', 'Sanjana Iyer', 'Victoria Wang', 'Navya Gupta',
-  'Tanvi Penubothu', 'Selena Xu', 'Shannon Victor', 'Iris Guo', 'Sophia Nguyen',
-  'Selina Shah', 'Charlotte Hsu', 'Winnie Lin', 'Mansi Patwardhan', 'Zaina Sheikh',
-  'Skyler Choi', 'Gurnoor Sandhu',
-])
+const LONG_HAIR_FALLBACK = new Set<string>(['Charlotte Hsu', 'Ruhi Gottumukkala', 'Winnie Lin'])
 
-/** Fully-pinned looks for specific people (checked before the WOMEN rule). */
+/* Colours people asked for on the avatar form (October 2026). */
+const BLACK_HAIR = '#211d29'
+const DARK_BROWN_HAIR = '#3a2a1e'
+const BROWN_HAIR = '#5f4027'
+const BLACK_TOP = '#34323d'
+const BLACK_PANTS = '#2a2932'
+const WHITE_TOP = '#f7f4ee'
+const LIGHT_BLUE = '#9cc3e6'
+const BLUE = '#4f86bd'
+const RED = '#cc4a3e'
+const GREEN = '#4a8a4a'
+const MAROON = '#6a2433'
+const BROWN_EYES = '#5a3a24'
+const DARK_BROWN_EYES = '#3e2a1e'
+const BLUE_EYES = '#3f7fd0'
+const GREEN_EYES = '#3f8f5a'
+
+/**
+ * Each person's own avatar, from the avatar form. Base 5 is the longer hair,
+ * base 8 the longer hair on a man, the rest are short. Bases 9 and 10 are
+ * Samaira's and Rishabh's own drawings, picked from rendered options. Eye colour is left out where it is black, which is what
+ * the sprite already draws.
+ *
+ * Two looks are reserved: only Rishabh is in all black, and only Samaira wears
+ * a white top. Sophia and Selena asked for white, so they have another colour.
+ *
+ * Asked for and not drawn, because a 16-pixel-wide person has no room for
+ * them: Sanjana's tortoise, and the Valorant outfit Darrien offered as the less
+ * serious option (the other option was the current avatar with lighter skin,
+ * which is what is here). Ho Ren left the question blank, so that avatar is the
+ * one the name used to generate.
+ */
 export const LOOK_OVERRIDES: Record<string, Look> = {
-  'Rishabh Goenka': { base: 0, recolor: { hair: '#241f2b', skin: SKIN[6], top: HOODIE, pants: JEANS } },
-  'Samaira Bakshi': { base: 5, recolor: { hair: '#241f2b', skin: SKIN[4], pants: JEANS } },
-  // lighter skin than the random assignment gave him
-  'Trevor White': { base: 4, recolor: { hair: '#9c6033', skin: SKIN[6], top: '#4f86bd', pants: '#5b3a2a' } },
+  // The only white top on the team, at Rishabh's request. Keep it that way.
+  'Samaira Bakshi': { base: 9, recolor: { hair: BLACK_HAIR, skin: '#edc9af', top: WHITE_TOP, pants: BLACK_PANTS } },
+  'Alex Devgan': {
+    base: 8,
+    recolor: { hair: BLACK_HAIR, skin: SKIN[5], top: BLACK_TOP, pants: JEANS, eyes: BROWN_EYES },
+    beard: true,
+  },
+  'Eliza Dawley': { base: 5, recolor: { hair: '#b58a45', skin: SKIN[1], top: '#d9603a', pants: JEANS, eyes: BLUE_EYES } },
+  'Aimee Furlan': { base: 5, recolor: { hair: '#c4562a', skin: SKIN[1], top: GREEN, pants: JEANS, eyes: BLUE_EYES } },
+  'Jaiden Poon': { base: 4, recolor: { hair: BLACK_HAIR, skin: SKIN[4], top: BLACK_TOP, pants: '#c9b48a' } },
+  // The only one in all black, at Rishabh's request. Keep it that way.
+  'Rishabh Goenka': { base: 10, recolor: { hair: BLACK_HAIR, skin: SKIN[6], top: BLACK_TOP, pants: BLACK_PANTS, eyes: BROWN_EYES } },
+  'Neel Sundar': {
+    base: 0,
+    recolor: { hair: BLACK_HAIR, skin: SKIN[8], top: RED, pants: '#6b6e78', eyes: DARK_BROWN_EYES },
+    extras: ['glasses'],
+  },
+  'Skyler Choi': { base: 5, recolor: { hair: BLACK_HAIR, skin: SKIN[2], top: '#6f9fd8', pants: JEANS } },
+  'Rohith Dinesh': { base: 2, recolor: { hair: BLACK_HAIR, skin: SKIN[8], top: RED, pants: '#2f4a80' } },
+  'Defne Dingiloglu': { base: 5, recolor: { hair: BROWN_HAIR, skin: SKIN[2], top: BLACK_TOP, pants: JEANS, eyes: BROWN_EYES } },
+  'Teo Fine': { base: 6, recolor: { hair: BLACK_HAIR, skin: SKIN[5], top: MAROON, pants: JEANS } },
+  'Alvin Fu': { base: 0, recolor: { hair: BLACK_HAIR, skin: SKIN[4], top: GREEN, pants: '#5b3a2a' }, extras: ['stripe'] },
+  'Iris Guo': { base: 5, recolor: { hair: BLACK_HAIR, skin: SKIN[3], top: RED, pants: BLACK_PANTS, eyes: BROWN_EYES } },
+  'Navya Gupta': {
+    base: 5,
+    recolor: { hair: BLACK_HAIR, skin: SKIN[8], top: '#e88aa8', pants: JEANS, eyes: DARK_BROWN_EYES },
+    extras: ['flower'],
+  },
+  'Sanjana Iyer': { base: 5, recolor: { hair: BLACK_HAIR, skin: SKIN[8], top: BLACK_TOP, pants: '#4a6fae', eyes: BROWN_EYES } },
+  'Darrien Liang': { base: 0, recolor: { hair: '#7c5230', skin: SKIN[5], top: '#8f61b4', pants: JEANS } },
+  'Sophia Nguyen': { base: 5, recolor: { hair: BLACK_HAIR, skin: SKIN[4], top: '#e8937a', pants: JEANS } },
+  'Mansi Patwardhan': {
+    base: 5,
+    recolor: { hair: BLACK_HAIR, skin: SKIN[4], top: LIGHT_BLUE, pants: BLACK_PANTS, eyes: BROWN_EYES },
+    extras: ['necklace'],
+  },
+  'Tanvi Penubothu': { base: 5, recolor: { hair: BLACK_HAIR, skin: SKIN[8], top: '#8f61b4', pants: '#4a4d5a' } },
+  'Ho Ren': { base: 2, recolor: { hair: '#c9a855', skin: '#ad7445', top: BLUE, pants: '#3f6b46' } },
+  'Gurnoor Sandhu': { base: 5, recolor: { hair: BLACK_HAIR, skin: SKIN[6], top: '#b79ad8', pants: JEANS, eyes: BROWN_EYES } },
+  'Selina Shah': { base: 5, recolor: { hair: BLACK_HAIR, skin: SKIN[7], top: MAROON, pants: '#7c9fd0', eyes: BROWN_EYES } },
+  'Zaina Sheikh': { base: 5, recolor: { hair: '#2a2020', skin: SKIN[5], top: '#8f61b4', pants: '#565b70', eyes: BROWN_EYES } },
+  'Eva Trapido': { base: 5, recolor: { hair: '#6b4528', skin: SKIN[1], top: GREEN, pants: JEANS, eyes: GREEN_EYES } },
+  'Shannon Victor': { base: 5, recolor: { hair: BLACK_HAIR, skin: SKIN[8], top: RED, pants: '#565b70', eyes: BROWN_EYES } },
+  'Victoria Wang': { base: 5, recolor: { hair: BLACK_HAIR, skin: SKIN[2], top: BLUE, pants: BLACK_PANTS } },
+  'Trevor White': {
+    base: 4,
+    recolor: { hair: DARK_BROWN_HAIR, skin: '#f5d8c4', top: '#3f6b46', pants: BLACK_PANTS, eyes: GREEN_EYES },
+  },
+  'Selena Xu': { base: 5, recolor: { hair: '#381106', skin: '#facf9d', top: '#c89f78', pants: '#67798f', eyes: '#301a0b' } },
 }
 
 /**
  * The pixel character for one person.
  *
  * Order of precedence: a full pin in LOOK_OVERRIDES, then the person's own
- * `avatar` choice in team.ts, then the name-based fallback above.
+ * `avatar` choice in team.ts, then the name-based fallback above. Unpinned
+ * colours come from the name, so they are the same on every visit.
  */
 export function looksFor(member: Member): Look {
   const { name } = member
@@ -148,10 +222,58 @@ const cache = new Map<string, string>()
  *  any dark cheek/jaw pixel reads as facial hair. */
 const SHADE_KEEP: Partial<Record<Role, number>> = { hair: 0.85, top: 0.8, pants: 0.8 }
 
+const FLOWER_PETAL = '#f4a3bf'
+const FLOWER_EYE = '#f6d66f'
+const STRIPE = '#e8c64a'
+const GOLD = '#e0b545'
+
+/** Where a hair flower sits, per template: a spot on the hair, top left. */
+const FLOWER_AT: Record<number, [number, number]> = { 5: [3, 3] }
+/** The pendant, per template: the bottom of the neckline. */
+const NECKLACE_AT: Record<number, [number, number][]> = { 5: [[9, 12], [10, 12]] }
+
+/** Pixels drawn over the recoloured sprite for each extra, as [x, y, colour]. */
+function extraPixels(look: Look, cells: (x: number, y: number) => Role | null, outline: string) {
+  const sp = REF_SPRITES[look.base % REF_SPRITES.length]
+  const px: [number, number, string][] = []
+  for (const extra of look.extras ?? []) {
+    if (extra === 'glasses') {
+      // A frame line along the top of both eyes and across the nose, and a rim
+      // under each eye. The lashes above the eyes already close the top.
+      const eye: [number, number][] = []
+      for (let y = 0; y < sp.h; y++)
+        for (let x = 0; x < sp.w; x++) if (cells(x, y) === 'eye' || cells(x, y) === 'pupil') eye.push([x, y])
+      const top = Math.min(...eye.map(([, y]) => y))
+      const bottom = Math.max(...eye.map(([, y]) => y))
+      const xs = [...new Set(eye.map(([x]) => x))].sort((a, b) => a - b)
+      const left = xs.slice(0, 2)
+      const right = xs.slice(-2)
+      for (let x = left[0] - 1; x <= right[1] + 1; x++) if (!xs.includes(x)) px.push([x, top, outline])
+      for (const x of [...left, ...right]) px.push([x, bottom + 1, outline])
+    } else if (extra === 'flower') {
+      const at = FLOWER_AT[look.base]
+      if (!at) continue
+      const [x, y] = at
+      px.push([x, y - 1, FLOWER_PETAL], [x - 1, y, FLOWER_PETAL], [x + 1, y, FLOWER_PETAL], [x, y + 1, FLOWER_PETAL])
+      px.push([x, y, FLOWER_EYE])
+    } else if (extra === 'stripe') {
+      // Across the middle row of the shirt.
+      const rows = [...new Set(Array.from({ length: sp.h }, (_, y) => y).filter((y) =>
+        Array.from({ length: sp.w }, (_, x) => cells(x, y)).includes('top'),
+      ))]
+      const y = rows[Math.floor(rows.length / 2)]
+      for (let x = 0; x < sp.w; x++) if (cells(x, y) === 'top') px.push([x, y, STRIPE])
+    } else if (extra === 'necklace') {
+      for (const [x, y] of NECKLACE_AT[look.base] ?? []) px.push([x, y, GOLD])
+    }
+  }
+  return px
+}
+
 function personURL(look: Look): string {
   const sp = REF_SPRITES[look.base % REF_SPRITES.length]
   const rc = look.recolor
-  const key = `${look.base}|${rc.skin ?? ''}|${rc.hair ?? ''}|${rc.top ?? ''}|${rc.pants ?? ''}`
+  const key = JSON.stringify(look)
   const hit = cache.get(key)
   if (hit) return hit
 
@@ -167,6 +289,21 @@ function personURL(look: Look): string {
     }
   }
   const colours = sp.pal.map(([hex, role]) => {
+    if (role === 'prop') return hex
+    if (role === 'pupil') return rc.eyes ?? hex
+    if (role === 'shine') {
+      // White on the reference's blonde; on darker hair, a light shade of it.
+      if (!rc.hair) return hex
+      const [th, ts, tl] = rgb2hsl(rc.hair)
+      return hsl2rgb(th, ts * 0.6, clamp01(Math.max(tl + 0.3, 0.55)))
+    }
+    if (role === 'chin') {
+      const from = look.beard ? rc.hair : rc.skin
+      if (!from) return hex
+      const [th, ts, tl] = rgb2hsl(from)
+      // A slight shade under the jaw, so the face keeps its shape.
+      return hsl2rgb(th, ts, clamp01(tl - (look.beard ? 0.02 : 0.05)))
+    }
     const target = rc[role as 'skin' | 'hair' | 'top' | 'pants']
     const m = mean[role]
     if (!target || !m) return hex
@@ -181,6 +318,11 @@ function personURL(look: Look): string {
     return hsl2rgb(th, clamp01(ts + (es - m.s) * 0.5), clamp01(tl + (el - m.l) * k))
   })
 
+  const cells = (x: number, y: number): Role | null => {
+    const ch = sp.rows[y]?.[x]
+    return ch && ch !== '.' ? sp.pal[parseInt(ch, 36)][1] : null
+  }
+
   const canvas = document.createElement('canvas')
   canvas.width = sp.w
   canvas.height = sp.h
@@ -194,6 +336,10 @@ function personURL(look: Look): string {
       ctx.fillStyle = colours[parseInt(ch, 36)]
       ctx.fillRect(x, y, 1, 1)
     }
+  }
+  for (const [x, y, colour] of extraPixels(look, cells, sp.pal[0][0])) {
+    ctx.fillStyle = colour
+    ctx.fillRect(x, y, 1, 1)
   }
   const url = canvas.toDataURL()
   cache.set(key, url)

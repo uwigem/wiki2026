@@ -108,7 +108,11 @@ export default function TeamGroup({ id, heading, blurb, flower, people, subteam,
                     }
                     aria-label={`Open profile: ${m.name}${leadsHere ? ', lead' : ''}`}
                   >
-                    <PixelPerson traits={looksFor(m)} scale={4} />
+                    {/* A fixed slot, so a taller character (Rishabh's curls) does not push
+                        their name below the rest of the row. Fits 20 rows at scale 4. */}
+                    <span className="flex h-20 items-end justify-center">
+                      <PixelPerson traits={looksFor(m)} scale={4} />
+                    </span>
                     <span className="pixel text-center text-tag leading-tight text-leaf-950">{m.name}</span>
                     {leadsHere && (
                       <span className="pixel rounded-sm bg-leaf-800 px-1.5 text-note tracking-wide text-leaf-50">

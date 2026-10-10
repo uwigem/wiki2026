@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { SUBTEAM_NAME, type Member } from '../content/team'
 import { useEscape } from '../hooks'
+import PixelIcon from './PixelIcon'
 import PixelPerson, { looksFor } from './PixelPerson'
 
 interface Props {
@@ -16,17 +17,73 @@ function safeUrl(url: string | undefined): string | undefined {
   return url && url.startsWith('https://') ? url : undefined
 }
 
-/** `https://www.linkedin.com/in/someone/` reads as `linkedin.com/in/someone`. */
-function shortUrl(url: string): string {
-  return url.replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, '')
+const MAIL = [
+  '............',
+  '............',
+  '############',
+  '##........##',
+  '#.#......#.#',
+  '#..#....#..#',
+  '#...#..#...#',
+  '#....##....#',
+  '#..........#',
+  '#..........#',
+  '############',
+  '............',
+]
+
+/** The "in" mark, cut out of a rounded square. */
+const LINKEDIN = [
+  '.##########.',
+  '############',
+  '##..########',
+  '##..########',
+  '############',
+  '##..#....###',
+  '##..#..#..##',
+  '##..#..#..##',
+  '##..#..#..##',
+  '##..#..#..##',
+  '############',
+  '.##########.',
+]
+
+const GLOBE = [
+  '....####....',
+  '..###..###..',
+  '.#..#..#..#.',
+  '.#..#..#..#.',
+  '############',
+  '#...#..#...#',
+  '#...#..#...#',
+  '############',
+  '.#..#..#..#.',
+  '.#..#..#..#.',
+  '..###..###..',
+  '....####....',
+]
+
+/** One square button with a glyph. The label is for screen readers and the tooltip. */
+function ContactButton({ href, label, icon, external }: { href: string; label: string; icon: string[]; external?: boolean }) {
+  return (
+    <a
+      href={href}
+      aria-label={label}
+      title={label}
+      className="pixel-btn h-11 w-11 justify-center p-0 text-leaf-900"
+      {...(external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
+    >
+      <PixelIcon rows={icon} className="h-5 w-5" />
+    </a>
+  )
 }
 
 /**
  * A member's profile card, shown as a modal dialog.
  *
  * Their headshot when we have one, otherwise their pixel character. Then their
- * titles, subteams and major, their bio if they have written one, and how to
- * reach them.
+ * titles on one line, any subteam their title does not already name, their
+ * bio, and a button each for email, LinkedIn and website.
  */
 export default function MemberModal({ member, onClose }: Props) {
   const dialogRef = useRef<HTMLDivElement>(null)
@@ -74,6 +131,12 @@ export default function MemberModal({ member, onClose }: Props) {
 
   const linkedin = safeUrl(member.linkedin)
   const website = safeUrl(member.website)
+  const first = member.name.split(' ')[0]
+  // A lead's title already names their subteam ("Wet Lab Lead"), so only the
+  // others are listed.
+  const otherSubteams = member.subteams.filter(
+    (id) => !member.leads?.includes(id) && !member.titles?.some((t) => t.includes(SUBTEAM_NAME[id])),
+  )
 
   return (
     <div
@@ -87,73 +150,46 @@ export default function MemberModal({ member, onClose }: Props) {
         aria-modal="true"
         aria-label={member.name}
         tabIndex={-1}
-        className="panel relative max-h-full w-full max-w-md overflow-y-auto"
+        className="panel relative max-h-full w-full max-w-2xl overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           ref={closeRef}
           type="button"
           onClick={onClose}
-          className="pixel absolute right-2 top-2 rounded-sm border-2 border-leaf-700 bg-leaf-50 px-2 py-0.5 text-sm text-leaf-900 hover:bg-leaf-200"
+          className="pixel absolute right-3 top-3 rounded-sm border-2 border-leaf-700 bg-leaf-50 px-2 py-0.5 text-sm text-leaf-900 hover:bg-leaf-200"
           aria-label="Close profile"
         >
           ✕
         </button>
 
-        <div className="flex items-center gap-4 border-b-[3px] border-leaf-300 bg-leaf-50 px-5 py-5 pr-12">
+        <div className="flex flex-col items-center gap-5 p-5 sm:flex-row sm:items-start sm:gap-6 sm:p-6">
           {member.photo ? (
             <img
               src={member.photo}
               alt={member.name}
-              className="h-32 w-24 shrink-0 rounded-sm border-[3px] border-leaf-700 object-cover"
+              className="aspect-[4/5] w-40 shrink-0 rounded-sm border-[3px] border-leaf-700 object-cover sm:w-52"
             />
           ) : (
-            <span className="flex h-32 w-24 shrink-0 items-end justify-center overflow-hidden rounded-sm border-[3px] border-leaf-300 bg-leaf-100">
-              <PixelPerson traits={looksFor(member)} scale={3} />
+            <span className="flex aspect-[4/5] w-40 shrink-0 items-end justify-center overflow-hidden rounded-sm border-[3px] border-leaf-300 bg-leaf-100 pb-3 sm:w-52">
+              <PixelPerson traits={looksFor(member)} scale={7} />
             </span>
           )}
-          <div className="min-w-0">
-            <h2 className="text-xl text-leaf-950">{member.name}</h2>
-            {member.titles?.map((t) => (
-              <p key={t} className="text-sm text-leaf-900">
-                {t}
-              </p>
-            ))}
-            <p className="kicker mt-1">{member.subteams.map((id) => SUBTEAM_NAME[id]).join(' · ')}</p>
-            {member.major && <p className="mt-1 text-note text-leaf-800">{member.major}</p>}
-          </div>
-        </div>
 
-        <div className="flex flex-col gap-3 px-5 py-4">
-          {member.bio && <p className="text-body-sm leading-relaxed">{member.bio}</p>}
-          <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-body-sm">
-            <dt className="pixel text-note text-leaf-800">Email</dt>
-            <dd className="min-w-0 break-words">
-              <a href={`mailto:${member.email}`} className="cross-link">
-                {member.email}
-              </a>
-            </dd>
-            {linkedin && (
-              <>
-                <dt className="pixel text-note text-leaf-800">LinkedIn</dt>
-                <dd className="min-w-0 break-words">
-                  <a href={linkedin} target="_blank" rel="noreferrer noopener" className="cross-link">
-                    {shortUrl(linkedin)}
-                  </a>
-                </dd>
-              </>
+          <div className="flex min-w-0 flex-1 flex-col self-stretch sm:pr-8">
+            <h2 className="text-2xl text-leaf-950">{member.name}</h2>
+            {member.titles && <p className="mt-1 text-body-sm text-leaf-900">{member.titles.join(' · ')}</p>}
+            {otherSubteams.length > 0 && (
+              <p className="kicker mt-1.5">{otherSubteams.map((id) => SUBTEAM_NAME[id]).join(' · ')}</p>
             )}
-            {website && (
-              <>
-                <dt className="pixel text-note text-leaf-800">Website</dt>
-                <dd className="min-w-0 break-words">
-                  <a href={website} target="_blank" rel="noreferrer noopener" className="cross-link">
-                    {shortUrl(website)}
-                  </a>
-                </dd>
-              </>
-            )}
-          </dl>
+            {member.bio && <p className="mt-4 text-body-sm leading-relaxed">{member.bio}</p>}
+
+            <div className="mt-5 flex gap-3 sm:mt-auto sm:pt-5">
+              <ContactButton href={`mailto:${member.email}`} label={`Email ${first}`} icon={MAIL} />
+              {linkedin && <ContactButton href={linkedin} label={`${first} on LinkedIn`} icon={LINKEDIN} external />}
+              {website && <ContactButton href={website} label={`${first}’s website`} icon={GLOBE} external />}
+            </div>
+          </div>
         </div>
       </div>
     </div>

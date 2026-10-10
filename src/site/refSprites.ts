@@ -2,7 +2,16 @@
 // Pixel-accurate transcriptions of the eight reference characters; each palette
 // colour is tagged with a role so it can be recoloured per person while keeping the
 // exact reference shape + shading. `rows` index into `pal` (base-36), '.' = empty.
-export type Role = 'dark' | 'shine' | 'skin' | 'hair' | 'top' | 'pants'
+//
+// Roles beyond the obvious ones:
+// - `eye`, `shine`: the white of the eye, and the highlight on some hair.
+//   Never recoloured.
+// - `pupil`: the cell beside it, recoloured to the person's eye colour if set.
+// - `chin`: the row under the jaw. A shade of the skin, or the hair for a beard.
+// - `prop`: an accessory, drawn exactly as given and never recoloured.
+// White in the reference (eyes, hair shine, the shirts on templates 3 and 5) is filled
+// in, not left empty, so the tile behind a person never shows through them.
+export type Role = 'dark' | 'shine' | 'skin' | 'hair' | 'top' | 'pants' | 'eye' | 'pupil' | 'chin' | 'prop'
 export interface RefSprite {
   w: number
   h: number
@@ -13,7 +22,7 @@ export interface RefSprite {
 export const REF_SPRITES: RefSprite[] = [
   {
     w: 15, h: 19,
-    pal: [['#181d39', 'dark'], ['#983c49', 'hair'], ['#632938', 'hair'], ['#c67b50', 'hair'], ['#25172f', 'dark'], ['#efb985', 'skin'], ['#fdd8ad', 'skin'], ['#458967', 'top'], ['#3d5a5c', 'top'], ['#3c3b78', 'pants'], ['#576ad9', 'pants'], ['#2e2344', 'dark']],
+    pal: [['#181d39', 'dark'], ['#983c49', 'hair'], ['#632938', 'hair'], ['#c67b50', 'hair'], ['#25172f', 'dark'], ['#efb985', 'skin'], ['#fdd8ad', 'skin'], ['#458967', 'top'], ['#3d5a5c', 'top'], ['#3c3b78', 'pants'], ['#576ad9', 'pants'], ['#2e2344', 'dark'], ['#181d39', 'pupil'], ['#fbf7ee', 'eye'], ['#c67b50', 'chin']],
     rows: [
       "....00000000...",
       "...0111202110..",
@@ -22,10 +31,10 @@ export const REF_SPRITES: RefSprite[] = [
       "013112233333210",
       "011223355555320",
       "022335005500500",
-      "025355.055.050.",
-      ".05356.066.060.",
+      "025355dc55dc50.",
+      ".05356dc66dc60.",
       "..043555555530.",
-      "...4333333330..",
+      "...4eeeeeeee0..",
       "..077777787774.",
       ".07777777877770",
       ".07787777877870",
@@ -38,7 +47,7 @@ export const REF_SPRITES: RefSprite[] = [
   },
   {
     w: 16, h: 19,
-    pal: [['#241a35', 'dark'], ['#914449', 'hair'], ['#612a3a', 'hair'], ['#c57a55', 'hair'], ['#6a3642', 'hair'], ['#edba8b', 'skin'], ['#ffd8aa', 'skin'], ['#ef6257', 'top'], ['#c93440', 'top'], ['#f69ba8', 'top'], ['#dec792', 'skin'], ['#e86e61', 'top']],
+    pal: [['#241a35', 'dark'], ['#914449', 'hair'], ['#612a3a', 'hair'], ['#c57a55', 'hair'], ['#6a3642', 'hair'], ['#edba8b', 'skin'], ['#ffd8aa', 'skin'], ['#ef6257', 'top'], ['#c93440', 'top'], ['#f69ba8', 'top'], ['#dec792', 'skin'], ['#e86e61', 'top'], ['#241a35', 'pupil'], ['#fbf7ee', 'eye'], ['#c57a55', 'chin']],
     rows: [
       "....000000000...",
       "...01111202110..",
@@ -47,10 +56,10 @@ export const REF_SPRITES: RefSprite[] = [
       "0133112233333210",
       "0311243355555320",
       "0112335005500500",
-      "0125355.055.050.",
-      "0145356.066.060.",
+      "0125355dc55dc50.",
+      "0145356dc66dc60.",
       "022203555555530.",
-      "02220333333330..",
+      "02220eeeeeeee0..",
       ".00077777787770.",
       "..07777777877770",
       "..07787777877870",
@@ -63,7 +72,7 @@ export const REF_SPRITES: RefSprite[] = [
   },
   {
     w: 15, h: 19,
-    pal: [['#201836', 'dark'], ['#e37528', 'hair'], ['#92464a', 'hair'], ['#612a39', 'hair'], ['#ef6d1f', 'hair'], ['#ebb258', 'hair'], ['#2a223e', 'dark'], ['#c47954', 'hair'], ['#f0b885', 'skin'], ['#fdd7ac', 'skin'], ['#d7e0f1', 'top'], ['#a0a1cf', 'top'], ['#493e63', 'pants'], ['#6d6493', 'pants']],
+    pal: [['#201836', 'dark'], ['#e37528', 'hair'], ['#92464a', 'hair'], ['#612a39', 'hair'], ['#ef6d1f', 'hair'], ['#ebb258', 'hair'], ['#2a223e', 'dark'], ['#c47954', 'hair'], ['#f0b885', 'skin'], ['#fdd7ac', 'skin'], ['#d7e0f1', 'top'], ['#a0a1cf', 'top'], ['#493e63', 'pants'], ['#6d6493', 'pants'], ['#201836', 'pupil'], ['#fbf7ee', 'eye'], ['#c47954', 'chin']],
     rows: [
       "....00000000...",
       "...0111232110..",
@@ -72,10 +81,10 @@ export const REF_SPRITES: RefSprite[] = [
       "015112277777210",
       "011227788888720",
       "022778008800800",
-      "028788.088.080.",
-      ".08789.099.090.",
+      "028788fe88fe80.",
+      ".08789fe99fe90.",
       "..007888888870.",
-      "...0777777770..",
+      "...0gggggggg0..",
       "..0aaabaababa0.",
       ".0aaaaabbbbaaa0",
       ".0aabaaaabaaba0",
@@ -88,7 +97,7 @@ export const REF_SPRITES: RefSprite[] = [
   },
   {
     w: 16, h: 19,
-    pal: [['#201837', 'dark'], ['#e37528', 'hair'], ['#91464a', 'hair'], ['#eeb153', 'hair'], ['#c47b52', 'hair'], ['#ecbd89', 'skin'], ['#ea7a36', 'skin'], ['#2f2143', 'dark'], ['#ffd8a9', 'skin'], ['#d6dff1', 'top'], ['#9e9ece', 'top']],
+    pal: [['#201837', 'dark'], ['#e37528', 'hair'], ['#91464a', 'hair'], ['#eeb153', 'hair'], ['#c47b52', 'hair'], ['#ecbd89', 'skin'], ['#ea7a36', 'skin'], ['#2f2143', 'dark'], ['#ffd8a9', 'skin'], ['#d6dff1', 'top'], ['#9e9ece', 'top'], ['#201837', 'pupil'], ['#fbf7ee', 'eye'], ['#f6f3ec', 'top'], ['#c47b52', 'chin']],
     rows: [
       "....000000000...",
       "...01111202110..",
@@ -97,23 +106,23 @@ export const REF_SPRITES: RefSprite[] = [
       "0133112244444210",
       "0311224455555420",
       "0162445005500500",
-      "7125455.055.050.",
-      "0125458.088.080.",
+      "7125455cb55cb50.",
+      "0125458cb88cb80.",
       "022204555555540.",
-      "02220444444440..",
-      ".000999.5555.90.",
-      "..099999.55.9990",
-      "..0..a999..99a.0",
+      "02220eeeeeeee0..",
+      ".000999d5555d90.",
+      "..099999d55d9990",
+      "..0dda999dd99ad0",
       "..055a9999999a50",
       "...00a9999999a0.",
-      "....0a.......0..",
+      "....0addddddd0..",
       "....0a99999990..",
       "....0000000000..",
     ],
   },
   {
     w: 15, h: 19,
-    pal: [['#1c1736', 'dark'], ['#453f61', 'hair'], ['#736c96', 'hair'], ['#c77950', 'hair'], ['#ebbe87', 'skin'], ['#fed7ae', 'skin'], ['#9d69d2', 'top'], ['#e0b3f4', 'top'], ['#5e3b96', 'top'], ['#632a39', 'pants'], ['#914545', 'pants']],
+    pal: [['#1c1736', 'dark'], ['#453f61', 'hair'], ['#736c96', 'hair'], ['#c77950', 'hair'], ['#ebbe87', 'skin'], ['#fed7ae', 'skin'], ['#9d69d2', 'top'], ['#e0b3f4', 'top'], ['#5e3b96', 'top'], ['#632a39', 'pants'], ['#914545', 'pants'], ['#1c1736', 'pupil'], ['#fbf7ee', 'eye'], ['#c77950', 'chin']],
     rows: [
       "....00000000...",
       "...0111000110..",
@@ -122,10 +131,10 @@ export const REF_SPRITES: RefSprite[] = [
       "012110033333010",
       "011003344444300",
       "000334004400400",
-      "004344.044.040.",
-      ".04345.055.050.",
+      "004344cb44cb40.",
+      ".04345cb55cb50.",
       "..003444444430.",
-      "...0333333330..",
+      "...0dddddddd0..",
       "..067666786670.",
       ".07666766876660",
       ".06686667866870",
@@ -137,10 +146,10 @@ export const REF_SPRITES: RefSprite[] = [
     ],
   },
   {
-    // longer-haired template (re-sampled with hue-based roles so hair, skin and
-    // top are all independently recolourable, so any skin tone works).
+    // The longer-haired template. Hair, skin and top are all independently
+    // recolourable, so any skin tone works.
     w: 16, h: 19,
-    pal: [['#1d1836', 'dark'], ['#474165', 'hair'], ['#291634', 'dark'], ['#706995', 'hair'], ['#6d648f', 'hair'], ['#c87a53', 'top'], ['#c87950', 'skin'], ['#eebd85', 'skin'], ['#2e243f', 'dark'], ['#fed8aa', 'skin'], ['#fad5b2', 'skin'], ['#c2795a', 'skin'], ['#edbb86', 'top'], ['#9a9ed0', 'hair'], ['#632a3b', 'pants'], ['#914545', 'pants']],
+    pal: [['#1d1836', 'dark'], ['#474165', 'hair'], ['#291634', 'hair'], ['#706995', 'hair'], ['#6d648f', 'hair'], ['#c87a53', 'hair'], ['#c87950', 'hair'], ['#eebd85', 'skin'], ['#2e243f', 'dark'], ['#fed8aa', 'skin'], ['#fad5b2', 'skin'], ['#c2795a', 'hair'], ['#edbb86', 'skin'], ['#9a9ed0', 'hair'], ['#632a3b', 'pants'], ['#914545', 'pants'], ['#2e243f', 'pupil'], ['#fbf7ee', 'eye'], ['#f6f3ec', 'top'], ['#c87950', 'chin']],
     rows: [
       "....000000000...",
       "...01111202110..",
@@ -149,13 +158,13 @@ export const REF_SPRITES: RefSprite[] = [
       "0133110255555010",
       "0311026677777620",
       "0112667007700700",
-      "0127677.877.070.",
-      "0127679.099.0a0.",
+      "0127677hg77hg70.",
+      "0127679hg99hga0.",
       "0222067777777b0.",
-      "02220666666660..",
-      ".000..7777777.0.",
-      "..0.....cccc...0",
-      "..0..d.......d.0",
+      "02220jjjjjjjj0..",
+      ".000ii7777777i0.",
+      "..0iiiiicccciii0",
+      "..0iidiiiiiiidi0",
       "..0cceeeeeeeeec0",
       "...00efffffffe0.",
       "....0effeeeef0..",
@@ -165,19 +174,19 @@ export const REF_SPRITES: RefSprite[] = [
   },
   {
     w: 15, h: 19,
-    pal: [['#1f1a38', 'dark'], ['#f3d771', 'hair'], ['#eaaf52', 'hair'], ['#c47954', 'hair'], ['#e9c28c', 'skin'], ['#fbd9ad', 'skin'], ['#a1d4ed', 'top'], ['#7dace4', 'top'], ['#355258', 'pants'], ['#438a68', 'pants']],
+    pal: [['#1f1a38', 'dark'], ['#f3d771', 'hair'], ['#eaaf52', 'hair'], ['#c47954', 'hair'], ['#e9c28c', 'skin'], ['#fbd9ad', 'skin'], ['#a1d4ed', 'top'], ['#7dace4', 'top'], ['#355258', 'pants'], ['#438a68', 'pants'], ['#1f1a38', 'pupil'], ['#fbf7ee', 'eye'], ['#fbf7ee', 'shine'], ['#c47954', 'chin']],
     rows: [
       "....00000000...",
       "...0111202110..",
-      "..01..112021.0.",
-      ".01..11222221.0",
-      "01.112233333210",
+      "..01cc112021c0.",
+      ".01cc11222221c0",
+      "01c112233333210",
       "011223344444320",
       "022334004400400",
-      "024344.044.040.",
-      ".04345.055.050.",
+      "024344ba44ba40.",
+      ".04345ba55ba50.",
       "..003444444430.",
-      "...0333333330..",
+      "...0dddddddd0..",
       "..066667777660.",
       ".06667666766660",
       ".06676667776760",
@@ -190,19 +199,19 @@ export const REF_SPRITES: RefSprite[] = [
   },
   {
     w: 16, h: 19,
-    pal: [['#1b1539', 'dark'], ['#f5d774', 'hair'], ['#ecaf52', 'hair'], ['#ca7e55', 'hair'], ['#622a3a', 'skin'], ['#efbd87', 'skin'], ['#ffd8ab', 'skin'], ['#5c3d9b', 'top'], ['#2b253c', 'dark'], ['#a778d6', 'top'], ['#a16dcc', 'pants']],
+    pal: [['#1b1539', 'dark'], ['#f5d774', 'hair'], ['#ecaf52', 'hair'], ['#ca7e55', 'hair'], ['#622a3a', 'skin'], ['#efbd87', 'skin'], ['#ffd8ab', 'skin'], ['#5c3d9b', 'top'], ['#2b253c', 'dark'], ['#a778d6', 'top'], ['#a16dcc', 'pants'], ['#1b1539', 'pupil'], ['#fbf7ee', 'eye'], ['#fbf7ee', 'shine'], ['#ca7e55', 'chin']],
     rows: [
       "....000000000...",
       "...01111202110..",
-      "..01...112021.0.",
-      ".01...11222221.0",
-      "01..112233333410",
-      "0.11223355555240",
+      "..01ddd112021d0.",
+      ".01ddd11222221d0",
+      "01dd112233333410",
+      "0d11223355555240",
       "0112335005500500",
-      "0125355.055.050.",
-      "0125356.066.060.",
+      "0125355cb55cb50.",
+      "0125356cb66cb60.",
       "022203555555530.",
-      "02220333333330..",
+      "02220eeeeeeee0..",
       ".00077777008770.",
       "..07777779097770",
       "..07707770007070",
@@ -211,6 +220,94 @@ export const REF_SPRITES: RefSprite[] = [
       "....00777a0970..",
       "....0077000078..",
       "....0000..0000..",
+    ],
+  },
+  {
+    // Template 5 drawn as a man (for Alex): a crew neck instead of the scoop
+    // neck, a short beard along the jaw, and a lock of hair down the right side
+    // so the hair reaches the shoulders on both sides. Not from the reference.
+    // The unused 'hair' entry keeps the recolour's hair mean equal to template 5's.
+    w: 16, h: 19,
+    pal: [['#1d1836', 'dark'], ['#474165', 'hair'], ['#291634', 'hair'], ['#706995', 'hair'], ['#6d648f', 'hair'], ['#c87a53', 'hair'], ['#c87950', 'hair'], ['#eebd85', 'skin'], ['#2e243f', 'dark'], ['#fed8aa', 'skin'], ['#fad5b2', 'skin'], ['#c2795a', 'hair'], ['#edbb86', 'skin'], ['#9a9ed0', 'hair'], ['#632a3b', 'pants'], ['#914545', 'pants'], ['#2e243f', 'pupil'], ['#fbf7ee', 'eye'], ['#458967', 'top'], ['#c87950', 'chin'], ['#3d5a5c', 'top']],
+    rows: [
+      "....000000000...",
+      "...01111202110..",
+      "..0133311200140.",
+      ".013331122222130",
+      "0133110255555010",
+      "0311026677777620",
+      "0112667007700710",
+      "0127677hg77hg710",
+      "0127679hg99hga10",
+      "022206j77777jb20",
+      "02220jjjjjjjj020",
+      ".000iii77777ii00",
+      "..0iiiiiiiiiiii0",
+      "..0iikiiiiiiiki0",
+      "..0cceeeeeeeeec0",
+      "...00efffffffe0.",
+      "....0effeeeef0..",
+      "....0eff000ef0..",
+      "....00000.0000..",
+    ],
+  },
+  {
+    // Samaira's own (template 9), drawn from template 5: an open white lab coat over
+    // a dark shirt, safety goggles pushed up as a hairband, a pink flask in her hand,
+    // and hair falling to the shoulders on both sides. Her hair is drawn in exact
+    // colours (prop), so it does not follow a hair recolour. Not from the reference.
+    w: 21, h: 19,
+    pal: [['#1d1836', 'dark'], ['#211d29', 'prop'], ['#141119', 'prop'], ['#3a3349', 'prop'], ['#625a7c', 'prop'], ['#eebd85', 'skin'], ['#fed8aa', 'skin'], ['#fad5b2', 'skin'], ['#edbb86', 'skin'], ['#2e243f', 'pupil'], ['#fbf7ee', 'eye'], ['#c87950', 'chin'], ['#f6f3ec', 'top'], ['#d9d4e3', 'prop'], ['#632a3b', 'pants'], ['#914545', 'pants'], ['#3b3550', 'prop'], ['#9fd4f0', 'prop'], ['#f4fbff', 'prop'], ['#4a5b80', 'prop'], ['#e4f3f8', 'prop'], ['#ee7fa6', 'prop'], ['#f9c2d5', 'prop']],
+    rows: [
+      ".....000000000.......",
+      "....0110ih00ih0......",
+      "...0jjj0hh00hh0j0....",
+      "..013431001100110....",
+      ".0131112111111210....",
+      ".01120222555552110...",
+      ".03112250055005210...",
+      ".0415255a955a95210...",
+      ".0315256a966a97230...",
+      ".03120255555552130...",
+      ".03120bbbbbbbb0110...",
+      "..000ccd55555dc00....",
+      "...0ccccdgggdccc0000.",
+      "...0ccdccdgdccdc00k0.",
+      "...088cccdedccc80kik0",
+      "....0cccdefedcc00lml0",
+      ".....0effeeeef0.0lll0",
+      ".....0eff000ef0.00000",
+      ".....00000.0000......",
+    ],
+  },
+  {
+    // Rishabh's own (template 10), drawn from template 0: curly hair, and a silver
+    // camera with a red dot held at the chest, its red strap over the shoulders. The
+    // unused 'top' shade keeps the recolour's top mean equal to template 0's. Not
+    // from the reference.
+    w: 15, h: 20,
+    pal: [['#181d39', 'dark'], ['#983c49', 'hair'], ['#632938', 'hair'], ['#c67b50', 'hair'], ['#25172f', 'dark'], ['#efb985', 'skin'], ['#fdd8ad', 'skin'], ['#458967', 'top'], ['#3d5a5c', 'top'], ['#3c3b78', 'pants'], ['#576ad9', 'pants'], ['#2e2344', 'dark'], ['#181d39', 'pupil'], ['#fbf7ee', 'eye'], ['#c67b50', 'chin'], ['#b8433f', 'prop'], ['#7e323f', 'hair'], ['#b45441', 'hair'], ['#c9cfd8', 'prop'], ['#f1f4f7', 'prop'], ['#22212b', 'prop'], ['#4a6fa8', 'prop'], ['#ffffff', 'prop'], ['#d8473f', 'prop'], ['#8f969f', 'prop']],
+    rows: [
+      "....00.000.00..",
+      "...033033h03h0.",
+      "...03g13g113g0.",
+      "..01133h133h10.",
+      ".03313g1g3g11g0",
+      "03g1331g331gg10",
+      "011g3g155555320",
+      "022335005500500",
+      "025355dc55dc50.",
+      ".05356dc66dc60.",
+      "..043555555530.",
+      "...4eeeeeeee0..",
+      "..0f00000000f4.",
+      ".0770jikkin0770",
+      ".0770iklmki0770",
+      ".0750ookkoo0570",
+      "..000000000090.",
+      "...09a99999a0..",
+      "...09a40009ab..",
+      "...0000..0000..",
     ],
   },
 ]
