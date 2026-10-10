@@ -42,6 +42,9 @@ Thumbs.db
 **/*Private & Shared*
 **/Screenshot *.png
 **/Screen Shot *.png
+# Google Forms upload folders, such as the raw headshots. Crop and resize into
+# public/team/ instead (see CONTRIBUTING.md).
+**/*(File responses)*
 
 # Office documents and archives. Wiki figures belong in public/ as png, svg or
 # pdf; a .docx or a .zip in here is almost always a Drive export. Add a `!`

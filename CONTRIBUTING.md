@@ -175,8 +175,7 @@ Find your line in `ROSTER` and add any of these:
   name: 'Your Name',
   email: 'you@uw.edu',
   subteams: ['wet-lab'],
-  major: 'Bioengineering',
-  bio: 'One or two sentences about you.',
+  bio: 'Hi, I’m Your! I’m a second-year Bioengineering major on the Wet Lab subteam. Outside of iGEM, I love hiking.',
   linkedin: 'https://www.linkedin.com/in/your-handle',
   website: 'https://your-site.com',
   photo: 'team/your-name.jpg',
@@ -186,20 +185,27 @@ Find your line in `ROSTER` and add any of these:
 
 - `bio`, `linkedin`, `website` and `photo` are all optional. Anything you leave
   out simply does not show. Nothing on the page says it is missing.
+- `bio` follows one pattern for everyone, so the profiles read alike: "Hi, I’m
+  First name! I’m a year, major major on the X subteam." (or "and I lead X"),
+  then a sentence on what you do or enjoy. Two or three sentences in all.
 - `linkedin` and `website` must be full addresses starting with `https://`.
-  Anything else is ignored.
+  Anything else is ignored. Each one becomes an icon button on your profile,
+  next to the email button.
 - `photo` is your headshot. Put the file in `public/team/` and write the path
-  without a leading slash, as above. A square or portrait crop works best; the
-  profile shows it at 3:4. **Leaving `photo` out is the opt-out** if you would
-  rather not have a photo on a public site: your pixel character stands in.
-- `avatar` is `'long'` or `'short'`, for your pixel character's hair. If you
-  leave it out, it is guessed from your first name, and that guess is wrong for
-  some people. Correcting your own is one word on your own line.
+  without a leading slash, as above. Crop it to 4:5 around your face, about
+  480 by 600 pixels, saved as a JPEG with no location data. **Leaving `photo`
+  out is the opt-out** if you would rather not have a photo on a public site:
+  your pixel character stands in.
+- `avatar` is `'long'` or `'short'`, for your pixel character's hair, if Web
+  Dev has not pinned your look (below).
 
-Your character's colours (hair, skin, top, trousers) are picked from your name,
-so they are the same every time the page loads. If you want specific ones, ask
-Web Dev to pin them in `LOOK_OVERRIDES` in
-[`src/site/components/PixelPerson.tsx`](src/site/components/PixelPerson.tsx).
+Everyone who filled in the avatar form has their character pinned in
+`LOOK_OVERRIDES` in
+[`src/site/components/PixelPerson.tsx`](src/site/components/PixelPerson.tsx):
+hair length and colour, skin, top, trousers, eye colour, and a few extras
+(glasses, a beard, a hair flower, a shirt stripe, a necklace). To change yours,
+edit your line there or ask Web Dev. Anyone without a pin gets colours picked
+from their name, the same on every visit.
 
 **Everyone's email is public.** The site and this repository are both public,
 so the address on your line can be read by anyone.

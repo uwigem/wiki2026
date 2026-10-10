@@ -205,12 +205,14 @@ and a clear line between student work and advisor work.
 
 ### Team (`/team`)
 
-**Now:** every student, with name, titles, subteams, major and email, grouped
-as Leadership and then by subteam. The principal investigator is one line in
-the header.
+**Now:** every student, grouped as Leadership and then by subteam, each with
+their own pixel character. Opening a profile shows their headshot, titles, bio,
+and email, LinkedIn and website buttons, from the profile form (October 2026).
+The principal investigator is one line in the header.
 
-**Still needed:** headshots, bios, and LinkedIn or personal links, each added by
-the person on their own line in `content/team.ts`. See CONTRIBUTING.md.
+**Still needed:** Charlotte Hsu, Ruhi Gottumukkala and Winnie Lin did not fill
+in the form, so they have short bios, no photo and an unpinned character. Jaiden
+Poon, Gurnoor Sandhu and Teo Fine sent no photo. See CONTRIBUTING.md.
 
 ## Things in the drafts that are not on the wiki yet
 

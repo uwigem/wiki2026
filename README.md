@@ -257,4 +257,5 @@ ones marked in code. The items that are not content:
 - **Get the wiki freeze and Jamboree dates** off the official iGEM calendar.
   Neither appears anywhere in the team's own notes.
 - **Project name and logo** from Creative.
-- **Headshots, bios and links** from each member. Headshots go in `public/team/`.
+- **The last profiles.** Three members have not sent a bio, photo or avatar, and
+  three more have no photo. The list is in `docs/CONTENT_MAP.md` under Team.
