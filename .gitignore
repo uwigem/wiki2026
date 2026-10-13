@@ -57,3 +57,7 @@ Thumbs.db
 *.ppt
 *.zip
 *.csv
+
+# The Web Dev prototype of the game, kept beside the repo for reference. The
+# game itself is src/site/content/alchemy.ts and src/site/components/alchemy/.
+igem-alchemy-main/
