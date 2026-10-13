@@ -20,7 +20,7 @@ export default function AlchemyPage() {
           The hedgehog on the bench says what the game is about. */}
       <GardenSection className="pb-10 pt-4 sm:pt-5">
         <div className="mx-auto flex max-w-5xl flex-col gap-3">
-          <div className="flex justify-center">
+          <div className="flex justify-center text-center">
             <PixelSign posts={false}>
               <p className="pixel text-tag tracking-[0.2em]">washington igem · hedgehogsense</p>
               <h1 className="mt-1 text-2xl sm:text-3xl">iGEM Alchemy</h1>
