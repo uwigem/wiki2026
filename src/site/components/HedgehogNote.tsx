@@ -43,6 +43,20 @@ const TAIL_H = 20
 const TAIL_OUTLINE =
   '0,0 5,0 5,3 10,3 10,7 14,7 14,9 18,9 18,11 14,11 14,13 10,13 10,17 5,17 5,20 0,20'
 
+/**
+ * The bubble's tail, pointing right at the hedgehog. Place it with `absolute
+ * left-full -ml-[3px]` on a `panel-flat` so it tucks under the border. The
+ * iGEM Alchemy hedgehog uses it too.
+ */
+export function BubbleTail({ className }: { className: string }) {
+  return (
+    <svg aria-hidden width={TAIL_W} height={TAIL_H} viewBox={`0 0 ${TAIL_W} ${TAIL_H}`} className={className}>
+      <polygon points={TAIL_OUTLINE} fill={SITE_PALETTE.bushHi} shapeRendering="crispEdges" />
+      <polyline points={TAIL_OUTLINE} fill="none" stroke={SITE_PALETTE.grass4} strokeWidth={3} shapeRendering="crispEdges" />
+    </svg>
+  )
+}
+
 interface Props {
   /** Paragraphs in the bubble. Inline formatting works, same as body copy. */
   body: string[]
@@ -86,30 +100,11 @@ export default function HedgehogNote({ body, label = 'in plain words' }: Props) 
           </div>
         </div>
 
-        <svg
-          aria-hidden
-          width={TAIL_W}
-          height={TAIL_H}
-          viewBox={`0 0 ${TAIL_W} ${TAIL_H}`}
-          // Pulled left by the border width so it sits on the bubble's edge
-          // rather than floating a hair off it, and raised so it points at the
-          // hedgehog's face rather than at its feet. The sprite is bottom
-          // aligned with the bubble, so its head is a fixed distance up.
-          className="absolute left-full bottom-9 -ml-[3px] hidden sm:block"
-        >
-          <polygon
-            points={TAIL_OUTLINE}
-            fill={SITE_PALETTE.bushHi}
-            shapeRendering="crispEdges"
-          />
-          <polyline
-            points={TAIL_OUTLINE}
-            fill="none"
-            stroke={SITE_PALETTE.grass4}
-            strokeWidth={3}
-            shapeRendering="crispEdges"
-          />
-        </svg>
+        {/* Pulled left by the border width so it sits on the bubble's edge
+            rather than floating a hair off it, and raised so it points at the
+            hedgehog's face rather than at its feet. The sprite is bottom
+            aligned with the bubble, so its head is a fixed distance up. */}
+        <BubbleTail className="absolute left-full bottom-9 -ml-[3px] hidden sm:block" />
       </div>
 
       <canvas

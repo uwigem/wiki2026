@@ -1,5 +1,6 @@
 import { PAGES } from './pages'
 import { ALL_ROUTES } from './nav'
+import { alchemyProblems } from './alchemy'
 
 /**
  * Development-time consistency check for the content files.
@@ -15,7 +16,7 @@ import { ALL_ROUTES } from './nav'
  */
 
 /** Routes that are real pages but are not built from `pages.ts`. */
-const HAND_WRITTEN_ROUTES = new Set(['/', '/team', '/wetlab/notebook', '/playground'])
+const HAND_WRITTEN_ROUTES = new Set(['/', '/team', '/wetlab/notebook', '/playground', '/alchemy'])
 
 /** `[label](/some/page#section)` inside any string of a page's content. */
 const LINK = /\]\((\/[^)\s]*)\)/g
@@ -112,6 +113,9 @@ export function checkContent() {
       )
     }
   }
+
+  // The game's recipes: every level has to be finishable.
+  for (const p of alchemyProblems()) problems.push(`iGEM Alchemy: ${p}`)
 
   if (problems.length > 0) {
     console.warn(

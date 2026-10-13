@@ -160,8 +160,8 @@ wiki.
 | `src/site/content/timeline.ts` | The notebook page's season timeline |
 | `src/site/content/site.ts` | Project title, tagline, CTAs, footer links |
 
-Four routes are not built from `pages.ts`: the home, team, notebook and
-playground pages. [CONTRIBUTING.md](CONTRIBUTING.md#the-four-routes-that-are-not-in-pagests)
+Five routes are not built from `pages.ts`: the home, team, notebook,
+playground and iGEM Alchemy pages. [CONTRIBUTING.md](CONTRIBUTING.md#the-five-routes-that-are-not-in-pagests)
 says where each of their strings lives.
 
 ## The garden, and the site on top of it

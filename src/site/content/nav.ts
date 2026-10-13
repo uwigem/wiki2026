@@ -57,6 +57,7 @@ export const NAV: NavGroup[] = [
     items: [
       { label: 'Integrated Human Practices', to: '/human-practices/integrated' },
       { label: 'Education', to: '/human-practices/education' },
+      { label: 'iGEM Alchemy', to: '/alchemy' },
     ],
   },
   {

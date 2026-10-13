@@ -1296,6 +1296,15 @@ const education: Page = {
     },
     {
       kind: "prose",
+      id: "alchemy",
+      heading: "iGEM Alchemy, the game",
+      body: [
+        "Four atoms on a workbench. Drag one onto another and they combine: hydrogen and oxygen make a hydroxyl group, a carboxyl group, an amine group and a side chain make an amino acid, two amino acids make a protein. Four levels take a player from those atoms to DNA and RNA, to a working animal cell, and finally to a plasmid carrying a jellyfish gene that makes cells glow. Every new thing comes with a one-line explanation, and an encyclopedia keeps everything found.",
+        "[Play iGEM Alchemy](/alchemy). It runs in the browser, on a phone or a laptop, and saves progress on the device.",
+      ],
+    },
+    {
+      kind: "prose",
       heading: "And this website",
       body: [
         "The garden you are reading is part of the outreach, not decoration around it. The **Playground** is a small space where anyone can walk the hedgehog around and plant flowers, which is exactly the audience that will not sit through a paragraph about ubiquitin ligases.",

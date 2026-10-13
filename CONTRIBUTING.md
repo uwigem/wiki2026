@@ -265,6 +265,28 @@ the house format (`22 Nov 2025`, or `20-28 Jan 2026` for a range).
 This is the project timeline, not a lab notebook. Wet-lab protocol records live
 in Benchling and should be summarised and linked here rather than retyped.
 
+## Edit the iGEM Alchemy game
+
+The game is data. Everything a player reads is in
+[`src/site/content/alchemy.ts`](src/site/content/alchemy.ts):
+
+- `ELEMENTS` is every thing that can be made, with its `description`, shown
+  the moment it is made and in the encyclopedia.
+- `LEVELS` is the four levels. Each has `starters` (what is in the sidebar at
+  the start), `goals` (what finishes the level), and `recipes`, each one
+  `r('makes', 'a', 'b')` or `r('makes', 'a', 'b', 'c')`. Order does not matter
+  when playing. A recipe keeps working in every level after the one it is
+  in, so there is no need to repeat it.
+
+To change a description, edit the string. To change a recipe, edit the `r(...)`
+line. To add a thing, add it to `ELEMENTS`, give it a recipe in a level, and
+give it a picture in [`src/site/components/alchemy/art.ts`](src/site/components/alchemy/art.ts):
+one entry in `DRAW`, built from the shapes at the top of that file (balls,
+capsules, polygons) in the colour ramps listed there, so it gets the same
+light and outline as the rest. The dev console warns if a level
+can no longer be finished, if the same ingredients make two different things,
+or if a thing can never be made. Ask Web Dev for a hand with the pixels.
+
 ## Change the project title, tagline or footer links
 
 Those are in [`src/site/content/site.ts`](src/site/content/site.ts), one
@@ -306,7 +328,7 @@ git fetch origin && git diff --stat origin/main -- src/engine src/components/Pix
 If it prints anything, you edited a frozen file. Say so on the Web Dev channel
 rather than pushing it quietly.
 
-### The four routes that are not in `pages.ts`
+### The five routes that are not in `pages.ts`
 
 If you are looking for text and cannot find it in `pages.ts`, it is on one of
 these, and changing it is a Web Dev job:
@@ -317,6 +339,7 @@ these, and changing it is a Web Dev job:
 | `/team` | Roster in `content/team.ts`; the header text in `src/site/pages/TeamPage.tsx` |
 | `/wetlab/notebook` | Entries in `content/timeline.ts`; the header text in `src/site/pages/NotebookPage.tsx` |
 | `/playground` | No text content. The full-screen garden toy |
+| `/alchemy` | iGEM Alchemy. Every word and recipe is in `content/alchemy.ts`, the pictures in `components/alchemy/art.ts` |
 
 The notebook is also skipped by the previous and next buttons, because those
 follow the `PAGES` array and it is not in it.
