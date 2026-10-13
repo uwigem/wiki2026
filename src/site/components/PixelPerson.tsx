@@ -125,20 +125,15 @@ const GREEN_EYES = '#3f8f5a'
 /**
  * Each person's own avatar, from the avatar form. Base 5 is the longer hair,
  * base 8 the longer hair on a man, the rest are short. Bases 9 and 10 are
- * Samaira's and Rishabh's own drawings, picked from rendered options. Eye colour is left out where it is black, which is what
- * the sprite already draws.
- *
- * Two looks are reserved: only Rishabh is in all black, and only Samaira wears
- * a white top. Sophia and Selena asked for white, so they have another colour.
+ * Samaira's and Rishabh's own drawings, picked from rendered options, and base
+ * 11 is the sprite Darrien drew himself. Eye colour is left out where it is
+ * black, which is what the sprite already draws.
  *
  * Asked for and not drawn, because a 16-pixel-wide person has no room for
- * them: Sanjana's tortoise, and the Valorant outfit Darrien offered as the less
- * serious option (the other option was the current avatar with lighter skin,
- * which is what is here). Ho Ren left the question blank, so that avatar is the
+ * it: Sanjana's tortoise. Ho Ren left the question blank, so that avatar is the
  * one the name used to generate.
  */
 export const LOOK_OVERRIDES: Record<string, Look> = {
-  // The only white top on the team, at Rishabh's request. Keep it that way.
   'Samaira Bakshi': { base: 9, recolor: { hair: BLACK_HAIR, skin: '#edc9af', top: WHITE_TOP, pants: BLACK_PANTS } },
   'Alex Devgan': {
     base: 8,
@@ -148,7 +143,6 @@ export const LOOK_OVERRIDES: Record<string, Look> = {
   'Eliza Dawley': { base: 5, recolor: { hair: '#b58a45', skin: SKIN[1], top: '#d9603a', pants: JEANS, eyes: BLUE_EYES } },
   'Aimee Furlan': { base: 5, recolor: { hair: '#c4562a', skin: SKIN[1], top: GREEN, pants: JEANS, eyes: BLUE_EYES } },
   'Jaiden Poon': { base: 4, recolor: { hair: BLACK_HAIR, skin: SKIN[4], top: BLACK_TOP, pants: '#c9b48a' } },
-  // The only one in all black, at Rishabh's request. Keep it that way.
   'Rishabh Goenka': { base: 10, recolor: { hair: BLACK_HAIR, skin: SKIN[6], top: BLACK_TOP, pants: BLACK_PANTS, eyes: BROWN_EYES } },
   'Neel Sundar': {
     base: 0,
@@ -167,7 +161,8 @@ export const LOOK_OVERRIDES: Record<string, Look> = {
     extras: ['flower'],
   },
   'Sanjana Iyer': { base: 5, recolor: { hair: BLACK_HAIR, skin: SKIN[8], top: BLACK_TOP, pants: '#4a6fae', eyes: BROWN_EYES } },
-  'Darrien Liang': { base: 0, recolor: { hair: '#7c5230', skin: SKIN[5], top: '#8f61b4', pants: JEANS } },
+  // Drawn by Darrien himself, in his own colours: nothing is recoloured.
+  'Darrien Liang': { base: 11, recolor: {} },
   'Sophia Nguyen': { base: 5, recolor: { hair: BLACK_HAIR, skin: SKIN[4], top: '#e8937a', pants: JEANS } },
   'Mansi Patwardhan': {
     base: 5,

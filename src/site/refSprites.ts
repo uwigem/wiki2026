@@ -310,4 +310,34 @@ export const REF_SPRITES: RefSprite[] = [
       "...0000..0000..",
     ],
   },
+  {
+    // Darrien's own (template 11), drawn by Darrien himself on template 0 and
+    // copied pixel for pixel from his file (8x8 blocks, 15x19): brown hair, gold
+    // eyes, a white shirt with a purple tie, dark trousers with pink and purple
+    // details. Shown in his own colours (an empty recolour); the roles are tagged
+    // so the top or trousers could still be recoloured. Not from the reference.
+    w: 15, h: 19,
+    pal: [['#181d39', 'dark'], ['#7c5331', 'hair'], ['#503620', 'hair'], ['#a96d3d', 'hair'], ['#25172f', 'dark'], ['#cf9463', 'skin'], ['#fbf7ee', 'eye'], ['#f1c800', 'pupil'], ['#d19869', 'skin'], ['#c9874f', 'chin'], ['#c7cfc7', 'top'], ['#fbf7ee', 'top'], ['#c68bf5', 'prop'], ['#8457d5', 'prop'], ['#ffffff', 'top'], ['#f1c893', 'prop'], ['#9a6cbe', 'prop'], ['#fbca1a', 'prop'], ['#25172f', 'pants'], ['#f54cf3', 'prop'], ['#f593f6', 'prop']],
+    rows: [
+      "....00000000...",
+      "...0111202110..",
+      "..013311242130.",
+      ".01331122222130",
+      "013112233333210",
+      "011223355555320",
+      "022335005500500",
+      "02535567556750.",
+      ".0535867886780.",
+      "..043555555530.",
+      "...4999999990..",
+      "..0abbbbbcdda4.",
+      ".0aabbbcdcabba0",
+      ".0bbbebf4bgbba0",
+      ".055eehiiiiie50",
+      "..00iiiiiiiii0.",
+      "...0jigiidik0..",
+      "...0igi00idii..",
+      "...0000..0000..",
+    ],
+  },
 ]
