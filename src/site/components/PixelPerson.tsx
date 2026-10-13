@@ -123,7 +123,7 @@ const GREEN_EYES = '#3f8f5a'
 
 /**
  * Each person's own avatar, from the avatar form. Base 5 has the longer hair
- * and base 8 is a crew-neck version of it; the rest are short. Bases 9 and 10
+ * and base 8 is a crew-neck version of it; the rest are short. Bases 9 to 11
  * are drawn individually. Eye colour is left out where it is black, which is
  * what the sprite already draws.
  */
@@ -155,7 +155,8 @@ export const LOOK_OVERRIDES: Record<string, Look> = {
     extras: ['flower'],
   },
   'Sanjana Iyer': { base: 5, recolor: { hair: BLACK_HAIR, skin: SKIN[8], top: BLACK_TOP, pants: '#4a6fae', eyes: BROWN_EYES } },
-  'Darrien Liang': { base: 0, recolor: { hair: '#7c5230', skin: SKIN[5], top: '#8f61b4', pants: JEANS } },
+  // Drawn by Darrien himself, in his own colours: nothing is recoloured.
+  'Darrien Liang': { base: 11, recolor: {} },
   'Sophia Nguyen': { base: 5, recolor: { hair: BLACK_HAIR, skin: SKIN[4], top: '#e8937a', pants: JEANS } },
   'Mansi Patwardhan': {
     base: 5,
