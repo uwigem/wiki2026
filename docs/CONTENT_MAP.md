@@ -214,6 +214,31 @@ The principal investigator is one line in the header.
 in the form, so they have short bios, no photo and an unpinned character. Jaiden
 Poon, Gurnoor Sandhu and Teo Fine sent no photo. See CONTRIBUTING.md.
 
+### iGEM Alchemy (`/alchemy`)
+
+**Now:** the Education subteam's combination game, playable, as they designed
+it: four levels (protein, DNA and RNA, animal cell, GFP plasmid), 47 things,
+their descriptions word for word. It plays like Little Alchemy, in a box on
+its own page with the four levels as a row of cards above it: drag elements
+from the sidebar onto the bench, drop one on another to combine, tap works on
+a phone, hints, an encyclopedia, progress saved in the browser. Two fixes so it can be finished: level 3 starts with
+Water and Enzyme (the outline only made them in level 4), and "any two
+organelles" is spelled out as every pair. The Education page links to it.
+
+Recipes carry over: one learned in a level keeps working in the levels after it.
+
+**Still needed:** Creative's eye on the icons, which are 24-pixel art drawn in
+code to match the garden. Human Practices to decide on these science points
+that playtesters raised about the recipes (October 2026), which were left as
+the subteam wrote them: Carbon + Oxygen is called a carboxyl group (strictly a
+carbonyl; a carboxyl is C + O + OH, which would also give the hydroxyl group a
+use in level 1); deoxyribose is made from Carbon + Hydroxyl group though its
+description says it lacks a hydroxyl; DNA is a backbone plus an amine, with no
+bases or nucleotides; Carbon + Carbon makes Life; a bilayer is made from a
+phospholipid and a protein rather than two phospholipids; the amine group's
+description is about allergy medicines and dyes rather than its role in an
+amino acid. Ribose's description, which described RNA, was corrected.
+
 ## Things in the drafts that are not on the wiki yet
 
 Worth knowing about, because they are written and just need placing:
