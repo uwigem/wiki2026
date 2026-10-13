@@ -9,6 +9,7 @@ import PageGarden, { variantFor } from './site/components/PageGarden'
 import GardenSection from './site/components/GardenSection'
 import PixelSign from './site/components/PixelSign'
 import TopNav from './site/components/TopNav'
+import AlchemyPage from './site/pages/AlchemyPage'
 import Home3 from './site/pages/Home3'
 import NotebookPage from './site/pages/NotebookPage'
 import PlaygroundPage from './site/pages/PlaygroundPage'
@@ -117,12 +118,14 @@ const SPECIAL_TITLES: Record<string, string> = {
   '/team': 'Team',
   '/playground': 'Playground',
   '/wetlab/notebook': 'Notebook',
+  '/alchemy': 'iGEM Alchemy',
 }
 
 function RouteView({ path }: { path: string }) {
   if (path === '/') return <Home3 />
   if (path === '/team') return <TeamPage />
   if (path === '/wetlab/notebook') return <NotebookPage />
+  if (path === '/alchemy') return <AlchemyPage />
 
   const page = pageBySlug(path)
   if (page) return <WikiPage page={page} />
