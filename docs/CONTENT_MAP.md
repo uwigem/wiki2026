@@ -53,7 +53,7 @@ All page content is data in `src/site/content/pages.ts`. Each item in a page's
 | `todo` | A visible "still to come" panel | Drafting only. No page ships one. |
 
 **Link between pages.** Any block can take an `id`, and any body text can then
-point at it: `[the pipeline](/project/engineering#pipeline)` opens the
+point at it: `[the pipeline](/engineering#pipeline)` opens the
 Engineering page scrolled to that exact section and flashes it. Use this instead
 of writing "see the Engineering page". `npm run dev` warns in the console if a
 link points at a page or a section that does not exist. Link targets must start with `/` or `https://`; anything else
@@ -76,7 +76,7 @@ hedgehog explaining the MMM trick; six story stops; team and playground cards.
 **Still needed:** nothing blocking. Once Creative delivers the project name and
 logo, change `PROJECT_TITLE` in `content/site.ts` and it updates everywhere.
 
-### The Idea (`/project/description`)
+### The Idea (`/description`)
 
 **Now:** the two arms, the dial-not-switch framing, and the shift from therapy
 to platform including Dr. Zheng's LockTAC correction.
@@ -86,7 +86,7 @@ The IHP sketches already specify these, including a clickable version where each
 protein in the complex opens its own description. Primary citations for the
 mechanism claims.
 
-### A Problem in the Garden (`/project/background`)
+### A Problem in the Garden (`/background`)
 
 **Now:** the balance logo as the opening image, why the amount matters, the
 limits of vismodegib and sonidegib, and what the Kong lab structure gives us.
@@ -94,7 +94,7 @@ limits of vismodegib and sonidegib, and what the Kong lab structure gives us.
 **Still needed:** epidemiology numbers with real sources. The medulloblastoma and
 basal cell carcinoma figures currently trace to slides, not papers.
 
-### The design pipeline (part of `/project/engineering`)
+### The design pipeline (part of `/engineering`)
 
 This was a Design page of its own until the site moved to the team's final
 architecture, which has no Design page. It is now the first half of Engineering,
@@ -110,7 +110,7 @@ renders; the MEGF8 binders. When a binder is validated, add it to
 viewer. A hotspot map and the minPAE against RMSD scatter plot would both work as
 `figure` blocks once the images exist.
 
-### Build, Test, Learn (`/project/engineering`), a medal page
+### Build, Test, Learn (`/engineering`), a medal page
 
 **Now:** the design pipeline above, then four cycles. Choosing the target, generating binders, learning to throw
 designs away (the membrane-binding discovery), and rescuing near misses.
@@ -122,7 +122,7 @@ purification, binding validation and the cell assay, as data arrives.
 cycle 3 is currently the strongest thing on the wiki because it describes
 something that went wrong.
 
-### What Grew (`/wetlab/experiments`)
+### What Grew (`/experiments`)
 
 **Now:** the four planned experiments, what we test in, and an honest note that
 there is no SPR access.
@@ -131,7 +131,7 @@ there is no SPR access.
 interpretation against what the Model and the design pipeline predicted, so a
 reader can see which predictions held.
 
-### The Model (`/drylab/model`), a medal page
+### The Model (`/model`), a medal page
 
 **Now:** what the model is for, the wild-type against PTCH1-knockout test, where
 the parameters come from, Dr. Sauro's model-selection guidance, the sensitivity
@@ -141,7 +141,7 @@ the twenty percent limit shown beside it.
 **Still needed:** confirm the Michaelis-Menten error against the linear model.
 The equations, the wiring diagram and the full parameter table.
 
-### Who the Garden Is For (`/human-practices/integrated`), a medal page
+### Who the Garden Is For (`/human-practices`), a medal page
 
 The most complete page, and the longest. **Now:** the guiding question, why
 location and amount matter, the seven-tool shed, the capability matrix, the four
@@ -160,7 +160,7 @@ saying what the team changed where the draft records one.
 write-ups will double it. The natural cut is the community need and the market
 model into their own pages under Impact.
 
-### Sharing the Garden (`/human-practices/education`), a medal page
+### Sharing the Garden (`/education`), a medal page
 
 **Now:** all nine activities, grouped under the team's own principles, each
 leading with who it was for and the gap it fills.
@@ -171,7 +171,7 @@ reach figure, the speaker series has no speaker names or poll results, and the
 Scientists You Might Not Know profiles name no scientists. Fill those in the
 draft first.
 
-### Tending Safely (`/team/safety`)
+### Tending Safely (`/safety-and-security`)
 
 **Now:** what can honestly be stated, and an admission that no biosafety document
 exists yet.
@@ -180,7 +180,7 @@ exists yet.
 real dual-use paragraph. This is a tool that changes a developmental pathway, so
 boilerplate will not do.
 
-### Notebook (`/wetlab/notebook`)
+### Notebook (`/notebook`)
 
 **Now:** the season as a timeline, built from `content/timeline.ts`.
 
@@ -252,7 +252,7 @@ belongs on them, so the structure is right from the first day:
 
 | Page | Address | Note |
 | --- | --- | --- |
-| Out of the Greenhouse | `/project/implementation` | proposed implementation |
-| Seeds We Logged | `/wetlab/parts` | parts and registry |
-| What We Leave Behind | `/team/contribution` | **medal page** |
-| The Checklist | `/team/judging` | where each criterion is evidenced |
+| Out of the Greenhouse | `/implementation` | proposed implementation |
+| Seeds We Logged | `/parts` | parts and registry |
+| What We Leave Behind | `/contribution` | **medal page** |
+| The Checklist | `/judging` | where each criterion is evidenced |

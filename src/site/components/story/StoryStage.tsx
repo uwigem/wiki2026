@@ -7,6 +7,7 @@ import ExploreCards from '../ExploreCards'
 import { groundTop } from './garden'
 import { Painter, span } from './painter'
 import { ENTRY_ENDS, drawStory, type Box, type Frame, type Label } from './scenes'
+import { href } from '../../router'
 
 /**
  * The Home 3 story: one picture pinned under the nav while the page scrolls
@@ -304,7 +305,7 @@ export default function StoryStage() {
     const onHomeLink = (e: globalThis.MouseEvent) => {
       if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
       const link = (e.target as HTMLElement | null)?.closest?.('a')
-      if (link?.getAttribute('href') !== '#/') return
+      if (link?.getAttribute('href') !== href('/')) return
       window.clearTimeout(homeJump)
       homeJump = window.setTimeout(() => {
         play.current.idx = 0

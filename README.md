@@ -13,10 +13,9 @@ hedgehog and the site is a garden being tended.
 > `PROJECT_TITLE` in `src/site/content/site.ts`, and changing it there updates
 > the nav, the footer, the homepage sign and every tab title.
 
-> **The homepage** (`#/`) is the team's scroll-driven script. The two homepages
+> **The homepage** (`/`) is the team's scroll-driven script. The two homepages
 > it was compared with are archived in
-> `src/site/pages/archive/`: the code is kept, nothing routes to it, and the
-> addresses they used (`#/home-alt`, `#/home-3`) are dead.
+> `src/site/pages/archive/`: the code is kept and nothing routes to it.
 
 > **The site structure is the team's final architecture** (agreed 2026-10-08):
 > Home, Project, Wetlab, Drylab, Human Practices, and Team and Resources, plus
@@ -93,9 +92,9 @@ Type-checks, then bundles into `dist/`.
 Vite, React 19, TypeScript, Tailwind v4. **No runtime dependencies beyond React
 itself**, and two deliberate omissions:
 
-- **No router library.** Routing is one small file, `src/site/router.tsx`. iGEM
-  serves each wiki as static files from a subpath, and hash routes
-  (`#/drylab/model`) survive that with no server rewrite rules.
+- **No router library.** Routing is one small file, `src/site/router.tsx`.
+  Pages live at real paths with iGEM's names (`/model`, `/human-practices`),
+  because judges' ballots link straight to those URLs.
 - **No markdown library.** Body copy supports `**bold**`, `*italic*` and
   `` `code` `` through one regular expression in
   `src/site/components/RichText.tsx`, which cannot inject markup into the page.
@@ -116,7 +115,7 @@ src/
     content/         ALL wiki copy lives here, as data
     components/      the site's own React components
     pages/           the four routes that are not data-driven
-    router.tsx       the hash router
+    router.tsx       the router
     layout.ts        page geometry shared between the DOM and the canvases
     theme.ts         which palette the site paints with
     rng.ts           seeded randomness
@@ -218,15 +217,17 @@ that `dist/index.html` is served at `https://2026.igem.wiki/washington/`.
 
 Two things make that work, and both are easy to undo by accident:
 
-- **`base: './'` in `vite.config.ts`.** iGEM serves each wiki from a subpath.
-  Vite's default emits root-absolute asset URLs (`/assets/...`), which 404 there
-  and render a blank page with no obvious cause. Relative URLs work from any
-  subpath.
-- **Hash routing.** Every route is `#/something`, so the server only ever has to
-  serve one file and needs no rewrite rules.
-
-The same two things are why the live preview works at
-`uwigem.github.io/wiki2026/`, which is also a subpath.
+- **The base path.** iGEM serves the wiki from `/washington/`, and a build
+  defaults to that base (`base` in `vite.config.ts`), so asset URLs and links
+  are absolute from it. The live preview builds with `BASE_PATH=/wiki2026/`
+  (see `.github/workflows/deploy.yml`). Building with the wrong base gives a
+  blank page with no obvious cause.
+- **Real paths with iGEM's names.** Judges' ballots link to fixed Standard
+  Page URLs such as `https://2026.igem.wiki/washington/model`, so those page
+  names (`STANDARD_PAGES` in `src/site/content/nav.ts`) must never change. The
+  build writes a copy of `index.html` for every page (`model/index.html`, ...)
+  and a `404.html`, so a direct link to any page loads on any static host. Old
+  addresses (`#/drylab/model`, `/drylab/model`) redirect to the new ones.
 
 To check a build locally the way it will actually be served:
 

@@ -26,6 +26,7 @@ import {
 import { contentBand, pixelScale } from '../layout'
 import { mulberry32 } from '../rng'
 import { SITE_PALETTE } from '../theme'
+import { activeGroup } from '../content/nav'
 
 /**
  * The page background: the engine's garden, kept to the margins, SCROLLING.
@@ -61,8 +62,9 @@ const MAX_BAKED_ROWS = 16000
 export type Variant = 'meadow' | 'wetland' | 'orchard'
 
 export function variantFor(path: string): Variant {
-  if (path.startsWith('/human-practices')) return 'wetland'
-  if (path.startsWith('/team')) return 'orchard'
+  const group = activeGroup(path)?.label
+  if (group === 'Human Practices') return 'wetland'
+  if (group === 'Team and Resources') return 'orchard'
   return 'meadow'
 }
 

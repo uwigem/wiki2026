@@ -119,11 +119,11 @@ const SIGNPOST = [
  * expected to ship, so it is not offered as a part of the project to explore.
  */
 const SECTIONS: Section[] = [
-  { to: '/project/description', label: 'Project', blurb: 'the idea and the build', colour: 'var(--p-stem)', icon: BALANCE },
-  { to: '/wetlab/experiments', label: 'Wetlab', blurb: 'experiments and parts', colour: 'var(--p-waterDeep)', icon: FLASK },
-  { to: '/drylab/model', label: 'Drylab', blurb: 'the model', colour: 'var(--p-lilacPetal)', icon: HELIX },
-  { to: '/human-practices/integrated', label: 'Human Practices', blurb: 'who shaped it', colour: 'var(--p-pinkDark)', icon: PEOPLE },
-  { to: '/team/contribution', label: 'Team and Resources', blurb: 'people and paperwork', colour: 'var(--p-spikeMid)', icon: SIGNPOST },
+  { to: '/description', label: 'Project', blurb: 'the idea and the build', colour: 'var(--p-stem)', icon: BALANCE },
+  { to: '/experiments', label: 'Wetlab', blurb: 'experiments and parts', colour: 'var(--p-waterDeep)', icon: FLASK },
+  { to: '/model', label: 'Drylab', blurb: 'the model', colour: 'var(--p-lilacPetal)', icon: HELIX },
+  { to: '/human-practices', label: 'Human Practices', blurb: 'who shaped it', colour: 'var(--p-pinkDark)', icon: PEOPLE },
+  { to: '/contribution', label: 'Team and Resources', blurb: 'people and paperwork', colour: 'var(--p-spikeMid)', icon: SIGNPOST },
 ]
 
 /**

@@ -1,5 +1,5 @@
 import { PAGES } from './pages'
-import { ALL_ROUTES } from './nav'
+import { ALL_ROUTES, OLD_PATHS, STANDARD_PAGES } from './nav'
 import { alchemyProblems } from './alchemy'
 
 /**
@@ -16,7 +16,7 @@ import { alchemyProblems } from './alchemy'
  */
 
 /** Routes that are real pages but are not built from `pages.ts`. */
-const HAND_WRITTEN_ROUTES = new Set(['/', '/team', '/wetlab/notebook', '/playground', '/alchemy'])
+const HAND_WRITTEN_ROUTES = new Set(['/', '/team', '/notebook', '/playground', '/alchemy'])
 
 /** `[label](/some/page#section)` inside any string of a page's content. */
 const LINK = /\]\((\/[^)\s]*)\)/g
@@ -42,6 +42,22 @@ export function checkContent() {
         `nav.ts links to "${route}" but no page has that slug, so the link lands on the ` +
           `"This bed is empty" page. Check the slug in src/site/content/pages.ts matches exactly.`,
       )
+    }
+  }
+
+  // The ballot links judges straight to these paths (handbook pp. 45 and 48).
+  for (const path of STANDARD_PAGES) {
+    if (!slugs.includes(path) && !HAND_WRITTEN_ROUTES.has(path)) {
+      problems.push(
+        `"${path}" is an iGEM Standard Page, so judges' ballots link straight to it, but no page ` +
+          `has that slug. Keep the exact name; see STANDARD_PAGES in src/site/content/nav.ts.`,
+      )
+    }
+  }
+
+  for (const [from, to] of Object.entries(OLD_PATHS)) {
+    if (!navPaths.has(to) && !HAND_WRITTEN_ROUTES.has(to)) {
+      problems.push(`OLD_PATHS sends "${from}" to "${to}", which is not a page any more.`)
     }
   }
 
@@ -71,7 +87,7 @@ export function checkContent() {
 
   /*
    * Links written inside the copy, for example
-   * `[the pipeline](/project/engineering#pipeline)`.
+   * `[the pipeline](/engineering#pipeline)`.
    *
    * These are plain strings, so moving a page silently turns every link to it
    * into a trip to "This bed is empty". That is exactly what happened when the

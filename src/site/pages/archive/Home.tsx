@@ -25,11 +25,11 @@ import PixelSign from '../../components/PixelSign'
  * apart. Adding a page to the path is one line here plus its `storyBeat`.
  */
 const STOPS: { slug: string; label: string; cta: string }[] = [
-  { slug: '/project/background', label: 'why it matters', cta: 'See what goes wrong' },
-  { slug: '/project/description', label: 'what we built', cta: 'Read the idea' },
-  { slug: '/project/design', label: 'designing the binder', cta: 'See the designs' },
-  { slug: '/project/engineering', label: 'what broke', cta: 'Follow the cycles' },
-  { slug: '/project/model', label: 'does it hold up', cta: 'Check the maths' },
+  { slug: '/background', label: 'why it matters', cta: 'See what goes wrong' },
+  { slug: '/description', label: 'what we built', cta: 'Read the idea' },
+  { slug: '/engineering', label: 'designing the binder', cta: 'See the designs' },
+  { slug: '/engineering', label: 'what broke', cta: 'Follow the cycles' },
+  { slug: '/model', label: 'does it hold up', cta: 'Check the maths' },
   { slug: '/impact/human-practices', label: 'who asked for it', cta: 'Meet our stakeholders' },
 ]
 

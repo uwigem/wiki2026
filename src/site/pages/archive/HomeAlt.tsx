@@ -73,11 +73,11 @@ const BEATS: { art: StoryArtKind; text: ReactNode }[] = [
 
 /** Where to go next. Plain links, in reading order, titles from the pages. */
 const NEXT: { slug: string; label: string }[] = [
-  { slug: '/project/background', label: 'Why it matters' },
-  { slug: '/project/description', label: 'What we built' },
-  { slug: '/project/design', label: 'Designing the binder' },
-  { slug: '/project/engineering', label: 'What broke, and what we changed' },
-  { slug: '/project/model', label: 'Does it hold up' },
+  { slug: '/background', label: 'Why it matters' },
+  { slug: '/description', label: 'What we built' },
+  { slug: '/engineering', label: 'Designing the binder' },
+  { slug: '/engineering', label: 'What broke, and what we changed' },
+  { slug: '/model', label: 'Does it hold up' },
   { slug: '/impact/human-practices', label: 'Who shaped it' },
 ]
 

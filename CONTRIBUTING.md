@@ -118,7 +118,7 @@ A page is one object. Full field-by-field reference is in
 
 ```ts
 const contribution: Page = {
-  slug: '/wetlab/protocols',            // the address, after the # in the URL
+  slug: '/protocols',                   // the address: .../washington/protocols
   title: 'How We Work',                 // the big heading on the wooden sign
   kicker: 'chapter 14 · protocols',     // the small label above it
   storyBeat: 'A gardener leaves the beds better than they found them.',
@@ -337,7 +337,7 @@ these, and changing it is a Web Dev job:
 | --- | --- |
 | `/` (home) | The scroll-driven story: every word is in `content/homeStory.ts` |
 | `/team` | Roster in `content/team.ts`; the header text in `src/site/pages/TeamPage.tsx` |
-| `/wetlab/notebook` | Entries in `content/timeline.ts`; the header text in `src/site/pages/NotebookPage.tsx` |
+| `/notebook` | Entries in `content/timeline.ts`; the header text in `src/site/pages/NotebookPage.tsx` |
 | `/playground` | No text content. The full-screen garden toy |
 | `/alchemy` | iGEM Alchemy. Every word and recipe is in `content/alchemy.ts`, the pictures in `components/alchemy/art.ts` |
 
