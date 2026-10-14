@@ -22,7 +22,7 @@ import { SMO_5L7D, type Structure } from "./structures";
 
 /**
  * Anything with an `id` can be linked to from anywhere else in the wiki, with
- * `[label](/drylab/model#that-id)`. Ids are kebab-case and have to be unique
+ * `[label](/model#that-id)`. Ids are kebab-case and have to be unique
  * within their page. Add one the moment a section is worth pointing at.
  */
 export interface Anchored {
@@ -201,7 +201,7 @@ export interface Page {
  * ===================================================================== */
 
 const description: Page = {
-  slug: "/project/description",
+  slug: "/description",
   title: "The Idea",
   kicker: "chapter 01 · description",
   storyBeat:
@@ -228,7 +228,7 @@ const description: Page = {
       items: [
         {
           title: "Up arm",
-          body: "A **de novo minibinder** pries apart the MEGF8 and MOSMO interface. [How we design one](/project/engineering#pipeline). The MMM complex can no longer assemble, so it stops clearing SMO, so SMO stays in the cilium and Hedgehog signalling goes up.",
+          body: "A **de novo minibinder** pries apart the MEGF8 and MOSMO interface. [How we design one](/engineering#pipeline). The MMM complex can no longer assemble, so it stops clearing SMO, so SMO stays in the cilium and Hedgehog signalling goes up.",
         },
         {
           title: "Down arm",
@@ -245,7 +245,7 @@ const description: Page = {
       kind: "prose",
       heading: "From a therapy to a platform",
       body: [
-        "We started out framing this as a Hedgehog therapy. After talking with researchers it became clear the more useful thing is a **modular research platform**, a way for any cilia lab to raise or lower a receptor of their choice and watch what happens. The reason that is worth doing is [the gap nothing else fills](/human-practices/integrated#the-gap). SMO is the receptor where the ground truth is already known, so it is our proof, not our endpoint. The down arm test on GPR161 is how we show the same parts port to a receptor the complex has no natural relationship with.",
+        "We started out framing this as a Hedgehog therapy. After talking with researchers it became clear the more useful thing is a **modular research platform**, a way for any cilia lab to raise or lower a receptor of their choice and watch what happens. The reason that is worth doing is [the gap nothing else fills](/human-practices#the-gap). SMO is the receptor where the ground truth is already known, so it is our proof, not our endpoint. The down arm test on GPR161 is how we show the same parts port to a receptor the complex has no natural relationship with.",
         "Dr. Ning Zheng, a ubiquitination expert we interviewed, pointed out that because we strengthen an interaction that already exists rather than forcing a brand new one, the right name for this is a **LockTAC**, not a PROTAC. He also noted a transmembrane version of this has not been shown in the literature, which is where the novelty sits.",
       ],
       source:
@@ -255,7 +255,7 @@ const description: Page = {
 };
 
 const background: Page = {
-  slug: "/project/background",
+  slug: "/background",
   title: "A Problem in the Garden",
   kicker: "chapter 02 · background",
   storyBeat:
@@ -284,7 +284,7 @@ const background: Page = {
       body: [
         "The approved SMO inhibitors, vismodegib and sonidegib, block the receptor directly. Tumours mutate SMO and become resistant, and the drugs carry harsh side effects, which is why they are not given to children. Blocking is a blunt move on a pathway that is really about amount.",
         "We also state the limit up front, from the same interview. This approach works on cases driven by too much SMO. It does not help cases driven by mutations further down the pathway, in **SUFU** or **GLI**.",
-        "What we propose instead is [a device with two arms](/project/description#two-arms), which sets the amount rather than blocking the receptor.",
+        "What we propose instead is [a device with two arms](/description#two-arms), which sets the amount rather than blocking the receptor.",
       ],
       source: "Interview with Dr. Stacey Ogden (St. Jude).",
     },
@@ -390,7 +390,7 @@ const designBlocks: Block[] = [
     ],
     goal: { label: "what we want to order and test", count: 96 },
     footnote:
-      "The drop from 255 to about 25 is the interesting one. Our first filters were passing designs that bound a part of the target buried inside the membrane, where no protein could ever reach them. That is [the third engineering cycle](/project/engineering#cycles).",
+      "The drop from 255 to about 25 is the interesting one. Our first filters were passing designs that bound a part of the target buried inside the membrane, where no protein could ever reach them. That is [the third engineering cycle](/engineering#cycles).",
     source:
       "Protein Design: binder design pipeline and engineering cycles, 2026.",
   },
@@ -403,7 +403,7 @@ const designBlocks: Block[] = [
     kind: "prose",
     heading: "Why this structure is here and not ours",
     body: [
-      "The receptor above is **Smoothened**, the protein the whole project is aimed at, with a molecule of **cholesterol** bound in the domain that sits outside the cell. The helices below it cross the membrane seven times, which is the shape that makes it a GPCR. Cholesterol binding is the activation step [our kinetic model argues about](/drylab/model#sensitivity), so this is the picture that page is describing in equations.",
+      "The receptor above is **Smoothened**, the protein the whole project is aimed at, with a molecule of **cholesterol** bound in the domain that sits outside the cell. The helices below it cross the membrane seven times, which is the shape that makes it a GPCR. Cholesterol binding is the activation step [our kinetic model argues about](/model#sensitivity), so this is the picture that page is describing in equations.",
       "It is a published structure rather than one of ours, and labelled that way on purpose. Our own targets, the MOSMO and MEGF8 interface, were solved by the Kong lab by cryo-EM and are not ours to publish. **Our designed binders are not here yet** because none has been validated at a bench. When they are, they drop into the same viewer.",
     ],
     source:
@@ -449,7 +449,7 @@ const designBlocks: Block[] = [
 ];
 
 const engineering: Page = {
-  slug: "/project/engineering",
+  slug: "/engineering",
   title: "Build, Test, Learn",
   kicker: "chapter 03 · engineering",
   medal: true,
@@ -528,7 +528,7 @@ const engineering: Page = {
             },
             {
               title: "Learn",
-              body: "Good numbers are not the same as a good binder. We rebuilt the filtering around what is physically reachable: re-fold every survivor against only the **extracellular** parts of the targets and apply the 2 by 2 filter again, then run a custom check that rejects anything still sitting within 5 to 10 Angstrom of the transmembrane helices. Dr. DiMaio added a third test, folding the binder **on its own** with no target present, to confirm it holds its shape rather than being propped up by the thing it is supposed to bind. About **25 designs** survived all of it. The filters are listed in order in [the pipeline](/project/engineering#pipeline) above.",
+              body: "Good numbers are not the same as a good binder. We rebuilt the filtering around what is physically reachable: re-fold every survivor against only the **extracellular** parts of the targets and apply the 2 by 2 filter again, then run a custom check that rejects anything still sitting within 5 to 10 Angstrom of the transmembrane helices. Dr. DiMaio added a third test, folding the binder **on its own** with no target present, to confirm it holds its shape rather than being propped up by the thing it is supposed to bind. About **25 designs** survived all of it. The filters are listed in order in [the pipeline](/engineering#pipeline) above.",
             },
           ],
         },
@@ -562,7 +562,7 @@ const engineering: Page = {
       heading: "Cycle 2: designing a binder against a hard surface",
       body: [
         "This cycle is in progress. The first real change came before any protein was made. We began aiming at ATRN, then switched to the **MMM complex** once it was clear MMM had cryo-EM and an accessible interface while ATRN only had an AlphaFold model. Better data to design against was worth the switch.",
-        "A second problem showed up in the pipeline itself. RoseTTAFold3 could not fold our targets well because the sequence databases were thin, so the designs were failing the fold check for the wrong reason. We fixed it by **templating MOSMO and MEGF8** during forward folding. We now have about 24 MOSMO binder backbones through sequence design. [The pipeline](/project/engineering#pipeline) above has every step.",
+        "A second problem showed up in the pipeline itself. RoseTTAFold3 could not fold our targets well because the sequence databases were thin, so the designs were failing the fold check for the wrong reason. We fixed it by **templating MOSMO and MEGF8** during forward folding. We now have about 24 MOSMO binder backbones through sequence design. [The pipeline](/engineering#pipeline) above has every step.",
       ],
       source: "Protein Design ideation notes and pipeline docs, 2026.",
     },
@@ -592,7 +592,7 @@ const engineering: Page = {
 };
 
 const experiments: Page = {
-  slug: "/wetlab/experiments",
+  slug: "/experiments",
   title: "What Grew",
   kicker: "chapter 05 · experiments",
   storyBeat: "This bed is still mostly soil. Come back when the season turns.",
@@ -647,7 +647,7 @@ const experiments: Page = {
 };
 
 const model: Page = {
-  slug: "/drylab/model",
+  slug: "/model",
   title: "The Model",
   kicker: "chapter 07 · model",
   medal: true,
@@ -757,7 +757,7 @@ const model: Page = {
       id: "mc4r-safety",
       heading: "Checking it cannot do harm somewhere else",
       body: [
-        "[The up arm](/project/description#two-arms) works by pulling the MMM complex apart. That frees MGRN1, and MGRN1 has another job: with a different partner called ATRN it controls **MC4R**, a receptor in the pathway that regulates appetite and body weight. If our binder released a flood of MGRN1 into that other role, we could be causing a metabolic side effect while congratulating ourselves on the ciliary result.",
+        "[The up arm](/description#two-arms) works by pulling the MMM complex apart. That frees MGRN1, and MGRN1 has another job: with a different partner called ATRN it controls **MC4R**, a receptor in the pathway that regulates appetite and body weight. If our binder released a flood of MGRN1 into that other role, we could be causing a metabolic side effect while congratulating ourselves on the ciliary result.",
         "So we modelled it. Adding binder does shift MC4R, but the effect is **small and it saturates**: about 2.3 percent at 50 nM, and still only **2.75 percent at 500 nM**, well under the 20 percent we had set as the point where an effect becomes biologically meaningful. Past about 50 nM, adding more binder changes nothing. The reason is that MGRN1 is the scarce component at roughly 0.18 nM in total, so there is only so much of it to redistribute no matter how hard we push.",
         "The useful part is that this holds regardless of how good our binder turns out to be. In the global sensitivity analysis the binder's own binding strength had **zero** influence on the MC4R result, which means we do not have to trade therapeutic dose against this particular risk.",
       ],
@@ -797,7 +797,7 @@ const model: Page = {
  * ===================================================================== */
 
 const humanPractices: Page = {
-  slug: "/human-practices/integrated",
+  slug: "/human-practices",
   title: "Who the Garden Is For",
   kicker: "chapter 08 · integrated human practices",
   medal: true,
@@ -1200,7 +1200,7 @@ const humanPractices: Page = {
 };
 
 const education: Page = {
-  slug: "/human-practices/education",
+  slug: "/education",
   title: "Sharing the Garden",
   kicker: "chapter 09 · education",
   medal: true,
@@ -1314,7 +1314,7 @@ const education: Page = {
 };
 
 const safety: Page = {
-  slug: "/team/safety",
+  slug: "/safety-and-security",
   title: "Tending Safely",
   kicker: "chapter 13 · safety",
   storyBeat: "Gloves on. Some things in a garden bite.",
@@ -1347,7 +1347,7 @@ const safety: Page = {
  * ===================================================================== */
 
 const attributions: Page = {
-  slug: "/team/attributions",
+  slug: "/attributions",
   title: "Who Helped Us Dig",
   kicker: "chapter 12 · attributions",
   storyBeat: "None of this was one hedgehog.",
@@ -1440,7 +1440,7 @@ const attributions: Page = {
  * ===================================================================== */
 
 const implementation: Page = {
-  slug: "/project/implementation",
+  slug: "/implementation",
   title: "Out of the Greenhouse",
   kicker: "chapter 04 · proposed implementation",
   storyBeat: "A seedling is not a garden. Who plants this, and where?",
@@ -1461,7 +1461,7 @@ const implementation: Page = {
 };
 
 const parts: Page = {
-  slug: "/wetlab/parts",
+  slug: "/parts",
   title: "Seeds We Logged",
   kicker: "chapter 06 · parts and registry",
   storyBeat:
@@ -1482,7 +1482,7 @@ const parts: Page = {
 };
 
 const contribution: Page = {
-  slug: "/team/contribution",
+  slug: "/contribution",
   title: "What We Leave Behind",
   kicker: "chapter 10 · contribution",
   medal: true,
@@ -1502,7 +1502,7 @@ const contribution: Page = {
 };
 
 const judging: Page = {
-  slug: "/team/judging",
+  slug: "/judging",
   title: "The Checklist",
   kicker: "chapter 11 · judging",
   storyBeat: "Everything we claim, and where on this wiki to check it.",

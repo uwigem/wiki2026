@@ -11,7 +11,7 @@ fall through to the "This bed is empty" page.
 | `Home.tsx` | The original garden homepage: the full-screen intro sequence, the live garden hero, the walking hedgehog | `#/` |
 | `HomeAlt.tsx` | The minimal one, told one sentence at a time, modelled on the Duke, Barcelona-UB and McGill wikis | `#/home-alt` |
 
-The homepage that won is `../Home3.tsx`, at `#/`.
+The homepage that won is `../Home3.tsx`, at `/`.
 
 ## If you want one of these back
 

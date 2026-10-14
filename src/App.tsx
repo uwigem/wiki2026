@@ -17,7 +17,7 @@ import TeamPage from './site/pages/TeamPage'
 import WikiPage from './site/pages/WikiPage'
 
 /**
- * App shell: hash router plus layout.
+ * App shell: router plus layout.
  *
  * `PageGarden` and `HedgehogGuide` are mounted once here, above the router, so
  * the engine's world is built a single time and the hedgehog keeps walking
@@ -45,7 +45,7 @@ export default function App() {
 
   useEffect(() => {
     // A new page normally starts at the top. The exception is a link that
-    // named a section: `#/drylab/model#sensitivity` is a request to land part
+    // named a section: `/model#sensitivity` is a request to land part
     // way down, and jumping to the top first would fight the scroll that
     // `useSectionJump` is about to do.
     if (currentAnchor()) return
@@ -74,8 +74,8 @@ export default function App() {
           href="#garden-main"
           className="skip-link"
           onClick={(e) => {
-            // The hash router would read "#garden-main" as a route and send the
-            // visitor home, so move focus directly instead of following the link.
+            // Move focus directly rather than following the link, so the
+            // address bar does not pick up a "#garden-main" fragment.
             e.preventDefault()
             mainRef.current?.focus()
             mainRef.current?.scrollIntoView({ block: 'start' })
@@ -98,7 +98,7 @@ export default function App() {
         <FooterGarden />
       </div>
 
-      {/* Announces the new page to screen readers after a hash navigation,
+      {/* Announces the new page to screen readers after a navigation,
           which otherwise swaps the whole document silently. */}
       <p aria-live="polite" className="sr-only">
         {announced}
@@ -117,14 +117,14 @@ function titleFor(path: string): string {
 const SPECIAL_TITLES: Record<string, string> = {
   '/team': 'Team',
   '/playground': 'Playground',
-  '/wetlab/notebook': 'Notebook',
+  '/notebook': 'Notebook',
   '/alchemy': 'iGEM Alchemy',
 }
 
 function RouteView({ path }: { path: string }) {
   if (path === '/') return <Home3 />
   if (path === '/team') return <TeamPage />
-  if (path === '/wetlab/notebook') return <NotebookPage />
+  if (path === '/notebook') return <NotebookPage />
   if (path === '/alchemy') return <AlchemyPage />
 
   const page = pageBySlug(path)

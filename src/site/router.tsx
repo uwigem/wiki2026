@@ -1,42 +1,82 @@
 import { useEffect, useState, type ReactNode } from 'react'
+import { OLD_PATHS } from './content/nav'
 
 /**
- * A small hash router.
+ * A small path router.
  *
- * Deliberately not react-router: iGEM serves each wiki as static files from a
- * subpath, and hash routes survive that with no server rewrite rules and no
- * extra dependency. Routes look like `#/drylab/model`.
+ * Pages live at real paths under the site's base: on iGEM that is
+ * https://2026.igem.wiki/washington/model, on the preview
+ * https://uwigem.github.io/wiki2026/model, and in `npm run dev` just /model.
+ * The base comes from Vite (`base` in vite.config.ts). Judges reach the award
+ * pages from fixed links on their ballot, which is why these are real paths and
+ * not `#/` routes.
+ *
+ * Deliberately not react-router: this is all the site needs, with no extra
+ * dependency.
  */
 
-/**
- * The current route, normalised.
- *
- * Trailing slashes and query strings are stripped so that a link someone pasted
- * from a browser bar (`#/drylab/model/`) or one a share tool decorated
- * (`#/drylab/model?utm_source=x`) still finds the page instead of falling
- * through to the 404.
- */
-export function currentPath(): string {
-  const raw = window.location.hash.replace(/^#/, '')
-  const path = raw.split('?')[0].split('#')[0].replace(/\/+$/, '')
-  if (!path) return '/'
-  return path.startsWith('/') ? path : '/'
+/** The site's base path with no trailing slash: `''`, `/washington` or `/wiki2026`. */
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '')
+
+/** A route as a URL: `/model#sensitivity` becomes `/washington/model#sensitivity`. */
+export function href(to: string): string {
+  const [path, anchor] = to.split('#')
+  const url = BASE + (path === '/' ? '/' : path)
+  return anchor ? `${url}#${anchor}` : url
+}
+
+/** A file in `public/` as a URL, for example `asset('team/ana.jpg')`. */
+export function asset(path: string): string {
+  return `${BASE}/${path.replace(/^\.?\//, '')}`
+}
+
+/** A path with the base, trailing slashes and old names taken off. */
+function normalise(raw: string): string {
+  let path = raw.startsWith(BASE + '/') || raw === BASE ? raw.slice(BASE.length) : raw
+  path = path.replace(/\/index\.html$/, '').replace(/\/+$/, '') || '/'
+  return OLD_PATHS[path] ?? path
 }
 
 /**
- * The section a link asked for, from a SECOND hash: `#/drylab/model#pipeline`
- * points at the block with `id: 'pipeline'` on the Design page.
- *
- * Two hashes in one URL looks odd, but the first one belongs to the router and
- * the browser only ever reads the whole thing as one fragment, so the second is
- * free for us to use. It survives being copied and pasted, which a query
- * parameter inside a fragment also would, but this reads like an anchor because
- * it behaves like one.
+ * An old `#/drylab/model#pipeline` link: the route and section it meant, or
+ * null for an ordinary `#section` hash.
  */
-export function currentAnchor(): string {
+function oldHashLink(): { path: string; anchor: string } | null {
   const raw = window.location.hash.replace(/^#/, '')
-  const parts = raw.split('#')
-  return parts.length > 1 ? parts.slice(1).join('#').split('?')[0] : ''
+  if (!raw.startsWith('/')) return null
+  const [path, ...rest] = raw.split('#')
+  return { path: normalise(path.split('?')[0]), anchor: rest.join('#').split('?')[0] }
+}
+
+/**
+ * The current route, for example `/`, `/model`, `/team`.
+ *
+ * Trailing slashes and query strings are ignored, so a link pasted from a
+ * browser bar (`/model/`) or decorated by a share tool (`/model?utm_source=x`)
+ * still finds the page.
+ */
+export function currentPath(): string {
+  return oldHashLink()?.path ?? normalise(window.location.pathname)
+}
+
+/** The section a link asked for: `/engineering#pipeline` points at the block with `id: 'pipeline'`. */
+export function currentAnchor(): string {
+  const old = oldHashLink()
+  if (old) return old.anchor
+  return decodeURIComponent(window.location.hash.replace(/^#/, ''))
+}
+
+/**
+ * Rewrites the address bar to the canonical URL when a visitor arrives on an
+ * old link (`#/drylab/model`, `/drylab/model`) or a trailing slash, so what
+ * they copy next is the address that will keep working.
+ */
+function tidyAddress() {
+  const path = currentPath()
+  const anchor = currentAnchor()
+  const canonical = href(anchor ? `${path}#${anchor}` : path)
+  const now = window.location.pathname + window.location.hash
+  if (now !== canonical) window.history.replaceState(null, '', canonical + window.location.search)
 }
 
 function prefersReducedMotion(): boolean {
@@ -67,12 +107,15 @@ export function revealSection(id: string, flash = true) {
   return true
 }
 
+/** Fired after the router changes the URL itself; the browser only fires `popstate` for back and forward. */
+const ROUTE_EVENT = 'wiki:route'
+
 export function navigate(to: string) {
   const [path, anchor] = to.split('#')
-  if (currentPath() === (path.replace(/\/+$/, '') || '/')) {
+  if (currentPath() === normalise(path)) {
     if (anchor) {
       // Same page, different section. Keep the URL honest, then jump.
-      window.history.replaceState(null, '', '#' + to)
+      window.history.replaceState(null, '', href(to))
       revealSection(anchor)
       return
     }
@@ -80,16 +123,27 @@ export function navigate(to: string) {
     window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
     return
   }
-  window.location.hash = to
+  window.history.pushState(null, '', href(to))
+  window.dispatchEvent(new Event(ROUTE_EVENT))
 }
 
-/** Current route path, for example `/`, `/drylab/model`, `/team`. */
+/** Current route path, for example `/`, `/model`, `/team`. */
 export function useRoute(): string {
-  const [path, setPath] = useState(currentPath)
+  const [path, setPath] = useState(() => {
+    tidyAddress()
+    return currentPath()
+  })
   useEffect(() => {
-    const onHash = () => setPath(currentPath())
-    window.addEventListener('hashchange', onHash)
-    return () => window.removeEventListener('hashchange', onHash)
+    const onChange = () => {
+      tidyAddress()
+      setPath(currentPath())
+    }
+    window.addEventListener('popstate', onChange)
+    window.addEventListener(ROUTE_EVENT, onChange)
+    return () => {
+      window.removeEventListener('popstate', onChange)
+      window.removeEventListener(ROUTE_EVENT, onChange)
+    }
   }, [])
   return path
 }
@@ -98,8 +152,8 @@ export function useRoute(): string {
  * After a route change, jump to the section the link asked for.
  *
  * It retries for a short while because the target may not be in the DOM on the
- * first frame: blocks fade in on scroll, images settle, and the page can still
- * be growing when the hash changes.
+ * first frame: blocks fade in, images settle, and the page can still be growing
+ * when the route changes.
  */
 export function useSectionJump(path: string) {
   useEffect(() => {
@@ -149,7 +203,7 @@ interface LinkProps {
 export function Link({ to, children, className, title, current, onNavigate }: LinkProps) {
   return (
     <a
-      href={'#' + to}
+      href={href(to)}
       className={className}
       title={title}
       aria-current={current === 'section' ? 'true' : current || undefined}

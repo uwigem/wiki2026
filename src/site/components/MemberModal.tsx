@@ -3,6 +3,7 @@ import { SUBTEAM_NAME, type Member } from '../content/team'
 import { useEscape } from '../hooks'
 import PixelIcon from './PixelIcon'
 import PixelPerson, { looksFor } from './PixelPerson'
+import { asset } from '../router'
 
 interface Props {
   member: Member
@@ -166,7 +167,7 @@ export default function MemberModal({ member, onClose }: Props) {
         <div className="flex flex-col items-center gap-5 p-5 sm:flex-row sm:items-start sm:gap-6 sm:p-6">
           {member.photo ? (
             <img
-              src={member.photo}
+              src={asset(member.photo)}
               alt={member.name}
               className="aspect-[4/5] w-40 shrink-0 rounded-sm border-[3px] border-leaf-700 object-cover sm:w-52"
             />
