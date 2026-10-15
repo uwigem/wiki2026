@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   BIG_FLOWER,
   BLUEBELL,
@@ -11,17 +10,18 @@ import {
 import PixelSign from './PixelSign'
 import PixelSprite from './PixelSprite'
 import { inline } from './RichText'
+import { stakeholderId, useStakeholders } from './stakeholders'
 
 /**
  * The people who shaped the project, planted as beds in the garden.
  *
  * One bed per kind of expertise, one bloom per person. This is the stakeholder
- * map from the Human Practices sketches, with two deliberate departures from
- * it: names are printed under their flower rather than revealed on hover, and
- * the detail opens in a panel rather than a pop-up. A map whose content only
- * appears when a mouse passes over it is unreadable on a phone and invisible
- * to a screen reader, and this is the page where a judge most needs to be able
- * to read everything.
+ * map from the Human Practices sketches, with one deliberate departure from
+ * it: names are printed under their flower rather than revealed on hover,
+ * because a map whose content only appears when a mouse passes over it is
+ * unreadable on a phone and invisible to a screen reader. Clicking a bloom
+ * opens that person's card as a dialog (`StakeholderModal`), and so does any
+ * mention of their name elsewhere on the page.
  *
  * Every entry carries a **what changed** line, and that line is the point.
  * An interview with no decision attached to it is a conversation, not
@@ -30,6 +30,8 @@ import { inline } from './RichText'
  */
 
 export interface Stakeholder {
+  /** How the text links to this person: `[Dr. Zheng](stakeholder:zheng)`. Defaults to the surname. */
+  id?: string
   name: string
   /** Position and institution. */
   role: string
@@ -63,8 +65,7 @@ interface Props {
 }
 
 export default function StakeholderGarden({ heading, intro, people, pending, source }: Props) {
-  const [openName, setOpenName] = useState<string | null>(null)
-  const open = people.find((p) => p.name === openName)
+  const { open } = useStakeholders()
 
   const beds = GROUPS.map((g) => ({ ...g, members: people.filter((p) => p.group === g.key) })).filter(
     (g) => g.members.length > 0,
@@ -84,60 +85,28 @@ export default function StakeholderGarden({ heading, intro, people, pending, sou
             </div>
 
             <ul className="mt-3 flex flex-wrap gap-2">
-              {bed.members.map((p) => {
-                const isOpen = p.name === openName
-                return (
-                  <li key={p.name}>
-                    <button
-                      type="button"
-                      aria-pressed={isOpen}
-                      onClick={() => setOpenName(isOpen ? null : p.name)}
-                      className={
-                        'flex w-[7.5rem] flex-col items-center gap-1 rounded-sm border-[3px] px-1.5 py-2 text-center transition-colors ' +
-                        (isOpen
-                          ? 'border-leaf-800 bg-leaf-200 shadow-[3px_3px_0_var(--p-shadow)]'
-                          : 'border-leaf-300 bg-leaf-50 hover:bg-leaf-100')
-                      }
-                    >
-                      <PixelSprite sprite={bed.flower} scale={2} />
-                      <span className="text-[0.72rem] leading-tight">{p.name}</span>
-                    </button>
-                  </li>
-                )
-              })}
+              {bed.members.map((p) => (
+                <li key={p.name}>
+                  <button
+                    type="button"
+                    onClick={() => open(stakeholderId(p))}
+                    aria-haspopup="dialog"
+                    className="flex w-[7.5rem] flex-col items-center gap-1 rounded-sm border-[3px] border-leaf-300 bg-leaf-50 px-1.5 py-2 text-center transition-colors hover:bg-leaf-100"
+                  >
+                    <PixelSprite sprite={bed.flower} scale={2} />
+                    <span className="text-[0.72rem] leading-tight">{p.name}</span>
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
         ))}
       </div>
 
-      {/* The detail. One panel for all of them, below the beds, so opening a
-          second person does not push the first one's bed around the page. */}
-      <div className="panel-flat mt-4 px-5 py-4" aria-live="polite">
-        {open ? (
-          <>
-            <h3 className="text-lg sm:text-xl">{open.name}</h3>
-            <p className="mt-1 text-note text-leaf-800">{open.role}</p>
-            {open.why && (
-              <p className="mt-3 text-body-sm leading-relaxed">
-                <span className="kicker mr-1.5 normal-case">why we asked</span>
-                {inline(open.why)}
-              </p>
-            )}
-            <p className="mt-2 text-body-sm leading-relaxed">
-              <span className="kicker mr-1.5 normal-case">what they said</span>
-              {inline(open.said)}
-            </p>
-            <p className="mt-3 border-l-[3px] border-petal-daisy pl-3 text-body-sm leading-relaxed">
-              <span className="kicker mr-1.5 normal-case">what we changed</span>
-              {inline(open.changed)}
-            </p>
-          </>
-        ) : (
-          <p className="text-center text-body-sm leading-relaxed">
-            Pick a bloom to read what that person told us, and what we changed because of it.
-          </p>
-        )}
-      </div>
+      <p className="mt-4 text-center text-body-sm leading-relaxed text-leaf-800">
+        Pick a bloom to read what that person told us, and what we changed because of it. Their names open the same
+        card wherever they come up on this page.
+      </p>
 
       {pending && pending.length > 0 && (
         <div className="mt-4 flex flex-col items-start gap-2">

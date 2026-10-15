@@ -1,5 +1,5 @@
-import { useState } from "react";
-import type { Block, Page } from "../content/pages";
+import { useMemo, useState } from "react";
+import type { Block, Page, Persona } from "../content/pages";
 import { pageNeighbours } from "../content/pages";
 import { Link, useSectionJump } from "../router";
 import FlowerBedCard from "../components/FlowerBedCard";
@@ -20,6 +20,22 @@ import StakeholderGarden from "../components/StakeholderGarden";
 import StatRow from "../components/StatRow";
 import StructureView from "../components/StructureView";
 import ToolShed from "../components/ToolShed";
+import Callout from "../components/Callout";
+import DataTable from "../components/DataTable";
+import DecisionTree from "../components/DecisionTree";
+import MembraneLandscape from "../components/MembraneLandscape";
+import SectionRail, { type RailSection } from "../components/SectionRail";
+import Details from "../components/Details";
+import PixelSprite from "../components/PixelSprite";
+import { ACCESSORIES } from "../components/gardenArt";
+import References from "../components/References";
+import ScienceFigure from "../components/ScienceFigure";
+import BorrowStrip from "../components/BorrowStrip";
+import StageRail from "../components/StageRail";
+import StakeholderModal from "../components/StakeholderModal";
+import Workflow from "../components/Workflow";
+import Hog from "../components/alchemy/Hog";
+import { StakeholderContext, stakeholderId } from "../components/stakeholders";
 
 /**
  * Generic content page, rendered from data in `content/pages.ts`.
@@ -37,7 +53,18 @@ export default function WikiPage({ page }: { page: Page }) {
   // page has rendered.
   useSectionJump(page.slug);
 
+  // The people this page interviewed, if any. Their cards open as a dialog
+  // from the garden and from any `[name](stakeholder:id)` mention in the text.
+  const people = page.blocks.flatMap((b) => (b.kind === "stakeholders" ? b.people : []));
+  const [openId, setOpenId] = useState<string | null>(null);
+  const openPerson = people.find((p) => stakeholderId(p) === openId);
+
+  // The page's sections, for the floating menu on pages that declare them,
+  // each with the headed blocks inside it.
+  const sections = useMemo(() => railSections(page.blocks), [page]);
+
   return (
+    <StakeholderContext.Provider value={{ people, open: setOpenId }}>
     <article>
       <GardenSection className="pb-4 pt-10 sm:pt-14">
         <div className="flex flex-col items-center gap-4 text-center">
@@ -96,8 +123,35 @@ export default function WikiPage({ page }: { page: Page }) {
           )}
         </nav>
       </GardenSection>
+
+      {openPerson && <StakeholderModal person={openPerson} onClose={() => setOpenId(null)} />}
     </article>
+    <SectionRail sections={sections} />
+    </StakeholderContext.Provider>
   );
+}
+
+/** A block's heading, for the kinds that have one. */
+function blockHeading(b: Block): string | undefined {
+  return "heading" in b && typeof b.heading === "string" ? b.heading : undefined;
+}
+
+/**
+ * Groups a page's blocks into the sections it declares (`section` on a
+ * block starts one). Every later block with an id and a heading becomes an
+ * entry under that section.
+ */
+function railSections(blocks: Block[]): RailSection[] {
+  const out: RailSection[] = [];
+  for (const b of blocks) {
+    if (!b.id) continue;
+    if (b.section) out.push({ id: b.id, label: b.section, items: [] });
+    else if (out.length > 0) {
+      const label = blockHeading(b);
+      if (label) out[out.length - 1].items.push({ id: b.id, label });
+    }
+  }
+  return out;
 }
 
 function BlockView({ block }: { block: Block }) {
@@ -318,6 +372,86 @@ function BlockView({ block }: { block: Block }) {
         />
       );
 
+    case "diagram":
+      return (
+        <figure className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
+          <ScienceFigure kind={block.figure} />
+          {block.caption && (
+            <figcaption className="mt-3 text-center text-body-sm leading-relaxed text-leaf-800">
+              {inline(block.caption)}
+            </figcaption>
+          )}
+          {block.source && (
+            <p className="mt-3 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">
+              {block.source}
+            </p>
+          )}
+        </figure>
+      );
+
+    case "borrow":
+      return (
+        <BorrowStrip
+          heading={block.heading}
+          items={block.items}
+          outcome={block.outcome}
+          source={block.source}
+        />
+      );
+
+    case "callout":
+      return <Callout heading={block.heading} label={block.label} body={block.body} source={block.source} />;
+
+    case "table":
+      return (
+        <DataTable
+          heading={block.heading}
+          intro={block.intro}
+          columns={block.columns}
+          rows={block.rows}
+          caption={block.caption}
+          source={block.source}
+        />
+      );
+
+    case "references":
+      return <References heading={block.heading} items={block.items} />;
+
+    case "rail":
+      return (
+        <StageRail
+          heading={block.heading}
+          intro={block.intro}
+          stages={block.stages}
+          hereLabel={block.hereLabel}
+          source={block.source}
+        />
+      );
+
+    case "flowchart":
+      return (
+        <DecisionTree heading={block.heading} intro={block.intro} start={block.start} nodes={block.nodes} source={block.source} />
+      );
+
+    case "landscape":
+      return <MembraneLandscape heading={block.heading} intro={block.intro} proteins={block.proteins} source={block.source} />;
+
+    case "workflow":
+      return (
+        <Workflow heading={block.heading} intro={block.intro} stages={block.stages} footnote={block.footnote} source={block.source} />
+      );
+
+    case "details":
+      return (
+        <Details heading={block.heading} summary={block.summary} open={block.open}>
+          {block.blocks.map((inner, i) => (
+            <div key={i} id={inner.id} className="min-w-0">
+              <BlockView block={inner} />
+            </div>
+          ))}
+        </Details>
+      );
+
     case "todo":
       return <TodoPanel items={block.body} />;
 
@@ -339,7 +473,7 @@ function PersonaCarousel({
 }: {
   heading?: string;
   intro?: string;
-  people: { title: string; body: string }[];
+  people: Persona[];
   source?: string;
 }) {
   const [at, setAt] = useState(0);
@@ -374,17 +508,39 @@ function PersonaCarousel({
           aria-live="polite"
         >
           <div className="grid gap-4 sm:grid-cols-[9rem_1fr] sm:items-start">
+            {/* The hedgehog with an accessory for the role stands in for each
+                researcher until Creative's drawings (a hedgehog dressed for
+                each role) arrive. */}
             <div
-              className="flex items-center justify-center rounded-sm border-[3px] border-dashed border-petal-daisy bg-leaf-50 px-3 text-center"
+              className="relative flex items-center justify-center rounded-sm border-[3px] border-leaf-300 bg-leaf-50 px-3"
               style={{ aspectRatio: "4 / 3" }}
             >
-              <p className="kicker">[placeholder image]</p>
+              <Hog scale={4} />
+              {person.persona && (
+                <PixelSprite sprite={ACCESSORIES[person.persona]} scale={3} className="absolute right-3 top-3" />
+              )}
             </div>
             <div className="min-w-0">
               <h3 className="text-lg sm:text-xl">{person.title}</h3>
-              <p className="mt-2 text-body-sm leading-relaxed">
-                {inline(person.body)}
-              </p>
+              {person.body && (
+                <p className="mt-2 text-body-sm leading-relaxed">{inline(person.body)}</p>
+              )}
+              {(
+                [
+                  ["who they are", person.role],
+                  ["their stake", person.stake],
+                  ["what they would need to see", person.cares],
+                  ["how they would use it", person.use],
+                ] as const
+              ).map(
+                ([label, text]) =>
+                  text && (
+                    <p key={label} className="mt-2 text-body-sm leading-relaxed">
+                      <span className="kicker mr-1.5 normal-case">{label}</span>
+                      {inline(text)}
+                    </p>
+                  ),
+              )}
             </div>
           </div>
         </div>

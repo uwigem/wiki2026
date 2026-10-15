@@ -50,6 +50,16 @@ All page content is data in `src/site/content/pages.ts`. Each item in a page's
 | `pillars` | Activities grouped under a stated principle | Outreach, or anything designed to a set of values |
 | `facts` | Compact key and value pairs | Reference details |
 | `quote` | A pulled-out quote on a sign | One sentence worth stopping on |
+| `callout` | A boxed statement with a daisy border | One paragraph the page's argument lands on: our system, the founder's theory |
+| `table` | A table of text; rows stack into cards on a phone | Anything with columns. Cells take links and bold |
+| `references` | A numbered reference list with resolving links | After a section whose text carries `[n]` markers |
+| `rail` | A strategy in stages with a rail beside it and a "we are here" line | A plan that is partly done and partly ahead |
+| `flowchart` | A yes/no decision tree a reader answers one question at a time | "Is this right for your project" |
+| `landscape` | The ciliary membrane with clickable proteins | Proteins that share a compartment, one card each |
+| `workflow` | A row of stages, one open at a time | A short procedure at a high level |
+| `details` | A closed section with its heading and one line showing; holds other blocks | References, the working behind a number, background a reader may know |
+| `diagram` | One of the site's own drawings, still and captioned (`ScienceFigure`) | A mechanism the text spends several paragraphs on |
+| `borrow` | Things that already exist, an arrow, and the one thing added | Positioning a new approach against established ones |
 | `todo` | A visible "still to come" panel | Drafting only. No page ships one. |
 
 **Link between pages.** Any block can take an `id`, and any body text can then
@@ -58,6 +68,16 @@ Engineering page scrolled to that exact section and flashes it. Use this instead
 of writing "see the Engineering page". `npm run dev` warns in the console if a
 link points at a page or a section that does not exist. Link targets must start with `/` or `https://`; anything else
 renders as plain text.
+
+**Name a stakeholder.** On a page with a `stakeholders` block, `[Dr. Zheng](stakeholder:zheng)`
+opens that person's card from anywhere in the text. The id is the person's `id` field, or
+their surname in lower case. `npm run dev` warns if the id matches nobody on the page.
+
+**Sections.** Give a block `section: "Market"` (and an `id`) and the page grows a floating
+menu of its sections: a rail in the right margin on wide screens, a corner button that names
+the current section on narrower ones. The menu follows the reader, and lists the headed blocks
+inside the current section so they can jump within it. Links into a closed `details` section
+open it.
 
 **Use `figure` while drafting a diagram that does not exist yet.** Give it a
 `caption` saying what the picture should show and an `owner`, and leave `src`
@@ -143,22 +163,28 @@ The equations, the wiring diagram and the full parameter table.
 
 ### Who the Garden Is For (`/human-practices`), a medal page
 
-The most complete page, and the longest. **Now:** the guiding question, why
-location and amount matter, the seven-tool shed, the capability matrix, the four
-requirements, the market figures, the founder's theory, and all thirteen
-interviews as a garden of flower beds grouped by expertise, each with the line
-saying what the team changed where the draft records one.
+The longest page, built from the Human Practices subteam's final draft (October 2026)
+with their text kept as written apart from spelling and grammar. **Now:** the guiding
+question; the project inspiration; all thirteen interviews as a garden, each opening a
+card that any mention of the name elsewhere on the page also opens; the community need
+(the membrane landscape with seven protein cards, location and amount, the seven-tool
+shed, the recurring gap, the capability matrix, our system and the founder's theory);
+the market model (biological opportunity, the four-step estimate and its limits, the
+market table, the to-market strategy with its "we are here" rail); designing for adoption
+(six personas, five shared needs, the design requirements table, the implementation
+strategy, the final package, the integration counter); responsible platform development;
+and the deliverables (technology evaluation flowchart, workflow, flyer, next steps), which
+are shared with `/implementation`. Five numbered reference lists with DOI links.
 
 **Still needed:**
 
-- Dr. Thomas Matula's entry says no change is written up yet, because the draft
-  does not state one. Replace it with the real line when there is one.
-- The researcher personas, and the closed-to-open slider.
-- The auditory cilia responsible-use case study.
-
-**This page will need splitting.** It is already long and the stakeholder
-write-ups will double it. The natural cut is the community need and the market
-model into their own pages under Impact.
+- Workflow stage detail, troubleshooting and best practices from the Education and
+  IHP leads: the four stages are on the page with one paragraph each.
+- Creative's art: the seven protein sprites for the landscape, the shed doors and props,
+  and a hedgehog per persona. The components render with placeholders until then.
+- Four links in the design requirements table wait on Wet Lab writing up the ALFA-tag
+  system, the cycloheximide chase, the western blot and photoconversion on `/experiments`.
+- Dr. Thomas Matula's entry still says no change is written up yet.
 
 ### Sharing the Garden (`/education`), a medal page
 
@@ -252,7 +278,7 @@ belongs on them, so the structure is right from the first day:
 
 | Page | Address | Note |
 | --- | --- | --- |
-| Out of the Greenhouse | `/implementation` | proposed implementation |
+| Out of the Greenhouse | `/implementation` | proposed implementation: who it is for, plus the deliverables shared with Human Practices |
 | Seeds We Logged | `/parts` | parts and registry |
 | What We Leave Behind | `/contribution` | **medal page** |
 | The Checklist | `/judging` | where each criterion is evidenced |

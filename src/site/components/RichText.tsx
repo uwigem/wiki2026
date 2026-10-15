@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from '../router'
+import { StakeholderLink } from './stakeholders'
 
 /**
  * Inline formatting for the content files: `**bold**`, `*italic*`, `` `code` ``
@@ -19,6 +20,9 @@ import { Link } from '../router'
  * A route may carry a section: `[the pipeline](/engineering#pipeline)` opens
  * the Design page scrolled to the block with `id: 'pipeline'`, and flashes it so
  * the reader can see what they were sent to look at.
+ *
+ * A third target form, `[Dr. Zheng](stakeholder:zheng)`, opens that person's
+ * card on a page that has a `stakeholders` block. See `stakeholders.tsx`.
  */
 
 const TOKEN = /(\[[^\]\n]+\]\([^)\s]+\)|\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/g
@@ -46,6 +50,9 @@ export function inline(text: string): ReactNode[] {
               {label}
             </Link>
           )
+        }
+        if (target.startsWith('stakeholder:')) {
+          return <StakeholderLink key={i} id={target.slice('stakeholder:'.length)} label={label} />
         }
         if (target.startsWith('https://')) {
           return (

@@ -1,3 +1,5 @@
+import { asset } from '../router'
+
 /**
  * A figure, or the clearly marked hole where one is going.
  *
@@ -36,7 +38,7 @@ export default function FigureFrame({ src, alt, caption, owner, ratio = 'wide', 
     <figure className="panel m-0 px-5 py-5 sm:px-7 sm:py-6">
       {src ? (
         <img
-          src={src}
+          src={asset(src)}
           alt={alt ?? ''}
           className="w-full rounded-sm border-[3px] border-leaf-700"
           style={{ aspectRatio: RATIO[ratio], objectFit: 'contain' }}

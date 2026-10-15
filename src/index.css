@@ -618,12 +618,14 @@
   }
 
   /*
-   * Every linkable block keeps clear of the sticky nav when it is scrolled to.
-   * `html { scroll-padding-top }` already does this for native anchor jumps,
-   * but `scrollIntoView` from script needs it on the element itself.
+   * Linkable blocks keep clear of the sticky nav through the
+   * `html { scroll-padding-top }` rule above, which applies to anchor jumps
+   * and to `scrollIntoView` alike. Do not add `scroll-margin-top` as well:
+   * the two stack, and a jump then lands twice as far down.
    */
-  [id] {
-    scroll-margin-top: 5.5rem;
+  /* Collapsible sections draw their own Show/Hide button. */
+  summary::-webkit-details-marker {
+    display: none;
   }
 
   /* Visually hidden, still read aloud. Used for the route-change announcement. */

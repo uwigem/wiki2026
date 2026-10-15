@@ -1,6 +1,13 @@
 import { PAGES } from './pages'
 import { ALL_ROUTES, OLD_PATHS, STANDARD_PAGES } from './nav'
 import { alchemyProblems } from './alchemy'
+import { stakeholderId } from '../components/stakeholders'
+import type { Block } from './pages'
+
+/** Every block on a page, including those inside collapsed `details` sections. */
+function flatten(blocks: Block[]): Block[] {
+  return blocks.flatMap((b) => (b.kind === 'details' ? [b, ...flatten(b.blocks)] : [b]))
+}
 
 /**
  * Development-time consistency check for the content files.
@@ -95,7 +102,7 @@ export function checkContent() {
    * string of a page is searched, whatever block it belongs to.
    */
   const idsByPage = new Map(
-    PAGES.map((p) => [p.slug, new Set(p.blocks.map((b) => b.id).filter(Boolean) as string[])]),
+    PAGES.map((p) => [p.slug, new Set(flatten(p.blocks).map((b) => b.id).filter(Boolean) as string[])]),
   )
   for (const page of PAGES) {
     const content = JSON.stringify(page.blocks)
@@ -122,11 +129,28 @@ export function checkContent() {
 
   // Pages that are evidence for a medal cannot ship with a placeholder on them.
   for (const page of PAGES) {
-    if (page.medal && page.blocks.some((b) => b.kind === 'todo')) {
+    if (page.medal && flatten(page.blocks).some((b) => b.kind === 'todo')) {
       problems.push(
         `"${page.title}" (${page.slug}) is a medal page and still has a todo block on it. ` +
           `It has to be finished and specific before the wiki freeze.`,
       )
+    }
+  }
+
+  // `[Name](stakeholder:id)` only works on a page whose stakeholders block has that id.
+  const STAKEHOLDER_LINK = /\]\(stakeholder:([^)\s]+)\)/g
+  for (const page of PAGES) {
+    const ids = new Set(flatten(page.blocks).flatMap((b) => (b.kind === 'stakeholders' ? b.people.map(stakeholderId) : [])))
+    for (const [, id] of JSON.stringify(page.blocks).matchAll(STAKEHOLDER_LINK)) {
+      if (!ids.has(id)) {
+        problems.push(
+          `"${page.title}" links to stakeholder "${id}", but no person in its stakeholders block has that id, ` +
+            `so the name renders as plain text. Ids default to the surname in lower case.`,
+        )
+      }
+    }
+    if (/\[placeholder/i.test(JSON.stringify(page.blocks))) {
+      problems.push(`"${page.title}" (${page.slug}) still contains "[placeholder" text.`)
     }
   }
 

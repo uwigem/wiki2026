@@ -1,26 +1,31 @@
 import { useState } from 'react'
+import PixelSprite from './PixelSprite'
 import { inline } from './RichText'
+import { PROPS, SHED_CLOSED, SHED_OPEN, type PropKey } from './gardenArt'
 
 /**
  * The garden shed: the tools researchers already have.
  *
- * Every tool here is something a cilia lab can use today, and every one of them
- * falls short in the same place. That shared shortfall is the argument for the
- * project, so the "where it falls short" line is not hidden behind the toggle:
- * it is the part a reader most needs, and a page of collapsed cards that hides
- * the point is a worse page.
+ * Closed on load. Opening the doors shows seven props, one per tool, and
+ * picking a prop shows that tool's card: what it does, where it falls short
+ * for ciliary work, and how it works. One card at a time, because seven
+ * stacked cards made this the longest thing on the page.
  *
- * What collapses is the mechanism, which is reference material. One card is
- * open on load so the shape of a card is obvious without clicking anything.
+ * The shed and the props are stand-in pixel art (`gardenArt.ts`) until
+ * Creative's drawings replace them.
  */
 
 export interface ToolEntry {
   name: string
-  /** How the tool works. The part that collapses. */
+  /** Short label under the prop. */
+  short?: string
+  /** Which prop stands for it. */
+  prop?: PropKey
+  /** How the tool works. */
   how: string
   /** What it is good for. */
   good: string
-  /** Where it falls short for ciliary work. Always visible. */
+  /** Where it falls short for ciliary work. */
   gap: string
 }
 
@@ -31,41 +36,83 @@ interface Props {
   source?: string
 }
 
+const PROP_ORDER: PropKey[] = ['axe', 'shears', 'spray', 'puller', 'cart', 'grabber', 'tagger']
+
 export default function ToolShed({ heading, intro, tools, source }: Props) {
-  const [open, setOpen] = useState<number | null>(0)
+  const [doorsOpen, setDoorsOpen] = useState(false)
+  const [picked, setPicked] = useState<number | null>(null)
+  const tool = picked === null ? null : tools[picked]
 
   return (
-    <section className="panel px-5 py-5 sm:px-7 sm:py-6">
+    <section className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
       {heading && <h2 className="text-xl">{heading}</h2>}
       {intro && <p className="mt-1 max-w-2xl text-body leading-relaxed">{inline(intro)}</p>}
 
-      <ul className="mt-4 flex flex-col gap-3">
-        {tools.map((tool, i) => {
-          const isOpen = open === i
-          return (
-            <li key={tool.name} className="panel-flat px-4 py-3">
-              <h3 className="text-base">{tool.name}</h3>
-              <p className="mt-1 text-body-sm leading-relaxed">{inline(tool.good)}</p>
+      <div className="mt-4 flex flex-col items-center">
+        <button
+          type="button"
+          onClick={() => {
+            setDoorsOpen((o) => !o)
+            if (doorsOpen) setPicked(null)
+          }}
+          aria-expanded={doorsOpen}
+          aria-controls="shed-props"
+          className="group flex flex-col items-center gap-2"
+        >
+          <PixelSprite sprite={doorsOpen ? SHED_OPEN : SHED_CLOSED} scale={4} />
+          <span className="pixel-btn py-1 text-xs group-hover:bg-leaf-200">{doorsOpen ? 'Close the shed' : 'Open the shed'}</span>
+        </button>
 
-              <p className="mt-2 border-l-[3px] border-petal-daisy pl-3 text-body-sm leading-relaxed">
-                <span className="kicker mr-1.5 normal-case">where it falls short</span>
-                {inline(tool.gap)}
-              </p>
+        {doorsOpen && (
+          <ul id="shed-props" className="mt-4 flex flex-wrap justify-center gap-2 sm:gap-3" aria-label="Tools in the shed">
+            {tools.map((t, i) => {
+              const sprite = PROPS[t.prop ?? PROP_ORDER[i % PROP_ORDER.length]]
+              const isPicked = picked === i
+              return (
+                <li key={t.name}>
+                  <button
+                    type="button"
+                    onClick={() => setPicked(isPicked ? null : i)}
+                    aria-pressed={isPicked}
+                    className={
+                      'flex w-[6.2rem] flex-col items-center gap-1.5 rounded-sm border-[3px] px-1 py-2 text-center transition-colors ' +
+                      (isPicked
+                        ? 'border-leaf-800 bg-leaf-200 shadow-[3px_3px_0_var(--p-shadow)]'
+                        : 'border-leaf-300 bg-leaf-50 hover:bg-leaf-100')
+                    }
+                  >
+                    <PixelSprite sprite={sprite} scale={3} />
+                    <span className="text-[0.7rem] leading-tight">{t.short ?? t.name}</span>
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
+        )}
+      </div>
 
-              <button
-                type="button"
-                className="pixel-btn mt-3 py-1 text-xs"
-                aria-expanded={isOpen}
-                onClick={() => setOpen(isOpen ? null : i)}
-              >
-                {isOpen ? 'Hide how it works' : 'How it works'}
-              </button>
-
-              {isOpen && <p className="mt-2 text-body-sm leading-relaxed">{inline(tool.how)}</p>}
-            </li>
-          )
-        })}
-      </ul>
+      <div className="panel-flat mt-4 px-5 py-4" aria-live="polite">
+        {tool ? (
+          <>
+            <h3 className="text-base sm:text-lg">{tool.name}</h3>
+            <p className="mt-2 text-body-sm leading-relaxed">{inline(tool.good)}</p>
+            <p className="mt-2 border-l-[3px] border-petal-daisy pl-3 text-body-sm leading-relaxed">
+              <span className="kicker mr-1.5 normal-case">where it falls short</span>
+              {inline(tool.gap)}
+            </p>
+            <p className="mt-2 text-body-sm leading-relaxed text-leaf-800">
+              <span className="kicker mr-1.5 normal-case">how it works</span>
+              {inline(tool.how)}
+            </p>
+          </>
+        ) : (
+          <p className="text-center text-body-sm leading-relaxed">
+            {doorsOpen
+              ? 'Pick a tool to read what it is good for and where it stops short for ciliary work.'
+              : 'Seven tools cilia labs already use. Open the shed to look at each.'}
+          </p>
+        )}
+      </div>
 
       {source && (
         <p className="mt-4 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{source}</p>

@@ -86,12 +86,22 @@ function prefersReducedMotion(): boolean {
 /**
  * Scrolls a section into view and flashes it, so the jump is visible.
  *
- * The sticky nav is kept off the heading by the `[id] { scroll-margin-top }`
+ * The sticky nav is kept off the heading by the `html { scroll-padding-top }`
  * rule in index.css. The flash is the `data-jump-flash` attribute set below.
  */
 export function revealSection(id: string, flash = true) {
   const el = document.getElementById(id)
   if (!el) return false
+  // A target inside a closed section is opened first, or it stays hidden.
+  for (let p = el.parentElement; p; p = p.parentElement) if (p instanceof HTMLDetailsElement) p.open = true
+  // A target that is itself a closed section (its id sits on the block's
+  // wrapper, with the `<details>` just inside) opens too, so a jump to
+  // "References" shows the references rather than only the heading.
+  const own =
+    el instanceof HTMLDetailsElement
+      ? el
+      : [...el.querySelectorAll('details')].find((d) => d.parentElement?.closest('[id]') === el)
+  if (own) own.open = true
   if (flash) {
     // A data attribute, not a class. These blocks fade in on scroll, and that
     // fade is React rewriting `className` on the same element: a class added
