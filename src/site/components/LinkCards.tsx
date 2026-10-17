@@ -49,8 +49,11 @@ export default function LinkCards({
           const isFile = FILE.test(it.href)
           return (
             <li key={it.href} className="panel-flat flex min-w-0 gap-3 px-4 py-4">
-              <span className="mt-0.5 text-leaf-700">
-                <PixelIcon rows={iconFor(it.href, it.tag)} className="h-9 w-9 shrink-0" />
+              {/* On a tile rather than loose on the card: a glyph the same
+                  colour as the writing beside it reads as a stray mark, and
+                  the border gives it the weight of a thing you can take. */}
+              <span className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border-[3px] border-leaf-700 bg-leaf-200 text-leaf-900 shadow-[3px_3px_0_var(--p-shadow)]">
+                <PixelIcon rows={iconFor(it.href, it.tag)} className="h-6 w-6" />
               </span>
               <div className="flex min-w-0 flex-1 flex-col gap-2">
                 {it.tag && <p className="kicker">{it.tag}</p>}

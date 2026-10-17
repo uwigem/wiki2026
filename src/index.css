@@ -695,9 +695,16 @@
     border: 0;
   }
 
+  /*
+   * No measure of its own. The reading column is already capped at 56rem and
+   * every panel adds padding inside that, so a paragraph can never run much
+   * past 80 characters. A second cap on top of the column's just left a strip
+   * of dead space down the right of the text while the headings, tables and
+   * figures beside it ran the full width, which reads as a mistake rather
+   * than as a margin.
+   */
   .prose-garden p {
     margin: 0 0 0.9rem;
-    max-width: 68ch;
   }
   .prose-garden p:last-child {
     margin-bottom: 0;
@@ -959,8 +966,7 @@
  * beside them run the full width. The ragged edge reads as a mistake. In here
  * the card is the measure.
  */
-.section-card .section-block .max-w-2xl,
-.section-card .section-block .prose-garden p {
+.section-card .section-block .max-w-2xl {
   max-width: none;
 }
 /* Block headings sit under the section's sign, so they step down a size. */

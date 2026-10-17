@@ -4,109 +4,109 @@
  *
  * A page of resource cards is otherwise a wall of words about words. One
  * glyph per card gives the eye something to land on and says what kind of
- * thing is behind the button before the label is read. They are drawn on the
- * same 12 by 12 grid as the section icons on the homepage, in `#` and `.`,
- * and `PixelIcon` paints them in whatever colour they inherit.
+ * thing is behind the button before the label is read.
+ *
+ * Every one of these is a **solid silhouette with its detail knocked out of
+ * it**, not an outline. Drawn as outlines on a 12 by 12 grid, every stroke is
+ * one pixel and every shape is mostly background: at the size a card renders
+ * them they lose their detail and read as empty boxes. A filled shape keeps
+ * its outline at any size, and the holes in it stay legible because they are
+ * surrounded by ink rather than made of it.
  */
 
-/** A sheet with a folded corner and lines of writing: anything to read. */
+/** A page with its corner turned down and three lines of writing knocked out. */
 export const DOCUMENT = [
-  '.########...',
-  '.#......##..',
-  '.#......#.#.',
-  '.#......####',
-  '.#.........#',
-  '.#.######..#',
-  '.#.........#',
-  '.#.######..#',
-  '.#.........#',
-  '.#.####....#',
-  '.#.........#',
-  '.##########.',
+  '..#######...',
+  '..#######...',
+  '..########..',
+  '..#.....###.',
+  '..#######.#.',
+  '..#.....###.',
+  '..#########.',
+  '..#.....###.',
+  '..#########.',
+  '..#...#####.',
+  '..#########.',
+  '............',
 ]
 
-/**
- * A portrait frame with a play triangle inside it: a reel, shot the way a
- * phone shoots. The triangle keeps a clear pixel off the frame on every side,
- * or at the size these render it merges into the border and the glyph reads
- * as an empty box.
- */
+/** A phone-shaped frame with a play triangle knocked out: a reel. */
 export const REEL = [
   '..########..',
-  '..#......#..',
-  '..#......#..',
-  '..#.#....#..',
-  '..#.##...#..',
-  '..#.###..#..',
-  '..#.###..#..',
-  '..#.##...#..',
-  '..#.#....#..',
-  '..#......#..',
-  '..#......#..',
   '..########..',
+  '..###.####..',
+  '..###..###..',
+  '..###...##..',
+  '..###....#..',
+  '..###...##..',
+  '..###..###..',
+  '..###.####..',
+  '..########..',
+  '..########..',
+  '............',
 ]
 
-/** A screen on a stand with a play triangle: an episode to watch. */
+/** A screen with a play triangle knocked out: an episode to watch. */
 export const SCREEN = [
   '############',
-  '#..........#',
-  '#...#......#',
-  '#...##.....#',
-  '#...###....#',
-  '#...####...#',
-  '#...####...#',
-  '#...###....#',
-  '#...##.....#',
-  '#...#......#',
-  '#..........#',
+  '############',
+  '####.#######',
+  '####..######',
+  '####...#####',
+  '####....####',
+  '####....####',
+  '####...#####',
+  '####..######',
+  '####.#######',
+  '############',
   '############',
 ]
 
-/** Angle brackets: code to clone. */
+/** Angle brackets cut out of a solid block: code to clone. */
 export const CODE = [
-  '............',
-  '............',
-  '...##....##.',
-  '..##......##',
-  '.##........#',
-  '##..........',
-  '##..........',
-  '.##........#',
-  '..##......##',
-  '...##....##.',
-  '............',
-  '............',
+  '############',
+  '############',
+  '###.####.###',
+  '##.######.##',
+  '#.########.#',
+  '#.########.#',
+  '#.########.#',
+  '#.########.#',
+  '##.######.##',
+  '###.####.###',
+  '############',
+  '############',
 ]
 
 /** A box with an arrow leaving it: a page that lives somewhere else. */
 export const OUTBOUND = [
-  '......######',
-  '......#...##',
-  '......#..#.#',
-  '......#.#..#',
-  '......##...#',
-  '.......#####',
+  '.....#######',
+  '.....#######',
+  '.....##...##',
+  '.....#.##.##',
+  '.....#.###.#',
+  '.....##.####',
   '............',
-  '#########...',
-  '#.......#...',
-  '#.......#...',
-  '#.......#...',
-  '#########...',
+  '########....',
+  '########....',
+  '##....##....',
+  '########....',
+  '########....',
 ]
 
-/** A flask with bubbles: the game. */
+/** A flask with the liquid knocked out of it: the game. */
 export const FLASK = [
-  '...######...',
-  '...#....#...',
-  '....#..#....',
-  '....#..#....',
-  '....#..#....',
-  '...#....#...',
-  '...#.##.#...',
-  '..#..##..#..',
-  '..#.####.#..',
-  '..#.####.#..',
-  '..########..',
+  '..######....',
+  '..#....#....',
+  '..#.##.#....',
+  '..#.##.#....',
+  '..#.##.#....',
+  '.##.##.##...',
+  '.#.####.#...',
+  '.#......#...',
+  '.#.####.#...',
+  '.#.####.#...',
+  '.########...',
   '............',
 ]
 
