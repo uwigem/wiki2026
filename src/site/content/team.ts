@@ -183,16 +183,6 @@ export const ROSTER: Member[] = [
     linkedin: 'https://www.linkedin.com/in/jaiden-poon',
   },
   {
-    name: 'Charlotte Hsu',
-    titles: ['Fundraising Lead'],
-    email: 'charhsu@uw.edu',
-    subteams: ['fundraising'],
-    leads: ['fundraising'],
-    leader: true,
-    bio:
-      'Hi, I’m Charlotte! I’m a Biochemistry major, and I lead Fundraising.',
-  },
-  {
     name: 'Rishabh Goenka',
     titles: ['Web Development Lead'],
     email: 'rish9@uw.edu',
@@ -291,6 +281,15 @@ export const ROSTER: Member[] = [
     bio:
       'Hi, I’m Navya! I’m a third-year Molecular, Cellular and Developmental Biology major on the Wet Lab subteam.',
     photo: 'team/navya-gupta.jpg',
+  },
+  {
+    name: 'Charlotte Hsu',
+    titles: ['Fundraising Lead'],
+    email: 'charhsu@uw.edu',
+    subteams: ['fundraising'],
+    leads: ['fundraising'],
+    bio:
+      'Hi, I’m Charlotte! I’m a Biochemistry major, and I lead Fundraising.',
   },
   {
     name: 'Sanjana Iyer',
