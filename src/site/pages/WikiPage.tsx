@@ -40,6 +40,7 @@ import StakeholderModal from "../components/StakeholderModal";
 import Workflow from "../components/Workflow";
 import Pipeline from "../components/Pipeline";
 import PartTrail from "../components/PartTrail";
+import RecipeStrip from "../components/RecipeStrip";
 import Hog from "../components/alchemy/Hog";
 import { StakeholderContext, stakeholderId } from "../components/stakeholders";
 
@@ -528,6 +529,18 @@ function BlockView({ block }: { block: Block }) {
 
     case "links":
       return <LinkCards heading={block.heading} intro={block.intro} items={block.items} source={block.source} />;
+
+    case "recipe":
+      return (
+        <RecipeStrip
+          heading={block.heading}
+          intro={block.intro}
+          inputs={block.inputs}
+          makes={block.makes}
+          action={block.action}
+          source={block.source}
+        />
+      );
 
     case "trail":
       return <PartTrail steps={block.steps} current={block.current} />;
