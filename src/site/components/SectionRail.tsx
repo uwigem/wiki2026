@@ -278,7 +278,9 @@ export function SectionMenu({ sections }: { sections: RailSection[] }) {
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
           aria-controls="section-menu"
-          className="pixel-btn pixel-btn-primary flex max-w-[15rem] items-center gap-2 py-2 text-xs"
+          /* Narrower on a phone: this button floats over the text, so a long
+             section name would cover half a line of it. */
+          className="pixel-btn pixel-btn-primary flex max-w-[11rem] items-center gap-2 py-2 text-xs sm:max-w-[15rem]"
         >
           <span aria-hidden>☰</span>
           <span className="truncate">{current ? current.label : 'Sections'}</span>

@@ -14,9 +14,13 @@ import { inline } from './RichText'
  * phone without a viewBox fighting it, and can carry its own text. The only
  * thing drawn is the centre rule.
  *
- * Every bar is also a table row underneath, so the numbers survive a screen
- * reader, a stylesheet failing to load, and being printed.
+ * The bars themselves are hidden from assistive technology and each row's name
+ * and number are plain text, so the chart reads as a list of values whether or
+ * not the stylesheet arrives.
  */
+
+/** Room kept clear at each end of the axis for the bars' own numbers. */
+const GUTTER = '3.25rem'
 
 export interface TornadoRow {
   label: string
@@ -67,11 +71,16 @@ export default function TornadoChart({
 
       <ul className="mt-4 flex flex-col gap-2">
         {rows.map((r) => {
-          const pct = (Math.abs(r.value) / max) * 50
           const positive = r.value >= 0
-          // Past about two thirds of the half-track there is no room left
-          // outside the bar for its own number.
-          const inside = pct > 32
+          /*
+           * How far along its half of the track this bar runs. The half is
+           * shortened by a fixed gutter so the longest bar still has room for
+           * its own number beyond the tip: every number then sits outside its
+           * bar, in the same relationship to it, at any width. Shortening in
+           * `rem` rather than in percent keeps all the bars on one linear
+           * scale, so their lengths stay comparable.
+           */
+          const len = `calc(${(Math.abs(r.value) / max).toFixed(4)} * (50% - ${GUTTER}))`
           return (
             <li key={r.label} className="grid grid-cols-1 gap-x-3 sm:grid-cols-[minmax(0,12rem)_1fr]">
               <span className="text-body-sm leading-tight sm:text-right">
@@ -95,26 +104,21 @@ export default function TornadoChart({
                     'absolute top-0.5 bottom-0.5 border-2 border-leaf-800 ' +
                     (positive ? 'bg-petal-pink' : 'bg-pool-400')
                   }
-                  style={
-                    positive
-                      ? { left: '50%', width: `${pct}%` }
-                      : { right: '50%', width: `${pct}%` }
-                  }
+                  style={positive ? { left: '50%', width: len } : { right: '50%', width: len }}
                 />
-                {/* The value sits just past the end of its bar, unless the bar
-                    is long enough that doing so would push the number out of
-                    the track and across the row label. Then it goes inside. */}
+                {/* The value sits just past the tip of its bar, always on the
+                    outside. The vertical centring rides on the `translate`
+                    property and never on `transform`: a Tailwind translate
+                    utility sets `translate`, so mixing the two applies both
+                    and the number drifts off the top of its bar. */}
                 <span
-                  className={'numeral absolute top-1/2 -translate-y-1/2 px-1.5 text-[0.7rem]'}
-                  style={
-                    positive
-                      ? inside
-                        ? { left: `calc(50% + ${pct}%)`, transform: 'translate(-100%, -50%)' }
-                        : { left: `calc(50% + ${pct}%)` }
-                      : inside
-                        ? { right: `calc(50% + ${pct}%)`, transform: 'translate(100%, -50%)' }
-                        : { right: `calc(50% + ${pct}%)` }
-                  }
+                  className="numeral absolute top-1/2 px-1.5 text-[0.7rem]"
+                  style={{
+                    ...(positive
+                      ? { left: `calc(50% + ${len})` }
+                      : { right: `calc(50% + ${len})` }),
+                    translate: '0 -50%',
+                  }}
                 >
                   {r.value > 0 ? '+' : ''}
                   {r.value.toFixed(2)}

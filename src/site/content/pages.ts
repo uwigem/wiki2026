@@ -29,6 +29,7 @@ import type { TreeNode } from "../components/DecisionTree";
 import type { MembraneProtein } from "../components/MembraneLandscape";
 import type { WorkflowStage } from "../components/Workflow";
 import type { PipelineStage } from "../components/Pipeline";
+import type { TrailStep } from "../components/PartTrail";
 import type { PersonaKey } from "../components/gardenArt";
 import { SMO_5L7D, type Structure } from "./structures";
 
@@ -299,6 +300,8 @@ export type Block = Anchored &
     /** Things to open or download: handbooks, posts, documents. */
     | { kind: "links"; heading?: string; intro?: string; items: LinkItem[]; source?: string }
     /** A visible "not written yet" marker. */
+    /** Where the reader is in a page told in numbered parts. */
+    | { kind: "trail"; steps: TrailStep[]; current: number }
     /** A chain of stages read downwards, each naming what it takes and returns. */
     | {
         kind: "pipeline";
@@ -582,6 +585,17 @@ const designBlocks: Block[] = [
   },
 ];
 
+/**
+ * The three parts of the Engineering page, in order. Each part opens with this
+ * list and its own index, so a reader who has scrolled past the signboard can
+ * still see which part they are in and jump to another.
+ */
+const ENGINEERING_PARTS: TrailStep[] = [
+  { label: "Kinetics modelling", to: "/engineering#kinetics" },
+  { label: "Protein modelling", to: "/engineering#protein-modelling" },
+  { label: "Wet lab", to: "/engineering#wet-lab" },
+];
+
 const engineering: Page = {
   slug: "/engineering",
   title: "Build, Test, Learn",
@@ -621,7 +635,7 @@ const engineering: Page = {
         "One whole-team cycle came first, and it is the reason there is a project to run cycles on.",
       cycles: [
         {
-          heading: "Choosing the target: how the project became the project",
+          heading: "Choosing the target: How the project became the project",
           intro: "This cycle is complete.",
           items: [
             {
@@ -645,9 +659,14 @@ const engineering: Page = {
       ],
     },
     {
-      kind: "prose",
+      kind: "trail",
       section: "Part 1: Kinetics modelling",
       id: "kinetics",
+      steps: ENGINEERING_PARTS,
+      current: 0,
+    },
+    {
+      kind: "prose",
       heading: "Where the modelling fits",
       body: [
         "The project starts as arithmetic. Before any protein is designed, the modelling subteam has to show that acting on the MMM complex could move **SMO in the cilium** by a useful amount, and that the rates in the literature support it. [The model](/model) is where that work is written up; this is the loop that produced it.",
@@ -657,7 +676,7 @@ const engineering: Page = {
       kind: "cycles",
       cycles: [
         {
-          heading: "Kinetics modelling: from a pathway diagram to equations",
+          heading: "Kinetics modelling: From a pathway diagram to equations",
           intro:
             "In progress. Each pass narrows the model toward the least complicated form that still answers the question.",
           items: [
@@ -682,9 +701,14 @@ const engineering: Page = {
       ],
     },
     {
-      kind: "prose",
+      kind: "trail",
       section: "Part 2: Protein modelling",
       id: "protein-modelling",
+      steps: ENGINEERING_PARTS,
+      current: 1,
+    },
+    {
+      kind: "prose",
       heading: "Where the design work fits",
       body: [
         "With a target worth acting on, the second loop is the binder itself. Generate candidates, throw almost all of them away, and work out why the survivors survived. The pipeline below is the machinery; the cycles after it are what we learned by running it. The general version, written so another team can run it, is on [contribution](/contribution#pipeline).",
@@ -697,7 +721,7 @@ const engineering: Page = {
       heading: "What running the pipeline taught us",
       cycles: [
         {
-          heading: "Cycle 1: generating binders",
+          heading: "Cycle 1: Generating binders",
           intro:
             "Complete. Getting a pipeline to produce candidate binders at all.",
           items: [
@@ -720,7 +744,7 @@ const engineering: Page = {
           ],
         },
         {
-          heading: "Cycle 2: learning to throw designs away",
+          heading: "Cycle 2: Learning to throw designs away",
           intro:
             "Complete, and the cycle we learned the most from. Our first filter was passing designs that could never work.",
           items: [
@@ -743,7 +767,7 @@ const engineering: Page = {
           ],
         },
         {
-          heading: "Cycle 3: rescuing the near misses",
+          heading: "Cycle 3: Rescuing the near misses",
           intro:
             "In progress. Twenty five binders is not enough to fill a 96-well plate.",
           items: [
@@ -777,9 +801,14 @@ const engineering: Page = {
       source: "Protein Design ideation notes and pipeline docs, 2026.",
     },
     {
-      kind: "prose",
+      kind: "trail",
       section: "Part 3: Wet lab",
       id: "wet-lab",
+      steps: ENGINEERING_PARTS,
+      current: 2,
+    },
+    {
+      kind: "prose",
       heading: "Where the bench work fits",
       body: [
         "The third loop is the one that decides whether any of the first two were right. It is the least far along, because it starts once there are constructs to put into cells. What is settled already is the shape of those constructs, and every decision below was forced on us by the biology rather than chosen. The assays themselves, with their controls, are on [experiments](/experiments).",
@@ -901,10 +930,12 @@ const model: Page = {
     {
       kind: "figure",
       id: "homeostasis-network",
+      src: "model/homeostasis-network.webp",
+      alt: "A reaction diagram. SMO is made in the cytoplasm and enters the primary cilium at a rate k in, leaving again at k out. Inside the cilium sits the MMM complex, drawn as MOSMO, MGRN1 the E3 ligase, and MEGF8 the membrane protein. The complex ubiquitinates ciliary SMO, which is then degraded by the proteasome. A de novo binder arrow points at MGRN1 and is labelled disrupts MMM. A proximity linker bridges the complex to ciliary SMO. PTCH1 blocks SMO entry, on in wild type and off in basal cell carcinoma. Ciliary SMO activates downstream Hedgehog signalling.",
       caption:
-        "The upstream interaction network of Hedgehog signalling that the homeostasis model represents: the MMM complex and PTCH1 acting on the pool of SMO that enters the cilium.",
-      owner: "Kinetic Modelling",
+        "The upstream network the homeostasis model represents: the MMM complex and PTCH1 acting on the pool of SMO that enters the cilium, with the two arms of our device entering on the left.",
       ratio: "wide",
+      source: "Kinetic Modelling, 2026.",
     },
     {
       kind: "details",
@@ -1113,10 +1144,12 @@ const model: Page = {
     {
       kind: "figure",
       id: "gpcr-schematic",
+      src: "model/gpcr-schematic.webp",
+      alt: "A schematic of the model's reactions. A primary cilium rises out of the plasma membrane, with cholesterol, SMO, PTCH1 and the Hedgehog ligand marked in a key. PTCH1 is labelled as importing cholesterol from the outer leaflet to the inner one. SMO is made in the cytoplasm by a first-order process and diffuses between the cytoplasm and the cilium. SMO binds cholesterol at its extracellular cysteine-rich domain, and the model assumes that binding increases SMO's affinity for the membrane and that signalling is proportional to the amount of SMO there. A fast decay rate removes SMO from the membrane. An inset on the right shows the Smoothened structure shifting from inactive and locked to active and unlocked when cholesterol binds.",
       caption:
-        "The reactions in the GPCR model: cholesterol moving between the membrane leaflets, PTCH1 acting on that distribution, and SMO activating when it binds cholesterol on the outer leaflet.",
-      owner: "Kinetic Modelling",
+        "The reactions in the GPCR model: cholesterol moving between the membrane leaflets, PTCH1 acting on that distribution, and SMO activating when it binds cholesterol at the domain facing outward.",
       ratio: "wide",
+      source: "Kinetic Modelling, 2026. Structure inset after the published Smoothened cryo-EM models.",
     },
     {
       kind: "prose",
@@ -1129,10 +1162,12 @@ const model: Page = {
     {
       kind: "figure",
       id: "migration-models",
+      src: "model/migration-models.webp",
+      alt: "The alternative route for SMO reaching the cilium. The same cilium and plasma membrane as the previous figure, with cholesterol, SMO, PTCH1 and the Hedgehog ligand in a key. SMO is synthesised in the cytoplasm and migrates to the plasma membrane, then reaches the ciliary membrane by lateral diffusion along it. A red cross marks the base of the cilium, showing that the intracellular route between the cytoplasm and the cilium is closed in this version of the model.",
       caption:
-        "The two proposed routes SMO could take to the ciliary membrane: lateral diffusion through the plasma membrane, or intracellular transport.",
-      owner: "Kinetic Modelling",
+        "The route we did not implement. Here SMO reaches the cilium by diffusing along the membrane rather than travelling through the cell, and the red cross marks the path that version closes off.",
       ratio: "wide",
+      source: "Kinetic Modelling, 2026.",
     },
     {
       kind: "table",
@@ -1244,6 +1279,14 @@ const model: Page = {
           source:
             "Kinetic Modelling: local sensitivity analysis of the recruitment model, Tellurium, 120 hour simulation.",
         },
+        {
+          kind: "figure",
+          id: "global-sensitivity",
+          caption:
+            "The global analysis: Morris screening and Sobol indices side by side, with the parameters both methods find uninfluential marked.",
+          owner: "Kinetic Modelling",
+          ratio: "wide",
+        },
       ],
     },
     {
@@ -1258,6 +1301,54 @@ const model: Page = {
       ],
       source:
         "Kinetic Modeling: MC4R safety model, mass-action kinetics in Tellurium. Abundances from PaxDb; Kong et al. 2020 and 2025.",
+    },
+    {
+      kind: "details",
+      id: "mc4r-variables",
+      heading: "How the safety model is built",
+      summary: "Why mass action rather than Michaelis-Menten, and the five quantities it follows.",
+      blocks: [
+        {
+          kind: "prose",
+          body: [
+            "The model is written in Python through the Tellurium interface built by the Sauro lab, and uses **mass-action kinetics**. MGRN1 and MC4R are both membrane-bound, so they do not satisfy the assumption of freely diffusing soluble reactants that classical Michaelis-Menten rests on. More decisively, MC4R sits at about 0.06 nM, orders of magnitude below the usual Km of a ring E3 ligase, and in that regime mass action is the exact simplification of Michaelis-Menten rather than an approximation of it.",
+          ],
+        },
+        {
+          kind: "table",
+          columns: ["Quantity", "What it is", "Where its starting value comes from"],
+          rows: [
+            [
+              "**M_free**",
+              "Free cytoplasmic MGRN1, bound to nothing. The competition point: any MGRN1 the binder frees passes through here before it can reach ATRN.",
+              "PaxDb, 0.03 ppm",
+            ],
+            [
+              "**M_MMM**",
+              "MGRN1 held inside the full complex at the plasma membrane. This is what the binder reduces.",
+              "PaxDb, scaled by the share of MGRN1 in the complex measured from the published MOSMO figure",
+            ],
+            [
+              "**M_ATRN**",
+              "MGRN1 bound to ATRN, the complex that ubiquitinates MC4R. The off-target effector: if this rises when binder is added, MC4R is affected.",
+              "Kong et al. 2025",
+            ],
+            [
+              "**MC4R_s**",
+              "Surface MC4R available for melanocortin signalling. The safety readout.",
+              "PaxDb, 0.01 ppm",
+            ],
+            [
+              "**f_MB**",
+              "The fraction of binding sites on MEGF8 occupied by the binder, from none to full saturation.",
+              "Benchmarked against a published nanobody against the same site",
+            ],
+          ],
+          caption:
+            "A sixth quantity, ubiquitinated MC4R on its way to the lysosome, is tracked only so the mass balance closes.",
+          source: "Kinetic Modelling: MC4R safety model. Abundances from PaxDb.",
+        },
+      ],
     },
     {
       kind: "dose",
@@ -1283,6 +1374,62 @@ const model: Page = {
       footnote:
         "The curve flattens by about 50 nM. Past that, adding more binder changes nothing, because MGRN1 is the scarce part at roughly 0.18 nM in total and there is only so much of it to redistribute.",
       source: "Kinetic Modeling: MC4R safety model.",
+    },
+    {
+      kind: "prose",
+      section: "Protein modelling",
+      id: "protein-modelling",
+      heading: "Modelling the binder against its target",
+      body: [
+        "The binder design process is technically finished once a backbone and a sequence exist. In practice it would rarely produce a binder that works at a bench without a third step: predicting the structure back and checking it. We used **RoseTTAFold3** alongside molecular visualisation software to improve hotspot selection run by run, and to choose which 96 of several thousand designs to order and test. The pipeline that produces them is written up on [contribution](/contribution#pipeline).",
+        "RoseTTAFold3 is an open-source deep learning model built jointly by the Institute for Protein Design and Microsoft AI for Good, trained on processed protein structural data. It is not a physics model. It is very good at predicting protein to protein interactions of the kind this project depends on, but its scores are empirically useful rather than estimates of the physical constants that describe how tightly two molecules hold each other.",
+      ],
+      source: "Protein Modelling: notes on model choice, 2026.",
+    },
+    {
+      kind: "prose",
+      id: "transmembrane",
+      heading: "The filter we had to write ourselves",
+      body: [
+        "Our targets sit in a membrane, and many of our designs tried to bind the part of them buried inside it. **MOSMO has four helices crossing the membrane and MEGF8 has one.** A binder reaching those helices is impossible in a living cell, so every such design had to go, and no published filter does this.",
+        "So we wrote one. We identified by hand which residues of MOSMO and MEGF8 sit within the membrane, then drew a radius of **5 to 10 Angstrom** around them. A design whose own atoms enter that region is treated as membrane-embedded and fails the filter, which takes it out of both the final set and the redesign pool. This is the step that cut the surviving designs from 255 to about 25, described as it happened in [the second design cycle](/engineering#cycles).",
+      ],
+      source: "Protein Modelling: transmembrane exclusion script, 2026.",
+    },
+    {
+      kind: "details",
+      section: "Sources",
+      id: "sources",
+      heading: "The literature this page rests on",
+      summary: "Twenty sources, for the kinetic models and the safety model.",
+      blocks: [
+        {
+          kind: "references",
+          heading: "Sources",
+          items: [
+            { n: "1", text: "Zie et al., 2014. Annals of Neuroscience.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4117150/" },
+            { n: "2", text: "Arensdorf et al., 2017. Trends in Pharmacological Sciences.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4593303/" },
+            { n: "3", text: "Taipale et al., 2002. Nature.", href: "https://doi.org/10.1038/nature00989" },
+            { n: "4", text: "Kinnebrew et al., 2022. Science Advances.", href: "https://doi.org/10.1126/sciadv.abm5563" },
+            { n: "5", text: "Luchetti et al., 2016. eLife.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC5123864/" },
+            { n: "6", text: "Zhu et al., 2024. Biophysical Journal.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11617633/" },
+            { n: "7", text: "Hasnovic and Mus-Veteau, 2018. Cells.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6115939/" },
+            { n: "8", text: "Wang et al., 2009. Proceedings of the National Academy of Sciences.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC2650314/" },
+            { n: "9", text: "Rohatgi et al., 2009. Proceedings of the National Academy of Sciences.", href: "https://doi.org/10.1073/pnas.0813373106" },
+            { n: "10", text: "Wustner et al., 2023. Frontiers in Cell and Developmental Biology.", href: "https://doi.org/10.3389/fcell.2023.1144936" },
+            { n: "11", text: "Kinnebrew et al., 2021.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8654371/" },
+            { n: "12", text: "Milenkovic et al., 2009. Journal of Cell Biology.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC2779247/" },
+            { n: "13", text: "Kong et al., 2020. Developmental Cell.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC7686252/" },
+            { n: "14", text: "Kong et al., 2025.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12752501/" },
+            { n: "15", text: "Mathieson et al., 2018. Nature Communications.", href: "https://doi.org/10.1038/s41467-018-03106-1" },
+            { n: "16", text: "Choi et al., 2018. PLOS Computational Biology. The Tellurium environment." },
+            { n: "17", text: "Berg and Purcell, 1977. Biophysical Journal." },
+            { n: "18", text: "Shenoy, 2007.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3463220/" },
+            { n: "19", text: "Doherty and McMahon, 2009.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3727619/" },
+            { n: "20", text: "PaxDb, the protein abundance database.", href: "https://pax-db.org" },
+          ],
+        },
+      ],
     },
   ],
 };
