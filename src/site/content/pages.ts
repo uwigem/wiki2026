@@ -2143,7 +2143,7 @@ const education: Page = {
         { value: "12,000+", label: "students, parents and educators invited to Engineering Discovery Days" },
         { value: "2,700+", label: "views of the paper-reading series across YouTube and Instagram" },
         { value: "$5", label: "or less to build one Can You Beat DNA Polymerase kit", emphasis: true },
-        { value: "5", label: "handbooks and guides for anyone to run these activities" },
+        { value: "5", label: "handbooks and guides to download and run these activities" },
       ],
     },
 
@@ -2258,7 +2258,7 @@ const education: Page = {
       items: [
         {
           title: "Can You Beat DNA Polymerase? Instructional manual",
-          body: "How to build each station for under five dollars, run the race, and talk about mutations along the way. Written and visual instructions, colourblind-friendly graphics, and the science behind the activity.",
+          body: "How to build each station for under five dollars, run the race, and talk about mutations along the way. Written and visual instructions, colourblind-friendly graphics, and the science behind the activity. Also as an editable [Word document](/education/dna-polymerase.docx).",
           href: "education/dna-polymerase.pdf",
           tag: "PDF, 6 pages",
         },
@@ -2342,9 +2342,9 @@ const education: Page = {
       items: [
         {
           title: "Build a Baselet handbook",
-          body: "Ages 8 to 18, 30 to 45 minutes. The bead colours, the base-pairing rules, the amino acid chart, and the mutations to try.",
-          href: "https://docs.google.com/document/d/10bECEVQb0TbHe4U1os_mHrUxQAWD1wqZIO4Ia7t5ic4/edit?usp=sharing",
-          tag: "Google Doc",
+          body: "Ages 8 to 18, 30 to 45 minutes. The bead colours, the base-pairing rules, the amino acid chart, and the mutations to try. The [latest version](https://docs.google.com/document/d/10bECEVQb0TbHe4U1os_mHrUxQAWD1wqZIO4Ia7t5ic4/edit?usp=sharing) is kept as a Google Doc.",
+          href: "education/baselet.pdf",
+          tag: "PDF, 6 pages",
         },
       ],
     },
@@ -2407,9 +2407,9 @@ const education: Page = {
       items: [
         {
           title: "Scientists You Might Not Know",
-          body: "Profiles for chemistry and biology lessons: the people behind aspirin, thalidomide's halt at the FDA, and more.",
-          href: "https://docs.google.com/document/d/1oJpNNe-DBpYJ4tP-zd76KM0-249qbn9j4jQ6PlO33eQ/edit?usp=sharing",
-          tag: "Google Doc",
+          body: "Profiles for chemistry and biology lessons: the people behind aspirin, thalidomide's halt at the FDA, and more. The [latest version](https://docs.google.com/document/d/1oJpNNe-DBpYJ4tP-zd76KM0-249qbn9j4jQ6PlO33eQ/edit?usp=sharing) is kept as a Google Doc.",
+          href: "education/scientists.pdf",
+          tag: "PDF, 31 pages",
         },
       ],
     },
