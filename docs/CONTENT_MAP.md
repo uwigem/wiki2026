@@ -36,6 +36,7 @@ All page content is data in `src/site/content/pages.ts`. Each item in a page's
 | `narration` | The hedgehog, with a speech bubble | A paragraph above needs a plain-language version beside it |
 | `cards` | A grid of flower-bed cards | Three to six parallel things |
 | `steps` | Numbered stepping stones | An ordered pipeline |
+| `pipeline` | Stage cards read downwards, each naming what goes in and what comes out | A chain someone else is meant to run: every stage visible at once |
 | `cycles` | The design/build/test/learn wheel, tabbed | Engineering cycles |
 | `stats` | A row of big figures | A few numbers that carry an argument |
 | `matrix` | A capability comparison table | Showing that nothing existing does the job |
@@ -141,11 +142,15 @@ viewer. A hotspot map and the minPAE against RMSD scatter plot would both work a
 
 ### Build, Test, Learn (`/engineering`), a medal page
 
-**Now:** the design pipeline above, then four cycles. Choosing the target, generating binders, learning to throw
-designs away (the membrane-binding discovery), and rescuing near misses.
+**Now:** three parts, one per subteam, in the order they happened. An opening
+card grid, then the whole-team cycle that chose the project, then Part 1 kinetics
+modelling, Part 2 protein modelling (the design pipeline above, then three
+cycles: generating binders, learning to throw designs away, rescuing near
+misses), and Part 3 wet lab.
 
-**Still needed:** the rescue rate for cycle 4. Wet lab cycles for expression,
-purification, binding validation and the cell assay, as data arrives.
+**Still needed:** the wet lab cycle itself, which is four empty headings in the
+planning doc. The rescue rate for the third protein design cycle. Part 3 opens
+with the construct decisions, which is real but is not a cycle.
 
 **Keep the failures in.** The judges asked for this explicitly after 2025, and
 cycle 3 is currently the strongest thing on the wiki because it describes
@@ -280,14 +285,29 @@ document instead, which is where someone looking for work to do should come.
 What that does NOT license is quietly turning a gap into a claim: if a number is
 not known, the page says so in its own words, or says nothing.
 
+### What We Leave Behind (`/contribution`), a medal page
+
+**Now:** the de novo binder design pipeline as a contribution another team can
+use. What they get, then Protein design (the summary, the seven-stage
+`pipeline` block, and one linkable write-up per tool), then the scripts, the
+four filter metrics as a `table` with `id: "metrics"`, and the repository with
+its folder map. Five references.
+
+The metrics table is the one definition of minPAE, RMSD, pLDDT and ddG on the
+site. Engineering links into it rather than restating the cutoffs. Keep it that
+way.
+
+**Still needed:** wet lab's contribution, which has no text at all and so has no
+section. The repository has no licence, which matters more than anything on this
+page: without one, strictly nobody outside the team may reuse the scripts.
+
 ### Pages the architecture asks for that are not written yet
 
-Four pages exist with an address, a nav entry and a `todo` block saying what
+Three pages exist with an address, a nav entry and a `todo` block saying what
 belongs on them, so the structure is right from the first day:
 
 | Page | Address | Note |
 | --- | --- | --- |
 | Out of the Greenhouse | `/implementation` | proposed implementation: who it is for, plus the deliverables shared with Human Practices |
 | Seeds We Logged | `/parts` | parts and registry |
-| What We Leave Behind | `/contribution` | **medal page** |
 | The Checklist | `/judging` | where each criterion is evidenced |

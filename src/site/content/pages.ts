@@ -28,6 +28,7 @@ import type { LinkItem } from "../components/LinkCards";
 import type { TreeNode } from "../components/DecisionTree";
 import type { MembraneProtein } from "../components/MembraneLandscape";
 import type { WorkflowStage } from "../components/Workflow";
+import type { PipelineStage } from "../components/Pipeline";
 import type { PersonaKey } from "../components/gardenArt";
 import { SMO_5L7D, type Structure } from "./structures";
 
@@ -298,6 +299,14 @@ export type Block = Anchored &
     /** Things to open or download: handbooks, posts, documents. */
     | { kind: "links"; heading?: string; intro?: string; items: LinkItem[]; source?: string }
     /** A visible "not written yet" marker. */
+    /** A chain of stages read downwards, each naming what it takes and returns. */
+    | {
+        kind: "pipeline";
+        heading?: string;
+        intro?: string;
+        stages: PipelineStage[];
+        source?: string;
+      }
     | { kind: "todo"; body: string[] }
   );
 
@@ -473,7 +482,7 @@ const designBlocks: Block[] = [
       },
       {
         title: "Filter hard",
-        body: "Keep a design only if it clears the **2 by 2 filter**: a **minPAE under 2** and a **backbone RMSD under 2 Angstrom** between the shape we asked for and the shape the sequence actually folds into. Both cutoffs are the published gold standard, and Dr. DiMaio told us minPAE is the single best predictor of a real binder.",
+        body: "Keep a design only if it clears the **2 by 2 filter**: a **minPAE under 2** and a **backbone RMSD under 2 Angstrom** between the shape we asked for and the shape the sequence actually folds into. Both cutoffs are the published gold standard, and Dr. DiMaio told us minPAE is the single best predictor of a real binder. [What each number means](/contribution#metrics).",
       },
       {
         title: "Score the interface",
@@ -678,7 +687,7 @@ const engineering: Page = {
       id: "protein-modelling",
       heading: "Where the design work fits",
       body: [
-        "With a target worth acting on, the second loop is the binder itself. Generate candidates, throw almost all of them away, and work out why the survivors survived. The pipeline below is the machinery; the cycles after it are what we learned by running it.",
+        "With a target worth acting on, the second loop is the binder itself. Generate candidates, throw almost all of them away, and work out why the survivors survived. The pipeline below is the machinery; the cycles after it are what we learned by running it. The general version, written so another team can run it, is on [contribution](/contribution#pipeline).",
       ],
     },
     ...designBlocks,
@@ -717,7 +726,7 @@ const engineering: Page = {
           items: [
             {
               title: "Design",
-              body: "With several thousand candidates we needed a cutoff. We took the two published gold standards: backbone **RMSD under 2 Angstrom** between the shape we asked for and the shape we got, and **minPAE under 2**. We call it the 2 by 2 filter.",
+              body: "With several thousand candidates we needed a cutoff. We took the two published gold standards: backbone **RMSD under 2 Angstrom** between the shape we asked for and the shape we got, and **minPAE under 2**. We call it the 2 by 2 filter, and [the metrics table](/contribution#metrics) defines both.",
             },
             {
               title: "Build",
@@ -2696,15 +2705,242 @@ const contribution: Page = {
   kicker: "chapter 10 · contribution",
   medal: true,
   storyBeat: "The part of the garden that is for whoever comes next.",
-  intro: "The documented thing a future team gets to start from.",
+  intro:
+    "A de novo binder design pipeline that runs end to end from one command, the scripts behind it, and the filters we learned to trust. All of it is open, and none of it is specific to our target.",
   blocks: [
     {
-      kind: "todo",
+      kind: "prose",
+      heading: "What another team gets",
       body: [
-        "Not written yet, and this one is a medal page, so it needs to be specific.",
-        "The contribution itself: the part, the data, the method or the documentation another team can pick up.",
-        "Why it is useful to someone who is not us, with the evidence that it works.",
-        "Where it lives, so it can be found: registry entry, repository, or protocol.",
+        "Designing a protein binder means driving three separate models in turn and throwing away almost everything they produce. The models are published and free. The part that is not written down anywhere is the plumbing: how to get them onto a cluster you are allowed to use, how to hand each one's output to the next, and which numbers are worth filtering on.",
+        "That plumbing is our contribution. We built it on **Hyak**, the University of Washington's shared cluster, so it runs somewhere any student here can reach rather than on a lab machine nobody else can book. It is driven by **one script** that takes a target, a batch size and a set of hotspot residues. And it is **not specific to MOSMO or MEGF8**: a team with a different target and a structure to aim at can point the same pipeline at it.",
+        "Below is the pipeline stage by stage, what each tool in it does, the scripts themselves, and the four numbers we use to decide whether a design is worth ordering. The whole thing is on [GitHub](https://github.com/uwigem/protein_design_2026).",
+      ],
+    },
+    {
+      kind: "prose",
+      section: "Protein design",
+      id: "summary",
+      heading: "De novo protein design, briefly",
+      body: [
+        "De novo protein design broadly refers to the development of new proteins with novel functions. The designs of these new proteins do not rely on existing protein structures. Instead they use biochemical principles and recent breakthrough computational methods, such as deep learning models trained on large-scale collections of experimental protein structural data [1]. One use case is the de novo design of novel **binders**, where custom proteins are computationally optimised to associate, or bind, with specific molecular targets. Use cases for these binders vary, but in this project we focus on a therapeutic use: the disruption of wild-type protein complex formation. De novo binders have also proved useful in the neutralisation of toxins or venoms, and in the precise modulation of immune responses such as inflammation [2].",
+        "For our project this year we are focusing on disrupting the binding interface between two proteins, **MOSMO** and **MEGF8**. We aim to prevent formation of the MOSMO, MEGF8 and MGRN1 (**MMM**) complex through a competitively inhibitory, high affinity de novo binder. For our binder design pipeline we used RosettaCommons Foundry models: **RFdiffusion3**, **ProteinMPNN** and **RoseTTAFold3**, developed in-house at the University of Washington's Institute for Protein Design [3]. How we used them against this particular target is on [the model](/model); what follows is the general version.",
+      ],
+    },
+    {
+      kind: "pipeline",
+      id: "pipeline",
+      heading: "The pipeline, stage by stage",
+      intro:
+        "One command runs all of it. Each stage below names the script that does the work and what it hands to the next stage, so the chain can be picked apart and re-run from any point.",
+      stages: [
+        {
+          title: "Set the target and the hotspots",
+          script: "pipeline/batch_design.sh",
+          body: [
+            "The whole run is started by one script, which takes a run name, a batch size, a set of hotspot residues and which target to aim at. Everything after this is automatic.",
+          ],
+          input: "a target structure and the residues to aim at",
+          output: "a configured run on the cluster",
+          note: "The input and output directories are set at the top of the script, so it can be pointed at any file layout.",
+        },
+        {
+          title: "Generate backbones",
+          script: "RFdiffusion3, through the Foundry container",
+          body: [
+            "RFdiffusion3 denoises around the fixed target to produce the coordinates of a small protein expected to interact favourably with it. These backbones are the geometric framework of the design, with no sequence yet.",
+          ],
+          input: "target structure and hotspot residues",
+          output: "candidate binder backbones",
+        },
+        {
+          title: "Design sequences onto them",
+          script: "ProteinMPNN",
+          body: [
+            "ProteinMPNN takes the coordinates of a structure and generates a sequence of amino acids predicted to fold into it, a process known as inverse folding. The output carries the complete sequence for the generated minibinder alongside the existing sequence of the target.",
+          ],
+          input: "backbones",
+          output: "amino acid sequences for each backbone",
+        },
+        {
+          title: "Fold the sequences back",
+          script: "RoseTTAFold3, through fold.sh",
+          body: [
+            "RoseTTAFold3 predicts how the designed sequence will actually fold, together with the target. Comparing that prediction against the backbone we asked for is what tells us whether the sequence recapitulates the shape, and whether the binder still lands where it was diffused.",
+          ],
+          input: "sequences and the target",
+          output: "predicted complexes and their confidence files",
+        },
+        {
+          title: "Pull the metrics out and filter",
+          script: "pipeline/scripts, redesign/batch_confidences_fixed.py",
+          body: [
+            "A script aligns each folded output against the backbone it came from to calculate the deviation, and reads the confidence values out of the prediction's own summary files. Designs are then kept or dropped on [the four numbers below](/contribution#metrics).",
+          ],
+          input: "predicted complexes",
+          output: "a table of metrics, and a list of designs worth keeping",
+        },
+        {
+          title: "Rescue the near misses",
+          script: "redesign/select_redesign.py, redesign/redesign_all_dirs.sh",
+          body: [
+            "Designs that came close to the cutoffs get a second pass: the first script finds them, the second sends them back through sequence design and folding. Giving a backbone a fresh sequence is known to lower deviation and raise prediction confidence, so a near miss gets another chance to settle into the shape that was asked for.",
+          ],
+          input: "near misses and designs that already passed",
+          output: "a second generation of sequences, filtered the same way",
+        },
+      ],
+      source: "Protein Design: binder design pipeline, 2026.",
+    },
+    {
+      kind: "prose",
+      id: "hyak",
+      heading: "Running it on a shared cluster",
+      body: [
+        "To interface with these models we pulled the Foundry container created by RosettaCommons from DockerHub onto **Hyak**, the University of Washington's high-performance computing cluster. Previously our use of protein design platforms was split between local installation and the Institute for Protein Design's own cluster. Moving the entire pipeline onto Hyak, a system widely available to all University of Washington students, establishes a platform where any future team here can run automated, high throughput computational protein design.",
+      ],
+    },
+    {
+      kind: "prose",
+      id: "rfdiffusion3",
+      heading: "RFdiffusion3",
+      body: [
+        "RoseTTAFoldDiffusion3 is a diffusion-based protein structure-generating model that uses iterative denoising to arrive at protein structures, a process known as backbone generation or fold design [3]. These backbones can be thought of as just the geometric framework for a design: the scaffold we aim to recreate through an amino acid sequence from ProteinMPNN, and hopefully match with a RoseTTAFold3 prediction. By providing fixed protein input structures, it denoises around the fixed target to generate the coordinates of a small protein expected to interact favourably with it.",
+      ],
+    },
+    {
+      kind: "prose",
+      id: "proteinmpnn",
+      heading: "ProteinMPNN",
+      body: [
+        "ProteinMPNN is a neural network that takes the coordinates of a given protein structure as input and generates a sequence of amino acids predicted to fold into that structure, a process known as inverse folding [4]. The output of this step is a file containing the complete sequence for the generated minibinder and the pre-existing sequence of the target protein.",
+      ],
+    },
+    {
+      kind: "prose",
+      id: "rosettafold3",
+      heading: "RoseTTAFold3",
+      body: [
+        "RoseTTAFold3 is a protein structure prediction model that takes an input sequence of amino acids and predicts how the specified protein will fold, a process known as forward folding [5]. Running the ProteinMPNN output through it and comparing against the initial backbone validates that the generated sequence recapitulates the structure we diffused. Further, the comparison tells us whether the binder is predicted to bind where it was initially placed. If the binder refolds in a similar position on the target as it was generated in, that is a strong indicator it has affinity for the target.",
+      ],
+    },
+    {
+      kind: "prose",
+      section: "The scripts and the code",
+      id: "our-scripts",
+      heading: "The scripts, and what they saved us",
+      body: [
+        "To achieve high-throughput de novo binder design we wrote Bash and Python scripts that automate the pipeline. Our design script lets a user input just the name of the target protein, the batch size, and the selected hotspots. This brought generation times down to about **45 minutes per 75 binder designs**, from about 75 minutes for the same batch at the start.",
+        "We also wrote a validation script that pulls metrics out of the output files of each design and out of the structure files themselves.",
+      ],
+      source:
+        "Protein Design: pipeline scripts and timings, 2026. Timing measured on Hyak.",
+    },
+    {
+      kind: "table",
+      id: "metrics",
+      heading: "The four numbers we filter on",
+      intro:
+        "Every design is judged on these, in this order. The first two are the published gold standards; the second two decide which of the survivors is worth ordering.",
+      columns: ["Metric", "What it measures", "What we treat as good"],
+      rows: [
+        [
+          "**minPAE**, minimum predicted aligned error",
+          "Structural prediction confidence: the lowest expected error in the distance between any given pair of residues, in Angstrom.",
+          "Under **2 Angstrom**. The gold standard cutoff.",
+        ],
+        [
+          "**RMSD**, root mean square deviation",
+          "Average distance between the backbone we asked for and the sequence's forward-folded structure, in Angstrom.",
+          "Under **2 Angstrom**. The gold standard cutoff.",
+        ],
+        [
+          "**pLDDT**",
+          "Per-residue prediction confidence, scored from 0 to 100.",
+          "Above **80** is satisfactory, but we do not filter designs out strictly on it.",
+        ],
+        [
+          "**ddG**",
+          "Change in Gibbs free energy, a computational stand-in for binding affinity.",
+          "Negative, and more negative than the ddG of the MOSMO to MEGF8 interface itself.",
+        ],
+      ],
+      source: "Protein Design: validation script and filter definitions, 2026.",
+    },
+    {
+      kind: "links",
+      id: "repository",
+      heading: "The code",
+      intro:
+        "Public, and laid out so the active pipeline is separate from the one-off scripts that are kept only for reference.",
+      items: [
+        {
+          title: "protein_design_2026",
+          body: "The pipeline, the redesign loop and the earlier exploratory scripts, with a quick start in the readme. Run `pipeline/batch_design.sh` from the project root.",
+          href: "https://github.com/uwigem/protein_design_2026",
+          label: "Open on GitHub",
+          tag: "Repository",
+        },
+      ],
+    },
+    {
+      kind: "table",
+      id: "layout",
+      heading: "What is in the repository",
+      columns: ["Folder", "What it holds"],
+      rows: [
+        [
+          "`pipeline/`",
+          "The automated binder-generation pipeline and the scripting layer that drives each stage. `batch_design.sh` is the end to end entry point.",
+        ],
+        [
+          "`redesign/`",
+          "The second pass: selecting near misses, re-running them, and collecting confidences.",
+        ],
+        [
+          "`archive/`",
+          "Scripts from earlier rounds, kept for reproducing old results. Not part of the active workflow.",
+        ],
+      ],
+    },
+    {
+      kind: "details",
+      section: "References",
+      id: "references",
+      heading: "References",
+      summary: "The five sources behind the protein design write-up.",
+      blocks: [
+        {
+          kind: "references",
+          for: "Protein design",
+          items: [
+            {
+              n: "1",
+              text: "W. Yang et al., The past, present and future of de novo protein design. Nature, vol. 652, no. 8112, pp. 1139 to 1152, April 2026.",
+              href: "https://doi.org/10.1038/s41586-026-10328-7",
+            },
+            {
+              n: "2",
+              text: "D. R. Fox, C. Taveneau, J. Clement, R. Grinter and G. J. Knott, Code to complex: AI-driven de novo binder design. Structure, vol. 33, no. 10, pp. 1631 to 1642, October 2025.",
+              href: "https://doi.org/10.1016/j.str.2025.08.007",
+            },
+            {
+              n: "3",
+              text: "J. Butcher et al., De novo design of all-atom biomolecular interactions with RFdiffusion3. bioRxiv, November 2025.",
+              href: "https://doi.org/10.1101/2025.09.18.676967",
+            },
+            {
+              n: "4",
+              text: "J. Dauparas et al., Robust deep learning-based protein sequence design using ProteinMPNN. Science, vol. 378, pp. 49 to 56, 2022.",
+              href: "https://doi.org/10.1126/science.add2187",
+            },
+            {
+              n: "5",
+              text: "N. Corley et al., Accelerating biomolecular modeling with AtomWorks and RF3. bioRxiv, August 2025.",
+              href: "https://doi.org/10.1101/2025.08.14.670328",
+            },
+          ],
+        },
       ],
     },
   ],
