@@ -18,6 +18,12 @@ import { inline } from './RichText'
  * engineering cycle, and it means the labels are not the only thing telling you
  * where you are.
  *
+ * The ring used to be the interface: a large circle with four buttons on it,
+ * and the writing hidden until one was clicked. That cost half a screen to say
+ * nothing and buried the actual content behind four clicks, so the ring is now
+ * an emblem beside the cycle's name and all four stages are on the page at
+ * once, in order, each carrying its own colour. Nothing here has to be opened.
+ *
  * The data shape matches the `steps` block, so a `steps` block can be dropped
  * into `cycles` with no rewriting. Items map to stages by position: items[0] is
  * Design, items[1] Build, items[2] Test, items[3] Learn.
@@ -55,7 +61,7 @@ const VIEW = 340
 const C = VIEW / 2
 const RADIUS = 118
 /** Side of one block in the ring. Big enough to read as a pixel, not a dot. */
-const BLOCK = 17
+const BLOCK = 20
 const PER_QUADRANT = 11
 /** Gap between the end of one quadrant and the start of the next, in degrees. */
 const GAP_DEG = 17
@@ -71,34 +77,108 @@ function splitHeading(heading: string) {
   return { tab: heading.slice(0, i).trim(), subtitle: heading.slice(i + 1).trim() }
 }
 
+/**
+ * The loop itself, as an emblem. Decorative: the stage names and colours are
+ * repeated as text on the cards below, so nothing is said only in here.
+ */
+function Ring({ label }: { label?: string }) {
+  return (
+    <div className="relative aspect-square w-[124px] shrink-0 sm:w-[148px]">
+      <svg viewBox={`0 0 ${VIEW} ${VIEW}`} className="absolute inset-0 h-full w-full" aria-hidden>
+        {STAGES.map((s, i) => {
+          // Each arc runs FROM this stage TO the next one, so it sits between
+          // two stations rather than under one. Blocks taper toward the far
+          // end, which gives the loop a direction without an arrowhead: a
+          // rotated arrowhead cannot stay on the pixel grid, and four tilted
+          // diamonds look like debris.
+          const from = i * 90 + 45 + GAP_DEG
+          const to = (i + 1) * 90 + 45 - GAP_DEG
+          return (
+            <g key={s.name}>
+              {Array.from({ length: PER_QUADRANT }, (_, b) => {
+                const t = b / (PER_QUADRANT - 1)
+                const p = polar(RADIUS, from + t * (to - from))
+                const size = BLOCK * (1 - t * 0.3)
+                return (
+                  <rect
+                    key={b}
+                    x={p.x - size / 2}
+                    y={p.y - size / 2}
+                    width={size}
+                    height={size}
+                    fill={s.colour}
+                    stroke={SITE_PALETTE.shadow}
+                    strokeWidth={2}
+                    shapeRendering="crispEdges"
+                  />
+                )
+              })}
+            </g>
+          )
+        })}
+      </svg>
+      {label && (
+        <span className="pixel absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs text-leaf-800">
+          {label}
+        </span>
+      )}
+    </div>
+  )
+}
+
+function StageCard({ index, step }: { index: number; step: CycleStep }) {
+  const stage = STAGES[index]
+  return (
+    <li
+      className="panel-flat flex min-w-0 flex-col gap-1.5 px-4 py-3.5"
+      style={{ boxShadow: `inset 8px 0 0 ${stage.colour}` }}
+    >
+      <div className="flex items-center gap-2">
+        <PixelSprite sprite={stage.sprite} scale={2} />
+        <span className="kicker">
+          {index + 1} · {stage.name}
+        </span>
+      </div>
+      {/* The kicker already names the stage. A title that only repeats it
+          would print "Design" twice in two type sizes. */}
+      {step.title && step.title.toLowerCase() !== stage.name.toLowerCase() && (
+        <h3 className="text-base leading-tight">{step.title}</h3>
+      )}
+      <p className="text-body-sm leading-relaxed">{inline(step.body)}</p>
+      {step.bullets && step.bullets.length > 0 && (
+        <ul className="mt-0.5 list-disc pl-5 text-body-sm leading-relaxed">
+          {step.bullets.map((b) => (
+            <li key={b}>{b}</li>
+          ))}
+        </ul>
+      )}
+    </li>
+  )
+}
+
 export default function CycleWheel({ heading, intro, cycles }: Props) {
   const [cycleIdx, setCycleIdx] = useState(0)
-  const [selected, setSelected] = useState<number | null>(null)
 
   if (cycles.length === 0) return null
 
   const cycle = cycles[cycleIdx]
   const { tab, subtitle } = splitHeading(cycle.heading)
-  const step = selected !== null ? cycle.items[selected] : undefined
-  const stage = selected !== null ? STAGES[selected] : undefined
+  const many = cycles.length > 1
 
   return (
     <section className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
       {heading && <h2 className="text-xl sm:text-2xl">{heading}</h2>}
       {intro && <p className="mt-2 text-body-sm leading-relaxed">{inline(intro)}</p>}
 
-      {cycles.length > 1 && (
-        <div className="mt-4 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Cycles">
+      {many && (
+        <div className="mt-4 flex flex-wrap gap-2" role="tablist" aria-label="Cycles">
           {cycles.map((c, i) => (
             <button
               key={c.heading}
               type="button"
               role="tab"
               aria-selected={i === cycleIdx}
-              onClick={() => {
-                setCycleIdx(i)
-                setSelected(null)
-              }}
+              onClick={() => setCycleIdx(i)}
               className={`pixel-btn ${i === cycleIdx ? 'pixel-btn-primary' : ''}`}
             >
               {splitHeading(c.heading).tab}
@@ -107,125 +187,26 @@ export default function CycleWheel({ heading, intro, cycles }: Props) {
         </div>
       )}
 
-      {(subtitle || cycle.intro) && (
-        <div className="mx-auto mt-4 max-w-2xl text-center">
-          {subtitle && <p className="pixel text-base sm:text-lg">{subtitle}</p>}
-          {cycle.intro && <p className="mt-1 text-body-sm leading-relaxed">{inline(cycle.intro)}</p>}
-        </div>
-      )}
-
-      {/* The ring. A square box so the absolutely placed stage buttons can be
-          positioned as percentages and stay on the circle at any size. */}
-      <div className="relative mx-auto mt-5 aspect-square w-full max-w-[380px]">
-        <svg viewBox={`0 0 ${VIEW} ${VIEW}`} className="absolute inset-0 h-full w-full" aria-hidden>
-          {STAGES.map((s, i) => {
-            const isSel = selected === i
-            const dim = selected !== null && !isSel
-            // Each arc is the step FROM this stage TO the next one, so it runs
-            // between two stations rather than sitting under one. Blocks taper
-            // toward the far end, which gives the loop a direction without
-            // needing an arrowhead: a rotated arrowhead cannot stay on the
-            // pixel grid, and four tilted diamonds look like debris.
-            const from = i * 90 + 45 + GAP_DEG
-            const to = (i + 1) * 90 + 45 - GAP_DEG
-            return (
-              <g key={s.name}>
-                {Array.from({ length: PER_QUADRANT }, (_, b) => {
-                  const t = b / (PER_QUADRANT - 1)
-                  const p = polar(RADIUS, from + t * (to - from))
-                  const size = (isSel ? BLOCK + 3 : BLOCK) * (1 - t * 0.3)
-                  return (
-                    <rect
-                      key={b}
-                      x={p.x - size / 2}
-                      y={p.y - size / 2}
-                      width={size}
-                      height={size}
-                      fill={s.colour}
-                      stroke={SITE_PALETTE.shadow}
-                      strokeWidth={2}
-                      opacity={dim ? 0.4 : 1}
-                      shapeRendering="crispEdges"
-                    />
-                  )
-                })}
-              </g>
-            )
-          })}
-        </svg>
-
-        {/* The hub: which cycle you are looking at. */}
-        <div className="absolute left-1/2 top-1/2 flex h-[30%] w-[30%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-sm border-[3px] border-leaf-700 bg-leaf-50 text-center shadow-[3px_3px_0_var(--p-shadow)]">
-          <span className="numeral text-2xl leading-none sm:text-3xl">
-            {String(cycleIdx + 1).padStart(2, '0')}
-          </span>
-          {/* "of 1" is noise on a part that ran a single cycle. */}
-          {cycles.length > 1 && <span className="kicker mt-1 text-[0.6rem]">of {cycles.length}</span>}
-        </div>
-
-        {/* One button per stage, sitting on the ring at the middle of its arc. */}
-        {STAGES.map((s, i) => {
-          const mid = polar(RADIUS, i * 90 + 45)
-          const isSel = selected === i
-          return (
-            <button
-              key={s.name}
-              type="button"
-              aria-pressed={isSel}
-              onClick={() => setSelected(isSel ? null : i)}
-              style={{ left: `${(mid.x / VIEW) * 100}%`, top: `${(mid.y / VIEW) * 100}%` }}
-              className={
-                'absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-0.5 rounded-sm border-[3px] px-2 py-1 transition-colors ' +
-                (isSel
-                  ? 'border-leaf-800 bg-leaf-200 shadow-[3px_3px_0_var(--p-shadow)]'
-                  : 'border-leaf-700 bg-leaf-50 hover:bg-leaf-100')
-              }
-            >
-              <PixelSprite sprite={s.sprite} scale={2} />
-              <span className="pixel text-tag leading-none">
-                <span className="opacity-60">{i + 1}</span> {s.name}
-              </span>
-            </button>
-          )
-        })}
-      </div>
-
-      <p className="mt-3 text-center text-body-sm opacity-80">
-        {selected === null ? 'Pick a stage to see what happened in it.' : stage?.note}
-      </p>
-
-      {/* The detail. The stage colour is an inset stripe inside the panel's own
-          border rather than a replacement for it: these are pastels, and one of
-          them as a border measures 1.2:1 against cream, which is no border. */}
-      <div
-        className="panel-flat mt-3 px-5 py-4"
-        style={stage ? { boxShadow: `inset 8px 0 0 ${stage.colour}` } : undefined}
-        aria-live="polite"
-      >
-        {step && selected !== null ? (
-          <>
-            <div className="flex items-baseline gap-2">
-              <span className="badge">{String(selected + 1).padStart(2, '0')}</span>
-              <p className="kicker">
-                {tab} · {STAGES[selected].name}
-              </p>
-            </div>
-            <h3 className="mt-1 text-lg sm:text-xl">{step.title || STAGES[selected].name}</h3>
-            <p className="mt-2 text-body-sm leading-relaxed">{inline(step.body)}</p>
-            {step.bullets && step.bullets.length > 0 && (
-              <ul className="mt-3 list-disc pl-5 text-body-sm leading-relaxed">
-                {step.bullets.map((b) => (
-                  <li key={b}>{b}</li>
-                ))}
-              </ul>
-            )}
-          </>
-        ) : (
-          <p className="text-center text-body-sm leading-relaxed">
-            Four stages, then round again. {tab} is {cycle.items.length === 4 ? 'all four' : 'in progress'}.
+      {/* The emblem and the cycle's name share a line, so the loop is present
+          without taking a screen to say so. */}
+      <div className="mt-4 flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
+        <Ring label={many ? `${cycleIdx + 1} of ${cycles.length}` : undefined} />
+        <div className="min-w-0">
+          <p className="pixel text-base sm:text-lg">{subtitle || tab}</p>
+          {cycle.intro && (
+            <p className="mt-1 text-body-sm leading-relaxed">{inline(cycle.intro)}</p>
+          )}
+          <p className="mt-1.5 text-note text-leaf-800">
+            Design, build, test, learn, then round again.
           </p>
-        )}
+        </div>
       </div>
+
+      <ol className="mt-4 grid gap-3 sm:grid-cols-2">
+        {cycle.items.map((step, i) => (
+          <StageCard key={step.title + i} index={i} step={step} />
+        ))}
+      </ol>
     </section>
   )
 }
