@@ -112,55 +112,60 @@ export default function WikiPage({ page }: { page: Page }) {
         {/* Blocks are flex items. Anything inside one that can be wider than
             the column (a table, a code line) has to be free to shrink, or it
             widens the page instead of scrolling inside itself. */}
-        {layout.lead.length > 0 && (
-          <div className="flex flex-col gap-6 pb-10">
-            {layout.lead.map((block, i) => (
-              <div key={i} id={block.id} className="min-w-0">
-                <BlockView block={block} />
-              </div>
-            ))}
-          </div>
-        )}
+        {/* On a long page the outline hangs off the left of this column, from its
+            first block to its last, and sticks while the reader scrolls. */}
+        <div className="relative">
+          {long && <SectionAside sections={rail} />}
 
-        {long ? (
-          <div className="relative flex flex-col gap-14 pb-4">
-            <SectionAside sections={rail} />
-            {layout.sections.map((section) => (
-              <CitationContext.Provider key={section.id} value={{ scope: slugify(section.label), lists }}>
-                <section id={section.id} aria-labelledby={section.id + "-title"} className="min-w-0">
-                  <h2 id={section.id + "-title"} className="section-title">
-                    {section.label}
-                  </h2>
-                  <div className="section-card">
-                    {section.blocks.map((block, i) => (
-                      <div
-                        key={i}
-                        id={blockKey(block)}
-                        className={
-                          "section-block min-w-0" +
-                          (i > 0 && blockHeading(block) ? " is-sub" : "") +
-                          // No heading of its own: photos, resource cards or a video that
-                          // belong to the write-up above them, so they sit close to it.
-                          (i > 0 && !blockHeading(block) ? " is-attached" : "")
-                        }
-                      >
-                        <BlockView block={block} />
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              </CitationContext.Provider>
-            ))}
-          </div>
-        ) : (
-          <div className="flex flex-col gap-6 pb-4">
-            {layout.sections.flatMap((section) => section.blocks).map((block, i) => (
-              <div key={i} id={block.id} className="min-w-0">
-                <BlockView block={block} />
-              </div>
-            ))}
-          </div>
-        )}
+          {layout.lead.length > 0 && (
+            <div className="flex flex-col gap-6 pb-10">
+              {layout.lead.map((block, i) => (
+                <div key={i} id={block.id} className="min-w-0">
+                  <BlockView block={block} />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {long ? (
+            <div className="flex flex-col gap-14 pb-4">
+              {layout.sections.map((section) => (
+                <CitationContext.Provider key={section.id} value={{ scope: slugify(section.label), lists }}>
+                  <section id={section.id} aria-labelledby={section.id + "-title"} className="min-w-0">
+                    <h2 id={section.id + "-title"} className="section-title">
+                      {section.label}
+                    </h2>
+                    <div className="section-card">
+                      {section.blocks.map((block, i) => (
+                        <div
+                          key={i}
+                          id={blockKey(block)}
+                          className={
+                            "section-block min-w-0" +
+                            (i > 0 && blockHeading(block) ? " is-sub" : "") +
+                            // No heading of its own: photos, resource cards or a video that
+                            // belong to the write-up above them, so they sit close to it.
+                            (i > 0 && !blockHeading(block) ? " is-attached" : "")
+                          }
+                        >
+                          <BlockView block={block} />
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                </CitationContext.Provider>
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col gap-6 pb-4">
+              {layout.sections.flatMap((section) => section.blocks).map((block, i) => (
+                <div key={i} id={block.id} className="min-w-0">
+                  <BlockView block={block} />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </GardenSection>
 
       <GardenSection className="pb-8 pt-8">
