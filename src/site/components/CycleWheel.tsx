@@ -159,7 +159,8 @@ export default function CycleWheel({ heading, intro, cycles }: Props) {
           <span className="numeral text-2xl leading-none sm:text-3xl">
             {String(cycleIdx + 1).padStart(2, '0')}
           </span>
-          <span className="kicker mt-1 text-[0.6rem]">of {cycles.length}</span>
+          {/* "of 1" is noise on a part that ran a single cycle. */}
+          {cycles.length > 1 && <span className="kicker mt-1 text-[0.6rem]">of {cycles.length}</span>}
         </div>
 
         {/* One button per stage, sitting on the ring at the middle of its arc. */}
