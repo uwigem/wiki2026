@@ -32,6 +32,11 @@ import { href } from '../../router'
  * page is heading for, so they lead the picture rather than flickering
  * through every beat it passes.
  *
+ * The closing screen is a landing. It holds the page until its title and gates
+ * are fully on screen, and the scroll that brought the reader there cannot
+ * carry on into the footer; only a fresh scroll after it has appeared does.
+ * Scrolling on while it is still appearing finishes it in place.
+ *
  * Layout. On a wide screen the words sit in a column on the left and the
  * picture fills the right; on a phone the picture takes the top and the words
  * the bottom. The hero and the closing are the exceptions: there the garden
@@ -50,6 +55,37 @@ const STEP_SECONDS = 0.55
 const REWIND_BODY_SECONDS = 0.35
 /** Going back up: how long a scene's entry takes to play backwards. */
 const REWIND_ENTRY_SECONDS = 0.5
+/** How far the closing has played once its title and gates are fully on screen. */
+const CLOSING_SHOWN = 0.65
+/** Input events closer together than this are one gesture. */
+const GESTURE_GAP_MS = 200
+/** The longest the closing holds the page before it has appeared, in case it never gets drawn. */
+const HOLD_LIMIT_MS = 4000
+
+/**
+ * The closing screen as a landing. `openAt` is when its title and gates were
+ * fully on screen (Infinity until then), and `closedAt` the last moment before
+ * the reader reached it. `gestureAt` and `inputAt` are when the reader's
+ * current scroll gesture began and last moved. `finish` asks the draw loop to
+ * play the closing straight to its end.
+ */
+interface Landing {
+  openAt: number
+  closedAt: number
+  finish: boolean
+  gestureAt: number
+  inputAt: number
+}
+
+/**
+ * Whether the closing screen is still holding the page: until it has fully
+ * appeared, and after that for as long as the gesture that brought the reader
+ * there keeps going.
+ */
+function holdingAtEnd(l: Landing, now: number) {
+  if (l.openAt === Infinity) return now - l.closedAt < HOLD_LIMIT_MS
+  return l.gestureAt <= l.openAt && now - l.inputAt < GESTURE_GAP_MS
+}
 
 interface Layout {
   navH: number
@@ -125,6 +161,7 @@ export default function StoryStage() {
   /** Which scene is showing and how far it has played. */
   const play = useRef({ idx: -1, t: 0 })
   const water = useRef({ value: 0.1, manual: false })
+  const landing = useRef<Landing>({ openAt: Infinity, closedAt: 0, finish: false, gestureAt: 0, inputAt: 0 })
   const reducedRef = useRef(reduced)
   reducedRef.current = reduced
 
@@ -165,7 +202,10 @@ export default function StoryStage() {
    *
    * The footer below the story is an ordinary piece of page, not a scene, so
    * once the reader is past the last scene the snapping is switched off and
-   * the wheel is left alone: it scrolls normally down there.
+   * the wheel is left alone: it scrolls normally down there. While the closing
+   * screen is holding the page (`holdingAtEnd`), the footer is taken out of the
+   * snap points and the snapping stays on, so a swipe or a key press settles
+   * back on the closing instead.
    *
    * A scroll this page asks for is made with the snapping off as well, so the
    * browser cannot fight it halfway, and it goes back on once the page has
@@ -200,7 +240,24 @@ export default function StoryStage() {
     }
     /** Still among the scenes, rather than down in the footer. */
     const inStory = () => window.scrollY <= stopAt(LAST) + 8
-    setSnap(true)
+    const applySnap = () => {
+      const hold = holdingAtEnd(landing.current, performance.now())
+      setSnap(inStory() || hold)
+      if (footer) footer.style.scrollSnapAlign = hold ? 'none' : 'end'
+    }
+    /** Any touch, key or click: a new gesture if the last one has paused. */
+    const noteInput = (fresh = false) => {
+      const now = performance.now()
+      const l = landing.current
+      if (fresh || now - l.inputAt > GESTURE_GAP_MS) l.gestureAt = now
+      l.inputAt = now
+      applySnap()
+    }
+    const onTouchStart = () => noteInput(true)
+    const onTouchMove = () => noteInput()
+    const onKeyDown = () => noteInput()
+    const onPointerDown = () => noteInput(true)
+    applySnap()
 
     let gliding = false
     let watch = 0
@@ -213,7 +270,7 @@ export default function StoryStage() {
         cancelAnimationFrame(watch)
         window.clearTimeout(giveUp)
         gliding = false
-        setSnap(inStory())
+        applySnap()
       }
       cancelAnimationFrame(watch)
       window.clearTimeout(giveUp)
@@ -236,7 +293,11 @@ export default function StoryStage() {
     glide.current = glideTo
 
     const onScroll = () => {
-      if (!gliding) setSnap(inStory())
+      if (gliding) return
+      // Pulled below the closing while it is holding: finish it, and let the
+      // snapping bring the page back to it.
+      if (!inStory() && holdingAtEnd(landing.current, performance.now())) landing.current.finish = true
+      applySnap()
     }
 
     /*
@@ -264,15 +325,19 @@ export default function StoryStage() {
     }
     const onWheel = (e: WheelEvent) => {
       if (e.ctrlKey || Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return
-      // Past the last scene the page scrolls like any other page.
-      if (!inStory()) return
-      e.preventDefault()
       const now = performance.now()
       const sign = Math.sign(e.deltaY)
       // A pause or a change of direction starts a new gesture.
-      if (now - lastEvent > 200 || sign !== lastSign) recent = []
+      if (now - lastEvent > GESTURE_GAP_MS || sign !== lastSign) {
+        recent = []
+        landing.current.gestureAt = now
+      }
       lastEvent = now
       lastSign = sign
+      landing.current.inputAt = now
+      // Past the last scene the page scrolls like any other page.
+      if (!inStory()) return
+      e.preventDefault()
       recent.push(Math.abs(e.deltaY))
       if (recent.length > 60) recent.shift()
       if (now < lockedUntil || mean(6) < mean(40) * 0.95) return
@@ -288,6 +353,15 @@ export default function StoryStage() {
         }
       const next = clamp(at + Math.sign(e.deltaY), 0, list.length - 1)
       if (next === at) return
+      // The closing holds the page: finish it in place rather than leave it.
+      if (next === STORY.length && holdingAtEnd(landing.current, now)) {
+        landing.current.finish = true
+        return
+      }
+      if (next === LAST) {
+        landing.current.openAt = Infinity
+        landing.current.closedAt = now
+      }
       goingTo = next
       arriveBy = now + 900
       lockedUntil = now + 550
@@ -316,10 +390,18 @@ export default function StoryStage() {
 
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('wheel', onWheel, { passive: false })
+    window.addEventListener('touchstart', onTouchStart, { passive: true })
+    window.addEventListener('touchmove', onTouchMove, { passive: true })
+    window.addEventListener('keydown', onKeyDown)
+    window.addEventListener('pointerdown', onPointerDown)
     document.addEventListener('click', onHomeLink, true)
     return () => {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('wheel', onWheel)
+      window.removeEventListener('touchstart', onTouchStart)
+      window.removeEventListener('touchmove', onTouchMove)
+      window.removeEventListener('keydown', onKeyDown)
+      window.removeEventListener('pointerdown', onPointerDown)
       document.removeEventListener('click', onHomeLink, true)
       window.clearTimeout(homeJump)
       cancelAnimationFrame(watch)
@@ -359,6 +441,7 @@ export default function StoryStage() {
     let running = false
     let clock = 0
     let last = performance.now()
+    let shownIdx = -1
 
     const tick = (now: number) => {
       const dt = Math.min(0.05, (now - last) / 1000)
@@ -401,6 +484,15 @@ export default function StoryStage() {
         }
       }
       const idx = pl.idx
+      // The closing starts out holding the page, unless the reader arrived by a
+      // jump straight into the footer (the End key), who is already past it.
+      const land = landing.current
+      if (idx !== LAST) {
+        land.openAt = Infinity
+        land.closedAt = now
+        land.finish = false
+      } else if (shownIdx !== LAST && pastEnd > 8) land.openAt = now
+      shownIdx = idx
       /** How far the page is from this scene's own place: + toward the next, - toward the previous. */
       const ahead = u - idx
       const heading = ahead > 0.02 ? 1 : ahead < -0.02 ? -1 : 0
@@ -415,10 +507,15 @@ export default function StoryStage() {
       if (reducedNow || secs <= 0) pl.t = 1
       else if (heading < 0)
         pl.t = Math.max(0, pl.t - dt * (pl.t > entry ? 1 / REWIND_BODY_SECONDS : entry / REWIND_ENTRY_SECONDS))
-      else if (heading > 0) pl.t = Math.min(1, pl.t + dt * Math.max(1 / secs, 1 / STEP_SECONDS))
+      else if (heading > 0 || (idx === LAST && land.finish))
+        pl.t = Math.min(1, pl.t + dt * Math.max(1 / secs, 1 / STEP_SECONDS))
       else pl.t = Math.min(1, pl.t + dt / secs)
       const t = pl.t
       const id = STORY[idx].id
+      if (idx === LAST) {
+        if (t >= 1) land.finish = false
+        if (land.openAt === Infinity && t >= CLOSING_SHOWN) land.openAt = now
+      }
 
       // The words belong to where the page is going, so they change once per
       // step, at the start of it.
@@ -458,7 +555,7 @@ export default function StoryStage() {
       // page. Its words and cards fade as they go, so the bottom of the page
       // is the garden over the footer rather than a sliver of cut-off cards.
       const leaving = 1 - span(below, 0.05, 0.6)
-      setFade(closingRef.current, idx === LAST ? span(t, 0.35, 0.65) * leaving : 0)
+      setFade(closingRef.current, idx === LAST ? span(t, 0.35, CLOSING_SHOWN) * leaving : 0)
       setFade(progressRef.current, leaving)
       // Hidden outright once gone, or its squares could still be clicked.
       const shown = leaving > 0.02 ? '' : 'hidden'
