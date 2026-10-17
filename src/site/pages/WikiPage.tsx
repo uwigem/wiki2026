@@ -38,6 +38,7 @@ import LinkCards from "../components/LinkCards";
 import StageRail from "../components/StageRail";
 import StakeholderModal from "../components/StakeholderModal";
 import Workflow from "../components/Workflow";
+import Pipeline from "../components/Pipeline";
 import Hog from "../components/alchemy/Hog";
 import { StakeholderContext, stakeholderId } from "../components/stakeholders";
 
@@ -526,6 +527,9 @@ function BlockView({ block }: { block: Block }) {
 
     case "links":
       return <LinkCards heading={block.heading} intro={block.intro} items={block.items} source={block.source} />;
+
+    case "pipeline":
+      return <Pipeline heading={block.heading} intro={block.intro} stages={block.stages} source={block.source} />;
 
     case "callout":
       return <Callout heading={block.heading} label={block.label} body={block.body} source={block.source} />;
