@@ -108,6 +108,8 @@ export function checkContent() {
     const content = JSON.stringify(page.blocks)
     for (const [, target] of content.matchAll(LINK)) {
       const [path, anchor] = target.split('#')
+      // A link to a file under public/ (a handbook PDF) is not a page.
+      if (/\.[a-z0-9]{2,5}$/i.test(path)) continue
       if (!navPaths.has(path) && !HAND_WRITTEN_ROUTES.has(path)) {
         problems.push(
           `"${page.title}" links to "${target}", but no page lives at "${path}", so the link ` +

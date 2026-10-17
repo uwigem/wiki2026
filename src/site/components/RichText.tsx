@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Link } from '../router'
+import { Link, asset } from '../router'
 import { Cite } from './citations'
 import { StakeholderLink } from './stakeholders'
 
@@ -36,6 +36,8 @@ const TOKEN = new RegExp(
 )
 const CITE = new RegExp(String.raw`^\[(${NUM}(?:\s*,\s*${NUM})*)\]$`)
 const LINK = /^\[([^\]]+)\]\(([^)]+)\)$/
+/** Link targets that are files in public/, not pages. */
+export const FILE = /\.(pdf|docx?|pptx?|xlsx?|csv|zip|png|jpe?g|webp|svg|mp4)$/i
 
 export function inline(text: string): ReactNode[] {
   return text
@@ -57,6 +59,15 @@ export function inline(text: string): ReactNode[] {
       if (link) {
         const [, label, target] = link
         if (target.startsWith('/')) {
+          // A file under public/ (a handbook PDF, say) opens as a file; a path
+          // without an extension is a page of this wiki.
+          if (FILE.test(target)) {
+            return (
+              <a key={i} href={asset(target)} target="_blank" rel="noreferrer noopener" className="cross-link">
+                {label}
+              </a>
+            )
+          }
           return (
             <Link key={i} to={target} className="cross-link">
               {label}

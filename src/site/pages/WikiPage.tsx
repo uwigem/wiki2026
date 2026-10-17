@@ -32,6 +32,9 @@ import { ACCESSORIES } from "../components/gardenArt";
 import References from "../components/References";
 import ScienceFigure from "../components/ScienceFigure";
 import BorrowStrip from "../components/BorrowStrip";
+import VideoRow from "../components/VideoRow";
+import Gallery from "../components/Gallery";
+import LinkCards from "../components/LinkCards";
 import StageRail from "../components/StageRail";
 import StakeholderModal from "../components/StakeholderModal";
 import Workflow from "../components/Workflow";
@@ -503,6 +506,15 @@ function BlockView({ block }: { block: Block }) {
           source={block.source}
         />
       );
+
+    case "video":
+      return <VideoRow heading={block.heading} intro={block.intro} videos={block.videos} source={block.source} />;
+
+    case "gallery":
+      return <Gallery heading={block.heading} intro={block.intro} images={block.images} source={block.source} />;
+
+    case "links":
+      return <LinkCards heading={block.heading} intro={block.intro} items={block.items} source={block.source} />;
 
     case "callout":
       return <Callout heading={block.heading} label={block.label} body={block.body} source={block.source} />;

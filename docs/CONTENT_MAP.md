@@ -60,6 +60,9 @@ All page content is data in `src/site/content/pages.ts`. Each item in a page's
 | `details` | A closed section with its heading and one line showing; holds other blocks | References, the working behind a number, background a reader may know |
 | `diagram` | One of the site's own drawings, still and captioned (`ScienceFigure`) | A mechanism the text spends several paragraphs on |
 | `borrow` | Things that already exist, an arrow, and the one thing added | Positioning a new approach against established ones |
+| `video` | YouTube videos as stills with a play button; the player loads only on click | Recorded talks, tutorial episodes |
+| `gallery` | Two to four photographs side by side, lazy-loaded | An event as it looked |
+| `links` | Cards that each end in one button: a file under `public/` downloads, an https:// address opens in a new tab | Handbooks, posts, documents to take home |
 | `todo` | A visible "still to come" panel | Drafting only. No page ships one. |
 
 **Link between pages.** Any block can take an `id`, and any body text can then
