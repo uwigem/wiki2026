@@ -887,6 +887,78 @@ const model: Page = {
     },
     {
       kind: "prose",
+      section: "Kinetic modelling",
+      id: "homeostasis",
+      heading: "The homeostasis model",
+      body: [
+        "Because the tuner was assembled with adjustability in mind, understanding how it behaves under varying conditions and doses is part of building it. To approach that, the modelling subteam built dedicated deterministic **ordinary differential equation** models: one for the intervention itself, and others for the systems attached to it.",
+        "To address the use of our system as a bidirectional network, including strategic dosing of both the linker and the binder, we implemented an ODE network representing the SMO signalling system upstream of the cilium itself. It includes the **MMM complex** (MGRN1, MEGF8, MOSMO) and the natural inhibitor **PTCH1**, the components most central to the trafficking of SMO into the cilium.",
+        "To be considered active, SMO must enter the primary cilium, so the network centres on ciliary SMO concentration, which is what the intervention acts on directly. The upstream system is restricted to PTCH1 and the MMM complex because one is the natural intervention and the other is ours. Since our intervention aims to restrict the SMO population in the cilium, the MMM shuttle is coupled to an existing downstream Hedgehog model from BioModels, to check whether reductions in SMO through targeted ubiquitination are enough to actually change the output of the system.",
+      ],
+      source:
+        "Kinetic Modelling: Version 0 construction and the 2026 wiki draft. Downstream model after Sivakumar, 2011; ciliary entry after Wilson, 2009.",
+    },
+    {
+      kind: "figure",
+      id: "homeostasis-network",
+      caption:
+        "The upstream interaction network of Hedgehog signalling that the homeostasis model represents: the MMM complex and PTCH1 acting on the pool of SMO that enters the cilium.",
+      owner: "Kinetic Modelling",
+      ratio: "wide",
+    },
+    {
+      kind: "details",
+      id: "states",
+      heading: "What the model tracks",
+      summary: "The six quantities the equations follow, and how each one changes.",
+      blocks: [
+        {
+          kind: "table",
+          columns: ["Quantity", "What it is", "Gained by", "Lost to"],
+          rows: [
+            [
+              "**S_cyto**",
+              "Cytoplasmic SMO that has yet to enter the cilium. The source the cilium draws on.",
+              "Synthesis, and exit from the cilium",
+              "Entry to the cilium, and degradation",
+            ],
+            [
+              "**S_cil**",
+              "Ciliary SMO. The active form, and the model's readout.",
+              "Entry from the cytoplasm",
+              "Exit, degradation, PTCH1 inhibition, and MMM-supported ubiquitination",
+            ],
+            [
+              "**S_ub**",
+              "Ubiquitinated SMO, on its way to the proteasome.",
+              "Michaelis-Menten interaction with MGRN1",
+              "Degradation",
+            ],
+            [
+              "**MMM**",
+              "The functional complex that ubiquitinates ciliary SMO.",
+              "Assembly from the non-functional form",
+              "Interaction with the de novo binder",
+            ],
+            [
+              "**M_nf**",
+              "The non-functional complex, pulled apart.",
+              "De novo binder interaction",
+              "Reassembly, reversibly",
+            ],
+            [
+              "**M_link**",
+              "The complex joined to the linker. Measures an accelerated ubiquitination rate.",
+              "Linker binding",
+              "Linker release",
+            ],
+          ],
+          source: "Kinetic Modelling: Version 0 state definitions.",
+        },
+      ],
+    },
+    {
+      kind: "prose",
       heading: "The test",
       body: [
         "We run the model twice. Once as **wild type**, and once with **PTCH1 set to zero**, which is the most common mutation in basal cell carcinoma and drives SMO too high. The **tunability window** is the range where adding the binder brings the second run back onto the first run over time.",
@@ -918,6 +990,74 @@ const model: Page = {
       ],
     },
     {
+      kind: "details",
+      id: "parameters",
+      heading: "Every parameter, and where it came from",
+      summary:
+        "Twelve values, each marked as measured, calculated from other values, or standing in until something better exists.",
+      blocks: [
+        {
+          kind: "table",
+          columns: ["Parameter", "What it represents", "Value", "Where it comes from"],
+          rows: [
+            ["SMO_cil", "Ciliary SMO concentration", "1 nM", "Normalisation anchor. Sets the scale only."],
+            ["M_free", "Active MMM complex", "0.148 nM", "Literature, Kong 2021, derived from densitometry"],
+            ["PTCH1", "PTCH1 concentration", "0.15 nM", "PaxDb, 0.01 ppm"],
+            ["Influx", "Ciliary influx", "0.116 nM per second", "Calculated from the other ciliary rates"],
+            ["k_out", "Ciliary transit, exit", "9.63e-5 per second", "Literature, Milenkovic 2014, from a half-life"],
+            ["kdeg_SMO_cil", "SMO degradation rate", "3.21e-5 per second", "Literature, Milenkovic 2014, from a half-life"],
+            ["kPTCH1_SMO", "PTCH1 removal strength", "4.8e-4 per nM per second", "**Stand-in.** Ye 2018, based on GPR161, a non-Smoothened Hedgehog inhibitor"],
+            ["kMMM", "MMM-mediated ubiquitination rate", "0.42 per nM per second", "Calculated from a fold change"],
+            ["alpha_L", "Ternary enhancement rate", "1", "**Stand-in.** Assumes the linker is non-cooperative"],
+            ["kdeg_MMM", "MMM degradation, turnover", "8.86e-6 per second", "Literature, Kong 2021"],
+            ["kform_MMM", "MMM synthesis", "1.3e-6 nM per second", "Calculated from degradation and abundance"],
+            ["k3, k_minus3, kf_MMM_linker, koff", "Binder and linker on and off rates", "Preset", "**Stand-ins**, swept rather than trusted"],
+          ],
+          caption:
+            "Four of the twelve are stand-ins rather than measurements. They are swept across a range in every result rather than being treated as known.",
+          source: "Kinetic Modelling: parameter database, 2026.",
+        },
+      ],
+    },
+    {
+      kind: "details",
+      id: "assumptions",
+      heading: "The assumptions the model rests on",
+      summary:
+        "Six places where the biology was simplified, and what would be needed to stop simplifying.",
+      blocks: [
+        {
+          kind: "facts",
+          items: [
+            {
+              title: "The cytoplasm is a non-depleting source",
+              body: "The cilium is a very small compartment, so ciliary SMO is a small fraction of the cell's total and the data are too sparse to fix the ratio. The cytoplasmic to ciliary transit is bundled into one influx rate. A SAG ciliary trafficking time course from wet lab would let us measure it properly.",
+            },
+            {
+              title: "The MMM complex is treated as one ligase",
+              body: "MEGF8, MGRN1 and MOSMO are represented as a single structure. The literature says they do not act on SMO independently, and no published binding data exists to separate their rates, so the complex is reduced to its rate-limiting form.",
+            },
+            {
+              title: "Ubiquitination is linear, not Michaelis-Menten",
+              body: "The database value for a general ring E3 ligase gives a Km far larger than our calculated ciliary SMO concentration. When Km greatly exceeds the substrate, Michaelis-Menten collapses to a first-order relationship, so that is what the model uses.",
+            },
+            {
+              title: "The linker clears at the same rate as the natural complex",
+              body: "With no measured kinetics for a designed molecule, the linker is given the complex's own rate and a neutral cooperativity of one. Measuring it would need binding data for the real linker.",
+            },
+            {
+              title: "Binder and linker constants are stand-ins",
+              body: "The real constraints of our binder and linker are unknown. Some are estimated from the FKBP and FRP system; the rest are preset and swept across a range in every result rather than being trusted as values.",
+            },
+            {
+              title: "The catalytic rate is derived, not measured",
+              body: "MGRN1 is a ring ligase, so its reactivity is coupled to its E2 partner and is hard to express as a single enzyme's catalytic rate. The model derives it from the fold change in SMO ubiquitination between MEGF8 knockout and wild type.",
+            },
+          ],
+        },
+      ],
+    },
+    {
       kind: "prose",
       heading: "What Dr. Sauro told us to do differently",
       body: [
@@ -928,7 +1068,124 @@ const model: Page = {
         "Kinetic Modeling: Dr. Herbert Sauro meeting notes (two meetings, summer 2026).",
     },
     {
+      kind: "links",
+      id: "equations",
+      heading: "The equations themselves",
+      intro:
+        "Written out in full, outside this page. These are the working for the models above and the safety model below.",
+      items: [
+        {
+          title: "Core ODE model",
+          body: "The full equation set for the homeostasis model, before the simplifications above.",
+          href: "https://www.overleaf.com/2243395337mdzbkdpkpczw#7f8ec6", // colour-ok: an Overleaf link fragment, not a colour
+          label: "Read on Overleaf",
+          tag: "LaTeX",
+        },
+        {
+          title: "The GPCR system",
+          body: "Reactions, initialisations and literature values for both candidate formulations of PTCH1.",
+          href: "https://www.overleaf.com/read/zvpbnkppkrzd#274249", // colour-ok: an Overleaf link fragment, not a colour
+          label: "Read on Overleaf",
+          tag: "LaTeX",
+        },
+        {
+          title: "Melanocortin safety model",
+          body: "The mass-action equations behind the MC4R result at the foot of this page.",
+          href: "https://drive.google.com/file/d/1PONnAZG1bpua0B07ge6KFhOMH_L61SFm/view",
+          label: "Open the document",
+          tag: "PDF, 2 pages",
+        },
+      ],
+    },
+    {
+      kind: "prose",
+      section: "The GPCR system",
+      id: "gpcr",
+      heading: "How best to model SMO itself",
+      body: [
+        "The model above treats SMO as a quantity to be moved around. This one asks a different question: what makes SMO signal at all, and when does that signalling become excessive. SMO is regulated by the Hedgehog ligand and by **PTCH1**, which keeps SMO out of the ciliary membrane and so inhibits it. Hedgehog activates the pathway by inhibiting PTCH1.",
+        "Despite a lot of study, there is no clear consensus on the detail. Earlier models had PTCH1 binding and inhibiting SMO directly. More recent evidence suggests PTCH1 instead works by reducing the **accessibility of cholesterol** in the outer plasma membrane, and others argue it expels cholesterol from the cell altogether. Here we advance a model in which SMO signalling is modulated by outer-leaflet cholesterol, and test whether it can reproduce several experimental observations.",
+        "Our model expands on previous ones by treating the distribution of cholesterol as something that changes, with cholesterol acting as SMO's own ligand. Cholesterol naturally distributes unevenly between the inner and outer layers of a membrane, and PTCH1 has been proposed to shift that distribution by acting as a rare transporter of sterols. Its close relative NPC1 does the same job in the lysosome. Once at the cilium, SMO needs a cholesterol binding step to activate, and signalling in the model is proportional to the amount of cholesterol-bound SMO. Because SMO binds at a domain that faces outward, its signalling is sensitive to which side of the membrane the cholesterol is on.",
+      ],
+      source:
+        "Kinetic Modelling: the GPCR system, 2026. After Kinnebrew 2022, Luchetti 2016, Taipale 2002 and Hasnovic and Mus-Veteau 2018.",
+    },
+    {
+      kind: "figure",
+      id: "gpcr-schematic",
+      caption:
+        "The reactions in the GPCR model: cholesterol moving between the membrane leaflets, PTCH1 acting on that distribution, and SMO activating when it binds cholesterol on the outer leaflet.",
+      owner: "Kinetic Modelling",
+      ratio: "wide",
+    },
+    {
+      kind: "prose",
+      heading: "Two things we could not decide from the literature",
+      body: [
+        "Rather than pick, we built both and let the results choose. **PTCH1's action** is implemented once as a linear relationship and once with enzyme kinetics. On Dr. Sauro's advice on model formulation, we implemented both and looked for disagreement with the objectives below; if neither could be ruled out on performance, we would favour the linear one for simplicity.",
+        "**How SMO reaches the cilium** is the second. One account has SMO move into the membrane and diffuse along it to the cilium; the other has it travel inside the cell. We implement the second as a diffusion equation, where SMO moves between the cell body and the cilium to balance the two concentrations, and intend to implement the first as well and see which better matches experiment.",
+      ],
+    },
+    {
+      kind: "figure",
+      id: "migration-models",
+      caption:
+        "The two proposed routes SMO could take to the ciliary membrane: lateral diffusion through the plasma membrane, or intracellular transport.",
+      owner: "Kinetic Modelling",
+      ratio: "wide",
+    },
+    {
+      kind: "table",
+      id: "objectives",
+      heading: "What the model has to reproduce",
+      intro:
+        "Five observations from the literature, chosen before fitting. A set of parameters is scored on how closely the simulation reproduces all five.",
+      columns: ["Observation", "The target"],
+      rows: [
+        [
+          "Cholesterol transport by PTCH1, taken from its close relative NPC1 at the lysosomal membrane",
+          "A decay rate of 0.09 per minute for outer-leaflet cholesterol after activation",
+        ],
+        [
+          "How much outer-leaflet cholesterol is removed on activation",
+          "Abundance falls to 0.429 of its original amount",
+        ],
+        [
+          "SMO's sensitivity to Hedgehog, from its half-maximal concentration of 1 nM",
+          "A twofold difference in signalling between a 1 nM run and a fully activating 300 nM run",
+        ],
+        ["How fast SMO leaves the cytoplasm", "A half-life of 20 minutes"],
+        [
+          "How fast SMO is degraded once activated",
+          "A half-life of 2 hours at the ciliary membrane, measured after the peak",
+        ],
+      ],
+      source:
+        "Kinetic Modelling: GPCR objectives. Sources include Wustner 2023, Kinnebrew 2021 and 2022.",
+    },
+    {
+      kind: "prose",
+      id: "gpcr-results",
+      heading: "What the two models did",
+      body: [
+        "Both replicated the five objectives with accuracy, and the **linear model reached a total error of 0.14**. The Michaelis-Menten figure is quoted differently in two versions of the analysis, so it is not published here until the subteam settles which run is right.",
+        "Both simulations hold details we would want to confirm against real data. Although a target half-life for SMO in the cytoplasm should have forced a realistic response, the linear model shows an immediate spike in activated SMO. In the Michaelis-Menten simulation, activated SMO is very low. The sensitivity analysis reflects the same split: the ciliary degradation rate dominates the linear model, while the forward rate for SMO embedding into the membrane dominates the other. Given the adequate fit, we expect to go forward with the linear approximation of PTCH1 kinetics.",
+        "The most useful thing now would be wet lab data on how SMO migrates at the cilium, and on whether that immediate rise in activated SMO is seen under a microscope at all.",
+      ],
+      source: "Kinetic Modelling: GPCR simulations and observations, 2026.",
+    },
+    {
+      kind: "figure",
+      id: "gpcr-simulations",
+      caption:
+        "The two candidate models run against the five objectives, with their sensitivity analyses side by side.",
+      owner: "Kinetic Modelling",
+      ratio: "wide",
+    },
+    {
       kind: "narration",
+      section: "Sensitivity analysis",
+      id: "sensitivity-analysis",
       label: "what a sensitivity analysis is",
       body: [
         "The model has dozens of numbers in it, and most of them we had to look up or guess. So before trusting any prediction, we nudge each number by ten percent and see which ones actually move the answer.",
@@ -972,7 +1229,26 @@ const model: Page = {
         "Kinetic Modeling: local sensitivity analysis of the recruitment model, run in Tellurium over a 120 hour simulation.",
     },
     {
+      kind: "details",
+      id: "how-sensitivity-was-run",
+      heading: "How the analysis was run",
+      summary: "The solver, the method and the window, for anyone reproducing it.",
+      blocks: [
+        {
+          kind: "prose",
+          body: [
+            "Six quantities were tracked over a simulated 120 hours: cytoplasmic, ciliary and ubiquitinated SMO, the MMM complex, its non-functional form, and the complex joined to the linker. The model was written in **Antimony** and run in **Tellurium**, using libRoadRunner's CVODES integrator at tight tolerances.",
+            "For every quantity and every parameter, the derivative of one with respect to the other was obtained from libRoadRunner's forward sensitivity solver, which integrates the sensitivity equations alongside the model itself. Every coefficient was then normalised so the parameters could be compared directly. For the chart above, each parameter was moved by ten percent either way, one at a time, and the whole model re-simulated.",
+            "A **global** analysis is also under way, using Morris screening followed by Sobol analysis, on the principle that a parameter flagged as uninfluential by both can be dropped from the model. The Morris pass has run; the Sobol results are not finished.",
+          ],
+          source:
+            "Kinetic Modelling: local sensitivity analysis of the recruitment model, Tellurium, 120 hour simulation.",
+        },
+      ],
+    },
+    {
       kind: "prose",
+      section: "Safety: the melanocortin pathway",
       id: "mc4r-safety",
       heading: "Checking it cannot do harm somewhere else",
       body: [
