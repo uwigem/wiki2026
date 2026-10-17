@@ -170,9 +170,22 @@
        and grass2, and grass1 is the band that turns up most, so the page reads
        as the same green as the animated meadow. Not grass2, the palest band,
        which made the static pages look washed out beside the hero. */
-    background: var(--p-grass1);
+    background-color: var(--p-grass1);
+    /* The lawn tiles here as well as on the backdrop, so the area the browser
+       paints outside the document (an overscroll, a window being resized)
+       carries the same texture instead of going flat. The image itself is set
+       by GardenBackdrop, which knows the base path; these are the rules that
+       make it line up with the backdrop's own copy. */
+    background-repeat: repeat;
+    background-size: calc(256px * var(--gs, 2)) calc(256px * var(--gs, 2));
+    image-rendering: pixelated;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
+  }
+  @media (min-width: 658px) and (min-height: 658px) {
+    body {
+      --gs: 3;
+    }
   }
 
   /* Pixel type for headings, labels and buttons. Never for body copy: Pixelify

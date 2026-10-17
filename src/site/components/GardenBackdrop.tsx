@@ -55,6 +55,24 @@ export default function GardenBackdrop({ path }: { path: string }) {
     }
   }, [file])
 
+  /*
+   * The lawn also goes on `body`, which is where the browser gets the colour
+   * it paints everything outside the document: the rubber band when a scroll
+   * runs past the end, and the strip left over while a window is being
+   * resized or a developer tools pane is opened. That area was taking the
+   * flat grass colour, and flat grass beside a textured lawn does not read as
+   * the same green, so the page looked as though it had run out of
+   * background. Setting it here rather than in the stylesheet because only
+   * `asset()` knows the base path the wiki is served under.
+   */
+  useEffect(() => {
+    const previous = document.body.style.backgroundImage
+    document.body.style.backgroundImage = `url(${asset(LAWN_FILE)})`
+    return () => {
+      document.body.style.backgroundImage = previous
+    }
+  }, [])
+
   // Fetch a page's garden as soon as a link to it is pointed at or focused,
   // so it is already in the cache by the time the link is followed.
   useEffect(() => {
