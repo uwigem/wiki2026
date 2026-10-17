@@ -323,13 +323,20 @@ function partAt(f: Frame, name: (typeof PART_NAMES)[number], i: number, u: numbe
   return [lerp(a[0], b[0], e), lerp(a[1], b[1], e) + bob] as const
 }
 
+/**
+ * Each name next to its own part, where it cannot be read as another's. In
+ * the docked complex MGRN1 sits directly over MOSMO, so MOSMO's name goes
+ * below it and MGRN1's above; MEGF8's goes below its foot. Kept centred on
+ * the part, because a name set off to one side runs out of the picture on
+ * the right when the parts are still floating.
+ */
 function partLabel(f: Frame, name: (typeof PART_NAMES)[number], x: number, y: number, alpha: number) {
   label(f, {
     id: name,
     kind: 'chip',
     text: name.toUpperCase(),
-    dx: x,
-    dy: name === 'mosmo' ? y - 7 : y + (name === 'megf8' ? 11 : 8),
+    dx: name === 'mosmo' ? x + 1.5 : x,
+    dy: name === 'megf8' ? y + 11 : name === 'mosmo' ? y + 7 : y - 7,
     align: 'center',
     alpha,
   })
