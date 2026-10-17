@@ -167,13 +167,25 @@ reader can see which predictions held.
 
 ### The Model (`/model`), a medal page
 
-**Now:** what the model is for, the wild-type against PTCH1-knockout test, where
-the parameters come from, Dr. Sauro's model-selection guidance, the sensitivity
-analysis as a tornado plot, and the MC4R off-target result as a dose curve with
-the twenty percent limit shown beside it.
+**Now:** four sections. Kinetic modelling (what the model is for, the homeostasis
+model and the six quantities it tracks, the wild-type against PTCH1-knockout
+test, where the parameters come from, the parameter table and the assumptions as
+drop-downs, Dr. Sauro's guidance, and the equations); the GPCR system (cholesterol
+as SMO's own ligand, the two formulations we could not choose between, the five
+objectives, and what the two models did); sensitivity analysis (the tornado plot
+and how it was run); and the melanocortin safety result as a dose curve.
 
-**Still needed:** confirm the Michaelis-Menten error against the linear model.
-The equations, the wiring diagram and the full parameter table.
+**Still needed:** four figures, all marked on the page with their owner: the
+upstream network, the GPCR schematic, the two SMO migration routes, and the
+simulation panels. The Michaelis-Menten total error, which two versions of the
+analysis disagree on and which the page therefore does not quote. The Sobol half
+of the global sensitivity analysis. A consolidated reference list, which the
+draft currently holds as about twenty loose URLs. The protein design half of the
+page, which has a heading in the planning doc and no text.
+
+The equations live on Overleaf and Drive. **That is a problem worth fixing before
+the freeze**: the judging handbook says content on sites outside iGEM cannot be
+judged, so anything we want credit for needs a copy hosted here.
 
 ### Who the Garden Is For (`/human-practices`), a medal page
 
