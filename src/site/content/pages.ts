@@ -2142,7 +2142,7 @@ const education: Page = {
       items: [
         { value: "12,000+", label: "students, parents and educators invited to Engineering Discovery Days" },
         { value: "2,700+", label: "views of the paper-reading series across YouTube and Instagram" },
-        { value: "under $5", label: "to build one Can You Beat DNA Polymerase kit", emphasis: true },
+        { value: "$5", label: "or less to build one Can You Beat DNA Polymerase kit", emphasis: true },
         { value: "5", label: "handbooks and guides for anyone to run these activities" },
       ],
     },

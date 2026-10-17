@@ -936,6 +936,13 @@
   padding-top: 1.75rem;
   border-top: 2px dashed var(--p-grass4);
 }
+/* Photos, resource cards or a video with no heading of their own belong to the
+   write-up above them: no rule between, and a shorter gap. */
+.section-block + .section-block.is-attached {
+  margin-top: 1rem;
+  padding-top: 0;
+  border-top: 0;
+}
 /* A block's own frame, inside a card: gone. A callout keeps its frame. */
 .section-card .section-block > .panel:not(.keep-frame),
 .section-card .section-block > .refs-list {
