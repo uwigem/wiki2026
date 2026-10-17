@@ -581,17 +581,39 @@ const engineering: Page = {
   storyBeat:
     "Nothing in a garden works the first time. You plant, you watch, you move it two feet to the left.",
   intro:
-    "How we design a binder and filter it down, and then the build, test, learn cycles in the order we actually ran them, including the parts that did not work the first time.",
+    "Three subteams ran the same loop, one after the other: the kinetic model first, then the designed binder, then the bench. These are those cycles in the order we actually ran them, including the parts that did not work the first time.",
   blocks: [
-    ...designBlocks,
+    {
+      kind: "cards",
+      id: "three-parts",
+      heading: "Three parts, in the order they happened",
+      intro:
+        "Each subteam ran its own design, build, test, learn loop, and each one handed the next something to work with.",
+      items: [
+        {
+          title: "Part 1: Kinetics modelling",
+          body: "Turning the Hedgehog pathway into equations we can run, and finding out which rates actually move the answer. [Go to Part 1](/engineering#kinetics)",
+        },
+        {
+          title: "Part 2: Protein modelling",
+          body: "Generating thousands of candidate binders, then learning to throw almost all of them away. [Go to Part 2](/engineering#protein-modelling)",
+        },
+        {
+          title: "Part 3: Wet lab",
+          body: "Building the constructs the biology allows, and testing whether the cilium responds. [Go to Part 3](/engineering#wet-lab)",
+        },
+      ],
+    },
     {
       kind: "cycles",
-      id: "cycles",
+      id: "choosing",
+      heading: "Before the three parts: choosing the project",
+      intro:
+        "One whole-team cycle came first, and it is the reason there is a project to run cycles on.",
       cycles: [
         {
-          heading: "Cycle 1: choosing the target",
-          intro:
-            "This cycle is complete. It is how the project became the project.",
+          heading: "Choosing the target: how the project became the project",
+          intro: "This cycle is complete.",
           items: [
             {
               title: "Design",
@@ -611,8 +633,62 @@ const engineering: Page = {
             },
           ],
         },
+      ],
+    },
+    {
+      kind: "prose",
+      section: "Part 1: Kinetics modelling",
+      id: "kinetics",
+      heading: "Where the modelling fits",
+      body: [
+        "The project starts as arithmetic. Before any protein is designed, the modelling subteam has to show that acting on the MMM complex could move **SMO in the cilium** by a useful amount, and that the rates in the literature support it. [The model](/model) is where that work is written up; this is the loop that produced it.",
+      ],
+    },
+    {
+      kind: "cycles",
+      cycles: [
         {
-          heading: "Cycle 2: generating binders",
+          heading: "Kinetics modelling: from a pathway diagram to equations",
+          intro:
+            "In progress. Each pass narrows the model toward the least complicated form that still answers the question.",
+          items: [
+            {
+              title: "Design",
+              body: "We begin by defining the problem through a large-scale literature review of the Hedgehog signalling system, with the goal of mapping points of interest and molecular targets. This includes scouring databases and resources for every interaction with our target, **Smoothened (SMO)**. Once a large list of targets was identified we eliminated them on relative necessity and availability of data, ultimately forming a preliminary, shared **parameter database**. From there we can develop early reaction maps of the system.",
+            },
+            {
+              title: "Build",
+              body: "During the build stage the literature review moves beyond parameters as the focus shifts to writing equations. To understand the reactions in detail we identify the predominant reaction mechanics and search for similar applications in the literature. Reaction maps are then converted into mathematical relationships for implementation in Python's **Tellurium** library.",
+            },
+            {
+              title: "Test",
+              body: "Once converted into **Antimony** for roadrunner compatibility, we adjust the equations and adapt parameters until a functional output based on real data is confirmed. Sensitivity analysis and parameter sweeps help identify the relative importance of each model component.",
+            },
+            {
+              title: "Learn",
+              body: "By reviewing the outputs of sensitivity analysis, parameter sweeps and model selection tools, we clear away gaps in knowledge and stand-in values, and set the direction for future adaptations: the most informative yet least complex form, an ideal model.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      kind: "prose",
+      section: "Part 2: Protein modelling",
+      id: "protein-modelling",
+      heading: "Where the design work fits",
+      body: [
+        "With a target worth acting on, the second loop is the binder itself. Generate candidates, throw almost all of them away, and work out why the survivors survived. The pipeline below is the machinery; the cycles after it are what we learned by running it.",
+      ],
+    },
+    ...designBlocks,
+    {
+      kind: "cycles",
+      id: "cycles",
+      heading: "What running the pipeline taught us",
+      cycles: [
+        {
+          heading: "Cycle 1: generating binders",
           intro:
             "Complete. Getting a pipeline to produce candidate binders at all.",
           items: [
@@ -635,7 +711,7 @@ const engineering: Page = {
           ],
         },
         {
-          heading: "Cycle 3: learning to throw designs away",
+          heading: "Cycle 2: learning to throw designs away",
           intro:
             "Complete, and the cycle we learned the most from. Our first filter was passing designs that could never work.",
           items: [
@@ -658,7 +734,7 @@ const engineering: Page = {
           ],
         },
         {
-          heading: "Cycle 4: rescuing the near misses",
+          heading: "Cycle 3: rescuing the near misses",
           intro:
             "In progress. Twenty five binders is not enough to fill a 96-well plate.",
           items: [
@@ -684,12 +760,21 @@ const engineering: Page = {
     },
     {
       kind: "prose",
-      heading: "Cycle 2: designing a binder against a hard surface",
+      heading: "Two changes of direction",
       body: [
-        "This cycle is in progress. The first real change came before any protein was made. We began aiming at ATRN, then switched to the **MMM complex** once it was clear MMM had cryo-EM and an accessible interface while ATRN only had an AlphaFold model. Better data to design against was worth the switch.",
+        "The first real change came before any protein was made. We began aiming at ATRN, then switched to the **MMM complex** once it was clear MMM had cryo-EM and an accessible interface while ATRN only had an AlphaFold model. Better data to design against was worth the switch.",
         "A second problem showed up in the pipeline itself. RoseTTAFold3 could not fold our targets well because the sequence databases were thin, so the designs were failing the fold check for the wrong reason. We fixed it by **templating MOSMO and MEGF8** during forward folding. We now have about 24 MOSMO binder backbones through sequence design. [The pipeline](/engineering#pipeline) above has every step.",
       ],
       source: "Protein Design ideation notes and pipeline docs, 2026.",
+    },
+    {
+      kind: "prose",
+      section: "Part 3: Wet lab",
+      id: "wet-lab",
+      heading: "Where the bench work fits",
+      body: [
+        "The third loop is the one that decides whether any of the first two were right. It is the least far along, because it starts once there are constructs to put into cells. What is settled already is the shape of those constructs, and every decision below was forced on us by the biology rather than chosen. The assays themselves, with their controls, are on [experiments](/experiments).",
+      ],
     },
     {
       kind: "cards",

@@ -154,6 +154,18 @@ export function checkContent() {
     if (/\[placeholder/i.test(JSON.stringify(page.blocks))) {
       problems.push(`"${page.title}" (${page.slug}) still contains "[placeholder" text.`)
     }
+    /*
+     * Drafts arrive from the planning docs carrying their own markers, for
+     * example "[REF TO Binder Design: HPC/Hyak]". They are not markdown links,
+     * so the link check above never sees them, and they would otherwise ship
+     * as literal text on a medal page.
+     */
+    if (/\[REF TO/i.test(JSON.stringify(page.blocks))) {
+      problems.push(
+        `"${page.title}" (${page.slug}) still contains a "[REF TO ...]" marker from a planning ` +
+          `doc. Replace it with a real link, for example [Hyak](/contribution#hyak).`,
+      )
+    }
   }
 
   // The game's recipes: every level has to be finishable.
