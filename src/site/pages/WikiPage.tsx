@@ -136,7 +136,13 @@ export default function WikiPage({ page }: { page: Page }) {
                       <div
                         key={i}
                         id={blockKey(block)}
-                        className={"section-block min-w-0" + (i > 0 && blockHeading(block) ? " is-sub" : "")}
+                        className={
+                          "section-block min-w-0" +
+                          (i > 0 && blockHeading(block) ? " is-sub" : "") +
+                          // No heading of its own: photos, resource cards or a video that
+                          // belong to the write-up above them, so they sit close to it.
+                          (i > 0 && !blockHeading(block) ? " is-attached" : "")
+                        }
                       >
                         <BlockView block={block} />
                       </div>
