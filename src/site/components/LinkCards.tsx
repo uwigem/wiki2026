@@ -1,4 +1,6 @@
 import { asset } from '../router'
+import PixelIcon from './PixelIcon'
+import { iconFor } from './resourceIcons'
 import { FILE, inline } from './RichText'
 
 /**
@@ -6,6 +8,12 @@ import { FILE, inline } from './RichText'
  * post to watch, a document to read. Each card says what it is, and ends in
  * one button. A file under `public/` is served from this site; anything else
  * opens where it lives, in a new tab.
+ *
+ * Each card leads with a pixel glyph for the kind of thing behind it, picked
+ * from the address rather than written into the content. On a page that is
+ * mostly prose, a row of cards that is also only prose disappears into it:
+ * the glyph is what stops the eye and says "this one is a thing you can take
+ * away" before a word of the label is read.
  */
 export interface LinkItem {
   title: string
@@ -40,19 +48,24 @@ export default function LinkCards({
           const href = local ? asset(it.href.replace(/^\//, '')) : it.href
           const isFile = FILE.test(it.href)
           return (
-            <li key={it.href} className="panel-flat flex min-w-0 flex-col gap-2 px-4 py-4">
-              {it.tag && <p className="kicker">{it.tag}</p>}
-              <h3 className="text-base">{it.title}</h3>
-              <p className="flex-1 text-body-sm leading-relaxed">{inline(it.body)}</p>
-              <a
-                href={href}
-                target="_blank"
-                rel="noreferrer noopener"
-                download={local && isFile ? '' : undefined}
-                className="pixel-btn self-start py-1.5 text-sm"
-              >
-                {it.label ?? (isFile ? 'Download' : 'Open')} →
-              </a>
+            <li key={it.href} className="panel-flat flex min-w-0 gap-3 px-4 py-4">
+              <span className="mt-0.5 text-leaf-700">
+                <PixelIcon rows={iconFor(it.href, it.tag)} className="h-9 w-9 shrink-0" />
+              </span>
+              <div className="flex min-w-0 flex-1 flex-col gap-2">
+                {it.tag && <p className="kicker">{it.tag}</p>}
+                <h3 className="text-base">{it.title}</h3>
+                <p className="flex-1 text-body-sm leading-relaxed">{inline(it.body)}</p>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  download={local && isFile ? '' : undefined}
+                  className="pixel-btn self-start py-1.5 text-sm"
+                >
+                  {it.label ?? (isFile ? 'Download' : 'Open')} →
+                </a>
+              </div>
             </li>
           )
         })}

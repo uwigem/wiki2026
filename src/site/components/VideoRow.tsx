@@ -19,10 +19,14 @@ export interface VideoItem {
   note?: string
 }
 
-function Video({ video }: { video: VideoItem }) {
+function Video({ video, index }: { video: VideoItem; index: number }) {
   const [playing, setPlaying] = useState(false)
   return (
-    <figure className="min-w-0">
+    <figure className="panel-flat flex min-w-0 flex-col gap-2 p-3">
+      <p className="kicker flex items-center gap-2">
+        Episode
+        <span className="badge">{String(index + 1).padStart(2, '0')}</span>
+      </p>
       <div className="relative aspect-video overflow-hidden rounded-sm border-[3px] border-leaf-700 bg-leaf-950">
         {playing ? (
           <iframe
@@ -46,13 +50,15 @@ function Video({ video }: { video: VideoItem }) {
               decoding="async"
               className="absolute inset-0 h-full w-full object-cover transition-opacity group-hover:opacity-90"
             />
-            <span className="pixel-btn pixel-btn-primary relative px-5 py-2.5 text-base">▶ Play</span>
+            <span className="pixel-btn pixel-btn-primary relative px-6 py-3 text-lg shadow-[4px_4px_0_var(--p-shadow)]">
+              ▶ Play
+            </span>
           </button>
         )}
       </div>
-      <figcaption className="mt-2 text-body-sm leading-snug">
+      <figcaption className="text-body-sm leading-snug">
         <span className="font-semibold">{video.title}</span>
-        {video.note && <span className="block text-leaf-800">{inline(video.note)}</span>}
+        {video.note && <span className="mt-0.5 block text-leaf-800">{inline(video.note)}</span>}
       </figcaption>
     </figure>
   )
@@ -74,8 +80,8 @@ export default function VideoRow({
       {heading && <h2 className="text-xl">{heading}</h2>}
       {intro && <p className="mt-1 max-w-2xl text-body leading-relaxed">{inline(intro)}</p>}
       <div className={'mt-4 grid gap-4 ' + (videos.length > 1 ? 'sm:grid-cols-2' : 'max-w-2xl')}>
-        {videos.map((v) => (
-          <Video key={v.id} video={v} />
+        {videos.map((v, i) => (
+          <Video key={v.id} video={v} index={i} />
         ))}
       </div>
       {source && (

@@ -951,6 +951,18 @@
   box-shadow: none;
   padding: 0;
 }
+/*
+ * Blocks cap their own text at a reading measure, which is right when a block
+ * sits alone in the page's full column. Inside a section card the column has
+ * already been narrowed by the card, so that cap leaves a strip of dead space
+ * down the right of every paragraph while the headings, tables and figures
+ * beside them run the full width. The ragged edge reads as a mistake. In here
+ * the card is the measure.
+ */
+.section-card .section-block .max-w-2xl,
+.section-card .section-block .prose-garden p {
+  max-width: none;
+}
 /* Block headings sit under the section's sign, so they step down a size. */
 .section-card .section-block h2 {
   font-size: 1.15rem;

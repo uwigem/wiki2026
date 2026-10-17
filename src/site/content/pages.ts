@@ -30,6 +30,7 @@ import type { MembraneProtein } from "../components/MembraneLandscape";
 import type { WorkflowStage } from "../components/Workflow";
 import type { PipelineStage } from "../components/Pipeline";
 import type { TrailStep } from "../components/PartTrail";
+import type { RecipePart } from "../components/RecipeStrip";
 import type { PersonaKey } from "../components/gardenArt";
 import { SMO_5L7D, type Structure } from "./structures";
 
@@ -300,6 +301,16 @@ export type Block = Anchored &
     /** Things to open or download: handbooks, posts, documents. */
     | { kind: "links"; heading?: string; intro?: string; items: LinkItem[]; source?: string }
     /** A visible "not written yet" marker. */
+    /** One combination from iGEM Alchemy, with the game's own pictures. */
+    | {
+        kind: "recipe";
+        heading?: string;
+        intro?: string;
+        inputs: RecipePart[];
+        makes: RecipePart;
+        action?: { label: string; to: string };
+        source?: string;
+      }
     /** Where the reader is in a page told in numbered parts. */
     | { kind: "trail"; steps: TrailStep[]; current: number }
     /** A chain of stages read downwards, each naming what it takes and returns. */
@@ -2743,8 +2754,21 @@ const education: Page = {
         "Students are rarely excited by rote memorisation, especially in a subject like biology, where so much of the early material is vocabulary. Yet that is often how the molecules of life are first introduced: as a list of terms to learn, not as things that are built from one another. We've found that some of the best ways to connect with younger students, from middle to high school, are through games. This year, we set out to fill the niche of an interactive synthetic biology browser game.",
         "Little Alchemy is a classic browser game in which players start with a handful of base elements and combine them to create new ones, eventually unlocking almost any concept or physical object. Our version has players start with the basic building blocks of life: carbon, hydrogen, oxygen and nitrogen. Each level has a specific target to reach, such as synthesising a protein, DNA, or a cell organelle.",
         "We chose this format because it mirrors how biology works, with complex structures built up from simpler pieces. Instead of being told that amino acids make up proteins, players find it out for themselves by trying combinations and seeing what they get. A combination that doesn't work costs nothing, so students are free to guess, experiment and try again, a cycle that echoes the engineering cycle we practised this year. The stage targets give newer students a clear direction, while those with more background can explore what else they can build along the way. Our goal was to make the molecules of life feel less like vocabulary words and more like something students can put together themselves.",
-        "[Play iGEM Alchemy](/alchemy). It runs in the browser, on a phone or a laptop, and saves progress on the device.",
       ],
+    },
+    {
+      kind: "recipe",
+      id: "alchemy-recipe",
+      intro:
+        "One combination from the first level. Nobody is told this one: you find it by putting two things together and seeing what happens.",
+      inputs: [
+        { id: "hydrogen", label: "Hydrogen" },
+        { id: "oxygen", label: "Oxygen" },
+      ],
+      makes: { id: "hydroxyl", label: "Hydroxyl group" },
+      action: { label: "Play iGEM Alchemy", to: "/alchemy" },
+      source:
+        "It runs in the browser, on a phone or a laptop, and saves progress on the device.",
     },
 
     {

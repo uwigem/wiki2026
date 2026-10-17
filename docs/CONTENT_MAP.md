@@ -39,6 +39,7 @@ All page content is data in `src/site/content/pages.ts`. Each item in a page's
 | `pipeline` | Stage cards read downwards, each naming what goes in and what comes out | A chain someone else is meant to run: every stage visible at once |
 | `cycles` | A loop emblem, then all four design/build/test/learn stages as cards. Several cycles become tabs | Engineering cycles |
 | `trail` | The run of numbered parts, with the one you are in marked | A page told in parts, at the top of each one |
+| `recipe` | One iGEM Alchemy combination, drawn with the game's own pictures | Showing what the game is, rather than describing it |
 | `stats` | A row of big figures | A few numbers that carry an argument |
 | `matrix` | A capability comparison table | Showing that nothing existing does the job |
 | `toolshed` | Expandable tool cards | Surveying existing methods |
