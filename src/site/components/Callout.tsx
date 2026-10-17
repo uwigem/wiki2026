@@ -19,7 +19,7 @@ export default function Callout({
   source?: string
 }) {
   return (
-    <section className="panel border-petal-daisy px-5 py-5 sm:px-7 sm:py-6">
+    <section className="keep-frame panel border-petal-daisy px-5 py-5 sm:px-7 sm:py-6">
       {label && <p className="kicker">{label}</p>}
       {heading && <h2 className="mt-1 text-xl">{heading}</h2>}
       <div className="prose-garden mt-3 text-body">

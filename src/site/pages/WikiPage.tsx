@@ -3,7 +3,7 @@ import type { Block, Page, Persona } from "../content/pages";
 import { pageNeighbours } from "../content/pages";
 import { Link, useSectionJump } from "../router";
 import FlowerBedCard from "../components/FlowerBedCard";
-import GardenSection, { Reveal, SectionDivider, } from "../components/GardenSection";
+import GardenSection, { SectionDivider } from "../components/GardenSection";
 import PixelSign, { QuoteSign, TextPanel, TodoPanel,} from "../components/PixelSign";
 import RichText, { inline } from "../components/RichText";
 import CycleWheel from "../components/CycleWheel";
@@ -24,7 +24,8 @@ import Callout from "../components/Callout";
 import DataTable from "../components/DataTable";
 import DecisionTree from "../components/DecisionTree";
 import MembraneLandscape from "../components/MembraneLandscape";
-import SectionRail, { type RailSection } from "../components/SectionRail";
+import { SectionAside, SectionMenu, type RailSection } from "../components/SectionRail";
+import { CitationContext, slugify } from "../components/citations";
 import Details from "../components/Details";
 import PixelSprite from "../components/PixelSprite";
 import { ACCESSORIES } from "../components/gardenArt";
@@ -40,7 +41,7 @@ import { StakeholderContext, stakeholderId } from "../components/stakeholders";
 /**
  * Generic content page, rendered from data in `content/pages.ts`.
  *
- * No garden is drawn here. The background is the canvas `PageGarden` paints
+ * No garden is drawn here. The background is the image `GardenBackdrop` shows
  * behind every page, and the hedgehog in the margin is `HedgehogGuide`. This
  * file only lays out readable panels on top of them.
  *
@@ -54,14 +55,33 @@ export default function WikiPage({ page }: { page: Page }) {
   useSectionJump(page.slug);
 
   // The people this page interviewed, if any. Their cards open as a dialog
-  // from the garden and from any `[name](stakeholder:id)` mention in the text.
+  // from the stakeholder block and from any `[name](stakeholder:id)` mention.
   const people = page.blocks.flatMap((b) => (b.kind === "stakeholders" ? b.people : []));
   const [openId, setOpenId] = useState<string | null>(null);
   const openPerson = people.find((p) => stakeholderId(p) === openId);
 
-  // The page's sections, for the floating menu on pages that declare them,
-  // each with the headed blocks inside it.
-  const sections = useMemo(() => railSections(page.blocks), [page]);
+  // Long pages (three or more declared sections) are laid out the way the
+  // clearest iGEM wikis lay out theirs: a list of sections beside the column,
+  // and each section as one heading over one card. Short pages stay a single
+  // column of panels.
+  const layout = useMemo(() => groupSections(page.blocks), [page]);
+  const long = layout.sections.length >= 3;
+  const rail = useMemo<RailSection[]>(
+    () =>
+      layout.sections.map(({ id, label, blocks }) => ({
+        id,
+        label,
+        // Every headed block after the first is a subsection. The first block
+        // opens the section, so the section's own entry already stands for it.
+        items: blocks.slice(1).flatMap((b) => {
+          const heading = blockHeading(b);
+          const key = blockKey(b);
+          return heading && key ? [{ id: key, label: heading }] : [];
+        }),
+      })),
+    [layout],
+  );
+  const lists = useMemo(() => referenceScopes(page.blocks), [page]);
 
   return (
     <StakeholderContext.Provider value={{ people, open: setOpenId }}>
@@ -73,31 +93,65 @@ export default function WikiPage({ page }: { page: Page }) {
             <h1 className="mt-1 text-2xl sm:text-4xl">{page.title}</h1>
           </PixelSign>
 
-          <p className="panel-flat max-w-2xl px-4 py-3 text-body leading-relaxed">
-            {page.storyBeat}
-          </p>
+          {/* One introduction, not two stacked boxes. */}
+          <div className="panel max-w-2xl px-5 py-4 sm:px-7 sm:py-5">
+            <p className="text-body leading-relaxed text-leaf-800">{page.storyBeat}</p>
+            {page.intro && <p className="mt-3 text-lg leading-relaxed">{page.intro}</p>}
+          </div>
 
-          {page.intro && (
-            <p className="panel max-w-2xl px-5 py-4 text-lg leading-relaxed">
-              {page.intro}
-            </p>
-          )}
+          {long && <ReadingTips hasPeople={people.length > 0} />}
         </div>
       </GardenSection>
 
       <SectionDivider />
 
       <GardenSection>
-        <div className="flex flex-col gap-6 pb-4">
-          {page.blocks.map((block, i) => (
-            // Blocks are flex items. Anything inside one that can be wider than
-            // the column (a table, a code line) has to be free to shrink, or it
-            // widens the page instead of scrolling inside itself.
-            <Reveal key={i} className="min-w-0" id={block.id}>
-              <BlockView block={block} />
-            </Reveal>
-          ))}
-        </div>
+        {/* Blocks are flex items. Anything inside one that can be wider than
+            the column (a table, a code line) has to be free to shrink, or it
+            widens the page instead of scrolling inside itself. */}
+        {layout.lead.length > 0 && (
+          <div className="flex flex-col gap-6 pb-10">
+            {layout.lead.map((block, i) => (
+              <div key={i} id={block.id} className="min-w-0">
+                <BlockView block={block} />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {long ? (
+          <div className="relative flex flex-col gap-14 pb-4">
+            <SectionAside sections={rail} />
+            {layout.sections.map((section) => (
+              <CitationContext.Provider key={section.id} value={{ scope: slugify(section.label), lists }}>
+                <section id={section.id} aria-labelledby={section.id + "-title"} className="min-w-0">
+                  <h2 id={section.id + "-title"} className="section-title">
+                    {section.label}
+                  </h2>
+                  <div className="section-card">
+                    {section.blocks.map((block, i) => (
+                      <div
+                        key={i}
+                        id={blockKey(block)}
+                        className={"section-block min-w-0" + (i > 0 && blockHeading(block) ? " is-sub" : "")}
+                      >
+                        <BlockView block={block} />
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              </CitationContext.Provider>
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col gap-6 pb-4">
+            {layout.sections.flatMap((section) => section.blocks).map((block, i) => (
+              <div key={i} id={block.id} className="min-w-0">
+                <BlockView block={block} />
+              </div>
+            ))}
+          </div>
+        )}
       </GardenSection>
 
       <GardenSection className="pb-8 pt-8">
@@ -126,7 +180,7 @@ export default function WikiPage({ page }: { page: Page }) {
 
       {openPerson && <StakeholderModal person={openPerson} onClose={() => setOpenId(null)} />}
     </article>
-    <SectionRail sections={sections} />
+    {long && <SectionMenu sections={rail} />}
     </StakeholderContext.Provider>
   );
 }
@@ -137,21 +191,72 @@ function blockHeading(b: Block): string | undefined {
 }
 
 /**
- * Groups a page's blocks into the sections it declares (`section` on a
- * block starts one). Every later block with an id and a heading becomes an
- * entry under that section.
+ * The id a block can be linked to: its own, or, for a headed block without
+ * one, an id made from its heading, so every subsection in the outline has
+ * somewhere to land.
  */
-function railSections(blocks: Block[]): RailSection[] {
-  const out: RailSection[] = [];
+function blockKey(b: Block): string | undefined {
+  if (b.id) return b.id;
+  const heading = blockHeading(b);
+  return heading ? "sub-" + slugify(heading) : undefined;
+}
+
+interface SectionGroup {
+  id: string;
+  label: string;
+  blocks: Block[];
+}
+
+/**
+ * Splits a page's blocks into what comes before its first declared section
+ * (`lead`) and the sections themselves. A block with `section` starts a new
+ * one; every block after it belongs to it until the next.
+ */
+function groupSections(blocks: Block[]): { lead: Block[]; sections: SectionGroup[] } {
+  const lead: Block[] = [];
+  const sections: SectionGroup[] = [];
   for (const b of blocks) {
-    if (!b.id) continue;
-    if (b.section) out.push({ id: b.id, label: b.section, items: [] });
-    else if (out.length > 0) {
-      const label = blockHeading(b);
-      if (label) out[out.length - 1].items.push({ id: b.id, label });
-    }
+    if (b.section) sections.push({ id: "section-" + slugify(b.section), label: b.section, blocks: [b] });
+    else if (sections.length > 0) sections[sections.length - 1].blocks.push(b);
+    else lead.push(b);
   }
+  return { lead, sections };
+}
+
+/** The sections that have a reference list of their own, so their markers can link to it. */
+function referenceScopes(blocks: Block[]): ReadonlySet<string> {
+  const out = new Set<string>();
+  const walk = (list: Block[]) =>
+    list.forEach((b) => {
+      if (b.kind === "references" && b.for) out.add(slugify(b.for));
+      if (b.kind === "details") walk(b.blocks);
+    });
+  walk(blocks);
   return out;
+}
+
+/** The "navigation tips" bar long pages open with: closed, one line, there when wanted. */
+function ReadingTips({ hasPeople }: { hasPeople: boolean }) {
+  return (
+    <details className="panel-flat group w-full max-w-2xl text-left">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-2.5">
+        <span className="pixel text-sm">How to read this page</span>
+        <span aria-hidden className="pixel text-xs transition-transform group-open:rotate-180">
+          ▾
+        </span>
+      </summary>
+      <ul className="list-disc space-y-1.5 border-t-2 border-leaf-300 py-3 pl-8 pr-4 text-body-sm leading-relaxed">
+        <li>The list beside the page (the button in the corner on a phone) jumps to any section.</li>
+        {hasPeople && (
+          <li>Open any person&apos;s card to read that conversation and what changed because of it. Their names in the text open the same card.</li>
+        )}
+        <li>
+          Parts with a <strong>Show</strong> button hold the working behind a point. Open them only if you want the detail.
+        </li>
+        <li>Numbers in brackets link to the sources at the foot of the page.</li>
+      </ul>
+    </details>
+  );
 }
 
 function BlockView({ block }: { block: Block }) {
@@ -415,7 +520,7 @@ function BlockView({ block }: { block: Block }) {
       );
 
     case "references":
-      return <References heading={block.heading} items={block.items} />;
+      return <References heading={block.heading} items={block.items} scope={block.for ? slugify(block.for) : undefined} />;
 
     case "rail":
       return (
@@ -445,7 +550,7 @@ function BlockView({ block }: { block: Block }) {
       return (
         <Details heading={block.heading} summary={block.summary} open={block.open}>
           {block.blocks.map((inner, i) => (
-            <div key={i} id={inner.id} className="min-w-0">
+            <div key={i} id={inner.id} className="section-block min-w-0">
               <BlockView block={inner} />
             </div>
           ))}

@@ -73,11 +73,17 @@ renders as plain text.
 opens that person's card from anywhere in the text. The id is the person's `id` field, or
 their surname in lower case. `npm run dev` warns if the id matches nobody on the page.
 
-**Sections.** Give a block `section: "Market"` (and an `id`) and the page grows a floating
-menu of its sections: a rail in the right margin on wide screens, a corner button that names
-the current section on narrower ones. The menu follows the reader, and lists the headed blocks
-inside the current section so they can jump within it. Links into a closed `details` section
-open it.
+**Sections.** Give a block `section: "Market"` (and an `id`) and it starts a named section;
+every block after it belongs to that section until the next one. A page with three or more
+sections switches to the long-page layout: each section is a wooden signboard over one card
+(the blocks inside drop their own frames and are divided by a dashed rule), and a flat list of
+the sections sits in the left margin on wide screens, or behind a corner button on a phone.
+Long pages also open with a "How to read this page" bar, and their margin hedgehog walks on
+the right. Links into a closed `details` section open it.
+
+**Citations.** A `references` block with `for: "Community need"` answers the `[n]` markers in
+that section: each marker links to its entry, opening the collapsed references on the way.
+Markers in a section with no list stay plain text.
 
 **Use `figure` while drafting a diagram that does not exist yet.** Give it a
 `caption` saying what the picture should show and an `owner`, and leave `src`

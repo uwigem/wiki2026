@@ -1,7 +1,61 @@
-/* TODO(assets): self-host these two fonts under /public/fonts before the wiki
-   freeze. igem.wiki should not depend on fonts.googleapis.com at load time. */
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=Nunito:ital,wght@0,400..800;1,400..700&display=swap');
 @import 'tailwindcss';
+
+/*
+ * The two web fonts, served from this site (public/fonts/), not from Google.
+ * Both are variable fonts, so one file covers every weight. Each comes in the
+ * Latin set and the extended-Latin set; the browser only fetches the second
+ * if a page uses a character from it (`unicode-range`). Licences: the OFL
+ * files beside them. The Latin files are also preloaded from index.html, so
+ * text can be set in the right font on the first paint.
+ */
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/pixelify-sans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/pixelify-sans-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/nunito-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/nunito-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/nunito-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/nunito-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
 
 /* ------------------------------------------------------------------------- *
  * COLOUR
@@ -836,5 +890,168 @@
   .skip-link,
   .pixel-btn {
     display: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Long pages (WikiPage's `long` layout): each section is a signboard over one
+ * card, the shape McGill 2025 uses for its Human Practices page. The blocks
+ * inside a card drop their own frames and are divided by a dashed rule, so a
+ * section reads as one piece instead of a stack of separate boxes.
+ *
+ * Unlayered on purpose. These rules have to beat the padding utilities on each
+ * block's own panel, and unlayered rules win over all of Tailwind's layers.
+ * ------------------------------------------------------------------------- */
+.section-title {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.45rem 1rem;
+  font-family: var(--font-pixel);
+  font-size: 1.2rem;
+  line-height: 1.25;
+  background: var(--p-quill);
+  border: 3px solid var(--p-quillDark);
+  border-radius: 2px;
+  box-shadow: 4px 4px 0 var(--p-shadow);
+  color: var(--sign-ink);
+}
+.section-card {
+  background: var(--p-bushHi);
+  border: 3px solid var(--p-bushDark);
+  border-radius: 2px;
+  box-shadow: 4px 4px 0 var(--p-shadow);
+  padding: 1.25rem 1.1rem;
+}
+@media (min-width: 640px) {
+  .section-title {
+    font-size: 1.45rem;
+    padding: 0.5rem 1.25rem;
+  }
+  .section-card {
+    padding: 1.75rem 2rem;
+  }
+}
+.section-block + .section-block {
+  margin-top: 1.75rem;
+  padding-top: 1.75rem;
+  border-top: 2px dashed var(--p-grass4);
+}
+/* A block's own frame, inside a card: gone. A callout keeps its frame. */
+.section-card .section-block > .panel:not(.keep-frame),
+.section-card .section-block > .refs-list {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+/* Block headings sit under the section's sign, so they step down a size. */
+.section-card .section-block h2 {
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+@media (min-width: 640px) {
+  .section-card .section-block h2 {
+    font-size: 1.3rem;
+  }
+}
+/* An opened "Show" section is indented under its heading, so it is clear
+   where the extra detail starts and stops. */
+.section-card details[open] > .details-body {
+  border-left: 3px solid var(--p-grass4);
+  padding-left: 1rem;
+}
+@media (min-width: 640px) {
+  .section-card details[open] > .details-body {
+    padding-left: 1.5rem;
+  }
+}
+
+/* Citation markers that link to their source. */
+.cite {
+  white-space: nowrap;
+}
+.cite a {
+  text-decoration: underline dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.cite a:hover {
+  text-decoration-style: solid;
+  background: var(--p-bushLight);
+}
+
+/* Subsection headings inside a section card carry a marker, the same daisy
+   yellow the outline uses for "you are here", so each subsection is easy to
+   find while scrolling and matches its entry in the outline. */
+.section-card > .section-block.is-sub > * > h2:first-child,
+.section-card > .section-block.is-sub > details > summary h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.section-card > .section-block.is-sub > * > h2:first-child::before,
+.section-card > .section-block.is-sub > details > summary h2::before {
+  content: '';
+  flex: none;
+  width: 0.6rem;
+  height: 0.6rem;
+  background: var(--p-daisyCore);
+  border: 2px solid var(--p-shadow);
+}
+
+/* ---------------------------------------------------------------------------
+ * The page background (GardenBackdrop). Two fixed images, drawn ahead of time
+ * by `npm run gardens`: a seamless lawn tile over the whole page, and the
+ * page's own margin strips, which hang off either side of a column exactly as
+ * wide as the reading column. Scaled up without smoothing, by a whole number.
+ *
+ * How much is --gs, the CSS pixels per garden pixel: 3 on every ordinary
+ * screen, 2 when the window's shorter side is under 658px (phones, small
+ * windows), where 3 would make the grass chunky.
+ * ------------------------------------------------------------------------- */
+.garden-backdrop {
+  --gs: 2;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: clip;
+  pointer-events: none;
+  background-color: var(--p-grass1);
+  background-repeat: repeat;
+  background-size: calc(256px * var(--gs)) calc(256px * var(--gs)); /* LAWN_SIZE */
+  image-rendering: pixelated;
+}
+@media (min-width: 658px) and (min-height: 658px) {
+  .garden-backdrop {
+    --gs: 3;
+  }
+}
+.garden-column {
+  position: relative;
+  height: 100%;
+  max-width: 56rem; /* max-w-4xl, the reading column (GardenSection) */
+  margin: 0 auto;
+}
+.garden-strip {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: calc(128px * var(--gs)); /* STRIP_W */
+  background-repeat: repeat-y;
+  background-size: calc(256px * var(--gs)) auto; /* both strips, side by side in one image */
+  image-rendering: pixelated;
+}
+.garden-strip-left {
+  right: 100%;
+  background-position: 0 0;
+}
+.garden-strip-right {
+  left: 100%;
+  background-position: calc(-128px * var(--gs)) 0;
+}
+/* Too narrow for margins worth planting: lawn only. */
+@media (max-width: 1039px) {
+  .garden-column {
+    display: none;
   }
 }

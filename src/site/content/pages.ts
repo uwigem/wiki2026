@@ -36,9 +36,9 @@ import { SMO_5L7D, type Structure } from "./structures";
 export interface Anchored {
   id?: string;
   /**
-   * This block starts a named section of the page. Long pages list their
-   * sections in a floating menu beside the page, one entry per label, with
-   * the headed blocks inside each section listed under it.
+   * This block starts a named section of the page. A page with three or
+   * more sections is laid out as one signboard and card per section, with a
+   * list of the sections in the left margin (a corner button on a phone).
    */
   section?: string;
 }
@@ -202,7 +202,12 @@ export type Block = Anchored &
         source?: string;
       }
     /** Numbered references for the section above, matching its [n] markers. */
-    | { kind: "references"; heading?: string; items: Reference[] }
+    /**
+     * A numbered reference list. `for` names the section whose `[n]` markers
+     * it answers (the section label, for example "Community need"), so those
+     * markers link to it.
+     */
+    | { kind: "references"; heading?: string; for?: string; items: Reference[] }
     /** A strategy in stages, with a rail beside it and a "we are here" line. */
     | {
         kind: "rail";
@@ -1093,6 +1098,17 @@ const humanPractices: Page = {
     "We are handing other researchers a tool that changes what stays in the primary cilium. Our guiding question: how do we make it easy for them to adopt, and encourage responsible use in biologically sensitive systems? This page is what they told us, and what we changed.",
   blocks: [
 {
+      kind: "stats",
+      id: "integration",
+      heading: "Integration counter",
+      items: [
+        { value: "13", label: "stakeholders consulted" },
+        { value: "6", label: "professional communities represented" },
+        { value: "5", label: "shared adoption needs" },
+        { value: "5", label: "design requirements defined", emphasis: true },
+      ],
+    },
+{
       kind: "stakeholders",
       section: "Who we asked",
       id: "stakeholders",
@@ -1661,7 +1677,7 @@ const humanPractices: Page = {
         { glyph: "grabber", caption: "degradation-based control" },
       ],
       outcome:
-        "...while adding a feature these tools were not designed around: control of protein abundance specifically **within the primary cilium**.",
+        "And adds what none of them were designed around: control of protein abundance specifically **within the primary cilium**.",
     },
 {
       kind: "prose",
@@ -1676,6 +1692,7 @@ const humanPractices: Page = {
 {
       kind: "prose",
       id: "entrepreneurship",
+      section: "Entrepreneurship",
       heading: "Entrepreneurship: from research to adoption",
       body: [
         "As our market analysis revealed, ciliary biology is a specialised but established research community, while existing tools from neighbouring markets have broader use cases that give researchers more global control over biological systems. Identifying a market opportunity does not automatically tell us how our technology can reach that market, however. We were confident that we wanted to spend as much time as possible developing the technology and giving researchers the ability to use it openly and accessibly, but we did not know how to achieve that goal. We started with a lot of potential avenues: patenting, licensing, creating a company, distributing it openly to labs. To understand how our project should approach these decisions, we spoke to [Roi Eisenkot](stakeholder:eisenkot), Associate Director of Bioengineering at UW CoMotion, who works with researchers to translate university technologies toward real world use.",
@@ -1936,17 +1953,6 @@ const humanPractices: Page = {
       ],
     },
 {
-      kind: "stats",
-      id: "integration",
-      heading: "Integration counter",
-      items: [
-        { value: "13", label: "stakeholders consulted" },
-        { value: "6", label: "professional communities represented" },
-        { value: "5", label: "shared adoption needs" },
-        { value: "5", label: "design requirements defined", emphasis: true },
-      ],
-    },
-{
       kind: "prose",
       section: "Responsible use",
       id: "responsible",
@@ -1990,6 +1996,7 @@ const humanPractices: Page = {
 {
       kind: "references",
       heading: "Project inspiration",
+      for: "Background",
       items: [
         { n: "1", text: "J. Su et al., Cell–cell communication: new insights and clinical implications. Signal Transduct. Target. Ther. 9, 196 (2024).", href: "https://doi.org/10.1038/s41392-024-01888-z" },
         { n: "2", text: "A. M. Skoda et al., The role of the Hedgehog signaling pathway in cancer: a comprehensive review. Bosn. J. Basic Med. Sci. 18, 8–20 (2018).", href: "https://doi.org/10.17305/bjbms.2018.2756" },
@@ -2007,6 +2014,7 @@ const humanPractices: Page = {
 {
       kind: "references",
       heading: "Community need",
+      for: "Community need",
       items: [
         { n: "1", text: "R. Pala, N. Alomari and S. M. Nauli, Primary cilium-dependent signaling mechanisms. Int. J. Mol. Sci. 18, 2272 (2017).", href: "https://doi.org/10.3390/ijms18112272" },
         { n: "2", text: "B. Li, Y.-Y. He and Z.-M. Yang, Primary cilia function as hubs for signal transduction. Cell Biosci. 15 (2025).", href: "https://doi.org/10.1186/s13578-025-01471-1" },
@@ -2033,6 +2041,7 @@ const humanPractices: Page = {
 {
       kind: "references",
       heading: "Market model",
+      for: "Market",
       items: [
         { n: "1", text: "J. S. Lorente et al., GPCR drug discovery: new agents, targets and indications. Nat. Rev. Drug Discov. 24, 458–479 (2025).", href: "https://doi.org/10.1038/s41573-025-01139-y" },
         { n: "2", text: "D. Jenkins and P. L. Beales, Genes and mechanisms in human ciliopathies. In Emery and Rimoin's Principles and Practice of Medical Genetics (2013).", href: "https://doi.org/10.1016/b978-0-12-383834-6.00174-9" },
@@ -2052,6 +2061,7 @@ const humanPractices: Page = {
 {
       kind: "references",
       heading: "Designing for adoption",
+      for: "Adoption",
       items: [
         { n: "1", text: "V. Reddy Palicharla and S. Mukhopadhyay, Molecular and structural perspectives on protein trafficking to the primary cilium membrane. Biochem. Soc. Trans. 52, 1473–1487 (2024).", href: "https://doi.org/10.1042/bst20231403" },
         { n: "2", text: "K. I. Hilgendorf, C. T. Johnson and P. K. Jackson, The primary cilium as a cellular receiver: organizing ciliary GPCR signaling. Curr. Opin. Cell Biol. 39, 84–92 (2016).", href: "https://doi.org/10.1016/j.ceb.2016.02.008" },
@@ -2064,6 +2074,7 @@ const humanPractices: Page = {
 {
       kind: "references",
       heading: "Responsible platform development",
+      for: "Responsible use",
       items: [
         { n: "1", text: "R. Pala, N. Alomari and S. M. Nauli, Primary cilium-dependent signaling mechanisms. Int. J. Mol. Sci. 18, 2272 (2017).", href: "https://doi.org/10.3390/ijms18112272" },
       ],

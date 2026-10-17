@@ -40,6 +40,8 @@ export default function FigureFrame({ src, alt, caption, owner, ratio = 'wide', 
         <img
           src={asset(src)}
           alt={alt ?? ''}
+          loading="lazy"
+          decoding="async"
           className="w-full rounded-sm border-[3px] border-leaf-700"
           style={{ aspectRatio: RATIO[ratio], objectFit: 'contain' }}
         />

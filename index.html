@@ -15,6 +15,15 @@
     />
     <!-- The icon is installed at runtime by src/site/favicon.ts: the team logo
          from src/site/content/teamLogo.ts, drawn on a cream tile. -->
+    <!-- The two fonts are served from this site (public/fonts/, declared in
+         src/index.css). Preloading the Latin files starts them downloading
+         with the page itself, so text is set in the right font from the first
+         paint instead of flashing a fallback first. -->
+    <link rel="preload" as="font" type="font/woff2" href="%BASE_URL%fonts/pixelify-sans-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="%BASE_URL%fonts/nunito-latin.woff2" crossorigin />
+    <!-- The lawn behind every page: one 1.7 KB tile. Each page's own garden
+         is preloaded from that page's HTML (see vite.config.ts). -->
+    <link rel="preload" as="image" href="%BASE_URL%gardens/lawn.png" />
   </head>
   <body>
     <div id="root"></div>

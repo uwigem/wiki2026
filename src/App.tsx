@@ -5,7 +5,7 @@ import { Link, currentAnchor, useRoute } from './site/router'
 import ExploreCards from './site/components/ExploreCards'
 import FooterGarden from './site/components/FooterGarden'
 import HedgehogGuide from './site/components/HedgehogGuide'
-import PageGarden, { variantFor } from './site/components/PageGarden'
+import GardenBackdrop from './site/components/GardenBackdrop'
 import GardenSection from './site/components/GardenSection'
 import PixelSign from './site/components/PixelSign'
 import TopNav from './site/components/TopNav'
@@ -19,7 +19,7 @@ import WikiPage from './site/pages/WikiPage'
 /**
  * App shell: router plus layout.
  *
- * `PageGarden` and `HedgehogGuide` are mounted once here, above the router, so
+ * `GardenBackdrop` and `HedgehogGuide` are mounted once here, above the router, so
  * the engine's world is built a single time and the hedgehog keeps walking
  * continuously as you move between pages rather than respawning on every
  * navigation.
@@ -28,6 +28,12 @@ import WikiPage from './site/pages/WikiPage'
  * the shell gets out of its way: nav, footer and background all step aside.
  * Two gardens would mean two requestAnimationFrame loops.
  */
+/** Whether the page at `path` is laid out with a section list (three or more declared sections). */
+function hasSectionList(path: string): boolean {
+  const page = pageBySlug(path)
+  return !!page && page.blocks.filter((b) => b.section).length >= 3
+}
+
 export default function App() {
   const path = useRoute()
   const isPlayground = path === '/playground'
@@ -61,12 +67,16 @@ export default function App() {
   if (isPlayground) return <PlaygroundPage />
 
   return (
-    <>
-      {/* Garden in the margins, clean grass down the middle. One variant per
-          page family. The quiet homepages paint their own flat background:
-          no garden in the margins and no hedgehog walking down beside the text. */}
-      {!isHome && <PageGarden variant={variantFor(path)} />}
-      {!isHome && <HedgehogGuide />}
+    // Relative, so the background below can span the whole document.
+    <div className="relative">
+      {/* Lawn everywhere, and each page's own garden in its margins: fixed
+          images, see GardenBackdrop. The quiet homepages paint their own flat
+          background: no garden in the margins and no hedgehog walking down
+          beside the text. */}
+      {!isHome && <GardenBackdrop path={path} />}
+      {/* Long pages keep their section list in the left margin, so the
+          hedgehog walks down the right one instead. */}
+      {!isHome && <HedgehogGuide side={hasSectionList(path) ? 'right' : 'left'} />}
 
       {/* Everything readable lives above the garden in one z-10 layer. */}
       <div className="relative z-10 flex min-h-screen flex-col">
@@ -103,7 +113,7 @@ export default function App() {
       <p aria-live="polite" className="sr-only">
         {announced}
       </p>
-    </>
+    </div>
   )
 }
 
