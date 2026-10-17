@@ -63,6 +63,7 @@ export const NAV: NavGroup[] = [
       { label: 'Experiments', to: '/experiments' },
       { label: 'Notebook', to: '/notebook' },
       { label: 'Parts and Registry', to: '/parts' },
+      { label: 'Results', to: '/results' },
     ],
   },
   {

@@ -40,6 +40,7 @@ All page content is data in `src/site/content/pages.ts`. Each item in a page's
 | `cycles` | A loop emblem, then all four design/build/test/learn stages as cards. Several cycles become tabs | Engineering cycles |
 | `trail` | The run of numbered parts, with the one you are in marked | A page told in parts, at the top of each one |
 | `recipe` | One iGEM Alchemy combination, drawn with the game's own pictures | Showing what the game is, rather than describing it |
+| `resultsSoon` | The hedgehog daydreaming an experiment in a thought bubble | A page that has no data yet and should say so without looking broken |
 | `stats` | A row of big figures | A few numbers that carry an argument |
 | `matrix` | A capability comparison table | Showing that nothing existing does the job |
 | `toolshed` | Expandable tool cards | Surveying existing methods |
@@ -324,4 +325,5 @@ belongs on them, so the structure is right from the first day:
 | --- | --- | --- |
 | Out of the Greenhouse | `/implementation` | proposed implementation: who it is for, plus the deliverables shared with Human Practices |
 | Seeds We Logged | `/parts` | parts and registry |
+| Results | `/results` | **has no data yet on purpose.** The hedgehog says so; replace the `resultsSoon` block the moment there are numbers |
 | The Checklist | `/judging` | where each criterion is evidenced |
