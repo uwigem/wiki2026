@@ -92,7 +92,7 @@ export const SUBTEAMS: Subteam[] = [
   },
   {
     id: 'human-practices',
-    name: 'Human Practices',
+    name: 'Integrated Human Practices',
     flower: 'daisy',
     blurb:
       'Integrated Human Practices interviews, plus education and outreach: the video series, trivia tabling, the central dogma bracelet, and iGEM Alchemy.',
