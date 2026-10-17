@@ -43,15 +43,6 @@ export const NAV: NavGroup[] = [
     ],
   },
   {
-    label: 'Wetlab',
-    to: '/experiments',
-    items: [
-      { label: 'Experiments', to: '/experiments' },
-      { label: 'Notebook', to: '/notebook' },
-      { label: 'Parts and Registry', to: '/parts' },
-    ],
-  },
-  {
     label: 'Drylab',
     to: '/model',
     items: [{ label: 'Model', to: '/model' }],
@@ -63,6 +54,15 @@ export const NAV: NavGroup[] = [
       { label: 'Integrated Human Practices', to: '/human-practices' },
       { label: 'Education', to: '/education' },
       { label: 'iGEM Alchemy', to: '/alchemy' },
+    ],
+  },
+  {
+    label: 'Wetlab',
+    to: '/experiments',
+    items: [
+      { label: 'Experiments', to: '/experiments' },
+      { label: 'Notebook', to: '/notebook' },
+      { label: 'Parts and Registry', to: '/parts' },
     ],
   },
   {
