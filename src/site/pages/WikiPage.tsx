@@ -41,6 +41,7 @@ import Workflow from "../components/Workflow";
 import Pipeline from "../components/Pipeline";
 import PartTrail from "../components/PartTrail";
 import RecipeStrip from "../components/RecipeStrip";
+import ResultsSoon from "../components/ResultsSoon";
 import Hog from "../components/alchemy/Hog";
 import { StakeholderContext, stakeholderId } from "../components/stakeholders";
 
@@ -541,6 +542,9 @@ function BlockView({ block }: { block: Block }) {
           source={block.source}
         />
       );
+
+    case "resultsSoon":
+      return <ResultsSoon note={block.note} caption={block.caption} />;
 
     case "trail":
       return <PartTrail steps={block.steps} current={block.current} />;

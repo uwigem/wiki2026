@@ -311,6 +311,8 @@ export type Block = Anchored &
         action?: { label: string; to: string };
         source?: string;
       }
+    /** The hedgehog imagining an experiment, on a page with no data yet. */
+    | { kind: "resultsSoon"; note: string; caption?: string }
     /** Where the reader is in a page told in numbered parts. */
     | { kind: "trail"; steps: TrailStep[]; current: number }
     /** A chain of stages read downwards, each naming what it takes and returns. */
@@ -3146,6 +3148,23 @@ const parts: Page = {
   ],
 };
 
+const results: Page = {
+  slug: "/results",
+  title: "Results",
+  kicker: "wetlab · results",
+  storyBeat: "Nothing has come up yet. The seeds are in.",
+  intro:
+    "What the experiments actually produced. There is nothing here yet, and this page says so rather than filling the space with something that is not data.",
+  blocks: [
+    {
+      kind: "resultsSoon",
+      note: "We'll add them when we have them.",
+      caption:
+        "The experiments and the controls they run against are on [experiments](/experiments).",
+    },
+  ],
+};
+
 const contribution: Page = {
   slug: "/contribution",
   title: "What We Leave Behind",
@@ -3432,6 +3451,7 @@ export const PAGES: Page[] = [
   implementation,
   experiments,
   parts,
+  results,
   model,
   humanPractices,
   education,
