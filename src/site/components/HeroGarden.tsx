@@ -12,7 +12,7 @@ import { SITE_MODE } from '../theme'
  *
  * `src/engine/game.ts` runs here unmodified: baked terrain, the animated
  * waterfall, pond ripples, depth-sorted plants, sparkles, the palette. It fills
- * the hero and nothing else. Below the fold the page switches to `PageGarden`,
+ * the hero and nothing else. Below the fold the page switches to `GardenBackdrop`,
  * whose middle is kept clear for text.
  *
  * The hedgehog is not steered by scroll here. The only movement asked of the

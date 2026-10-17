@@ -172,12 +172,15 @@ piece of the garden, it runs the engine.
 **The homepage hero** (`HeroGarden.tsx`) runs `src/engine/game.ts` unmodified:
 baked terrain, animated waterfall, ripples, depth-sorted plants, sparkles.
 
-**Every other page** gets `PageGarden.tsx`, which bakes a background from the
-engine's own recipes: `terrain.ts`'s grass, `world.ts`'s pond edges, and the
-engine's real flower, tree and rock sprites. Plants are scattered into the left
-and right margins from a fixed seed; the middle stays clean grass so the reading
-panels sit on a consistent green. It is baked once to the full document height
-and a moving window is blitted to the viewport, so it scrolls with the page.
+**Every other page** has its own garden down its margins, drawn ahead of time
+and saved as images under `public/gardens/`. `npm run gardens` draws them from
+the engine's own recipes (`src/site/garden/generate.ts`: `terrain.ts`'s grass,
+`world.ts`'s pond edges, the engine's real flower, tree and rock sprites), one
+layout per page from a seed made from its path. The site only shows the files
+(`GardenBackdrop.tsx`): a 1.7 KB seamless lawn tile over the whole page, and one
+image of about 20 KB holding the page's two margin strips, preloaded from that
+page's HTML. No garden is computed in the browser. Run `npm run gardens` again
+after adding a page or changing the recipe, and commit the images.
 
 **The hedgehog in the margin** (`HedgehogGuide.tsx`) is the engine's own
 `Player`, running headless. Its vertical target is a straight linear function of

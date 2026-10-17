@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from '../router'
+import { Cite } from './citations'
 import { StakeholderLink } from './stakeholders'
 
 /**
@@ -23,9 +24,17 @@ import { StakeholderLink } from './stakeholders'
  *
  * A third target form, `[Dr. Zheng](stakeholder:zheng)`, opens that person's
  * card on a page that has a `stakeholders` block. See `stakeholders.tsx`.
+ *
+ * A citation marker, `[4]` or `[9, 10]`, links to that entry in its section's
+ * reference list where the page has one. See `citations.tsx`.
  */
 
-const TOKEN = /(\[[^\]\n]+\]\([^)\s]+\)|\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/g
+const NUM = String.raw`\d+(?:\.\d+)?`
+const TOKEN = new RegExp(
+  String.raw`(\[[^\]\n]+\]\([^)\s]+\)|\[${NUM}(?:\s*,\s*${NUM})*\](?!\()|\*\*[^*]+\*\*|\*[^*]+\*|` + '`[^`]+`)',
+  'g',
+)
+const CITE = new RegExp(String.raw`^\[(${NUM}(?:\s*,\s*${NUM})*)\]$`)
 const LINK = /^\[([^\]]+)\]\(([^)]+)\)$/
 
 export function inline(text: string): ReactNode[] {
@@ -40,6 +49,9 @@ export function inline(text: string): ReactNode[] {
             {part.slice(1, -1)}
           </code>
         )
+
+      const cite = CITE.exec(part)
+      if (cite) return <Cite key={i} nums={cite[1].split(/\s*,\s*/)} />
 
       const link = LINK.exec(part)
       if (link) {

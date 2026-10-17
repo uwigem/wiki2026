@@ -1,15 +1,15 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import DataTable, { type TableData } from './DataTable'
 import RichText, { inline } from './RichText'
 
 /**
- * A strategy told in stages, one open at a time, with a rail beside it.
+ * A strategy told in stages, one open at a time.
  *
  * Every stage's heading is always visible; its text shows only when it is
- * open, and the stage the team is at opens first. The rail lists the stages,
- * marks the open one, and draws a "we are here" line between what is done
- * and what is planned. The same line is drawn in the stage list itself, so
- * a phone reader (who has no rail) still sees where past turns to future.
+ * open, and the stage the team is at opens first. A "we are here" line sits
+ * between what is done and what is planned. There is no second list of the
+ * stages beside it: the page already has a section list in the margin, and
+ * two sticky lists side by side read as clutter.
  */
 export interface Stage {
   title: string
@@ -35,22 +35,6 @@ export default function StageRail({
 }) {
   const hereAt = stages.findIndex((s) => s.here)
   const [open, setOpen] = useState(hereAt >= 0 ? hereAt : 0)
-  const refs = useRef<(HTMLElement | null)[]>([])
-  // Set by the rail: scroll to the stage once it has opened. Opening one
-  // stage closes another, which moves everything below it, so the scroll
-  // has to wait for that layout rather than measure the old one.
-  const scrollTo = useRef<number | null>(null)
-
-  useEffect(() => {
-    if (scrollTo.current === null) return
-    refs.current[scrollTo.current]?.scrollIntoView({ block: 'start', behavior: 'smooth' })
-    scrollTo.current = null
-  }, [open])
-
-  const show = (i: number) => {
-    scrollTo.current = i
-    setOpen(i)
-  }
 
   const HereLine = ({ small }: { small?: boolean }) => (
     <div className="flex items-center gap-2" aria-label={hereLabel}>
@@ -65,7 +49,7 @@ export default function StageRail({
       {heading && <h2 className="text-xl sm:text-2xl">{heading}</h2>}
       {intro && <p className="mt-1 max-w-2xl text-body leading-relaxed">{inline(intro)}</p>}
 
-      <div className="mt-5 gap-6 md:grid md:grid-cols-[1fr_11rem]">
+      <div className="mt-5">
         <ol className="flex min-w-0 flex-col gap-2">
           {stages.map((stage, i) => {
             const isOpen = i === open
@@ -78,9 +62,6 @@ export default function StageRail({
                   </div>
                 )}
                 <section
-                  ref={(el) => {
-                    refs.current[i] = el
-                  }}
                   className={'rounded-sm border-[3px] ' + (isOpen ? 'border-leaf-700 bg-leaf-50' : 'border-leaf-300 bg-leaf-50')}
                 >
                   <h3>
@@ -117,29 +98,6 @@ export default function StageRail({
           })}
         </ol>
 
-        <nav aria-label="Stages" className="hidden md:block">
-          <ol className="sticky top-24 flex flex-col gap-1.5">
-            {stages.map((stage, i) => (
-              <li key={stage.title} className="flex flex-col gap-1.5">
-                {i === hereAt && <HereLine small />}
-                <button
-                  type="button"
-                  onClick={() => show(i)}
-                  aria-current={i === open ? 'step' : undefined}
-                  className={
-                    'flex items-start gap-2 rounded-sm border-[3px] px-2 py-1.5 text-left text-xs leading-snug transition-colors ' +
-                    (i === open
-                      ? 'border-leaf-800 bg-leaf-200 shadow-[3px_3px_0_var(--p-shadow)]'
-                      : 'border-leaf-300 bg-leaf-50 hover:bg-leaf-100')
-                  }
-                >
-                  <span className="pixel shrink-0 text-[0.6rem] text-leaf-800">{i + 1}</span>
-                  <span>{stage.title}</span>
-                </button>
-              </li>
-            ))}
-          </ol>
-        </nav>
       </div>
 
       {source && (

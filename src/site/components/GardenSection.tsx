@@ -4,7 +4,7 @@ import { useRevealOnScroll } from '../hooks'
 /**
  * A page section: the reading column.
  *
- * Keeps content in a readable width over the garden canvas (`PageGarden`) and
+ * Keeps content in a readable width over the garden background (`GardenBackdrop`) and
  * leaves enough margin either side that the world stays visible. The width and
  * padding classes here are mirrored in `site/layout.ts`, which the canvases use
  * to line up with this column. Change both together.

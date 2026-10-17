@@ -1,3 +1,5 @@
+import { refId } from './citations'
+
 /**
  * A numbered reference list for the section above it. Every entry carries a
  * link that resolves (a DOI or a stable URL), which is what lets a judge check
@@ -12,13 +14,22 @@ export interface Reference {
   href?: string
 }
 
-export default function References({ heading = 'References', items }: { heading?: string; items: Reference[] }) {
+export default function References({
+  heading = 'References',
+  items,
+  scope,
+}: {
+  heading?: string
+  items: Reference[]
+  /** The section these sources belong to, so markers in it can link here. */
+  scope?: string
+}) {
   return (
-    <section className="panel-flat px-5 py-4 sm:px-7 sm:py-5">
+    <section className="refs-list panel-flat px-5 py-4 sm:px-7 sm:py-5">
       <h2 className="kicker">{heading}</h2>
       <ol className="mt-2 flex flex-col gap-1.5 text-xs leading-relaxed text-leaf-800">
         {items.map((r) => (
-          <li key={r.n} className="flex gap-2">
+          <li key={r.n} id={scope ? refId(scope, r.n) : undefined} className="flex gap-2 rounded-sm">
             <span className="pixel shrink-0 text-[0.65rem] text-leaf-800">[{r.n}]</span>
             <span className="min-w-0">
               {r.text}{' '}

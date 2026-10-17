@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   BIG_FLOWER,
   BLUEBELL,
@@ -13,15 +14,14 @@ import { inline } from './RichText'
 import { stakeholderId, useStakeholders } from './stakeholders'
 
 /**
- * The people who shaped the project, planted as beds in the garden.
+ * The people who shaped the project, as a filterable set of cards.
  *
- * One bed per kind of expertise, one bloom per person. This is the stakeholder
- * map from the Human Practices sketches, with one deliberate departure from
- * it: names are printed under their flower rather than revealed on hover,
- * because a map whose content only appears when a mouse passes over it is
- * unreadable on a phone and invisible to a screen reader. Clicking a bloom
- * opens that person's card as a dialog (`StakeholderModal`), and so does any
- * mention of their name elsewhere on the page.
+ * Laid out the way McGill 2025 lays out its Human Practices journey: a row of
+ * filter chips, one per kind of expertise, over cards that each give a name,
+ * a role and a "More" that opens the full conversation as a dialog
+ * (`StakeholderModal`). Any mention of the person's name elsewhere on the page
+ * opens the same dialog. Each kind of expertise keeps its own flower, so the
+ * groups are told apart by shape as well as by label.
  *
  * Every entry carries a **what changed** line, and that line is the point.
  * An interview with no decision attached to it is a conversation, not
@@ -66,46 +66,78 @@ interface Props {
 
 export default function StakeholderGarden({ heading, intro, people, pending, source }: Props) {
   const { open } = useStakeholders()
+  const [filter, setFilter] = useState<string>('all')
 
-  const beds = GROUPS.map((g) => ({ ...g, members: people.filter((p) => p.group === g.key) })).filter(
-    (g) => g.members.length > 0,
+  const groups = GROUPS.map((g) => ({ ...g, count: people.filter((p) => p.group === g.key).length })).filter(
+    (g) => g.count > 0,
   )
+  const flowerFor = (key: string) => GROUPS.find((g) => g.key === key)?.flower ?? DAISY
+  const labelFor = (key: string) => GROUPS.find((g) => g.key === key)?.label ?? key
+  const shown = filter === 'all' ? people : people.filter((p) => p.group === filter)
+
+  const chip = (key: string, label: string, count: number, flower?: Sprite) => {
+    const on = filter === key
+    return (
+      <li key={key}>
+        <button
+          type="button"
+          onClick={() => setFilter(key)}
+          aria-pressed={on}
+          className={
+            'flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-sm border-[3px] px-2.5 py-1 text-xs transition-colors ' +
+            (on ? 'border-leaf-800 bg-leaf-200 font-semibold' : 'border-leaf-300 bg-leaf-50 hover:bg-leaf-100')
+          }
+        >
+          {flower && <PixelSprite sprite={flower} scale={2} />}
+          <span>{label}</span>
+          <span className="text-leaf-800">{count}</span>
+        </button>
+      </li>
+    )
+  }
 
   return (
     <section className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
       {heading && <h2 className="text-xl sm:text-2xl">{heading}</h2>}
       {intro && <p className="mt-1 max-w-2xl text-body leading-relaxed">{inline(intro)}</p>}
 
-      <div className="mt-5 grid gap-4 sm:grid-cols-2">
-        {beds.map((bed) => (
-          <div key={bed.key} className="panel-flat px-4 py-3">
-            <div className="flex items-baseline justify-between gap-2">
-              <h3 className="text-base">{bed.label}</h3>
-              <span className="badge">{bed.members.length}</span>
-            </div>
+      {/* One swipeable row on a phone, wrapping from there up. */}
+      <ul
+        className="-mx-1 mt-4 flex gap-2 overflow-x-auto px-1 pb-1 sm:flex-wrap sm:overflow-visible"
+        aria-label="Filter by kind of expertise"
+      >
+        {chip('all', 'All', people.length)}
+        {groups.map((g) => chip(g.key, g.label, g.count, g.flower))}
+      </ul>
 
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {bed.members.map((p) => (
-                <li key={p.name}>
-                  <button
-                    type="button"
-                    onClick={() => open(stakeholderId(p))}
-                    aria-haspopup="dialog"
-                    className="flex w-[7.5rem] flex-col items-center gap-1 rounded-sm border-[3px] border-leaf-300 bg-leaf-50 px-1.5 py-2 text-center transition-colors hover:bg-leaf-100"
-                  >
-                    <PixelSprite sprite={bed.flower} scale={2} />
-                    <span className="text-[0.72rem] leading-tight">{p.name}</span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3" aria-live="polite">
+        {shown.map((p) => (
+          <li key={p.name} className="min-w-0">
+            <button
+              type="button"
+              onClick={() => open(stakeholderId(p))}
+              aria-haspopup="dialog"
+              className="group flex h-full w-full items-start gap-3 rounded-sm border-[3px] border-leaf-300 bg-leaf-50 px-3 py-3 text-left transition-colors hover:border-leaf-700 hover:bg-leaf-100"
+            >
+              <span aria-hidden className="flex h-12 w-12 shrink-0 items-center justify-center rounded-sm bg-leaf-100">
+                <PixelSprite sprite={flowerFor(p.group)} scale={4} />
+              </span>
+              <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+                <span className="text-sm font-semibold leading-snug">{p.name}</span>
+                <span className="line-clamp-2 text-xs leading-snug text-leaf-800">{p.role}</span>
+                <span className="mt-1.5 flex items-center justify-between gap-2">
+                  <span className="truncate text-[0.7rem] text-leaf-800">{labelFor(p.group)}</span>
+                  <span className="shrink-0 text-xs font-semibold underline-offset-2 group-hover:underline">More →</span>
+                </span>
+              </span>
+            </button>
+          </li>
         ))}
-      </div>
+      </ul>
 
-      <p className="mt-4 text-center text-body-sm leading-relaxed text-leaf-800">
-        Pick a bloom to read what that person told us, and what we changed because of it. Their names open the same
-        card wherever they come up on this page.
+      <p className="mt-4 text-body-sm leading-relaxed text-leaf-800">
+        Open a card to read what that person told us, and what we changed because of it. Their names open the same card
+        wherever they come up on this page.
       </p>
 
       {pending && pending.length > 0 && (
