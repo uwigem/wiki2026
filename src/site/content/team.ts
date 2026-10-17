@@ -206,6 +206,16 @@ export const ROSTER: Member[] = [
     photo: 'team/rishabh-goenka.jpg',
   },
   {
+    name: 'Trevor White',
+    email: 'tw256@uw.edu',
+    subteams: ['protein-design', 'web-dev'],
+    leader: true,
+    bio:
+      'Hi, I’m Trevor! I’m a second-year Computer Science and Biology major on the Protein Design and Web Development subteams. I write and organize the scripts for our de novo protein design pipelines, and I helped build this wiki. Outside of school, I love to read, cook, and play games.',
+    linkedin: 'https://www.linkedin.com/in/trevor-white-aa40123bb',
+    photo: 'team/trevor-white.jpg',
+  },
+  {
     name: 'Neel Sundar',
     email: 'sundarn@uw.edu',
     subteams: ['web-dev'],
@@ -395,15 +405,6 @@ export const ROSTER: Member[] = [
       'Hi, I’m Victoria! I’m a Biochemistry and Real Estate major on the Wet Lab subteam. In my free time, I enjoy playing tennis and trying new restaurants.',
     linkedin: 'https://www.linkedin.com/in/victoria-ching-yen-wang',
     photo: 'team/victoria-wang.jpg',
-  },
-  {
-    name: 'Trevor White',
-    email: 'tw256@uw.edu',
-    subteams: ['protein-design', 'web-dev'],
-    bio:
-      'Hi, I’m Trevor! I’m a second-year Computer Science and Biology major on the Protein Design and Web Development subteams. I write and organize the scripts for our de novo protein design pipelines, and I helped build this wiki. Outside of school, I love to read, cook, and play games.',
-    linkedin: 'https://www.linkedin.com/in/trevor-white-aa40123bb',
-    photo: 'team/trevor-white.jpg',
   },
   {
     name: 'Selena Xu',
