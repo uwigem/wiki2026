@@ -1,15 +1,14 @@
 import type { Sprite } from '../../engine/sprites'
 
 /**
- * Stand-in pixel art for the Human Practices page, drawn in the engine's
- * sprite alphabet (see LEGEND in `src/engine/sprites.ts`) so it takes the
- * site's palette like everything else.
+ * Pixel art for the Human Practices page, drawn in the engine's sprite
+ * alphabet (see LEGEND in `src/engine/sprites.ts`) so it takes the site's
+ * palette like everything else.
  *
- * These exist so the page works and so Creative can see what each picture is
- * for and roughly how big it is: the shed and its seven props, one glyph per
- * kind of membrane protein, and an accessory per researcher persona. Each is
- * meant to be replaced by Creative's drawing; swap the sprite, nothing else
- * changes.
+ * The shed and its seven props are finished drawings. The membrane protein
+ * glyphs and the persona accessories are still stand-ins so the page works and
+ * Creative can see what each picture is for and roughly how big it is; swap
+ * the sprite, nothing else changes.
  */
 
 function s(rows: string[]): Sprite {
@@ -19,172 +18,212 @@ function s(rows: string[]): Sprite {
 
 /* ------------------------------------------------------------- the shed */
 
-/** Closed: planks, a tiled roof, two doors with a latch. */
+/** Closed: quill-tone planks under a slate roof, a window with its flower box, double doors with a latch, a lantern on a hook. */
 export const SHED_CLOSED = s([
-  '..............KKKKKKKKKKKKKK..............',
-  '............KKttttttttttttttKK............',
-  '..........KKttTtTtTtTtTtTtTtttKK..........',
-  '........KKttTtTtTtTtTtTtTtTtTtttKK........',
-  '......KKttTtTtTtTtTtTtTtTtTtTtTtttKK......',
-  '....KKttTtTtTtTtTtTtTtTtTtTtTtTtTtttKK....',
-  '..KKttTtTtTtTtTtTtTtTtTtTtTtTtTtTtTtttKK..',
-  'KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK',
-  '.NnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnN.',
-  '.NMnnnnnnnnnnnnNNNNNNNNNNNNnnnnnnnnnnnnMN.',
-  '.NnnnnnnnnnnnnnNnnnnnnNnnnnNnnnnnnnnnnnnN.',
-  '.NMnnnnnnnnnnnnNnnnnnnNnnnnNnnnnnnnnnnnMN.',
-  '.NnnnnnnnnnnnnnNnnnnnnNnnnnNnnnnnnnnnnnnN.',
-  '.NMnnnnnnnnnnnnNnnnnnnNnnnnNnnnnnnnnnnnMN.',
-  '.NnnnnnnnnnnnnnNnnnnJnNnJnnnNnnnnnnnnnnnN.',
-  '.NMnnnnnnnnnnnnNnnnnnnNnnnnNnnnnnnnnnnnMN.',
-  '.NnnnnnnnnnnnnnNnnnnnnNnnnnNnnnnnnnnnnnnN.',
-  '.NMnnnnnnnnnnnnNnnnnnnNnnnnNnnnnnnnnnnnMN.',
-  '.NnnnnnnnnnnnnnNnnnnnnNnnnnNnnnnnnnnnnnnN.',
-  '.NMnnnnnnnnnnnnNnnnnnnNnnnnNnnnnnnnnnnnMN.',
-  '.NnnnnnnnnnnnnnNnnnnnnNnnnnNnnnnnnnnnnnnN.',
-  'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+  '....................KKKK....................',
+  '..................KKtttTKK..................',
+  '................KKTKTTKTTKKK................',
+  '..............KKtTTtTTtTTtTTKK..............',
+  '............KKTKTTKTTKTTKTTKTTKK............',
+  '..........KKtTTtTTtTTtTTtTTtTTtTKK..........',
+  '........KKTKTTKTTKTTKTTKTTKTTKTTKTKK........',
+  '......KKtTTtTTtTTtTTtTTtTTtTTtTTtTTtKK......',
+  '....KKTKTTKTTKTTKTTKTTKTTKTTKTTKTTKTTKKK....',
+  '..KKtTTtTTtTTtTTtTTtTTtTTtTTtTTtTTtTTtTTKK..',
+  'KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK',
+  '.ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ.',
+  '.ZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZ.',
+  '.ZzzzAAAAAAAzzzzzKKKKKKKKKKKKzzzzzKzzzzzzzZ.',
+  '.ZZZZAIUuAuAZZZZZKZzzzKKzzzZKZZZZKYKZZZZZZZ.',
+  '.ZzzzAUuuAuAzzzzzKzZzzKKzzZzKzzzzKJKzzzzzzZ.',
+  '.ZzzzAAAAAAAzzzzzKzzZzKKzZzzKzzzzzKzzzzzzzZ.',
+  '.ZZZZAuuuAuAZZZZZKzzzZKKZzzzKZZZZZZZZZZZZZZ.',
+  '.ZzzzAAAAAAAzzzzzKzzzZKKZzzzKzzzzzzzzzzzzzZ.',
+  '.ZzzzZPyVZZZzzzzzKzzzJKKJzzzKzzzzzzzzzzzzzZ.',
+  '.ZZZZAAAAAAAZZZZZKzzzZKKZzzzKZZZZZZZZZZZZZZ.',
+  '.ZzzzzzzzzzzzzzzzKzzzZKKZzzzKzzzzzzzzzzzzzZ.',
+  '.ZzzzzzzzzzzzzzzzKzzzZKKZzzzKzzzzzzzzzzzzzZ.',
+  '.ZZZZZZZZZZZZZZZZKzzzZKKZzzzKZZZZZZZZZZZZZZ.',
+  '.ZzzzzzzzzzzzzzzzKzzzzKKzzzzKzzzzzzzzzzzzzZ.',
+  '.ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ.',
+  '..,.tTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTt.,.',
+  ",',,KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK,,,'",
 ])
 
-/** Open: the doors swung back, shelves inside. */
+/** Open: the doors folded back against the wall, two shelves of pots inside. */
 export const SHED_OPEN = s([
-  '..............KKKKKKKKKKKKKK..............',
-  '............KKttttttttttttttKK............',
-  '..........KKttTtTtTtTtTtTtTtttKK..........',
-  '........KKttTtTtTtTtTtTtTtTtTtttKK........',
-  '......KKttTtTtTtTtTtTtTtTtTtTtTtttKK......',
-  '....KKttTtTtTtTtTtTtTtTtTtTtTtTtTtttKK....',
-  '..KKttTtTtTtTtTtTtTtTtTtTtTtTtTtTtTtttKK..',
-  'KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK',
-  '.NnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnN.',
-  '.NMnnnnnnnnnNNNNDDDDDDDDDDDDNNNNnnnnnnnMN.',
-  '.NnnnnnnnnnnNnnNDDDDDDDDDDDDNnnNnnnnnnnnN.',
-  '.NMnnnnnnnnnNnnNDMMMMMMMMMMDNnnNnnnnnnnMN.',
-  '.NnnnnnnnnnnNnnNDDDDDDDDDDDDNnnNnnnnnnnnN.',
-  '.NMnnnnnnnnnNnnNDDDDDDDDDDDDNnnNnnnnnnnMN.',
-  '.NnnnnnnnnnnNJnNDMMMMMMMMMMDNnJNnnnnnnnnN.',
-  '.NMnnnnnnnnnNnnNDDDDDDDDDDDDNnnNnnnnnnnMN.',
-  '.NnnnnnnnnnnNnnNDDDDDDDDDDDDNnnNnnnnnnnnN.',
-  '.NMnnnnnnnnnNnnNDDDDDDDDDDDDNnnNnnnnnnnMN.',
-  '.NnnnnnnnnnnNnnNDDDDDDDDDDDDNnnNnnnnnnnnN.',
-  '.NMnnnnnnnnnNnnNDDDDDDDDDDDDNnnNnnnnnnnMN.',
-  '.NnnnnnnnnnnNNNNDDDDDDDDDDDDNNNNnnnnnnnnN.',
-  'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+  '....................KKKK....................',
+  '..................KKtttTKK..................',
+  '................KKTKTTKTTKKK................',
+  '..............KKtTTtTTtTTtTTKK..............',
+  '............KKTKTTKTTKTTKTTKTTKK............',
+  '..........KKtTTtTTtTTtTTtTTtTTtTKK..........',
+  '........KKTKTTKTTKTTKTTKTTKTTKTTKTKK........',
+  '......KKtTTtTTtTTtTTtTTtTTtTTtTTtTTtKK......',
+  '....KKTKTTKTTKTTKTTKTTKTTKTTKTTKTTKTTKKK....',
+  '..KKtTTtTTtTTtTTtTTtTTtTTtTTtTTtTTtTTtTTKK..',
+  'KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK',
+  '.ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ.',
+  '.ZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZ.',
+  '.ZzzzAAAAAAAzKKKKKKKKKKKKKKKKKKKKzKzzzzzzzZ.',
+  '.ZZZZAIUuAuAZKzzKKLLLLLLLLLLKKzzKKYKZZZZZZZ.',
+  '.ZzzzAUuuAuAzKzzKKLLLLLLLLLLKKzzKKJKzzzzzzZ.',
+  '.ZzzzAAAAAAAzKzzKKLVLLbLLuLLKKzzKzKzzzzzzzZ.',
+  '.ZZZZAuuuAuAZKzzKKAAAAAAAAAAKKzzKZZZZZZZZZZ.',
+  '.ZzzzAAAAAAAzKzzKKLLLLLLLLLLKKzzKzzzzzzzzzZ.',
+  '.ZzzzZPyVZZZzKzzKKLLLLLLLLLLKKzzKzzzzzzzzzZ.',
+  '.ZZZZAAAAAAAZKzzKKLLYLLLPLLLKKzzKZZZZZZZZZZ.',
+  '.ZzzzzzzzzzzzKzzKKAAAAAAAAAAKKzzKzzzzzzzzzZ.',
+  '.ZzzzzzzzzzzzKzzKKLLLLLLLLLLKKzzKzzzzzzzzzZ.',
+  '.ZZZZZZZZZZZZKzzKKLLLLLLLLLLKKzzKZZZZZZZZZZ.',
+  '.ZzzzzzzzzzzzKKKKKZZZZZZZZZZKKKKKzzzzzzzzzZ.',
+  '.ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ.',
+  '..,.tTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTt.,.',
+  ",',,KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK,,,'",
 ])
 
 /* ------------------------------------------------------------ the props */
 
 export type PropKey = 'axe' | 'shears' | 'spray' | 'puller' | 'cart' | 'grabber' | 'tagger'
 
-/** Removes the whole plant: genetic knockout. A felling axe, head and handle. */
+/** Removes the whole plant: genetic knockout. A felling axe, wedge head and long handle. */
 const AXE = s([
-  '.........nM...',
-  '.........nM...',
-  '.K.......nM...',
-  'KKK......nM...',
-  'KiiKK....nM...',
-  'KiiiiKKKKnM...',
-  'KiiiiKKKKnM...',
-  'KiiKK....nM...',
-  'KKK......nM...',
-  '.K.......nM...',
-  '.........nM...',
-  '.........nM...',
+  '......KKKK......',
+  '....KKtttTK.....',
+  '..KKtItttTTK....',
+  '.KttttttTTTK....',
+  '.KTtttTTTTTK....',
+  '..KTTTTTTTKZ....',
+  '...KKKKKKZAz....',
+  '........ZAzZ....',
+  '.........ZAzZ...',
+  '..........ZAzZ..',
+  '...........ZAzZ.',
+  '............ZAzZ',
+  '.............ZzZ',
+  '..............Z.',
+  '................',
+  '................',
 ])
 
-/** Trims rather than uproots: gene silencing. Blades crossed over two loops. */
+/** Trims rather than uproots: gene silencing. Secateurs, blades open, orange grips. */
 const SHEARS = s([
-  '.i..........i.',
-  '..i........i..',
-  '...i......i...',
-  '....i....i....',
-  '.....i..i.....',
-  '......KK......',
-  '.....b..b.....',
-  '....b....b....',
-  '...bb....bb...',
-  '..b..b..b..b..',
-  '..b..b..b..b..',
-  '...bb....bb...',
+  '.K..........K...',
+  'KtK........KtK..',
+  'KItK......KtTK..',
+  '.KttK....KtTK...',
+  '..KttK..KtTK....',
+  '...KttKKTTK.....',
+  '....KtKKTK......',
+  '.....KKXK.......',
+  '....KbbKbbK.....',
+  '...KbObKbObK....',
+  '...KbbbKbbbK....',
+  '...KbbbKbbbK....',
+  '...KbbbKbbbK....',
+  '....KbbKbbK.....',
+  '.....KK.KK......',
+  '................',
 ])
 
-/** Dose and reach: small molecule antagonists. A spray bottle. */
+/** Dose and reach: small molecule antagonists. A spray bottle with a trigger head. */
 const SPRAY = s([
-  '.....KKK......',
-  '....Kt.KW.....',
-  '....KKKKWW....',
-  '.....uu.......',
-  '....uuuu......',
-  '...uuuuuu.....',
-  '..uUUuuuuu....',
-  '..uUUuuuuu....',
-  '..uuuuuuuu....',
-  '..uuuuuuuu....',
-  '...uuuuuu.....',
-  '....uuuu......',
+  '......KKK.......',
+  '.....KtTTKK.....',
+  '..KKKKtttTK.....',
+  '.KtIKKKKKtK.....',
+  '.KtK...KTK......',
+  '..K....KuUK.....',
+  '......KuUuuK....',
+  '.....KuUuuuuK...',
+  '.....KuuuuuuK...',
+  '.....KwwwwwwK...',
+  '.....KwWwwwwK...',
+  '.....KuuuuuuK...',
+  '.....KuuuuuuK...',
+  '.....KuuuuuuK...',
+  '......KuuuuK....',
+  '.......KKKK.....',
 ])
 
-/** Lifts one weed out on demand: inducible degrons. A trowel. */
+/** Lifts one weed out on demand: inducible degrons. A hand fork. */
 const PULLER = s([
-  '......nM......',
-  '......nM......',
-  '......nM......',
-  '......nM......',
-  '...KKKnMKK....',
-  '...KKKKKKK....',
-  '...K..K..K....',
-  '...K..K..K....',
-  '...K..K..K....',
-  '...K..K..K....',
-  '....K.K.K.....',
-  '..............',
+  '......KZZK......',
+  '.....KZAAzK.....',
+  '.....KZAzzK.....',
+  '.....KZzzzK.....',
+  '.....KZzzzK.....',
+  '......KZzK......',
+  '......KTtK......',
+  '....KKKTtKKK....',
+  '...KtTTTTTTtK...',
+  '...KTKKTTKKTK...',
+  '...KTK.KtK.KTK..',
+  '...KTK.KTK.KTK..',
+  '...KTK.KTK.KTK..',
+  '....K..KK..K....',
+  '................',
+  '................',
 ])
 
-/** Moves everything along the path at once: ciliary trafficking. A cart. */
+/** Moves everything along the path at once: ciliary trafficking. A wheelbarrow with a sprout aboard. */
 const CART = s([
-  '..............',
-  '..............',
-  '..NNNNNNNNNN..',
-  '..NnnnnnnnnN..',
-  '..NnMnnnMnnN..',
-  '..NnnnnnnnnNnn',
-  '..NNNNNNNNNN..',
-  '...KK....KK...',
-  '..KggK..KggK..',
-  '..KggK..KggK..',
-  '...KK....KK...',
-  '..............',
+  '......qp..q.....',
+  '.......pqp......',
+  '........p.......',
+  '.ZZZZZZZZZZZZZ..',
+  '.ZAzzzzzzzzzzZ..',
+  '.ZzNnnnnnnnnzZ..',
+  '.ZzNnnnnnnnnzZZZ',
+  '..ZzzzzzzzzzZAaZ',
+  '..ZZZZZZZZZZZ.ZZ',
+  '.....ZKKZ.......',
+  '....KtTTtK......',
+  '...KTKKKKTK.....',
+  '...KTKtIKTK.....',
+  '...KTKKKKTK.....',
+  '....KtTTtK......',
+  '.....KKKK.......',
 ])
 
-/** Picks one thing out and holds it: targeted protein degradation. Tongs. */
+/** Picks one thing out and holds it: targeted protein degradation. Tongs on a berry. */
 const GRABBER = s([
-  '......KK......',
-  '......KK......',
-  '......KK......',
-  '.....KKKK.....',
-  '....KK..KK....',
-  '...K......K...',
-  '..K..bbbb..K..',
-  '..K..bOOb..K..',
-  '..K..bbbb..K..',
-  '..K........K..',
-  '..KK......KK..',
-  '...K......K...',
+  '.......KK.......',
+  '......KtTK......',
+  '......KtTK......',
+  '.....KtTTTK.....',
+  '....KtTKKTTK....',
+  '...KtTK..KTTK...',
+  '..KtTK....KTTK..',
+  '..KTK......KTK..',
+  '..KTK.KKKK.KTK..',
+  '..KTK.KbOK.KTK..',
+  '..KTKKbbbbKKTK..',
+  '..KTKKbbbbKKTK..',
+  '...KTKKbbKKTK...',
+  '....KKKKKKKK....',
+  '................',
+  '................',
 ])
 
-/** Marks one plant and leaves it standing: cilia-targeted ubiquitination. */
+/** Marks one plant and leaves it standing: cilia-targeted ubiquitination. A plant tag on a stake. */
 const TAGGER = s([
-  '...YYYYYYYY...',
-  '...YJJJjjjY...',
-  '...YjJjJjjY...',
-  '...YYYYYYYY...',
-  '......nM......',
-  '......nM......',
-  '......nM......',
-  '......nM......',
-  '......nM......',
-  '......nM......',
-  '......nM......',
-  '......nM......',
+  '....KKKKKKKK....',
+  '...KYjjjjjjYK...',
+  '...KYjJYjjjYK...',
+  '...KYjjjjjjYK...',
+  '...KYJJJJJjYK...',
+  '...KYjjjjjjYK...',
+  '...KYJJJJjjYK...',
+  '...KYjjjjjjYK...',
+  '....KKKZZKKK....',
+  '.......ZA.......',
+  '.......ZA.......',
+  '.......ZA.......',
+  '.......ZA.......',
+  '.......ZA.......',
+  '......,ZA,......',
+  "....,',ZA,',....",
 ])
 
 export const PROPS: Record<PropKey, Sprite> = {
