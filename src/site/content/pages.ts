@@ -33,6 +33,11 @@ import type { TrailStep } from "../components/PartTrail";
 import type { RecipePart } from "../components/RecipeStrip";
 import type { PersonaKey } from "../components/gardenArt";
 import { SMO_5L7D, type Structure } from "./structures";
+import {
+  RECRUITMENT_CONSTRUCTS,
+  SCREENING_CONSTRUCTS,
+  type ConstructGroup,
+} from "./constructs";
 
 /**
  * Anything with an `id` can be linked to from anywhere else in the wiki, with
@@ -287,6 +292,21 @@ export type Block = Anchored &
         caption: string;
         owner?: string;
         ratio?: "wide" | "square" | "tall";
+        /**
+         * This figure plots made-up numbers: it shows what a result would look
+         * like, not one we measured. Marks the figure on the page, so nobody
+         * skimming mistakes it for data.
+         */
+        hypothetical?: true;
+        source?: string;
+      }
+    /** Genetic constructs, as rows of labelled domains. */
+    | {
+        kind: "constructs";
+        heading?: string;
+        intro?: string;
+        groups: ConstructGroup[];
+        footnote?: string;
         source?: string;
       }
     /**
@@ -3418,35 +3438,18 @@ const parts: Page = {
     },
 
     {
-      kind: "cards",
+      kind: "constructs",
       section: "Engineered recruitment constructs",
       id: "recruitment-constructs",
       navLabel: "The ten constructs",
       heading: "Ten mammalian expression constructs",
       intro:
-        "Four groups, all ordered from GenScript in pcDNA3.1(+)-based expression vectors. DmrA and DmrC are the chemically induced dimerisation domains; ALFA and NbALFA are the peptide tag and its nanobody; His6, HA, eGFP and mCherry are detection and purification tags.",
-      items: [
-        {
-          title: "Chemically induced recruitment",
-          body: "The four constructs behind the down arm, where adding a rapalog brings two proteins together: **SMO–DmrC(T2098L)–eGFP**, **MGRN1–DmrA–His6**, **MGRN1(C279A/C282A)–DmrA–His6**, and **MEGF8 ICD(2602–2778)–DmrA–His6**.",
-          note: "The C279A/C282A pair is the catalytically inactive MGRN1 control.",
-        },
-        {
-          title: "ALFA-based recruitment",
-          body: "The same idea through the ALFA tag and its nanobody rather than a rapalog: **HA–MGRN1–NbALFA**, **HA–MGRN1(C279A/C282A)–NbALFA**, and **SMO–His6–ALFA**.",
-        },
-        {
-          title: "Additional receptor constructs",
-          body: "Two constructs that put a second ciliary receptor through the same two recruitment systems: **GPR161–eGFP–DmrC(T2098L)** and **GPR161–GFP–ALFA**.",
-          note: "These are what would test whether the platform generalises past SMO.",
-        },
-        {
-          title: "Experimental control",
-          body: "**DmrA–mCherry**, a proximity-only control: it is brought to the target like the others but carries no ubiquitination machinery, so it separates the effect of proximity itself from the effect of what is recruited.",
-        },
-      ],
+        "All ten were ordered from GenScript in pcDNA3.1(+)-based expression vectors. DmrA and DmrC are the chemically induced dimerisation domains; ALFA and NbALFA are the peptide tag and the nanobody that binds it; His6, HA, eGFP and mCherry are detection and purification tags.",
+      groups: RECRUITMENT_CONSTRUCTS,
+      footnote:
+        "Domain widths are not to scale. The catalytically inactive MGRN1 carries the C279A and C282A substitutions, and the MEGF8 construct carries only its intracellular domain, residues 2602 to 2778.",
+      source: "Wet Lab: GenScript order, 2026.",
     },
-
     {
       kind: "prose",
       section: "Binder screening constructs",
@@ -3459,29 +3462,14 @@ const parts: Page = {
       ],
     },
     {
-      kind: "cards",
+      kind: "constructs",
       id: "screening-components",
       heading: "What the system is made of",
-      items: [
-        {
-          title: "Designed binder constructs",
-          body: "Each candidate binder fused to one half of the split transcription factor, as a library of designs: MEGF8-targeting binders and MOSMO-targeting binders, cloned into the same assay vector so every candidate is screened the same way.",
-        },
-        {
-          title: "Target constructs",
-          body: "MEGF8 and MOSMO, each fused to the complementary half of the transcription factor, and each tested as its own separate target.",
-        },
-        {
-          title: "Reporter and markers",
-          body: "A **GFP reporter** switched on by the reconstituted GAL4 and VP16 system, and a **BFP marker** used to identify the relevant cell population during flow cytometry.",
-        },
-        {
-          title: "GB1-only carrier",
-          body: "Filler DNA carrying no MEGF8 or MOSMO target, used in place of the target construct as the negative control. Every binder is scored against its own matched GB1 condition.",
-        },
-      ],
+      groups: SCREENING_CONSTRUCTS,
+      footnote:
+        "Which half of the transcription factor sits on the binder and which on the target follows the final plasmid designs, so the halves are drawn here without being assigned. The exact names go in once those designs are settled.",
+      source: "Wet Lab: Twist Bioscience order, 2026.",
     },
-
     {
       kind: "table",
       section: "Parts inventory",

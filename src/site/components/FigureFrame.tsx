@@ -24,6 +24,13 @@ interface Props {
   owner?: string
   /** Rough shape of the finished figure, so the page does not jump later. */
   ratio?: 'wide' | 'square' | 'tall'
+  /**
+   * The figure plots made-up numbers, drawn to show the shape a result would
+   * take. Several of the wet lab figures do, and a plotted curve on a wiki
+   * reads as a measurement unless the page says otherwise, so this marks it
+   * on the figure as well as in the caption.
+   */
+  hypothetical?: true
   source?: string
 }
 
@@ -33,18 +40,25 @@ const RATIO: Record<NonNullable<Props['ratio']>, string> = {
   tall: '3 / 4',
 }
 
-export default function FigureFrame({ src, alt, caption, owner, ratio = 'wide', source }: Props) {
+export default function FigureFrame({ src, alt, caption, owner, ratio = 'wide', hypothetical, source }: Props) {
   return (
     <figure className="panel m-0 px-5 py-5 sm:px-7 sm:py-6">
       {src ? (
-        <img
-          src={asset(src)}
-          alt={alt ?? ''}
-          loading="lazy"
-          decoding="async"
-          className="w-full rounded-sm border-[3px] border-leaf-700"
-          style={{ aspectRatio: RATIO[ratio], objectFit: 'contain' }}
-        />
+        <div className="relative">
+          {hypothetical && (
+            <p className="pixel absolute left-2 top-2 rounded-sm border-2 border-leaf-700 bg-petal-daisy px-2 py-0.5 text-tag tracking-wide text-leaf-950">
+              hypothetical data
+            </p>
+          )}
+          <img
+            src={asset(src)}
+            alt={alt ?? ''}
+            loading="lazy"
+            decoding="async"
+            className="w-full rounded-sm border-[3px] border-leaf-700"
+            style={{ aspectRatio: RATIO[ratio], objectFit: 'contain' }}
+          />
+        </div>
       ) : (
         <div
           className="flex w-full flex-col items-center justify-center gap-2 rounded-sm border-[3px] border-dashed border-petal-daisy bg-leaf-50 px-6 py-6 text-center"
