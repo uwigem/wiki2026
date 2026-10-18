@@ -61,3 +61,6 @@ Thumbs.db
 # The Web Dev prototype of the game, kept beside the repo for reference. The
 # game itself is src/site/content/alchemy.ts and src/site/components/alchemy/.
 igem-alchemy-main/
+
+# Local scratch for figure comparison; never part of the published site.
+public/wetlab/_audit/
