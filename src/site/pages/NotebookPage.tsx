@@ -42,7 +42,7 @@ export default function NotebookPage() {
             <p className="pixel text-tag tracking-[0.2em]">notebook</p>
             <h1 className="mt-1 text-2xl sm:text-4xl">The Season, In Order</h1>
           </PixelSign>
-          <p className="panel max-w-2xl px-5 py-4 text-body leading-relaxed">
+          <p className="panel measure px-5 py-4 text-body leading-relaxed">
             Where the wet lab has got to: the system designed, the constructs drawn up and ordered, and the
             experiments waiting on delivery. The whole team's season is at the bottom.
           </p>
@@ -75,10 +75,10 @@ export default function NotebookPage() {
           <Reveal>
             <div className="panel px-5 py-5 sm:px-7 sm:py-6">
               <h3 className="text-xl">When they arrive</h3>
-              <p className="mt-1 max-w-2xl text-body leading-relaxed">
+              <p className="measure mt-1 text-body leading-relaxed">
                 The order the work happens in, once there is something to work with.
               </p>
-              <ol className="mt-4 flex flex-col gap-2">
+              <ol className="measure mt-4 flex flex-col gap-2">
                 {NEXT_STEPS.map((step, i) => (
                   <li key={step} className="flex gap-3 text-body-sm leading-relaxed">
                     <span className="badge shrink-0">{i + 1}</span>
@@ -86,7 +86,7 @@ export default function NotebookPage() {
                   </li>
                 ))}
               </ol>
-              <p className="mt-4 text-body-sm leading-relaxed">
+              <p className="measure mt-4 text-body-sm leading-relaxed">
                 What each experiment is for, and the controls it runs against, are on{' '}
                 <Link to="/experiments" className="cross-link">
                   experiments
@@ -121,7 +121,7 @@ export default function NotebookPage() {
                       <span className="pixel ml-auto text-tag tracking-widest text-leaf-800">milestone</span>
                     )}
                   </div>
-                  <p className="mt-2 text-body-sm leading-relaxed">{entry.body}</p>
+                  <p className="measure mt-2 text-body-sm leading-relaxed">{entry.body}</p>
                 </div>
               </li>
             ))}
