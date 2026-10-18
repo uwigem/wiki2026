@@ -147,16 +147,31 @@ export default function MmmDiagram() {
             </text>
           </g>
 
-          {/* the breaker, only once it is in */}
+          {/*
+            The breaker, only once it is in. A de novo minibinder is a small
+            helical bundle, so it is drawn as three helices like every other
+            protein here rather than as an abstract shape, and it sits
+            symmetrically in the gap it has opened.
+          */}
           <g style={{ opacity: broken ? 1 : 0, transition: ease }} aria-hidden>
-            <path
-              d="M 130 86 L 146 100 L 130 118 L 122 102 Z"
-              fill={P.pinkBud}
-              stroke={P.pinkDark}
-              strokeWidth={1.8}
-              strokeLinejoin="round"
-            />
-            <text x={152} y={150} fontSize={11} fontWeight={700} fill={P.pinkDark}>
+            {[
+              [130, 94, 38],
+              [140, 87, 52],
+              [150, 94, 38],
+            ].map(([x, y, h]) => (
+              <rect
+                key={x}
+                x={x}
+                y={y}
+                width={8}
+                height={h}
+                rx={4}
+                fill={P.pinkBud}
+                stroke={P.pinkDark}
+                strokeWidth={1.6}
+              />
+            ))}
+            <text x={144} y={152} fontSize={11} fontWeight={700} fill={P.pinkDark} textAnchor="middle">
               minibinder
             </text>
           </g>
@@ -186,13 +201,13 @@ export default function MmmDiagram() {
           {/* the linker, only once it is on */}
           <g style={{ opacity: linked ? 1 : 0, transition: ease }} aria-hidden>
             <path
-              d="M 122 64 q 14 -16 28 0 q 14 16 28 0 q 14 -16 28 0 q 14 16 28 0 q 14 -16 28 0 q 14 16 28 0 q 14 -16 28 0"
+              d="M 122 56 q 14 -12 28 0 q 14 12 28 0 q 14 -12 28 0 q 14 12 28 0 q 14 -12 28 0 q 14 12 28 0 q 14 -12 28 0"
               fill="none"
               stroke={P.shadow}
               strokeWidth={3}
               strokeLinecap="round"
             />
-            <text x={222} y={40} fontSize={11} fontWeight={700} fill={P.shadow} textAnchor="middle">
+            <text x={222} y={36} fontSize={11} fontWeight={700} fill={P.shadow} textAnchor="middle">
               inducible linker
             </text>
           </g>
