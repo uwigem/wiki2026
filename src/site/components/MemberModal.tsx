@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react'
-import { SUBTEAM_NAME, type Member } from '../content/team'
+import { SUBTEAM_NAME, type Profile } from '../content/team'
 import { useEscape } from '../hooks'
 import PixelIcon from './PixelIcon'
 import PixelPerson, { looksFor } from './PixelPerson'
 import { asset } from '../router'
 
 interface Props {
-  member: Member
+  member: Profile
   onClose: () => void
 }
 
@@ -132,10 +132,12 @@ export default function MemberModal({ member, onClose }: Props) {
 
   const linkedin = safeUrl(member.linkedin)
   const website = safeUrl(member.website)
-  const first = member.name.split(' ')[0]
+  // "Rishabh" from "Rishabh Goenka", but "Jennifer" from "Dr. Jennifer Kong".
+  const words = member.name.split(' ')
+  const first = words[0].endsWith('.') && words.length > 1 ? words[1] : words[0]
   // A lead's title already names their subteam ("Wet Lab Lead"), so only the
   // others are listed.
-  const otherSubteams = member.subteams.filter(
+  const otherSubteams = (member.subteams ?? []).filter(
     (id) => !member.leads?.includes(id) && !member.titles?.some((t) => t.includes(SUBTEAM_NAME[id])),
   )
 
@@ -185,11 +187,15 @@ export default function MemberModal({ member, onClose }: Props) {
             )}
             {member.bio && <p className="mt-4 text-body-sm leading-relaxed">{member.bio}</p>}
 
-            <div className="mt-5 flex gap-3 sm:mt-auto sm:pt-5">
-              <ContactButton href={`mailto:${member.email}`} label={`Email ${first}`} icon={MAIL} />
-              {linkedin && <ContactButton href={linkedin} label={`${first} on LinkedIn`} icon={LINKEDIN} external />}
-              {website && <ContactButton href={website} label={`${first}’s website`} icon={GLOBE} external />}
-            </div>
+            {(member.email || linkedin || website) && (
+              <div className="mt-5 flex gap-3 sm:mt-auto sm:pt-5">
+                {member.email && (
+                  <ContactButton href={`mailto:${member.email}`} label={`Email ${first}`} icon={MAIL} />
+                )}
+                {linkedin && <ContactButton href={linkedin} label={`${first} on LinkedIn`} icon={LINKEDIN} external />}
+                {website && <ContactButton href={website} label={`${first}’s website`} icon={GLOBE} external />}
+              </div>
+            )}
           </div>
         </div>
       </div>
