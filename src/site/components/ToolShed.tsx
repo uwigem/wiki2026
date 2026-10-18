@@ -59,8 +59,8 @@ export default function ToolShed({ heading, intro, tools, source }: Props) {
           aria-controls="shed-props"
           className="group flex flex-col items-center gap-2"
         >
-          <PixelSprite sprite={doorsOpen ? SHED_OPEN : SHED_CLOSED} scale={4} />
-          <span className="pixel-btn py-1 text-xs group-hover:bg-leaf-200">{doorsOpen ? 'Close the shed' : 'Open the shed'}</span>
+          <PixelSprite sprite={doorsOpen ? SHED_OPEN : SHED_CLOSED} scale={6} />
+          <span className="pixel-btn px-3 py-1.5 text-sm group-hover:bg-leaf-200">{doorsOpen ? 'Close the shed' : 'Open the shed'}</span>
         </button>
 
         {doorsOpen && (
@@ -75,14 +75,14 @@ export default function ToolShed({ heading, intro, tools, source }: Props) {
                     onClick={() => setPicked(isPicked ? null : i)}
                     aria-pressed={isPicked}
                     className={
-                      'flex w-[6.2rem] flex-col items-center gap-1.5 rounded-sm border-[3px] px-1 py-2 text-center transition-colors ' +
+                      'flex w-[7.25rem] flex-col items-center gap-2 rounded-sm border-[3px] px-1 py-2.5 text-center transition-colors ' +
                       (isPicked
                         ? 'border-leaf-800 bg-leaf-200 shadow-[3px_3px_0_var(--p-shadow)]'
                         : 'border-leaf-300 bg-leaf-50 hover:bg-leaf-100')
                     }
                   >
-                    <PixelSprite sprite={sprite} scale={3} />
-                    <span className="text-[0.7rem] leading-tight">{t.short ?? t.name}</span>
+                    <PixelSprite sprite={sprite} scale={4} />
+                    <span className="text-note leading-tight">{t.short ?? t.name}</span>
                   </button>
                 </li>
               )

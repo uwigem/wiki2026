@@ -4,6 +4,9 @@ import RichText, { inline } from './RichText'
 /**
  * A short workflow as a row of stages. Click a stage to read it. The first is
  * open on load so the shape is obvious without clicking anything.
+ *
+ * The stage you picked reads ABOVE the row rather than below it, so choosing a
+ * later stage does not push its own text off the bottom of a small screen.
  */
 export interface WorkflowStage {
   title: string
@@ -30,7 +33,14 @@ export default function Workflow({
       {heading && <h2 className="text-xl">{heading}</h2>}
       {intro && <p className="mt-1 max-w-2xl text-body leading-relaxed">{inline(intro)}</p>}
 
-      <ol className="mt-4 flex flex-wrap items-stretch gap-2">
+      <div id="workflow-stage" className="panel-flat mt-4 px-5 py-4" aria-live="polite">
+        <h3 className="text-lg">{stages[open].title}</h3>
+        <div className="prose-garden mt-2 text-body-sm">
+          <RichText paragraphs={stages[open].body} />
+        </div>
+      </div>
+
+      <ol className="mt-3 flex flex-wrap items-stretch gap-2">
         {stages.map((stage, i) => (
           <li key={stage.title} className="flex items-center gap-2">
             <button
@@ -56,13 +66,6 @@ export default function Workflow({
           </li>
         ))}
       </ol>
-
-      <div id="workflow-stage" className="panel-flat mt-4 px-5 py-4" aria-live="polite">
-        <h3 className="text-lg">{stages[open].title}</h3>
-        <div className="prose-garden mt-2 text-body-sm">
-          <RichText paragraphs={stages[open].body} />
-        </div>
-      </div>
 
       {footnote && <p className="mt-3 text-body-sm leading-relaxed text-leaf-800">{inline(footnote)}</p>}
       {source && (

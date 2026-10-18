@@ -1695,17 +1695,8 @@ const model: Page = {
  */
 const DELIVERABLES: Block[] = [
 {
-    kind: "prose",
-    section: "Deliverables",
-    id: "technology-evaluation",
-    heading: "Technology evaluation",
-    body: [
-      "We first wanted to provide researchers with a way to evaluate whether their research project will benefit from our ciliary platform. Not every protein is connected to ciliary function, and proteins in the ciliary membrane can also have important functions in other pathways of the cell [1]. This is why it is important to determine whether a research question and its targets are even a suitable fit for our platform's approach of modifying the ciliary membrane. Otherwise, researchers could end up spending a lot of time and resources on a platform that is not appropriate for their experiment.",
-      "The flowchart is designed to walk researchers through a list of yes or no questions to decide if their project is suitable for our platform and to clarify what they should consider moving forward. It includes considerations about the target, the intended outcome and the procedure. We hope this allows researchers to make an informed decision about adopting the platform before beginning their experimentation.",
-    ],
-  },
-{
     kind: "flowchart",
+    section: "Deliverables",
     id: "platform-fit",
     heading: "Is our platform right for your project?",
     intro: "Answer each question in turn. The coloured boxes in the chart are the buttons you reach at the end.",
@@ -1781,6 +1772,15 @@ const DELIVERABLES: Block[] = [
       },
     ],
   },
+{
+    kind: "prose",
+    id: "technology-evaluation",
+    heading: "Technology evaluation",
+    body: [
+      "We first wanted to provide researchers with a way to evaluate whether their research project will benefit from our ciliary platform. Not every protein is connected to ciliary function, and proteins in the ciliary membrane can also have important functions in other pathways of the cell. This is why it is important to determine if their research question and targets are even suitable fits for our platform's approach of modifying the ciliary membrane. Otherwise, researchers could end up spending a lot of time and resources on a platform that is not appropriate for their experiment.",
+      "The flowchart is designed to walk researchers through a list of yes or no questions to decide if their project is suitable for our platform and to clarify what they should consider moving forward. The flowchart includes considerations about the target, intended outcome, and procedure. We hope this allows researchers to make an informed decision about adopting the platform before beginning their experimentation.",
+    ],
+  },
     {
       kind: "details",
       id: "platform-fit-drawing",
@@ -1802,8 +1802,7 @@ const DELIVERABLES: Block[] = [
     kind: "workflow",
     id: "workflow",
     heading: "Experimental workflow",
-    intro:
-      "Many researchers are wary of using a novel platform when there are no detailed, validated protocols to refer to along the way. Our proof of concept demonstrates that the ciliary platform can be used to modulate SMO, but applying it to other ciliary proteins will require researchers to modify the information provided accordingly. The high-level workflow sets out how a scientist can apply the platform to their own research question: identify an appropriate target, modulate its ciliary localisation, and validate whether the experiment produced the intended outcome. Pick a stage to read it.",
+    intro: "Pick a stage to read what it involves.",
     stages: [
       {
         title: "Question",
@@ -1830,8 +1829,24 @@ const DELIVERABLES: Block[] = [
         ],
       },
     ],
-    footnote:
-      "The guide will also provide appropriate readouts for validation at each stage, so researchers can move forward confidently or modify their experiment early on. Our troubleshooting and best-practice instructions will offer newer researchers experiments to try, rather than leaving them to determine the protocol entirely on their own. This workflow is not a specific protocol to follow; it is a general understanding of how to apply the platform to a project, with validation and troubleshooting steps throughout to reduce experimental error.",
+  },
+{
+    kind: "prose",
+    id: "workflow-notes",
+    body: [
+      "Many researchers are wary of using a novel platform since there are no detailed validated protocols they can refer to along their project. Our proof of concept demonstrates that the ciliary platform can be used to modulate SMO, but applying the platform to other ciliary proteins will require researchers to modify the information provided accordingly. We wanted to make the experimentation process easier by providing clear details of what we have validated at each stage and guidance on how researchers can build off of that.",
+      "The high-level workflow details how scientists can apply the platform to their own research question, identify an appropriate target, modulate its ciliary localisation, and validate whether the experiment produced the intended outcome. We hope this workflow will provide researchers with a guide of what to consider at each step and how to effectively use our platform experimentally.",
+      "The guide will also provide appropriate readouts for validation at each stage, so researchers can move forward confidently or modify their experiment early on. Our troubleshooting and best practices instructions will offer newer researchers experiments to test out rather than leaving them to determine the protocol entirely on their own.",
+      "While this workflow is not a specific protocol researchers can follow, we hope it provides them with a general understanding and guidance for applying our ciliary platform to their own research projects. Our validation and troubleshooting steps throughout will allow them to reduce experimental error and gain confidence in using our novel platform.",
+    ],
+  },
+{
+    kind: "todo",
+    body: [
+      "Two parts of the guide are written but not finished, and go here:",
+      "Troubleshooting: what to try when a stage does not give the readout it should.",
+      "Best practices: the habits that make the platform behave predictably from one lab to the next.",
+    ],
   },
     {
       kind: "details",
@@ -2281,7 +2296,6 @@ const humanPractices: Page = {
 {
       kind: "matrix",
       id: "matrix",
-      heading: "The same gap, every time",
       navLabel: "Existing Tool Limitations",
       intro:
         "Combining these features gives researchers a much easier way to study the impact of a specific protein on the ciliary membrane independently of the rest of the cell, while also testing how different levels of that protein change signalling and cellular pathways.",
@@ -3365,8 +3379,8 @@ const implementation: Page = {
       kind: "prose",
       heading: "Who this is for",
       body: [
-        "Our Human Practices work points at cilia labs that want to raise or lower one receptor in the primary cilium, not at patients. [Six kinds of researcher](/human-practices#who-would-use-this) told us what each would need before trusting a tool like this. Those needs became our [design requirements](/human-practices#design-requirements), and the [implementation strategy](/human-practices#implementation-strategy) compares the small molecule, antibody and protein routes to the component that recognises the target. What a lab would actually receive is set out in the [final package](/human-practices#implementation), and how it would get there in the [to-market strategy](/human-practices#to-market).",
-        "Below is what we are actually handing over: a way to decide whether the platform fits a project, the workflow for using it, the flyer we hand out, and where this goes next.",
+        "Developing this technology was only part of our work. Through conversations with stakeholders, we realised the importance of supplying a reproducible and responsible method for adoption. We aimed to create a platform that would be as easily accessible as possible and could be largely expanded for other usages outside of our Smoothened proof of concept.",
+        "The thinking behind that sits on Human Practices: [six kinds of researcher](/human-practices#who-would-use-this) told us what each would need before trusting a tool like this, those needs became our [design requirements](/human-practices#design-requirements), and the [delivery selection](/human-practices#implementation-strategy) compares the small molecule, antibody and protein routes to the component that recognises the target.",
       ],
     },
     ...DELIVERABLES,

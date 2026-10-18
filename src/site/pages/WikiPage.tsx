@@ -3,7 +3,7 @@ import type { Block, Page, Persona } from "../content/pages";
 import { pageNeighbours } from "../content/pages";
 import { Link, useSectionJump } from "../router";
 import FlowerBedCard from "../components/FlowerBedCard";
-import GardenSection, { SectionDivider } from "../components/GardenSection";
+import GardenSection, { SectionBreak, SectionDivider } from "../components/GardenSection";
 import PixelSign, { QuoteSign, TextPanel, TodoPanel,} from "../components/PixelSign";
 import RichText, { inline } from "../components/RichText";
 import CycleWheel from "../components/CycleWheel";
@@ -81,9 +81,12 @@ export default function WikiPage({ page }: { page: Page }) {
         // Every headed block after the first is a subsection. The first block
         // opens the section, so the section's own entry already stands for it.
         items: blocks.slice(1).flatMap((b) => {
-          const heading = blockHeading(b);
+          // `navLabel` lets the outline be shorter than the heading on the
+          // page, and lets a block that prints no heading at all still be
+          // somewhere a reader can jump to.
+          const label = b.navLabel ?? blockHeading(b);
           const key = blockKey(b);
-          return heading && key ? [{ id: key, label: heading }] : [];
+          return label && key ? [{ id: key, label }] : [];
         }),
       })),
     [layout],
@@ -102,7 +105,9 @@ export default function WikiPage({ page }: { page: Page }) {
 
           {/* One introduction, not two stacked boxes. */}
           <div className="panel max-w-2xl px-5 py-4 sm:px-7 sm:py-5">
-            <p className="text-body leading-relaxed text-leaf-800">{page.storyBeat}</p>
+            {page.storyBeat && (
+              <p className="text-body leading-relaxed text-leaf-800">{page.storyBeat}</p>
+            )}
             {page.intro && <p className="mt-3 text-lg leading-relaxed">{page.intro}</p>}
           </div>
 
@@ -132,9 +137,12 @@ export default function WikiPage({ page }: { page: Page }) {
           )}
 
           {long ? (
-            <div className="flex flex-col gap-14 pb-4">
-              {layout.sections.map((section) => (
+            <div className="flex flex-col gap-8 pb-4">
+              {layout.sections.map((section, si) => (
                 <CitationContext.Provider key={section.id} value={{ scope: slugify(section.label), lists }}>
+                  {/* A marked break, so a new topic does not read as another
+                      block of the one before it. */}
+                  {si > 0 && <SectionBreak />}
                   <section id={section.id} aria-labelledby={section.id + "-title"} className="min-w-0">
                     <h2 id={section.id + "-title"} className="section-title">
                       {section.label}
@@ -660,12 +668,16 @@ function PersonaCarousel({
           className="panel-flat min-w-0 flex-1 px-4 py-4 sm:px-5"
           aria-live="polite"
         >
-          <div className="grid gap-4 sm:grid-cols-[9rem_1fr] sm:items-start">
+          {/* The picture is floated rather than put in its own column: the
+              text is several times taller than it is, so a column left a tall
+              empty strip down the left of every card. Floated, the text runs
+              beside the picture and then back under it. */}
+          <div className="min-w-0 after:block after:clear-both after:content-['']">
             {/* The hedgehog with an accessory for the role stands in for each
                 researcher until Creative's drawings (a hedgehog dressed for
                 each role) arrive. */}
             <div
-              className="relative flex items-center justify-center rounded-sm border-[3px] border-leaf-300 bg-leaf-50 px-3"
+              className="relative mb-3 flex items-center justify-center rounded-sm border-[3px] border-leaf-300 bg-leaf-50 px-3 sm:float-left sm:mb-2 sm:mr-4 sm:w-36"
               style={{ aspectRatio: "4 / 3" }}
             >
               <Hog scale={4} />

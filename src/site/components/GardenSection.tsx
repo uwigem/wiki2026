@@ -31,6 +31,27 @@ export function SectionDivider() {
 }
 
 /**
+ * The break between two sections of a long page.
+ *
+ * A long page's sections were separated by space alone, which read as the same
+ * break as the dashed rule between two blocks inside one section. This is a
+ * louder, different mark, so a change of topic looks like a change of topic.
+ */
+export function SectionBreak() {
+  return (
+    <div aria-hidden className="flex items-center gap-3">
+      <span className="h-[3px] flex-1 bg-leaf-400" />
+      <span className="flex gap-1">
+        <span className="h-1.5 w-1.5 bg-leaf-600" />
+        <span className="h-1.5 w-1.5 bg-leaf-600" />
+        <span className="h-1.5 w-1.5 bg-leaf-600" />
+      </span>
+      <span className="h-[3px] flex-1 bg-leaf-400" />
+    </div>
+  )
+}
+
+/**
  * Fades its children in the first time they scroll into view.
  *
  * Starts at `opacity-0`, so anything inside is invisible until the observer
