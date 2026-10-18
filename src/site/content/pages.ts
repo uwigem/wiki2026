@@ -3394,16 +3394,142 @@ const parts: Page = {
   kicker: "chapter 06 · parts and registry",
   storyBeat:
     "Every seed saved and labelled, so the next gardener can plant it.",
-  intro: "The parts we designed, built and submitted to the iGEM Registry.",
+  intro:
+    "The genetic parts we designed for HedgehogSense: what each one is, what it is for, and where it came from.",
   blocks: [
     {
-      kind: "todo",
+      kind: "prose",
+      heading: "Overview",
       body: [
-        "Not written yet. What belongs here:",
-        "Each part: its registry number, what it is, and the sequence.",
-        "Which are basic parts and which are composite.",
-        "The characterisation data for each one, and a link to the experiment it came from.",
-        "Which parts we improved rather than made, and what the improvement was.",
+        "We designed two families of genetic parts. One controls the recruitment of the proteins that regulate **SMO**. The other characterises the computationally designed binders we made against **MEGF8** and **MOSMO**.",
+        "The first family is ten mammalian expression constructs, covering chemically induced recruitment, ALFA-based recruitment, an experimental control, and two constructs for testing a second ciliary receptor. All ten were ordered from GenScript in pcDNA3.1(+)-based expression vectors.",
+        "The second is a set of gene fragments from Twist Bioscience: our designed MEGF8 and MOSMO binders, and the constructs that make up the split-transcription-factor system used to screen them.",
+        "This page documents the design, the components and the intended function of each part. What they are used for is on [experiments](/experiments), and when each piece was designed and ordered is in the [notebook](/notebook).",
+      ],
+    },
+    {
+      kind: "callout",
+      label: "where this stands",
+      heading: "Designed and ordered, not yet built",
+      body: [
+        "Construct design is complete and the GenScript and Twist Bioscience orders are placed. They have not arrived, so nothing here has been assembled, validated or characterised, and no part has been submitted to the Registry yet.",
+        "Everything below is a designed and ordered part. Nothing on this page should be read as a characterised one.",
+      ],
+    },
+
+    {
+      kind: "cards",
+      section: "Engineered recruitment constructs",
+      id: "recruitment-constructs",
+      navLabel: "The ten constructs",
+      heading: "Ten mammalian expression constructs",
+      intro:
+        "Four groups, all ordered from GenScript in pcDNA3.1(+)-based expression vectors. DmrA and DmrC are the chemically induced dimerisation domains; ALFA and NbALFA are the peptide tag and its nanobody; His6, HA, eGFP and mCherry are detection and purification tags.",
+      items: [
+        {
+          title: "Chemically induced recruitment",
+          body: "The four constructs behind the down arm, where adding a rapalog brings two proteins together: **SMO–DmrC(T2098L)–eGFP**, **MGRN1–DmrA–His6**, **MGRN1(C279A/C282A)–DmrA–His6**, and **MEGF8 ICD(2602–2778)–DmrA–His6**.",
+          note: "The C279A/C282A pair is the catalytically inactive MGRN1 control.",
+        },
+        {
+          title: "ALFA-based recruitment",
+          body: "The same idea through the ALFA tag and its nanobody rather than a rapalog: **HA–MGRN1–NbALFA**, **HA–MGRN1(C279A/C282A)–NbALFA**, and **SMO–His6–ALFA**.",
+        },
+        {
+          title: "Additional receptor constructs",
+          body: "Two constructs that put a second ciliary receptor through the same two recruitment systems: **GPR161–eGFP–DmrC(T2098L)** and **GPR161–GFP–ALFA**.",
+          note: "These are what would test whether the platform generalises past SMO.",
+        },
+        {
+          title: "Experimental control",
+          body: "**DmrA–mCherry**, a proximity-only control: it is brought to the target like the others but carries no ubiquitination machinery, so it separates the effect of proximity itself from the effect of what is recruited.",
+        },
+      ],
+    },
+
+    {
+      kind: "prose",
+      section: "Binder screening constructs",
+      id: "screening-constructs",
+      navLabel: "The screening system",
+      heading: "A split transcription factor, built from parts",
+      body: [
+        "Our protein design subteam produced candidate binders against extracellular regions of MEGF8 and MOSMO. To find out which of them bind inside a cell, we designed a mammalian split-transcription-factor system from the **GAL4** DNA-binding domain and the **VP16** transcriptional activation domain.",
+        "A binder carries one half of that transcription factor and its target carries the other. If the two meet, the halves reconstitute and switch on a reporter. The binder gene fragments and the target constructs were ordered from Twist Bioscience.",
+      ],
+    },
+    {
+      kind: "cards",
+      id: "screening-components",
+      heading: "What the system is made of",
+      items: [
+        {
+          title: "Designed binder constructs",
+          body: "Each candidate binder fused to one half of the split transcription factor, as a library of designs: MEGF8-targeting binders and MOSMO-targeting binders, cloned into the same assay vector so every candidate is screened the same way.",
+        },
+        {
+          title: "Target constructs",
+          body: "MEGF8 and MOSMO, each fused to the complementary half of the transcription factor, and each tested as its own separate target.",
+        },
+        {
+          title: "Reporter and markers",
+          body: "A **GFP reporter** switched on by the reconstituted GAL4 and VP16 system, and a **BFP marker** used to identify the relevant cell population during flow cytometry.",
+        },
+        {
+          title: "GB1-only carrier",
+          body: "Filler DNA carrying no MEGF8 or MOSMO target, used in place of the target construct as the negative control. Every binder is scored against its own matched GB1 condition.",
+        },
+      ],
+    },
+
+    {
+      kind: "table",
+      section: "Parts inventory",
+      id: "inventory-genscript",
+      navLabel: "GenScript constructs",
+      heading: "GenScript constructs",
+      intro: "The ten mammalian expression constructs, as ordered.",
+      columns: ["Construct", "Intended function"],
+      rows: [
+        ["SMO_DmrC_T2098L_CeGFP", "SMO fusion for chemically induced recruitment"],
+        ["MGRN1_DmrA_His6", "Direct MGRN1 recruitment"],
+        ["MGRN1_C279A_C282A_DmrA_His6", "Catalytically inactive MGRN1 control"],
+        ["MEGF8_ICD_2602_2778_DmrA_His6", "Recruitment of the MEGF8 intracellular domain"],
+        ["HA_MGRN1_NbALFA", "ALFA-based MGRN1 recruitment"],
+        ["HA_MGRN1_C279A_C282A_NbALFA", "Catalytically inactive ALFA-recruitment control"],
+        ["SMO_His6_ALFA_v2", "ALFA-tagged SMO construct"],
+        ["GPR161_EGFP_DmrC_T2098L", "Recruitment system for an additional ciliary receptor"],
+        ["GPR161_GFP_ALFA", "ALFA-tagged GPR161 receptor"],
+        ["DmrA_mCherry_proximity_only_control", "Proximity-only control"],
+      ],
+      source: "Wet Lab: GenScript order, 2026.",
+    },
+    {
+      kind: "table",
+      id: "inventory-twist",
+      heading: "Twist Bioscience gene fragments",
+      intro: "The binder and screening fragments, by category.",
+      columns: ["Part category", "Intended function"],
+      rows: [
+        ["MEGF8-targeting binder gene fragments", "Encode the computationally designed MEGF8 binders"],
+        ["MOSMO-targeting binder gene fragments", "Encode the computationally designed MOSMO binders"],
+        ["MEGF8 target fusion constructs", "MEGF8 components for the GAL4 and VP16 screening system"],
+        ["MOSMO target fusion constructs", "MOSMO components for the GAL4 and VP16 screening system"],
+      ],
+      caption:
+        "Individual binder sequences and identifiers go in once the final design list is settled, as do the exact names and sources of the GAL4 and VP16 components, the GFP reporter, the BFP marker and the GB1 control.",
+      source: "Wet Lab: Twist Bioscience order, 2026.",
+    },
+
+    {
+      kind: "prose",
+      section: "iGEM Parts Registry",
+      id: "registry",
+      navLabel: "Registry",
+      heading: "What we will submit",
+      body: [
+        "No part on this page has a Registry number yet. The constructs were designed and ordered this autumn and have not arrived, so none has been assembled or characterised, and we are not claiming any of them as a Registry part until that has happened.",
+        "When the parts are submitted, this section gets the number, the type and the characterisation data for each one, with a link to the experiment the data came from.",
       ],
     },
   ],
