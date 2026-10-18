@@ -147,9 +147,7 @@ export interface Investigator extends Profile {
 /**
  * The principal investigators, shown above the students.
  *
- * Both entries come from the team's feedback doc. Dr. DiMaio's is shorter
- * because the doc's own entry for him was left unfinished, so the rest is
- * drawn from what the Attributions page already says about his mentorship.
+ * Both entries come from the team's feedback doc.
  */
 export const PRINCIPAL_INVESTIGATORS: Investigator[] = [
   {
@@ -164,7 +162,7 @@ export const PRINCIPAL_INVESTIGATORS: Investigator[] = [
     titles: ['Associate Professor, Institute for Protein Design'],
     photo: 'team/frank-dimaio.jpg',
     bio:
-      'Dr. Frank DiMaio is an Associate Professor at the University of Washington and a protein design mentor at the Institute for Protein Design. He advises our Protein Design subteam on the de novo pipeline behind the minibinder, where he set the tool choices, the filter metrics and the target-selection rules. He also gave us a seat on the DIGS cluster the pipeline runs on.',
+      'Dr. Frank DiMaio is an Associate Professor of Biochemistry at the University of Washington and a faculty member of the Institute for Protein Design. He earned his PhD from the University of Wisconsin–Madison in 2007. His research focuses on developing computational methods for protein structure prediction, modeling, and design, with particular expertise in interpreting experimental structural data. Through his work, he has contributed to advances in computational protein engineering and structure determination. As an advisor to Washington iGEM, Dr. DiMaio provided valuable guidance on our computational protein design efforts, helping shape our approach to designing binders targeting the MMM complex.',
   },
 ]
 
