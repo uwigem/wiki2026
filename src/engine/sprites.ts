@@ -39,6 +39,7 @@ export const LEGEND: Record<string, ColorKey> = {
   V: 'lilacPetal',
   v: 'lilacHi',
   y: 'lilacCore',
+  '@': 'lilacDeep',
   // white flower
   w: 'petalWhite',
   W: 'petalWhiteHi',
@@ -385,6 +386,30 @@ export const TUFT = s([
   ",.,.,.,.,",
   ".,'.,'.,,",
   ',,,,,,,,,',
+])
+// ---------------- the section rail's pair ----------------
+// The two-leaf sprout off the hedgehog's head, on its own: a section the reader
+// has not reached yet. The leaves splay the same way the hedgehog's do.
+export const SPROUT = s([
+  'q.....q',
+  'qp...pq',
+  '.qp.pq.',
+  '..ppp..',
+  '...s...',
+  '...s...',
+  '..FsF..',
+])
+// The lilac a pixel bigger and a shade deeper, for the section the reader is
+// in. At the rail's size the garden lilac washes out against the panel.
+export const RAIL_BLOOM = s([
+  '..@..@..',
+  '.@V@@V@.',
+  '.@VyyV@.',
+  '.@@yy@@.',
+  '..@@@@..',
+  '...s....',
+  '..FsF...',
+  '...s....',
 ])
 export const PEBBLE = s([
   '.gg..',
