@@ -155,12 +155,14 @@ export const PRINCIPAL_INVESTIGATORS: Investigator[] = [
   {
     name: 'Dr. Jennifer Kong',
     titles: ['Assistant Professor of Biochemistry'],
+    photo: 'team/jennifer-kong.jpg',
     bio:
       'Dr. Jennifer Kong is an Assistant Professor of Biochemistry at the University of Washington, where she leads the Kong Lab. Her research focuses on the molecular mechanisms regulating cellular sensitivity to developmental signals, particularly the Hedgehog signalling pathway. Her work helped identify the MMM complex of MOSMO, MEGF8 and MGRN1, which regulates Hedgehog signalling by controlling the abundance of the Smoothened (SMO) receptor. As the primary PI for Washington iGEM, she provides scientific guidance on the team’s efforts to engineer tunable control over Hedgehog signalling.',
   },
   {
     name: 'Dr. Frank DiMaio',
     titles: ['Associate Professor, Institute for Protein Design'],
+    photo: 'team/frank-dimaio.jpg',
     bio:
       'Dr. Frank DiMaio is an Associate Professor at the University of Washington and a protein design mentor at the Institute for Protein Design. He advises our Protein Design subteam on the de novo pipeline behind the minibinder, where he set the tool choices, the filter metrics and the target-selection rules. He also gave us a seat on the DIGS cluster the pipeline runs on.',
   },

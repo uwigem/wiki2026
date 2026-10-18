@@ -1,6 +1,5 @@
 import { FERN } from '../../engine/sprites'
 import type { Investigator } from '../content/team'
-import { asset } from '../router'
 import PixelPerson, { looksFor } from './PixelPerson'
 import PixelSprite from './PixelSprite'
 
@@ -10,8 +9,8 @@ import PixelSprite from './PixelSprite'
  * Deliberately the same thing as a `TeamGroup`: the group's name on the left,
  * a tile per person on the right, and the tile opens their profile. The only
  * difference is that a tile carries their post under their name, because two
- * names with no context at the head of the page say nothing, and that a
- * headshot is shown on the tile when we have one.
+ * names with no context at the head of the page say nothing. The photograph
+ * appears in the profile the tile opens, never on the tile itself.
  */
 export default function InvestigatorCards({
   people,
@@ -48,18 +47,10 @@ export default function InvestigatorCards({
                   className="flex h-full w-40 flex-col items-center gap-1 rounded-sm border-[3px] border-petal-daisy bg-petal-cream/60 px-2 pb-2 pt-2 shadow-[3px_3px_0_var(--p-shadow)] transition duration-150 hover:brightness-[1.06]"
                   aria-label={`Open profile: ${p.name}`}
                 >
-                  {/* The same fixed slot as a student tile, so a headshot and a
-                      pixel character leave the names on one line. */}
+                  {/* The pixel character, always, exactly as on a student tile.
+                      The photograph belongs inside the profile, not out here. */}
                   <span className="flex h-20 items-end justify-center">
-                    {p.photo ? (
-                      <img
-                        src={asset(p.photo)}
-                        alt=""
-                        className="h-20 w-16 rounded-sm border-2 border-leaf-700 object-cover"
-                      />
-                    ) : (
-                      <PixelPerson traits={looksFor(p)} scale={4} />
-                    )}
+                    <PixelPerson traits={looksFor(p)} scale={4} />
                   </span>
                   <span className="pixel text-center text-tag leading-tight text-leaf-950">{p.name}</span>
                   <span className="text-center text-note leading-tight text-leaf-800">{p.titles[0]}</span>
