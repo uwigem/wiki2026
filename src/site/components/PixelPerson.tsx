@@ -39,7 +39,7 @@ const JEANS = '#3f5fa0'
 type Recolor = Partial<Record<'skin' | 'hair' | 'top' | 'pants' | 'eyes', string>>
 
 /** Small additions people asked for on the avatar form. */
-export type Extra = 'glasses' | 'flower' | 'stripe' | 'necklace'
+export type Extra = 'glasses' | 'flower' | 'stripe' | 'necklace' | 'scarf' | 'check'
 
 export interface Look {
   base: number
@@ -128,6 +128,17 @@ const GREEN_EYES = '#3f8f5a'
  * what the sprite already draws.
  */
 export const LOOK_OVERRIDES: Record<string, Look> = {
+  // The two principal investigators, from the descriptions on the feedback doc.
+  'Dr. Jennifer Kong': {
+    base: 5,
+    recolor: { hair: BLACK_HAIR, skin: SKIN[2], top: '#9ea4a8', pants: BLACK_PANTS, eyes: DARK_BROWN_EYES },
+    extras: ['scarf'],
+  },
+  'Dr. Frank DiMaio': {
+    base: 2,
+    recolor: { hair: BROWN_HAIR, skin: SKIN[0], top: '#7fa8c9', pants: JEANS },
+    extras: ['check', 'glasses'],
+  },
   'Samaira Bakshi': { base: 9, recolor: { hair: BLACK_HAIR, skin: '#edc9af', top: WHITE_TOP, pants: BLACK_PANTS } },
   'Alex Devgan': {
     base: 8,
@@ -185,7 +196,7 @@ export const LOOK_OVERRIDES: Record<string, Look> = {
  * `avatar` choice in team.ts, then the name-based fallback above. Unpinned
  * colours come from the name, so they are the same on every visit.
  */
-export function looksFor(member: Member): Look {
+export function looksFor(member: Pick<Member, 'name'> & Partial<Pick<Member, 'avatar'>>): Look {
   const { name } = member
   const pinned = LOOK_OVERRIDES[name]
   if (pinned) return pinned
@@ -215,6 +226,8 @@ const FLOWER_PETAL = '#f4a3bf'
 const FLOWER_EYE = '#f6d66f'
 const STRIPE = '#e8c64a'
 const GOLD = '#e0b545'
+const SCARF = '#ef9fc0'
+const SCARF_SHADE = '#d47a9f'
 
 /** Where a hair flower sits, per template: a spot on the hair, top left. */
 const FLOWER_AT: Record<number, [number, number]> = { 5: [3, 3] }
@@ -254,6 +267,43 @@ function extraPixels(look: Look, cells: (x: number, y: number) => Role | null, o
       for (let x = 0; x < sp.w; x++) if (cells(x, y) === 'top') px.push([x, y, STRIPE])
     } else if (extra === 'necklace') {
       for (const [x, y] of NECKLACE_AT[look.base] ?? []) px.push([x, y, GOLD])
+    } else if (extra === 'scarf') {
+      /*
+       * Found rather than hand-placed, so it sits right on any template. The
+       * first row carrying a shirt pixel is the shoulder line; the skin still
+       * showing on it and the row below is the neck and the neckline, and that
+       * is exactly what a scarf covers. Only those pixels are painted, so the
+       * shoulders keep the person's own top: filling the whole row instead
+       * buried the sweater and left them looking dressed in scarf alone. Two
+       * pixels hang below as a tail.
+       */
+      const rowHas = (y: number, role: Role) =>
+        Array.from({ length: sp.w }, (_, x) => cells(x, y)).includes(role)
+      const bare = (x: number, y: number) => cells(x, y) === 'skin' || cells(x, y) === 'chin'
+      let shoulder = -1
+      for (let y = 0; y < sp.h && shoulder < 0; y++) if (rowHas(y, 'top')) shoulder = y
+      if (shoulder < 0) continue
+      for (let x = 0; x < sp.w; x++) if (bare(x, shoulder)) px.push([x, shoulder, SCARF])
+      const drape: number[] = []
+      for (let x = 0; x < sp.w; x++) {
+        if (!bare(x, shoulder + 1)) continue
+        px.push([x, shoulder + 1, SCARF_SHADE])
+        drape.push(x)
+      }
+      for (const x of drape.slice(0, 2)) px.push([x, shoulder + 2, SCARF_SHADE])
+    } else if (extra === 'check') {
+      // A 2 by 2 check over the whole shirt, the darker squares a shade down
+      // from the person's own top colour, so it reads as a checked shirt at any
+      // size without needing a second colour on the form.
+      if (!look.recolor.top) continue
+      const [th, ts, tl] = rgb2hsl(look.recolor.top)
+      const dark = hsl2rgb(th, clamp01(ts + 0.12), clamp01(tl - 0.22))
+      for (let y = 0; y < sp.h; y++) {
+        for (let x = 0; x < sp.w; x++) {
+          if (cells(x, y) !== 'top') continue
+          if ((Math.floor(x / 2) + Math.floor(y / 2)) % 2 === 1) px.push([x, y, dark])
+        }
+      }
     }
   }
   return px

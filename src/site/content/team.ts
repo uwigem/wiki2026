@@ -117,8 +117,41 @@ export const SUBTEAMS: Subteam[] = [
   },
 ]
 
-/** Shown as one line in the page header. From the iGEM team roster. */
-export const PRINCIPAL_INVESTIGATOR = 'Dr. Jennifer Kong, Assistant Professor'
+/** Someone who advises the team but is not a student on the roster. */
+export interface Investigator {
+  name: string
+  /** Their post, shown under the name. */
+  title: string
+  /** Who they are and what they advise us on. */
+  bio: string
+  /**
+   * Headshot, as a path inside `public/`. Without one the pixel character
+   * stands in; their look is pinned by name in LOOK_OVERRIDES.
+   */
+  photo?: string
+}
+
+/**
+ * The principal investigators, shown above the students.
+ *
+ * Both entries come from the team's feedback doc. Dr. DiMaio's is shorter
+ * because the doc's own entry for him was left unfinished, so the rest is
+ * drawn from what the Attributions page already says about his mentorship.
+ */
+export const PRINCIPAL_INVESTIGATORS: Investigator[] = [
+  {
+    name: 'Dr. Jennifer Kong',
+    title: 'Assistant Professor of Biochemistry',
+    bio:
+      'Dr. Jennifer Kong is an Assistant Professor of Biochemistry at the University of Washington, where she leads the Kong Lab. Her research focuses on the molecular mechanisms regulating cellular sensitivity to developmental signals, particularly the Hedgehog signalling pathway. Her work helped identify the MMM complex of MOSMO, MEGF8 and MGRN1, which regulates Hedgehog signalling by controlling the abundance of the Smoothened (SMO) receptor. As the primary PI for Washington iGEM, she provides scientific guidance on the team’s efforts to engineer tunable control over Hedgehog signalling.',
+  },
+  {
+    name: 'Dr. Frank DiMaio',
+    title: 'Associate Professor, Institute for Protein Design',
+    bio:
+      'Dr. Frank DiMaio is an Associate Professor at the University of Washington and a protein design mentor at the Institute for Protein Design. He advises our Protein Design subteam on the de novo pipeline behind the minibinder, where he set the tool choices, the filter metrics and the target-selection rules. He also gave us a seat on the DIGS cluster the pipeline runs on.',
+  },
+]
 
 /**
  * Every student on the team. Student leaders first, in this order; everyone
