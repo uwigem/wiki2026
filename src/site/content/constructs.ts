@@ -42,6 +42,7 @@ export const DOMAIN_ROLES: { role: DomainRole; label: string }[] = [
   { role: "recruitment", label: "recruitment domain" },
   { role: "marker", label: "fluorescent marker" },
   { role: "tag", label: "detection or purification tag" },
+  { role: "other", label: "a part we designed" },
 ];
 
 /**
