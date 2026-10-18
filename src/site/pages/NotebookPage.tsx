@@ -1,8 +1,26 @@
-import { MISSING_DATES, TIMELINE } from '../content/timeline'
+import { MISSING_DATES, NEXT_STEPS, TIMELINE, WETLAB_MILESTONES } from '../content/timeline'
+import { RECRUITMENT_CONSTRUCTS } from '../content/constructs'
+import ConstructDiagram from '../components/ConstructDiagram'
+import Details from '../components/Details'
 import GardenSection, { Reveal, SectionDivider } from '../components/GardenSection'
+import MilestoneTrack from '../components/MilestoneTrack'
 import PixelSign, { TodoPanel } from '../components/PixelSign'
+import { Link } from '../router'
 
-/** The notebook / timeline. Content lives in content/timeline.ts. */
+/**
+ * The notebook.
+ *
+ * The page leads with the wet lab's engineering record, because that is what
+ * the Notebook is under in the navigation and what a judge looking for it
+ * expects: what was designed, what was ordered, and what has not happened yet.
+ * The whole team's season follows underneath, closed, so that none of it is
+ * lost and none of it buries the part above.
+ *
+ * Nothing here may read as though the experiments have been run. The
+ * constructs are on order.
+ *
+ * Content lives in `content/timeline.ts` and `content/constructs.ts`.
+ */
 export default function NotebookPage() {
   return (
     <article>
@@ -12,9 +30,9 @@ export default function NotebookPage() {
             <p className="pixel text-tag tracking-[0.2em]">notebook</p>
             <h1 className="mt-1 text-2xl sm:text-4xl">The Season, In Order</h1>
           </PixelSign>
-          <h2 className="sr-only">Timeline</h2>
-          <p className="panel-flat max-w-2xl px-4 py-3 text-body-sm leading-relaxed">
-            Every garden has a diary. Ours starts in November, with a protein nobody had a name for yet.
+          <p className="panel max-w-2xl px-5 py-4 text-body leading-relaxed">
+            Where the wet lab has got to: the system designed, the constructs drawn up and ordered, and the
+            experiments waiting on delivery. The whole team's season is at the bottom.
           </p>
         </div>
       </GardenSection>
@@ -22,11 +40,69 @@ export default function NotebookPage() {
       <SectionDivider />
 
       <GardenSection>
-        <ol className="flex flex-col gap-4">
-          {TIMELINE.map((entry, i) => (
-            <li key={i}>
-              <Reveal>
-                <div className={'panel px-5 py-4 ' + (entry.milestone ? 'border-l-[10px] border-l-pool-400' : '')}>
+        <h2 className="text-xl sm:text-2xl">Wet lab, start to here</h2>
+        <p className="mt-2 max-w-2xl text-body leading-relaxed">
+          Design work is finished and the orders are placed. Nothing has been assembled or tested.
+        </p>
+
+        <div className="mt-5">
+          <Reveal>
+            <MilestoneTrack milestones={WETLAB_MILESTONES} />
+          </Reveal>
+        </div>
+
+        <div className="mt-6 flex flex-col gap-5">
+          <Reveal>
+            <ConstructDiagram
+              heading="What we designed"
+              intro="The ten mammalian expression constructs, ordered from GenScript in pcDNA3.1(+)-based expression vectors. The same parts are listed, with what each one is for, on [parts and registry](/parts)."
+              groups={RECRUITMENT_CONSTRUCTS}
+              footnote="Domain widths are not to scale."
+              source="Wet Lab: GenScript order, 2026."
+            />
+          </Reveal>
+
+          <Reveal>
+            <div className="panel px-5 py-5 sm:px-7 sm:py-6">
+              <h3 className="text-xl">When they arrive</h3>
+              <p className="mt-1 max-w-2xl text-body leading-relaxed">
+                The order the work happens in, once there is something to work with.
+              </p>
+              <ol className="mt-4 flex flex-col gap-2">
+                {NEXT_STEPS.map((step, i) => (
+                  <li key={step} className="flex gap-3 text-body-sm leading-relaxed">
+                    <span className="badge shrink-0">{i + 1}</span>
+                    <span className="pt-0.5">{step}</span>
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-4 text-body-sm leading-relaxed">
+                What each experiment is for, and the controls it runs against, are on{' '}
+                <Link to="/experiments" className="cross-link">
+                  experiments
+                </Link>
+                .
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </GardenSection>
+
+      <SectionDivider />
+
+      <GardenSection className="pb-10">
+        <Details
+          heading="The whole season, week by week"
+          summary={`Every subteam's record, from November 2025. ${TIMELINE.length} entries.`}
+        >
+          <ol className="flex flex-col gap-4">
+            {TIMELINE.map((entry, i) => (
+              <li key={i}>
+                <div
+                  className={
+                    'panel px-5 py-4 ' + (entry.milestone ? 'border-l-[10px] border-l-pool-400' : '')
+                  }
+                >
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                     <span className="badge">{entry.date}</span>
                     <h3 className="text-lg">{entry.title}</h3>
@@ -37,10 +113,10 @@ export default function NotebookPage() {
                   </div>
                   <p className="mt-2 text-body-sm leading-relaxed">{entry.body}</p>
                 </div>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
+              </li>
+            ))}
+          </ol>
+        </Details>
 
         {/* A drafting aid: shown by `npm run dev`, left out of the published
             site. What is missing is also tracked in docs/CONTENT_MAP.md. */}
@@ -50,7 +126,6 @@ export default function NotebookPage() {
               items={[
                 `TODO(ops): dates still missing (${MISSING_DATES.join(', ')}). Get these off the official iGEM calendar.`,
                 'Wet-lab protocol summaries, linked out to the Benchling record.',
-                'Mark each entry complete / in-progress so this reads as a live log rather than a history.',
               ]}
             />
           </div>

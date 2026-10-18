@@ -180,6 +180,64 @@ export const TIMELINE: TimelineEntry[] = [
 ]
 
 /**
+ * The wet lab's own engineering milestones, which the Notebook page leads
+ * with. Separate from TIMELINE above: that is the whole team's season, this is
+ * the record of designing and ordering the constructs.
+ *
+ * `status` says whether something has happened. Nothing here may imply that
+ * laboratory experiments have been run; the constructs are still on order.
+ */
+export interface Milestone {
+  /** Free text, shown as a tag: "August to September 2026", or "Upcoming". */
+  date: string
+  title: string
+  body: string
+  status: 'done' | 'upcoming'
+}
+
+export const WETLAB_MILESTONES: Milestone[] = [
+  {
+    date: 'Mar to Jun 2026',
+    title: 'Project conceptualisation',
+    body: 'Two approaches chosen: recruit MGRN1 to SMO, or block the MMM complex with designed binders.',
+    status: 'done',
+  },
+  {
+    date: 'Jul to Aug 2026',
+    title: 'Experimental planning',
+    body: 'Experiments worked out with the Kong Lab and the modelling team, from recruitment through to signalling.',
+    status: 'done',
+  },
+  {
+    date: 'Aug to Sep 2026',
+    title: 'Construct design',
+    body: 'Ten mammalian expression constructs designed, in four groups.',
+    status: 'done',
+  },
+  {
+    date: 'Oct 2026',
+    title: 'Orders placed',
+    body: 'Placed with GenScript and Twist Bioscience. Both are awaiting delivery.',
+    status: 'done',
+  },
+  {
+    date: 'Upcoming',
+    title: 'Experimental validation',
+    body: 'Nothing at the bench yet. Plasmid preparation comes first, then the assays.',
+    status: 'upcoming',
+  },
+]
+
+/** What happens once the orders land, in order. */
+export const NEXT_STEPS: string[] = [
+  'Plasmid preparation and verification.',
+  'Mammalian protein expression and recruitment assays.',
+  'SMO ubiquitination measurements.',
+  'MEGF8 and MOSMO binder screening.',
+  'SMO trafficking and Hedgehog signalling assays.',
+]
+
+/**
  * TODO(ops): no Jamboree date or wiki-freeze date appears anywhere in the Notion
  * export. Get both from the official iGEM calendar and add them here. The wiki
  * freeze in particular needs to be visible to everyone editing this site.
