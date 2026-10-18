@@ -21,6 +21,7 @@ import StatRow from "../components/StatRow";
 import StructureView from "../components/StructureView";
 import ToolShed from "../components/ToolShed";
 import Callout from "../components/Callout";
+import ConstructDiagram from "../components/ConstructDiagram";
 import DataTable from "../components/DataTable";
 import DecisionTree from "../components/DecisionTree";
 import MembraneLandscape from "../components/MembraneLandscape";
@@ -491,6 +492,17 @@ function BlockView({ block }: { block: Block }) {
     case "explainer":
       return <SignalDial />;
 
+    case "constructs":
+      return (
+        <ConstructDiagram
+          heading={block.heading}
+          intro={block.intro}
+          groups={block.groups}
+          footnote={block.footnote}
+          source={block.source}
+        />
+      );
+
     case "figure":
       return (
         <FigureFrame
@@ -499,6 +511,7 @@ function BlockView({ block }: { block: Block }) {
           caption={block.caption}
           owner={block.owner}
           ratio={block.ratio}
+          hypothetical={block.hypothetical}
           source={block.source}
         />
       );
