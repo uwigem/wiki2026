@@ -92,6 +92,9 @@
   --text-note: 0.78rem; /* sources, captions, taglines */
   --text-tag: 0.68rem; /* pixel eyebrow labels and tags */
 
+  /* About 72 characters at --text-body. See .prose-garden. */
+  --measure: 35rem;
+
   /* greens: bushHi > bushLight > grass4 > grass2 > grass1 > grass3 > bushDark > shadow */
   --color-leaf-50: var(--p-bushHi);
   --color-leaf-100: var(--p-bushHi);
@@ -709,13 +712,22 @@
   }
 
   /*
-   * No measure of its own. The reading column is already capped at 56rem and
-   * every panel adds padding inside that, so a paragraph can never run much
-   * past 80 characters. A second cap on top of the column's just left a strip
-   * of dead space down the right of the text while the headings, tables and
-   * figures beside it ran the full width, which reads as a mistake rather
-   * than as a margin.
+   * The reading measure: how wide a run of words is allowed to get.
+   *
+   * The page column alone is not enough. Inside a section card a paragraph
+   * measures about 99 characters, and on the longest pages 112, where a
+   * reader tracks 60 to 75 comfortably and starts losing the start of the
+   * next line past about 85.
+   *
+   * Capping paragraphs on their own would leave them ragged against headings
+   * running the full width, which is the mistake this used to avoid by not
+   * capping at all. So everything made of words is capped to the same column
+   * instead, and only what needs the room (figures, tables, diagrams, the
+   * construct bars) runs the full width of the card. The text then has one
+   * straight right edge and the wide things break out of it deliberately.
    */
+
+
   .prose-garden p {
     margin: 0 0 0.9rem;
   }
@@ -972,15 +984,31 @@
   padding: 0;
 }
 /*
- * Blocks cap their own text at a reading measure, which is right when a block
- * sits alone in the page's full column. Inside a section card the column has
- * already been narrowed by the card, so that cap leaves a strip of dead space
- * down the right of every paragraph while the headings, tables and figures
- * beside them run the full width. The ragged edge reads as a mistake. In here
- * the card is the measure.
+ * The reading measure, unlayered so it outranks Tailwind's own width
+ * utilities: a cap inside `@layer components` loses to `.max-w-2xl` in the
+ * utilities layer however specific it is.
  */
-.section-card .section-block .max-w-2xl {
-  max-width: none;
+.prose-garden,
+.measure {
+  max-width: var(--measure);
+}
+/*
+ * Blocks introduce themselves with `max-w-2xl`, which is 42rem: wider than a
+ * reader tracks. On a paragraph that cap becomes the reading measure. Only on
+ * a paragraph, so the utility still means 42rem on a panel or an image.
+ */
+p.max-w-2xl {
+  max-width: var(--measure);
+}
+
+/*
+ * Inside a section card the words keep the same measure as everywhere else,
+ * and the headings come with them so the text column has one edge rather than
+ * a ragged one. Figures, tables and diagrams are not words and still run the
+ * full width of the card.
+ */
+.section-card .section-block :is(h2, h3) {
+  max-width: var(--measure);
 }
 /* Block headings sit under the section's sign, so they step down a size. */
 .section-card .section-block h2 {

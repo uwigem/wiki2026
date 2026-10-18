@@ -38,7 +38,7 @@ export default function Procedure({
         {groups.map((group, g) => (
           <div key={g} className={g === 0 && !heading && !intro ? '' : 'mt-1'}>
             {group.title && <h4 className="text-base font-semibold text-leaf-950">{group.title}</h4>}
-            <ol className="mt-2 flex flex-col gap-2">
+            <ol className="measure mt-2 flex flex-col gap-2">
               {group.steps.map((step, i) => (
                 <li key={i} className="flex gap-3">
                   <span className="badge mt-0.5 shrink-0">{i + 1}</span>

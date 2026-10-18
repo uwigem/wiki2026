@@ -78,7 +78,7 @@ export default function DataTable({
         ))}
       </ul>
 
-      {caption && <p className="mt-3 text-body-sm leading-relaxed text-leaf-800">{inline(caption)}</p>}
+      {caption && <p className="measure mt-3 text-body-sm leading-relaxed text-leaf-800">{inline(caption)}</p>}
       {source && (
         <p className="mt-4 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{source}</p>
       )}
