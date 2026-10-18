@@ -399,17 +399,18 @@ export const SPROUT = s([
   '...s...',
   '..FsF..',
 ])
-// The lilac a pixel bigger and a shade deeper, for the section the reader is
-// in. At the rail's size the garden lilac washes out against the panel.
+// The garden's lilac, a shade deeper and a stem row taller, for the section the
+// reader is in. The head is the same seven pixels wide, so it stays symmetric;
+// at the rail's size the ordinary lilac washes out against the panel.
 export const RAIL_BLOOM = s([
-  '..@..@..',
-  '.@V@@V@.',
-  '.@VyyV@.',
-  '.@@yy@@.',
-  '..@@@@..',
-  '...s....',
-  '..FsF...',
-  '...s....',
+  '..@.@..',
+  '.@VyV@.',
+  '.@yyy@.',
+  '..@V@..',
+  '...s...',
+  '..FsF..',
+  '...s...',
+  '...s...',
 ])
 export const PEBBLE = s([
   '.gg..',

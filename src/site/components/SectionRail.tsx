@@ -164,7 +164,7 @@ function Outline({
                         aria-current={on ? 'location' : undefined}
                         data-mark={on ? 'item' : undefined}
                         className={
-                          '-ml-[3px] block w-full border-l-[3px] py-[3px] pl-2.5 pr-1 text-left text-[0.72rem] leading-snug transition-colors ' +
+                          '-ml-[2px] block w-full border-l-2 py-[3px] pl-2.5 pr-1 text-left text-[0.72rem] leading-snug transition-colors ' +
                           (touch ? 'min-h-8 content-center ' : '') +
                           (on
                             ? 'border-leaf-800 bg-leaf-100 font-semibold text-[var(--ink)]'
