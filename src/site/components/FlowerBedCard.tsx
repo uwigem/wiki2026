@@ -13,7 +13,7 @@ export default function FlowerBedCard({
   step,
 }: {
   title: string
-  body: string
+  body: string | string[]
   note?: string
   /** Renders a numbered marker before the title. Used by the `steps` block. */
   step?: number
@@ -24,7 +24,11 @@ export default function FlowerBedCard({
         {step !== undefined && <span className="badge">{step}</span>}
         <h3 className="text-lg">{title}</h3>
       </div>
-      <p className="text-body leading-relaxed">{inline(body)}</p>
+      {(Array.isArray(body) ? body : [body]).map((para, i) => (
+        <p key={i} className="text-body leading-relaxed">
+          {inline(para)}
+        </p>
+      ))}
       {note && <p className="mt-1 text-note text-leaf-800">{note}</p>}
     </article>
   )

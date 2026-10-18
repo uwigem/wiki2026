@@ -65,7 +65,8 @@ export interface Anchored {
 
 export interface CardItem {
   title: string;
-  body: string;
+  /** One paragraph, or several when the card makes more than one point. */
+  body: string | string[];
   note?: string;
 }
 
@@ -1809,6 +1810,15 @@ const model: Page = {
  */
 const DELIVERABLES: Block[] = [
 {
+    kind: "figure",
+    id: "platform-fit-chart",
+    src: "ihp/platform-fit.png",
+    alt: "A flowchart. Are you working with the cilia? If no, another tool may be more suitable. If yes, are you focusing on protein targets? If no, another tool. If yes, are those proteins transmembrane and localised to the ciliary membrane? If no, another tool. If yes, are you manipulating abundance or just looking for a protein tag? Tagging leads to: are you targeting SMO? Yes leads to: use our proof of concept, with a button labelled Our Workflow. Manipulating abundance, or tagging something other than SMO, leads to: do you already have a targeting binder or antibody? Yes leads to: use our platform to design your own ciliary abundance modulator, with a button labelled Our Platform. No leads to: use our guide to design a de novo protein binder for your target protein, with a button labelled Our Implementation Strategy, and then on to the platform.",
+    caption:
+      "Is our platform right for your project? Start at the top left and follow the arrows. The same questions are below as something you can answer.",
+    ratio: "wide",
+  },
+{
     kind: "flowchart",
     section: "Deliverables",
     id: "platform-fit",
@@ -1895,23 +1905,6 @@ const DELIVERABLES: Block[] = [
       "The flowchart is designed to walk researchers through a list of yes or no questions to decide if their project is suitable for our platform and to clarify what they should consider moving forward. The flowchart includes considerations about the target, intended outcome, and procedure. We hope this allows researchers to make an informed decision about adopting the platform before beginning their experimentation.",
     ],
   },
-    {
-      kind: "details",
-      id: "platform-fit-drawing",
-      heading: "See the whole chart",
-      summary: "The same questions as a drawing, every branch at once.",
-      blocks: [
-{
-    kind: "figure",
-    id: "platform-fit-chart",
-    src: "ihp/platform-fit.png",
-    alt: "A flowchart. Are you working with the cilia? If no, another tool may be more suitable. If yes, are you focusing on protein targets? If no, another tool. If yes, are those proteins transmembrane and localised to the ciliary membrane? If no, another tool. If yes, are you manipulating abundance or just looking for a protein tag? Tagging leads to: are you targeting SMO? Yes leads to: use our proof of concept, with a button labelled Our Workflow. Manipulating abundance, or tagging something other than SMO, leads to: do you already have a targeting binder or antibody? Yes leads to: use our platform to design your own ciliary abundance modulator, with a button labelled Our Platform. No leads to: use our guide to design a de novo protein binder for your target protein, with a button labelled Our Implementation Strategy, and then on to the platform.",
-    caption:
-      "Is our platform right for your project? Start at the top left and follow the arrows. The same questions are below as something you can answer.",
-    ratio: "wide",
-  },
-      ],
-    },
 {
     kind: "workflow",
     id: "workflow",
@@ -1962,12 +1955,6 @@ const DELIVERABLES: Block[] = [
       "Best practices: the habits that make the platform behave predictably from one lab to the next.",
     ],
   },
-    {
-      kind: "details",
-      id: "flyer-section",
-      heading: "The flyer we hand out",
-      summary: "What the platform is, its two components, the targets it could be pointed at, and how to reach us.",
-      blocks: [
 {
     kind: "figure",
     id: "flyer",
@@ -1977,8 +1964,6 @@ const DELIVERABLES: Block[] = [
       "The flyer we hand out: what the platform is, its two components, the targets it could be pointed at, and how to reach us.",
     ratio: "tall",
   },
-      ],
-    },
 ];
 
 /**
@@ -2884,12 +2869,10 @@ const humanPractices: Page = {
       items: [
         {
           title: "Open source",
-          body: "**For:** easy for scientists to adapt; builds trust with users; lowering barriers to access allows more widespread use by scientists. **Against:** once the technology is out of our hands we have no control over it, and open source projects typically struggle to get startup funding without guaranteed profit.",
-        },
+          body: ["**For:** easy for scientists to adapt; builds trust with users; lowering barriers to access allows more widespread use by scientists.", "**Against:** once the technology is out of our hands we have no control over it, and open source projects typically struggle to get startup funding without guaranteed profit."],        },
         {
           title: "Private and proprietary",
-          body: "**For:** we hold whole responsibility over our technology, and can prevent misuse by requesting purposes and methods from clients. **Against:** some would argue we should not have sole authority over the use of a research platform; a lack of trust and transparency; and a higher barrier to entry for scientists.",
-        },
+          body: ["**For:** we hold whole responsibility over our technology, and can prevent misuse by requesting purposes and methods from clients.", "**Against:** some would argue we should not have sole authority over the use of a research platform; a lack of trust and transparency; and a higher barrier to entry for scientists."],        },
       ],
     },
 {
