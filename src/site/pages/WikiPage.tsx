@@ -518,6 +518,7 @@ function BlockView({ block }: { block: Block }) {
       return (
         <FigureFrame
           src={block.src}
+          srcMobile={block.srcMobile}
           alt={block.alt}
           caption={block.caption}
           owner={block.owner}

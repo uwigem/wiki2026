@@ -17,12 +17,22 @@ import { asset } from '../router'
 interface Props {
   /** Path or URL. Leave out while the figure does not exist yet. */
   src?: string
+  /**
+   * A phone edition of the same figure, where one exists. A wide diagram
+   * scaled to 375px is unreadable, so the figure packages ship a stacked
+   * version; this swaps to it below the `sm` breakpoint.
+   */
+  srcMobile?: string
   /** What the figure shows. Required whenever `src` is set. */
   alt?: string
   caption: string
   /** Subteam that owes this figure. Shown only in the empty state. */
   owner?: string
-  /** Rough shape of the finished figure, so the page does not jump later. */
+  /**
+   * Rough shape of the finished figure, so the page does not jump later.
+   * Leave it out for an image that should keep its own proportions, which is
+   * what an SVG diagram wants.
+   */
   ratio?: 'wide' | 'square' | 'tall'
   /**
    * The figure plots made-up numbers, drawn to show the shape a result would
@@ -40,7 +50,7 @@ const RATIO: Record<NonNullable<Props['ratio']>, string> = {
   tall: '3 / 4',
 }
 
-export default function FigureFrame({ src, alt, caption, owner, ratio = 'wide', hypothetical, source }: Props) {
+export default function FigureFrame({ src, alt, caption, owner, srcMobile, ratio, hypothetical, source }: Props) {
   return (
     <figure className="panel m-0 px-5 py-5 sm:px-7 sm:py-6">
       {src ? (
@@ -50,19 +60,22 @@ export default function FigureFrame({ src, alt, caption, owner, ratio = 'wide', 
               hypothetical data
             </p>
           )}
-          <img
-            src={asset(src)}
-            alt={alt ?? ''}
-            loading="lazy"
-            decoding="async"
-            className="w-full rounded-sm border-[3px] border-leaf-700"
-            style={{ aspectRatio: RATIO[ratio], objectFit: 'contain' }}
-          />
+          <picture>
+            {srcMobile && <source media="(max-width: 639px)" srcSet={asset(srcMobile)} />}
+            <img
+              src={asset(src)}
+              alt={alt ?? ''}
+              loading="lazy"
+              decoding="async"
+              className="w-full rounded-sm border-[3px] border-leaf-700"
+              style={ratio ? { aspectRatio: RATIO[ratio], objectFit: 'contain' } : undefined}
+            />
+          </picture>
         </div>
       ) : (
         <div
           className="flex w-full flex-col items-center justify-center gap-2 rounded-sm border-[3px] border-dashed border-petal-daisy bg-leaf-50 px-6 py-6 text-center"
-          style={{ aspectRatio: RATIO[ratio] }}
+          style={{ aspectRatio: RATIO[ratio ?? 'wide'] }}
         >
           <p className="kicker">figure not drawn yet</p>
           <p className="max-w-md text-body-sm leading-relaxed">{caption}</p>
