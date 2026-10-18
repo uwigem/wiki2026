@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import {
   LEADERSHIP,
-  PRINCIPAL_INVESTIGATOR,
+  PRINCIPAL_INVESTIGATORS,
   SUBTEAMS,
   TEAM_PAGE_INTRO,
   membersOf,
   type Member,
 } from '../content/team'
 import GardenSection, { Reveal, SectionDivider } from '../components/GardenSection'
+import InvestigatorCards from '../components/InvestigatorCards'
 import MemberModal from '../components/MemberModal'
 import PixelSign from '../components/PixelSign'
 import TeamGroup from '../components/TeamGroup'
@@ -25,7 +26,6 @@ export default function TeamPage() {
             <h1 className="mt-1 text-2xl sm:text-4xl">Meet the Team</h1>
           </PixelSign>
           <p className="panel-flat max-w-2xl px-4 py-3 text-body-sm leading-relaxed">{TEAM_PAGE_INTRO}</p>
-          <p className="kicker normal-case">Principal investigator: {PRINCIPAL_INVESTIGATOR}</p>
         </div>
       </GardenSection>
 
@@ -34,6 +34,9 @@ export default function TeamPage() {
       <GardenSection>
         <div className="flex flex-col gap-5">
           <Reveal>
+            <InvestigatorCards people={PRINCIPAL_INVESTIGATORS} />
+          </Reveal>
+          <Reveal delay={0.04}>
             <TeamGroup
               id="leads"
               heading="Leadership"
@@ -44,7 +47,7 @@ export default function TeamPage() {
             />
           </Reveal>
           {SUBTEAMS.map((s, i) => (
-            <Reveal key={s.id} delay={Math.min((i + 1) * 0.04, 0.2)}>
+            <Reveal key={s.id} delay={Math.min((i + 2) * 0.04, 0.2)}>
               <TeamGroup
                 id={s.id}
                 heading={s.name}
