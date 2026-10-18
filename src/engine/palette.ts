@@ -35,7 +35,6 @@ export type ColorKey =
   | 'lilacPetal'
   | 'lilacHi'
   | 'lilacCore'
-  | 'lilacDeep'
   | 'pinkBud'
   | 'pinkHi'
   | 'pinkDark'
@@ -115,7 +114,6 @@ const BASE: Palette = {
   lilacPetal: '#b79ad4',
   lilacHi: '#dbc8ef',
   lilacCore: '#f2e9a0',
-  lilacDeep: '#a67acd',
   pinkBud: '#e79bb0',
   pinkHi: '#f8c8d4',
   pinkDark: '#c9718c',

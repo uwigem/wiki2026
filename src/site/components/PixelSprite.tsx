@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
 import type { Sprite } from '../../engine/sprites'
+import type { Palette } from '../../engine/palette'
 import { spriteURL } from '../hooks'
 
 interface Props {
@@ -11,6 +12,8 @@ interface Props {
   /** Leave empty for pure decoration (the image is then hidden from screen readers). */
   alt?: string
   flip?: boolean
+  /** Draw in a palette other than the site's. The rail's deeper lilac is the one use. */
+  palette?: Palette
 }
 
 /**
@@ -20,10 +23,10 @@ interface Props {
  * scaled up by CSS with `image-rendering: pixelated`, so a 16×16 hedgehog costs
  * the same few hundred bytes whether it's 3× or 10× on screen.
  */
-export default function PixelSprite({ sprite, scale = 3, className, style, alt = '', flip }: Props) {
+export default function PixelSprite({ sprite, scale = 3, className, style, alt = '', flip, palette }: Props) {
   return (
     <img
-      src={spriteURL(sprite)}
+      src={spriteURL(sprite, palette)}
       alt={alt}
       aria-hidden={alt === '' ? true : undefined}
       width={sprite.w * scale}
