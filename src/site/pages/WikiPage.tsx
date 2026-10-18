@@ -22,6 +22,7 @@ import StructureView from "../components/StructureView";
 import ToolShed from "../components/ToolShed";
 import Callout from "../components/Callout";
 import ConstructDiagram from "../components/ConstructDiagram";
+import Procedure from "../components/Procedure";
 import DataTable from "../components/DataTable";
 import DecisionTree from "../components/DecisionTree";
 import MembraneLandscape from "../components/MembraneLandscape";
@@ -491,6 +492,16 @@ function BlockView({ block }: { block: Block }) {
 
     case "explainer":
       return <SignalDial />;
+
+    case "procedure":
+      return (
+        <Procedure
+          heading={block.heading}
+          intro={block.intro}
+          groups={block.groups}
+          source={block.source}
+        />
+      );
 
     case "constructs":
       return (

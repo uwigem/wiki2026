@@ -38,6 +38,7 @@ import {
   SCREENING_CONSTRUCTS,
   type ConstructGroup,
 } from "./constructs";
+import type { ProcedureGroup } from "../components/Procedure";
 
 /**
  * Anything with an `id` can be linked to from anywhere else in the wiki, with
@@ -298,6 +299,14 @@ export type Block = Anchored &
          * skimming mistakes it for data.
          */
         hypothetical?: true;
+        source?: string;
+      }
+    /** A bench procedure: numbered steps, in groups with subheadings. */
+    | {
+        kind: "procedure";
+        heading?: string;
+        intro?: string;
+        groups: ProcedureGroup[];
         source?: string;
       }
     /** Genetic constructs, as rows of labelled domains. */
@@ -3544,15 +3553,166 @@ const protocols: Page = {
   slug: "/protocols",
   title: "Protocols",
   kicker: "wetlab · protocols",
-  storyBeat: "How each bed was planted, step by step, for anyone who wants to plant their own.",
+  storyBeat:
+    "How each bed gets planted, step by step, for anyone who wants to plant their own.",
   intro:
-    "The bench procedures behind the experiments, written so another lab can follow them. They are being written up as each one is validated, and none is finished yet.",
+    "The bench procedures behind the experiments, written so another lab can follow them.",
   blocks: [
     {
-      kind: "resultsSoon",
-      note: "We'll add them when we have them.",
-      caption:
-        "What each experiment is for, and the controls it runs against, are on [experiments](/experiments).",
+      kind: "callout",
+      label: "where this stands",
+      heading: "One protocol of five, and none of them run yet",
+      body: [
+        "Experiment 1 is written up below. The procedures for experiments 2 to 5 are still being drafted and go up as they are finished.",
+        "A few instrument settings are still being confirmed with the lab, and are marked where they appear rather than filled with a guess. What each experiment is for, and the controls it runs against, are on [experiments](/experiments).",
+      ],
+    },
+
+    {
+      kind: "prose",
+      id: "experiment-1",
+      heading: "Experiment 1: induced MGRN1 recruitment to SMO",
+      body: [
+        "These protocols test whether induced proximity of the E3 ubiquitin ligase **MGRN1** to **SMO** is enough to reduce SMO protein levels and Hedgehog signalling activity. They use the human cell line **HEK293T**.",
+        "SMO is fused to FKBP12 and MGRN1 to FRB, so that rapamycin brings the two together. A luciferase reporter assay measures Hedgehog signalling and a western blot measures SMO protein levels. Four recruitment conditions are compared, which separates MGRN1 ligase activity from non-specific proximity and from proteasomal degradation.",
+      ],
+    },
+
+    {
+      kind: "details",
+      id: "cell-culture",
+      heading: "Cell culture and transfection",
+      summary: "Plating, transfection, kinetic medium and splitting, across days 0 and 1.",
+      blocks: [
+        {
+          kind: "procedure",
+          groups: [
+            {
+              title: "Plate cells (day 0)",
+              steps: [
+                "Plate HEK293T cells at a density of 6.5 × 10⁵ per well, in 2 ml of media, in a 6-well plate.",
+                "Let the cells attach for at least 6 hours before transfection.",
+              ],
+            },
+            {
+              title: "Transfection (day 0)",
+              steps: [
+                "Prepare two Eppendorf tubes and label each clearly. **Tube A**: 140 µl OptiMEM and 6 µl polyethylenimine. **Tube B**: 140 µl OptiMEM and about 1.6 µg total plasmid DNA, combining the SMO-FKBP12 construct with the MGRN1-FRB or control construct.",
+                "Centrifuge tube B *(settings being confirmed)*, then incubate 5 minutes at room temperature.",
+                "Add tube B to tube A and incubate 20 minutes at room temperature.",
+                "Add the combined mixture dropwise to the attached cells.",
+                "Incubate at least 20 hours, to allow protein expression.",
+              ],
+            },
+            {
+              title: "Prepare kinetic medium (day 0, for 100 ml)",
+              steps: [
+                "Add 93.5 ml OptiMEM, 4 ml FBS, 1 ml P/S and 1.5 ml HEPES to a sterile bottle.",
+                "Mix, inverting gently.",
+                "Store at 4 °C.",
+              ],
+            },
+            {
+              title: "Split cells (day 1)",
+              steps: [
+                "Trypsinise the cells and resuspend in 3 ml media. For the endpoint assay use DMEM; for the kinetic assay use OptiMEM with 4% FBS, 1% P/S and 15 mM HEPES.",
+                "For luciferase, dispense 45 µl of cell suspension per well into a 96-well plate, with two replicate sets per condition.",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
+    {
+      kind: "details",
+      id: "rapamycin-luciferase",
+      heading: "Rapamycin treatment and luciferase assay",
+      summary: "Four recruitment conditions, then an overnight incubation and the read.",
+      blocks: [
+        {
+          kind: "table",
+          heading: "The four treatment conditions",
+          intro:
+            "All four carry rapamycin (A/C heterodimeriser rapalog, Takara 635055) at a final 100 nM.",
+          columns: ["Condition"],
+          rows: [
+            ["SMO-FKBP12 + FRB + rapamycin"],
+            ["SMO-FKBP12 + MGRN1(RING-dead)-FRB + rapamycin"],
+            ["SMO-FKBP12 + VHL-FRB + rapamycin"],
+            ["SMO-FKBP12 + MGRN1-FRB + rapamycin, with and without MG132"],
+          ],
+        },
+        {
+          kind: "procedure",
+          groups: [
+            {
+              title: "Add rapamycin",
+              steps: [
+                "Dilute the stock to a 1 µM working stock, ten times the final concentration, in assay medium.",
+                "Add 5 µl to each 45 µl well, giving 100 nM in 50 µl.",
+                "Add MG132 to the last condition only.",
+              ],
+            },
+            {
+              title: "Incubate and read",
+              steps: [
+                "Incubate overnight, for at least 16 hours.",
+                "Read luciferase *(reagent, volume and plate reader settings being confirmed)*.",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
+    {
+      kind: "details",
+      id: "western-blot",
+      heading: "Western blot",
+      summary: "Lysis, quantification, the gel, and the blot.",
+      blocks: [
+        {
+          kind: "procedure",
+          groups: [
+            {
+              steps: [
+                "Incubate the plates overnight after treatment.",
+                "Lyse with RIPA lysis buffer (50 mM HEPES pH 7.9, 140 mM NaCl, 1 mM EDTA, 1% Triton X-100, 0.1% SDS, 0.1% sodium deoxycholate) with protease and phosphatase inhibitors, for 30 minutes at 4 °C on a rotator.",
+                "Clear the cell debris by centrifugation *(settings being confirmed)*, then measure protein concentration by BCA.",
+                "Load 10 µl of protein per lane onto a Bis-Tris PAGE gel, run the gel *(settings being confirmed)*, and transfer to a PVDF membrane.",
+                "Block with 5% milk in TBS-T (20 mM Tris HCl pH 7.5, 150 mM NaCl, 0.1% Tween 20) for 1 hour.",
+                "Incubate with primary antibodies at 4 °C overnight. Wash with TBS-T, then incubate with an HRP secondary antibody for 1 hour at room temperature.",
+                "Visualise with a chemiluminescent HRP substrate on the biomolecular imager.",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
+    {
+      kind: "details",
+      id: "safety-and-waste",
+      heading: "Safety and waste",
+      summary: "What is bioactive here, and where the waste goes.",
+      blocks: [
+        {
+          kind: "prose",
+          body: [
+            "Rapamycin and MG132 are bioactive. Wear gloves, and handle stock solutions in a fume hood.",
+            "Dispose of transfected-cell waste as biohazard waste, in the correct biohazard bin.",
+          ],
+        },
+      ],
+    },
+
+    {
+      kind: "prose",
+      heading: "The rest",
+      body: [
+        "Protocols for experiments 2 to 5, covering the binder screen, the trafficking time course, purified binder validation and the rheostat assay, are being written and go up here as they are finished. The experiments themselves are already described on [experiments](/experiments).",
+      ],
     },
   ],
 };
