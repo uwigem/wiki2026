@@ -22,118 +22,42 @@ import { inline } from './RichText'
  * **The drawing faces left and is never mirrored.** The quills, the paw and
  * the lit side of its face are all drawn for that direction, so flipping it
  * lights the animal from the wrong side. Everything it looks at therefore has
- * to be placed on its left: the cloud sits to the left of the hedgehog, and
- * inside the cloud the flask sits to the left of the hedgehog imagining it.
+ * to be placed on its left: the cloud sits up and to the left of the hedgehog,
+ * and inside the cloud the flask sits to the left of the hedgehog watching it.
  *
  * **A thought is a cloud, not a box.** The bubble is a real cloud, built as
  * the union of a handful of circles resolved onto a coarse grid, so its edge
  * comes out in hard steps like everything else here rather than as a smooth
- * curve. Three round puffs climb from the top of the hedgehog's head to reach
- * it, which is the one drawing convention everybody reads without a caption.
+ * curve. It is tinted a step away from the panel behind it, so it reads as a
+ * shape and not as an outline drawn on the card. Three round puffs fall from
+ * its underside to the top of the hedgehog's head, which is the one drawing
+ * convention everybody reads without a caption.
+ *
+ * The scene is the one chosen from five drawn side by side: the hedgehog as
+ * it is, no coat and no goggles, watching a flask fizz on the bench.
  */
 
 const { w: HOG_W, h: HOG_H } = HEDGEHOG_SIDE_SIZE
 
 /* ---------------------------------------------------------------- the hog */
 
-/**
- * The lab coat, in sprite pixels. It faces left like the animal, so its open
- * front is on the left: everything from COAT_EDGE rightwards is coat, the
- * strip in front of that stays the hedgehog's own belly, and a dark line down
- * the edge is the lapel. Painting the whole lower body white made a
- * straitjacket; the opening is what makes it a coat.
- */
-const COAT_FROM = 12
-const COAT_EDGE = 6
-/** A pocket: the top seam, three pixels wide, on the hip. */
-const POCKET = { x: 9, y: 17, w: 3 }
-/** Goggles: the lens box, in sprite pixels. */
-const LENS = { x: 4, y: 5, w: 5, h: 4 }
-/** The strap, running back over the head to the quills. */
-const STRAP = { x: 9, y: 5, w: 5, h: 2 }
-
-/**
- * The hedgehog, optionally dressed for the bench.
- *
- * The coat and the goggles are painted only where the base drawing already
- * has a pixel, so they can never spill past the silhouette however roughly
- * their boxes are specified.
- */
-function paintHog(ctx: CanvasRenderingContext2D, lab: boolean) {
+/** The hedgehog from the team's own mark, exactly as drawn. */
+function paintHog(ctx: CanvasRenderingContext2D) {
   const cells = decodeLayer(HEDGEHOG_SIDE)
-  // Which pixels the animal occupies, and which of them are its pale body.
-  const solid = new Set<number>()
-  const body = new Set<number>()
-  const arm = new Set<number>()
   for (let i = 0; i < cells.length; i += 3) {
-    const x = cells[i]
-    const y = cells[i + 1]
-    const key = y * HOG_W + x
-    solid.add(key)
-    // Palette entries 21 and 19 are the cream of its belly and the tan of
-    // its arms; the coat and its sleeves go over those and nothing else, so
-    // the quills stay quills.
-    if (cells[i + 2] === 21 || cells[i + 2] === 19) body.add(key)
-    if (cells[i + 2] === 19) arm.add(key)
     ctx.fillStyle = '#' + BALANCE_LOGO.palette[cells[i + 2] - 1]
-    ctx.fillRect(x, y, 1, 1)
+    ctx.fillRect(cells[i], cells[i + 1], 1, 1)
   }
-  if (!lab) return
-
-  for (let y = COAT_FROM; y < HOG_H - 2; y++) {
-    for (let x = COAT_EDGE; x < HOG_W; x++) {
-      if (!body.has(y * HOG_W + x)) continue
-      ctx.fillStyle =
-        x === COAT_EDGE
-          ? SITE_PALETTE.stoneDark // the lapel, a line down the open front
-          : y === COAT_FROM
-            ? SITE_PALETTE.stoneMid // the collar
-            : SITE_PALETTE.petalWhite
-      ctx.fillRect(x, y, 1, 1)
-    }
-  }
-  // The near arm hangs in front of the open coat, so it gets a sleeve of its
-  // own even though it sits forward of the lapel. Row 13 is the arm; the
-  // tan pixels on it are the only ones painted.
-  for (let x = 0; x < COAT_EDGE; x++) {
-    if (arm.has(13 * HOG_W + x)) {
-      ctx.fillStyle = SITE_PALETTE.petalWhite
-      ctx.fillRect(x, 13, 1, 1)
-    }
-  }
-  // The lapel folds back at the top: one step up and out from the edge.
-  ctx.fillStyle = SITE_PALETTE.stoneDark
-  ctx.fillRect(COAT_EDGE + 1, COAT_FROM - 1, 1, 1)
-  for (let x = POCKET.x; x < POCKET.x + POCKET.w; x++) ctx.fillRect(x, POCKET.y, 1, 1)
-
-  const put = (x: number, y: number, colour: string) => {
-    if (solid.has(y * HOG_W + x)) {
-      ctx.fillStyle = colour
-      ctx.fillRect(x, y, 1, 1)
-    }
-  }
-  for (let y = STRAP.y; y < STRAP.y + STRAP.h; y++) {
-    for (let x = STRAP.x; x < STRAP.x + STRAP.w; x++) put(x, y, SITE_PALETTE.stoneDark)
-  }
-  for (let y = LENS.y - 1; y <= LENS.y + LENS.h; y++) {
-    for (let x = LENS.x - 1; x <= LENS.x + LENS.w; x++) {
-      const inside =
-        x >= LENS.x && x < LENS.x + LENS.w && y >= LENS.y && y < LENS.y + LENS.h
-      put(x, y, inside ? SITE_PALETTE.sparkle : SITE_PALETTE.stoneDark)
-    }
-  }
-  // One highlight in the glass, so it reads as glass and not as a hole.
-  put(LENS.x + 1, LENS.y + 1, SITE_PALETTE.sparkleHi)
 }
 
-function Hog({ lab = false, scale = 5 }: { lab?: boolean; scale?: number }) {
+function Hog({ scale = 5 }: { scale?: number }) {
   const ref = useRef<HTMLCanvasElement>(null)
   useEffect(() => {
     const ctx = ref.current?.getContext('2d')
     if (!ctx) return
     ctx.clearRect(0, 0, HOG_W, HOG_H)
-    paintHog(ctx, lab)
-  }, [lab])
+    paintHog(ctx)
+  }, [])
   return (
     <canvas
       ref={ref}
@@ -146,50 +70,68 @@ function Hog({ lab = false, scale = 5 }: { lab?: boolean; scale?: number }) {
   )
 }
 
-/* -------------------------------------------------------------- the flask */
+/* -------------------------------------------------------------- the scene */
 
+/**
+ * An Erlenmeyer flask: a narrow neck, a wide round base, liquid two thirds
+ * up with bubbles in it, and a highlight down the left of the glass.
+ */
 const FLASK = [
-  '....######....',
-  '....#oooo#....',
-  '....#oooo#....',
-  '....#oooo#....',
-  '...#oooooo#...',
-  '...#oobooo#...',
-  '..#oooooooo#..',
-  '..#oooobooo#..',
-  '.#oooooooooo#.',
-  '.#gggggggggg#.',
-  '#gggggggggggg#',
-  '#gggggggggggg#',
-  '#gggggggggggg#',
-  '#gggggggggggg#',
-  '##############',
+  '.....dddddd.....',
+  '.....dBbbbd.....',
+  '.....dBbbbd.....',
+  '.....dBbbbd.....',
+  '.....dBbbbd.....',
+  '.....dBbbbd.....',
+  '....dBbbbbbd....',
+  '....dBbbfbbd....',
+  '...dBbbbbbbbd...',
+  '...dBbbbbfbbd...',
+  '..dBbbbbbbbbbd..',
+  '..dbwwwwwwwwbd..',
+  '.dbwwwwfwwwwwbd.',
+  '.dwwwwwwwwwwwwd.',
+  'dwwwwwwwwfwwwwwd',
+  'dwwwfwwwwwwwwwwd',
+  'dwwwwwwwwwwwwwwd',
+  'dwwwwwwwwwwwwwwd',
+  '.dddddddddddddd.',
 ]
 const INK: Record<string, string> = {
-  '#': SITE_PALETTE.shadow,
-  o: SITE_PALETTE.bushHi,
-  g: SITE_PALETTE.waterDeep,
-  b: SITE_PALETTE.foam,
+  d: SITE_PALETTE.shadow,
+  b: SITE_PALETTE.sparkle,
+  B: SITE_PALETTE.sparkleHi,
+  w: SITE_PALETTE.waterDeep,
+  f: SITE_PALETTE.petalWhiteHi,
 }
-/** Fizz coming off the top, as [x, y, size]. */
+/** Fizz drifting up off the flask and towards the hedgehog, as [x, y, size]. */
 const FIZZ: [number, number, number][] = [
-  [4, 3, 2],
-  [8, 0, 1],
-  [10, 5, 2],
+  [6, -3, 2],
+  [9, -7, 1],
+  [4, -9, 2],
+  [8, -13, 1],
 ]
 
 const FLASK_W = FLASK[0].length
 const FLASK_H = FLASK.length
-const GAP = 6
-/** Flask on the LEFT, hedgehog on the right: it has to face what it watches. */
+/** Space between the flask and the hedgehog's snout. */
+const GAP = 3
 const SCENE_W = FLASK_W + GAP + HOG_W
-const SCENE_H = HOG_H + 5
+/** Tall enough for the fizz above the flask, plus the bench under everything. */
+const SCENE_H = HOG_H + 3
+const BENCH_Y = SCENE_H - 3
 
 function paintScene(ctx: CanvasRenderingContext2D) {
   ctx.clearRect(0, 0, SCENE_W, SCENE_H)
-  const floor = SCENE_H
 
-  const fy = floor - FLASK_H
+  // The bench, a top with a darker front edge, under both of them.
+  ctx.fillStyle = SITE_PALETTE.bark
+  ctx.fillRect(0, BENCH_Y, SCENE_W, 2)
+  ctx.fillStyle = SITE_PALETTE.barkDark
+  ctx.fillRect(0, BENCH_Y + 2, SCENE_W, 1)
+
+  // The flask, standing on the bench.
+  const fy = BENCH_Y - FLASK_H
   FLASK.forEach((row, y) => {
     for (let x = 0; x < row.length; x++) {
       const colour = INK[row[x]]
@@ -198,12 +140,13 @@ function paintScene(ctx: CanvasRenderingContext2D) {
       ctx.fillRect(x, fy + y, 1, 1)
     }
   })
-  ctx.fillStyle = SITE_PALETTE.foam
-  for (const [x, y, s] of FIZZ) ctx.fillRect(x, fy - 4 + y, s, s)
+  ctx.fillStyle = SITE_PALETTE.petalWhiteHi
+  for (const [x, y, s] of FIZZ) ctx.fillRect(x, fy + y, s, s)
 
+  // The hedgehog, standing on the same bench, watching.
   ctx.save()
-  ctx.translate(FLASK_W + GAP, floor - HOG_H)
-  paintHog(ctx, true)
+  ctx.translate(FLASK_W + GAP, BENCH_Y - HOG_H)
+  paintHog(ctx)
   ctx.restore()
 }
 
@@ -262,6 +205,13 @@ const CLOUD = cloudCells()
 const CLOUD_W = CLOUD_COLS * CELL
 const CLOUD_H = CLOUD_ROWS * CELL
 
+/**
+ * The cloud's fill. One step away from the panel it sits on: the same colour
+ * as the panel made it read as an outline drawn on the card rather than as a
+ * shape in front of it.
+ */
+const CLOUD_FILL = SITE_PALETTE.fallLight
+
 function Cloud({ children }: { children: React.ReactNode }) {
   return (
     /* Fixed size on a laptop, but never wider than the column it is in: on a
@@ -277,13 +227,13 @@ function Cloud({ children }: { children: React.ReactNode }) {
         shapeRendering="crispEdges"
       >
         {CLOUD.fill.map(([x, y]) => (
-          <rect key={`f${x}-${y}`} x={x} y={y} width={1} height={1} fill={SITE_PALETTE.bushHi} />
+          <rect key={`f${x}-${y}`} x={x} y={y} width={1} height={1} fill={CLOUD_FILL} />
         ))}
         {CLOUD.edge.map(([x, y]) => (
           <rect key={`e${x}-${y}`} x={x} y={y} width={1} height={1} fill={SITE_PALETTE.bushDark} />
         ))}
       </svg>
-      {/* The straight middle of the cloud, where content can sit without
+      {/* The straight middle of the cloud, where the picture can sit without
           running into a bump. */}
       <div className="absolute inset-x-[18%] inset-y-[12%] flex flex-col items-center justify-center text-center">
         {children}
@@ -319,13 +269,12 @@ function Puffs() {
              phone so the trail and the hedgehog slide inward together. */
           style={{ translate: `calc(${shift}px * var(--k, 1)) 0` }}
         >
-          <circle cx="5" cy="5" r="4" fill={SITE_PALETTE.bushHi} stroke={SITE_PALETTE.bushDark} strokeWidth="2" />
+          <circle cx="5" cy="5" r="4" fill={CLOUD_FILL} stroke={SITE_PALETTE.bushDark} strokeWidth="2" />
         </svg>
       ))}
     </span>
   )
 }
-
 
 /* --------------------------------------------------------------- the page */
 
@@ -340,11 +289,6 @@ export default function ResultsSoon({
 }) {
   return (
     <section className="panel px-5 py-6 sm:px-7 sm:py-8">
-      {/* A thought hangs ABOVE the thinker. The cloud is at the top, the
-          hedgehog at the bottom and to the right of it, and the puffs fall
-          from the cloud's underside down to the top of its head. The hedgehog
-          sits right of centre because it faces left and cannot be flipped: a
-          cloud over its right shoulder would be behind its back. */}
       {/* What the hedgehog is thinking, said once, above the drawing. The
           cloud holds only the picture; a caption inside it fought the bumps
           for room and never sat quite level. */}
@@ -352,6 +296,11 @@ export default function ResultsSoon({
         {inline(note)} <span className="whitespace-nowrap">:)</span>
       </p>
 
+      {/* A thought hangs ABOVE the thinker. The cloud is at the top, the
+          hedgehog at the bottom and to the right of it, and the puffs fall
+          from the cloud's underside down to the top of its head. The hedgehog
+          sits right of centre because it faces left and cannot be flipped: a
+          cloud over its right shoulder would be behind its back. */}
       <div className="flex flex-col items-center [--k:0.7] sm:[--k:1]">
         <Cloud>
           <Scene />
