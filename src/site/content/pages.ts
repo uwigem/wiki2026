@@ -863,7 +863,7 @@ const engineering: Page = {
 const experiments: Page = {
   slug: "/experiments",
   title: "Experiments",
-  kicker: "wetlab \u00b7 experiments",
+  kicker: "chapter 05 · experiments",
   storyBeat:
     "You cannot tell whether a seed took by reading the packet. You plant it, and then you go and look.",
   intro:
