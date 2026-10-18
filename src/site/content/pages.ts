@@ -273,6 +273,8 @@ export type Block = Anchored &
         heading: string;
         summary?: string;
         open?: boolean;
+        /** Its place in a sequence, when a run of these is one procedure. */
+        step?: number;
         blocks: Block[];
       }
     /** A protein structure, drawn from coordinates. */
@@ -3669,6 +3671,8 @@ const protocols: Page = {
     {
       kind: "details",
       id: "cell-culture",
+      step: 1,
+      open: true,
       heading: "Cell culture and transfection",
       summary: "Plating, transfection, kinetic medium and splitting, across days 0 and 1.",
       blocks: [
@@ -3715,6 +3719,7 @@ const protocols: Page = {
     {
       kind: "details",
       id: "rapamycin-luciferase",
+      step: 2,
       heading: "Rapamycin treatment and luciferase assay",
       summary: "Four recruitment conditions, then an overnight incubation and the read.",
       blocks: [
@@ -3757,6 +3762,7 @@ const protocols: Page = {
     {
       kind: "details",
       id: "western-blot",
+      step: 3,
       heading: "Western blot",
       summary: "Lysis, quantification, the gel, and the blot.",
       blocks: [
@@ -3782,6 +3788,7 @@ const protocols: Page = {
     {
       kind: "details",
       id: "safety-and-waste",
+      step: 4,
       heading: "Safety and waste",
       summary: "What is bioactive here, and where the waste goes.",
       blocks: [
