@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { DAISY, TUFT } from '../../engine/sprites'
+import { RAIL_BLOOM, RAIL_PALETTE, SPROUT } from './railArt'
 import { revealSection } from '../router'
 import PixelSprite from './PixelSprite'
 
@@ -146,9 +146,9 @@ function Outline({
                 (inSection ? 'bg-leaf-200' : 'hover:bg-leaf-100')
               }
             >
-              {/* A daisy for the section you are in, a tuft of grass for the rest. */}
-              <span aria-hidden className="flex h-[14px] w-[14px] shrink-0 items-end justify-center">
-                <PixelSprite sprite={inSection ? DAISY : TUFT} scale={2} />
+              {/* The lilac for the section you are in, a seedling for the rest. */}
+              <span aria-hidden className="flex h-[16px] w-[16px] shrink-0 items-end justify-center">
+                <PixelSprite sprite={inSection ? RAIL_BLOOM : SPROUT} palette={inSection ? RAIL_PALETTE : undefined} scale={2} />
               </span>
               <span>{s.label}</span>
             </button>

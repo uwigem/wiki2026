@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { drawSprite } from '../engine/paint'
 import type { Sprite } from '../engine/sprites'
+import type { Palette } from '../engine/palette'
 import { SITE_PALETTE } from './theme'
 
 /* ------------------------------------------------------------------ *
@@ -14,9 +15,16 @@ import { SITE_PALETTE } from './theme'
  * ------------------------------------------------------------------ */
 
 const spriteCache = new Map<Sprite, string>()
+/** Sprites drawn in a palette other than the site's, one cache per palette. */
+const tintedCache = new WeakMap<Palette, Map<Sprite, string>>()
 
-export function spriteURL(sp: Sprite): string {
-  const cached = spriteCache.get(sp)
+export function spriteURL(sp: Sprite, pal: Palette = SITE_PALETTE): string {
+  let cache = spriteCache
+  if (pal !== SITE_PALETTE) {
+    cache = tintedCache.get(pal) ?? new Map()
+    tintedCache.set(pal, cache)
+  }
+  const cached = cache.get(sp)
   if (cached) return cached
   const canvas = document.createElement('canvas')
   canvas.width = sp.w
@@ -24,9 +32,9 @@ export function spriteURL(sp: Sprite): string {
   const ctx = canvas.getContext('2d')
   if (!ctx) return ''
   ctx.imageSmoothingEnabled = false
-  drawSprite(ctx, sp, 0, 0, SITE_PALETTE)
+  drawSprite(ctx, sp, 0, 0, pal)
   const url = canvas.toDataURL()
-  spriteCache.set(sp, url)
+  cache.set(sp, url)
   return url
 }
 
