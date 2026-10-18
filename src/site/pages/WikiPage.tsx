@@ -629,7 +629,7 @@ function BlockView({ block }: { block: Block }) {
 
     case "details":
       return (
-        <Details heading={block.heading} summary={block.summary} open={block.open}>
+        <Details heading={block.heading} summary={block.summary} open={block.open} step={block.step}>
           {block.blocks.map((inner, i) => (
             <div key={i} id={inner.id} className="section-block min-w-0">
               <BlockView block={inner} />
