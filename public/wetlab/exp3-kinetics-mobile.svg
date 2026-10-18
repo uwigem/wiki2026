@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-10-18T00:50:23.279005</dc:date>
+    <dc:date>2026-10-18T03:42:34.555706</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -35,7 +35,7 @@ L 637.2 1573.2
 L 637.2 38.16 
 L 32.4 38.16 
 z
-" clip-path="url(#p694128bda8)" style="fill: #3e5d4d"/>
+" clip-path="url(#p4ee8de1226)" style="fill: #3e5d4d"/>
    </g>
    <g id="patch_3">
     <path d="M 28.08 1568.88 
@@ -43,1722 +43,2843 @@ L 632.88 1568.88
 L 632.88 33.84 
 L 28.08 33.84 
 z
-" clip-path="url(#p694128bda8)" style="fill: #f6faf4; stroke: #629371; stroke-width: 3; stroke-linejoin: miter"/>
+" clip-path="url(#p4ee8de1226)" style="fill: #f6faf4; stroke: #629371; stroke-width: 3; stroke-linejoin: miter"/>
    </g>
    <g id="patch_4">
-    <path d="M 54 789.12 
-L 614.88 789.12 
-L 614.88 191.52 
-L 54 191.52 
+    <path d="M 50.4 789.12 
+L 611.28 789.12 
+L 611.28 191.52 
+L 50.4 191.52 
 z
-" clip-path="url(#p694128bda8)" style="fill: #f6faf4; stroke: #629371; stroke-width: 2.5; stroke-linejoin: miter"/>
+" clip-path="url(#p4ee8de1226)" style="fill: #f6faf4; stroke: #629371; stroke-width: 2.5; stroke-linejoin: miter"/>
    </g>
    <g id="patch_5">
-    <path d="M 54 1391.76 
-L 614.88 1391.76 
-L 614.88 810 
-L 54 810 
+    <path d="M 50.4 1391.76 
+L 611.28 1391.76 
+L 611.28 810 
+L 50.4 810 
 z
-" clip-path="url(#p694128bda8)" style="fill: #f6faf4; stroke: #629371; stroke-width: 2.5; stroke-linejoin: miter"/>
+" clip-path="url(#p4ee8de1226)" style="fill: #f6faf4; stroke: #629371; stroke-width: 2.5; stroke-linejoin: miter"/>
    </g>
    <g id="patch_6">
-    <path d="M 54 1534.32 
-L 614.88 1534.32 
-L 614.88 1414.8 
-L 54 1414.8 
+    <path d="M 50.4 1534.32 
+L 611.28 1534.32 
+L 611.28 1414.8 
+L 50.4 1414.8 
 z
-" clip-path="url(#p694128bda8)" style="fill: #f3efbd; stroke: #907a5d; stroke-width: 2; stroke-linejoin: miter"/>
+" clip-path="url(#p4ee8de1226)" style="fill: #f3efbd; stroke: #907a5d; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_7">
-    <path d="M 424.08 85.68 
-L 609.12 85.68 
-Q 612.72 85.68 612.72 82.08 
-L 612.72 54.72 
-Q 612.72 51.12 609.12 51.12 
-L 424.08 51.12 
-Q 420.48 51.12 420.48 54.72 
-L 420.48 82.08 
-Q 420.48 85.68 424.08 85.68 
+    <path d="M 420.48 85.68 
+L 605.52 85.68 
+Q 609.12 85.68 609.12 82.08 
+L 609.12 54.72 
+Q 609.12 51.12 605.52 51.12 
+L 420.48 51.12 
+Q 416.88 51.12 416.88 54.72 
+L 416.88 82.08 
+Q 416.88 85.68 420.48 85.68 
 z
-" clip-path="url(#p694128bda8)" style="fill: #f3efbd; stroke: #907a5d; stroke-width: 1.7; stroke-linejoin: miter"/>
+" clip-path="url(#p4ee8de1226)" style="fill: #f3efbd; stroke: #907a5d; stroke-width: 1.7; stroke-linejoin: miter"/>
    </g>
    <g id="text_1">
     <!-- HYPOTHETICAL -->
-    <g style="fill: #263a30" transform="translate(445.464063 73.479687) scale(0.2 -0.2)">
+    <g style="fill: #263a30" transform="translate(435.920313 75.529687) scale(0.2 -0.2)">
      <defs>
-      <path id="Cabin-Bold-48" d="M 4243 0 
-L 4243 4480 
-L 3424 4480 
-L 3424 2733 
-L 1312 2733 
-L 1312 4480 
-L 493 4480 
-L 493 0 
-L 1312 0 
-L 1312 1939 
-L 3424 1939 
-L 3424 0 
-L 4243 0 
+      <path id="Nunito-Bold-48" d="M 902 -51 
+Q 704 -51 598 61 
+Q 493 173 493 371 
+L 493 4141 
+Q 493 4346 598 4454 
+Q 704 4563 902 4563 
+Q 1101 4563 1206 4454 
+Q 1312 4346 1312 4141 
+L 1312 2630 
+L 3635 2630 
+L 3635 4141 
+Q 3635 4346 3740 4454 
+Q 3846 4563 4045 4563 
+Q 4243 4563 4348 4454 
+Q 4454 4346 4454 4141 
+L 4454 371 
+Q 4454 173 4348 61 
+Q 4243 -51 4045 -51 
+Q 3846 -51 3740 61 
+Q 3635 173 3635 371 
+L 3635 1946 
+L 1312 1946 
+L 1312 371 
+Q 1312 173 1209 61 
+Q 1107 -51 902 -51 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-59" d="M 3872 4480 
-L 3002 4480 
-L 1914 2714 
-L 826 4480 
-L -45 4480 
-L 1504 1984 
-L 1504 0 
-L 2323 0 
-L 2323 1984 
-L 3872 4480 
+      <path id="Nunito-Bold-59" d="M 1978 -51 
+Q 1779 -51 1673 61 
+Q 1568 173 1568 378 
+L 1568 2323 
+L 1741 1830 
+L 198 4000 
+Q 115 4115 124 4246 
+Q 134 4378 230 4470 
+Q 326 4563 499 4563 
+Q 627 4563 732 4499 
+Q 838 4435 934 4301 
+L 2080 2675 
+L 1901 2675 
+L 3053 4301 
+Q 3155 4442 3251 4502 
+Q 3347 4563 3488 4563 
+Q 3654 4563 3747 4476 
+Q 3840 4390 3843 4262 
+Q 3846 4134 3750 3994 
+L 2221 1830 
+L 2387 2323 
+L 2387 378 
+Q 2387 -51 1978 -51 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-50" d="M 2112 1472 
-C 2746 1472 3680 1773 3680 3059 
-C 3680 4288 3002 4480 1760 4480 
-L 493 4480 
-L 493 0 
-L 1312 0 
-L 1312 1472 
-L 2112 1472 
+      <path id="Nunito-Bold-50" d="M 902 -51 
+Q 704 -51 598 61 
+Q 493 173 493 371 
+L 493 4096 
+Q 493 4301 601 4406 
+Q 710 4512 909 4512 
+L 2451 4512 
+Q 3194 4512 3597 4141 
+Q 4000 3770 4000 3104 
+Q 4000 2438 3597 2064 
+Q 3194 1690 2451 1690 
+L 1312 1690 
+L 1312 371 
+Q 1312 173 1209 61 
+Q 1107 -51 902 -51 
 z
-M 1984 3795 
-C 2669 3795 2848 3565 2848 3053 
-C 2848 2445 2598 2240 2003 2240 
-L 1312 2240 
-L 1312 3795 
-L 1984 3795 
-z
-" transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-4f" d="M 2432 -90 
-C 3712 -90 4640 832 4640 2240 
-C 4640 3648 3712 4570 2432 4570 
-C 1152 4570 224 3648 224 2240 
-C 224 832 1152 -90 2432 -90 
-z
-M 2432 3782 
-C 3302 3782 3744 3136 3744 2240 
-C 3744 1344 3302 698 2432 698 
-C 1562 698 1120 1344 1120 2240 
-C 1120 3136 1562 3782 2432 3782 
+M 1312 2336 
+L 2323 2336 
+Q 2758 2336 2982 2531 
+Q 3206 2726 3206 3104 
+Q 3206 3482 2982 3674 
+Q 2758 3866 2323 3866 
+L 1312 3866 
+L 1312 2336 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-54" d="M 3450 3686 
-L 3450 4480 
-L 96 4480 
-L 96 3686 
-L 1363 3686 
-L 1363 0 
-L 2182 0 
-L 2182 3686 
-L 3450 3686 
+      <path id="Nunito-Bold-4f" d="M 2515 -64 
+Q 1862 -64 1372 224 
+Q 883 512 614 1033 
+Q 346 1555 346 2259 
+Q 346 2790 499 3216 
+Q 653 3642 937 3946 
+Q 1222 4250 1622 4413 
+Q 2022 4576 2515 4576 
+Q 3174 4576 3660 4291 
+Q 4147 4006 4416 3488 
+Q 4685 2970 4685 2266 
+Q 4685 1734 4531 1305 
+Q 4378 877 4093 569 
+Q 3808 262 3408 99 
+Q 3008 -64 2515 -64 
+z
+M 2515 640 
+Q 2931 640 3222 832 
+Q 3514 1024 3670 1389 
+Q 3827 1754 3827 2259 
+Q 3827 3027 3484 3449 
+Q 3142 3872 2515 3872 
+Q 2106 3872 1811 3683 
+Q 1517 3494 1360 3132 
+Q 1203 2771 1203 2259 
+Q 1203 1498 1548 1069 
+Q 1894 640 2515 640 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-45" d="M 3424 0 
-L 3424 794 
-L 1331 794 
-L 1331 1939 
-L 2906 1939 
-L 2906 2733 
-L 1331 2733 
-L 1331 3686 
-L 3360 3686 
-L 3360 4480 
-L 493 4480 
-L 493 0 
-L 3424 0 
+      <path id="Nunito-Bold-54" d="M 1990 -51 
+Q 1792 -51 1686 61 
+Q 1581 173 1581 371 
+L 1581 3827 
+L 333 3827 
+Q 166 3827 73 3920 
+Q -19 4013 -19 4173 
+Q -19 4339 73 4425 
+Q 166 4512 333 4512 
+L 3648 4512 
+Q 3814 4512 3907 4425 
+Q 4000 4339 4000 4173 
+Q 4000 4013 3907 3920 
+Q 3814 3827 3648 3827 
+L 2400 3827 
+L 2400 371 
+Q 2400 173 2297 61 
+Q 2195 -51 1990 -51 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-49" d="M 1312 0 
-L 1312 4480 
-L 493 4480 
-L 493 0 
-L 1312 0 
+      <path id="Nunito-Bold-45" d="M 928 0 
+Q 717 0 605 112 
+Q 493 224 493 435 
+L 493 4077 
+Q 493 4288 605 4400 
+Q 717 4512 928 4512 
+L 3213 4512 
+Q 3373 4512 3459 4429 
+Q 3546 4346 3546 4192 
+Q 3546 4032 3459 3945 
+Q 3373 3859 3213 3859 
+L 1280 3859 
+L 1280 2618 
+L 3072 2618 
+Q 3238 2618 3321 2534 
+Q 3405 2451 3405 2291 
+Q 3405 2131 3321 2048 
+Q 3238 1965 3072 1965 
+L 1280 1965 
+L 1280 653 
+L 3213 653 
+Q 3373 653 3459 569 
+Q 3546 486 3546 326 
+Q 3546 166 3459 83 
+Q 3373 0 3213 0 
+L 928 0 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-43" d="M 2432 -90 
-C 2899 -90 3379 13 3706 173 
-L 3616 954 
-C 3245 806 2899 698 2432 698 
-C 1562 698 1120 1344 1120 2240 
-C 1120 3136 1562 3782 2432 3782 
-C 2899 3782 3245 3674 3616 3526 
-L 3706 4307 
-C 3379 4467 2899 4570 2432 4570 
-C 1152 4570 224 3648 224 2240 
-C 224 832 1152 -90 2432 -90 
+      <path id="Nunito-Bold-49" d="M 902 -51 
+Q 704 -51 598 61 
+Q 493 173 493 371 
+L 493 4141 
+Q 493 4346 598 4454 
+Q 704 4563 902 4563 
+Q 1101 4563 1206 4454 
+Q 1312 4346 1312 4141 
+L 1312 371 
+Q 1312 173 1209 61 
+Q 1107 -51 902 -51 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-41" d="M 3981 0 
-L 2387 4480 
-L 1613 4480 
-L 19 0 
-L 870 0 
-L 1254 1082 
-L 2746 1082 
-L 3130 0 
-L 3981 0 
-z
-M 2464 1875 
-L 1536 1875 
-L 1997 3187 
-L 2464 1875 
+      <path id="Nunito-Bold-43" d="M 2592 -64 
+Q 1888 -64 1385 221 
+Q 883 506 614 1027 
+Q 346 1549 346 2259 
+Q 346 2790 499 3216 
+Q 653 3642 941 3946 
+Q 1229 4250 1648 4413 
+Q 2067 4576 2592 4576 
+Q 2944 4576 3283 4486 
+Q 3622 4397 3878 4230 
+Q 4013 4147 4057 4028 
+Q 4102 3910 4076 3798 
+Q 4051 3686 3971 3609 
+Q 3891 3533 3772 3523 
+Q 3654 3514 3514 3603 
+Q 3315 3731 3084 3788 
+Q 2854 3846 2618 3846 
+Q 2163 3846 1849 3660 
+Q 1536 3475 1376 3123 
+Q 1216 2771 1216 2259 
+Q 1216 1754 1376 1395 
+Q 1536 1037 1849 851 
+Q 2163 666 2618 666 
+Q 2861 666 3097 726 
+Q 3334 787 3546 915 
+Q 3686 998 3798 988 
+Q 3910 979 3987 908 
+Q 4064 838 4089 732 
+Q 4115 627 4076 515 
+Q 4038 403 3923 320 
+Q 3667 134 3312 35 
+Q 2957 -64 2592 -64 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-4c" d="M 3155 0 
-L 3155 794 
-L 1312 794 
-L 1312 4480 
-L 493 4480 
-L 493 0 
-L 3155 0 
+      <path id="Nunito-Bold-41" d="M 538 -51 
+Q 384 -51 291 19 
+Q 198 90 179 208 
+Q 160 326 224 474 
+L 1914 4218 
+Q 1997 4403 2115 4483 
+Q 2234 4563 2387 4563 
+Q 2534 4563 2652 4483 
+Q 2771 4403 2854 4218 
+L 4550 474 
+Q 4621 326 4601 204 
+Q 4582 83 4492 16 
+Q 4403 -51 4256 -51 
+Q 4077 -51 3977 35 
+Q 3878 122 3802 301 
+L 3386 1267 
+L 3731 1043 
+L 1030 1043 
+L 1376 1267 
+L 966 301 
+Q 883 115 793 32 
+Q 704 -51 538 -51 
+z
+M 2374 3622 
+L 1478 1491 
+L 1312 1696 
+L 3450 1696 
+L 3290 1491 
+L 2387 3622 
+L 2374 3622 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Bold-4c" d="M 909 0 
+Q 710 0 601 112 
+Q 493 224 493 422 
+L 493 4115 
+Q 493 4320 598 4425 
+Q 704 4531 902 4531 
+Q 1101 4531 1206 4425 
+Q 1312 4320 1312 4115 
+L 1312 698 
+L 3168 698 
+Q 3341 698 3433 608 
+Q 3526 518 3526 352 
+Q 3526 186 3433 93 
+Q 3341 0 3168 0 
+L 909 0 
 z
 " transform="scale(0.015625)"/>
      </defs>
-     <use xlink:href="#Cabin-Bold-48"/>
-     <use xlink:href="#Cabin-Bold-59" transform="translate(73.999985 0)"/>
-     <use xlink:href="#Cabin-Bold-50" transform="translate(133.799973 0)"/>
-     <use xlink:href="#Cabin-Bold-4f" transform="translate(193.399963 0)"/>
-     <use xlink:href="#Cabin-Bold-54" transform="translate(268.149948 0)"/>
-     <use xlink:href="#Cabin-Bold-48" transform="translate(323.549942 0)"/>
-     <use xlink:href="#Cabin-Bold-45" transform="translate(397.549927 0)"/>
-     <use xlink:href="#Cabin-Bold-54" transform="translate(454.349915 0)"/>
-     <use xlink:href="#Cabin-Bold-49" transform="translate(509.749908 0)"/>
-     <use xlink:href="#Cabin-Bold-43" transform="translate(537.949905 0)"/>
-     <use xlink:href="#Cabin-Bold-41" transform="translate(598.849899 0)"/>
-     <use xlink:href="#Cabin-Bold-4c" transform="translate(661.349884 0)"/>
+     <use xlink:href="#Nunito-Bold-48"/>
+     <use xlink:href="#Nunito-Bold-59" transform="translate(77.299988 0)"/>
+     <use xlink:href="#Nunito-Bold-50" transform="translate(139.099976 0)"/>
+     <use xlink:href="#Nunito-Bold-4f" transform="translate(204.299973 0)"/>
+     <use xlink:href="#Nunito-Bold-54" transform="translate(282.799957 0)"/>
+     <use xlink:href="#Nunito-Bold-48" transform="translate(344.899948 0)"/>
+     <use xlink:href="#Nunito-Bold-45" transform="translate(422.199936 0)"/>
+     <use xlink:href="#Nunito-Bold-54" transform="translate(481.899933 0)"/>
+     <use xlink:href="#Nunito-Bold-49" transform="translate(543.999924 0)"/>
+     <use xlink:href="#Nunito-Bold-43" transform="translate(572.199921 0)"/>
+     <use xlink:href="#Nunito-Bold-41" transform="translate(640.199905 0)"/>
+     <use xlink:href="#Nunito-Bold-4c" transform="translate(714.599899 0)"/>
     </g>
    </g>
    <g id="text_2">
     <!-- FIGURE 3C -->
-    <g style="fill: #3e5d4d" transform="translate(54 84.659531) scale(0.3 -0.3)">
+    <g style="fill: #3e5d4d" transform="translate(50.4 83.954062) scale(0.3 -0.3)">
      <defs>
-      <path id="Cabin-Bold-46" d="M 3251 3686 
-L 3251 4480 
-L 493 4480 
-L 493 0 
-L 1312 0 
-L 1312 1939 
-L 2810 1939 
-L 2810 2733 
-L 1312 2733 
-L 1312 3686 
-L 3251 3686 
+      <path id="PixelifySans-Bold-46" d="M 390 -70 
+L 390 4083 
+L 2899 4083 
+L 2899 3533 
+L 3469 3533 
+L 3469 2662 
+L 2650 2662 
+L 2650 3206 
+L 1203 3206 
+L 1203 2438 
+L 2336 2438 
+L 2336 1574 
+L 1203 1574 
+L 1203 -70 
+L 390 -70 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-47" d="M 2413 -90 
-C 2925 -90 3622 64 3949 250 
-L 3949 2246 
-L 2637 2246 
-L 2637 1568 
-L 3130 1568 
-L 3130 768 
-C 2912 723 2701 698 2515 698 
-C 1587 698 1120 1344 1120 2259 
-C 1120 3130 1542 3782 2477 3782 
-C 2874 3782 3366 3667 3712 3526 
-L 3802 4307 
-C 3475 4467 2893 4570 2458 4570 
-C 1146 4570 224 3648 224 2246 
-C 224 832 1158 -90 2413 -90 
+      <path id="PixelifySans-Bold-49" d="M 390 -70 
+L 390 800 
+L 954 800 
+L 954 3206 
+L 390 3206 
+L 390 4083 
+L 2336 4083 
+L 2336 3206 
+L 1766 3206 
+L 1766 800 
+L 2336 800 
+L 2336 -70 
+L 390 -70 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-55" d="M 2298 -90 
-C 3558 -90 4154 704 4154 1920 
-L 4154 4480 
-L 3334 4480 
-L 3334 2195 
-C 3334 1363 3162 698 2298 698 
-C 1434 698 1261 1363 1261 2195 
-L 1261 4480 
-L 442 4480 
-L 442 1920 
-C 442 704 1037 -90 2298 -90 
+      <path id="PixelifySans-Bold-47" d="M 954 -70 
+L 954 474 
+L 390 474 
+L 390 3533 
+L 954 3533 
+L 954 4083 
+L 2899 4083 
+L 2899 3533 
+L 3469 3533 
+L 3469 2118 
+L 2650 2118 
+L 2650 3206 
+L 1203 3206 
+L 1203 800 
+L 2650 800 
+L 2650 1024 
+L 2086 1024 
+L 2086 1574 
+L 1517 1574 
+L 1517 2438 
+L 2336 2438 
+L 2336 1901 
+L 3469 1901 
+L 3469 474 
+L 2899 474 
+L 2899 -70 
+L 954 -70 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-52" d="M 3923 0 
-L 2912 1882 
-C 3334 2144 3674 2496 3674 3187 
-C 3674 4160 2995 4480 2131 4480 
-L 493 4480 
-L 493 0 
-L 1312 0 
-L 1312 1664 
-L 2144 1664 
-L 3072 0 
-L 3923 0 
-z
-M 1946 3795 
-C 2650 3795 2816 3546 2816 3130 
-C 2816 2726 2656 2432 1914 2432 
-L 1312 2432 
-L 1312 3795 
-L 1946 3795 
+      <path id="PixelifySans-Bold-55" d="M 954 -70 
+L 954 474 
+L 390 474 
+L 390 4083 
+L 1203 4083 
+L 1203 800 
+L 2650 800 
+L 2650 4083 
+L 3469 4083 
+L 3469 474 
+L 2899 474 
+L 2899 -70 
+L 954 -70 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-20" transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-33" d="M 1434 -90 
-C 2266 -90 3072 397 3072 1389 
-C 3072 1888 2867 2253 2483 2483 
-C 2765 2688 2912 2989 2912 3379 
-C 2912 3859 2675 4570 1523 4570 
-C 1037 4570 646 4410 512 4275 
-L 640 3661 
-C 813 3814 1139 3878 1427 3878 
-C 1894 3878 2086 3661 2086 3341 
-C 2086 3027 1894 2752 1235 2752 
-L 941 2752 
-L 870 2118 
-L 1446 2118 
-C 2125 2118 2266 1754 2266 1350 
-C 2266 851 1856 698 1402 698 
-C 1030 698 614 838 429 1011 
-L 230 256 
-C 320 147 870 -90 1434 -90 
+      <path id="PixelifySans-Bold-52" d="M 390 -70 
+L 390 3533 
+L 954 3533 
+L 954 4083 
+L 2899 4083 
+L 2899 3533 
+L 3469 3533 
+L 3469 1574 
+L 2899 1574 
+L 2899 1024 
+L 2624 1024 
+L 2624 800 
+L 3181 800 
+L 3181 -70 
+L 2374 -70 
+L 2374 474 
+L 1798 474 
+L 1798 1024 
+L 1203 1024 
+L 1203 -70 
+L 390 -70 
+z
+M 1203 1901 
+L 2650 1901 
+L 2650 3206 
+L 1203 3206 
+L 1203 1901 
+z
+" transform="scale(0.015625)"/>
+      <path id="PixelifySans-Bold-45" d="M 954 -70 
+L 954 474 
+L 390 474 
+L 390 3533 
+L 954 3533 
+L 954 4083 
+L 2899 4083 
+L 2899 3533 
+L 3469 3533 
+L 3469 2662 
+L 2650 2662 
+L 2650 3206 
+L 1203 3206 
+L 1203 2438 
+L 2336 2438 
+L 2336 1574 
+L 1203 1574 
+L 1203 800 
+L 2650 800 
+L 2650 1350 
+L 3469 1350 
+L 3469 474 
+L 2899 474 
+L 2899 -70 
+L 954 -70 
+z
+" transform="scale(0.015625)"/>
+      <path id="PixelifySans-Bold-20" transform="scale(0.015625)"/>
+      <path id="PixelifySans-Bold-33" d="M 954 -70 
+L 954 474 
+L 390 474 
+L 390 1350 
+L 1203 1350 
+L 1203 800 
+L 2650 800 
+L 2650 1574 
+L 954 1574 
+L 954 2438 
+L 2650 2438 
+L 2650 3206 
+L 1203 3206 
+L 1203 2662 
+L 390 2662 
+L 390 3533 
+L 954 3533 
+L 954 4083 
+L 2899 4083 
+L 2899 3533 
+L 3469 3533 
+L 3469 2118 
+L 2899 2118 
+L 2899 1901 
+L 3469 1901 
+L 3469 474 
+L 2899 474 
+L 2899 -70 
+L 954 -70 
+z
+" transform="scale(0.015625)"/>
+      <path id="PixelifySans-Bold-43" d="M 954 -70 
+L 954 474 
+L 390 474 
+L 390 3533 
+L 954 3533 
+L 954 4083 
+L 2899 4083 
+L 2899 3533 
+L 3469 3533 
+L 3469 2118 
+L 2650 2118 
+L 2650 3206 
+L 1203 3206 
+L 1203 800 
+L 2650 800 
+L 2650 1901 
+L 3469 1901 
+L 3469 474 
+L 2899 474 
+L 2899 -70 
+L 954 -70 
 z
 " transform="scale(0.015625)"/>
      </defs>
-     <use xlink:href="#Cabin-Bold-46"/>
-     <use xlink:href="#Cabin-Bold-49" transform="translate(52.499985 0)"/>
-     <use xlink:href="#Cabin-Bold-47" transform="translate(80.699982 0)"/>
-     <use xlink:href="#Cabin-Bold-55" transform="translate(147.099976 0)"/>
-     <use xlink:href="#Cabin-Bold-52" transform="translate(218.899963 0)"/>
-     <use xlink:href="#Cabin-Bold-45" transform="translate(281.499954 0)"/>
-     <use xlink:href="#Cabin-Bold-20" transform="translate(338.299942 0)"/>
-     <use xlink:href="#Cabin-Bold-33" transform="translate(360.799927 0)"/>
-     <use xlink:href="#Cabin-Bold-43" transform="translate(414.699921 0)"/>
+     <use xlink:href="#PixelifySans-Bold-46"/>
+     <use xlink:href="#PixelifySans-Bold-49" transform="translate(60.299988 0)"/>
+     <use xlink:href="#PixelifySans-Bold-47" transform="translate(102.899979 0)"/>
+     <use xlink:href="#PixelifySans-Bold-55" transform="translate(163.199966 0)"/>
+     <use xlink:href="#PixelifySans-Bold-52" transform="translate(223.499954 0)"/>
+     <use xlink:href="#PixelifySans-Bold-45" transform="translate(283.799942 0)"/>
+     <use xlink:href="#PixelifySans-Bold-20" transform="translate(344.09993 0)"/>
+     <use xlink:href="#PixelifySans-Bold-33" transform="translate(364.099915 0)"/>
+     <use xlink:href="#PixelifySans-Bold-43" transform="translate(424.399902 0)"/>
     </g>
    </g>
    <g id="text_3">
     <!-- SMO trafficking kinetics -->
-    <g style="fill: #263a30" transform="translate(54 128.97) scale(0.42 -0.42)">
+    <g style="fill: #263a30" transform="translate(50.4 129.094687) scale(0.42 -0.42)">
      <defs>
-      <path id="PixelifySans-SemiBold-53" d="M 960 -70 
-L 960 480 
-L 390 480 
-L 390 1280 
-L 1146 1280 
-L 1146 723 
-L 2669 723 
-L 2669 1606 
-L 960 1606 
-L 960 2157 
-L 390 2157 
-L 390 3507 
-L 960 3507 
-L 960 4070 
-L 2854 4070 
-L 2854 3507 
-L 3430 3507 
-L 3430 2714 
-L 2669 2714 
-L 2669 3270 
-L 1146 3270 
-L 1146 2394 
-L 2854 2394 
-L 2854 1843 
-L 3430 1843 
-L 3430 480 
-L 2854 480 
-L 2854 -70 
-L 960 -70 
+      <path id="PixelifySans-Bold-53" d="M 954 -70 
+L 954 474 
+L 390 474 
+L 390 1350 
+L 1203 1350 
+L 1203 800 
+L 2650 800 
+L 2650 1574 
+L 954 1574 
+L 954 2118 
+L 390 2118 
+L 390 3533 
+L 954 3533 
+L 954 4083 
+L 2899 4083 
+L 2899 3533 
+L 3469 3533 
+L 3469 2662 
+L 2650 2662 
+L 2650 3206 
+L 1203 3206 
+L 1203 2438 
+L 2899 2438 
+L 2899 1901 
+L 3469 1901 
+L 3469 474 
+L 2899 474 
+L 2899 -70 
+L 954 -70 
 z
 " transform="scale(0.015625)"/>
-      <path id="PixelifySans-SemiBold-4d" d="M 390 -70 
-L 390 3507 
-L 960 3507 
-L 960 4070 
-L 1715 4070 
-L 1715 3507 
-L 2291 3507 
-L 2291 2394 
-L 2669 2394 
-L 2669 3507 
-L 3245 3507 
-L 3245 4070 
-L 4006 4070 
-L 4006 3507 
-L 4570 3507 
-L 4570 -70 
-L 3821 -70 
-L 3821 3270 
-L 3430 3270 
-L 3430 2157 
-L 2854 2157 
-L 2854 480 
-L 2099 480 
-L 2099 2157 
-L 1523 2157 
-L 1523 3270 
-L 1146 3270 
-L 1146 -70 
+      <path id="PixelifySans-Bold-4d" d="M 390 -70 
+L 390 3533 
+L 954 3533 
+L 954 4083 
+L 1766 4083 
+L 1766 3533 
+L 2336 3533 
+L 2336 2438 
+L 2650 2438 
+L 2650 3533 
+L 3219 3533 
+L 3219 4083 
+L 4038 4083 
+L 4038 3533 
+L 4595 3533 
+L 4595 -70 
+L 3789 -70 
+L 3789 3206 
+L 3469 3206 
+L 3469 2118 
+L 2899 2118 
+L 2899 474 
+L 2086 474 
+L 2086 2118 
+L 1517 2118 
+L 1517 3206 
+L 1203 3206 
+L 1203 -70 
 L 390 -70 
 z
 " transform="scale(0.015625)"/>
-      <path id="PixelifySans-SemiBold-4f" d="M 960 -70 
-L 960 480 
-L 390 480 
-L 390 3507 
-L 960 3507 
-L 960 4070 
-L 2854 4070 
-L 2854 3507 
-L 3430 3507 
-L 3430 480 
-L 2854 480 
-L 2854 -70 
-L 960 -70 
+      <path id="PixelifySans-Bold-4f" d="M 954 -70 
+L 954 474 
+L 390 474 
+L 390 3533 
+L 954 3533 
+L 954 4083 
+L 2899 4083 
+L 2899 3533 
+L 3469 3533 
+L 3469 474 
+L 2899 474 
+L 2899 -70 
+L 954 -70 
 z
-M 1146 723 
-L 2669 723 
-L 2669 3270 
-L 1146 3270 
-L 1146 723 
-z
-" transform="scale(0.015625)"/>
-      <path id="PixelifySans-SemiBold-20" transform="scale(0.015625)"/>
-      <path id="PixelifySans-SemiBold-74" d="M 1523 -70 
-L 1523 480 
-L 960 480 
-L 960 2157 
-L 390 2157 
-L 390 2950 
-L 960 2950 
-L 960 4070 
-L 1715 4070 
-L 1715 2950 
-L 3430 2950 
-L 3430 2157 
-L 1715 2157 
-L 1715 723 
-L 3245 723 
-L 3245 1280 
-L 4006 1280 
-L 4006 480 
-L 3430 480 
-L 3430 -70 
-L 1523 -70 
+M 1203 800 
+L 2650 800 
+L 2650 3206 
+L 1203 3206 
+L 1203 800 
 z
 " transform="scale(0.015625)"/>
-      <path id="PixelifySans-SemiBold-72" d="M 390 -70 
-L 390 2394 
-L 960 2394 
-L 960 2950 
-L 2854 2950 
-L 2854 2394 
-L 3430 2394 
-L 3430 1606 
-L 2669 1606 
-L 2669 2157 
-L 1146 2157 
-L 1146 -70 
+      <path id="PixelifySans-Bold-74" d="M 1517 -70 
+L 1517 474 
+L 954 474 
+L 954 2118 
+L 390 2118 
+L 390 2989 
+L 954 2989 
+L 954 4083 
+L 1766 4083 
+L 1766 2989 
+L 3469 2989 
+L 3469 2118 
+L 1766 2118 
+L 1766 800 
+L 3219 800 
+L 3219 1350 
+L 4038 1350 
+L 4038 474 
+L 3469 474 
+L 3469 -70 
+L 1517 -70 
+z
+" transform="scale(0.015625)"/>
+      <path id="PixelifySans-Bold-72" d="M 390 -70 
+L 390 2438 
+L 954 2438 
+L 954 2989 
+L 2899 2989 
+L 2899 2438 
+L 3469 2438 
+L 3469 1574 
+L 2650 1574 
+L 2650 2118 
+L 1203 2118 
+L 1203 -70 
 L 390 -70 
 z
 " transform="scale(0.015625)"/>
-      <path id="PixelifySans-SemiBold-61" d="M 960 -70 
-L 960 480 
-L 390 480 
-L 390 2394 
-L 960 2394 
-L 960 2950 
-L 2854 2950 
-L 2854 2394 
-L 3437 2394 
-L 3437 723 
-L 4006 723 
-L 4006 -70 
-L 3245 -70 
-L 3245 480 
-L 2854 480 
-L 2854 -70 
-L 960 -70 
+      <path id="PixelifySans-Bold-61" d="M 954 -70 
+L 954 474 
+L 390 474 
+L 390 2438 
+L 954 2438 
+L 954 2989 
+L 2899 2989 
+L 2899 2438 
+L 3469 2438 
+L 3469 800 
+L 4038 800 
+L 4038 -70 
+L 3219 -70 
+L 3219 474 
+L 2899 474 
+L 2899 -70 
+L 954 -70 
 z
-M 1146 723 
-L 2669 723 
-L 2669 2157 
-L 1146 2157 
-L 1146 723 
+M 1203 800 
+L 2650 800 
+L 2650 2118 
+L 1203 2118 
+L 1203 800 
 z
 " transform="scale(0.015625)"/>
-      <path id="PixelifySans-SemiBold-66" d="M 390 -70 
-L 390 3507 
-L 960 3507 
-L 960 4070 
-L 2854 4070 
-L 2854 3507 
-L 3430 3507 
-L 3430 2714 
-L 2669 2714 
-L 2669 3270 
-L 1146 3270 
-L 1146 2394 
-L 2291 2394 
-L 2291 1606 
-L 1146 1606 
-L 1146 -70 
+      <path id="PixelifySans-Bold-66" d="M 390 -70 
+L 390 3533 
+L 954 3533 
+L 954 4083 
+L 2899 4083 
+L 2899 3533 
+L 3469 3533 
+L 3469 2662 
+L 2650 2662 
+L 2650 3206 
+L 1203 3206 
+L 1203 2438 
+L 2336 2438 
+L 2336 1574 
+L 1203 1574 
+L 1203 -70 
 L 390 -70 
 z
 " transform="scale(0.015625)"/>
-      <path id="PixelifySans-SemiBold-69" d="M 390 -70 
-L 390 2950 
-L 1146 2950 
-L 1146 -70 
+      <path id="PixelifySans-Bold-69" d="M 390 -70 
+L 390 2989 
+L 1203 2989 
+L 1203 -70 
 L 390 -70 
 z
-M 390 3270 
-L 390 4070 
-L 1146 4070 
-L 1146 3270 
-L 390 3270 
+M 390 3206 
+L 390 4083 
+L 1203 4083 
+L 1203 3206 
+L 390 3206 
 z
 " transform="scale(0.015625)"/>
-      <path id="PixelifySans-SemiBold-63" d="M 960 -70 
-L 960 480 
-L 390 480 
-L 390 2394 
-L 960 2394 
-L 960 2950 
-L 2854 2950 
-L 2854 2394 
-L 3430 2394 
-L 3430 1606 
-L 2669 1606 
-L 2669 2157 
-L 1146 2157 
-L 1146 723 
-L 2669 723 
-L 2669 1280 
-L 3430 1280 
-L 3430 480 
-L 2854 480 
-L 2854 -70 
-L 960 -70 
+      <path id="PixelifySans-Bold-63" d="M 954 -70 
+L 954 474 
+L 390 474 
+L 390 2438 
+L 954 2438 
+L 954 2989 
+L 2899 2989 
+L 2899 2438 
+L 3469 2438 
+L 3469 1574 
+L 2650 1574 
+L 2650 2118 
+L 1203 2118 
+L 1203 800 
+L 2650 800 
+L 2650 1350 
+L 3469 1350 
+L 3469 474 
+L 2899 474 
+L 2899 -70 
+L 954 -70 
 z
 " transform="scale(0.015625)"/>
-      <path id="PixelifySans-SemiBold-6b" d="M 390 -70 
-L 390 4070 
-L 1146 4070 
-L 1146 1843 
-L 1523 1843 
-L 1523 2394 
-L 2669 2394 
-L 2669 2950 
-L 3430 2950 
-L 3430 2157 
-L 2854 2157 
-L 2854 1606 
-L 1715 1606 
-L 1715 1280 
-L 2854 1280 
-L 2854 723 
-L 3430 723 
-L 3430 -70 
-L 2669 -70 
-L 2669 480 
-L 1523 480 
-L 1523 1043 
-L 1146 1043 
-L 1146 -70 
-L 390 -70 
-z
-" transform="scale(0.015625)"/>
-      <path id="PixelifySans-SemiBold-6e" d="M 390 -70 
-L 390 2950 
-L 2854 2950 
-L 2854 2394 
-L 3430 2394 
-L 3430 -70 
-L 2669 -70 
-L 2669 2157 
-L 1146 2157 
-L 1146 -70 
+      <path id="PixelifySans-Bold-6b" d="M 390 -70 
+L 390 4083 
+L 1203 4083 
+L 1203 1901 
+L 1517 1901 
+L 1517 2438 
+L 2650 2438 
+L 2650 2989 
+L 3469 2989 
+L 3469 2118 
+L 2899 2118 
+L 2899 1574 
+L 1766 1574 
+L 1766 1350 
+L 2899 1350 
+L 2899 800 
+L 3469 800 
+L 3469 -70 
+L 2650 -70 
+L 2650 474 
+L 1517 474 
+L 1517 1024 
+L 1203 1024 
+L 1203 -70 
 L 390 -70 
 z
 " transform="scale(0.015625)"/>
-      <path id="PixelifySans-SemiBold-67" d="M 960 -1190 
-L 960 -634 
-L 390 -634 
-L 390 160 
-L 1146 160 
-L 1146 -397 
-L 2675 -397 
-L 2675 480 
-L 960 480 
-L 960 1043 
-L 390 1043 
-L 390 2394 
-L 960 2394 
-L 960 2950 
-L 2861 2950 
-L 2861 2394 
-L 3430 2394 
-L 3430 -634 
-L 2861 -634 
-L 2861 -1190 
-L 960 -1190 
-z
-M 1146 1280 
-L 2675 1280 
-L 2675 2157 
-L 1146 2157 
-L 1146 1280 
+      <path id="PixelifySans-Bold-6e" d="M 390 -70 
+L 390 2989 
+L 2899 2989 
+L 2899 2438 
+L 3469 2438 
+L 3469 -70 
+L 2650 -70 
+L 2650 2118 
+L 1203 2118 
+L 1203 -70 
+L 390 -70 
 z
 " transform="scale(0.015625)"/>
-      <path id="PixelifySans-SemiBold-65" d="M 960 -70 
-L 960 480 
-L 390 480 
-L 390 2394 
-L 960 2394 
-L 960 2950 
-L 2854 2950 
-L 2854 2394 
-L 3430 2394 
-L 3430 1606 
-L 2669 1606 
-L 2669 2157 
-L 1146 2157 
-L 1146 1843 
-L 2291 1843 
-L 2291 1043 
-L 1146 1043 
-L 1146 723 
-L 2669 723 
-L 2669 1286 
-L 3430 1286 
-L 3430 486 
-L 2854 486 
-L 2854 -70 
-L 960 -70 
+      <path id="PixelifySans-Bold-67" d="M 954 -1165 
+L 954 -621 
+L 390 -621 
+L 390 250 
+L 1203 250 
+L 1203 -294 
+L 2656 -294 
+L 2656 474 
+L 954 474 
+L 954 1024 
+L 390 1024 
+L 390 2438 
+L 954 2438 
+L 954 2989 
+L 2906 2989 
+L 2906 2438 
+L 3469 2438 
+L 3469 -621 
+L 2906 -621 
+L 2906 -1165 
+L 954 -1165 
+z
+M 1203 1350 
+L 2656 1350 
+L 2656 2118 
+L 1203 2118 
+L 1203 1350 
 z
 " transform="scale(0.015625)"/>
-      <path id="PixelifySans-SemiBold-73" d="M 390 -70 
-L 390 723 
-L 2669 723 
-L 2669 1043 
-L 960 1043 
-L 960 1606 
-L 390 1606 
-L 390 2394 
-L 960 2394 
-L 960 2950 
-L 3430 2950 
-L 3430 2157 
-L 1146 2157 
-L 1146 1843 
-L 2854 1843 
-L 2854 1280 
-L 3430 1280 
-L 3430 480 
-L 2854 480 
-L 2854 -70 
+      <path id="PixelifySans-Bold-65" d="M 954 -70 
+L 954 474 
+L 390 474 
+L 390 2438 
+L 954 2438 
+L 954 2989 
+L 2899 2989 
+L 2899 2438 
+L 3469 2438 
+L 3469 1574 
+L 2650 1574 
+L 2650 2118 
+L 1203 2118 
+L 1203 1901 
+L 2336 1901 
+L 2336 1024 
+L 1203 1024 
+L 1203 800 
+L 2650 800 
+L 2650 1357 
+L 3469 1357 
+L 3469 480 
+L 2899 480 
+L 2899 -70 
+L 954 -70 
+z
+" transform="scale(0.015625)"/>
+      <path id="PixelifySans-Bold-73" d="M 390 -70 
+L 390 800 
+L 2650 800 
+L 2650 1024 
+L 954 1024 
+L 954 1574 
+L 390 1574 
+L 390 2438 
+L 954 2438 
+L 954 2989 
+L 3469 2989 
+L 3469 2118 
+L 1203 2118 
+L 1203 1901 
+L 2899 1901 
+L 2899 1350 
+L 3469 1350 
+L 3469 474 
+L 2899 474 
+L 2899 -70 
 L 390 -70 
 z
 " transform="scale(0.015625)"/>
      </defs>
-     <use xlink:href="#PixelifySans-SemiBold-53"/>
-     <use xlink:href="#PixelifySans-SemiBold-4d" transform="translate(59.699997 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-4f" transform="translate(137.199982 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-20" transform="translate(196.899979 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-74" transform="translate(216.899963 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-72" transform="translate(285.599945 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-61" transform="translate(345.299942 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-66" transform="translate(413.999924 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-66" transform="translate(473.699921 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-69" transform="translate(533.399918 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-63" transform="translate(557.399902 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-6b" transform="translate(617.099899 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-69" transform="translate(676.799896 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-6e" transform="translate(700.799881 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-67" transform="translate(760.499878 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-20" transform="translate(820.199875 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-6b" transform="translate(840.19986 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-69" transform="translate(899.899857 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-6e" transform="translate(923.899841 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-65" transform="translate(983.599838 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-74" transform="translate(1043.299835 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-69" transform="translate(1111.999817 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-63" transform="translate(1135.999802 0)"/>
-     <use xlink:href="#PixelifySans-SemiBold-73" transform="translate(1195.699799 0)"/>
+     <use xlink:href="#PixelifySans-Bold-53"/>
+     <use xlink:href="#PixelifySans-Bold-4d" transform="translate(60.299988 0)"/>
+     <use xlink:href="#PixelifySans-Bold-4f" transform="translate(138.199982 0)"/>
+     <use xlink:href="#PixelifySans-Bold-20" transform="translate(198.499969 0)"/>
+     <use xlink:href="#PixelifySans-Bold-74" transform="translate(218.499954 0)"/>
+     <use xlink:href="#PixelifySans-Bold-72" transform="translate(287.699936 0)"/>
+     <use xlink:href="#PixelifySans-Bold-61" transform="translate(347.999924 0)"/>
+     <use xlink:href="#PixelifySans-Bold-66" transform="translate(417.199905 0)"/>
+     <use xlink:href="#PixelifySans-Bold-66" transform="translate(477.499893 0)"/>
+     <use xlink:href="#PixelifySans-Bold-69" transform="translate(537.799881 0)"/>
+     <use xlink:href="#PixelifySans-Bold-63" transform="translate(562.699875 0)"/>
+     <use xlink:href="#PixelifySans-Bold-6b" transform="translate(622.999863 0)"/>
+     <use xlink:href="#PixelifySans-Bold-69" transform="translate(683.29985 0)"/>
+     <use xlink:href="#PixelifySans-Bold-6e" transform="translate(708.199844 0)"/>
+     <use xlink:href="#PixelifySans-Bold-67" transform="translate(768.499832 0)"/>
+     <use xlink:href="#PixelifySans-Bold-20" transform="translate(828.79982 0)"/>
+     <use xlink:href="#PixelifySans-Bold-6b" transform="translate(848.799805 0)"/>
+     <use xlink:href="#PixelifySans-Bold-69" transform="translate(909.099792 0)"/>
+     <use xlink:href="#PixelifySans-Bold-6e" transform="translate(933.999786 0)"/>
+     <use xlink:href="#PixelifySans-Bold-65" transform="translate(994.299774 0)"/>
+     <use xlink:href="#PixelifySans-Bold-74" transform="translate(1054.599762 0)"/>
+     <use xlink:href="#PixelifySans-Bold-69" transform="translate(1123.799744 0)"/>
+     <use xlink:href="#PixelifySans-Bold-63" transform="translate(1148.699738 0)"/>
+     <use xlink:href="#PixelifySans-Bold-73" transform="translate(1208.999725 0)"/>
     </g>
    </g>
    <g id="text_4">
     <!-- Vehicle vs AP21967  |  0-360 minutes -->
-    <g style="fill: #3e5d4d" transform="translate(54.72 160.217578) scale(0.27 -0.27)">
+    <g style="fill: #3e5d4d" transform="translate(51.12 160.474922) scale(0.27 -0.27)">
      <defs>
-      <path id="Cabin-Regular-56" d="M 4096 4480 
-L 3456 4480 
-L 2067 698 
-L 666 4480 
-L 26 4480 
-L 1741 0 
-L 2381 0 
-L 4096 4480 
+      <path id="Nunito-Regular-56" d="M 2208 -45 
+Q 2086 -45 2009 12 
+Q 1933 70 1888 186 
+L 128 4211 
+Q 83 4320 102 4393 
+Q 122 4467 189 4512 
+Q 256 4557 346 4557 
+Q 467 4557 528 4502 
+Q 589 4448 627 4346 
+L 2317 422 
+L 2112 422 
+L 3795 4352 
+Q 3840 4448 3904 4502 
+Q 3968 4557 4083 4557 
+Q 4173 4557 4233 4512 
+Q 4294 4467 4310 4390 
+Q 4326 4314 4282 4211 
+L 2522 186 
+Q 2477 70 2403 12 
+Q 2330 -45 2208 -45 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-65" d="M 3059 1568 
-C 3078 1677 3085 1786 3085 1875 
-C 3085 2720 2515 3200 1734 3200 
-C 762 3200 198 2470 198 1594 
-C 198 691 787 -64 1894 -64 
-C 2349 -64 2701 70 2944 179 
-L 2867 634 
-C 2586 506 2253 448 1965 448 
-C 1370 448 870 698 787 1568 
-L 3059 1568 
-z
-M 1722 2688 
-C 2246 2688 2490 2406 2490 1965 
-L 838 1965 
-C 954 2419 1210 2688 1722 2688 
-z
-" transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-68" d="M 3110 0 
-L 3110 1677 
-C 3110 2579 2778 3200 1875 3200 
-C 1466 3200 1184 3072 966 2797 
-L 966 4800 
-L 384 4800 
-L 384 0 
-L 966 0 
-L 966 2278 
-C 1146 2560 1402 2688 1786 2688 
-C 2342 2688 2534 2419 2534 1677 
-L 2534 0 
-L 3110 0 
-z
-" transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-69" d="M 966 3840 
-L 966 4480 
-L 390 4480 
-L 390 3840 
-L 966 3840 
-z
-M 966 0 
-L 966 3136 
-L 390 3136 
-L 390 0 
-L 966 0 
+      <path id="Nunito-Regular-65" d="M 1888 -58 
+Q 1395 -58 1040 137 
+Q 685 333 489 691 
+Q 294 1050 294 1549 
+Q 294 2035 486 2396 
+Q 678 2758 1014 2963 
+Q 1350 3168 1792 3168 
+Q 2106 3168 2355 3062 
+Q 2605 2957 2781 2758 
+Q 2957 2560 3049 2278 
+Q 3142 1997 3142 1645 
+Q 3142 1542 3084 1494 
+Q 3027 1446 2918 1446 
+L 691 1446 
+L 691 1786 
+L 2797 1786 
+L 2694 1702 
+Q 2694 2048 2592 2288 
+Q 2490 2528 2294 2656 
+Q 2099 2784 1805 2784 
+Q 1478 2784 1251 2633 
+Q 1024 2483 909 2217 
+Q 794 1952 794 1600 
+L 794 1562 
+Q 794 973 1078 665 
+Q 1363 358 1888 358 
+Q 2106 358 2320 416 
+Q 2534 474 2739 608 
+Q 2829 666 2902 662 
+Q 2976 659 3021 617 
+Q 3066 576 3082 515 
+Q 3098 454 3069 384 
+Q 3040 314 2957 262 
+Q 2746 109 2458 25 
+Q 2170 -58 1888 -58 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-63" d="M 1773 -64 
-C 2278 -64 2541 51 2726 173 
-L 2650 634 
-C 2400 512 2125 442 1830 442 
-C 1133 442 800 890 800 1574 
-C 800 2272 1133 2688 1830 2688 
-C 2125 2688 2394 2618 2643 2496 
-L 2733 3014 
-C 2547 3117 2240 3200 1766 3200 
-C 723 3200 211 2490 211 1574 
-C 211 698 730 -64 1773 -64 
+      <path id="Nunito-Regular-68" d="M 742 -45 
+Q 614 -45 550 25 
+Q 486 96 486 224 
+L 486 4294 
+Q 486 4422 550 4489 
+Q 614 4557 742 4557 
+Q 864 4557 934 4489 
+Q 1005 4422 1005 4294 
+L 1005 2419 
+L 922 2419 
+Q 1056 2790 1360 2979 
+Q 1664 3168 2061 3168 
+Q 2432 3168 2678 3033 
+Q 2925 2899 3046 2627 
+Q 3168 2355 3168 1939 
+L 3168 224 
+Q 3168 96 3101 25 
+Q 3034 -45 2912 -45 
+Q 2784 -45 2717 25 
+Q 2650 96 2650 224 
+L 2650 1907 
+Q 2650 2342 2480 2544 
+Q 2310 2746 1939 2746 
+Q 1510 2746 1257 2480 
+Q 1005 2214 1005 1773 
+L 1005 224 
+Q 1005 -45 742 -45 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-6c" d="M 1466 397 
-C 1024 397 960 486 960 1024 
-L 960 4800 
-L 384 4800 
-L 384 691 
-C 384 314 589 -64 1197 -64 
-L 1382 -64 
-L 1466 397 
+      <path id="Nunito-Regular-69" d="M 742 -32 
+Q 614 -32 550 41 
+Q 486 115 486 250 
+L 486 2867 
+Q 486 3002 550 3072 
+Q 614 3142 742 3142 
+Q 864 3142 934 3072 
+Q 1005 3002 1005 2867 
+L 1005 250 
+Q 1005 115 937 41 
+Q 870 -32 742 -32 
+z
+M 742 3859 
+Q 582 3859 492 3945 
+Q 403 4032 403 4179 
+Q 403 4333 492 4413 
+Q 582 4493 742 4493 
+Q 909 4493 995 4413 
+Q 1082 4333 1082 4179 
+Q 1082 4032 995 3945 
+Q 909 3859 742 3859 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-20" transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-76" d="M 3091 3136 
-L 2445 3136 
-L 1574 634 
-L 698 3136 
-L 58 3136 
-L 1254 0 
-L 1901 0 
-L 3091 3136 
+      <path id="Nunito-Regular-63" d="M 1805 -58 
+Q 1338 -58 998 147 
+Q 659 352 476 720 
+Q 294 1088 294 1574 
+Q 294 1946 396 2240 
+Q 499 2534 697 2742 
+Q 896 2950 1174 3059 
+Q 1453 3168 1805 3168 
+Q 2035 3168 2284 3097 
+Q 2534 3027 2739 2854 
+Q 2803 2810 2822 2746 
+Q 2842 2682 2822 2621 
+Q 2803 2560 2758 2518 
+Q 2714 2477 2646 2470 
+Q 2579 2464 2509 2515 
+Q 2342 2643 2169 2694 
+Q 1997 2746 1837 2746 
+Q 1587 2746 1401 2666 
+Q 1216 2586 1088 2438 
+Q 960 2291 893 2073 
+Q 826 1856 826 1568 
+Q 826 1011 1088 688 
+Q 1350 365 1837 365 
+Q 1997 365 2166 416 
+Q 2336 467 2509 595 
+Q 2579 646 2643 640 
+Q 2707 634 2752 592 
+Q 2797 550 2813 486 
+Q 2829 422 2809 361 
+Q 2790 301 2726 256 
+Q 2522 90 2278 16 
+Q 2035 -58 1805 -58 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-73" d="M 1280 -64 
-C 2240 -64 2477 454 2477 870 
-C 2477 1523 1888 1715 1581 1805 
-C 1088 1952 851 2029 851 2323 
-C 851 2618 1101 2746 1459 2746 
-C 1811 2746 2042 2624 2227 2470 
-L 2298 2995 
-C 2106 3091 1862 3200 1446 3200 
-C 589 3200 269 2739 269 2259 
-C 269 1626 826 1472 1254 1357 
-C 1510 1286 1882 1165 1882 838 
-C 1882 589 1658 448 1254 448 
-C 774 448 410 646 275 768 
-L 205 211 
-C 352 109 723 -64 1280 -64 
+      <path id="Nunito-Regular-6c" d="M 1434 -58 
+Q 973 -58 729 224 
+Q 486 506 486 1030 
+L 486 4294 
+Q 486 4422 550 4489 
+Q 614 4557 742 4557 
+Q 864 4557 934 4489 
+Q 1005 4422 1005 4294 
+L 1005 1069 
+Q 1005 723 1142 553 
+Q 1280 384 1549 384 
+Q 1606 384 1651 390 
+Q 1696 397 1741 397 
+Q 1811 403 1840 364 
+Q 1869 326 1869 211 
+Q 1869 96 1817 38 
+Q 1766 -19 1651 -38 
+Q 1600 -45 1542 -51 
+Q 1485 -58 1434 -58 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-41" d="M 3898 0 
-L 2291 4480 
-L 1651 4480 
-L 45 0 
-L 685 0 
-L 1114 1210 
-L 2829 1210 
-L 3258 0 
-L 3898 0 
-z
-M 2637 1760 
-L 1306 1760 
-L 1971 3629 
-L 2637 1760 
-z
-" transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-50" d="M 2125 1568 
-C 2720 1568 3507 1920 3507 3085 
-C 3507 4288 2778 4480 1946 4480 
-L 512 4480 
-L 512 0 
-L 1152 0 
-L 1152 1568 
-L 2125 1568 
-z
-M 1830 3936 
-C 2618 3936 2874 3699 2874 3059 
-C 2874 2458 2630 2112 2010 2112 
-L 1152 2112 
-L 1152 3936 
-L 1830 3936 
+      <path id="Nunito-Regular-20" transform="scale(0.015625)"/>
+      <path id="Nunito-Regular-76" d="M 1645 -45 
+Q 1536 -45 1453 16 
+Q 1370 77 1312 205 
+L 205 2790 
+Q 160 2886 173 2969 
+Q 186 3053 250 3104 
+Q 314 3155 429 3155 
+Q 531 3155 588 3110 
+Q 646 3066 691 2950 
+L 1741 384 
+L 1568 384 
+L 2637 2950 
+Q 2682 3066 2739 3110 
+Q 2797 3155 2906 3155 
+Q 3008 3155 3062 3104 
+Q 3117 3053 3126 2973 
+Q 3136 2893 3098 2797 
+L 1978 205 
+Q 1933 77 1846 16 
+Q 1760 -45 1645 -45 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-32" d="M 3008 0 
-L 3008 550 
-L 1459 550 
-C 2464 1978 2835 2746 2835 3341 
-C 2835 3904 2534 4570 1594 4570 
-C 813 4570 390 4083 320 3949 
-L 397 3405 
-C 582 3648 896 4000 1440 4000 
-C 1907 4000 2221 3744 2221 3277 
-C 2221 2931 2042 2406 358 0 
-L 3008 0 
+      <path id="Nunito-Regular-73" d="M 1536 -58 
+Q 1248 -58 957 12 
+Q 666 83 416 256 
+Q 352 301 326 361 
+Q 301 422 310 483 
+Q 320 544 361 589 
+Q 403 634 464 643 
+Q 525 653 602 614 
+Q 851 461 1084 400 
+Q 1318 339 1549 339 
+Q 1914 339 2099 473 
+Q 2285 608 2285 838 
+Q 2285 1018 2163 1123 
+Q 2042 1229 1779 1286 
+L 1197 1414 
+Q 794 1498 598 1702 
+Q 403 1907 403 2234 
+Q 403 2522 553 2730 
+Q 704 2938 979 3053 
+Q 1254 3168 1619 3168 
+Q 1901 3168 2153 3094 
+Q 2406 3021 2611 2861 
+Q 2675 2816 2697 2755 
+Q 2720 2694 2704 2633 
+Q 2688 2573 2643 2531 
+Q 2598 2490 2534 2483 
+Q 2470 2477 2400 2522 
+Q 2208 2650 2009 2710 
+Q 1811 2771 1619 2771 
+Q 1261 2771 1075 2630 
+Q 890 2490 890 2259 
+Q 890 2080 1005 1965 
+Q 1120 1850 1363 1798 
+L 1946 1677 
+Q 2362 1587 2570 1392 
+Q 2778 1197 2778 864 
+Q 2778 442 2438 192 
+Q 2099 -58 1536 -58 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-31" d="M 1626 0 
-L 1626 4480 
-L 1158 4480 
-C 966 4179 563 3898 218 3782 
-L 320 3213 
-C 499 3270 678 3354 986 3603 
-L 986 0 
-L 1626 0 
+      <path id="Nunito-Regular-41" d="M 461 -45 
+Q 358 -45 297 3 
+Q 237 51 227 131 
+Q 218 211 262 314 
+L 2022 4320 
+Q 2080 4448 2160 4502 
+Q 2240 4557 2336 4557 
+Q 2432 4557 2512 4502 
+Q 2592 4448 2643 4320 
+L 4410 314 
+Q 4461 211 4451 128 
+Q 4442 45 4384 0 
+Q 4326 -45 4224 -45 
+Q 4109 -45 4038 16 
+Q 3968 77 3923 192 
+L 3450 1286 
+L 3706 1152 
+L 954 1152 
+L 1216 1286 
+L 749 192 
+Q 691 70 627 12 
+Q 563 -45 461 -45 
+z
+M 2330 3898 
+L 1299 1472 
+L 1146 1594 
+L 3514 1594 
+L 3373 1472 
+L 2342 3898 
+L 2330 3898 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-39" d="M 1843 4570 
-C 890 4570 288 3917 288 3078 
-C 288 2202 819 1786 1645 1786 
-C 2003 1786 2362 1914 2534 2150 
-C 2374 1011 1530 525 915 243 
-L 1382 0 
-C 2029 0 3245 1043 3245 2957 
-C 3245 4198 2566 4570 1843 4570 
+      <path id="Nunito-Regular-50" d="M 819 -45 
+Q 691 -45 624 28 
+Q 557 102 557 230 
+L 557 4243 
+Q 557 4378 627 4445 
+Q 698 4512 826 4512 
+L 2342 4512 
+Q 3066 4512 3456 4157 
+Q 3846 3802 3846 3155 
+Q 3846 2515 3456 2156 
+Q 3066 1798 2342 1798 
+L 1082 1798 
+L 1082 230 
+Q 1082 102 1018 28 
+Q 954 -45 819 -45 
 z
-M 1702 2310 
-C 1062 2310 909 2771 909 3110 
-C 909 3571 1190 4038 1766 4038 
-C 2195 4038 2605 3770 2605 3206 
-C 2605 2656 2189 2310 1702 2310 
-z
-" transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-36" d="M 1798 -90 
-C 2752 -90 3354 570 3354 1395 
-C 3354 2278 2726 2688 1997 2688 
-C 1658 2688 1331 2605 1094 2285 
-C 1395 3552 2118 3955 2733 4237 
-L 2317 4480 
-C 1600 4467 397 3219 397 1536 
-C 397 339 1024 -90 1798 -90 
-z
-M 1939 2170 
-C 2579 2170 2733 1709 2733 1370 
-C 2733 909 2451 442 1875 442 
-C 1446 442 1037 698 1037 1286 
-C 1037 1824 1453 2170 1939 2170 
+M 1082 2240 
+L 2278 2240 
+Q 2797 2240 3062 2473 
+Q 3328 2707 3328 3155 
+Q 3328 3610 3062 3843 
+Q 2797 4077 2278 4077 
+L 1082 4077 
+L 1082 2240 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-37" d="M 3149 4480 
-L 250 4480 
-L 250 3930 
-L 2266 3930 
-L 570 0 
-L 1210 0 
-L 3149 4480 
+      <path id="Nunito-Regular-32" d="M 826 0 
+Q 685 0 617 67 
+Q 550 134 550 250 
+Q 550 320 585 387 
+Q 621 454 685 525 
+L 2118 2061 
+Q 2445 2413 2589 2710 
+Q 2733 3008 2733 3315 
+Q 2733 3699 2499 3900 
+Q 2266 4102 1818 4102 
+Q 1530 4102 1274 4012 
+Q 1018 3923 781 3738 
+Q 698 3674 630 3680 
+Q 563 3686 512 3731 
+Q 461 3776 441 3846 
+Q 422 3917 444 3987 
+Q 467 4058 544 4115 
+Q 794 4320 1146 4445 
+Q 1498 4570 1862 4570 
+Q 2317 4570 2630 4429 
+Q 2944 4288 3104 4016 
+Q 3264 3744 3264 3354 
+Q 3264 3085 3177 2825 
+Q 3091 2566 2915 2297 
+Q 2739 2029 2458 1741 
+L 1094 301 
+L 1094 448 
+L 3251 448 
+Q 3373 448 3433 393 
+Q 3494 339 3494 230 
+Q 3494 115 3433 57 
+Q 3373 0 3251 0 
+L 826 0 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-7c" d="M 1018 -1338 
-L 1018 4800 
-L 448 4800 
-L 448 -1338 
-L 1018 -1338 
+      <path id="Nunito-Regular-31" d="M 992 0 
+Q 877 0 813 61 
+Q 749 122 749 230 
+Q 749 339 813 393 
+Q 877 448 992 448 
+L 1824 448 
+L 1824 4077 
+L 2099 4077 
+L 1171 3462 
+Q 1088 3418 1014 3424 
+Q 941 3430 893 3478 
+Q 845 3526 825 3593 
+Q 806 3661 832 3734 
+Q 858 3808 941 3859 
+L 1824 4442 
+Q 1907 4493 1984 4525 
+Q 2061 4557 2138 4557 
+Q 2227 4557 2288 4502 
+Q 2349 4448 2349 4333 
+L 2349 448 
+L 3117 448 
+Q 3232 448 3296 393 
+Q 3360 339 3360 230 
+Q 3360 115 3296 57 
+Q 3232 0 3117 0 
+L 992 0 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-30" d="M 2246 -90 
-C 3392 -90 4166 832 4166 2285 
-C 4166 3654 3373 4570 2323 4570 
-C 1254 4570 403 3616 403 2163 
-C 403 787 1152 -90 2246 -90 
+      <path id="Nunito-Regular-39" d="M 1606 -58 
+Q 1318 -58 1004 57 
+Q 691 173 454 390 
+Q 384 442 368 512 
+Q 352 582 371 649 
+Q 390 717 438 765 
+Q 486 813 556 816 
+Q 627 819 704 762 
+Q 922 576 1152 493 
+Q 1382 410 1619 410 
+Q 2035 410 2326 614 
+Q 2618 819 2768 1235 
+Q 2918 1651 2918 2266 
+L 2918 2861 
+L 2976 2861 
+Q 2938 2502 2762 2233 
+Q 2586 1965 2310 1824 
+Q 2035 1683 1690 1683 
+Q 1293 1683 985 1862 
+Q 678 2042 505 2368 
+Q 333 2694 333 3104 
+Q 333 3533 515 3862 
+Q 698 4192 1021 4381 
+Q 1344 4570 1766 4570 
+Q 2298 4570 2672 4310 
+Q 3046 4051 3238 3558 
+Q 3430 3066 3430 2368 
+Q 3430 1779 3308 1331 
+Q 3187 883 2950 572 
+Q 2714 262 2374 102 
+Q 2035 -58 1606 -58 
 z
-M 2310 4019 
-C 2976 4019 3533 3430 3533 2285 
-C 3533 1037 3008 461 2259 461 
-C 1549 461 1050 1011 1050 2163 
-C 1050 3405 1651 4019 2310 4019 
-z
-" transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-2d" d="M 2349 1523 
-L 2349 2074 
-L 365 2074 
-L 365 1523 
-L 2349 1523 
-z
-" transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-33" d="M 1472 -90 
-C 2298 -90 3098 384 3098 1370 
-C 3098 1798 2944 2285 2355 2483 
-C 2810 2797 2938 3078 2938 3418 
-C 2938 3910 2694 4570 1574 4570 
-C 973 4570 640 4378 538 4275 
-L 646 3757 
-C 800 3885 1075 4019 1510 4019 
-C 2003 4019 2272 3840 2272 3418 
-C 2272 2957 2010 2682 1203 2682 
-L 966 2682 
-L 902 2195 
-L 1370 2195 
-C 2253 2195 2432 1786 2432 1363 
-C 2432 646 1907 461 1478 461 
-C 1062 461 787 602 403 813 
-L 256 250 
-C 352 154 883 -90 1472 -90 
-z
-" transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-6d" d="M 5254 0 
-L 5254 1850 
-C 5254 2771 4838 3200 4051 3200 
-C 3469 3200 3110 2963 2906 2573 
-C 2618 3098 2208 3200 1843 3200 
-C 1510 3200 1261 3123 902 2803 
-L 838 3136 
-L 390 3136 
-L 390 0 
-L 966 0 
-L 966 2278 
-C 1126 2560 1440 2688 1798 2688 
-C 2234 2688 2534 2496 2534 1728 
-L 2534 0 
-L 3110 0 
-L 3110 1818 
-C 3110 2170 3206 2688 3942 2688 
-C 4461 2688 4678 2432 4678 1843 
-L 4678 0 
-L 5254 0 
+M 1798 2125 
+Q 2086 2125 2304 2253 
+Q 2522 2381 2643 2608 
+Q 2765 2835 2765 3130 
+Q 2765 3424 2643 3648 
+Q 2522 3872 2304 4000 
+Q 2086 4128 1798 4128 
+Q 1517 4128 1302 4000 
+Q 1088 3872 963 3648 
+Q 838 3424 838 3130 
+Q 838 2835 963 2608 
+Q 1088 2381 1302 2253 
+Q 1517 2125 1798 2125 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-6e" d="M 3219 0 
-L 3219 1728 
-C 3219 2630 2854 3200 1939 3200 
-C 1606 3200 1261 3123 902 2803 
-L 838 3136 
-L 390 3136 
-L 390 0 
-L 966 0 
-L 966 2278 
-C 1126 2560 1466 2688 1824 2688 
-C 2419 2688 2643 2394 2643 1728 
-L 2643 0 
-L 3219 0 
+      <path id="Nunito-Regular-36" d="M 2074 -58 
+Q 1542 -58 1168 201 
+Q 794 461 602 953 
+Q 410 1446 410 2144 
+Q 410 2733 531 3181 
+Q 653 3629 889 3939 
+Q 1126 4250 1465 4410 
+Q 1805 4570 2234 4570 
+Q 2528 4570 2838 4454 
+Q 3149 4339 3386 4128 
+Q 3456 4077 3472 4003 
+Q 3488 3930 3469 3862 
+Q 3450 3795 3402 3750 
+Q 3354 3706 3283 3702 
+Q 3213 3699 3136 3757 
+Q 2918 3942 2688 4022 
+Q 2458 4102 2221 4102 
+Q 1805 4102 1513 3897 
+Q 1222 3693 1072 3280 
+Q 922 2867 922 2246 
+L 922 1651 
+L 864 1651 
+Q 902 2016 1078 2281 
+Q 1254 2547 1529 2688 
+Q 1805 2829 2150 2829 
+Q 2547 2829 2854 2649 
+Q 3162 2470 3334 2147 
+Q 3507 1824 3507 1408 
+Q 3507 986 3328 653 
+Q 3149 320 2822 131 
+Q 2496 -58 2074 -58 
+z
+M 2042 390 
+Q 2323 390 2540 515 
+Q 2758 640 2880 867 
+Q 3002 1094 3002 1389 
+Q 3002 1683 2880 1907 
+Q 2758 2131 2540 2259 
+Q 2323 2387 2042 2387 
+Q 1760 2387 1542 2259 
+Q 1325 2131 1203 1907 
+Q 1082 1683 1082 1389 
+Q 1082 1094 1203 867 
+Q 1325 640 1542 515 
+Q 1760 390 2042 390 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-75" d="M 2963 0 
-L 2963 3136 
-L 2387 3136 
-L 2387 806 
-C 2234 557 1952 448 1664 448 
-C 1146 448 934 806 934 1472 
-L 934 3136 
-L 358 3136 
-L 358 1312 
-C 358 371 781 -64 1517 -64 
-C 1926 -64 2189 70 2387 346 
-L 2451 0 
-L 2963 0 
+      <path id="Nunito-Regular-37" d="M 1075 -45 
+Q 986 -45 922 0 
+Q 858 45 842 125 
+Q 826 205 877 301 
+L 2931 4288 
+L 2931 4058 
+L 627 4058 
+Q 512 4058 448 4118 
+Q 384 4179 384 4288 
+Q 384 4397 448 4454 
+Q 512 4512 627 4512 
+L 3168 4512 
+Q 3283 4512 3353 4454 
+Q 3424 4397 3424 4288 
+Q 3424 4198 3401 4131 
+Q 3379 4064 3341 3981 
+L 1370 134 
+Q 1325 45 1254 0 
+Q 1184 -45 1075 -45 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-74" d="M 2035 397 
-L 1888 397 
-C 1267 397 1229 435 1229 1037 
-L 1229 2688 
-L 2054 2688 
-L 2054 3136 
-L 1229 3136 
-L 1229 3968 
-L 653 3910 
-L 653 3136 
-L 166 3136 
-L 115 2688 
-L 653 2688 
-L 653 685 
-C 653 307 877 -64 1472 -64 
-L 1990 -64 
-L 2035 397 
+      <path id="Nunito-Regular-7c" d="M 845 -1197 
+Q 723 -1197 656 -1129 
+Q 589 -1062 589 -934 
+L 589 4294 
+Q 589 4429 656 4493 
+Q 723 4557 845 4557 
+Q 973 4557 1040 4493 
+Q 1107 4429 1107 4294 
+L 1107 -934 
+Q 1107 -1197 845 -1197 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Regular-30" d="M 1920 -58 
+Q 1146 -58 742 537 
+Q 339 1133 339 2259 
+Q 339 3014 518 3529 
+Q 698 4045 1053 4307 
+Q 1408 4570 1920 4570 
+Q 2701 4570 3101 3984 
+Q 3501 3398 3501 2266 
+Q 3501 1510 3321 992 
+Q 3142 474 2790 208 
+Q 2438 -58 1920 -58 
+z
+M 1920 397 
+Q 2458 397 2717 854 
+Q 2976 1312 2976 2266 
+Q 2976 3226 2717 3670 
+Q 2458 4115 1920 4115 
+Q 1389 4115 1126 3667 
+Q 864 3219 864 2266 
+Q 864 1312 1126 854 
+Q 1389 397 1920 397 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Regular-2d" d="M 640 1491 
+Q 544 1491 480 1552 
+Q 416 1613 416 1702 
+Q 416 1798 480 1859 
+Q 544 1920 640 1920 
+L 2080 1920 
+Q 2170 1920 2234 1859 
+Q 2298 1798 2298 1702 
+Q 2298 1613 2234 1552 
+Q 2170 1491 2080 1491 
+L 640 1491 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Regular-33" d="M 1869 -58 
+Q 1498 -58 1123 51 
+Q 749 160 474 371 
+Q 390 429 364 502 
+Q 339 576 355 643 
+Q 371 710 422 758 
+Q 474 806 547 812 
+Q 621 819 710 762 
+Q 992 576 1273 493 
+Q 1555 410 1856 410 
+Q 2182 410 2406 506 
+Q 2630 602 2745 790 
+Q 2861 979 2861 1254 
+Q 2861 1651 2598 1856 
+Q 2336 2061 1837 2061 
+L 1382 2061 
+Q 1261 2061 1197 2121 
+Q 1133 2182 1133 2291 
+Q 1133 2394 1197 2454 
+Q 1261 2515 1382 2515 
+L 1792 2515 
+Q 2086 2515 2294 2617 
+Q 2502 2720 2617 2909 
+Q 2733 3098 2733 3366 
+Q 2733 3725 2502 3913 
+Q 2272 4102 1837 4102 
+Q 1549 4102 1293 4019 
+Q 1037 3936 787 3738 
+Q 710 3680 636 3683 
+Q 563 3686 515 3728 
+Q 467 3770 444 3840 
+Q 422 3910 448 3984 
+Q 474 4058 557 4122 
+Q 813 4339 1158 4454 
+Q 1504 4570 1869 4570 
+Q 2304 4570 2614 4432 
+Q 2925 4294 3091 4035 
+Q 3258 3776 3258 3411 
+Q 3258 3136 3152 2909 
+Q 3046 2682 2857 2522 
+Q 2669 2362 2400 2291 
+L 2400 2362 
+Q 2867 2285 3126 1981 
+Q 3386 1677 3386 1216 
+Q 3386 826 3203 541 
+Q 3021 256 2681 99 
+Q 2342 -58 1869 -58 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Regular-6d" d="M 755 -45 
+Q 627 -45 563 25 
+Q 499 96 499 224 
+L 499 2893 
+Q 499 3021 563 3088 
+Q 627 3155 749 3155 
+Q 870 3155 937 3088 
+Q 1005 3021 1005 2893 
+L 1005 2330 
+L 934 2419 
+Q 1056 2778 1328 2973 
+Q 1600 3168 1978 3168 
+Q 2374 3168 2620 2979 
+Q 2867 2790 2950 2394 
+L 2854 2394 
+Q 2970 2752 3267 2960 
+Q 3565 3168 3962 3168 
+Q 4314 3168 4541 3033 
+Q 4768 2899 4883 2627 
+Q 4998 2355 4998 1939 
+L 4998 224 
+Q 4998 96 4931 25 
+Q 4864 -45 4736 -45 
+Q 4614 -45 4547 25 
+Q 4480 96 4480 224 
+L 4480 1914 
+Q 4480 2342 4333 2544 
+Q 4186 2746 3834 2746 
+Q 3450 2746 3229 2480 
+Q 3008 2214 3008 1760 
+L 3008 224 
+Q 3008 96 2941 25 
+Q 2874 -45 2746 -45 
+Q 2624 -45 2557 25 
+Q 2490 96 2490 224 
+L 2490 1914 
+Q 2490 2342 2339 2544 
+Q 2189 2746 1843 2746 
+Q 1459 2746 1238 2480 
+Q 1018 2214 1018 1760 
+L 1018 224 
+Q 1018 -45 755 -45 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Regular-6e" d="M 742 -45 
+Q 614 -45 550 25 
+Q 486 96 486 224 
+L 486 2893 
+Q 486 3021 550 3088 
+Q 614 3155 736 3155 
+Q 858 3155 925 3088 
+Q 992 3021 992 2893 
+L 992 2342 
+L 922 2419 
+Q 1056 2790 1360 2979 
+Q 1664 3168 2061 3168 
+Q 2432 3168 2678 3033 
+Q 2925 2899 3046 2627 
+Q 3168 2355 3168 1939 
+L 3168 224 
+Q 3168 96 3101 25 
+Q 3034 -45 2912 -45 
+Q 2784 -45 2717 25 
+Q 2650 96 2650 224 
+L 2650 1907 
+Q 2650 2342 2480 2544 
+Q 2310 2746 1939 2746 
+Q 1510 2746 1257 2480 
+Q 1005 2214 1005 1773 
+L 1005 224 
+Q 1005 -45 742 -45 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Regular-75" d="M 1587 -58 
+Q 1210 -58 963 80 
+Q 717 218 592 493 
+Q 467 768 467 1178 
+L 467 2893 
+Q 467 3027 534 3091 
+Q 602 3155 723 3155 
+Q 851 3155 918 3091 
+Q 986 3027 986 2893 
+L 986 1184 
+Q 986 774 1155 572 
+Q 1325 371 1690 371 
+Q 2086 371 2336 640 
+Q 2586 909 2586 1344 
+L 2586 2893 
+Q 2586 3027 2653 3091 
+Q 2720 3155 2848 3155 
+Q 2970 3155 3037 3091 
+Q 3104 3027 3104 2893 
+L 3104 224 
+Q 3104 -45 2854 -45 
+Q 2733 -45 2665 25 
+Q 2598 96 2598 224 
+L 2598 806 
+L 2682 717 
+Q 2554 339 2262 140 
+Q 1971 -58 1587 -58 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Regular-74" d="M 1734 -58 
+Q 1370 -58 1123 73 
+Q 877 205 755 457 
+Q 634 710 634 1075 
+L 634 2707 
+L 205 2707 
+Q 96 2707 38 2761 
+Q -19 2816 -19 2912 
+Q -19 3008 38 3059 
+Q 96 3110 205 3110 
+L 634 3110 
+L 634 3846 
+Q 634 3974 704 4041 
+Q 774 4109 896 4109 
+Q 1018 4109 1085 4041 
+Q 1152 3974 1152 3846 
+L 1152 3110 
+L 1958 3110 
+Q 2067 3110 2124 3059 
+Q 2182 3008 2182 2912 
+Q 2182 2816 2124 2761 
+Q 2067 2707 1958 2707 
+L 1152 2707 
+L 1152 1126 
+Q 1152 762 1305 573 
+Q 1459 384 1805 384 
+Q 1926 384 2012 409 
+Q 2099 435 2157 435 
+Q 2214 442 2252 397 
+Q 2291 352 2291 243 
+Q 2291 166 2262 102 
+Q 2234 38 2163 13 
+Q 2086 -13 1961 -35 
+Q 1837 -58 1734 -58 
 z
 " transform="scale(0.015625)"/>
      </defs>
-     <use xlink:href="#Cabin-Regular-56"/>
-     <use xlink:href="#Cabin-Regular-65" transform="translate(64.399994 0)"/>
-     <use xlink:href="#Cabin-Regular-68" transform="translate(115.599991 0)"/>
-     <use xlink:href="#Cabin-Regular-69" transform="translate(169.799988 0)"/>
-     <use xlink:href="#Cabin-Regular-63" transform="translate(190.999985 0)"/>
-     <use xlink:href="#Cabin-Regular-6c" transform="translate(236.399979 0)"/>
-     <use xlink:href="#Cabin-Regular-65" transform="translate(259.999969 0)"/>
-     <use xlink:href="#Cabin-Regular-20" transform="translate(311.199966 0)"/>
-     <use xlink:href="#Cabin-Regular-76" transform="translate(333.699951 0)"/>
-     <use xlink:href="#Cabin-Regular-73" transform="translate(382.524948 0)"/>
-     <use xlink:href="#Cabin-Regular-20" transform="translate(423.924942 0)"/>
-     <use xlink:href="#Cabin-Regular-41" transform="translate(446.424927 0)"/>
-     <use xlink:href="#Cabin-Regular-50" transform="translate(508.024918 0)"/>
-     <use xlink:href="#Cabin-Regular-32" transform="translate(565.224915 0)"/>
-     <use xlink:href="#Cabin-Regular-31" transform="translate(617.624908 0)"/>
-     <use xlink:href="#Cabin-Regular-39" transform="translate(653.124893 0)"/>
-     <use xlink:href="#Cabin-Regular-36" transform="translate(710.124878 0)"/>
-     <use xlink:href="#Cabin-Regular-37" transform="translate(766.174866 0)"/>
-     <use xlink:href="#Cabin-Regular-20" transform="translate(816.374863 0)"/>
-     <use xlink:href="#Cabin-Regular-20" transform="translate(838.874847 0)"/>
-     <use xlink:href="#Cabin-Regular-7c" transform="translate(861.374832 0)"/>
-     <use xlink:href="#Cabin-Regular-20" transform="translate(884.274826 0)"/>
-     <use xlink:href="#Cabin-Regular-20" transform="translate(906.774811 0)"/>
-     <use xlink:href="#Cabin-Regular-30" transform="translate(929.274796 0)"/>
-     <use xlink:href="#Cabin-Regular-2d" transform="translate(1000.674789 0)"/>
-     <use xlink:href="#Cabin-Regular-33" transform="translate(1041.824783 0)"/>
-     <use xlink:href="#Cabin-Regular-36" transform="translate(1096.52478 0)"/>
-     <use xlink:href="#Cabin-Regular-30" transform="translate(1153.324768 0)"/>
-     <use xlink:href="#Cabin-Regular-20" transform="translate(1224.724762 0)"/>
-     <use xlink:href="#Cabin-Regular-6d" transform="translate(1247.224747 0)"/>
-     <use xlink:href="#Cabin-Regular-69" transform="translate(1334.924728 0)"/>
-     <use xlink:href="#Cabin-Regular-6e" transform="translate(1356.124725 0)"/>
-     <use xlink:href="#Cabin-Regular-75" transform="translate(1412.024719 0)"/>
-     <use xlink:href="#Cabin-Regular-74" transform="translate(1464.424713 0)"/>
-     <use xlink:href="#Cabin-Regular-65" transform="translate(1498.12471 0)"/>
-     <use xlink:href="#Cabin-Regular-73" transform="translate(1549.324707 0)"/>
+     <use xlink:href="#Nunito-Regular-56"/>
+     <use xlink:href="#Nunito-Regular-65" transform="translate(68.899994 0)"/>
+     <use xlink:href="#Nunito-Regular-68" transform="translate(122.099991 0)"/>
+     <use xlink:href="#Nunito-Regular-69" transform="translate(178.899979 0)"/>
+     <use xlink:href="#Nunito-Regular-63" transform="translate(202.099976 0)"/>
+     <use xlink:href="#Nunito-Regular-6c" transform="translate(248.399963 0)"/>
+     <use xlink:href="#Nunito-Regular-65" transform="translate(277.999954 0)"/>
+     <use xlink:href="#Nunito-Regular-20" transform="translate(331.199951 0)"/>
+     <use xlink:href="#Nunito-Regular-76" transform="translate(356.999939 0)"/>
+     <use xlink:href="#Nunito-Regular-73" transform="translate(408.499924 0)"/>
+     <use xlink:href="#Nunito-Regular-20" transform="translate(456.599915 0)"/>
+     <use xlink:href="#Nunito-Regular-41" transform="translate(482.399902 0)"/>
+     <use xlink:href="#Nunito-Regular-50" transform="translate(555.299896 0)"/>
+     <use xlink:href="#Nunito-Regular-32" transform="translate(618.599884 0)"/>
+     <use xlink:href="#Nunito-Regular-31" transform="translate(678.599869 0)"/>
+     <use xlink:href="#Nunito-Regular-39" transform="translate(738.599854 0)"/>
+     <use xlink:href="#Nunito-Regular-36" transform="translate(798.599838 0)"/>
+     <use xlink:href="#Nunito-Regular-37" transform="translate(858.599823 0)"/>
+     <use xlink:href="#Nunito-Regular-20" transform="translate(918.599808 0)"/>
+     <use xlink:href="#Nunito-Regular-20" transform="translate(944.399796 0)"/>
+     <use xlink:href="#Nunito-Regular-7c" transform="translate(970.199783 0)"/>
+     <use xlink:href="#Nunito-Regular-20" transform="translate(996.699768 0)"/>
+     <use xlink:href="#Nunito-Regular-20" transform="translate(1022.499756 0)"/>
+     <use xlink:href="#Nunito-Regular-30" transform="translate(1048.299744 0)"/>
+     <use xlink:href="#Nunito-Regular-2d" transform="translate(1108.299728 0)"/>
+     <use xlink:href="#Nunito-Regular-33" transform="translate(1150.699722 0)"/>
+     <use xlink:href="#Nunito-Regular-36" transform="translate(1210.699707 0)"/>
+     <use xlink:href="#Nunito-Regular-30" transform="translate(1270.699692 0)"/>
+     <use xlink:href="#Nunito-Regular-20" transform="translate(1330.699677 0)"/>
+     <use xlink:href="#Nunito-Regular-6d" transform="translate(1356.499664 0)"/>
+     <use xlink:href="#Nunito-Regular-69" transform="translate(1442.099655 0)"/>
+     <use xlink:href="#Nunito-Regular-6e" transform="translate(1465.299652 0)"/>
+     <use xlink:href="#Nunito-Regular-75" transform="translate(1522.09964 0)"/>
+     <use xlink:href="#Nunito-Regular-74" transform="translate(1578.199631 0)"/>
+     <use xlink:href="#Nunito-Regular-65" transform="translate(1613.199615 0)"/>
+     <use xlink:href="#Nunito-Regular-73" transform="translate(1666.399612 0)"/>
     </g>
    </g>
    <g id="text_5">
     <!-- A / Ciliary SMO -->
-    <g style="fill: #263a30" transform="translate(76.32 248.183437) scale(0.36 -0.36)">
+    <g style="fill: #263a30" transform="translate(72.72 247.246875) scale(0.36 -0.36)">
      <defs>
-      <path id="Cabin-Bold-2f" d="M 3315 4480 
-L 2458 4480 
-L 122 -544 
-L 979 -544 
-L 3315 4480 
+      <path id="PixelifySans-Bold-41" d="M 390 -70 
+L 390 2989 
+L 954 2989 
+L 954 3533 
+L 1517 3533 
+L 1517 4083 
+L 2336 4083 
+L 2336 3533 
+L 2899 3533 
+L 2899 2989 
+L 3469 2989 
+L 3469 -70 
+L 2650 -70 
+L 2650 1024 
+L 1203 1024 
+L 1203 -70 
+L 390 -70 
+z
+M 1203 1901 
+L 2650 1901 
+L 2650 2662 
+L 2086 2662 
+L 2086 3206 
+L 1766 3206 
+L 1766 2662 
+L 1203 2662 
+L 1203 1901 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-69" d="M 1165 3686 
-L 1165 4480 
-L 371 4480 
-L 371 3686 
-L 1165 3686 
-z
-M 1165 0 
-L 1165 3200 
-L 371 3200 
-L 371 0 
-L 1165 0 
+      <path id="PixelifySans-Bold-2f" d="M 365 -77 
+L 2400 4038 
+L 3142 4038 
+L 1107 -77 
+L 365 -77 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-6c" d="M 1549 589 
-C 1235 589 1165 589 1165 1101 
-L 1165 4800 
-L 371 4800 
-L 371 774 
-C 371 314 621 -64 1190 -64 
-L 1478 -64 
-L 1549 589 
+      <path id="PixelifySans-Bold-6c" d="M 390 -70 
+L 390 4083 
+L 1203 4083 
+L 1203 -70 
+L 390 -70 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-61" d="M 3117 589 
-L 3014 589 
-C 2784 589 2733 621 2733 1101 
-L 2733 1965 
-C 2733 2893 2291 3251 1574 3251 
-C 1178 3251 794 3155 410 2970 
-L 480 2323 
-C 819 2490 1069 2566 1357 2566 
-C 1766 2566 1914 2406 1933 2042 
-C 1331 2022 134 1798 134 896 
-C 134 288 550 -64 1062 -64 
-C 1446 -64 1830 70 2042 307 
-C 2163 83 2400 -64 2758 -64 
-L 3046 -64 
-L 3117 589 
-z
-M 1939 774 
-C 1773 614 1536 544 1395 544 
-C 1094 544 966 666 966 928 
-C 966 1306 1491 1485 1939 1504 
-L 1939 774 
-z
-" transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-72" d="M 2195 3251 
-L 1984 3251 
-C 1619 3251 1299 3034 1133 2861 
-L 1114 3200 
-L 371 3200 
-L 371 0 
-L 1165 0 
-L 1165 2182 
-C 1254 2362 1485 2502 1747 2502 
-L 2042 2502 
-L 2195 3251 
-z
-" transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-79" d="M 3424 3200 
-L 2541 3200 
-L 1709 1139 
-L 890 3200 
-L 6 3200 
-L 1338 211 
-L 627 -1549 
-L 1421 -1549 
-L 3424 3200 
-z
-" transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-53" d="M 1792 -90 
-C 3302 -90 3526 704 3526 1216 
-C 3526 2202 2675 2458 1978 2669 
-C 1491 2816 1075 2957 1075 3315 
-C 1075 3699 1549 3789 1894 3789 
-C 2323 3789 2726 3648 3206 3386 
-L 3290 4224 
-C 3059 4378 2477 4570 1862 4570 
-C 653 4570 243 3821 243 3226 
-C 243 2426 934 2202 1568 1984 
-C 2112 1798 2611 1638 2611 1184 
-C 2611 819 2291 698 1811 698 
-C 1139 698 646 934 403 1171 
-L 307 237 
-C 563 70 1114 -90 1792 -90 
-z
-" transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-4d" d="M 5050 0 
-L 4429 4480 
-L 3757 4480 
-L 2669 2438 
-L 1574 4480 
-L 902 4480 
-L 282 0 
-L 1133 0 
-L 1517 2995 
-L 2669 941 
-L 3814 3002 
-L 4198 0 
-L 5050 0 
+      <path id="PixelifySans-Bold-79" d="M 954 -1165 
+L 954 -621 
+L 390 -621 
+L 390 250 
+L 1203 250 
+L 1203 -294 
+L 2656 -294 
+L 2656 474 
+L 954 474 
+L 954 1024 
+L 390 1024 
+L 390 2989 
+L 1203 2989 
+L 1203 1350 
+L 2656 1350 
+L 2656 2989 
+L 3469 2989 
+L 3469 -621 
+L 2906 -621 
+L 2906 -1165 
+L 954 -1165 
 z
 " transform="scale(0.015625)"/>
      </defs>
-     <use xlink:href="#Cabin-Bold-41"/>
-     <use xlink:href="#Cabin-Bold-20" transform="translate(62.499985 0)"/>
-     <use xlink:href="#Cabin-Bold-2f" transform="translate(84.999969 0)"/>
-     <use xlink:href="#Cabin-Bold-20" transform="translate(140.09996 0)"/>
-     <use xlink:href="#Cabin-Bold-43" transform="translate(162.599945 0)"/>
-     <use xlink:href="#Cabin-Bold-69" transform="translate(223.499939 0)"/>
-     <use xlink:href="#Cabin-Bold-6c" transform="translate(247.499924 0)"/>
-     <use xlink:href="#Cabin-Bold-69" transform="translate(273.799911 0)"/>
-     <use xlink:href="#Cabin-Bold-61" transform="translate(297.799896 0)"/>
-     <use xlink:href="#Cabin-Bold-72" transform="translate(347.599884 0)"/>
-     <use xlink:href="#Cabin-Bold-79" transform="translate(381.799881 0)"/>
-     <use xlink:href="#Cabin-Bold-20" transform="translate(435.499878 0)"/>
-     <use xlink:href="#Cabin-Bold-53" transform="translate(457.999863 0)"/>
-     <use xlink:href="#Cabin-Bold-4d" transform="translate(515.999847 0)"/>
-     <use xlink:href="#Cabin-Bold-4f" transform="translate(598.674835 0)"/>
+     <use xlink:href="#PixelifySans-Bold-41"/>
+     <use xlink:href="#PixelifySans-Bold-20" transform="translate(60.299988 0)"/>
+     <use xlink:href="#PixelifySans-Bold-2f" transform="translate(80.299973 0)"/>
+     <use xlink:href="#PixelifySans-Bold-20" transform="translate(135.09996 0)"/>
+     <use xlink:href="#PixelifySans-Bold-43" transform="translate(155.099945 0)"/>
+     <use xlink:href="#PixelifySans-Bold-69" transform="translate(215.399933 0)"/>
+     <use xlink:href="#PixelifySans-Bold-6c" transform="translate(240.299927 0)"/>
+     <use xlink:href="#PixelifySans-Bold-69" transform="translate(265.199921 0)"/>
+     <use xlink:href="#PixelifySans-Bold-61" transform="translate(290.099915 0)"/>
+     <use xlink:href="#PixelifySans-Bold-72" transform="translate(359.299896 0)"/>
+     <use xlink:href="#PixelifySans-Bold-79" transform="translate(419.599884 0)"/>
+     <use xlink:href="#PixelifySans-Bold-20" transform="translate(479.899872 0)"/>
+     <use xlink:href="#PixelifySans-Bold-53" transform="translate(499.899857 0)"/>
+     <use xlink:href="#PixelifySans-Bold-4d" transform="translate(560.199844 0)"/>
+     <use xlink:href="#PixelifySans-Bold-4f" transform="translate(638.099838 0)"/>
     </g>
    </g>
    <g id="text_6">
     <!-- Primary-cilium signal -->
-    <g style="fill: #3e5d4d" transform="translate(76.32 280.6) scale(0.28 -0.28)">
+    <g style="fill: #3e5d4d" transform="translate(72.72 280.921562) scale(0.28 -0.28)">
      <defs>
-      <path id="Cabin-Regular-72" d="M 2048 3251 
-L 1997 3251 
-C 1613 3251 1312 3046 934 2618 
-L 864 3136 
-L 390 3136 
-L 390 0 
-L 1005 0 
-L 1005 2214 
-C 1114 2413 1459 2618 1722 2618 
-L 1920 2618 
-L 2048 3251 
+      <path id="Nunito-Regular-72" d="M 749 -45 
+Q 621 -45 553 25 
+Q 486 96 486 224 
+L 486 2893 
+Q 486 3021 550 3088 
+Q 614 3155 736 3155 
+Q 858 3155 925 3088 
+Q 992 3021 992 2893 
+L 992 2374 
+L 928 2374 
+Q 1030 2752 1318 2957 
+Q 1606 3162 2029 3174 
+Q 2125 3181 2182 3133 
+Q 2240 3085 2246 2970 
+Q 2253 2861 2195 2797 
+Q 2138 2733 2016 2720 
+L 1914 2707 
+Q 1478 2669 1244 2429 
+Q 1011 2189 1011 1773 
+L 1011 224 
+Q 1011 96 944 25 
+Q 877 -45 749 -45 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-61" d="M 3021 397 
-L 2963 397 
-C 2630 397 2605 608 2605 1056 
-L 2605 1696 
-C 2605 2829 2291 3200 1498 3200 
-C 1082 3200 685 3066 435 2874 
-L 518 2406 
-C 851 2637 1107 2688 1344 2688 
-C 1786 2688 2029 2560 2029 1965 
-C 1229 1952 154 1728 154 845 
-C 154 320 538 -64 1120 -64 
-C 1523 -64 1843 122 2080 397 
-C 2208 102 2330 -64 2886 -64 
-L 2931 -64 
-L 3021 397 
-z
-M 2029 819 
-C 1843 563 1536 397 1229 397 
-C 941 397 742 538 742 877 
-C 742 1344 1114 1536 2029 1568 
-L 2029 819 
+      <path id="Nunito-Regular-61" d="M 1466 -58 
+Q 1146 -58 893 67 
+Q 640 192 493 409 
+Q 346 627 346 896 
+Q 346 1242 522 1440 
+Q 698 1638 1104 1721 
+Q 1510 1805 2214 1805 
+L 2502 1805 
+L 2502 1466 
+L 2221 1466 
+Q 1702 1466 1404 1418 
+Q 1107 1370 988 1254 
+Q 870 1139 870 928 
+Q 870 666 1052 499 
+Q 1235 333 1549 333 
+Q 1805 333 2000 454 
+Q 2195 576 2307 787 
+Q 2419 998 2419 1274 
+L 2419 2003 
+Q 2419 2400 2259 2576 
+Q 2099 2752 1734 2752 
+Q 1510 2752 1286 2694 
+Q 1062 2637 813 2509 
+Q 723 2464 659 2480 
+Q 595 2496 556 2547 
+Q 518 2598 512 2665 
+Q 506 2733 541 2797 
+Q 576 2861 653 2899 
+Q 934 3040 1209 3104 
+Q 1485 3168 1734 3168 
+Q 2138 3168 2400 3037 
+Q 2662 2906 2790 2640 
+Q 2918 2374 2918 1958 
+L 2918 224 
+Q 2918 96 2857 25 
+Q 2797 -45 2682 -45 
+Q 2560 -45 2496 25 
+Q 2432 96 2432 224 
+L 2432 723 
+L 2490 723 
+Q 2438 480 2294 307 
+Q 2150 134 1939 38 
+Q 1728 -58 1466 -58 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-79" d="M 3187 3136 
-L 2547 3136 
-L 1664 806 
-L 685 3136 
-L 45 3136 
-L 1350 141 
-L 627 -1549 
-L 1267 -1549 
-L 3187 3136 
+      <path id="Nunito-Regular-79" d="M 1178 -1197 
+Q 1082 -1197 1024 -1145 
+Q 966 -1094 956 -1008 
+Q 947 -922 986 -832 
+L 1427 160 
+L 1427 -64 
+L 198 2790 
+Q 160 2886 173 2969 
+Q 186 3053 250 3104 
+Q 314 3155 429 3155 
+Q 531 3155 588 3110 
+Q 646 3066 691 2950 
+L 1741 378 
+L 1568 378 
+L 2630 2950 
+Q 2682 3066 2739 3110 
+Q 2797 3155 2906 3155 
+Q 3008 3155 3062 3104 
+Q 3117 3053 3126 2973 
+Q 3136 2893 3098 2797 
+L 1459 -992 
+Q 1408 -1107 1347 -1152 
+Q 1286 -1197 1178 -1197 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-67" d="M 1632 -1600 
-C 2669 -1600 3206 -1120 3206 -614 
-C 3206 0 2419 173 1926 256 
-C 1184 384 954 429 954 589 
-C 954 666 1018 730 1107 781 
-C 1242 742 1408 723 1555 723 
-C 2374 723 2822 1338 2822 1971 
-C 2822 2202 2765 2445 2534 2720 
-C 2669 2752 2861 2765 2906 2765 
-L 3053 2765 
-L 3123 3149 
-L 3072 3149 
-C 2758 3149 2502 3072 2310 2970 
-C 2054 3130 1805 3200 1510 3200 
-C 678 3200 230 2630 230 1939 
-C 230 1619 326 1242 774 915 
-C 474 774 403 557 403 448 
-C 403 352 454 179 723 51 
-C 230 -122 166 -480 166 -653 
-C 166 -1069 544 -1600 1632 -1600 
+      <path id="Nunito-Regular-67" d="M 1862 -1210 
+Q 1523 -1210 1200 -1130 
+Q 877 -1050 614 -877 
+Q 538 -832 515 -768 
+Q 493 -704 505 -643 
+Q 518 -582 563 -534 
+Q 608 -486 669 -473 
+Q 730 -461 794 -493 
+Q 1075 -666 1331 -730 
+Q 1587 -794 1837 -794 
+Q 2291 -794 2524 -550 
+Q 2758 -307 2758 154 
+L 2758 877 
+L 2822 877 
+Q 2726 506 2416 288 
+Q 2106 70 1690 70 
+Q 1261 70 947 265 
+Q 634 461 464 813 
+Q 294 1165 294 1626 
+Q 294 1971 390 2256 
+Q 486 2541 668 2742 
+Q 851 2944 1110 3056 
+Q 1370 3168 1690 3168 
+Q 2112 3168 2419 2953 
+Q 2726 2739 2816 2374 
+L 2752 2298 
+L 2752 2893 
+Q 2752 3021 2819 3088 
+Q 2886 3155 3008 3155 
+Q 3136 3155 3200 3088 
+Q 3264 3021 3264 2893 
+L 3264 224 
+Q 3264 -486 2909 -848 
+Q 2554 -1210 1862 -1210 
 z
-M 1517 2739 
-C 1958 2739 2272 2470 2272 1978 
-C 2272 1523 2010 1165 1530 1165 
-C 1088 1165 781 1466 781 1958 
-C 781 2413 1037 2739 1517 2739 
-z
-M 1786 -166 
-C 2355 -269 2624 -429 2624 -653 
-C 2624 -896 2298 -1152 1658 -1152 
-C 1056 -1152 717 -928 717 -640 
-C 717 -416 928 -179 1216 -90 
-C 1293 -102 1773 -166 1786 -166 
+M 1786 493 
+Q 2086 493 2304 630 
+Q 2522 768 2640 1024 
+Q 2758 1280 2758 1626 
+Q 2758 2144 2496 2448 
+Q 2234 2752 1786 2752 
+Q 1491 2752 1273 2614 
+Q 1056 2477 937 2224 
+Q 819 1971 819 1626 
+Q 819 1107 1081 800 
+Q 1344 493 1786 493 
 z
 " transform="scale(0.015625)"/>
      </defs>
-     <use xlink:href="#Cabin-Regular-50"/>
-     <use xlink:href="#Cabin-Regular-72" transform="translate(57.199997 0)"/>
-     <use xlink:href="#Cabin-Regular-69" transform="translate(89.299988 0)"/>
-     <use xlink:href="#Cabin-Regular-6d" transform="translate(110.499985 0)"/>
-     <use xlink:href="#Cabin-Regular-61" transform="translate(198.199966 0)"/>
-     <use xlink:href="#Cabin-Regular-72" transform="translate(246.199951 0)"/>
-     <use xlink:href="#Cabin-Regular-79" transform="translate(278.299942 0)"/>
-     <use xlink:href="#Cabin-Regular-2d" transform="translate(328.799927 0)"/>
-     <use xlink:href="#Cabin-Regular-63" transform="translate(371.199921 0)"/>
-     <use xlink:href="#Cabin-Regular-69" transform="translate(416.599915 0)"/>
-     <use xlink:href="#Cabin-Regular-6c" transform="translate(437.799911 0)"/>
-     <use xlink:href="#Cabin-Regular-69" transform="translate(461.399902 0)"/>
-     <use xlink:href="#Cabin-Regular-75" transform="translate(482.599899 0)"/>
-     <use xlink:href="#Cabin-Regular-6d" transform="translate(534.999893 0)"/>
-     <use xlink:href="#Cabin-Regular-20" transform="translate(622.699875 0)"/>
-     <use xlink:href="#Cabin-Regular-73" transform="translate(645.19986 0)"/>
-     <use xlink:href="#Cabin-Regular-69" transform="translate(686.599854 0)"/>
-     <use xlink:href="#Cabin-Regular-67" transform="translate(707.79985 0)"/>
-     <use xlink:href="#Cabin-Regular-6e" transform="translate(757.599838 0)"/>
-     <use xlink:href="#Cabin-Regular-61" transform="translate(813.499832 0)"/>
-     <use xlink:href="#Cabin-Regular-6c" transform="translate(861.499817 0)"/>
+     <use xlink:href="#Nunito-Regular-50"/>
+     <use xlink:href="#Nunito-Regular-72" transform="translate(63.299988 0)"/>
+     <use xlink:href="#Nunito-Regular-69" transform="translate(99.099976 0)"/>
+     <use xlink:href="#Nunito-Regular-6d" transform="translate(122.299973 0)"/>
+     <use xlink:href="#Nunito-Regular-61" transform="translate(207.899963 0)"/>
+     <use xlink:href="#Nunito-Regular-72" transform="translate(260.899948 0)"/>
+     <use xlink:href="#Nunito-Regular-79" transform="translate(296.699936 0)"/>
+     <use xlink:href="#Nunito-Regular-2d" transform="translate(348.09993 0)"/>
+     <use xlink:href="#Nunito-Regular-63" transform="translate(390.499924 0)"/>
+     <use xlink:href="#Nunito-Regular-69" transform="translate(436.799911 0)"/>
+     <use xlink:href="#Nunito-Regular-6c" transform="translate(459.999908 0)"/>
+     <use xlink:href="#Nunito-Regular-69" transform="translate(489.599899 0)"/>
+     <use xlink:href="#Nunito-Regular-75" transform="translate(512.799896 0)"/>
+     <use xlink:href="#Nunito-Regular-6d" transform="translate(568.899887 0)"/>
+     <use xlink:href="#Nunito-Regular-20" transform="translate(654.499878 0)"/>
+     <use xlink:href="#Nunito-Regular-73" transform="translate(680.299866 0)"/>
+     <use xlink:href="#Nunito-Regular-69" transform="translate(728.399857 0)"/>
+     <use xlink:href="#Nunito-Regular-67" transform="translate(751.599854 0)"/>
+     <use xlink:href="#Nunito-Regular-6e" transform="translate(810.199844 0)"/>
+     <use xlink:href="#Nunito-Regular-61" transform="translate(866.999832 0)"/>
+     <use xlink:href="#Nunito-Regular-6c" transform="translate(919.999817 0)"/>
     </g>
    </g>
    <g id="text_7">
     <!-- B / Whole-cell SMO -->
-    <g style="fill: #263a30" transform="translate(76.32 866.663437) scale(0.36 -0.36)">
+    <g style="fill: #263a30" transform="translate(72.72 865.816875) scale(0.36 -0.36)">
      <defs>
-      <path id="Cabin-Bold-42" d="M 2221 0 
-C 2970 0 3821 282 3821 1318 
-C 3821 1888 3558 2195 3040 2394 
-C 3302 2611 3418 2925 3418 3328 
-C 3418 4320 2733 4480 1702 4480 
-L 493 4480 
-L 493 0 
-L 2221 0 
+      <path id="PixelifySans-Bold-42" d="M 954 -70 
+L 954 474 
+L 390 474 
+L 390 3533 
+L 954 3533 
+L 954 4083 
+L 2899 4083 
+L 2899 3533 
+L 3469 3533 
+L 3469 2118 
+L 2899 2118 
+L 2899 1901 
+L 3469 1901 
+L 3469 474 
+L 2899 474 
+L 2899 -70 
+L 954 -70 
 z
-M 2035 3782 
-C 2413 3782 2656 3674 2656 3206 
-C 2656 2778 2342 2682 2112 2682 
-L 1312 2682 
-L 1312 3782 
-L 2035 3782 
-z
-M 2163 2035 
-C 2624 2035 2976 1882 2976 1363 
-C 2976 858 2643 698 2118 698 
-L 1312 698 
-L 1312 2035 
-L 2163 2035 
-z
-" transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-57" d="M 6125 4480 
-L 5274 4480 
-L 4416 1382 
-L 3379 4480 
-L 2810 4480 
-L 1811 1299 
-L 915 4480 
-L 64 4480 
-L 1325 0 
-L 2099 0 
-L 3091 2989 
-L 4090 0 
-L 4813 0 
-L 6125 4480 
+M 1203 800 
+L 2650 800 
+L 2650 1574 
+L 1517 1574 
+L 1517 2438 
+L 2650 2438 
+L 2650 3206 
+L 1203 3206 
+L 1203 800 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-68" d="M 3187 0 
-L 3187 1722 
-C 3187 2624 2822 3251 1824 3251 
-C 1587 3251 1344 3155 1158 3034 
-L 1158 4800 
-L 365 4800 
-L 365 0 
-L 1158 0 
-L 1158 2323 
-C 1306 2496 1491 2598 1760 2598 
-C 2208 2598 2394 2317 2394 1722 
-L 2394 0 
-L 3187 0 
+      <path id="PixelifySans-Bold-57" d="M 954 -70 
+L 954 474 
+L 390 474 
+L 390 4083 
+L 1203 4083 
+L 1203 800 
+L 1517 800 
+L 1517 1901 
+L 2086 1901 
+L 2086 3533 
+L 2899 3533 
+L 2899 1901 
+L 3469 1901 
+L 3469 800 
+L 3789 800 
+L 3789 4083 
+L 4595 4083 
+L 4595 474 
+L 4038 474 
+L 4038 -70 
+L 3219 -70 
+L 3219 474 
+L 2650 474 
+L 2650 1574 
+L 2336 1574 
+L 2336 474 
+L 1766 474 
+L 1766 -70 
+L 954 -70 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-6f" d="M 1798 -64 
-C 2822 -64 3418 698 3418 1594 
-C 3418 2490 2822 3251 1798 3251 
-C 774 3251 179 2490 179 1594 
-C 179 698 774 -64 1798 -64 
-z
-M 1798 2598 
-C 2310 2598 2605 2189 2605 1594 
-C 2605 998 2310 589 1798 589 
-C 1286 589 992 998 992 1594 
-C 992 2189 1286 2598 1798 2598 
-z
-" transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-65" d="M 3072 1427 
-C 3104 1581 3123 1722 3123 1862 
-C 3123 2707 2522 3251 1715 3251 
-C 730 3251 179 2483 179 1594 
-C 179 698 755 -64 1914 -64 
-C 2368 -64 2739 51 2982 179 
-L 2944 851 
-C 2682 710 2259 589 1958 589 
-C 1536 589 1094 832 1005 1427 
-L 3072 1427 
-z
-M 1741 2598 
-C 2170 2598 2317 2253 2317 1965 
-L 1024 1965 
-C 1101 2330 1331 2598 1741 2598 
+      <path id="PixelifySans-Bold-68" d="M 390 -70 
+L 390 4083 
+L 1203 4083 
+L 1203 2438 
+L 1517 2438 
+L 1517 2989 
+L 2899 2989 
+L 2899 2438 
+L 3469 2438 
+L 3469 -70 
+L 2650 -70 
+L 2650 2118 
+L 1766 2118 
+L 1766 1574 
+L 1203 1574 
+L 1203 -70 
+L 390 -70 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-2d" d="M 2330 1472 
-L 2330 2074 
-L 346 2074 
-L 346 1472 
-L 2330 1472 
+      <path id="PixelifySans-Bold-6f" d="M 954 -70 
+L 954 474 
+L 390 474 
+L 390 2438 
+L 954 2438 
+L 954 2989 
+L 2899 2989 
+L 2899 2438 
+L 3469 2438 
+L 3469 474 
+L 2899 474 
+L 2899 -70 
+L 954 -70 
+z
+M 1203 800 
+L 2650 800 
+L 2650 2118 
+L 1203 2118 
+L 1203 800 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-63" d="M 1734 -64 
-C 2246 -64 2490 45 2694 173 
-L 2624 851 
-C 2362 678 2106 589 1798 589 
-C 1286 589 992 998 992 1594 
-C 992 2189 1286 2598 1798 2598 
-C 2106 2598 2362 2509 2624 2336 
-L 2694 3014 
-C 2490 3142 2246 3251 1734 3251 
-C 710 3251 179 2490 179 1594 
-C 179 698 710 -64 1734 -64 
+      <path id="PixelifySans-Bold-2d" d="M 179 1165 
+L 179 2042 
+L 2125 2042 
+L 2125 1165 
+L 179 1165 
 z
 " transform="scale(0.015625)"/>
      </defs>
-     <use xlink:href="#Cabin-Bold-42"/>
-     <use xlink:href="#Cabin-Bold-20" transform="translate(62.599991 0)"/>
-     <use xlink:href="#Cabin-Bold-2f" transform="translate(85.099976 0)"/>
-     <use xlink:href="#Cabin-Bold-20" transform="translate(140.199966 0)"/>
-     <use xlink:href="#Cabin-Bold-57" transform="translate(162.699951 0)"/>
-     <use xlink:href="#Cabin-Bold-68" transform="translate(258.999939 0)"/>
-     <use xlink:href="#Cabin-Bold-6f" transform="translate(314.09993 0)"/>
-     <use xlink:href="#Cabin-Bold-6c" transform="translate(370.299927 0)"/>
-     <use xlink:href="#Cabin-Bold-65" transform="translate(396.599915 0)"/>
-     <use xlink:href="#Cabin-Bold-2d" transform="translate(448.099899 0)"/>
-     <use xlink:href="#Cabin-Bold-63" transform="translate(489.899887 0)"/>
-     <use xlink:href="#Cabin-Bold-65" transform="translate(534.699875 0)"/>
-     <use xlink:href="#Cabin-Bold-6c" transform="translate(586.19986 0)"/>
-     <use xlink:href="#Cabin-Bold-6c" transform="translate(612.499847 0)"/>
-     <use xlink:href="#Cabin-Bold-20" transform="translate(638.799835 0)"/>
-     <use xlink:href="#Cabin-Bold-53" transform="translate(661.29982 0)"/>
-     <use xlink:href="#Cabin-Bold-4d" transform="translate(719.299805 0)"/>
-     <use xlink:href="#Cabin-Bold-4f" transform="translate(801.974792 0)"/>
+     <use xlink:href="#PixelifySans-Bold-42"/>
+     <use xlink:href="#PixelifySans-Bold-20" transform="translate(60.299988 0)"/>
+     <use xlink:href="#PixelifySans-Bold-2f" transform="translate(80.299973 0)"/>
+     <use xlink:href="#PixelifySans-Bold-20" transform="translate(135.09996 0)"/>
+     <use xlink:href="#PixelifySans-Bold-57" transform="translate(155.099945 0)"/>
+     <use xlink:href="#PixelifySans-Bold-68" transform="translate(232.999939 0)"/>
+     <use xlink:href="#PixelifySans-Bold-6f" transform="translate(293.299927 0)"/>
+     <use xlink:href="#PixelifySans-Bold-6c" transform="translate(353.599915 0)"/>
+     <use xlink:href="#PixelifySans-Bold-65" transform="translate(378.499908 0)"/>
+     <use xlink:href="#PixelifySans-Bold-2d" transform="translate(438.799896 0)"/>
+     <use xlink:href="#PixelifySans-Bold-63" transform="translate(475.499893 0)"/>
+     <use xlink:href="#PixelifySans-Bold-65" transform="translate(535.799881 0)"/>
+     <use xlink:href="#PixelifySans-Bold-6c" transform="translate(596.099869 0)"/>
+     <use xlink:href="#PixelifySans-Bold-6c" transform="translate(620.999863 0)"/>
+     <use xlink:href="#PixelifySans-Bold-20" transform="translate(645.899857 0)"/>
+     <use xlink:href="#PixelifySans-Bold-53" transform="translate(665.899841 0)"/>
+     <use xlink:href="#PixelifySans-Bold-4d" transform="translate(726.199829 0)"/>
+     <use xlink:href="#PixelifySans-Bold-4f" transform="translate(804.099823 0)"/>
     </g>
    </g>
    <g id="text_8">
     <!-- Total cellular fluorescence -->
-    <g style="fill: #3e5d4d" transform="translate(76.32 899.191562) scale(0.28 -0.28)">
+    <g style="fill: #3e5d4d" transform="translate(72.72 899.43) scale(0.28 -0.28)">
      <defs>
-      <path id="Cabin-Regular-54" d="M 3315 3930 
-L 3315 4480 
-L 96 4480 
-L 96 3930 
-L 1402 3930 
-L 1402 0 
-L 2010 0 
-L 2010 3930 
-L 3315 3930 
+      <path id="Nunito-Regular-54" d="M 1926 -45 
+Q 1805 -45 1734 28 
+Q 1664 102 1664 230 
+L 1664 4058 
+L 224 4058 
+Q 109 4058 45 4122 
+Q -19 4186 -19 4288 
+Q -19 4397 45 4454 
+Q 109 4512 224 4512 
+L 3635 4512 
+Q 3750 4512 3814 4454 
+Q 3878 4397 3878 4288 
+Q 3878 4179 3814 4118 
+Q 3750 4058 3635 4058 
+L 2195 4058 
+L 2195 230 
+Q 2195 102 2128 28 
+Q 2061 -45 1926 -45 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-6f" d="M 1760 -64 
-C 2739 -64 3315 659 3315 1568 
-C 3315 2477 2739 3200 1760 3200 
-C 774 3200 205 2477 205 1568 
-C 205 659 774 -64 1760 -64 
+      <path id="Nunito-Regular-6f" d="M 1779 -58 
+Q 1325 -58 992 140 
+Q 659 339 476 700 
+Q 294 1062 294 1555 
+Q 294 1926 396 2224 
+Q 499 2522 697 2733 
+Q 896 2944 1168 3056 
+Q 1440 3168 1779 3168 
+Q 2234 3168 2566 2969 
+Q 2899 2771 3081 2409 
+Q 3264 2048 3264 1555 
+Q 3264 1184 3161 889 
+Q 3059 595 2860 380 
+Q 2662 166 2390 54 
+Q 2118 -58 1779 -58 
 z
-M 1760 2688 
-C 2381 2688 2726 2272 2726 1568 
-C 2726 864 2381 448 1760 448 
-C 1139 448 794 864 794 1568 
-C 794 2272 1139 2688 1760 2688 
+M 1779 358 
+Q 2067 358 2284 499 
+Q 2502 640 2620 909 
+Q 2739 1178 2739 1555 
+Q 2739 2138 2480 2445 
+Q 2221 2752 1779 2752 
+Q 1485 2752 1270 2614 
+Q 1056 2477 937 2211 
+Q 819 1946 819 1555 
+Q 819 979 1081 668 
+Q 1344 358 1779 358 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Regular-66" d="M 2029 2688 
-L 2029 3136 
-L 1184 3136 
-L 1184 3520 
-C 1184 4160 1216 4288 1517 4288 
-C 1638 4288 1760 4275 1901 4230 
-L 1990 4717 
-C 1837 4768 1702 4800 1338 4800 
-C 858 4800 608 4435 608 3930 
-L 608 3136 
-L 141 3136 
-L 64 2688 
-L 608 2688 
-L 608 0 
-L 1184 0 
-L 1184 2688 
-L 2029 2688 
+      <path id="Nunito-Regular-66" d="M 909 -45 
+Q 787 -45 720 25 
+Q 653 96 653 224 
+L 653 2707 
+L 243 2707 
+Q 141 2707 80 2761 
+Q 19 2816 19 2912 
+Q 19 3008 80 3059 
+Q 141 3110 243 3110 
+L 794 3110 
+L 653 2976 
+L 653 3219 
+Q 653 3827 950 4147 
+Q 1248 4467 1824 4518 
+L 2010 4538 
+Q 2099 4544 2153 4505 
+Q 2208 4467 2224 4409 
+Q 2240 4352 2227 4291 
+Q 2214 4230 2169 4185 
+Q 2125 4141 2061 4134 
+L 1914 4122 
+Q 1523 4090 1347 3885 
+Q 1171 3680 1171 3283 
+L 1171 3014 
+L 1094 3110 
+L 1862 3110 
+Q 1971 3110 2028 3059 
+Q 2086 3008 2086 2912 
+Q 2086 2816 2028 2761 
+Q 1971 2707 1862 2707 
+L 1171 2707 
+L 1171 224 
+Q 1171 -45 909 -45 
 z
 " transform="scale(0.015625)"/>
      </defs>
-     <use xlink:href="#Cabin-Regular-54"/>
-     <use xlink:href="#Cabin-Regular-6f" transform="translate(45.424988 0)"/>
-     <use xlink:href="#Cabin-Regular-74" transform="translate(99.674973 0)"/>
-     <use xlink:href="#Cabin-Regular-61" transform="translate(133.374969 0)"/>
-     <use xlink:href="#Cabin-Regular-6c" transform="translate(181.374954 0)"/>
-     <use xlink:href="#Cabin-Regular-20" transform="translate(204.974945 0)"/>
-     <use xlink:href="#Cabin-Regular-63" transform="translate(227.47493 0)"/>
-     <use xlink:href="#Cabin-Regular-65" transform="translate(272.874924 0)"/>
-     <use xlink:href="#Cabin-Regular-6c" transform="translate(324.074921 0)"/>
-     <use xlink:href="#Cabin-Regular-6c" transform="translate(347.674911 0)"/>
-     <use xlink:href="#Cabin-Regular-75" transform="translate(371.274902 0)"/>
-     <use xlink:href="#Cabin-Regular-6c" transform="translate(423.674896 0)"/>
-     <use xlink:href="#Cabin-Regular-61" transform="translate(447.274887 0)"/>
-     <use xlink:href="#Cabin-Regular-72" transform="translate(495.274872 0)"/>
-     <use xlink:href="#Cabin-Regular-20" transform="translate(527.374863 0)"/>
-     <use xlink:href="#Cabin-Regular-66" transform="translate(549.874847 0)"/>
-     <use xlink:href="#Cabin-Regular-6c" transform="translate(582.974838 0)"/>
-     <use xlink:href="#Cabin-Regular-75" transform="translate(606.574829 0)"/>
-     <use xlink:href="#Cabin-Regular-6f" transform="translate(658.974823 0)"/>
-     <use xlink:href="#Cabin-Regular-72" transform="translate(713.974808 0)"/>
-     <use xlink:href="#Cabin-Regular-65" transform="translate(746.074799 0)"/>
-     <use xlink:href="#Cabin-Regular-73" transform="translate(797.274796 0)"/>
-     <use xlink:href="#Cabin-Regular-63" transform="translate(838.674789 0)"/>
-     <use xlink:href="#Cabin-Regular-65" transform="translate(884.074783 0)"/>
-     <use xlink:href="#Cabin-Regular-6e" transform="translate(935.27478 0)"/>
-     <use xlink:href="#Cabin-Regular-63" transform="translate(991.174774 0)"/>
-     <use xlink:href="#Cabin-Regular-65" transform="translate(1036.574768 0)"/>
+     <use xlink:href="#Nunito-Regular-54"/>
+     <use xlink:href="#Nunito-Regular-6f" transform="translate(60.199997 0)"/>
+     <use xlink:href="#Nunito-Regular-74" transform="translate(115.799988 0)"/>
+     <use xlink:href="#Nunito-Regular-61" transform="translate(150.799973 0)"/>
+     <use xlink:href="#Nunito-Regular-6c" transform="translate(203.799957 0)"/>
+     <use xlink:href="#Nunito-Regular-20" transform="translate(233.399948 0)"/>
+     <use xlink:href="#Nunito-Regular-63" transform="translate(259.199936 0)"/>
+     <use xlink:href="#Nunito-Regular-65" transform="translate(305.499924 0)"/>
+     <use xlink:href="#Nunito-Regular-6c" transform="translate(358.699921 0)"/>
+     <use xlink:href="#Nunito-Regular-6c" transform="translate(388.299911 0)"/>
+     <use xlink:href="#Nunito-Regular-75" transform="translate(417.899902 0)"/>
+     <use xlink:href="#Nunito-Regular-6c" transform="translate(473.999893 0)"/>
+     <use xlink:href="#Nunito-Regular-61" transform="translate(503.599884 0)"/>
+     <use xlink:href="#Nunito-Regular-72" transform="translate(556.599869 0)"/>
+     <use xlink:href="#Nunito-Regular-20" transform="translate(592.399857 0)"/>
+     <use xlink:href="#Nunito-Regular-66" transform="translate(618.199844 0)"/>
+     <use xlink:href="#Nunito-Regular-6c" transform="translate(651.499832 0)"/>
+     <use xlink:href="#Nunito-Regular-75" transform="translate(681.099823 0)"/>
+     <use xlink:href="#Nunito-Regular-6f" transform="translate(737.199814 0)"/>
+     <use xlink:href="#Nunito-Regular-72" transform="translate(792.799805 0)"/>
+     <use xlink:href="#Nunito-Regular-65" transform="translate(828.599792 0)"/>
+     <use xlink:href="#Nunito-Regular-73" transform="translate(881.799789 0)"/>
+     <use xlink:href="#Nunito-Regular-63" transform="translate(929.89978 0)"/>
+     <use xlink:href="#Nunito-Regular-65" transform="translate(976.199768 0)"/>
+     <use xlink:href="#Nunito-Regular-6e" transform="translate(1029.399765 0)"/>
+     <use xlink:href="#Nunito-Regular-63" transform="translate(1086.199753 0)"/>
+     <use xlink:href="#Nunito-Regular-65" transform="translate(1132.499741 0)"/>
     </g>
    </g>
    <g id="text_9">
     <!-- INTERPRETATION -->
-    <g style="fill: #263a30" transform="translate(75.6 1456.979531) scale(0.3 -0.3)">
+    <g style="fill: #263a30" transform="translate(72 1456.274062) scale(0.3 -0.3)">
      <defs>
-      <path id="Cabin-Bold-4e" d="M 4032 0 
-L 4032 4480 
-L 3213 4480 
-L 3213 1587 
-L 1299 4480 
-L 493 4480 
-L 493 0 
-L 1312 0 
-L 1312 3072 
-L 3360 0 
-L 4032 0 
+      <path id="PixelifySans-Bold-4e" d="M 390 -70 
+L 390 4083 
+L 1203 4083 
+L 1203 3533 
+L 1766 3533 
+L 1766 2989 
+L 2336 2989 
+L 2336 1350 
+L 2650 1350 
+L 2650 4083 
+L 3469 4083 
+L 3469 -70 
+L 2650 -70 
+L 2650 474 
+L 2086 474 
+L 2086 1024 
+L 1517 1024 
+L 1517 2662 
+L 1203 2662 
+L 1203 -70 
+L 390 -70 
+z
+" transform="scale(0.015625)"/>
+      <path id="PixelifySans-Bold-54" d="M 1517 -70 
+L 1517 3206 
+L 1203 3206 
+L 1203 2662 
+L 390 2662 
+L 390 3533 
+L 954 3533 
+L 954 4083 
+L 2899 4083 
+L 2899 3533 
+L 3469 3533 
+L 3469 2662 
+L 2650 2662 
+L 2650 3206 
+L 2336 3206 
+L 2336 -70 
+L 1517 -70 
+z
+" transform="scale(0.015625)"/>
+      <path id="PixelifySans-Bold-50" d="M 390 -70 
+L 390 3533 
+L 954 3533 
+L 954 4083 
+L 2899 4083 
+L 2899 3533 
+L 3469 3533 
+L 3469 1574 
+L 2899 1574 
+L 2899 1024 
+L 1203 1024 
+L 1203 -70 
+L 390 -70 
+z
+M 1203 1901 
+L 2650 1901 
+L 2650 3206 
+L 1203 3206 
+L 1203 1901 
 z
 " transform="scale(0.015625)"/>
      </defs>
-     <use xlink:href="#Cabin-Bold-49"/>
-     <use xlink:href="#Cabin-Bold-4e" transform="translate(28.199997 0)"/>
-     <use xlink:href="#Cabin-Bold-54" transform="translate(98.899979 0)"/>
-     <use xlink:href="#Cabin-Bold-45" transform="translate(154.299973 0)"/>
-     <use xlink:href="#Cabin-Bold-52" transform="translate(211.09996 0)"/>
-     <use xlink:href="#Cabin-Bold-50" transform="translate(273.699951 0)"/>
-     <use xlink:href="#Cabin-Bold-52" transform="translate(333.299942 0)"/>
-     <use xlink:href="#Cabin-Bold-45" transform="translate(395.899933 0)"/>
-     <use xlink:href="#Cabin-Bold-54" transform="translate(452.699921 0)"/>
-     <use xlink:href="#Cabin-Bold-41" transform="translate(502.849915 0)"/>
-     <use xlink:href="#Cabin-Bold-54" transform="translate(560.099899 0)"/>
-     <use xlink:href="#Cabin-Bold-49" transform="translate(615.499893 0)"/>
-     <use xlink:href="#Cabin-Bold-4f" transform="translate(643.69989 0)"/>
-     <use xlink:href="#Cabin-Bold-4e" transform="translate(719.699875 0)"/>
+     <use xlink:href="#PixelifySans-Bold-49"/>
+     <use xlink:href="#PixelifySans-Bold-4e" transform="translate(42.599991 0)"/>
+     <use xlink:href="#PixelifySans-Bold-54" transform="translate(102.899979 0)"/>
+     <use xlink:href="#PixelifySans-Bold-45" transform="translate(163.199966 0)"/>
+     <use xlink:href="#PixelifySans-Bold-52" transform="translate(223.499954 0)"/>
+     <use xlink:href="#PixelifySans-Bold-50" transform="translate(283.799942 0)"/>
+     <use xlink:href="#PixelifySans-Bold-52" transform="translate(344.09993 0)"/>
+     <use xlink:href="#PixelifySans-Bold-45" transform="translate(404.399918 0)"/>
+     <use xlink:href="#PixelifySans-Bold-54" transform="translate(464.699905 0)"/>
+     <use xlink:href="#PixelifySans-Bold-41" transform="translate(524.999893 0)"/>
+     <use xlink:href="#PixelifySans-Bold-54" transform="translate(585.299881 0)"/>
+     <use xlink:href="#PixelifySans-Bold-49" transform="translate(645.599869 0)"/>
+     <use xlink:href="#PixelifySans-Bold-4f" transform="translate(688.19986 0)"/>
+     <use xlink:href="#PixelifySans-Bold-4e" transform="translate(748.499847 0)"/>
     </g>
    </g>
    <g id="text_10">
     <!-- Ciliary loss alone does not prove -->
-    <g style="fill: #263a30" transform="translate(75.6 1492.725547) scale(0.29 -0.29)">
+    <g style="fill: #263a30" transform="translate(72 1493.088047) scale(0.29 -0.29)">
      <defs>
-      <path id="Cabin-Bold-73" d="M 1280 -64 
-C 2374 -64 2534 486 2534 877 
-C 2534 1536 2086 1734 1658 1856 
-C 1254 1971 928 2022 928 2330 
-C 928 2586 1184 2682 1459 2682 
-C 1805 2682 2176 2496 2336 2336 
-L 2406 3014 
-C 2234 3130 1818 3251 1402 3251 
-C 499 3251 230 2682 230 2234 
-C 230 1619 704 1472 1152 1338 
-C 1466 1242 1741 1152 1741 883 
-C 1741 723 1638 531 1254 531 
-C 896 531 467 698 269 851 
-L 198 173 
-C 384 51 781 -64 1280 -64 
+      <path id="Nunito-Bold-69" d="M 813 -45 
+Q 621 -45 518 70 
+Q 416 186 416 390 
+L 416 2739 
+Q 416 2950 518 3062 
+Q 621 3174 813 3174 
+Q 1005 3174 1110 3062 
+Q 1216 2950 1216 2739 
+L 1216 390 
+Q 1216 186 1113 70 
+Q 1011 -45 813 -45 
+z
+M 813 3770 
+Q 589 3770 464 3882 
+Q 339 3994 339 4192 
+Q 339 4397 464 4505 
+Q 589 4614 813 4614 
+Q 1043 4614 1164 4505 
+Q 1286 4397 1286 4192 
+Q 1286 3994 1164 3882 
+Q 1043 3770 813 3770 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-6e" d="M 3194 0 
-L 3194 1722 
-C 3194 2624 2829 3251 1830 3251 
-C 1581 3251 1312 3142 1126 3008 
-L 1114 3200 
-L 371 3200 
-L 371 0 
-L 1165 0 
-L 1165 2323 
-C 1312 2496 1498 2598 1766 2598 
-C 2214 2598 2400 2317 2400 1722 
-L 2400 0 
-L 3194 0 
+      <path id="Nunito-Bold-6c" d="M 1485 -64 
+Q 954 -64 685 240 
+Q 416 544 416 1133 
+L 416 4160 
+Q 416 4358 518 4460 
+Q 621 4563 813 4563 
+Q 1005 4563 1110 4460 
+Q 1216 4358 1216 4160 
+L 1216 1171 
+Q 1216 877 1341 736 
+Q 1466 595 1696 595 
+Q 1747 595 1792 598 
+Q 1837 602 1882 608 
+Q 1971 621 2003 560 
+Q 2035 499 2035 314 
+Q 2035 154 1971 64 
+Q 1907 -26 1760 -45 
+Q 1696 -51 1625 -57 
+Q 1555 -64 1485 -64 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-64" d="M 3290 0 
-L 3290 4800 
-L 2496 4800 
-L 2496 3040 
-C 2291 3174 2074 3251 1747 3251 
-C 723 3251 179 2490 179 1594 
-C 179 698 723 -64 1747 -64 
-C 2093 -64 2304 26 2528 179 
-L 2541 0 
-L 3290 0 
-z
-M 1798 2598 
-C 2310 2598 2534 2189 2534 1594 
-C 2534 998 2310 589 1798 589 
-C 1286 589 992 998 992 1594 
-C 992 2189 1286 2598 1798 2598 
-z
-" transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-74" d="M 2054 589 
-L 1837 589 
-C 1389 589 1350 614 1350 1101 
-L 1350 2547 
-L 2054 2547 
-L 2054 3200 
-L 1350 3200 
-L 1350 3987 
-L 557 3904 
-L 557 3200 
-L 173 3200 
-L 102 2547 
-L 557 2547 
-L 557 774 
-C 557 358 813 -64 1414 -64 
-L 1984 -64 
-L 2054 589 
-z
-" transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-70" d="M 1914 -64 
-C 2938 -64 3482 698 3482 1594 
-C 3482 2490 2938 3251 1914 3251 
-C 1562 3251 1344 3162 1126 3014 
-L 1062 3200 
-L 371 3200 
-L 371 -1549 
-L 1165 -1549 
-L 1165 154 
-C 1376 13 1581 -64 1914 -64 
-z
-M 1862 2598 
-C 2374 2598 2669 2189 2669 1594 
-C 2669 998 2374 589 1862 589 
-C 1350 589 1126 998 1126 1594 
-C 1126 2189 1350 2598 1862 2598 
+      <path id="Nunito-Bold-61" d="M 1446 -64 
+Q 1107 -64 841 67 
+Q 576 198 425 422 
+Q 275 646 275 928 
+Q 275 1274 454 1475 
+Q 634 1677 1037 1766 
+Q 1440 1856 2118 1856 
+L 2438 1856 
+L 2438 1395 
+L 2125 1395 
+Q 1728 1395 1491 1356 
+Q 1254 1318 1155 1225 
+Q 1056 1133 1056 966 
+Q 1056 755 1203 620 
+Q 1350 486 1613 486 
+Q 1824 486 1987 585 
+Q 2150 685 2246 857 
+Q 2342 1030 2342 1254 
+L 2342 1990 
+Q 2342 2310 2201 2451 
+Q 2061 2592 1728 2592 
+Q 1542 2592 1328 2547 
+Q 1114 2502 877 2394 
+Q 755 2336 662 2361 
+Q 570 2387 518 2467 
+Q 467 2547 467 2643 
+Q 467 2739 518 2832 
+Q 570 2925 691 2970 
+Q 986 3091 1258 3142 
+Q 1530 3194 1754 3194 
+Q 2214 3194 2512 3053 
+Q 2810 2912 2957 2627 
+Q 3104 2342 3104 1894 
+L 3104 358 
+Q 3104 160 3008 54 
+Q 2912 -51 2733 -51 
+Q 2554 -51 2454 54 
+Q 2355 160 2355 358 
+L 2355 666 
+L 2406 666 
+Q 2362 442 2230 278 
+Q 2099 115 1900 25 
+Q 1702 -64 1446 -64 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-76" d="M 3155 3200 
-L 2374 3200 
-L 1587 986 
-L 800 3200 
-L 19 3200 
-L 1248 0 
-L 1926 0 
-L 3155 3200 
+      <path id="Nunito-Bold-72" d="M 826 -51 
+Q 627 -51 521 54 
+Q 416 160 416 358 
+L 416 2778 
+Q 416 2976 518 3078 
+Q 621 3181 806 3181 
+Q 992 3181 1094 3078 
+Q 1197 2976 1197 2778 
+L 1197 2374 
+L 1133 2374 
+Q 1222 2758 1484 2956 
+Q 1747 3155 2182 3194 
+Q 2317 3206 2397 3126 
+Q 2477 3046 2490 2880 
+Q 2502 2720 2416 2621 
+Q 2330 2522 2157 2502 
+L 2016 2490 
+Q 1626 2451 1427 2249 
+Q 1229 2048 1229 1683 
+L 1229 358 
+Q 1229 160 1126 54 
+Q 1024 -51 826 -51 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Bold-79" d="M 1210 -1203 
+Q 1069 -1203 979 -1129 
+Q 890 -1056 874 -934 
+Q 858 -813 915 -678 
+L 1350 288 
+L 1350 -45 
+L 186 2650 
+Q 128 2790 147 2912 
+Q 166 3034 265 3107 
+Q 365 3181 538 3181 
+Q 685 3181 774 3113 
+Q 864 3046 934 2861 
+L 1798 704 
+L 1606 704 
+L 2490 2867 
+Q 2560 3046 2656 3113 
+Q 2752 3181 2912 3181 
+Q 3053 3181 3136 3107 
+Q 3219 3034 3238 2915 
+Q 3258 2797 3194 2656 
+L 1638 -896 
+Q 1555 -1075 1459 -1139 
+Q 1363 -1203 1210 -1203 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Bold-20" transform="scale(0.015625)"/>
+      <path id="Nunito-Bold-6f" d="M 1843 -64 
+Q 1357 -64 998 134 
+Q 640 333 441 701 
+Q 243 1069 243 1568 
+Q 243 1946 355 2243 
+Q 467 2541 678 2755 
+Q 890 2970 1184 3082 
+Q 1478 3194 1843 3194 
+Q 2330 3194 2688 2995 
+Q 3046 2797 3244 2432 
+Q 3443 2067 3443 1568 
+Q 3443 1190 3331 889 
+Q 3219 589 3008 374 
+Q 2797 160 2502 48 
+Q 2208 -64 1843 -64 
+z
+M 1843 544 
+Q 2080 544 2259 659 
+Q 2438 774 2537 1001 
+Q 2637 1229 2637 1568 
+Q 2637 2080 2419 2333 
+Q 2202 2586 1843 2586 
+Q 1606 2586 1427 2474 
+Q 1248 2362 1149 2134 
+Q 1050 1907 1050 1568 
+Q 1050 1062 1267 803 
+Q 1485 544 1843 544 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Bold-73" d="M 1562 -64 
+Q 1286 -64 979 -6 
+Q 672 51 429 192 
+Q 326 256 284 342 
+Q 243 429 252 515 
+Q 262 602 316 666 
+Q 371 730 457 749 
+Q 544 768 646 717 
+Q 902 595 1126 547 
+Q 1350 499 1568 499 
+Q 1875 499 2025 604 
+Q 2176 710 2176 883 
+Q 2176 1030 2077 1110 
+Q 1978 1190 1779 1229 
+L 1139 1350 
+Q 742 1427 534 1641 
+Q 326 1856 326 2195 
+Q 326 2502 496 2726 
+Q 666 2950 966 3072 
+Q 1267 3194 1658 3194 
+Q 1939 3194 2185 3133 
+Q 2432 3072 2662 2944 
+Q 2758 2893 2793 2809 
+Q 2829 2726 2809 2640 
+Q 2790 2554 2732 2486 
+Q 2675 2419 2588 2403 
+Q 2502 2387 2394 2438 
+Q 2195 2541 2012 2585 
+Q 1830 2630 1664 2630 
+Q 1350 2630 1200 2521 
+Q 1050 2413 1050 2234 
+Q 1050 2099 1139 2009 
+Q 1229 1920 1414 1888 
+L 2054 1766 
+Q 2470 1690 2684 1485 
+Q 2899 1280 2899 934 
+Q 2899 467 2534 201 
+Q 2170 -64 1562 -64 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Bold-6e" d="M 813 -51 
+Q 621 -51 518 54 
+Q 416 160 416 358 
+L 416 2778 
+Q 416 2976 518 3078 
+Q 621 3181 806 3181 
+Q 992 3181 1094 3078 
+Q 1197 2976 1197 2778 
+L 1197 2342 
+L 1126 2502 
+Q 1267 2842 1564 3018 
+Q 1862 3194 2240 3194 
+Q 2618 3194 2861 3053 
+Q 3104 2912 3225 2627 
+Q 3347 2342 3347 1907 
+L 3347 358 
+Q 3347 160 3244 54 
+Q 3142 -51 2950 -51 
+Q 2758 -51 2652 54 
+Q 2547 160 2547 358 
+L 2547 1869 
+Q 2547 2234 2409 2400 
+Q 2272 2566 1984 2566 
+Q 1632 2566 1424 2345 
+Q 1216 2125 1216 1760 
+L 1216 358 
+Q 1216 -51 813 -51 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Bold-65" d="M 1958 -64 
+Q 1427 -64 1043 134 
+Q 659 333 451 697 
+Q 243 1062 243 1562 
+Q 243 2048 444 2413 
+Q 646 2778 1001 2986 
+Q 1357 3194 1811 3194 
+Q 2144 3194 2409 3085 
+Q 2675 2976 2864 2771 
+Q 3053 2566 3152 2275 
+Q 3251 1984 3251 1619 
+Q 3251 1504 3171 1443 
+Q 3091 1382 2944 1382 
+L 890 1382 
+L 890 1843 
+L 2688 1843 
+L 2586 1747 
+Q 2586 2042 2499 2240 
+Q 2413 2438 2249 2544 
+Q 2086 2650 1843 2650 
+Q 1574 2650 1385 2525 
+Q 1197 2400 1097 2173 
+Q 998 1946 998 1632 
+L 998 1587 
+Q 998 1062 1244 803 
+Q 1491 544 1971 544 
+Q 2138 544 2346 585 
+Q 2554 627 2739 730 
+Q 2874 806 2976 796 
+Q 3078 787 3139 723 
+Q 3200 659 3213 566 
+Q 3226 474 3178 378 
+Q 3130 282 3014 211 
+Q 2790 70 2499 3 
+Q 2208 -64 1958 -64 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Bold-64" d="M 1619 -64 
+Q 1210 -64 899 134 
+Q 589 333 416 701 
+Q 243 1069 243 1568 
+Q 243 2074 416 2435 
+Q 589 2797 899 2995 
+Q 1210 3194 1619 3194 
+Q 2010 3194 2301 3002 
+Q 2592 2810 2694 2496 
+L 2624 2496 
+L 2624 4160 
+Q 2624 4358 2726 4460 
+Q 2829 4563 3021 4563 
+Q 3213 4563 3318 4460 
+Q 3424 4358 3424 4160 
+L 3424 358 
+Q 3424 160 3321 54 
+Q 3219 -51 3027 -51 
+Q 2835 -51 2732 54 
+Q 2630 160 2630 358 
+L 2630 858 
+L 2701 666 
+Q 2605 333 2310 134 
+Q 2016 -64 1619 -64 
+z
+M 1843 544 
+Q 2080 544 2259 659 
+Q 2438 774 2537 1001 
+Q 2637 1229 2637 1568 
+Q 2637 2080 2419 2333 
+Q 2202 2586 1843 2586 
+Q 1606 2586 1427 2474 
+Q 1248 2362 1149 2134 
+Q 1050 1907 1050 1568 
+Q 1050 1062 1267 803 
+Q 1485 544 1843 544 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Bold-74" d="M 1850 -64 
+Q 1434 -64 1155 77 
+Q 877 218 742 490 
+Q 608 762 608 1165 
+L 608 2528 
+L 275 2528 
+Q 122 2528 38 2608 
+Q -45 2688 -45 2829 
+Q -45 2976 38 3053 
+Q 122 3130 275 3130 
+L 608 3130 
+L 608 3712 
+Q 608 3910 713 4012 
+Q 819 4115 1011 4115 
+Q 1203 4115 1305 4012 
+Q 1408 3910 1408 3712 
+L 1408 3130 
+L 2086 3130 
+Q 2240 3130 2323 3053 
+Q 2406 2976 2406 2829 
+Q 2406 2688 2323 2608 
+Q 2240 2528 2086 2528 
+L 1408 2528 
+L 1408 1210 
+Q 1408 902 1542 748 
+Q 1677 595 1978 595 
+Q 2086 595 2169 614 
+Q 2253 634 2317 640 
+Q 2394 646 2445 592 
+Q 2496 538 2496 371 
+Q 2496 243 2454 144 
+Q 2413 45 2304 6 
+Q 2221 -19 2086 -41 
+Q 1952 -64 1850 -64 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Bold-70" d="M 813 -1203 
+Q 621 -1203 518 -1100 
+Q 416 -998 416 -800 
+L 416 2778 
+Q 416 2976 518 3078 
+Q 621 3181 806 3181 
+Q 998 3181 1100 3078 
+Q 1203 2976 1203 2778 
+L 1203 2278 
+L 1133 2470 
+Q 1229 2797 1526 2995 
+Q 1824 3194 2221 3194 
+Q 2630 3194 2940 2995 
+Q 3251 2797 3424 2435 
+Q 3597 2074 3597 1568 
+Q 3597 1069 3424 701 
+Q 3251 333 2944 134 
+Q 2637 -64 2221 -64 
+Q 1830 -64 1536 131 
+Q 1242 326 1139 640 
+L 1216 640 
+L 1216 -800 
+Q 1216 -998 1110 -1100 
+Q 1005 -1203 813 -1203 
+z
+M 1997 544 
+Q 2234 544 2413 659 
+Q 2592 774 2691 1001 
+Q 2790 1229 2790 1568 
+Q 2790 2080 2572 2333 
+Q 2355 2586 1997 2586 
+Q 1760 2586 1581 2474 
+Q 1402 2362 1302 2134 
+Q 1203 1907 1203 1568 
+Q 1203 1062 1420 803 
+Q 1638 544 1997 544 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Bold-76" d="M 1683 -51 
+Q 1523 -51 1404 32 
+Q 1286 115 1210 288 
+L 192 2650 
+Q 134 2790 150 2912 
+Q 166 3034 265 3107 
+Q 365 3181 538 3181 
+Q 685 3181 774 3113 
+Q 864 3046 934 2861 
+L 1798 704 
+L 1606 704 
+L 2496 2867 
+Q 2566 3046 2659 3113 
+Q 2752 3181 2912 3181 
+Q 3053 3181 3136 3107 
+Q 3219 3034 3238 2915 
+Q 3258 2797 3194 2656 
+L 2157 288 
+Q 2086 115 1968 32 
+Q 1850 -51 1683 -51 
 z
 " transform="scale(0.015625)"/>
      </defs>
-     <use xlink:href="#Cabin-Bold-43"/>
-     <use xlink:href="#Cabin-Bold-69" transform="translate(60.899994 0)"/>
-     <use xlink:href="#Cabin-Bold-6c" transform="translate(84.899979 0)"/>
-     <use xlink:href="#Cabin-Bold-69" transform="translate(111.199966 0)"/>
-     <use xlink:href="#Cabin-Bold-61" transform="translate(135.199951 0)"/>
-     <use xlink:href="#Cabin-Bold-72" transform="translate(184.999939 0)"/>
-     <use xlink:href="#Cabin-Bold-79" transform="translate(219.199936 0)"/>
-     <use xlink:href="#Cabin-Bold-20" transform="translate(272.899933 0)"/>
-     <use xlink:href="#Cabin-Bold-6c" transform="translate(295.399918 0)"/>
-     <use xlink:href="#Cabin-Bold-6f" transform="translate(321.199905 0)"/>
-     <use xlink:href="#Cabin-Bold-73" transform="translate(377.399902 0)"/>
-     <use xlink:href="#Cabin-Bold-73" transform="translate(419.69989 0)"/>
-     <use xlink:href="#Cabin-Bold-20" transform="translate(461.999878 0)"/>
-     <use xlink:href="#Cabin-Bold-61" transform="translate(484.499863 0)"/>
-     <use xlink:href="#Cabin-Bold-6c" transform="translate(534.29985 0)"/>
-     <use xlink:href="#Cabin-Bold-6f" transform="translate(560.099838 0)"/>
-     <use xlink:href="#Cabin-Bold-6e" transform="translate(616.299835 0)"/>
-     <use xlink:href="#Cabin-Bold-65" transform="translate(671.499832 0)"/>
-     <use xlink:href="#Cabin-Bold-20" transform="translate(722.999817 0)"/>
-     <use xlink:href="#Cabin-Bold-64" transform="translate(745.499802 0)"/>
-     <use xlink:href="#Cabin-Bold-6f" transform="translate(802.599792 0)"/>
-     <use xlink:href="#Cabin-Bold-65" transform="translate(858.799789 0)"/>
-     <use xlink:href="#Cabin-Bold-73" transform="translate(910.299774 0)"/>
-     <use xlink:href="#Cabin-Bold-20" transform="translate(952.599762 0)"/>
-     <use xlink:href="#Cabin-Bold-6e" transform="translate(975.099747 0)"/>
-     <use xlink:href="#Cabin-Bold-6f" transform="translate(1030.299744 0)"/>
-     <use xlink:href="#Cabin-Bold-74" transform="translate(1085.874741 0)"/>
-     <use xlink:href="#Cabin-Bold-20" transform="translate(1120.274734 0)"/>
-     <use xlink:href="#Cabin-Bold-70" transform="translate(1142.774719 0)"/>
-     <use xlink:href="#Cabin-Bold-72" transform="translate(1199.974716 0)"/>
-     <use xlink:href="#Cabin-Bold-6f" transform="translate(1233.299713 0)"/>
-     <use xlink:href="#Cabin-Bold-76" transform="translate(1288.62471 0)"/>
-     <use xlink:href="#Cabin-Bold-65" transform="translate(1338.224701 0)"/>
+     <use xlink:href="#Nunito-Bold-43"/>
+     <use xlink:href="#Nunito-Bold-69" transform="translate(67.999985 0)"/>
+     <use xlink:href="#Nunito-Bold-6c" transform="translate(93.499969 0)"/>
+     <use xlink:href="#Nunito-Bold-69" transform="translate(125.399963 0)"/>
+     <use xlink:href="#Nunito-Bold-61" transform="translate(150.899948 0)"/>
+     <use xlink:href="#Nunito-Bold-72" transform="translate(205.599945 0)"/>
+     <use xlink:href="#Nunito-Bold-79" transform="translate(244.799942 0)"/>
+     <use xlink:href="#Nunito-Bold-20" transform="translate(297.399933 0)"/>
+     <use xlink:href="#Nunito-Bold-6c" transform="translate(324.499924 0)"/>
+     <use xlink:href="#Nunito-Bold-6f" transform="translate(356.399918 0)"/>
+     <use xlink:href="#Nunito-Bold-73" transform="translate(413.999908 0)"/>
+     <use xlink:href="#Nunito-Bold-73" transform="translate(462.799896 0)"/>
+     <use xlink:href="#Nunito-Bold-20" transform="translate(511.599884 0)"/>
+     <use xlink:href="#Nunito-Bold-61" transform="translate(538.699875 0)"/>
+     <use xlink:href="#Nunito-Bold-6c" transform="translate(593.399872 0)"/>
+     <use xlink:href="#Nunito-Bold-6f" transform="translate(625.299866 0)"/>
+     <use xlink:href="#Nunito-Bold-6e" transform="translate(682.899857 0)"/>
+     <use xlink:href="#Nunito-Bold-65" transform="translate(741.399841 0)"/>
+     <use xlink:href="#Nunito-Bold-20" transform="translate(795.599838 0)"/>
+     <use xlink:href="#Nunito-Bold-64" transform="translate(822.699829 0)"/>
+     <use xlink:href="#Nunito-Bold-6f" transform="translate(882.699814 0)"/>
+     <use xlink:href="#Nunito-Bold-65" transform="translate(940.299805 0)"/>
+     <use xlink:href="#Nunito-Bold-73" transform="translate(994.499802 0)"/>
+     <use xlink:href="#Nunito-Bold-20" transform="translate(1043.299789 0)"/>
+     <use xlink:href="#Nunito-Bold-6e" transform="translate(1070.39978 0)"/>
+     <use xlink:href="#Nunito-Bold-6f" transform="translate(1128.899765 0)"/>
+     <use xlink:href="#Nunito-Bold-74" transform="translate(1186.499756 0)"/>
+     <use xlink:href="#Nunito-Bold-20" transform="translate(1224.89975 0)"/>
+     <use xlink:href="#Nunito-Bold-70" transform="translate(1251.999741 0)"/>
+     <use xlink:href="#Nunito-Bold-72" transform="translate(1311.999725 0)"/>
+     <use xlink:href="#Nunito-Bold-6f" transform="translate(1351.199722 0)"/>
+     <use xlink:href="#Nunito-Bold-76" transform="translate(1408.799713 0)"/>
+     <use xlink:href="#Nunito-Bold-65" transform="translate(1461.49971 0)"/>
     </g>
    </g>
    <g id="text_11">
     <!-- SMO protein degradation. -->
-    <g style="fill: #263a30" transform="translate(75.6 1519.97) scale(0.29 -0.29)">
+    <g style="fill: #263a30" transform="translate(72 1520.418594) scale(0.29 -0.29)">
      <defs>
-      <path id="Cabin-Bold-67" d="M 1664 -1600 
-C 2650 -1600 3194 -1190 3194 -570 
-C 3194 205 2362 339 1907 397 
-C 1382 461 1107 506 1107 659 
-C 1107 704 1133 742 1178 762 
-C 1286 742 1395 730 1517 730 
-C 2355 730 2810 1306 2810 1990 
-C 2810 2246 2746 2496 2618 2694 
-C 2688 2701 2758 2701 2797 2701 
-L 3085 2701 
-L 3136 3200 
-L 2931 3200 
-C 2630 3200 2374 3130 2246 3059 
-C 2054 3181 1805 3251 1517 3251 
-C 678 3251 218 2675 218 1990 
-C 218 1568 390 1190 710 960 
-C 499 858 390 723 390 525 
-C 390 314 506 173 678 64 
-C 339 -115 154 -346 154 -653 
-C 154 -1126 602 -1600 1664 -1600 
-z
-M 1517 2669 
-C 1901 2669 2099 2400 2099 1990 
-C 2099 1581 1901 1312 1517 1312 
-C 1126 1312 928 1581 928 1990 
-C 928 2400 1126 2669 1517 2669 
-z
-M 1638 -192 
-C 2042 -237 2490 -294 2490 -602 
-C 2490 -877 2118 -1037 1626 -1037 
-C 1107 -1037 813 -858 813 -576 
-C 813 -333 1024 -211 1254 -134 
-C 1395 -160 1523 -179 1638 -192 
+      <path id="Nunito-Bold-53" d="M 2048 -64 
+Q 1766 -64 1484 -22 
+Q 1203 19 953 105 
+Q 704 192 506 320 
+Q 390 397 345 505 
+Q 301 614 317 720 
+Q 333 826 400 906 
+Q 467 986 569 1005 
+Q 672 1024 794 947 
+Q 1075 781 1388 704 
+Q 1702 627 2048 627 
+Q 2554 627 2784 796 
+Q 3014 966 3014 1235 
+Q 3014 1459 2851 1587 
+Q 2688 1715 2291 1798 
+L 1587 1946 
+Q 979 2074 681 2378 
+Q 384 2682 384 3181 
+Q 384 3494 512 3750 
+Q 640 4006 873 4192 
+Q 1107 4378 1430 4477 
+Q 1754 4576 2144 4576 
+Q 2528 4576 2873 4480 
+Q 3219 4384 3494 4198 
+Q 3597 4128 3632 4025 
+Q 3667 3923 3648 3824 
+Q 3629 3725 3558 3654 
+Q 3488 3584 3382 3571 
+Q 3277 3558 3142 3635 
+Q 2906 3770 2662 3827 
+Q 2419 3885 2138 3885 
+Q 1843 3885 1632 3801 
+Q 1421 3718 1309 3568 
+Q 1197 3418 1197 3213 
+Q 1197 2982 1350 2844 
+Q 1504 2707 1875 2630 
+L 2573 2483 
+Q 3206 2349 3516 2061 
+Q 3827 1773 3827 1293 
+Q 3827 986 3702 736 
+Q 3578 486 3344 307 
+Q 3110 128 2784 32 
+Q 2458 -64 2048 -64 
 z
 " transform="scale(0.015625)"/>
-      <path id="Cabin-Bold-2e" d="M 1139 0 
-L 1139 832 
-L 346 832 
-L 346 0 
-L 1139 0 
+      <path id="Nunito-Bold-4d" d="M 877 -51 
+Q 698 -51 602 51 
+Q 506 154 506 333 
+L 506 4179 
+Q 506 4365 608 4464 
+Q 710 4563 890 4563 
+Q 1050 4563 1142 4502 
+Q 1235 4442 1312 4294 
+L 2893 1370 
+L 2688 1370 
+L 4269 4294 
+Q 4346 4442 4435 4502 
+Q 4525 4563 4685 4563 
+Q 4864 4563 4960 4464 
+Q 5056 4365 5056 4179 
+L 5056 333 
+Q 5056 154 4963 51 
+Q 4870 -51 4685 -51 
+Q 4506 -51 4410 51 
+Q 4314 154 4314 333 
+L 4314 3296 
+L 4454 3296 
+L 3110 845 
+Q 3046 736 2976 685 
+Q 2906 634 2784 634 
+Q 2662 634 2585 688 
+Q 2509 742 2451 845 
+L 1094 3302 
+L 1248 3302 
+L 1248 333 
+Q 1248 154 1155 51 
+Q 1062 -51 877 -51 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Bold-67" d="M 1875 -1216 
+Q 1530 -1216 1206 -1152 
+Q 883 -1088 621 -954 
+Q 499 -890 457 -800 
+Q 416 -710 432 -617 
+Q 448 -525 509 -454 
+Q 570 -384 659 -358 
+Q 749 -333 845 -384 
+Q 1126 -525 1379 -566 
+Q 1632 -608 1811 -608 
+Q 2240 -608 2454 -400 
+Q 2669 -192 2669 218 
+L 2669 794 
+L 2726 794 
+Q 2630 467 2326 272 
+Q 2022 77 1638 77 
+Q 1216 77 902 272 
+Q 589 467 416 819 
+Q 243 1171 243 1638 
+Q 243 1990 342 2275 
+Q 442 2560 624 2765 
+Q 806 2970 1065 3082 
+Q 1325 3194 1638 3194 
+Q 2035 3194 2332 2998 
+Q 2630 2803 2720 2483 
+L 2656 2323 
+L 2656 2778 
+Q 2656 2976 2761 3078 
+Q 2867 3181 3053 3181 
+Q 3245 3181 3347 3078 
+Q 3450 2976 3450 2778 
+L 3450 314 
+Q 3450 -448 3046 -832 
+Q 2643 -1216 1875 -1216 
+z
+M 1856 685 
+Q 2106 685 2285 800 
+Q 2464 915 2563 1129 
+Q 2662 1344 2662 1638 
+Q 2662 2080 2444 2333 
+Q 2227 2586 1856 2586 
+Q 1606 2586 1427 2470 
+Q 1248 2355 1149 2144 
+Q 1050 1933 1050 1638 
+Q 1050 1197 1267 941 
+Q 1485 685 1856 685 
+z
+" transform="scale(0.015625)"/>
+      <path id="Nunito-Bold-2e" d="M 800 -32 
+Q 582 -32 451 102 
+Q 320 237 320 448 
+Q 320 653 451 784 
+Q 582 915 800 915 
+Q 1024 915 1149 784 
+Q 1274 653 1274 448 
+Q 1274 237 1149 102 
+Q 1024 -32 800 -32 
 z
 " transform="scale(0.015625)"/>
      </defs>
-     <use xlink:href="#Cabin-Bold-53"/>
-     <use xlink:href="#Cabin-Bold-4d" transform="translate(57.999985 0)"/>
-     <use xlink:href="#Cabin-Bold-4f" transform="translate(140.674973 0)"/>
-     <use xlink:href="#Cabin-Bold-20" transform="translate(216.674957 0)"/>
-     <use xlink:href="#Cabin-Bold-70" transform="translate(239.174942 0)"/>
-     <use xlink:href="#Cabin-Bold-72" transform="translate(296.374939 0)"/>
-     <use xlink:href="#Cabin-Bold-6f" transform="translate(329.699936 0)"/>
-     <use xlink:href="#Cabin-Bold-74" transform="translate(385.274933 0)"/>
-     <use xlink:href="#Cabin-Bold-65" transform="translate(419.674927 0)"/>
-     <use xlink:href="#Cabin-Bold-69" transform="translate(471.174911 0)"/>
-     <use xlink:href="#Cabin-Bold-6e" transform="translate(495.174896 0)"/>
-     <use xlink:href="#Cabin-Bold-20" transform="translate(550.374893 0)"/>
-     <use xlink:href="#Cabin-Bold-64" transform="translate(572.874878 0)"/>
-     <use xlink:href="#Cabin-Bold-65" transform="translate(629.974869 0)"/>
-     <use xlink:href="#Cabin-Bold-67" transform="translate(681.474854 0)"/>
-     <use xlink:href="#Cabin-Bold-72" transform="translate(731.574844 0)"/>
-     <use xlink:href="#Cabin-Bold-61" transform="translate(765.149841 0)"/>
-     <use xlink:href="#Cabin-Bold-64" transform="translate(814.949829 0)"/>
-     <use xlink:href="#Cabin-Bold-61" transform="translate(872.04982 0)"/>
-     <use xlink:href="#Cabin-Bold-74" transform="translate(921.099808 0)"/>
-     <use xlink:href="#Cabin-Bold-69" transform="translate(955.499802 0)"/>
-     <use xlink:href="#Cabin-Bold-6f" transform="translate(979.499786 0)"/>
-     <use xlink:href="#Cabin-Bold-6e" transform="translate(1035.699783 0)"/>
-     <use xlink:href="#Cabin-Bold-2e" transform="translate(1090.89978 0)"/>
+     <use xlink:href="#Nunito-Bold-53"/>
+     <use xlink:href="#Nunito-Bold-4d" transform="translate(63.099991 0)"/>
+     <use xlink:href="#Nunito-Bold-4f" transform="translate(149.899979 0)"/>
+     <use xlink:href="#Nunito-Bold-20" transform="translate(228.399963 0)"/>
+     <use xlink:href="#Nunito-Bold-70" transform="translate(255.499954 0)"/>
+     <use xlink:href="#Nunito-Bold-72" transform="translate(315.499939 0)"/>
+     <use xlink:href="#Nunito-Bold-6f" transform="translate(354.699936 0)"/>
+     <use xlink:href="#Nunito-Bold-74" transform="translate(412.299927 0)"/>
+     <use xlink:href="#Nunito-Bold-65" transform="translate(450.699921 0)"/>
+     <use xlink:href="#Nunito-Bold-69" transform="translate(504.899918 0)"/>
+     <use xlink:href="#Nunito-Bold-6e" transform="translate(530.399902 0)"/>
+     <use xlink:href="#Nunito-Bold-20" transform="translate(588.899887 0)"/>
+     <use xlink:href="#Nunito-Bold-64" transform="translate(615.999878 0)"/>
+     <use xlink:href="#Nunito-Bold-65" transform="translate(675.999863 0)"/>
+     <use xlink:href="#Nunito-Bold-67" transform="translate(730.19986 0)"/>
+     <use xlink:href="#Nunito-Bold-72" transform="translate(790.599854 0)"/>
+     <use xlink:href="#Nunito-Bold-61" transform="translate(829.79985 0)"/>
+     <use xlink:href="#Nunito-Bold-64" transform="translate(884.499847 0)"/>
+     <use xlink:href="#Nunito-Bold-61" transform="translate(944.499832 0)"/>
+     <use xlink:href="#Nunito-Bold-74" transform="translate(999.199829 0)"/>
+     <use xlink:href="#Nunito-Bold-69" transform="translate(1037.599823 0)"/>
+     <use xlink:href="#Nunito-Bold-6f" transform="translate(1063.099808 0)"/>
+     <use xlink:href="#Nunito-Bold-6e" transform="translate(1120.699799 0)"/>
+     <use xlink:href="#Nunito-Bold-2e" transform="translate(1179.199783 0)"/>
     </g>
    </g>
   </g>
   <g id="axes_2">
    <g id="patch_8">
-    <path d="M 158.4 671.04 
-L 572.4 671.04 
-L 572.4 331.2 
-L 158.4 331.2 
+    <path d="M 154.8 671.04 
+L 568.8 671.04 
+L 568.8 331.2 
+L 154.8 331.2 
 z
 " style="fill: #f6faf4"/>
    </g>
    <g id="line2d_1">
-    <path d="M 158.4 380.578462 
-L 572.4 380.578462 
-" clip-path="url(#p9dfa9864fe)" style="fill: none; stroke-dasharray: 7.4,3.2; stroke-dashoffset: 0; stroke: #c8ddae; stroke-width: 2"/>
+    <path d="M 154.8 380.578462 
+L 568.8 380.578462 
+" clip-path="url(#pdc6775bf5a)" style="fill: none; stroke-dasharray: 7.4,3.2; stroke-dashoffset: 0; stroke: #c8ddae; stroke-width: 2"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_2"/>
      <g id="text_12">
       <!-- 0 -->
-      <g style="fill: #263a30" transform="translate(166.577878 701.29) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-30"/>
+      <g style="fill: #263a30" transform="translate(164.517722 700.264844) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-30"/>
       </g>
      </g>
     </g>
@@ -1766,9 +2887,9 @@ L 572.4 380.578462
      <g id="line2d_3"/>
      <g id="text_13">
       <!-- 60 -->
-      <g style="fill: #263a30" transform="translate(221.796376 701.29) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-36"/>
-       <use xlink:href="#Cabin-Regular-30" transform="translate(56.799988 0)"/>
+      <g style="fill: #263a30" transform="translate(219.303797 700.264844) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-36"/>
+       <use xlink:href="#Nunito-Regular-30" transform="translate(59.999985 0)"/>
       </g>
      </g>
     </g>
@@ -1776,10 +2897,10 @@ L 572.4 380.578462
      <g id="line2d_4"/>
      <g id="text_14">
       <!-- 120 -->
-      <g style="fill: #263a30" transform="translate(280.482686 701.29) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-31"/>
-       <use xlink:href="#Cabin-Regular-32" transform="translate(35.499985 0)"/>
-       <use xlink:href="#Cabin-Regular-30" transform="translate(87.899979 0)"/>
+      <g style="fill: #263a30" transform="translate(274.089873 700.264844) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-31"/>
+       <use xlink:href="#Nunito-Regular-32" transform="translate(59.999985 0)"/>
+       <use xlink:href="#Nunito-Regular-30" transform="translate(119.999969 0)"/>
       </g>
      </g>
     </g>
@@ -1787,30 +2908,45 @@ L 572.4 380.578462
      <g id="line2d_5"/>
      <g id="text_15">
       <!-- 240 -->
-      <g style="fill: #263a30" transform="translate(403.499994 701.29) scale(0.27 -0.27)">
+      <g style="fill: #263a30" transform="translate(399.862025 700.264844) scale(0.27 -0.27)">
        <defs>
-        <path id="Cabin-Regular-34" d="M 3200 1216 
-L 3200 1766 
-L 2656 1766 
-L 2656 4480 
-L 2150 4480 
-L 90 1216 
-L 2016 1216 
-L 2016 0 
-L 2656 0 
-L 2656 1216 
-L 3200 1216 
+        <path id="Nunito-Regular-34" d="M 2675 -45 
+Q 2554 -45 2483 25 
+Q 2413 96 2413 224 
+L 2413 966 
+L 576 966 
+Q 448 966 374 1027 
+Q 301 1088 301 1203 
+Q 301 1274 333 1347 
+Q 365 1421 448 1536 
+L 2400 4378 
+Q 2458 4467 2528 4512 
+Q 2598 4557 2694 4557 
+Q 2797 4557 2870 4493 
+Q 2944 4429 2944 4288 
+L 2944 1414 
+L 3411 1414 
+Q 3533 1414 3597 1356 
+Q 3661 1299 3661 1190 
+Q 3661 1082 3597 1024 
+Q 3533 966 3411 966 
+L 2944 966 
+L 2944 224 
+Q 2944 96 2873 25 
+Q 2803 -45 2675 -45 
 z
-M 2016 1766 
-L 1037 1766 
-L 2016 3392 
-L 2016 1766 
+M 2413 1414 
+L 2413 3898 
+L 2566 3898 
+L 774 1274 
+L 774 1414 
+L 2413 1414 
 z
 " transform="scale(0.015625)"/>
        </defs>
-       <use xlink:href="#Cabin-Regular-32"/>
-       <use xlink:href="#Cabin-Regular-34" transform="translate(52.399994 0)"/>
-       <use xlink:href="#Cabin-Regular-30" transform="translate(108.299988 0)"/>
+       <use xlink:href="#Nunito-Regular-32"/>
+       <use xlink:href="#Nunito-Regular-34" transform="translate(59.999985 0)"/>
+       <use xlink:href="#Nunito-Regular-30" transform="translate(119.999969 0)"/>
       </g>
      </g>
     </g>
@@ -1818,340 +2954,482 @@ z
      <g id="line2d_6"/>
      <g id="text_16">
       <!-- 360 -->
-      <g style="fill: #263a30" transform="translate(528.841833 701.29) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-33"/>
-       <use xlink:href="#Cabin-Regular-36" transform="translate(54.699997 0)"/>
-       <use xlink:href="#Cabin-Regular-30" transform="translate(111.499985 0)"/>
+      <g style="fill: #263a30" transform="translate(525.634177 700.264844) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-33"/>
+       <use xlink:href="#Nunito-Regular-36" transform="translate(59.999985 0)"/>
+       <use xlink:href="#Nunito-Regular-30" transform="translate(119.999969 0)"/>
       </g>
      </g>
     </g>
     <g id="text_17">
      <!-- Time after treatment (min) -->
-     <g style="fill: #263a30" transform="translate(206.2025 747.824844) scale(0.28 -0.28)">
+     <g style="fill: #263a30" transform="translate(188.097188 744.500937) scale(0.28 -0.28)">
       <defs>
-       <path id="Cabin-Bold-6d" d="M 5203 0 
-L 5203 1722 
-C 5203 2618 4794 3251 3930 3251 
-C 3354 3251 2976 2970 2867 2765 
-C 2643 3098 2259 3251 1888 3251 
-C 1549 3251 1254 3104 1069 2950 
-L 1024 3200 
-L 371 3200 
-L 371 0 
-L 1165 0 
-L 1165 2336 
-C 1306 2502 1498 2598 1754 2598 
-C 2202 2598 2394 2413 2394 1722 
-L 2394 0 
-L 3181 0 
-L 3181 1978 
-C 3181 2304 3290 2598 3814 2598 
-C 4256 2598 4410 2310 4410 1722 
-L 4410 0 
-L 5203 0 
+       <path id="Nunito-Bold-6d" d="M 826 -51 
+Q 634 -51 531 54 
+Q 429 160 429 358 
+L 429 2778 
+Q 429 2976 531 3078 
+Q 634 3181 819 3181 
+Q 1005 3181 1107 3078 
+Q 1210 2976 1210 2778 
+L 1210 2310 
+L 1139 2502 
+Q 1267 2822 1536 3008 
+Q 1805 3194 2176 3194 
+Q 2554 3194 2797 3014 
+Q 3040 2835 3136 2464 
+L 3046 2464 
+Q 3174 2803 3468 2998 
+Q 3763 3194 4147 3194 
+Q 4506 3194 4739 3053 
+Q 4973 2912 5088 2627 
+Q 5203 2342 5203 1907 
+L 5203 358 
+Q 5203 160 5097 54 
+Q 4992 -51 4800 -51 
+Q 4608 -51 4505 54 
+Q 4403 160 4403 358 
+L 4403 1875 
+Q 4403 2234 4284 2400 
+Q 4166 2566 3885 2566 
+Q 3571 2566 3392 2345 
+Q 3213 2125 3213 1734 
+L 3213 358 
+Q 3213 160 3110 54 
+Q 3008 -51 2816 -51 
+Q 2624 -51 2518 54 
+Q 2413 160 2413 358 
+L 2413 1875 
+Q 2413 2234 2294 2400 
+Q 2176 2566 1901 2566 
+Q 1587 2566 1408 2345 
+Q 1229 2125 1229 1734 
+L 1229 358 
+Q 1229 -51 826 -51 
 z
 " transform="scale(0.015625)"/>
-       <path id="Cabin-Bold-66" d="M 2061 2547 
-L 2061 3200 
-L 1357 3200 
-L 1357 3635 
-C 1357 4026 1408 4134 1645 4134 
-C 1696 4134 1843 4134 1984 4102 
-L 2054 4762 
-C 1843 4781 1754 4800 1331 4800 
-C 813 4800 563 4378 563 3962 
-L 563 3200 
-L 179 3200 
-L 109 2547 
-L 563 2547 
-L 563 0 
-L 1357 0 
-L 1357 2547 
-L 2061 2547 
+       <path id="Nunito-Bold-66" d="M 1030 -51 
+Q 838 -51 732 54 
+Q 627 160 627 358 
+L 627 2528 
+L 333 2528 
+Q 179 2528 96 2608 
+Q 13 2688 13 2829 
+Q 13 2976 96 3053 
+Q 179 3130 333 3130 
+L 858 3130 
+L 627 2918 
+L 627 3136 
+Q 627 3795 960 4124 
+Q 1293 4454 1920 4512 
+L 2138 4531 
+Q 2266 4544 2342 4489 
+Q 2419 4435 2444 4348 
+Q 2470 4262 2451 4172 
+Q 2432 4083 2371 4016 
+Q 2310 3949 2214 3942 
+L 2125 3936 
+Q 1760 3910 1593 3750 
+Q 1427 3590 1427 3264 
+L 1427 3027 
+L 1325 3130 
+L 1971 3130 
+Q 2125 3130 2208 3053 
+Q 2291 2976 2291 2829 
+Q 2291 2688 2208 2608 
+Q 2125 2528 1971 2528 
+L 1427 2528 
+L 1427 358 
+Q 1427 -51 1030 -51 
 z
 " transform="scale(0.015625)"/>
-       <path id="Cabin-Bold-28" d="M 1632 -870 
-C 1235 -173 909 710 909 1965 
-C 909 3219 1235 4102 1632 4800 
-L 909 4800 
-C 512 4102 262 3315 262 1965 
-C 262 614 512 -173 909 -870 
-L 1632 -870 
+       <path id="Nunito-Bold-28" d="M 1389 -1043 
+Q 992 -416 816 278 
+Q 640 973 640 1683 
+Q 640 2157 717 2624 
+Q 794 3091 960 3542 
+Q 1126 3994 1389 4410 
+Q 1459 4525 1577 4553 
+Q 1696 4582 1801 4537 
+Q 1907 4493 1958 4374 
+Q 2010 4256 1946 4077 
+Q 1792 3667 1693 3273 
+Q 1594 2880 1546 2489 
+Q 1498 2099 1498 1683 
+Q 1498 1267 1549 876 
+Q 1600 486 1702 96 
+Q 1805 -294 1946 -710 
+Q 2010 -890 1958 -1008 
+Q 1907 -1126 1801 -1171 
+Q 1696 -1216 1577 -1187 
+Q 1459 -1158 1389 -1043 
 z
 " transform="scale(0.015625)"/>
-       <path id="Cabin-Bold-29" d="M 864 -870 
-C 1261 -173 1510 614 1510 1965 
-C 1510 3315 1261 4102 864 4800 
-L 141 4800 
-C 538 4102 864 3219 864 1965 
-C 864 710 538 -173 141 -870 
-L 864 -870 
+       <path id="Nunito-Bold-29" d="M 902 -1043 
+Q 832 -1158 713 -1187 
+Q 595 -1216 486 -1168 
+Q 378 -1120 330 -1005 
+Q 282 -890 346 -710 
+Q 506 -294 602 96 
+Q 698 486 746 876 
+Q 794 1267 794 1683 
+Q 794 2099 742 2489 
+Q 691 2880 592 3270 
+Q 493 3661 346 4077 
+Q 282 4256 333 4374 
+Q 384 4493 493 4537 
+Q 602 4582 717 4553 
+Q 832 4525 902 4410 
+Q 1293 3789 1472 3091 
+Q 1651 2394 1651 1683 
+Q 1651 1210 1571 742 
+Q 1491 275 1328 -176 
+Q 1165 -627 902 -1043 
 z
 " transform="scale(0.015625)"/>
       </defs>
-      <use xlink:href="#Cabin-Bold-54"/>
-      <use xlink:href="#Cabin-Bold-69" transform="translate(54.649994 0)"/>
-      <use xlink:href="#Cabin-Bold-6d" transform="translate(78.649979 0)"/>
-      <use xlink:href="#Cabin-Bold-65" transform="translate(165.249969 0)"/>
-      <use xlink:href="#Cabin-Bold-20" transform="translate(216.749954 0)"/>
-      <use xlink:href="#Cabin-Bold-61" transform="translate(239.249939 0)"/>
-      <use xlink:href="#Cabin-Bold-66" transform="translate(288.424927 0)"/>
-      <use xlink:href="#Cabin-Bold-74" transform="translate(322.424911 0)"/>
-      <use xlink:href="#Cabin-Bold-65" transform="translate(356.824905 0)"/>
-      <use xlink:href="#Cabin-Bold-72" transform="translate(408.32489 0)"/>
-      <use xlink:href="#Cabin-Bold-20" transform="translate(442.524887 0)"/>
-      <use xlink:href="#Cabin-Bold-74" transform="translate(465.024872 0)"/>
-      <use xlink:href="#Cabin-Bold-72" transform="translate(499.424866 0)"/>
-      <use xlink:href="#Cabin-Bold-65" transform="translate(533.624863 0)"/>
-      <use xlink:href="#Cabin-Bold-61" transform="translate(585.124847 0)"/>
-      <use xlink:href="#Cabin-Bold-74" transform="translate(634.174835 0)"/>
-      <use xlink:href="#Cabin-Bold-6d" transform="translate(668.574829 0)"/>
-      <use xlink:href="#Cabin-Bold-65" transform="translate(755.17482 0)"/>
-      <use xlink:href="#Cabin-Bold-6e" transform="translate(806.674805 0)"/>
-      <use xlink:href="#Cabin-Bold-74" transform="translate(861.249802 0)"/>
-      <use xlink:href="#Cabin-Bold-20" transform="translate(895.649796 0)"/>
-      <use xlink:href="#Cabin-Bold-28" transform="translate(918.14978 0)"/>
-      <use xlink:href="#Cabin-Bold-6d" transform="translate(945.849777 0)"/>
-      <use xlink:href="#Cabin-Bold-69" transform="translate(1032.449768 0)"/>
-      <use xlink:href="#Cabin-Bold-6e" transform="translate(1056.449753 0)"/>
-      <use xlink:href="#Cabin-Bold-29" transform="translate(1109.39975 0)"/>
+      <use xlink:href="#Nunito-Bold-54"/>
+      <use xlink:href="#Nunito-Bold-69" transform="translate(62.099991 0)"/>
+      <use xlink:href="#Nunito-Bold-6d" transform="translate(87.599976 0)"/>
+      <use xlink:href="#Nunito-Bold-65" transform="translate(175.299957 0)"/>
+      <use xlink:href="#Nunito-Bold-20" transform="translate(229.499954 0)"/>
+      <use xlink:href="#Nunito-Bold-61" transform="translate(256.599945 0)"/>
+      <use xlink:href="#Nunito-Bold-66" transform="translate(311.299942 0)"/>
+      <use xlink:href="#Nunito-Bold-74" transform="translate(347.699936 0)"/>
+      <use xlink:href="#Nunito-Bold-65" transform="translate(386.09993 0)"/>
+      <use xlink:href="#Nunito-Bold-72" transform="translate(440.299927 0)"/>
+      <use xlink:href="#Nunito-Bold-20" transform="translate(479.499924 0)"/>
+      <use xlink:href="#Nunito-Bold-74" transform="translate(506.599915 0)"/>
+      <use xlink:href="#Nunito-Bold-72" transform="translate(544.999908 0)"/>
+      <use xlink:href="#Nunito-Bold-65" transform="translate(584.199905 0)"/>
+      <use xlink:href="#Nunito-Bold-61" transform="translate(638.399902 0)"/>
+      <use xlink:href="#Nunito-Bold-74" transform="translate(693.099899 0)"/>
+      <use xlink:href="#Nunito-Bold-6d" transform="translate(731.499893 0)"/>
+      <use xlink:href="#Nunito-Bold-65" transform="translate(819.199875 0)"/>
+      <use xlink:href="#Nunito-Bold-6e" transform="translate(873.399872 0)"/>
+      <use xlink:href="#Nunito-Bold-74" transform="translate(931.899857 0)"/>
+      <use xlink:href="#Nunito-Bold-20" transform="translate(970.29985 0)"/>
+      <use xlink:href="#Nunito-Bold-28" transform="translate(997.399841 0)"/>
+      <use xlink:href="#Nunito-Bold-6d" transform="translate(1033.199829 0)"/>
+      <use xlink:href="#Nunito-Bold-69" transform="translate(1120.899811 0)"/>
+      <use xlink:href="#Nunito-Bold-6e" transform="translate(1146.399796 0)"/>
+      <use xlink:href="#Nunito-Bold-29" transform="translate(1204.89978 0)"/>
      </g>
     </g>
    </g>
    <g id="matplotlib.axis_2">
     <g id="ytick_1">
      <g id="line2d_7">
-      <path d="M 158.4 671.04 
-L 572.4 671.04 
-" clip-path="url(#p9dfa9864fe)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
+      <path d="M 154.8 671.04 
+L 568.8 671.04 
+" clip-path="url(#pdc6775bf5a)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_8"/>
      <g id="text_18">
       <!-- 0 -->
-      <g style="fill: #263a30" transform="translate(129.120313 681.165) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-30"/>
+      <g style="fill: #263a30" transform="translate(128.6 680.652422) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-30"/>
       </g>
      </g>
     </g>
     <g id="ytick_2">
      <g id="line2d_9">
-      <path d="M 158.4 598.424615 
-L 572.4 598.424615 
-" clip-path="url(#p9dfa9864fe)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
+      <path d="M 154.8 598.424615 
+L 568.8 598.424615 
+" clip-path="url(#pdc6775bf5a)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_10"/>
      <g id="text_19">
       <!-- 25 -->
-      <g style="fill: #263a30" transform="translate(119.645 608.549615) scale(0.27 -0.27)">
+      <g style="fill: #263a30" transform="translate(112.4 608.037037) scale(0.27 -0.27)">
        <defs>
-        <path id="Cabin-Regular-35" d="M 1408 -90 
-C 2298 -90 3130 531 3130 1510 
-C 3130 2394 2598 2803 1197 2816 
-L 1325 3930 
-L 2816 3930 
-L 2874 4480 
-L 838 4480 
-L 570 2272 
-L 1114 2272 
-C 2086 2272 2464 2016 2464 1485 
-C 2464 883 1978 461 1402 461 
-C 1114 461 749 570 474 730 
-L 326 160 
-C 422 58 979 -90 1408 -90 
+        <path id="Nunito-Regular-35" d="M 2016 -58 
+Q 1651 -58 1289 51 
+Q 928 160 634 390 
+Q 557 442 531 512 
+Q 506 582 525 652 
+Q 544 723 595 771 
+Q 646 819 720 825 
+Q 794 832 877 774 
+Q 1139 589 1420 499 
+Q 1702 410 2010 410 
+Q 2323 410 2550 528 
+Q 2778 646 2896 860 
+Q 3014 1075 3014 1363 
+Q 3014 1805 2758 2086 
+Q 2502 2368 2054 2368 
+Q 1779 2368 1548 2265 
+Q 1318 2163 1126 1939 
+Q 1082 1888 1021 1853 
+Q 960 1818 883 1818 
+Q 774 1818 713 1878 
+Q 653 1939 653 2042 
+L 653 4269 
+Q 653 4390 717 4451 
+Q 781 4512 896 4512 
+L 3072 4512 
+Q 3194 4512 3254 4454 
+Q 3315 4397 3315 4288 
+Q 3315 4179 3254 4121 
+Q 3194 4064 3072 4064 
+L 1171 4064 
+L 1171 2266 
+L 1030 2266 
+Q 1197 2534 1491 2678 
+Q 1786 2822 2150 2822 
+Q 2579 2822 2889 2643 
+Q 3200 2464 3369 2141 
+Q 3539 1818 3539 1389 
+Q 3539 966 3353 640 
+Q 3168 314 2829 128 
+Q 2490 -58 2016 -58 
 z
 " transform="scale(0.015625)"/>
        </defs>
-       <use xlink:href="#Cabin-Regular-32"/>
-       <use xlink:href="#Cabin-Regular-35" transform="translate(52.399994 0)"/>
+       <use xlink:href="#Nunito-Regular-32"/>
+       <use xlink:href="#Nunito-Regular-35" transform="translate(59.999985 0)"/>
       </g>
      </g>
     </g>
     <g id="ytick_3">
      <g id="line2d_11">
-      <path d="M 158.4 525.809231 
-L 572.4 525.809231 
-" clip-path="url(#p9dfa9864fe)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
+      <path d="M 154.8 525.809231 
+L 568.8 525.809231 
+" clip-path="url(#pdc6775bf5a)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_12"/>
      <g id="text_20">
       <!-- 50 -->
-      <g style="fill: #263a30" transform="translate(114.515 535.934231) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-35"/>
-       <use xlink:href="#Cabin-Regular-30" transform="translate(54.099991 0)"/>
+      <g style="fill: #263a30" transform="translate(112.4 535.421653) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-35"/>
+       <use xlink:href="#Nunito-Regular-30" transform="translate(59.999985 0)"/>
       </g>
      </g>
     </g>
     <g id="ytick_4">
      <g id="line2d_13">
-      <path d="M 158.4 453.193846 
-L 572.4 453.193846 
-" clip-path="url(#p9dfa9864fe)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
+      <path d="M 154.8 453.193846 
+L 568.8 453.193846 
+" clip-path="url(#pdc6775bf5a)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_14"/>
      <g id="text_21">
       <!-- 75 -->
-      <g style="fill: #263a30" transform="translate(120.239844 463.318846) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-37"/>
-       <use xlink:href="#Cabin-Regular-35" transform="translate(50.199997 0)"/>
+      <g style="fill: #263a30" transform="translate(112.4 462.806268) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-37"/>
+       <use xlink:href="#Nunito-Regular-35" transform="translate(59.999985 0)"/>
       </g>
      </g>
     </g>
     <g id="ytick_5">
      <g id="line2d_15">
-      <path d="M 158.4 380.578462 
-L 572.4 380.578462 
-" clip-path="url(#p9dfa9864fe)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
+      <path d="M 154.8 380.578462 
+L 568.8 380.578462 
+" clip-path="url(#pdc6775bf5a)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_16"/>
      <g id="text_22">
       <!-- 100 -->
-      <g style="fill: #263a30" transform="translate(100.255625 390.703462) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-31"/>
-       <use xlink:href="#Cabin-Regular-30" transform="translate(35.499985 0)"/>
-       <use xlink:href="#Cabin-Regular-30" transform="translate(106.899979 0)"/>
+      <g style="fill: #263a30" transform="translate(96.2 390.190883) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-31"/>
+       <use xlink:href="#Nunito-Regular-30" transform="translate(59.999985 0)"/>
+       <use xlink:href="#Nunito-Regular-30" transform="translate(119.999969 0)"/>
       </g>
      </g>
     </g>
     <g id="text_23">
      <!-- SMO (% of baseline) -->
-     <g style="fill: #263a30" transform="translate(81.47875 622.734063) rotate(-90) scale(0.28 -0.28)">
+     <g style="fill: #263a30" transform="translate(78.88 635.180938) rotate(-90) scale(0.28 -0.28)">
       <defs>
-       <path id="Cabin-Bold-25" d="M 4186 -58 
-C 4781 -58 5178 416 5178 1152 
-C 5178 1856 4774 2304 4218 2304 
-C 3661 2304 3226 1837 3226 1101 
-C 3226 397 3610 -58 4186 -58 
+       <path id="Nunito-Bold-25" d="M 2106 51 
+Q 2042 -64 1949 -99 
+Q 1856 -134 1763 -112 
+Q 1670 -90 1606 -22 
+Q 1542 45 1529 144 
+Q 1517 243 1581 358 
+L 3942 4454 
+Q 4006 4570 4099 4608 
+Q 4192 4646 4281 4624 
+Q 4371 4602 4435 4531 
+Q 4499 4461 4515 4361 
+Q 4531 4262 4467 4154 
+L 2106 51 
 z
-M 4307 4480 
-L 3642 4480 
-L 941 -77 
-L 1606 -77 
-L 4307 4480 
+M 1421 1818 
+Q 883 1818 582 2189 
+Q 282 2560 282 3200 
+Q 282 3629 416 3936 
+Q 550 4243 806 4409 
+Q 1062 4576 1421 4576 
+Q 1958 4576 2259 4208 
+Q 2560 3840 2560 3200 
+Q 2560 2771 2425 2460 
+Q 2291 2150 2035 1984 
+Q 1779 1818 1421 1818 
 z
-M 1178 2144 
-C 1773 2144 2170 2618 2170 3354 
-C 2170 4058 1766 4506 1210 4506 
-C 653 4506 218 4038 218 3302 
-C 218 2598 602 2144 1178 2144 
+M 1421 2355 
+Q 1574 2355 1683 2448 
+Q 1792 2541 1849 2726 
+Q 1907 2912 1907 3200 
+Q 1907 3629 1779 3833 
+Q 1651 4038 1421 4038 
+Q 1267 4038 1158 3948 
+Q 1050 3859 992 3673 
+Q 934 3488 934 3200 
+Q 934 2765 1062 2560 
+Q 1190 2355 1421 2355 
 z
-M 4211 1843 
-C 4448 1843 4672 1638 4672 1152 
-C 4672 621 4467 416 4192 416 
-C 3936 416 3738 608 3738 1101 
-C 3738 1626 3974 1843 4211 1843 
+M 4634 -64 
+Q 4096 -64 3795 307 
+Q 3494 678 3494 1318 
+Q 3494 1747 3628 2054 
+Q 3763 2362 4019 2528 
+Q 4275 2694 4634 2694 
+Q 5171 2694 5472 2326 
+Q 5773 1958 5773 1318 
+Q 5773 890 5638 579 
+Q 5504 269 5248 102 
+Q 4992 -64 4634 -64 
 z
-M 1203 4045 
-C 1440 4045 1664 3840 1664 3354 
-C 1664 2822 1459 2618 1184 2618 
-C 928 2618 730 2810 730 3302 
-C 730 3827 966 4045 1203 4045 
+M 4634 474 
+Q 4787 474 4896 563 
+Q 5005 653 5062 841 
+Q 5120 1030 5120 1318 
+Q 5120 1747 4992 1952 
+Q 4864 2157 4634 2157 
+Q 4480 2157 4371 2067 
+Q 4262 1978 4204 1792 
+Q 4147 1606 4147 1318 
+Q 4147 883 4275 678 
+Q 4403 474 4634 474 
 z
 " transform="scale(0.015625)"/>
-       <path id="Cabin-Bold-62" d="M 1907 -64 
-C 2931 -64 3475 698 3475 1594 
-C 3475 2490 2931 3251 1907 3251 
-C 1574 3251 1363 3174 1158 3040 
-L 1158 4800 
-L 365 4800 
-L 365 0 
-L 1107 0 
-L 1120 179 
-C 1344 26 1555 -64 1907 -64 
+       <path id="Nunito-Bold-62" d="M 2221 -64 
+Q 1824 -64 1526 134 
+Q 1229 333 1133 666 
+L 1203 826 
+L 1203 358 
+Q 1203 160 1100 54 
+Q 998 -51 813 -51 
+Q 621 -51 518 54 
+Q 416 160 416 358 
+L 416 4160 
+Q 416 4358 518 4460 
+Q 621 4563 813 4563 
+Q 1005 4563 1110 4460 
+Q 1216 4358 1216 4160 
+L 1216 2496 
+L 1139 2496 
+Q 1242 2810 1536 3002 
+Q 1830 3194 2221 3194 
+Q 2637 3194 2944 2995 
+Q 3251 2797 3424 2435 
+Q 3597 2074 3597 1568 
+Q 3597 1069 3424 701 
+Q 3251 333 2940 134 
+Q 2630 -64 2221 -64 
 z
-M 1856 2598 
-C 2368 2598 2662 2189 2662 1594 
-C 2662 998 2368 589 1856 589 
-C 1344 589 1120 998 1120 1594 
-C 1120 2189 1344 2598 1856 2598 
+M 1997 544 
+Q 2234 544 2413 659 
+Q 2592 774 2691 1001 
+Q 2790 1229 2790 1568 
+Q 2790 2080 2572 2333 
+Q 2355 2586 1997 2586 
+Q 1760 2586 1581 2474 
+Q 1402 2362 1302 2134 
+Q 1203 1907 1203 1568 
+Q 1203 1062 1420 803 
+Q 1638 544 1997 544 
 z
 " transform="scale(0.015625)"/>
       </defs>
-      <use xlink:href="#Cabin-Bold-53"/>
-      <use xlink:href="#Cabin-Bold-4d" transform="translate(57.999985 0)"/>
-      <use xlink:href="#Cabin-Bold-4f" transform="translate(140.674973 0)"/>
-      <use xlink:href="#Cabin-Bold-20" transform="translate(216.674957 0)"/>
-      <use xlink:href="#Cabin-Bold-28" transform="translate(239.174942 0)"/>
-      <use xlink:href="#Cabin-Bold-25" transform="translate(266.874939 0)"/>
-      <use xlink:href="#Cabin-Bold-20" transform="translate(351.074921 0)"/>
-      <use xlink:href="#Cabin-Bold-6f" transform="translate(373.574905 0)"/>
-      <use xlink:href="#Cabin-Bold-66" transform="translate(429.149902 0)"/>
-      <use xlink:href="#Cabin-Bold-20" transform="translate(463.149887 0)"/>
-      <use xlink:href="#Cabin-Bold-62" transform="translate(485.649872 0)"/>
-      <use xlink:href="#Cabin-Bold-61" transform="translate(542.749863 0)"/>
-      <use xlink:href="#Cabin-Bold-73" transform="translate(592.54985 0)"/>
-      <use xlink:href="#Cabin-Bold-65" transform="translate(634.849838 0)"/>
-      <use xlink:href="#Cabin-Bold-6c" transform="translate(686.349823 0)"/>
-      <use xlink:href="#Cabin-Bold-69" transform="translate(712.649811 0)"/>
-      <use xlink:href="#Cabin-Bold-6e" transform="translate(736.649796 0)"/>
-      <use xlink:href="#Cabin-Bold-65" transform="translate(791.849792 0)"/>
-      <use xlink:href="#Cabin-Bold-29" transform="translate(840.974777 0)"/>
+      <use xlink:href="#Nunito-Bold-53"/>
+      <use xlink:href="#Nunito-Bold-4d" transform="translate(63.099991 0)"/>
+      <use xlink:href="#Nunito-Bold-4f" transform="translate(149.899979 0)"/>
+      <use xlink:href="#Nunito-Bold-20" transform="translate(228.399963 0)"/>
+      <use xlink:href="#Nunito-Bold-28" transform="translate(255.499954 0)"/>
+      <use xlink:href="#Nunito-Bold-25" transform="translate(291.299942 0)"/>
+      <use xlink:href="#Nunito-Bold-20" transform="translate(385.799927 0)"/>
+      <use xlink:href="#Nunito-Bold-6f" transform="translate(412.899918 0)"/>
+      <use xlink:href="#Nunito-Bold-66" transform="translate(470.499908 0)"/>
+      <use xlink:href="#Nunito-Bold-20" transform="translate(506.899902 0)"/>
+      <use xlink:href="#Nunito-Bold-62" transform="translate(533.999893 0)"/>
+      <use xlink:href="#Nunito-Bold-61" transform="translate(593.999878 0)"/>
+      <use xlink:href="#Nunito-Bold-73" transform="translate(648.699875 0)"/>
+      <use xlink:href="#Nunito-Bold-65" transform="translate(697.499863 0)"/>
+      <use xlink:href="#Nunito-Bold-6c" transform="translate(751.69986 0)"/>
+      <use xlink:href="#Nunito-Bold-69" transform="translate(783.599854 0)"/>
+      <use xlink:href="#Nunito-Bold-6e" transform="translate(809.099838 0)"/>
+      <use xlink:href="#Nunito-Bold-65" transform="translate(867.599823 0)"/>
+      <use xlink:href="#Nunito-Bold-29" transform="translate(921.79982 0)"/>
      </g>
     </g>
    </g>
    <g id="patch_9">
-    <path d="M 158.4 671.04 
-L 158.4 331.2 
+    <path d="M 154.8 671.04 
+L 154.8 331.2 
 " style="fill: none; stroke: #3e5d4d; stroke-width: 1.7; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_10">
-    <path d="M 158.4 671.04 
-L 572.4 671.04 
+    <path d="M 154.8 671.04 
+L 568.8 671.04 
 " style="fill: none; stroke: #3e5d4d; stroke-width: 1.7; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="line2d_17">
-    <path d="M 176.217722 380.578462 
-L 207.660759 377.673846 
-L 239.103797 383.483077 
-L 301.989873 380.578462 
-L 427.762025 383.483077 
-L 553.534177 386.387692 
-" clip-path="url(#p9dfa9864fe)" style="fill: none; stroke-dasharray: 13.32,5.76; stroke-dashoffset: 0; stroke: #93c6ba; stroke-width: 3.6"/>
+    <path d="M 172.617722 380.578462 
+L 204.060759 377.673846 
+L 235.503797 383.483077 
+L 298.389873 380.578462 
+L 424.162025 383.483077 
+L 549.934177 386.387692 
+" clip-path="url(#pdc6775bf5a)" style="fill: none; stroke-dasharray: 13.32,5.76; stroke-dashoffset: 0; stroke: #93c6ba; stroke-width: 3.6"/>
     <defs>
-     <path id="m1df8157ef9" d="M -5 5 
+     <path id="m6a3a78f45b" d="M -5 5 
 L 5 5 
 L 5 -5 
 L -5 -5 
 z
 " style="stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
     </defs>
-    <g clip-path="url(#p9dfa9864fe)">
-     <use xlink:href="#m1df8157ef9" x="176.217722" y="380.578462" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
-     <use xlink:href="#m1df8157ef9" x="207.660759" y="377.673846" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
-     <use xlink:href="#m1df8157ef9" x="239.103797" y="383.483077" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
-     <use xlink:href="#m1df8157ef9" x="301.989873" y="380.578462" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
-     <use xlink:href="#m1df8157ef9" x="427.762025" y="383.483077" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
-     <use xlink:href="#m1df8157ef9" x="553.534177" y="386.387692" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
+    <g clip-path="url(#pdc6775bf5a)">
+     <use xlink:href="#m6a3a78f45b" x="172.617722" y="380.578462" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
+     <use xlink:href="#m6a3a78f45b" x="204.060759" y="377.673846" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
+     <use xlink:href="#m6a3a78f45b" x="235.503797" y="383.483077" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
+     <use xlink:href="#m6a3a78f45b" x="298.389873" y="380.578462" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
+     <use xlink:href="#m6a3a78f45b" x="424.162025" y="383.483077" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
+     <use xlink:href="#m6a3a78f45b" x="549.934177" y="386.387692" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
     </g>
    </g>
    <g id="legend_1">
     <g id="line2d_18">
-     <path d="M 170.4 296.49525 
-L 194.4 296.49525 
-L 218.4 296.49525 
+     <path d="M 166.8 297.81525 
+L 190.8 297.81525 
+L 214.8 297.81525 
 " style="fill: none; stroke-dasharray: 13.32,5.76; stroke-dashoffset: 0; stroke: #93c6ba; stroke-width: 3.6"/>
      <g>
-      <use xlink:href="#m1df8157ef9" x="194.4" y="296.49525" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
+      <use xlink:href="#m6a3a78f45b" x="190.8" y="297.81525" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
      </g>
     </g>
     <g id="text_24">
      <!-- Vehicle -->
-     <g style="fill: #263a30" transform="translate(237.6 304.89525) scale(0.24 -0.24)">
-      <use xlink:href="#Cabin-Regular-56"/>
-      <use xlink:href="#Cabin-Regular-65" transform="translate(64.399994 0)"/>
-      <use xlink:href="#Cabin-Regular-68" transform="translate(115.599991 0)"/>
-      <use xlink:href="#Cabin-Regular-69" transform="translate(169.799988 0)"/>
-      <use xlink:href="#Cabin-Regular-63" transform="translate(190.999985 0)"/>
-      <use xlink:href="#Cabin-Regular-6c" transform="translate(236.399979 0)"/>
-      <use xlink:href="#Cabin-Regular-65" transform="translate(259.999969 0)"/>
+     <g style="fill: #263a30" transform="translate(234 306.21525) scale(0.24 -0.24)">
+      <use xlink:href="#Nunito-Regular-56"/>
+      <use xlink:href="#Nunito-Regular-65" transform="translate(68.899994 0)"/>
+      <use xlink:href="#Nunito-Regular-68" transform="translate(122.099991 0)"/>
+      <use xlink:href="#Nunito-Regular-69" transform="translate(178.899979 0)"/>
+      <use xlink:href="#Nunito-Regular-63" transform="translate(202.099976 0)"/>
+      <use xlink:href="#Nunito-Regular-6c" transform="translate(248.399963 0)"/>
+      <use xlink:href="#Nunito-Regular-65" transform="translate(277.999954 0)"/>
      </g>
     </g>
     <g id="line2d_19">
-     <path d="M 348.2925 296.49525 
-L 372.2925 296.49525 
-L 396.2925 296.49525 
+     <path d="M 349.48875 297.81525 
+L 373.48875 297.81525 
+L 397.48875 297.81525 
 " style="fill: none; stroke: #3e5d4d; stroke-width: 4.4; stroke-linecap: square"/>
      <defs>
-      <path id="m449742fc80" d="M 0 5.5 
+      <path id="m85d9bade0c" d="M 0 5.5 
 C 1.458617 5.5 2.857689 4.920485 3.889087 3.889087 
 C 4.920485 2.857689 5.5 1.458617 5.5 0 
 C 5.5 -1.458617 4.920485 -2.857689 3.889087 -3.889087 
@@ -2164,61 +3442,61 @@ z
 " style="stroke: #3e5d4d; stroke-width: 1.4"/>
      </defs>
      <g>
-      <use xlink:href="#m449742fc80" x="372.2925" y="296.49525" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
+      <use xlink:href="#m85d9bade0c" x="373.48875" y="297.81525" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
      </g>
     </g>
     <g id="text_25">
      <!-- AP21967 -->
-     <g style="fill: #263a30" transform="translate(415.4925 304.89525) scale(0.24 -0.24)">
-      <use xlink:href="#Cabin-Regular-41"/>
-      <use xlink:href="#Cabin-Regular-50" transform="translate(61.599991 0)"/>
-      <use xlink:href="#Cabin-Regular-32" transform="translate(118.799988 0)"/>
-      <use xlink:href="#Cabin-Regular-31" transform="translate(171.199982 0)"/>
-      <use xlink:href="#Cabin-Regular-39" transform="translate(206.699966 0)"/>
-      <use xlink:href="#Cabin-Regular-36" transform="translate(263.699951 0)"/>
-      <use xlink:href="#Cabin-Regular-37" transform="translate(319.749939 0)"/>
+     <g style="fill: #263a30" transform="translate(416.68875 306.21525) scale(0.24 -0.24)">
+      <use xlink:href="#Nunito-Regular-41"/>
+      <use xlink:href="#Nunito-Regular-50" transform="translate(72.899994 0)"/>
+      <use xlink:href="#Nunito-Regular-32" transform="translate(136.199982 0)"/>
+      <use xlink:href="#Nunito-Regular-31" transform="translate(196.199966 0)"/>
+      <use xlink:href="#Nunito-Regular-39" transform="translate(256.199951 0)"/>
+      <use xlink:href="#Nunito-Regular-36" transform="translate(316.199936 0)"/>
+      <use xlink:href="#Nunito-Regular-37" transform="translate(376.199921 0)"/>
      </g>
     </g>
    </g>
    <g id="line2d_20">
-    <path d="M 176.217722 380.578462 
-L 207.660759 427.052308 
-L 239.103797 473.526154 
-L 301.989873 522.904615 
-L 427.762025 572.283077 
-L 553.534177 592.615385 
-" clip-path="url(#p9dfa9864fe)" style="fill: none; stroke: #3e5d4d; stroke-width: 4.4; stroke-linecap: square"/>
-    <g clip-path="url(#p9dfa9864fe)">
-     <use xlink:href="#m449742fc80" x="176.217722" y="380.578462" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
-     <use xlink:href="#m449742fc80" x="207.660759" y="427.052308" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
-     <use xlink:href="#m449742fc80" x="239.103797" y="473.526154" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
-     <use xlink:href="#m449742fc80" x="301.989873" y="522.904615" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
-     <use xlink:href="#m449742fc80" x="427.762025" y="572.283077" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
-     <use xlink:href="#m449742fc80" x="553.534177" y="592.615385" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
+    <path d="M 172.617722 380.578462 
+L 204.060759 427.052308 
+L 235.503797 473.526154 
+L 298.389873 522.904615 
+L 424.162025 572.283077 
+L 549.934177 592.615385 
+" clip-path="url(#pdc6775bf5a)" style="fill: none; stroke: #3e5d4d; stroke-width: 4.4; stroke-linecap: square"/>
+    <g clip-path="url(#pdc6775bf5a)">
+     <use xlink:href="#m85d9bade0c" x="172.617722" y="380.578462" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
+     <use xlink:href="#m85d9bade0c" x="204.060759" y="427.052308" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
+     <use xlink:href="#m85d9bade0c" x="235.503797" y="473.526154" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
+     <use xlink:href="#m85d9bade0c" x="298.389873" y="522.904615" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
+     <use xlink:href="#m85d9bade0c" x="424.162025" y="572.283077" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
+     <use xlink:href="#m85d9bade0c" x="549.934177" y="592.615385" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
     </g>
    </g>
   </g>
   <g id="axes_3">
    <g id="patch_11">
-    <path d="M 158.4 1273.68 
-L 572.4 1273.68 
-L 572.4 949.68 
-L 158.4 949.68 
+    <path d="M 154.8 1273.68 
+L 568.8 1273.68 
+L 568.8 949.68 
+L 154.8 949.68 
 z
 " style="fill: #f6faf4"/>
    </g>
    <g id="line2d_21">
-    <path d="M 158.4 996.756923 
-L 572.4 996.756923 
-" clip-path="url(#p04f3e78ff3)" style="fill: none; stroke-dasharray: 7.4,3.2; stroke-dashoffset: 0; stroke: #c8ddae; stroke-width: 2"/>
+    <path d="M 154.8 996.756923 
+L 568.8 996.756923 
+" clip-path="url(#p8643a22964)" style="fill: none; stroke-dasharray: 7.4,3.2; stroke-dashoffset: 0; stroke: #c8ddae; stroke-width: 2"/>
    </g>
    <g id="matplotlib.axis_3">
     <g id="xtick_6">
      <g id="line2d_22"/>
      <g id="text_26">
       <!-- 0 -->
-      <g style="fill: #263a30" transform="translate(166.577878 1303.93) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-30"/>
+      <g style="fill: #263a30" transform="translate(164.517722 1302.904844) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-30"/>
       </g>
      </g>
     </g>
@@ -2226,9 +3504,9 @@ L 572.4 996.756923
      <g id="line2d_23"/>
      <g id="text_27">
       <!-- 60 -->
-      <g style="fill: #263a30" transform="translate(221.796376 1303.93) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-36"/>
-       <use xlink:href="#Cabin-Regular-30" transform="translate(56.799988 0)"/>
+      <g style="fill: #263a30" transform="translate(219.303797 1302.904844) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-36"/>
+       <use xlink:href="#Nunito-Regular-30" transform="translate(59.999985 0)"/>
       </g>
      </g>
     </g>
@@ -2236,10 +3514,10 @@ L 572.4 996.756923
      <g id="line2d_24"/>
      <g id="text_28">
       <!-- 120 -->
-      <g style="fill: #263a30" transform="translate(280.482686 1303.93) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-31"/>
-       <use xlink:href="#Cabin-Regular-32" transform="translate(35.499985 0)"/>
-       <use xlink:href="#Cabin-Regular-30" transform="translate(87.899979 0)"/>
+      <g style="fill: #263a30" transform="translate(274.089873 1302.904844) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-31"/>
+       <use xlink:href="#Nunito-Regular-32" transform="translate(59.999985 0)"/>
+       <use xlink:href="#Nunito-Regular-30" transform="translate(119.999969 0)"/>
       </g>
      </g>
     </g>
@@ -2247,10 +3525,10 @@ L 572.4 996.756923
      <g id="line2d_25"/>
      <g id="text_29">
       <!-- 240 -->
-      <g style="fill: #263a30" transform="translate(403.499994 1303.93) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-32"/>
-       <use xlink:href="#Cabin-Regular-34" transform="translate(52.399994 0)"/>
-       <use xlink:href="#Cabin-Regular-30" transform="translate(108.299988 0)"/>
+      <g style="fill: #263a30" transform="translate(399.862025 1302.904844) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-32"/>
+       <use xlink:href="#Nunito-Regular-34" transform="translate(59.999985 0)"/>
+       <use xlink:href="#Nunito-Regular-30" transform="translate(119.999969 0)"/>
       </g>
      </g>
     </g>
@@ -2258,245 +3536,245 @@ L 572.4 996.756923
      <g id="line2d_26"/>
      <g id="text_30">
       <!-- 360 -->
-      <g style="fill: #263a30" transform="translate(528.841833 1303.93) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-33"/>
-       <use xlink:href="#Cabin-Regular-36" transform="translate(54.699997 0)"/>
-       <use xlink:href="#Cabin-Regular-30" transform="translate(111.499985 0)"/>
+      <g style="fill: #263a30" transform="translate(525.634177 1302.904844) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-33"/>
+       <use xlink:href="#Nunito-Regular-36" transform="translate(59.999985 0)"/>
+       <use xlink:href="#Nunito-Regular-30" transform="translate(119.999969 0)"/>
       </g>
      </g>
     </g>
     <g id="text_31">
      <!-- Time after treatment (min) -->
-     <g style="fill: #263a30" transform="translate(206.2025 1350.464844) scale(0.28 -0.28)">
-      <use xlink:href="#Cabin-Bold-54"/>
-      <use xlink:href="#Cabin-Bold-69" transform="translate(54.649994 0)"/>
-      <use xlink:href="#Cabin-Bold-6d" transform="translate(78.649979 0)"/>
-      <use xlink:href="#Cabin-Bold-65" transform="translate(165.249969 0)"/>
-      <use xlink:href="#Cabin-Bold-20" transform="translate(216.749954 0)"/>
-      <use xlink:href="#Cabin-Bold-61" transform="translate(239.249939 0)"/>
-      <use xlink:href="#Cabin-Bold-66" transform="translate(288.424927 0)"/>
-      <use xlink:href="#Cabin-Bold-74" transform="translate(322.424911 0)"/>
-      <use xlink:href="#Cabin-Bold-65" transform="translate(356.824905 0)"/>
-      <use xlink:href="#Cabin-Bold-72" transform="translate(408.32489 0)"/>
-      <use xlink:href="#Cabin-Bold-20" transform="translate(442.524887 0)"/>
-      <use xlink:href="#Cabin-Bold-74" transform="translate(465.024872 0)"/>
-      <use xlink:href="#Cabin-Bold-72" transform="translate(499.424866 0)"/>
-      <use xlink:href="#Cabin-Bold-65" transform="translate(533.624863 0)"/>
-      <use xlink:href="#Cabin-Bold-61" transform="translate(585.124847 0)"/>
-      <use xlink:href="#Cabin-Bold-74" transform="translate(634.174835 0)"/>
-      <use xlink:href="#Cabin-Bold-6d" transform="translate(668.574829 0)"/>
-      <use xlink:href="#Cabin-Bold-65" transform="translate(755.17482 0)"/>
-      <use xlink:href="#Cabin-Bold-6e" transform="translate(806.674805 0)"/>
-      <use xlink:href="#Cabin-Bold-74" transform="translate(861.249802 0)"/>
-      <use xlink:href="#Cabin-Bold-20" transform="translate(895.649796 0)"/>
-      <use xlink:href="#Cabin-Bold-28" transform="translate(918.14978 0)"/>
-      <use xlink:href="#Cabin-Bold-6d" transform="translate(945.849777 0)"/>
-      <use xlink:href="#Cabin-Bold-69" transform="translate(1032.449768 0)"/>
-      <use xlink:href="#Cabin-Bold-6e" transform="translate(1056.449753 0)"/>
-      <use xlink:href="#Cabin-Bold-29" transform="translate(1109.39975 0)"/>
+     <g style="fill: #263a30" transform="translate(188.097188 1347.140937) scale(0.28 -0.28)">
+      <use xlink:href="#Nunito-Bold-54"/>
+      <use xlink:href="#Nunito-Bold-69" transform="translate(62.099991 0)"/>
+      <use xlink:href="#Nunito-Bold-6d" transform="translate(87.599976 0)"/>
+      <use xlink:href="#Nunito-Bold-65" transform="translate(175.299957 0)"/>
+      <use xlink:href="#Nunito-Bold-20" transform="translate(229.499954 0)"/>
+      <use xlink:href="#Nunito-Bold-61" transform="translate(256.599945 0)"/>
+      <use xlink:href="#Nunito-Bold-66" transform="translate(311.299942 0)"/>
+      <use xlink:href="#Nunito-Bold-74" transform="translate(347.699936 0)"/>
+      <use xlink:href="#Nunito-Bold-65" transform="translate(386.09993 0)"/>
+      <use xlink:href="#Nunito-Bold-72" transform="translate(440.299927 0)"/>
+      <use xlink:href="#Nunito-Bold-20" transform="translate(479.499924 0)"/>
+      <use xlink:href="#Nunito-Bold-74" transform="translate(506.599915 0)"/>
+      <use xlink:href="#Nunito-Bold-72" transform="translate(544.999908 0)"/>
+      <use xlink:href="#Nunito-Bold-65" transform="translate(584.199905 0)"/>
+      <use xlink:href="#Nunito-Bold-61" transform="translate(638.399902 0)"/>
+      <use xlink:href="#Nunito-Bold-74" transform="translate(693.099899 0)"/>
+      <use xlink:href="#Nunito-Bold-6d" transform="translate(731.499893 0)"/>
+      <use xlink:href="#Nunito-Bold-65" transform="translate(819.199875 0)"/>
+      <use xlink:href="#Nunito-Bold-6e" transform="translate(873.399872 0)"/>
+      <use xlink:href="#Nunito-Bold-74" transform="translate(931.899857 0)"/>
+      <use xlink:href="#Nunito-Bold-20" transform="translate(970.29985 0)"/>
+      <use xlink:href="#Nunito-Bold-28" transform="translate(997.399841 0)"/>
+      <use xlink:href="#Nunito-Bold-6d" transform="translate(1033.199829 0)"/>
+      <use xlink:href="#Nunito-Bold-69" transform="translate(1120.899811 0)"/>
+      <use xlink:href="#Nunito-Bold-6e" transform="translate(1146.399796 0)"/>
+      <use xlink:href="#Nunito-Bold-29" transform="translate(1204.89978 0)"/>
      </g>
     </g>
    </g>
    <g id="matplotlib.axis_4">
     <g id="ytick_6">
      <g id="line2d_27">
-      <path d="M 158.4 1273.68 
-L 572.4 1273.68 
-" clip-path="url(#p04f3e78ff3)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
+      <path d="M 154.8 1273.68 
+L 568.8 1273.68 
+" clip-path="url(#p8643a22964)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_28"/>
      <g id="text_32">
       <!-- 0 -->
-      <g style="fill: #263a30" transform="translate(129.120313 1283.805) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-30"/>
+      <g style="fill: #263a30" transform="translate(128.6 1283.292422) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-30"/>
       </g>
      </g>
     </g>
     <g id="ytick_7">
      <g id="line2d_29">
-      <path d="M 158.4 1204.449231 
-L 572.4 1204.449231 
-" clip-path="url(#p04f3e78ff3)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
+      <path d="M 154.8 1204.449231 
+L 568.8 1204.449231 
+" clip-path="url(#p8643a22964)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_30"/>
      <g id="text_33">
       <!-- 25 -->
-      <g style="fill: #263a30" transform="translate(119.645 1214.574231) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-32"/>
-       <use xlink:href="#Cabin-Regular-35" transform="translate(52.399994 0)"/>
+      <g style="fill: #263a30" transform="translate(112.4 1214.061653) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-32"/>
+       <use xlink:href="#Nunito-Regular-35" transform="translate(59.999985 0)"/>
       </g>
      </g>
     </g>
     <g id="ytick_8">
      <g id="line2d_31">
-      <path d="M 158.4 1135.218462 
-L 572.4 1135.218462 
-" clip-path="url(#p04f3e78ff3)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
+      <path d="M 154.8 1135.218462 
+L 568.8 1135.218462 
+" clip-path="url(#p8643a22964)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_32"/>
      <g id="text_34">
       <!-- 50 -->
-      <g style="fill: #263a30" transform="translate(114.515 1145.343462) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-35"/>
-       <use xlink:href="#Cabin-Regular-30" transform="translate(54.099991 0)"/>
+      <g style="fill: #263a30" transform="translate(112.4 1144.830883) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-35"/>
+       <use xlink:href="#Nunito-Regular-30" transform="translate(59.999985 0)"/>
       </g>
      </g>
     </g>
     <g id="ytick_9">
      <g id="line2d_33">
-      <path d="M 158.4 1065.987692 
-L 572.4 1065.987692 
-" clip-path="url(#p04f3e78ff3)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
+      <path d="M 154.8 1065.987692 
+L 568.8 1065.987692 
+" clip-path="url(#p8643a22964)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_34"/>
      <g id="text_35">
       <!-- 75 -->
-      <g style="fill: #263a30" transform="translate(120.239844 1076.112692) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-37"/>
-       <use xlink:href="#Cabin-Regular-35" transform="translate(50.199997 0)"/>
+      <g style="fill: #263a30" transform="translate(112.4 1075.600114) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-37"/>
+       <use xlink:href="#Nunito-Regular-35" transform="translate(59.999985 0)"/>
       </g>
      </g>
     </g>
     <g id="ytick_10">
      <g id="line2d_35">
-      <path d="M 158.4 996.756923 
-L 572.4 996.756923 
-" clip-path="url(#p04f3e78ff3)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
+      <path d="M 154.8 996.756923 
+L 568.8 996.756923 
+" clip-path="url(#p8643a22964)" style="fill: none; stroke: #c8ddae; stroke-opacity: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_36"/>
      <g id="text_36">
       <!-- 100 -->
-      <g style="fill: #263a30" transform="translate(100.255625 1006.881923) scale(0.27 -0.27)">
-       <use xlink:href="#Cabin-Regular-31"/>
-       <use xlink:href="#Cabin-Regular-30" transform="translate(35.499985 0)"/>
-       <use xlink:href="#Cabin-Regular-30" transform="translate(106.899979 0)"/>
+      <g style="fill: #263a30" transform="translate(96.2 1006.369345) scale(0.27 -0.27)">
+       <use xlink:href="#Nunito-Regular-31"/>
+       <use xlink:href="#Nunito-Regular-30" transform="translate(59.999985 0)"/>
+       <use xlink:href="#Nunito-Regular-30" transform="translate(119.999969 0)"/>
       </g>
      </g>
     </g>
     <g id="text_37">
      <!-- SMO (% of baseline) -->
-     <g style="fill: #263a30" transform="translate(81.47875 1233.294062) rotate(-90) scale(0.28 -0.28)">
-      <use xlink:href="#Cabin-Bold-53"/>
-      <use xlink:href="#Cabin-Bold-4d" transform="translate(57.999985 0)"/>
-      <use xlink:href="#Cabin-Bold-4f" transform="translate(140.674973 0)"/>
-      <use xlink:href="#Cabin-Bold-20" transform="translate(216.674957 0)"/>
-      <use xlink:href="#Cabin-Bold-28" transform="translate(239.174942 0)"/>
-      <use xlink:href="#Cabin-Bold-25" transform="translate(266.874939 0)"/>
-      <use xlink:href="#Cabin-Bold-20" transform="translate(351.074921 0)"/>
-      <use xlink:href="#Cabin-Bold-6f" transform="translate(373.574905 0)"/>
-      <use xlink:href="#Cabin-Bold-66" transform="translate(429.149902 0)"/>
-      <use xlink:href="#Cabin-Bold-20" transform="translate(463.149887 0)"/>
-      <use xlink:href="#Cabin-Bold-62" transform="translate(485.649872 0)"/>
-      <use xlink:href="#Cabin-Bold-61" transform="translate(542.749863 0)"/>
-      <use xlink:href="#Cabin-Bold-73" transform="translate(592.54985 0)"/>
-      <use xlink:href="#Cabin-Bold-65" transform="translate(634.849838 0)"/>
-      <use xlink:href="#Cabin-Bold-6c" transform="translate(686.349823 0)"/>
-      <use xlink:href="#Cabin-Bold-69" transform="translate(712.649811 0)"/>
-      <use xlink:href="#Cabin-Bold-6e" transform="translate(736.649796 0)"/>
-      <use xlink:href="#Cabin-Bold-65" transform="translate(791.849792 0)"/>
-      <use xlink:href="#Cabin-Bold-29" transform="translate(840.974777 0)"/>
+     <g style="fill: #263a30" transform="translate(78.88 1245.740937) rotate(-90) scale(0.28 -0.28)">
+      <use xlink:href="#Nunito-Bold-53"/>
+      <use xlink:href="#Nunito-Bold-4d" transform="translate(63.099991 0)"/>
+      <use xlink:href="#Nunito-Bold-4f" transform="translate(149.899979 0)"/>
+      <use xlink:href="#Nunito-Bold-20" transform="translate(228.399963 0)"/>
+      <use xlink:href="#Nunito-Bold-28" transform="translate(255.499954 0)"/>
+      <use xlink:href="#Nunito-Bold-25" transform="translate(291.299942 0)"/>
+      <use xlink:href="#Nunito-Bold-20" transform="translate(385.799927 0)"/>
+      <use xlink:href="#Nunito-Bold-6f" transform="translate(412.899918 0)"/>
+      <use xlink:href="#Nunito-Bold-66" transform="translate(470.499908 0)"/>
+      <use xlink:href="#Nunito-Bold-20" transform="translate(506.899902 0)"/>
+      <use xlink:href="#Nunito-Bold-62" transform="translate(533.999893 0)"/>
+      <use xlink:href="#Nunito-Bold-61" transform="translate(593.999878 0)"/>
+      <use xlink:href="#Nunito-Bold-73" transform="translate(648.699875 0)"/>
+      <use xlink:href="#Nunito-Bold-65" transform="translate(697.499863 0)"/>
+      <use xlink:href="#Nunito-Bold-6c" transform="translate(751.69986 0)"/>
+      <use xlink:href="#Nunito-Bold-69" transform="translate(783.599854 0)"/>
+      <use xlink:href="#Nunito-Bold-6e" transform="translate(809.099838 0)"/>
+      <use xlink:href="#Nunito-Bold-65" transform="translate(867.599823 0)"/>
+      <use xlink:href="#Nunito-Bold-29" transform="translate(921.79982 0)"/>
      </g>
     </g>
    </g>
    <g id="patch_12">
-    <path d="M 158.4 1273.68 
-L 158.4 949.68 
+    <path d="M 154.8 1273.68 
+L 154.8 949.68 
 " style="fill: none; stroke: #3e5d4d; stroke-width: 1.7; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_13">
-    <path d="M 158.4 1273.68 
-L 572.4 1273.68 
+    <path d="M 154.8 1273.68 
+L 568.8 1273.68 
 " style="fill: none; stroke: #3e5d4d; stroke-width: 1.7; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="line2d_37">
-    <path d="M 176.217722 996.756923 
-L 207.660759 996.756923 
-L 239.103797 996.756923 
-L 301.989873 999.526154 
-L 427.762025 996.756923 
-L 553.534177 999.526154 
-" clip-path="url(#p04f3e78ff3)" style="fill: none; stroke-dasharray: 13.32,5.76; stroke-dashoffset: 0; stroke: #93c6ba; stroke-width: 3.6"/>
-    <g clip-path="url(#p04f3e78ff3)">
-     <use xlink:href="#m1df8157ef9" x="176.217722" y="996.756923" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
-     <use xlink:href="#m1df8157ef9" x="207.660759" y="996.756923" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
-     <use xlink:href="#m1df8157ef9" x="239.103797" y="996.756923" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
-     <use xlink:href="#m1df8157ef9" x="301.989873" y="999.526154" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
-     <use xlink:href="#m1df8157ef9" x="427.762025" y="996.756923" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
-     <use xlink:href="#m1df8157ef9" x="553.534177" y="999.526154" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
+    <path d="M 172.617722 996.756923 
+L 204.060759 996.756923 
+L 235.503797 996.756923 
+L 298.389873 999.526154 
+L 424.162025 996.756923 
+L 549.934177 999.526154 
+" clip-path="url(#p8643a22964)" style="fill: none; stroke-dasharray: 13.32,5.76; stroke-dashoffset: 0; stroke: #93c6ba; stroke-width: 3.6"/>
+    <g clip-path="url(#p8643a22964)">
+     <use xlink:href="#m6a3a78f45b" x="172.617722" y="996.756923" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
+     <use xlink:href="#m6a3a78f45b" x="204.060759" y="996.756923" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
+     <use xlink:href="#m6a3a78f45b" x="235.503797" y="996.756923" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
+     <use xlink:href="#m6a3a78f45b" x="298.389873" y="999.526154" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
+     <use xlink:href="#m6a3a78f45b" x="424.162025" y="996.756923" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
+     <use xlink:href="#m6a3a78f45b" x="549.934177" y="999.526154" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
     </g>
    </g>
    <g id="legend_2">
     <g id="line2d_38">
-     <path d="M 170.4 915.37125 
-L 194.4 915.37125 
-L 218.4 915.37125 
+     <path d="M 166.8 916.69125 
+L 190.8 916.69125 
+L 214.8 916.69125 
 " style="fill: none; stroke-dasharray: 13.32,5.76; stroke-dashoffset: 0; stroke: #93c6ba; stroke-width: 3.6"/>
      <g>
-      <use xlink:href="#m1df8157ef9" x="194.4" y="915.37125" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
+      <use xlink:href="#m6a3a78f45b" x="190.8" y="916.69125" style="fill: #bce2d3; stroke: #3e5d4d; stroke-width: 1.2; stroke-linejoin: miter"/>
      </g>
     </g>
     <g id="text_38">
      <!-- Vehicle -->
-     <g style="fill: #263a30" transform="translate(237.6 923.77125) scale(0.24 -0.24)">
-      <use xlink:href="#Cabin-Regular-56"/>
-      <use xlink:href="#Cabin-Regular-65" transform="translate(64.399994 0)"/>
-      <use xlink:href="#Cabin-Regular-68" transform="translate(115.599991 0)"/>
-      <use xlink:href="#Cabin-Regular-69" transform="translate(169.799988 0)"/>
-      <use xlink:href="#Cabin-Regular-63" transform="translate(190.999985 0)"/>
-      <use xlink:href="#Cabin-Regular-6c" transform="translate(236.399979 0)"/>
-      <use xlink:href="#Cabin-Regular-65" transform="translate(259.999969 0)"/>
+     <g style="fill: #263a30" transform="translate(234 925.09125) scale(0.24 -0.24)">
+      <use xlink:href="#Nunito-Regular-56"/>
+      <use xlink:href="#Nunito-Regular-65" transform="translate(68.899994 0)"/>
+      <use xlink:href="#Nunito-Regular-68" transform="translate(122.099991 0)"/>
+      <use xlink:href="#Nunito-Regular-69" transform="translate(178.899979 0)"/>
+      <use xlink:href="#Nunito-Regular-63" transform="translate(202.099976 0)"/>
+      <use xlink:href="#Nunito-Regular-6c" transform="translate(248.399963 0)"/>
+      <use xlink:href="#Nunito-Regular-65" transform="translate(277.999954 0)"/>
      </g>
     </g>
     <g id="line2d_39">
-     <path d="M 348.2925 915.37125 
-L 372.2925 915.37125 
-L 396.2925 915.37125 
+     <path d="M 349.48875 916.69125 
+L 373.48875 916.69125 
+L 397.48875 916.69125 
 " style="fill: none; stroke: #3e5d4d; stroke-width: 4.4; stroke-linecap: square"/>
      <g>
-      <use xlink:href="#m449742fc80" x="372.2925" y="915.37125" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
+      <use xlink:href="#m85d9bade0c" x="373.48875" y="916.69125" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
      </g>
     </g>
     <g id="text_39">
      <!-- AP21967 -->
-     <g style="fill: #263a30" transform="translate(415.4925 923.77125) scale(0.24 -0.24)">
-      <use xlink:href="#Cabin-Regular-41"/>
-      <use xlink:href="#Cabin-Regular-50" transform="translate(61.599991 0)"/>
-      <use xlink:href="#Cabin-Regular-32" transform="translate(118.799988 0)"/>
-      <use xlink:href="#Cabin-Regular-31" transform="translate(171.199982 0)"/>
-      <use xlink:href="#Cabin-Regular-39" transform="translate(206.699966 0)"/>
-      <use xlink:href="#Cabin-Regular-36" transform="translate(263.699951 0)"/>
-      <use xlink:href="#Cabin-Regular-37" transform="translate(319.749939 0)"/>
+     <g style="fill: #263a30" transform="translate(416.68875 925.09125) scale(0.24 -0.24)">
+      <use xlink:href="#Nunito-Regular-41"/>
+      <use xlink:href="#Nunito-Regular-50" transform="translate(72.899994 0)"/>
+      <use xlink:href="#Nunito-Regular-32" transform="translate(136.199982 0)"/>
+      <use xlink:href="#Nunito-Regular-31" transform="translate(196.199966 0)"/>
+      <use xlink:href="#Nunito-Regular-39" transform="translate(256.199951 0)"/>
+      <use xlink:href="#Nunito-Regular-36" transform="translate(316.199936 0)"/>
+      <use xlink:href="#Nunito-Regular-37" transform="translate(376.199921 0)"/>
      </g>
     </g>
    </g>
    <g id="line2d_40">
-    <path d="M 176.217722 996.756923 
-L 207.660759 999.526154 
-L 239.103797 1005.064615 
-L 301.989873 1013.372308 
-L 427.762025 1035.526154 
-L 553.534177 1063.218462 
-" clip-path="url(#p04f3e78ff3)" style="fill: none; stroke: #3e5d4d; stroke-width: 4.4; stroke-linecap: square"/>
-    <g clip-path="url(#p04f3e78ff3)">
-     <use xlink:href="#m449742fc80" x="176.217722" y="996.756923" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
-     <use xlink:href="#m449742fc80" x="207.660759" y="999.526154" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
-     <use xlink:href="#m449742fc80" x="239.103797" y="1005.064615" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
-     <use xlink:href="#m449742fc80" x="301.989873" y="1013.372308" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
-     <use xlink:href="#m449742fc80" x="427.762025" y="1035.526154" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
-     <use xlink:href="#m449742fc80" x="553.534177" y="1063.218462" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
+    <path d="M 172.617722 996.756923 
+L 204.060759 999.526154 
+L 235.503797 1005.064615 
+L 298.389873 1013.372308 
+L 424.162025 1035.526154 
+L 549.934177 1063.218462 
+" clip-path="url(#p8643a22964)" style="fill: none; stroke: #3e5d4d; stroke-width: 4.4; stroke-linecap: square"/>
+    <g clip-path="url(#p8643a22964)">
+     <use xlink:href="#m85d9bade0c" x="172.617722" y="996.756923" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
+     <use xlink:href="#m85d9bade0c" x="204.060759" y="999.526154" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
+     <use xlink:href="#m85d9bade0c" x="235.503797" y="1005.064615" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
+     <use xlink:href="#m85d9bade0c" x="298.389873" y="1013.372308" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
+     <use xlink:href="#m85d9bade0c" x="424.162025" y="1035.526154" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
+     <use xlink:href="#m85d9bade0c" x="549.934177" y="1063.218462" style="fill: #d7eacf; stroke: #3e5d4d; stroke-width: 1.4"/>
     </g>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="p694128bda8">
+  <clipPath id="p4ee8de1226">
    <rect x="0" y="0" width="669.6" height="1598.4"/>
   </clipPath>
-  <clipPath id="p9dfa9864fe">
-   <rect x="158.4" y="331.2" width="414" height="339.84"/>
+  <clipPath id="pdc6775bf5a">
+   <rect x="154.8" y="331.2" width="414" height="339.84"/>
   </clipPath>
-  <clipPath id="p04f3e78ff3">
-   <rect x="158.4" y="949.68" width="414" height="324"/>
+  <clipPath id="p8643a22964">
+   <rect x="154.8" y="949.68" width="414" height="324"/>
   </clipPath>
  </defs>
 </svg>
