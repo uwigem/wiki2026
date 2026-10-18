@@ -5,7 +5,6 @@ import {
   HEDGEHOG_SIDE_SIZE,
   decodeLayer,
 } from '../content/balanceLogo'
-import PixelIcon from './PixelIcon'
 import { SITE_PALETTE } from '../theme'
 import { inline } from './RichText'
 
@@ -208,7 +207,7 @@ function paintScene(ctx: CanvasRenderingContext2D) {
   ctx.restore()
 }
 
-function Scene({ scale = 3 }: { scale?: number }) {
+function Scene({ scale = 4 }: { scale?: number }) {
   const ref = useRef<HTMLCanvasElement>(null)
   useEffect(() => {
     const ctx = ref.current?.getContext('2d')
@@ -286,7 +285,7 @@ function Cloud({ children }: { children: React.ReactNode }) {
       </svg>
       {/* The straight middle of the cloud, where content can sit without
           running into a bump. */}
-      <div className="absolute inset-x-[18%] inset-y-[12%] flex flex-col items-center justify-center gap-2 text-center">
+      <div className="absolute inset-x-[18%] inset-y-[12%] flex flex-col items-center justify-center text-center">
         {children}
       </div>
     </div>
@@ -327,23 +326,6 @@ function Puffs() {
   )
 }
 
-/**
- * A smile. An outline, not a filled disc: filled, the two eye holes and the
- * mouth gap read as a face in a respirator.
- */
-const SMILEY = [
-  '...#####...',
-  '..#.....#..',
-  '.#.......#.',
-  '#...#.#...#',
-  '#.........#',
-  '#.........#',
-  '#..#...#..#',
-  '#...###...#',
-  '.#.......#.',
-  '..#.....#..',
-  '...#####...',
-]
 
 /* --------------------------------------------------------------- the page */
 
@@ -363,18 +345,16 @@ export default function ResultsSoon({
           from the cloud's underside down to the top of its head. The hedgehog
           sits right of centre because it faces left and cannot be flipped: a
           cloud over its right shoulder would be behind its back. */}
+      {/* What the hedgehog is thinking, said once, above the drawing. The
+          cloud holds only the picture; a caption inside it fought the bumps
+          for room and never sat quite level. */}
+      <p className="mb-5 text-center text-body leading-relaxed">
+        {inline(note)} <span className="whitespace-nowrap">:)</span>
+      </p>
+
       <div className="flex flex-col items-center [--k:0.7] sm:[--k:1]">
         <Cloud>
           <Scene />
-          {/* The smile runs on the end of the sentence, not under it: as a
-              flex item it became its own line whenever the words wrapped. */}
-          <p className="text-body-sm leading-snug">
-            {inline(note)}{' '}
-            <PixelIcon
-              rows={SMILEY}
-              className="ml-1 inline-block h-[1.05em] w-[1.05em] align-[-0.15em] text-leaf-900"
-            />
-          </p>
         </Cloud>
 
         {/* Pulled up into the empty bottom of the cloud's box, where the

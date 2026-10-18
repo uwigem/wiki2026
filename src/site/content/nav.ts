@@ -61,6 +61,7 @@ export const NAV: NavGroup[] = [
     to: '/experiments',
     items: [
       { label: 'Experiments', to: '/experiments' },
+      { label: 'Protocols', to: '/protocols' },
       { label: 'Notebook', to: '/notebook' },
       { label: 'Parts and Registry', to: '/parts' },
       { label: 'Results', to: '/results' },
