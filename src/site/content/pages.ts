@@ -936,8 +936,7 @@ const experiments: Page = {
       kind: "prose",
       section: "Experiment 1: Induced recruitment",
       id: "experiments",
-      navLabel: "Rationale",
-      heading: "Chemically induced recruitment of MGRN1 and MEGF8 to SMO",
+      heading: "Rationale",
       body: [
         "The MMM complex regulates Hedgehog signalling by ubiquitinating SMO, which promotes its internalisation and degradation. **MGRN1** is the E3 ubiquitin ligase that does the ubiquitinating. **MEGF8** recruits MGRN1 and contributes to its activity. **MOSMO** interacts with MEGF8 and helps regulate the complex at the cell surface.",
         "Kong et al. [1] showed that MGRN1 on its own does not significantly increase SMO ubiquitination when overexpressed in HEK293T cells. MEGF8 on its own produces a small increase, probably by working through endogenous MGRN1. Expressing both together produces substantially more.",
@@ -1002,8 +1001,7 @@ const experiments: Page = {
       kind: "prose",
       section: "Experiment 2: Binder screen",
       id: "exp2",
-      navLabel: "Rationale",
-      heading: "Screening designed binders against MEGF8 and MOSMO",
+      heading: "Rationale",
       body: [
         "The other arm needs protein binders that interfere with the MMM complex and stop it clearing SMO. Before any of that, a narrower question: do the designs we generated recognise their targets inside a cell at all?",
         "We screen binders against both MEGF8 and MOSMO in a 96-well mammalian protein interaction assay. It measures binding. It does not show that a binder disrupts the complex, and a positive result here should not be read as though it does.",
@@ -1066,8 +1064,7 @@ const experiments: Page = {
       kind: "prose",
       section: "Experiment 3: SMO trafficking",
       id: "exp3",
-      navLabel: "Rationale",
-      heading: "Quantifying SMO trafficking and depletion kinetics",
+      heading: "Rationale",
       body: [
         "Experiment 1 asks whether recruitment increases ubiquitination. This one asks what then happens to SMO: how quickly it leaves the primary cilium, and whether the amount in the cell as a whole changes too.",
         "Those are different questions. Ciliary SMO is what matters for signalling, but a fall in ciliary fluorescence does not prove SMO was degraded. It may simply have moved elsewhere in the cell. To tell the two apart, we measure SMO at the cilium and in the rest of the cell from the same images, across the same time course.",
@@ -1132,8 +1129,7 @@ const experiments: Page = {
       kind: "prose",
       section: "Experiment 4: Binder validation",
       id: "exp4",
-      navLabel: "Rationale",
-      heading: "Functional validation of designed MEGF8 and MOSMO binders",
+      heading: "Rationale",
       body: [
         "A GFP signal in Experiment 2 says a candidate interacts with its target in the screening system. It does not say the binder interferes with MMM function or changes Hedgehog signalling. This experiment asks that.",
         "The complex drives SMO ubiquitination and limits how much SMO accumulates in the cilium. Our binders are designed against extracellular-facing regions of human MEGF8 and MOSMO, so they can be applied to cells from the outside as purified protein rather than expressed inside them.",
@@ -1198,8 +1194,7 @@ const experiments: Page = {
       kind: "prose",
       section: "Experiment 5: The rheostat",
       id: "exp5",
-      navLabel: "Rationale",
-      heading: "Functional validation of a bidirectional Hedgehog rheostat",
+      heading: "Rationale",
       body: [
         "This is the last experiment, and it only happens if the others work. It needs induced recruitment to have changed SMO regulation, and at least one designed binder to have reduced MMM function and raised SMO abundance. Binding in the Experiment 2 screen does not qualify a binder for this on its own.",
         "Experiments 1 to 4 stop short of the thing the project claims. They measure recruitment, ubiquitination, binding and SMO localisation. None of them measures Hedgehog signalling across a range of inputs, which is what a rheostat has to do.",
