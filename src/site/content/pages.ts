@@ -3165,6 +3165,23 @@ const results: Page = {
   ],
 };
 
+const protocols: Page = {
+  slug: "/protocols",
+  title: "Protocols",
+  kicker: "wetlab · protocols",
+  storyBeat: "How each bed was planted, step by step, for anyone who wants to plant their own.",
+  intro:
+    "The bench procedures behind the experiments, written so another lab can follow them. They are being written up as each one is validated, and none is finished yet.",
+  blocks: [
+    {
+      kind: "resultsSoon",
+      note: "We'll add them when we have them.",
+      caption:
+        "What each experiment is for, and the controls it runs against, are on [experiments](/experiments).",
+    },
+  ],
+};
+
 const contribution: Page = {
   slug: "/contribution",
   title: "What We Leave Behind",
@@ -3450,6 +3467,7 @@ export const PAGES: Page[] = [
   engineering,
   implementation,
   experiments,
+  protocols,
   parts,
   results,
   model,

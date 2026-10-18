@@ -80,17 +80,27 @@ export function checkContent() {
       problems.push(`"${page.slug}" (${page.title}) must not end with a "/".`)
   }
 
-  // The chapter number in each kicker has to follow the PAGES order by hand.
-  PAGES.forEach((page, i) => {
+  /*
+   * The chapter number in each kicker has to follow the PAGES order by hand.
+   *
+   * Only pages whose kicker carries a chapter number count towards it. A page
+   * with a plain kicker ("wetlab · results") is an interlude: it sits in the
+   * reading order, so previous and next walk through it, but it does not take
+   * a number and does not push the chapters after it along.
+   */
+  let chapter = 0
+  for (const page of PAGES) {
     const match = page.kicker.match(/chapter\s+(\d+)/i)
-    if (match && Number(match[1]) !== i + 1) {
+    if (!match) continue
+    chapter += 1
+    if (Number(match[1]) !== chapter) {
       problems.push(
-        `"${page.title}" is page ${i + 1} in the PAGES array but its kicker says ` +
-          `"chapter ${match[1]}". Reading order comes from the PAGES array, so either move the ` +
-          `page or renumber the kickers after it.`,
+        `"${page.title}" is numbered chapter ${chapter} by its place in the PAGES array ` +
+          `but its kicker says "chapter ${match[1]}". Reading order comes from the PAGES array, ` +
+          `so either move the page or renumber the kickers after it.`,
       )
     }
-  })
+  }
 
   /*
    * Links written inside the copy, for example
