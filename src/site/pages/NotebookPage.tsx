@@ -3,7 +3,7 @@ import { RECRUITMENT_CONSTRUCTS } from '../content/constructs'
 import ConstructDiagram from '../components/ConstructDiagram'
 import Details from '../components/Details'
 import GardenSection, { Reveal, SectionDivider } from '../components/GardenSection'
-import MilestoneTrack from '../components/MilestoneTrack'
+import StageRail, { type Stage } from '../components/StageRail'
 import PixelSign, { TodoPanel } from '../components/PixelSign'
 import { Link } from '../router'
 
@@ -21,6 +21,18 @@ import { Link } from '../router'
  *
  * Content lives in `content/timeline.ts` and `content/constructs.ts`.
  */
+/**
+ * The milestones as rail stages. The one that has not started is marked
+ * `here`, so the rail draws its line above it: everything above is done, and
+ * that stage is what the lab is waiting to begin.
+ */
+const STAGES: Stage[] = WETLAB_MILESTONES.map((m) => ({
+  title: m.title,
+  meta: m.date,
+  body: [m.body],
+  here: m.status === 'upcoming' ? true : undefined,
+}))
+
 export default function NotebookPage() {
   return (
     <article>
@@ -40,16 +52,14 @@ export default function NotebookPage() {
       <SectionDivider />
 
       <GardenSection>
-        <h2 className="text-xl sm:text-2xl">Wet lab, start to here</h2>
-        <p className="mt-2 max-w-2xl text-body leading-relaxed">
-          Design work is finished and the orders are placed. Nothing has been assembled or tested.
-        </p>
-
-        <div className="mt-5">
-          <Reveal>
-            <MilestoneTrack milestones={WETLAB_MILESTONES} />
-          </Reveal>
-        </div>
+        <Reveal>
+          <StageRail
+            heading="Wet lab, start to here"
+            intro="Design work is finished and the orders are placed. Above the line is what is done; below it is what happens once the materials arrive."
+            stages={STAGES}
+            hereLabel="where we are"
+          />
+        </Reveal>
 
         <div className="mt-6 flex flex-col gap-5">
           <Reveal>
