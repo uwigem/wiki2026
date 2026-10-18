@@ -37,8 +37,17 @@ const { w: HOG_W, h: HOG_H } = HEDGEHOG_SIDE_SIZE
 
 /* ---------------------------------------------------------------- the hog */
 
-/** Lab coat: painted only over the body, from this row down. */
+/**
+ * The lab coat, in sprite pixels. It faces left like the animal, so its open
+ * front is on the left: everything from COAT_EDGE rightwards is coat, the
+ * strip in front of that stays the hedgehog's own belly, and a dark line down
+ * the edge is the lapel. Painting the whole lower body white made a
+ * straitjacket; the opening is what makes it a coat.
+ */
 const COAT_FROM = 12
+const COAT_EDGE = 6
+/** A pocket: the top seam, three pixels wide, on the hip. */
+const POCKET = { x: 9, y: 17, w: 3 }
 /** Goggles: the lens box, in sprite pixels. */
 const LENS = { x: 4, y: 5, w: 5, h: 4 }
 /** The strap, running back over the head to the quills. */
@@ -56,27 +65,47 @@ function paintHog(ctx: CanvasRenderingContext2D, lab: boolean) {
   // Which pixels the animal occupies, and which of them are its pale body.
   const solid = new Set<number>()
   const body = new Set<number>()
+  const arm = new Set<number>()
   for (let i = 0; i < cells.length; i += 3) {
     const x = cells[i]
     const y = cells[i + 1]
     const key = y * HOG_W + x
     solid.add(key)
-    // Palette entry 21 is the cream of its face and belly; the coat goes
-    // over that and nothing else, so the quills stay quills.
-    if (cells[i + 2] === 21) body.add(key)
+    // Palette entries 21 and 19 are the cream of its belly and the tan of
+    // its arms; the coat and its sleeves go over those and nothing else, so
+    // the quills stay quills.
+    if (cells[i + 2] === 21 || cells[i + 2] === 19) body.add(key)
+    if (cells[i + 2] === 19) arm.add(key)
     ctx.fillStyle = '#' + BALANCE_LOGO.palette[cells[i + 2] - 1]
     ctx.fillRect(x, y, 1, 1)
   }
   if (!lab) return
 
-  for (let y = COAT_FROM; y < HOG_H; y++) {
-    for (let x = 0; x < HOG_W; x++) {
+  for (let y = COAT_FROM; y < HOG_H - 2; y++) {
+    for (let x = COAT_EDGE; x < HOG_W; x++) {
       if (!body.has(y * HOG_W + x)) continue
-      // A darker line along the top edge reads as the collar.
-      ctx.fillStyle = y === COAT_FROM ? SITE_PALETTE.stoneMid : SITE_PALETTE.petalWhite
+      ctx.fillStyle =
+        x === COAT_EDGE
+          ? SITE_PALETTE.stoneDark // the lapel, a line down the open front
+          : y === COAT_FROM
+            ? SITE_PALETTE.stoneMid // the collar
+            : SITE_PALETTE.petalWhite
       ctx.fillRect(x, y, 1, 1)
     }
   }
+  // The near arm hangs in front of the open coat, so it gets a sleeve of its
+  // own even though it sits forward of the lapel. Row 13 is the arm; the
+  // tan pixels on it are the only ones painted.
+  for (let x = 0; x < COAT_EDGE; x++) {
+    if (arm.has(13 * HOG_W + x)) {
+      ctx.fillStyle = SITE_PALETTE.petalWhite
+      ctx.fillRect(x, 13, 1, 1)
+    }
+  }
+  // The lapel folds back at the top: one step up and out from the edge.
+  ctx.fillStyle = SITE_PALETTE.stoneDark
+  ctx.fillRect(COAT_EDGE + 1, COAT_FROM - 1, 1, 1)
+  for (let x = POCKET.x; x < POCKET.x + POCKET.w; x++) ctx.fillRect(x, POCKET.y, 1, 1)
 
   const put = (x: number, y: number, colour: string) => {
     if (solid.has(y * HOG_W + x)) {
@@ -265,19 +294,21 @@ function Cloud({ children }: { children: React.ReactNode }) {
 }
 
 /**
- * The puffs climbing from the hedgehog's head to the cloud: bigger and
- * further left the closer they get, so the trail leans towards the thought
- * instead of stacking straight up like a column of bubbles.
+ * The puffs between the cloud and the hedgehog's head, read top to bottom:
+ * each one smaller and further right than the one above, so the trail falls
+ * from the cloud's underside down to the head rather than standing beside
+ * the cloud like a column of bubbles. The sizes are [diameter, shift from
+ * the page's centre line] in pixels.
  */
 const TRAIL: [number, number][] = [
-  [22, -26],
-  [15, -12],
-  [9, 0],
+  [24, 58],
+  [16, 86],
+  [10, 108],
 ]
 
 function Puffs() {
   return (
-    <span aria-hidden className="flex flex-col items-center gap-1.5">
+    <span aria-hidden className="flex flex-col items-center gap-2">
       {TRAIL.map(([d, shift]) => (
         <svg
           key={d}
@@ -285,7 +316,9 @@ function Puffs() {
           height={d}
           viewBox="0 0 10 10"
           className="block"
-          style={{ marginLeft: shift }}
+          /* The shift is scaled by --k, which the layout sets smaller on a
+             phone so the trail and the hedgehog slide inward together. */
+          style={{ translate: `calc(${shift}px * var(--k, 1)) 0` }}
         >
           <circle cx="5" cy="5" r="4" fill={SITE_PALETTE.bushHi} stroke={SITE_PALETTE.bushDark} strokeWidth="2" />
         </svg>
@@ -294,17 +327,22 @@ function Puffs() {
   )
 }
 
-/** A smile, drawn solid with its face knocked out so it survives being small. */
+/**
+ * A smile. An outline, not a filled disc: filled, the two eye holes and the
+ * mouth gap read as a face in a respirator.
+ */
 const SMILEY = [
-  '..#####..',
-  '.#######.',
-  '##.###.##',
-  '#########',
-  '#########',
-  '##.....##',
-  '.##...##.',
-  '.#######.',
-  '..#####..',
+  '...#####...',
+  '..#.....#..',
+  '.#.......#.',
+  '#...#.#...#',
+  '#.........#',
+  '#.........#',
+  '#..#...#..#',
+  '#...###...#',
+  '.#.......#.',
+  '..#.....#..',
+  '...#####...',
 ]
 
 /* --------------------------------------------------------------- the page */
@@ -320,10 +358,12 @@ export default function ResultsSoon({
 }) {
   return (
     <section className="panel px-5 py-6 sm:px-7 sm:py-8">
-      {/* The cloud is on the hedgehog's left, because the hedgehog faces that
-          way and cannot be flipped. On a phone the two stack, cloud first,
-          and the puffs still run between them. */}
-      <div className="flex flex-col items-center justify-center gap-1 sm:flex-row sm:items-end sm:gap-4">
+      {/* A thought hangs ABOVE the thinker. The cloud is at the top, the
+          hedgehog at the bottom and to the right of it, and the puffs fall
+          from the cloud's underside down to the top of its head. The hedgehog
+          sits right of centre because it faces left and cannot be flipped: a
+          cloud over its right shoulder would be behind its back. */}
+      <div className="flex flex-col items-center [--k:0.7] sm:[--k:1]">
         <Cloud>
           <Scene />
           {/* The smile runs on the end of the sentence, not under it: as a
@@ -332,13 +372,21 @@ export default function ResultsSoon({
             {inline(note)}{' '}
             <PixelIcon
               rows={SMILEY}
-              className="ml-0.5 inline-block h-[0.95em] w-[0.95em] align-[-0.1em] text-leaf-800"
+              className="ml-1 inline-block h-[1.05em] w-[1.05em] align-[-0.15em] text-leaf-900"
             />
           </p>
         </Cloud>
 
-        <div className="flex flex-col items-center sm:mb-6 sm:items-start">
+        {/* Pulled up into the empty bottom of the cloud's box, where the
+            drawn cloud has already ended. */}
+        <div className="-mt-3">
           <Puffs />
+        </div>
+        {/* The head is on the left of the drawing, so the hedgehog shifts
+            far enough right for the last puff to sit over it. Pulled up a
+            little, because the drawing's top rows are only quill tips and the
+            head itself starts four pixels down. */}
+        <div className="-mt-2" style={{ translate: 'calc(126px * var(--k, 1)) 0' }}>
           <Hog />
         </div>
       </div>
