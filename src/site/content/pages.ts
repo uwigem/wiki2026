@@ -289,6 +289,8 @@ export type Block = Anchored &
     | {
         kind: "figure";
         src?: string;
+        /** A phone edition of the same figure, where the package ships one. */
+        srcMobile?: string;
         alt?: string;
         caption: string;
         owner?: string;
@@ -909,6 +911,16 @@ const experiments: Page = {
       ],
     },
     {
+      kind: "figure",
+      id: "mmm-overview",
+      src: "wetlab/overview.svg",
+      srcMobile: "wetlab/overview-mobile.svg",
+      alt: "A cross-section of the cell membrane. MEGF8 spans the membrane with MOSMO beside it, and MGRN1, labelled E3 ligase, sits on the cytoplasmic side. To the right, SMO is drawn as a seven-pass receptor being tagged with three ubiquitin marks. An arrow leads to two boxes: ciliary SMO down, then Hedgehog signalling down.",
+      caption:
+        "The mechanism the whole project redirects: the MMM complex ubiquitinates SMO, which lowers how much of it stays in the cilium, and Hedgehog signalling falls with it.",
+      source: "Wet Lab figure package, 2026.",
+    },
+    {
       kind: "callout",
       label: "where this stands",
       heading: "None of this has been run yet",
@@ -930,6 +942,15 @@ const experiments: Page = {
         "So we want to know whether we can control that process by bringing individual components of the complex directly to SMO. There are two questions. Is recruiting MGRN1 straight to SMO enough to increase SMO ubiquitination? And can recruiting MEGF8 to SMO pull endogenous MGRN1 into proximity and increase ubiquitination without expressing any extra MGRN1 at all?",
         "Recruitment is controlled chemically. The **FKBP and FRB** system lets two engineered proteins associate once **AP21967**, a rapalog, is added. We also use the **ALFA tag**, a short peptide recognised by a high-affinity nanobody (NbALFA), to detect and isolate the engineered proteins. The same pair is used in protein detection, affinity purification and engineered recruitment systems including bioPROTAC work, and it lets us compare how much of each tagged protein we recover.",
       ],
+    },
+    {
+      kind: "figure",
+      id: "fig-1a",
+      src: "wetlab/exp1-recruitment-routes.svg",
+      alt: "Two labelled panels. Panel A, rapalog-gated recruitment: AP21967 brings SMO-DmrC and MGRN1-DmrA together, shown before recruitment, during recruitment, and at the measurement step. Panel B, ALFA and NbALFA recruitment: NbALFA binds the ALFA tag on SMO with no chemical inducer, in the same three steps.",
+      caption:
+        "The two recruitment routes tested in this experiment. The rapalog route is switched on chemically; the ALFA route needs no inducer.",
+      source: "Wet Lab figure package, 2026.",
     },
     {
       kind: "steps",
@@ -967,6 +988,15 @@ const experiments: Page = {
     },
 
     {
+      kind: "figure",
+      id: "fig-1b",
+      src: "wetlab/exp1-ubiquitination.svg",
+      alt: "A bar chart of relative SMO ubiquitination, as fold change against SMO alone. Five control bars sit at about 1: SMO only, an inert mCherry control, an inactive MGRN1 mutant, and MGRN1 and MEGF8 with no inducer. Two recruited bars rise above them: MEGF8 recruited at 2.9 times and MGRN1 recruited at 4.4 times. The figure is labelled illustrative, not measured.",
+      caption:
+        "What a working result would look like: the controls flat, and only the recruited conditions rising. The numbers are illustrative, not measurements, and the figure says so.",
+      source: "Wet Lab figure package, 2026.",
+    },
+    {
       kind: "prose",
       section: "Experiment 2: Binder screen",
       id: "exp2",
@@ -977,6 +1007,15 @@ const experiments: Page = {
         "We screen binders against both MEGF8 and MOSMO in a 96-well mammalian protein interaction assay. It measures binding. It does not show that a binder disrupts the complex, and a positive result here should not be read as though it does.",
         "The assay splits a transcription factor in two. One half is fused to a designed binder, the other to MEGF8 or MOSMO. If the binder finds its target, the two halves are brought together and switch on a GFP reporter, so GFP expression stands in for the interaction.",
       ],
+    },
+    {
+      kind: "figure",
+      id: "fig-2a",
+      src: "wetlab/exp2-screen-workflow.svg",
+      alt: "A four-step workflow. One, design and clone two target-specific binder libraries against MEGF8 and MOSMO, each fused to one half of a split transcription factor. Two, set up a 96-well screen in HEK293T cells with three plasmids per well. Three, binding reconstitutes the transcription factor and switches on a GFP reporter. Four, read by flow cytometry and prioritise candidates by their GFP and BFP double-positive fold change against a GB1-only control.",
+      caption:
+        "The screen, from design to readout. A raised double-positive population shows that a binder meets its target inside a cell; it does not show that the complex has been disrupted.",
+      source: "Wet Lab figure package, 2026.",
     },
     {
       kind: "steps",
@@ -1013,6 +1052,15 @@ const experiments: Page = {
     },
 
     {
+      kind: "figure",
+      id: "fig-2b",
+      src: "wetlab/exp2-flow-fold-change.svg",
+      alt: "Panel A shows four flow cytometry plots of GFP against BFP. The two GB1-only controls sit at about 4 percent double positive; the MEGF8 binder reaches 28.5 percent and the MOSMO binder 23.4 percent. Panel B plots binding fold change for each binder against its own matched GB1 control. The figure is labelled simulated data.",
+      caption:
+        "The shape of a positive screen: a binder lifts its double-positive population well above its own matched control. Every number here is simulated for layout, and the figure says so.",
+      source: "Wet Lab figure package, 2026.",
+    },
+    {
       kind: "prose",
       section: "Experiment 3: SMO trafficking",
       id: "exp3",
@@ -1023,6 +1071,16 @@ const experiments: Page = {
         "Those are different questions. Ciliary SMO is what matters for signalling, but a fall in ciliary fluorescence does not prove SMO was degraded. It may simply have moved elsewhere in the cell. To tell the two apart, we measure SMO at the cilium and in the rest of the cell from the same images, across the same time course.",
         "The [kinetic model](/model) also needs time-resolved measurements to describe how the system responds to AP21967, which is why the series runs out to 360 minutes.",
       ],
+    },
+    {
+      kind: "figure",
+      id: "fig-3a",
+      src: "wetlab/exp3-imaging-workflow.svg",
+      srcMobile: "wetlab/exp3-imaging-workflow-mobile.svg",
+      alt: "A proposed imaging experiment in three parts. One, an AP21967 time course against vehicle, with separate fixed wells at 0, 30, 60, 120, 240 and 360 minutes. Two, a schematic cell marking two regions of interest: the ciliary region, identified by a marker, and the whole cell. Three, quantify ciliary SMO, whole-cell SMO and the ratio between them. A note reads that ciliary SMO loss can reflect trafficking without degradation.",
+      caption:
+        "How the time course is collected and measured. Both regions come off the same images, which is what lets the two readings be compared.",
+      source: "Wet Lab figure package, 2026.",
     },
     {
       kind: "steps",
@@ -1059,6 +1117,16 @@ const experiments: Page = {
     },
 
     {
+      kind: "figure",
+      id: "fig-3c",
+      src: "wetlab/exp3-kinetics.svg",
+      srcMobile: "wetlab/exp3-kinetics-mobile.svg",
+      alt: "Two plots of SMO fluorescence over 360 minutes, normalised to baseline, comparing vehicle with AP21967 at matched timepoints. One plot is ciliary SMO, the other whole-cell SMO. The figure is labelled hypothetical data.",
+      caption:
+        "The two curves read together, not separately: ciliary signal falling while the whole cell holds steady would mean SMO moved rather than went. Simulated curves, labelled as such on the figure.",
+      source: "Wet Lab figure package, 2026.",
+    },
+    {
       kind: "prose",
       section: "Experiment 4: Binder validation",
       id: "exp4",
@@ -1069,6 +1137,16 @@ const experiments: Page = {
         "The complex drives SMO ubiquitination and limits how much SMO accumulates in the cilium. Our binders are designed against extracellular-facing regions of human MEGF8 and MOSMO, so they can be applied to cells from the outside as purified protein rather than expressed inside them.",
         "Selected candidates are expressed in Expi293F cells, purified, and added to ciliated NIH/3T3 cells, where we measure ciliary SMO and downstream Hedgehog signalling. NIH/3T3 is a well-established mouse model for these assays, and that is also the catch: a binder designed against the human proteins has to recognise accessible sites on the mouse ones to act on endogenous MMM here at all.",
       ],
+    },
+    {
+      kind: "figure",
+      id: "fig-4a",
+      src: "wetlab/exp4-validation-workflow.svg",
+      srcMobile: "wetlab/exp4-validation-workflow-mobile.svg",
+      alt: "A workflow in two halves. Along the top, select MEGF8 and MOSMO candidates, express them in Expi293F cells, and purify by affinity chromatography followed by size exclusion. Below, two readouts branch off: ciliary SMO by fluorescence imaging in NIH/3T3 cells, and GLI activity in Shh-LIGHT2 cells as firefly over Renilla under a submaximal SHH stimulus. A footer notes that everything is compared against nonbinding protein controls.",
+      caption:
+        "From a hit in the screen to a protein you can put on cells, and the two things measured once it is there.",
+      source: "Wet Lab figure package, 2026.",
     },
     {
       kind: "steps",
@@ -1104,6 +1182,16 @@ const experiments: Page = {
       ],
     },
 
+    {
+      kind: "figure",
+      id: "fig-4b",
+      src: "wetlab/exp4-sec-readouts.svg",
+      srcMobile: "wetlab/exp4-sec-readouts-mobile.svg",
+      alt: "A size exclusion chromatography trace of absorbance at 280 nanometres against elution volume, with a single main peak marked as the putative monomer, shown beside the functional readouts for ciliary SMO and GLI reporter activity. The figure is labelled simulated data.",
+      caption:
+        "What a usable purification and a working binder would look like together: a clean monomer peak, then movement in both cell readouts. Simulated, and labelled as such.",
+      source: "Wet Lab figure package, 2026.",
+    },
     {
       kind: "prose",
       section: "Experiment 5: The rheostat",
