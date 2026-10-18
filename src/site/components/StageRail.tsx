@@ -13,6 +13,8 @@ import RichText, { inline } from './RichText'
  */
 export interface Stage {
   title: string
+  /** A date or other short tag, shown beside the title while it is collapsed. */
+  meta?: string
   body: string[]
   /** A table inside the stage, for example the dissemination pathways. */
   table?: TableData
@@ -72,10 +74,21 @@ export default function StageRail({
                       className="flex w-full items-center gap-3 px-4 py-3 text-left"
                     >
                       <span className="badge shrink-0">{i + 1}</span>
-                      <span className="min-w-0 flex-1 text-base font-semibold leading-snug">{stage.title}</span>
+                      <span className="min-w-0 flex-1">
+                        {/* A long single word (a stage called "conceptualisation")
+                            would otherwise run out of its box and under the
+                            status label beside it on a narrow screen. */}
+                        <span className="block break-words text-base font-semibold leading-snug">
+                          {stage.title}
+                        </span>
+                        {stage.meta && <span className="pixel block text-note text-leaf-800">{stage.meta}</span>}
+                      </span>
                       {done && <span className="pixel shrink-0 text-note text-leaf-800">done</span>}
                       {!done && hereAt >= 0 && i > hereAt && <span className="pixel shrink-0 text-note text-leaf-800">planned</span>}
-                      <span aria-hidden className="pixel-btn shrink-0 py-1 text-xs">
+                      {/* The whole heading is the button, so on a phone this
+                          pill is dropped: it is decoration, and the room it
+                          takes was breaking long titles mid-word. */}
+                      <span aria-hidden className="pixel-btn hidden shrink-0 py-1 text-xs sm:inline-block">
                         {isOpen ? 'Hide' : 'Show'}
                       </span>
                     </button>
