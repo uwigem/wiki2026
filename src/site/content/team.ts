@@ -117,18 +117,31 @@ export const SUBTEAMS: Subteam[] = [
   },
 ]
 
-/** Someone who advises the team but is not a student on the roster. */
-export interface Investigator {
+/**
+ * Anyone whose profile the team page can open: a student, or one of the
+ * principal investigators. `Member` is the student version of this, with an
+ * email and a subteam always present.
+ */
+export interface Profile {
   name: string
-  /** Their post, shown under the name. */
-  title: string
-  /** Who they are and what they advise us on. */
-  bio: string
-  /**
-   * Headshot, as a path inside `public/`. Without one the pixel character
-   * stands in; their look is pinned by name in LOOK_OVERRIDES.
-   */
+  titles?: string[]
+  bio?: string
   photo?: string
+  email?: string
+  linkedin?: string
+  website?: string
+  subteams?: SubteamId[]
+  leads?: SubteamId[]
+  avatar?: 'long' | 'short'
+}
+
+/** Someone who advises the team but is not a student on the roster. */
+export interface Investigator extends Profile {
+  name: string
+  /** Their post, shown on the tile and in the profile. */
+  titles: string[]
+  /** Who they are and what they advise us on. Read in the profile. */
+  bio: string
 }
 
 /**
@@ -141,13 +154,13 @@ export interface Investigator {
 export const PRINCIPAL_INVESTIGATORS: Investigator[] = [
   {
     name: 'Dr. Jennifer Kong',
-    title: 'Assistant Professor of Biochemistry',
+    titles: ['Assistant Professor of Biochemistry'],
     bio:
       'Dr. Jennifer Kong is an Assistant Professor of Biochemistry at the University of Washington, where she leads the Kong Lab. Her research focuses on the molecular mechanisms regulating cellular sensitivity to developmental signals, particularly the Hedgehog signalling pathway. Her work helped identify the MMM complex of MOSMO, MEGF8 and MGRN1, which regulates Hedgehog signalling by controlling the abundance of the Smoothened (SMO) receptor. As the primary PI for Washington iGEM, she provides scientific guidance on the team’s efforts to engineer tunable control over Hedgehog signalling.',
   },
   {
     name: 'Dr. Frank DiMaio',
-    title: 'Associate Professor, Institute for Protein Design',
+    titles: ['Associate Professor, Institute for Protein Design'],
     bio:
       'Dr. Frank DiMaio is an Associate Professor at the University of Washington and a protein design mentor at the Institute for Protein Design. He advises our Protein Design subteam on the de novo pipeline behind the minibinder, where he set the tool choices, the filter metrics and the target-selection rules. He also gave us a seat on the DIGS cluster the pipeline runs on.',
   },

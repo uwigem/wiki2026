@@ -5,7 +5,7 @@ import {
   SUBTEAMS,
   TEAM_PAGE_INTRO,
   membersOf,
-  type Member,
+  type Profile,
 } from '../content/team'
 import GardenSection, { Reveal, SectionDivider } from '../components/GardenSection'
 import InvestigatorCards from '../components/InvestigatorCards'
@@ -15,7 +15,7 @@ import TeamGroup from '../components/TeamGroup'
 
 /** The team page: the student leaders, then each subteam. Every tile opens a profile. */
 export default function TeamPage() {
-  const [picked, setPicked] = useState<Member | null>(null)
+  const [picked, setPicked] = useState<Profile | null>(null)
 
   return (
     <article>
@@ -34,7 +34,7 @@ export default function TeamPage() {
       <GardenSection>
         <div className="flex flex-col gap-5">
           <Reveal>
-            <InvestigatorCards people={PRINCIPAL_INVESTIGATORS} />
+            <InvestigatorCards people={PRINCIPAL_INVESTIGATORS} onPick={setPicked} />
           </Reveal>
           <Reveal delay={0.04}>
             <TeamGroup
