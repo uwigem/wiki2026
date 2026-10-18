@@ -112,7 +112,18 @@ function useKeepInView(box: React.RefObject<HTMLElement | null>, active: Active)
   }, [box, active])
 }
 
-function Outline({ sections, active, onPick }: { sections: RailSection[]; active: Active; onPick?: () => void }) {
+function Outline({
+  sections,
+  active,
+  onPick,
+  touch,
+}: {
+  sections: RailSection[]
+  active: Active
+  onPick?: () => void
+  /** Sized for a finger rather than a cursor, for the pop-up menu. */
+  touch?: boolean
+}) {
   const pick = (id: string) => {
     jump(id)
     onPick?.()
@@ -131,6 +142,7 @@ function Outline({ sections, active, onPick }: { sections: RailSection[]; active
               data-mark={onSection ? 'section' : undefined}
               className={
                 'flex w-full items-center gap-2 rounded-sm px-2 py-1 text-left text-[0.8rem] font-semibold leading-snug transition-colors ' +
+                (touch ? 'min-h-9 ' : '') +
                 (inSection ? 'bg-leaf-200' : 'hover:bg-leaf-100')
               }
             >
@@ -153,6 +165,7 @@ function Outline({ sections, active, onPick }: { sections: RailSection[]; active
                         data-mark={on ? 'item' : undefined}
                         className={
                           '-ml-[2px] block w-full border-l-2 py-[3px] pl-2.5 pr-1 text-left text-[0.72rem] leading-snug transition-colors ' +
+                          (touch ? 'min-h-8 content-center ' : '') +
                           (on
                             ? 'border-leaf-800 bg-leaf-100 font-semibold text-[var(--ink)]'
                             : 'border-transparent text-leaf-800 hover:border-leaf-500 hover:text-[var(--ink)]')
@@ -259,7 +272,7 @@ export function SectionMenu({ sections }: { sections: RailSection[] }) {
           <nav id="section-menu" aria-label="Sections of this page" className="panel flex max-h-[70vh] w-72 flex-col py-3">
             <p className="kicker mb-1.5 px-4">On this page</p>
             <div ref={box} className="relative min-h-0 flex-1 overflow-y-auto px-2">
-              <Outline sections={sections} active={active} onPick={() => setOpen(false)} />
+              <Outline sections={sections} active={active} onPick={() => setOpen(false)} touch />
             </div>
             <button
               type="button"
@@ -267,7 +280,7 @@ export function SectionMenu({ sections }: { sections: RailSection[] }) {
                 toTop()
                 setOpen(false)
               }}
-              className="mx-2 mt-2 border-t-2 border-dashed border-leaf-300 px-2 pt-2 text-left text-[0.75rem] text-leaf-800"
+              className="mx-2 mt-2 min-h-9 border-t-2 border-dashed border-leaf-300 px-2 pt-2 text-left text-[0.75rem] text-leaf-800"
             >
               ↑ Back to top
             </button>
@@ -280,7 +293,7 @@ export function SectionMenu({ sections }: { sections: RailSection[] }) {
           aria-controls="section-menu"
           /* Narrower on a phone: this button floats over the text, so a long
              section name would cover half a line of it. */
-          className="pixel-btn pixel-btn-primary flex max-w-[11rem] items-center gap-2 py-2 text-xs sm:max-w-[15rem]"
+          className="pixel-btn pixel-btn-primary flex min-h-11 max-w-[11rem] items-center gap-2 py-2 text-xs sm:max-w-[15rem]"
         >
           <span aria-hidden>☰</span>
           <span className="truncate">{current ? current.label : 'Sections'}</span>

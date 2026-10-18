@@ -26,7 +26,7 @@ import Procedure from "../components/Procedure";
 import DataTable from "../components/DataTable";
 import DecisionTree from "../components/DecisionTree";
 import MembraneLandscape from "../components/MembraneLandscape";
-import { SectionAside, SectionMenu, type RailSection } from "../components/SectionRail";
+import { SectionAside, SectionMenu, type RailItem, type RailSection } from "../components/SectionRail";
 import { CitationContext, slugify } from "../components/citations";
 import Details from "../components/Details";
 import PixelSprite from "../components/PixelSprite";
@@ -76,8 +76,19 @@ export default function WikiPage({ page }: { page: Page }) {
   const layout = useMemo(() => groupSections(page.blocks), [page]);
   const long = layout.sections.length >= 3;
   const rail = useMemo<RailSection[]>(
-    () =>
-      layout.sections.map(({ id, label, blocks }) => ({
+    () => [
+      // What opens the page, before the first section. Without this the
+      // outline starts part way down and there is no way back to the top of
+      // the page from it.
+      ...(() => {
+        const headed = layout.lead
+          .map((b) => ({ id: blockKey(b), label: b.navLabel ?? blockHeading(b) }))
+          .filter((e): e is RailItem => Boolean(e.id && e.label));
+        return headed.length > 0
+          ? [{ id: headed[0].id, label: headed[0].label, items: headed.slice(1) }]
+          : [];
+      })(),
+      ...layout.sections.map(({ id, label, blocks }) => ({
         id,
         label,
         // Every headed block after the first is a subsection. The first block
@@ -91,6 +102,7 @@ export default function WikiPage({ page }: { page: Page }) {
           return label && key ? [{ id: key, label }] : [];
         }),
       })),
+    ],
     [layout],
   );
   const lists = useMemo(() => referenceScopes(page.blocks), [page]);
@@ -131,7 +143,7 @@ export default function WikiPage({ page }: { page: Page }) {
           {layout.lead.length > 0 && (
             <div className="flex flex-col gap-6 pb-10">
               {layout.lead.map((block, i) => (
-                <div key={i} id={block.id} className="min-w-0">
+                <div key={i} id={blockKey(block)} className="min-w-0">
                   <BlockView block={block} />
                 </div>
               ))}
