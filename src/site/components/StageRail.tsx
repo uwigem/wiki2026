@@ -73,10 +73,10 @@ export default function StageRail({
                     >
                       <span className="badge shrink-0">{i + 1}</span>
                       <span className="min-w-0 flex-1 text-base font-semibold leading-snug">{stage.title}</span>
-                      {done && <span className="pixel shrink-0 text-[0.6rem] text-leaf-800">done</span>}
-                      {!done && hereAt >= 0 && i > hereAt && <span className="pixel shrink-0 text-[0.6rem] text-leaf-800">planned</span>}
-                      <span aria-hidden className="pixel shrink-0 text-xs text-leaf-800">
-                        {isOpen ? '▴' : '▾'}
+                      {done && <span className="pixel shrink-0 text-note text-leaf-800">done</span>}
+                      {!done && hereAt >= 0 && i > hereAt && <span className="pixel shrink-0 text-note text-leaf-800">planned</span>}
+                      <span aria-hidden className="pixel-btn shrink-0 py-1 text-xs">
+                        {isOpen ? 'Hide' : 'Show'}
                       </span>
                     </button>
                   </h3>

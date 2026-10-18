@@ -75,102 +75,116 @@ export const SHED_OPEN = s([
 
 export type PropKey = 'axe' | 'shears' | 'spray' | 'puller' | 'cart' | 'grabber' | 'tagger'
 
-/** Removes the whole plant: genetic knockout. */
+/** Removes the whole plant: genetic knockout. A felling axe, head and handle. */
 const AXE = s([
-  '......KKK...',
-  '.....KiiiK..',
-  '....KiiiiiK.',
-  '....KiiigKK.',
-  '...nnKggK...',
-  '..nMn.KK....',
-  '.nMn........',
-  'nMn.........',
-  'Mn..........',
-  'n...........',
+  '.........nM...',
+  '.........nM...',
+  '.K.......nM...',
+  'KKK......nM...',
+  'KiiKK....nM...',
+  'KiiiiKKKKnM...',
+  'KiiiiKKKKnM...',
+  'KiiKK....nM...',
+  'KKK......nM...',
+  '.K.......nM...',
+  '.........nM...',
+  '.........nM...',
 ])
 
-/** Trims rather than uproots: gene silencing. */
+/** Trims rather than uproots: gene silencing. Blades crossed over two loops. */
 const SHEARS = s([
-  'ii.........i',
-  '.ii.......ii',
-  '..ii.....ii.',
-  '...ii...ii..',
-  '....ii.ii...',
-  '.....KKK....',
-  '....bb.bb...',
-  '...bb...bb..',
-  '..bb.....bb.',
-  '.bb.......bb',
+  '.i..........i.',
+  '..i........i..',
+  '...i......i...',
+  '....i....i....',
+  '.....i..i.....',
+  '......KK......',
+  '.....b..b.....',
+  '....b....b....',
+  '...bb....bb...',
+  '..b..b..b..b..',
+  '..b..b..b..b..',
+  '...bb....bb...',
 ])
 
-/** Dose and reach: small molecule antagonists. */
+/** Dose and reach: small molecule antagonists. A spray bottle. */
 const SPRAY = s([
-  '....KKK.....',
-  '...Kt.KW....',
-  '...KKKKWW...',
-  '....uu......',
-  '...uuuu.....',
-  '..uUUuuu....',
-  '..uUUuuu....',
-  '..uuuuuu....',
-  '..uuuuuu....',
-  '...uuuu.....',
+  '.....KKK......',
+  '....Kt.KW.....',
+  '....KKKKWW....',
+  '.....uu.......',
+  '....uuuu......',
+  '...uuuuuu.....',
+  '..uUUuuuuu....',
+  '..uUUuuuuu....',
+  '..uuuuuuuu....',
+  '..uuuuuuuu....',
+  '...uuuuuu.....',
+  '....uuuu......',
 ])
 
-/** Pulls one weed out on demand: inducible degrons. */
+/** Lifts one weed out on demand: inducible degrons. A trowel. */
 const PULLER = s([
-  '.....nn.....',
-  '.....nn.....',
-  '.....nn.....',
-  '.....nn.....',
-  '.....nn.....',
-  '.....KK.....',
-  '...KKKKKK...',
-  '..Kg.KK.gK..',
-  '..g..gg..g..',
-  '..g......g..',
+  '......nM......',
+  '......nM......',
+  '......nM......',
+  '......nM......',
+  '...KKKnMKK....',
+  '...KKKKKKK....',
+  '...K..K..K....',
+  '...K..K..K....',
+  '...K..K..K....',
+  '...K..K..K....',
+  '....K.K.K.....',
+  '..............',
 ])
 
-/** Moves everything along the path: ciliary trafficking. */
+/** Moves everything along the path at once: ciliary trafficking. A cart. */
 const CART = s([
-  '............',
-  '.NNNNNNNNN..',
-  '.NnnnnnnnN..',
-  '.NnMnnMnnN..',
-  '.NnnnnnnnNnn',
-  '.NNNNNNNNN..',
-  '..KK...KK...',
-  '.KggK.KggK..',
-  '.KggK.KggK..',
-  '..KK...KK...',
+  '..............',
+  '..............',
+  '..NNNNNNNNNN..',
+  '..NnnnnnnnnN..',
+  '..NnMnnnMnnN..',
+  '..NnnnnnnnnNnn',
+  '..NNNNNNNNNN..',
+  '...KK....KK...',
+  '..KggK..KggK..',
+  '..KggK..KggK..',
+  '...KK....KK...',
+  '..............',
 ])
 
-/** Picks one thing out: targeted protein degradation. */
+/** Picks one thing out and holds it: targeted protein degradation. Tongs. */
 const GRABBER = s([
-  '....bb......',
-  '....KK......',
-  '....KK......',
-  '....KK......',
-  '....KK......',
-  '....KK......',
-  '...KKKK.....',
-  '..Kg..gK....',
-  '..g....g....',
-  '.gg....gg...',
+  '......KK......',
+  '......KK......',
+  '......KK......',
+  '.....KKKK.....',
+  '....KK..KK....',
+  '...K......K...',
+  '..K..bbbb..K..',
+  '..K..bOOb..K..',
+  '..K..bbbb..K..',
+  '..K........K..',
+  '..KK......KK..',
+  '...K......K...',
 ])
 
-/** Marks one plant: cilia-targeted ubiquitination. */
+/** Marks one plant and leaves it standing: cilia-targeted ubiquitination. */
 const TAGGER = s([
-  '..YYYYYYY...',
-  '..YJJJjjY...',
-  '..YjJjJjY...',
-  '..YYYYYYY...',
-  '.....nn.....',
-  '.....nn.....',
-  '.....nn.....',
-  '.....nn.....',
-  '.....nn.....',
-  '.....nn.....',
+  '...YYYYYYYY...',
+  '...YJJJjjjY...',
+  '...YjJjJjjY...',
+  '...YYYYYYYY...',
+  '......nM......',
+  '......nM......',
+  '......nM......',
+  '......nM......',
+  '......nM......',
+  '......nM......',
+  '......nM......',
+  '......nM......',
 ])
 
 export const PROPS: Record<PropKey, Sprite> = {

@@ -42,6 +42,14 @@ import { SMO_5L7D, type Structure } from "./structures";
 export interface Anchored {
   id?: string;
   /**
+   * What the left-hand outline calls this block, when that should be shorter
+   * or plainer than the heading printed on the page. The outline is a list to
+   * scan, so it wants a noun ("Market Estimate"); the page is being read, so
+   * it can keep the team's own voice ("Estimating the Market for Ciliary
+   * Tools"). Without this the outline just uses the heading.
+   */
+  navLabel?: string;
+  /**
    * This block starts a named section of the page. A page with three or
    * more sections is laid out as one signboard and card per section, with a
    * list of the sections in the left margin (a corner button on a phone).
@@ -339,8 +347,8 @@ export interface Page {
    * `todo` block in it.
    */
   medal?: true;
-  /** The guide's narration for this stop in the garden. */
-  storyBeat: string;
+  /** The guide's narration for this stop in the garden. Pages may skip it. */
+  storyBeat?: string;
   /** Lede paragraph, rendered large under the title. */
   intro?: string;
   blocks: Block[];
@@ -1530,7 +1538,7 @@ const DELIVERABLES: Block[] = [
       {
         id: "proof-of-concept",
         text: "Use our proof of concept.",
-        action: { label: "Our workflow", to: "/human-practices#workflow" },
+        action: { label: "Our workflow", to: "/implementation#workflow" },
       },
       {
         id: "platform",
@@ -1571,7 +1579,7 @@ const DELIVERABLES: Block[] = [
       {
         title: "Question",
         body: [
-          "Decide what you want to learn about a protein in the primary cilium, and whether the question is really about its ciliary pool rather than the protein across the whole cell. The [technology evaluation](/human-practices#platform-fit) above is the quick version of this step.",
+          "Decide what you want to learn about a protein in the primary cilium, and whether the question is really about its ciliary pool rather than the protein across the whole cell. The [technology evaluation](/implementation#platform-fit) above is the quick version of this step.",
         ],
       },
       {
@@ -1613,8 +1621,17 @@ const DELIVERABLES: Block[] = [
   },
       ],
     },
+];
+
+/**
+ * The roadmap that closes both pages that use it. On Human Practices it is the
+ * whole of the last section, because the deliverables it used to follow have
+ * moved to Proposed Implementation.
+ */
+const NEXT_STEPS: Block[] = [
 {
     kind: "prose",
+    section: "Next Steps",
     id: "next-steps",
     heading: "Next steps",
     body: [
@@ -1631,8 +1648,6 @@ const humanPractices: Page = {
   title: "Who the Garden Is For",
   kicker: "chapter 08 · integrated human practices",
   medal: true,
-  storyBeat:
-    "A garden nobody visits is just a field. So we went and asked people, and one of those conversations changed what the project even is.",
   intro:
     "We are handing other researchers a tool that changes what stays in the primary cilium. Our guiding question: how do we make it easy for them to adopt, and encourage responsible use in biologically sensitive systems? This page is what they told us, and what we changed.",
   blocks: [
@@ -1649,11 +1664,9 @@ const humanPractices: Page = {
     },
 {
       kind: "stakeholders",
-      section: "Who we asked",
+      section: "Stakeholders",
       id: "stakeholders",
       heading: "Who we asked, and what it changed",
-      intro:
-        "Thirteen conversations, planted by what each person knows. Each has a line saying what we did differently afterwards, or says plainly where that is not written up yet.",
       people: [
         {
           id: "miller",
@@ -1925,7 +1938,7 @@ const humanPractices: Page = {
       {
         kind: "details",
         id: "location-and-amount",
-        heading: "Why location and amount matter",
+        heading: "Protein Localization & Abundance",
         summary: "A protein can be in the right cell and the wrong place, and pathways respond to how much of a protein is there, not only whether it is.",
         blocks: [
 {
@@ -1952,9 +1965,9 @@ const humanPractices: Page = {
 {
       kind: "toolshed",
       id: "toolbox",
-      heading: "Current tools",
+      heading: "Existing Tools",
       intro:
-        "Cilia labs are not short of tools. We went through the ones they actually reach for, and asked the same question of each: can it change one chosen protein, only inside the cilium, at a time you pick, by an amount you pick.",
+        "From our conversations with stakeholders and examination into contemporary cilia research, here are several tools currently used to modulate protein abundance in the primary cilium.",
       tools: [
         {
           name: "Genetic knockout (CRISPR-Cas9)",
@@ -2018,7 +2031,7 @@ const humanPractices: Page = {
 {
       kind: "prose",
       id: "the-gap",
-      heading: "A recurring gap",
+      heading: "Unmet Need",
       body: [
         "Across the tools researchers already use, a pattern emerges. Genetic knockouts can ask whether a protein is important, but they usually change protein levels across the whole cell rather than only in the primary cilium [8, 9]. Small molecule antagonists and inducible degrons add more control over when a change occurs, but still do not reliably distinguish between a protein's action in the primary cilium and elsewhere in the cell [13, 14, 15]. Approaches that perturb ciliary trafficking or ciliary ubiquitination can act solely within the cilium, but often affect many proteins at once rather than one chosen target [16, 17, 20]. Targeted protein degradation improves target specificity, but most existing systems are still designed to act across the cell surface rather than selectively on the ciliary membrane [18, 19].",
         "Click on [Market Model](/human-practices#market) to learn more about the quantitative economic gap.",
@@ -2028,7 +2041,7 @@ const humanPractices: Page = {
 {
       kind: "facts",
       id: "four-requirements",
-      heading: "Four things a ciliary tool has to do",
+      heading: "Core Requirements",
       items: [
         { title: "What", body: "Target a specific protein of choice." },
         { title: "Where", body: "Act specifically within the primary cilium." },
@@ -2039,9 +2052,9 @@ const humanPractices: Page = {
 {
       kind: "matrix",
       id: "matrix",
-      heading: "The same gap, every time",
+      navLabel: "Existing Tool Limitations",
       intro:
-        "Reading down the columns is the argument. Plenty of tools are target specific. A couple act only inside the cilium. None of them does both and lets you choose the amount. Combining these features gives researchers a much easier way to study the impact of a specific protein on the ciliary membrane independently of the rest of the cell, while also testing how different levels of that protein change signalling and cellular pathways.",
+        "Combining these features gives researchers a much easier way to study the impact of a specific protein on the ciliary membrane independently of the rest of the cell, while also testing how different levels of that protein change signalling and cellular pathways.",
       columns: ["target specific", "cilium only", "timing", "tunable"],
       rows: [
         { label: "Genetic knockout", levels: ["full", "none", "none", "none"] },
@@ -2061,6 +2074,7 @@ const humanPractices: Page = {
       id: "our-system",
       label: "our system",
       heading: "What we are building",
+      navLabel: "Our Platform",
       body: [
         "To address this gap, we are developing a research tool for modulating protein abundance on the primary cilium. Our system uses the MMM complex, a ciliary membrane associated ubiquitination complex that naturally regulates Smoothened in the Hedgehog signalling pathway, and redirects its E3 ubiquitin ligase activity toward a chosen ciliary membrane protein. By bringing the target protein and the MMM complex into close proximity, our goal is to give researchers more control over how much of a target protein remains in the primary cilium. Rather than replacing existing tools, the platform is designed to combine the strengths of several of them into a system built specifically for ciliary biology.",
         "[Learn more about our system](/description)",
@@ -2070,6 +2084,7 @@ const humanPractices: Page = {
       kind: "prose",
       id: "why-it-matters",
       heading: "Why this capability matters",
+      navLabel: "Research Value",
       body: [
         "The value of our system comes from giving researchers a way to study a protein within the primary cilium as its own population. Many ciliary proteins are also found elsewhere in the cell, so altering the entire cellular pool can make it difficult to tell whether an observed effect actually came from the cilium [1]. A signalling researcher might want to know whether changing only the ciliary pool of a GPCR changes pathway activity. A trafficking researcher might ask how quickly a receptor must leave the cilium before signalling changes. A ciliopathy researcher studying disease or drug response may want to compare partial reductions in receptor abundance instead of complete losses. These are different questions, but they all depend on the same ability: to control a specific target protein, in the primary cilium, by a controllable amount.",
         "Tunability adds another layer of information. Researchers could begin to test whether signalling changes gradually as receptor abundance falls, whether there is a minimum amount needed before a response occurs, or whether faster removal from the cilium shuts signalling down more quickly. The exact research question may differ, but the underlying need is the same: more precise control over protein location and abundance could reveal biological relationships that are difficult to identify with today's separate tools.",
@@ -2081,16 +2096,11 @@ const humanPractices: Page = {
       id: "founders-theory",
       label: "founder's theory",
       heading: "What a useful ciliary tool must let you control",
+      navLabel: "Founder\u2019s Theory",
       body: [
-        "We believe that understanding ciliary signalling requires more than knowing whether a protein is present or not. A useful research tool should give researchers control over the target protein, and over when, where, and by how much its abundance changes. In the primary cilium, these factors shape the impact of signalling proteins on cellular pathways. A research tool that can independently control these variables lets scientists uncover signalling thresholds and cilium-specific functions that are difficult to separate with current methods.",
+        "We believe that understanding ciliary signalling requires more than knowing whether a protein is present or not. A useful research tool should give researchers control over the target protein, and over when, where, and by how much its abundance changes. In the primary cilium, these factors shape the impact of signalling proteins on cellular pathways. A research tool that can independently control these variables lets scientists uncover signalling thresholds and cilium-specific functions that are difficult to separate with current methods. As we continue speaking with researchers and validating our platform, this theory will also continue to evolve alongside the needs of the community.",
       ],
       source: "Written after the interviews, and still being revised as we speak to more researchers.",
-    },
-{
-      kind: "prose",
-      body: [
-        "Our founder's theory therefore proposes that the most useful ciliary tools will combine target specificity, location control and tunability in the same system. Instead of an on/off switch, our platform allows researchers to explore the intermediate states that exist between the two. As we continue speaking with researchers and validating our platform, this theory will continue to evolve alongside the needs of the community.",
-      ],
     },
 {
       kind: "prose",
@@ -2116,7 +2126,8 @@ const humanPractices: Page = {
     },
 {
       kind: "stats",
-      heading: "What the cilia research tool market is worth",
+      heading: "Estimating the Market for Ciliary Tools",
+      navLabel: "Market Estimate",
       intro: "There is no published figure, so we built one from the cilia share of PubMed and the NIH's technology funding. The working is in the section below.",
       items: [
         { value: "$3.6M a year", label: "lower estimate: Bioengineering funding, 7.212 billion dollars × 0.05%" },
@@ -2128,7 +2139,7 @@ const humanPractices: Page = {
         kind: "details",
         id: "market-working",
         heading: "How we built the estimate",
-        summary: "Two questions, four steps, and the five limitations we know about.",
+        navLabel: "Estimation Method",
         blocks: [
 {
       kind: "prose",
@@ -2189,6 +2200,7 @@ const humanPractices: Page = {
         kind: "details",
         id: "neighbouring-markets",
         heading: "What neighbouring markets tell us",
+        navLabel: "Adjacent Markets",
         summary: "CRISPR, RNAi, small molecules, targeted protein degradation and research antibodies: their size, their growth, and what that says about ours.",
         blocks: [
 {
@@ -2239,7 +2251,7 @@ const humanPractices: Page = {
     },
 {
       kind: "prose",
-      heading: "Starting with an end goal",
+      heading: "Translation Goals",
       body: [
         "One of the first lessons we learned from our conversations with [Mr. Eisenkot](stakeholder:eisenkot) is that there is no straightforward correct pathway. He encouraged us to first define what we ultimately want the technology to achieve. If our priority lies with broad scientific access, an open nonprofit model could let researchers obtain and use the platform more easily. If continued development requires significant investment, we could use intellectual property and commercial partnerships to sustain those costs.",
         "This changed the way we viewed intellectual property. Rather than considering patenting a way to maintain control over our technology, it could instead ensure the technology remains in the open domain. Since patents require substantial time and resources, they generally make the most sense with a method to recover that investment. At the same time, simply distributing the technology as a black box could reduce adoption if researchers do not have the proper validation or know how to implement it in their own science.",
@@ -2307,7 +2319,7 @@ const humanPractices: Page = {
     },
 {
       kind: "prose",
-      heading: "How would we decide?",
+      heading: "Decision Framework",
       body: [
         "We envision revisiting these options after completing the earlier stages of our to-market strategy. Evidence from customer discovery will tell us whether there is a real need that researchers are willing to learn, and pay, to meet. Transferability experiments will show how much technical assistance users would require. Continued development will reveal the time and financial resources successful manufacturing demands. For now, our goal is to preserve multiple dissemination pathways while collecting the evidence we need to make that decision responsibly.",
       ],
@@ -2327,6 +2339,7 @@ const humanPractices: Page = {
       kind: "prose",
       id: "with-stakeholders",
       heading: "Designing with stakeholders in mind",
+      navLabel: "Stakeholder Insights",
       body: [
         "Speaking to researchers and biotechnology developers changed our definition of a successful platform. [Dr. Samuel Miller](stakeholder:miller) pushed us to think beyond whether the system could alter receptor abundance and instead ask whether that change would produce a meaningful biological effect. He also pointed out that researchers care about practical factors such as cost, technical difficulty, reproducibility, and the risk of false positive or false negative results. [Dr. John Wallingford](stakeholder:wallingford) similarly emphasised that a new ciliary tool would need clear information about its degradation rate, effectiveness and efficiency before other researchers could confidently use it. Our conversations with the co-founders of [NuukBio](stakeholder:nuukbio) reinforced that a research platform cannot rely on assumed value. These conversations encouraged us to first define the specific scientific question our technology could answer, and then build strong experimental evidence around it, so that researchers have the confidence to use our technology.",
         "Other stakeholders expanded what we thought trust meant. [Dr. Paul Pottinger](stakeholder:pottinger) encouraged us to think about unintended effects across larger biological systems and to set clear boundaries between what our platform can demonstrate now and what is only possible in the future. [Dr. Stacey Ogden](stakeholder:ogden) reminded us that the protein abundance we modulate has real physiological meaning: modulating SMO, for example, directly affects the Hedgehog pathway, with its important roles in development, so a technology that alters these systems must be used responsibly. [Dr. Herbert Sauro's](stakeholder:sauro) feedback on our kinetic models showed us that strong adoption depends on having a clear biological model and knowing what experimental data are needed to support it.",
@@ -2337,6 +2350,7 @@ const humanPractices: Page = {
       kind: "personas",
       id: "who-would-use-this",
       heading: "Who would use this?",
+      navLabel: "User Segments",
       intro: "Six kinds of researcher who would pick this up, and what each of them would need from it first.",
       people: [
         {
@@ -2451,6 +2465,7 @@ const humanPractices: Page = {
       kind: "prose",
       id: "what-adoption-means",
       heading: "What adoption now means to us",
+      navLabel: "Adoption Criteria",
       body: [
         "At the start of our project, adoption depended on whether the platform succeeded in changing protein abundance in the primary cilium. Through our conversations with researchers and our examination of existing technology, that definition has become much broader. A tool is not useful just because it works once in our hands. The eventual user, another researcher, needs to be able to understand what the tool is doing, trust the results, reproduce the tool, and adapt it to their own research question. Feedback around biological relevance, validation, efficiency and unintended effects gave us the framework and the steps needed to shift our focus toward these wider requirements.",
         "Now, for us, successful adoption means developing a platform that is not only functional, but also specific, tunable, well validated, adaptable, and biologically interpretable. These principles guide how we evaluate our current proof of concept, and how we think about sharing our platform with future researchers.",
@@ -2459,7 +2474,7 @@ const humanPractices: Page = {
 {
       kind: "table",
       id: "implementation-strategy",
-      heading: "Implementation strategy",
+      heading: "Delivery Selection",
       intro: "Three ways to build the component that recognises the target, and what each would cost us.",
       columns: ["Format", "Strengths", "Weaknesses"],
       rows: [
@@ -2477,7 +2492,7 @@ const humanPractices: Page = {
 {
       kind: "prose",
       id: "implementation",
-      heading: "Implementation",
+      heading: "Platform Package",
       body: [
         "Taking in all of these parts and sources of feedback, we hope to deliver a final product that can be easily adopted for a wide variety of research interests, while being thoughtful about possible misuse. From our interview with [Dr. David Younger](stakeholder:younger), we realised that there are large databases of existing candidate binders for a wide variety of targets. Because of this, our protein linker system can be adapted to a new target without a researcher needing any de novo protein design software, although we need to guide scientists to the right resources, which is why we aim to include a guide to using candidate binders in our final product. Since reproducible results are foundational to science, we also aim to open source our results, giving scientists known working concentrations for our product. By giving scientists known use cases we can encourage them to use our technology while also advising them on experimental design. Integrating all of this with stakeholder feedback, the final product package would include the following.",
       ],
@@ -2507,6 +2522,7 @@ const humanPractices: Page = {
       kind: "cards",
       id: "openness",
       heading: "How open should our platform be?",
+      navLabel: "Access Model",
       items: [
         {
           title: "Open source",
@@ -2524,13 +2540,13 @@ const humanPractices: Page = {
         "Given the advice we have received from a number of stakeholders on developing a research platform, we are choosing to keep much of our research open and available, while maintaining responsibility with guardrails for our technology.",
       ],
     },
-...DELIVERABLES,
+...NEXT_STEPS,
       {
         kind: "details",
         id: "references",
         section: "References",
         heading: "References",
-        summary: "Fifty-one sources, listed by section. The [n] markers in the text point here.",
+        summary: "Sources in IEEE format.",
         blocks: [
 {
       kind: "references",
@@ -3120,10 +3136,11 @@ const implementation: Page = {
       heading: "Who this is for",
       body: [
         "Our Human Practices work points at cilia labs that want to raise or lower one receptor in the primary cilium, not at patients. [Six kinds of researcher](/human-practices#who-would-use-this) told us what each would need before trusting a tool like this. Those needs became our [design requirements](/human-practices#design-requirements), and the [implementation strategy](/human-practices#implementation-strategy) compares the small molecule, antibody and protein routes to the component that recognises the target. What a lab would actually receive is set out in the [final package](/human-practices#implementation), and how it would get there in the [to-market strategy](/human-practices#to-market).",
-        "The tools below are the same ones on the Human Practices page: a way to decide whether the platform fits a project, the workflow for using it, the flyer we hand out, and where this goes next.",
+        "Below is what we are actually handing over: a way to decide whether the platform fits a project, the workflow for using it, the flyer we hand out, and where this goes next.",
       ],
     },
     ...DELIVERABLES,
+    ...NEXT_STEPS,
   ],
 };
 

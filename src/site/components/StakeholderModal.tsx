@@ -73,18 +73,9 @@ export default function StakeholderModal({ person, onClose }: { person: Stakehol
         </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto px-5 py-4">
-          {person.why && (
-            <p className="text-body-sm leading-relaxed">
-              <span className="kicker mr-1.5 normal-case">why we asked</span>
-              {inline(person.why)}
-            </p>
-          )}
-          <p className="mt-3 text-body-sm leading-relaxed">
-            <span className="kicker mr-1.5 normal-case">what they said</span>
-            {inline(person.said)}
-          </p>
+          {person.why && <p className="text-body-sm leading-relaxed">{inline(person.why)}</p>}
+          <p className="mt-3 text-body-sm leading-relaxed">{inline(person.said)}</p>
           <p className="mt-3 border-l-[3px] border-petal-daisy pl-3 text-body-sm leading-relaxed">
-            <span className="kicker mr-1.5 normal-case">what we changed</span>
             {inline(person.changed)}
           </p>
         </div>
