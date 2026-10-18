@@ -221,12 +221,34 @@ export function SectionMenu({ sections }: { sections: RailSection[] }) {
   const active = useActive(sections)
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  /** Stood aside: the reader is going down the page and is not looking for this. */
+  const [stood, setStood] = useState(false)
   const popRef = useRef<HTMLDivElement>(null)
   const box = useRef<HTMLDivElement>(null)
   useKeepInView(box, open ? active : { section: -2, item: -2 })
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > window.innerHeight)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  /*
+   * The button floats over the reading column, so it steps aside while the
+   * reader is going down the page and comes back the moment they scroll up,
+   * which is when somebody is looking for a way out rather than reading. It
+   * also stays put near the top, where it covers nothing.
+   */
+  useEffect(() => {
+    let last = window.scrollY
+    const onScroll = () => {
+      const y = window.scrollY
+      if (y < 240) setStood(false)
+      else if (y > last + 6) setStood(true)
+      else if (y < last - 6) setStood(false)
+      last = y
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -267,7 +289,13 @@ export function SectionMenu({ sections }: { sections: RailSection[] }) {
       )}
 
       {/* Everything narrower: the outline behind one button. */}
-      <div ref={popRef} className="fixed bottom-4 right-4 z-30 flex flex-col items-end gap-2 print:hidden xl:hidden">
+      <div
+        ref={popRef}
+        className={
+          'fixed bottom-4 right-4 z-30 flex flex-col items-end gap-2 transition-transform duration-200 motion-reduce:transition-none print:hidden xl:hidden ' +
+          (stood && !open ? 'pointer-events-none translate-y-[calc(100%+1.5rem)]' : 'translate-y-0')
+        }
+      >
         {open && (
           <nav id="section-menu" aria-label="Sections of this page" className="panel flex max-h-[70vh] w-72 flex-col py-3">
             <p className="kicker mb-1.5 px-4">On this page</p>
@@ -291,8 +319,8 @@ export function SectionMenu({ sections }: { sections: RailSection[] }) {
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
           aria-controls="section-menu"
-          /* Narrower on a phone: this button floats over the text, so a long
-             section name would cover half a line of it. */
+          /* Narrow on a phone: even standing aside between scrolls, a long
+             section name would cover half a line of text. */
           className="pixel-btn pixel-btn-primary flex min-h-11 max-w-[11rem] items-center gap-2 py-2 text-xs sm:max-w-[15rem]"
         >
           <span aria-hidden>☰</span>
