@@ -3154,7 +3154,7 @@ const results: Page = {
   kicker: "wetlab · results",
   storyBeat: "Nothing has come up yet. The seeds are in.",
   intro:
-    "What the experiments actually produced. There is nothing here yet, and this page says so rather than filling the space with something that is not data.",
+    "What the experiments actually produced. Check back after the wiki freeze is over, on 25 November.",
   blocks: [
     {
       kind: "resultsSoon",
