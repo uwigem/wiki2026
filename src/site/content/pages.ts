@@ -862,53 +862,282 @@ const engineering: Page = {
 
 const experiments: Page = {
   slug: "/experiments",
-  title: "What Grew",
+  title: "Experiments",
   kicker: "chapter 05 · experiments",
-  storyBeat: "This bed is still mostly soil. Come back when the season turns.",
+  storyBeat:
+    "You cannot tell whether a seed took by reading the packet. You plant it, and then you go and look.",
   intro:
-    "Four experiments, each answering one question, in the order they have to be answered.",
+    "Five experiments, each answering one question, in the order the questions have to be answered.",
   blocks: [
     {
-      kind: "steps",
-      id: "experiments",
-      heading: "The four experiments",
-      intro: "Each one answers a specific question, in order.",
-      items: [
-        {
-          title: "Does forced proximity work",
-          body: "Put SMO, MGRN1, and tagged ubiquitin into NIH/3T3 cells with a rapalog-controlled linker, then pull down and blot for ubiquitin. Controls include a catalytically dead MGRN1 and a no-linker SMO. This proves the down arm before any binder is involved.",
-        },
-        {
-          title: "Which binders work",
-          body: "Screen the designed binders in a 96-well mammalian two-hybrid, with the target on one half and the binder on the other driving a GFP reporter. About 125 to 130 binders can be screened this way.",
-        },
-        {
-          title: "Does SMO actually move",
-          body: "Transfect the best hits into NIH/3T3, induce cilia by dropping serum, add varying amounts of SHH, then image how much SMO sits in the cilium. Readouts are median ciliary SMO intensity and the fraction of cilia that are SMO positive.",
-        },
-        {
-          title: "Purify the winners",
-          body: "Express the top 5 to 10 binders and purify them by IMAC using a His-tag, so they can be characterised directly.",
-        },
+      kind: "prose",
+      heading: "Overview",
+      body: [
+        "The Hedgehog pathway is essential to embryonic development, tissue organisation and cellular differentiation. Its activity is controlled by how much **Smoothened (SMO)** there is and by where that SMO sits: SMO is a seven-transmembrane protein that transmits Hedgehog signals from the primary cilium.",
+        "Under normal conditions the **MGRN1, MEGF8 and MOSMO (MMM) complex** sets SMO abundance by ubiquitinating it, which sends it on for trafficking and turnover. We are engineering that naturally occurring mechanism into a modular system that can raise or lower SMO abundance in response to an external input.",
+        "Five experiments follow from that. The first asks whether chemically induced proximity can recruit MGRN1 to SMO and promote its ubiquitination. The second screens computationally designed binders against MEGF8 and MOSMO for binding inside cells. The third measures what happens to SMO over six hours once recruitment is induced. The fourth tests whether purified binders change ciliary SMO and downstream signalling. The fifth puts both arms in the same cells and asks whether they work as a bidirectional rheostat.",
+        "Each section below gives the rationale, the proposed design, and what each outcome would and would not tell us.",
       ],
-      source:
-        "Wet Lab: mid-quarter check-in and Induced Proximity Assay protocol, 2026.",
     },
     {
-      kind: "facts",
-      heading: "What we test in",
+      kind: "callout",
+      label: "where this stands",
+      heading: "None of this has been run yet",
+      body: [
+        "Construct design is finished and the orders are placed with GenScript and Twist Bioscience. They have not arrived. Everything on this page is a proposed design.",
+        "What we designed and ordered is on [parts and registry](/parts), and the dates are in the [notebook](/notebook).",
+      ],
+    },
+
+    {
+      kind: "prose",
+      section: "Experiment 1: Induced recruitment",
+      id: "experiments",
+      navLabel: "Rationale",
+      heading: "Chemically induced recruitment of MGRN1 and MEGF8 to SMO",
+      body: [
+        "The MMM complex regulates Hedgehog signalling by ubiquitinating SMO, which promotes its internalisation and degradation. **MGRN1** is the E3 ubiquitin ligase that does the ubiquitinating. **MEGF8** recruits MGRN1 and contributes to its activity. **MOSMO** interacts with MEGF8 and helps regulate the complex at the cell surface.",
+        "Kong et al. [1] showed that MGRN1 on its own does not significantly increase SMO ubiquitination when overexpressed in HEK293T cells. MEGF8 on its own produces a small increase, probably by working through endogenous MGRN1. Expressing both together produces substantially more.",
+        "So we want to know whether we can control that process by bringing individual components of the complex directly to SMO. There are two questions. Is recruiting MGRN1 straight to SMO enough to increase SMO ubiquitination? And can recruiting MEGF8 to SMO pull endogenous MGRN1 into proximity and increase ubiquitination without expressing any extra MGRN1 at all?",
+        "Recruitment is controlled chemically. The **FKBP and FRB** system lets two engineered proteins associate once **AP21967**, a rapalog, is added. We also use the **ALFA tag**, a short peptide recognised by a high-affinity nanobody (NbALFA), to detect and isolate the engineered proteins. The same pair is used in protein detection, affinity purification and engineered recruitment systems including bioPROTAC work, and it lets us compare how much of each tagged protein we recover.",
+      ],
+    },
+    {
+      kind: "steps",
+      id: "exp1-design",
+      heading: "Proposed design",
+      intro: "Both recruitment strategies are tested in HEK293T cells, using engineered SMO, MGRN1 and MEGF8 constructs.",
       items: [
         {
-          title: "Cell lines",
-          body: "NIH/3T3 mouse cells for the ciliary and proximity work, and HEK293T for transfection and the two-hybrid screen. Designs are mouse-optimised for NIH/3T3.",
+          title: "Direct recruitment of MGRN1",
+          body: "SMO and MGRN1 carry compatible chemically inducible dimerisation domains, and AP21967 brings them together. Co-immunoprecipitation measures the association, and we then ask whether recruitment increases SMO ubiquitination. Wild-type MGRN1 is compared against a catalytically inactive mutant, which tests whether any ubiquitination actually depends on ligase activity.",
         },
         {
-          title: "Reagents",
-          body: "Constructs come from gene synthesis, with full-length MEGF8 supplied by the advising lab because of its size.",
+          title: "MEGF8-mediated recruitment",
+          body: "MEGF8 is recruited to SMO through the same system. Its cytoplasmic region binds MGRN1, so this asks whether bringing MEGF8 across pulls in the cell's own MGRN1. Nothing here overexpresses MGRN1. Co-immunoprecipitation shows whether endogenous MGRN1 associates with the recruited MEGF8 and SMO, and ubiquitination then shows whether that association does anything.",
         },
         {
-          title: "Honest gap",
-          body: "We do not have SPR access, so we cannot yet measure binding affinities directly or confirm the binding order. The model treats binder strength as a swept range until then.",
+          title: "ALFA-tag detection",
+          body: "ALFA-tagged constructs let us isolate the engineered proteins specifically with ALFA-binding nanobodies and compare expression, recovery and association across conditions. Normalising the co-immunoprecipitated amounts against the recovered tagged protein accounts for differences in expression or in pull-down recovery rather than in recruitment.",
+        },
+        {
+          title: "Measuring ubiquitination",
+          body: "SMO is isolated under denaturing conditions and the ubiquitin signal read by Western blot. The conditions compared are SMO with vehicle, SMO with direct MGRN1 recruitment, SMO with a catalytically inactive MGRN1 recruited the same way, SMO with MEGF8 recruitment relying on endogenous MGRN1, and recruitment-deficient and dimeriser-only controls.",
+        },
+      ],
+    },
+    {
+      kind: "prose",
+      id: "exp1-outcome",
+      heading: "Expected outcome",
+      body: [
+        "We expect AP21967 to increase association between proteins carrying compatible FKBP and FRB domains. For direct recruitment, more SMO ubiquitination would show that artificially bringing the ligase to SMO is sufficient under these conditions. For MEGF8-mediated recruitment, pulling down endogenous MGRN1 along with recruited MEGF8, and seeing more ubiquitination, would support the idea that MEGF8 can recruit the machinery the cell already has.",
+        "If direct recruitment does not increase ubiquitination, proximity alone is not enough. If MEGF8 recruitment does produce a response, that points to MEGF8 doing something beyond carrying MGRN1 over, such as positioning or activating it.",
+        "If both work, we have evidence that engineered proximity can control a receptor-associated ubiquitination system, and we can choose whichever strategy is cleaner for the rest of the project. Either way, this is the experiment that decides the shape of the downregulation arm.",
+      ],
+    },
+
+    {
+      kind: "prose",
+      section: "Experiment 2: Binder screen",
+      id: "exp2",
+      navLabel: "Rationale",
+      heading: "Screening designed binders against MEGF8 and MOSMO",
+      body: [
+        "The other arm needs protein binders that interfere with the MMM complex and stop it clearing SMO. Before any of that, a narrower question: do the designs we generated recognise their targets inside a cell at all?",
+        "We screen binders against both MEGF8 and MOSMO in a 96-well mammalian protein interaction assay. It measures binding. It does not show that a binder disrupts the complex, and a positive result here should not be read as though it does.",
+        "The assay splits a transcription factor in two. One half is fused to a designed binder, the other to MEGF8 or MOSMO. If the binder finds its target, the two halves are brought together and switch on a GFP reporter, so GFP expression stands in for the interaction.",
+      ],
+    },
+    {
+      kind: "steps",
+      id: "exp2-design",
+      heading: "Proposed design",
+      items: [
+        {
+          title: "Clone the designs",
+          body: "The computationally designed MEGF8 and MOSMO binding sequences go into the assay vector carrying one half of the split transcription factor. MEGF8 and MOSMO are tested as separate target fusions carrying the complementary half.",
+        },
+        {
+          title: "Run the plate",
+          body: "A 96-well format in HEK293T cells. Each well receives the binder construct, its corresponding target construct and the GFP reporter plasmid, so every candidate is screened under comparable conditions.",
+        },
+        {
+          title: "Read by flow cytometry",
+          body: "Once the reporter has had time to express, cells are collected and read by flow cytometry. Binding is scored from the double-positive population, GFP and BFP, as a percentage of cells, which is a quantitative measure of reporter activation.",
+        },
+        {
+          title: "Compare against the carrier control",
+          body: "Every binder has a matched GB1-only carrier control containing no MEGF8 or MOSMO target, which gives the background reporter signal. Binding fold change is the double-positive population for a binder and target pair over its own GB1 control. The MEGF8 and MOSMO screens are analysed separately, and the stronger candidates go forward.",
+        },
+      ],
+    },
+    {
+      kind: "prose",
+      id: "exp2-outcome",
+      heading: "Expected outcome",
+      body: [
+        "A binder that interacts with its intended target should raise GFP activation, and the double-positive population, above its matched GB1 control, giving a fold change greater than one.",
+        "A candidate that does not differ from its control gives us no evidence of binding under the conditions tested, which is not the same thing as evidence that it does not bind.",
+        "Background reporter activity and differences in how well each fusion protein is expressed both move this number, so fold change has to be read alongside the underlying flow-cytometry populations and the assay controls rather than on its own.",
+      ],
+    },
+
+    {
+      kind: "prose",
+      section: "Experiment 3: SMO trafficking",
+      id: "exp3",
+      navLabel: "Rationale",
+      heading: "Quantifying SMO trafficking and depletion kinetics",
+      body: [
+        "Experiment 1 asks whether recruitment increases ubiquitination. This one asks what then happens to SMO: how quickly it leaves the primary cilium, and whether the amount in the cell as a whole changes too.",
+        "Those are different questions. Ciliary SMO is what matters for signalling, but a fall in ciliary fluorescence does not prove SMO was degraded. It may simply have moved elsewhere in the cell. To tell the two apart, we measure SMO at the cilium and in the rest of the cell from the same images, across the same time course.",
+        "The [kinetic model](/model) also needs time-resolved measurements to describe how the system responds to AP21967, which is why the series runs out to 360 minutes.",
+      ],
+    },
+    {
+      kind: "steps",
+      id: "exp3-design",
+      heading: "Proposed design",
+      items: [
+        {
+          title: "A six-hour time course",
+          body: "Ciliated NIH/3T3 cells carrying the direct MGRN1 recruitment system are treated with AP21967 or vehicle, then imaged at baseline and at roughly 30, 60, 120, 240 and 360 minutes. Separate wells fixed at each timepoint make the series practical without continuous live-cell imaging. We would use a validated fluorescent SMO readout, such as SMO-GFP or a suitable immunofluorescence assay, together with a ciliary marker.",
+        },
+        {
+          title: "Measure cilium and cell separately",
+          body: "For each cell we identify the cilium and measure background-corrected SMO fluorescence there, then measure a whole-cell region and, where possible, the non-ciliary part. Both use the same imaging channel and acquisition settings so the signals are directly comparable. Cilium length and area are tracked as well, so that a change in cilium size is not mistaken for a change in SMO.",
+        },
+        {
+          title: "Then vary the dose",
+          body: "The first pass is a single AP21967 concentration against vehicle. If that produces a measurable response, key timepoints are repeated at further concentrations to see whether depletion depends on dose. A longer series of six to eight concentrations could follow if the model needs it, particularly to test whether the response plateaus or falls away at high concentrations. A hook effect is a question we would be asking, not a property we are assuming.",
+        },
+        {
+          title: "Controls",
+          body: "Vehicle gives the baseline trafficking profile. Catalytically inactive MGRN1 tests whether the response needs ligase activity. A recruitment-deficient condition tests whether it needs the engineered interaction at all, and a dimeriser-only control catches anything AP21967 does by itself. We also monitor cell health and the proportion of cells that have a primary cilium.",
+        },
+      ],
+    },
+    {
+      kind: "prose",
+      id: "exp3-outcome",
+      heading: "Expected outcome",
+      body: [
+        "If recruitment drives SMO down, ciliary SMO fluorescence should fall after AP21967 relative to vehicle. What the whole-cell measurement does at the same time is what tells us what that fall means.",
+        "Ciliary signal down with little change in the whole cell would be consistent with SMO being redistributed, or leaving the cilium. Both falling together would be consistent with less SMO in the cell overall, though confirming degradation would need a biochemical abundance assay rather than imaging. No change at all, with recruitment verified, would say that recruitment does not produce a measurable trafficking response under these conditions.",
+        "These measurements let the modelling team estimate how fast and how far ciliary SMO falls, and constrain a model of how SMO is distributed between compartments. They cannot separate ciliary entry and exit rate constants on their own: that would need another method, such as fluorescence recovery or photoconversion.",
+      ],
+    },
+
+    {
+      kind: "prose",
+      section: "Experiment 4: Binder validation",
+      id: "exp4",
+      navLabel: "Rationale",
+      heading: "Functional validation of designed MEGF8 and MOSMO binders",
+      body: [
+        "A GFP signal in Experiment 2 says a candidate interacts with its target in the screening system. It does not say the binder interferes with MMM function or changes Hedgehog signalling. This experiment asks that.",
+        "The complex drives SMO ubiquitination and limits how much SMO accumulates in the cilium. Our binders are designed against extracellular-facing regions of human MEGF8 and MOSMO, so they can be applied to cells from the outside as purified protein rather than expressed inside them.",
+        "Selected candidates are expressed in Expi293F cells, purified, and added to ciliated NIH/3T3 cells, where we measure ciliary SMO and downstream Hedgehog signalling. NIH/3T3 is a well-established mouse model for these assays, and that is also the catch: a binder designed against the human proteins has to recognise accessible sites on the mouse ones to act on endogenous MMM here at all.",
+      ],
+    },
+    {
+      kind: "steps",
+      id: "exp4-design",
+      heading: "Proposed design",
+      items: [
+        {
+          title: "Produce and purify",
+          body: "Candidates are chosen on their fold change in the double-positive population against the matched GB1 control. Sequences go into mammalian expression vectors built for secreted production and purification, and are expressed in Expi293F cells. Secreted binders are collected from the culture medium, purified by an appropriate affinity method, and assessed for purity and recovery. Size-exclusion chromatography removes aggregates if needed, and concentrations are standardised before any functional testing.",
+        },
+        {
+          title: "Ciliary SMO",
+          body: "Purified binders go onto ciliated NIH/3T3 cells, each against a matched nonbinding purified protein and a buffer-only control, at several concentrations so that dose dependence is visible. SMO localisation is read by immunofluorescence against a primary-cilium marker, and SMO fluorescence within the cilium is quantified across many cells and independent experiments. We also monitor viability and the proportion of ciliated cells, so that a change unrelated to MMM regulation shows up.",
+        },
+        {
+          title: "Pathway activity",
+          body: "Promising candidates go into Shh-LIGHT2 cells, an NIH/3T3-derived line carrying a GLI-responsive firefly luciferase reporter and a constitutive Renilla control, under the same submaximal SHH stimulation. Firefly normalised to Renilla compares signalling across conditions, and we check whether any change is consistent with what ciliary SMO did. Gli1 measured by RT-qPCR would give a second readout where feasible.",
+        },
+        {
+          title: "Specificity, and reading a negative",
+          body: "Responses are compared against the nonbinding control and checked for dose dependence. A target-dependent control, or a direct test of whether MEGF8 and MOSMO still associate, is what would show that a response comes from disrupting the complex rather than from something else the purified protein does.",
+        },
+      ],
+    },
+    {
+      kind: "prose",
+      id: "exp4-outcome",
+      heading: "Expected outcome",
+      body: [
+        "A candidate that interferes with MMM regulation should raise ciliary SMO fluorescence relative to the nonbinding control, and under a matched submaximal SHH stimulus should raise normalised GLI reporter activity as well. A dose-dependent response in both is what would make it the upregulation arm.",
+        "A binder that raises ciliary SMO without raising GLI activity would be telling us that more SMO in the cilium does not automatically produce more signal.",
+        "A candidate that does nothing may have failed to reach or recognise the mouse target, or may be binding without disrupting anything. The functional assay alone cannot separate those, and a flat result here would not establish that a binder is nonfunctional against its intended human target.",
+      ],
+    },
+
+    {
+      kind: "prose",
+      section: "Experiment 5: The rheostat",
+      id: "exp5",
+      navLabel: "Rationale",
+      heading: "Functional validation of a bidirectional Hedgehog rheostat",
+      body: [
+        "This is the last experiment, and it only happens if the others work. It needs induced recruitment to have changed SMO regulation, and at least one designed binder to have reduced MMM function and raised SMO abundance. Binding in the Experiment 2 screen does not qualify a binder for this on its own.",
+        "Experiments 1 to 4 stop short of the thing the project claims. They measure recruitment, ubiquitination, binding and SMO localisation. None of them measures Hedgehog signalling across a range of inputs, which is what a rheostat has to do.",
+        "So both mechanisms go into the same cells, pushing in opposite directions: induced recruitment of MGRN1 or MEGF8 to drive SMO down, and a validated binder against MEGF8 or MOSMO to let SMO accumulate. The readout is a GLI-responsive luciferase reporter, which measures pathway output rather than SMO abundance.",
+      ],
+    },
+    {
+      kind: "steps",
+      id: "exp5-design",
+      heading: "Proposed design",
+      items: [
+        {
+          title: "Each arm on its own",
+          body: "Shh-LIGHT2 cells, firefly luciferase normalised to Renilla, under a submaximal SHH stimulus so that both increases and decreases in signalling can be detected. First the recruitment strategy that gave the clearest effect on SMO, AP21967 against vehicle, to see whether it lowers GLI reporter activity. Then, separately, a binder already shown to interfere with MMM function, against a nonbinding control, to see whether it raises GLI activity.",
+        },
+        {
+          title: "Both arms together",
+          body: "If each arm works alone, four conditions follow: neither input active, recruitment alone, MMM disruption alone, and both. That shows whether both still function when combined, and whether one can counteract the other. Controls are the recruitment-deficient or catalytically inactive construct for the down arm, the nonbinding protein for the up arm, and AP21967 on its own. Viability and reporter normalisation are watched throughout.",
+        },
+        {
+          title: "Then the matrix",
+          body: "If the four-condition version holds, it expands to three levels of each input. Binder levels have to be validated independently, because putting in more plasmid does not reliably produce proportionally more protein. Every condition is read as normalised GLI activity, with ciliary SMO and endogenous Gli1 measured as well where that is feasible, under the same SHH stimulation throughout.",
+        },
+      ],
+    },
+    {
+      kind: "table",
+      id: "exp5-matrix",
+      heading: "The two-input matrix",
+      intro: "AP21967 concentration sets the down arm. The amount of a validated MMM-disrupting binder sets the up arm. The input levels are illustrative, and would be defined after each mechanism is tested on its own.",
+      columns: ["MMM disruptor", "No AP21967", "Low AP21967", "High AP21967"],
+      rows: [
+        ["None", "Baseline", "Down arm, low input", "Down arm, high input"],
+        ["Low", "Up arm, low input", "Both inputs, low and low", "Both inputs, low and high"],
+        ["High", "Up arm, high input", "Both inputs, high and low", "Both inputs, high and high"],
+      ],
+      caption: "These are experimental conditions, not predicted results.",
+    },
+    {
+      kind: "prose",
+      id: "exp5-outcome",
+      heading: "Expected outcome",
+      body: [
+        "If the downregulation arm works, GLI reporter activity falls after recruitment relative to its control. If a designed binder inhibits MMM function, GLI activity rises relative to a nonbinding control. Showing both independently would establish bidirectional regulation, which is not yet a rheostat.",
+        "The harder question is what happens when both inputs are active. An intermediate response would support the idea that the two can be balanced against each other, but the combined response may also favour one arm. Direct recruitment may bypass the particular interaction a binder blocks, so the two effects should not be assumed to cancel.",
+        "The strongest result available here is several reproducible levels of GLI activity produced by varying the two inputs. That would be graded control rather than two directions. It still would not establish that the system is reversible, or that it works on any ciliary receptor other than SMO.",
+      ],
+    },
+
+    {
+      kind: "references",
+      heading: "References",
+      items: [
+        {
+          n: "1",
+          text: "Kong et al., 2020. Developmental Cell.",
+          href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC7686252/",
         },
       ],
     },
@@ -2471,7 +2700,7 @@ const humanPractices: Page = {
         [
           "Safety and biological integrity",
           "Check the system around the target. Monitor ciliary structure, off-target effects and any unintended changes to broader pathways.",
-          "We include controls to check that the [effect really comes from MMM activity](/experiments#experiments), and use [modelling](/model#mc4r-safety) to look for possible off-target effects on other pathways.",
+          "We include controls to check that the [effect really comes from MMM activity](/experiments#exp1-design), and use [modelling](/model#mc4r-safety) to look for possible off-target effects on other pathways.",
           "Researchers can interpret results with more confidence, knowing that the observed effect was caused by altering the intended protein's abundance rather than by damage to the cilium or broad signalling disruption.",
         ],
       ],
