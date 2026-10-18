@@ -90,6 +90,16 @@ export default function MmmDiagram() {
       ? 'translate(34px, 0)'
       : 'translate(0,0)'
 
+  /*
+   * The tagging arrow. MGRN1 slides right when the linker is on, so the arrow
+   * has to start from wherever its edge now is rather than from a fixed point,
+   * or it begins inside the ligase. It stops short of the ubiquitin for the
+   * same reason: ending on the cluster buries the head under the tags.
+   */
+  const ubX = linked ? 318 : 352
+  const armFrom = linked ? 206 : 172
+  const armTo = ubX - 16
+
   // The receptor on the right is SMO at rest, and whatever the lab picked once
   // the linker is on, so it is renamed as well as recoloured.
   const targetFill = linked ? P.pinkBud : P.waterLight
@@ -201,7 +211,7 @@ export default function MmmDiagram() {
           {/* the linker, only once it is on */}
           <g style={{ opacity: linked ? 1 : 0, transition: ease }} aria-hidden>
             <path
-              d="M 122 56 q 14 -12 28 0 q 14 12 28 0 q 14 -12 28 0 q 14 12 28 0 q 14 -12 28 0 q 14 12 28 0 q 14 -12 28 0"
+              d="M 122 58 q 14 -8 28 0 q 14 8 28 0 q 14 -8 28 0 q 14 8 28 0 q 14 -8 28 0 q 14 8 28 0 q 14 -8 28 0"
               fill="none"
               stroke={P.shadow}
               strokeWidth={3}
@@ -215,7 +225,7 @@ export default function MmmDiagram() {
           {/* ubiquitin, and the arrow that puts it there. Neither survives the breaker. */}
           <g style={{ opacity: broken ? 0 : 1, transition: ease }}>
             <path
-              d={`M 172 182 Q 258 196 ${linked ? 318 : 352} 166`}
+              d={`M ${armFrom} 182 Q ${(armFrom + armTo) / 2} 196 ${armTo} 166`}
               fill="none"
               stroke={P.bushDark}
               strokeWidth={2}
@@ -223,9 +233,9 @@ export default function MmmDiagram() {
               style={{ transition: ease }}
             />
             {[
-              [linked ? 318 : 352, 152],
-              [linked ? 334 : 368, 160],
-              [linked ? 318 : 352, 170],
+              [ubX, 152],
+              [ubX + 16, 160],
+              [ubX, 170],
             ].map(([cx, cy], i) => (
               <g key={i} style={{ transition: ease }}>
                 <circle cx={cx} cy={cy} r={9} fill={P.pinkBud} stroke={P.pinkDark} strokeWidth={1.4} />
