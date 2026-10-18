@@ -16,6 +16,7 @@ import TornadoChart from "../components/TornadoChart";
 import FigureFrame from "../components/FigureFrame";
 import HedgehogNote from "../components/HedgehogNote";
 import ProgrammePillars from "../components/ProgrammePillars";
+import MmmDiagram from "../components/MmmDiagram";
 import StakeholderGarden from "../components/StakeholderGarden";
 import StatRow from "../components/StatRow";
 import StructureView from "../components/StructureView";
@@ -501,6 +502,9 @@ function BlockView({ block }: { block: Block }) {
           </figcaption>
         </figure>
       );
+
+    case "mechanism":
+      return <MmmDiagram />;
 
     case "explainer":
       return <SignalDial />;

@@ -288,6 +288,12 @@ export type Block = Anchored &
      * Home 3 tells the story its own way, so it lives here with the two arms.
      */
     | { kind: "explainer" }
+    /**
+     * The MMM complex drawn at the molecular level, with a button per arm:
+     * the linker that drags the complex onto a chosen receptor, and the
+     * minibinder that takes the complex apart.
+     */
+    | { kind: "mechanism" }
     /** A figure, or the marked hole where one is going. */
     | {
         kind: "figure";
@@ -406,11 +412,12 @@ const description: Page = {
       heading: "The short version",
       body: [
         "The **Hedgehog pathway** is one of the handful of signals that pattern an animal during development, and one that drives cancer when it switches back on in adults. Its central transducer is **Smoothened (SMO)**, a receptor that has to sit in the **primary cilium** to be active.",
-        "How much SMO sits in that cilium is not fixed. A membrane-bound complex called **MMM**, made of **MEGF8, MOSMO and MGRN1**, tags SMO for degradation and clears it out. MGRN1 is the enzyme, and MEGF8 and MOSMO are its adapters.",
-        "We build a device out of three modular parts, a **targeting module**, an **inducible linker**, and an **E3 module**, that borrows this natural machinery to raise or lower how much of a receptor stays in the cilium.",
+        "How much SMO sits in that cilium is not fixed. A transmembrane complex called **MMM**, made of **MEGF8, MOSMO and MGRN1**, tags SMO for degradation and clears it out. MEGF8 brings the complex to its target, MGRN1 ubiquitinates the target to tag it for degradation, and MOSMO is needed for complex stability.",
+        "We build a device out of two modular parts, a **disruptor protein** and an **inducible linker**, that borrows this natural machinery to raise or lower how much of a receptor stays in the cilium.",
       ],
       source: "How to frame the project (Wet Lab wiki notes), 2026.",
     },
+    { kind: "mechanism", id: "mechanism" },
     {
       kind: "cards",
       id: "two-arms",
@@ -419,12 +426,12 @@ const description: Page = {
         "Both arms are engineered, both are genetically encodable, and they push the same pathway in opposite directions.",
       items: [
         {
-          title: "Up arm",
-          body: "A **de novo minibinder** pries apart the MEGF8 and MOSMO interface. [How we design one](/engineering#pipeline). The MMM complex can no longer assemble, so it stops clearing SMO, so SMO stays in the cilium and Hedgehog signalling goes up.",
+          title: "Down arm",
+          body: "An **inducible linker** forces **the MMM complex** onto a chosen receptor. That receptor now gets tagged and cleared, so signalling through it goes down. We test this by recruiting MGRN1 to GPR161, a receptor MMM does not normally touch.",
         },
         {
-          title: "Down arm",
-          body: "A **chemically induced linker** forces MGRN1 onto a chosen receptor. That receptor now gets tagged and cleared, so signalling through it goes down. We test this by recruiting MGRN1 to GPR161, a receptor MMM does not normally touch.",
+          title: "Up arm",
+          body: "A **de novo minibinder** pries apart the MEGF8 and MOSMO interface. [How we design one](/engineering#pipeline). The MMM complex can no longer assemble, so it stops clearing the targeted receptor. Doing this prevents over degradation and allows us a new vector to tune ciliary abundance.",
         },
         {
           title: "A dial, not a switch",
