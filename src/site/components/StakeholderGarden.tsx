@@ -11,6 +11,9 @@ import {
 import PixelSign from './PixelSign'
 import PixelSprite from './PixelSprite'
 import { inline } from './RichText'
+import PixelPerson, { looksFor } from './PixelPerson'
+import CreditLogo from './CreditLogo'
+import type { CreditLogoId } from '../content/creditLogos'
 import { stakeholderId, useStakeholders } from './stakeholders'
 
 /**
@@ -43,6 +46,18 @@ export interface Stakeholder {
   said: string
   /** What the team actually changed because of it. */
   changed: string
+  /**
+   * Their photograph, a file in `public/`. Square, because the sources are a
+   * mix of shapes and a square reads as a portrait at any size. Without one
+   * the card falls back to the flower for their group.
+   */
+  photo?: string
+  /**
+   * This entry is an organisation rather than one person. Their logo stands in
+   * for the pixel person, drawn from the same pixel-art set the attributions
+   * page uses rather than dropped in as an image file.
+   */
+  logo?: CreditLogoId
 }
 
 /** One flower per bed, so the groups are told apart by shape, not only by label. */
@@ -71,7 +86,6 @@ export default function StakeholderGarden({ heading, intro, people, pending, sou
   const groups = GROUPS.map((g) => ({ ...g, count: people.filter((p) => p.group === g.key).length })).filter(
     (g) => g.count > 0,
   )
-  const flowerFor = (key: string) => GROUPS.find((g) => g.key === key)?.flower ?? DAISY
   const labelFor = (key: string) => GROUPS.find((g) => g.key === key)?.label ?? key
   const shown = filter === 'all' ? people : people.filter((p) => p.group === filter)
 
@@ -119,8 +133,17 @@ export default function StakeholderGarden({ heading, intro, people, pending, sou
               aria-haspopup="dialog"
               className="group flex h-full w-full items-start gap-3 rounded-sm border-[3px] border-leaf-300 bg-leaf-50 px-3 py-3 text-left transition-colors hover:border-leaf-700 hover:bg-leaf-100"
             >
-              <span aria-hidden className="flex h-12 w-12 shrink-0 items-center justify-center rounded-sm bg-leaf-100">
-                <PixelSprite sprite={flowerFor(p.group)} scale={4} />
+              {/* The pixel person at full size and unframed, as on the team and
+                  attributions pages: a fixed slot so a taller character does
+                  not shift the name beside it. Their photograph belongs in the
+                  profile, not on the tile, and an organisation shows its logo
+                  instead of a person. */}
+              <span aria-hidden className="flex h-20 w-16 shrink-0 items-end justify-center">
+                {p.logo ? (
+                  <CreditLogo id={p.logo} scale={2} />
+                ) : (
+                  <PixelPerson traits={looksFor(p)} scale={4} />
+                )}
               </span>
               <span className="flex min-w-0 flex-1 flex-col gap-0.5">
                 <span className="text-sm font-semibold leading-snug">{p.name}</span>

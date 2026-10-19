@@ -2072,7 +2072,7 @@ const humanPractices: Page = {
       id: "integration",
       heading: "Integration counter",
       items: [
-        { value: "13", label: "stakeholders consulted" },
+        { value: "16", label: "stakeholders consulted" },
         { value: "6", label: "professional communities represented" },
         { value: "5", label: "shared adoption needs" },
         { value: "5", label: "design requirements defined", emphasis: true },
@@ -2093,6 +2093,7 @@ const humanPractices: Page = {
           said: "He challenged the team to first establish whether changing receptor copy number produces a meaningful biological effect, noting that in some GPCR systems ligand availability or downstream signal amplification may matter more than receptor abundance itself, and recommended a well characterised system where receptor abundance is already known to influence a measurable phenotype as a rigorous proof of principle. He also highlighted that ubiquitin mediated control could alter protein abundance much more rapidly than transcriptional regulation, and that researchers weigh cost, technical difficulty, equipment requirements, reproducibility and the likelihood of false negatives or positives when adopting a tool.",
           changed:
             "The team will prioritise a biologically meaningful proof of principle system before expanding to additional GPCRs, and its adoption guide will include detailed methods, controls, validation data, reagent sources and construction procedures so other researchers can reproduce and evaluate the platform.",
+          photo: "ihp/stakeholders/miller.jpg",
         },
         {
           id: "pottinger",
@@ -2103,6 +2104,7 @@ const humanPractices: Page = {
           said: "He advised that the current goal of building a research platform and the long term potential of therapeutic application are not incompatible, but that the team should clearly communicate the distinction between what the technology can do now and what remains a future possibility. He also emphasised considering unintended effects at a systems level and seeking additional systems biology expertise to examine how perturbing one component of a pathway could influence broader pathways.",
           changed:
             "The team will build clear boundaries around validation and uncertainty into its responsible use material, test a validated platform in more physiologically complex models such as organoids, use system level modelling to explore off target consequences, and set clearer goalposts for what counts as successful platform development.",
+          photo: "ihp/stakeholders/pottinger.jpg",
         },
         {
           id: "sauro",
@@ -2113,6 +2115,7 @@ const humanPractices: Page = {
           said: "He introduced the team to modelling platforms including BioModels, LibRoadRunner, WebIridium and Spyder, and explained how to use them to write and analyse kinetic models. He also guided the model development process by having the team create a wiring diagram to identify which components were most important, and gave detailed feedback as the model progressed.",
           changed:
             "The team simplified its kinetic model through a wiring diagram and used that process to work out which wet lab experimental data it needed.",
+          photo: "ihp/stakeholders/sauro.jpg",
         },
         {
           id: "wallingford",
@@ -2123,6 +2126,7 @@ const humanPractices: Page = {
           said: "He set out what researchers and clinicians need to know when using a new tool, including degradation rate, effectiveness and efficiency. He explained that a primary limitation in ciliary research is the inability to study cilia dynamics, since expansion microscopy requires fixing cells and so disables a direct link between structure and dynamics.",
           changed:
             "The meeting narrowed down how the project could be used by ciliary researchers and what steps were needed to establish it as a foundational advancement, with live cell study of Hedgehog signalling without fixture as the intended contribution.",
+          photo: "ihp/stakeholders/wallingford.jpg",
         },
         {
           id: "ogden",
@@ -2133,16 +2137,7 @@ const humanPractices: Page = {
           said: "She advised on what the hedgehog signalling pathway is implicated in, discussing the majority of cancer cases coming from rhabdomyosarcoma and medulloblastoma, and the cardiovascular conditions that occur with hedgehog misregulation in children, many of which are diagnosed via amniocentesis. She also raised the implications of tampering with such a ubiquitous system.",
           changed:
             "Given the histories of developmental biology being used to support eugenics efforts, the team recognised how important responsible use of the tool is.",
-        },
-        {
-          id: "nuukbio",
-          name: "Changho Chun and Justin Lee",
-          role: "Co-founders of NuukBio, an early stage biotechnology company developing a live-cell phenotyping platform",
-          group: "startup or industry",
-          why: "The team's own platform is at a similar early stage, so they wanted to learn how NuukBio translated an academic scientific capability into a broader research platform.",
-          said: "They emphasised that deep tech platforms cannot rely on assumed value and that the underlying science first needs rigorous experimental validation, with researchers acting as the first users. They encouraged the team to define the specific unanswered scientific questions the platform enables before identifying broad markets, users or applications, and to develop an evolving founder's theory, a clear hypothesis of why the platform is useful and what problem it solves, refined repeatedly through stakeholder feedback.",
-          changed:
-            "Wet lab and modelling teams will organise validation around clearly defined scientific questions, Human Practices will develop an initial value hypothesis and test it through interviews with potential end users, and the team will broaden outreach through referrals and local life science networks.",
+          photo: "ihp/stakeholders/ogden.jpg",
         },
         {
           id: "zheng",
@@ -2153,6 +2148,7 @@ const humanPractices: Page = {
           said: "He explained that because SMO is endogenously targeted and ubiquitinated by the MMM complex, the team would not be able to prove that regulation of SMO was due to their platform rather than the pre-existing biological relationship. He recommended selecting a protein that is not naturally targeted by MMM, to test whether the system can create a synthetic interaction and so demonstrate a truly modular tool.",
           changed:
             "The platform shifted from focusing only on SMO as a target to a modular system that can target and regulate any ciliary membrane protein.",
+          photo: "ihp/stakeholders/zheng.jpg",
         },
         {
           id: "matula",
@@ -2162,6 +2158,7 @@ const humanPractices: Page = {
           why: "To learn from his experience developing a research tool with a wide range of applications, since PIXUL started as an academic research tool before being commercialised.",
           said: "He described customer discovery and product development from working with UW CoMotion through to early grant applications, and urged the team to quickly develop small proof of concept technologies to attract early investors. He stressed staying utilitarian, iterating constantly on customer feedback rather than personal preference, and noted that people in labs are often set in how they already do things, so the key is finding a specific pain point the tool solves.",
           changed: "No change from this conversation is written up yet.",
+          photo: "ihp/stakeholders/matula.jpg",
         },
         {
           id: "younger",
@@ -2172,6 +2169,7 @@ const humanPractices: Page = {
           said: "He raised no fundamental concerns with the de novo protein design approach but said the choice between a small molecule, a protein based PROTAC and an antibody system should depend on the intended application, with biologics and minibinders more feasible within the iGEM timeline. He cautioned that full length knob and hole antibodies are not easy to design, synthesise or screen, suggesting two minibinders connected by a flexible linker as a minimal proof of concept, and warned that fully open sourcing too early could reduce investor incentives before a defensible IP foundation exists.",
           changed:
             "The wet lab team will prioritise validating a smaller minibinder system before pursuing more complex antibody or small molecule formats, the protein modelling and kinetics team will focus on scalable candidate generation, and Human Practices will continue examining platform implementation strategies.",
+          photo: "ihp/stakeholders/younger.jpg",
         },
         {
           id: "vokes",
@@ -2182,6 +2180,7 @@ const humanPractices: Page = {
           said: "He suggested expanding wet lab experimentation to NIH/3T3 cells, an embryonic murine cell line with Hh signalling present, and using levels of the ciliary protein ARL13B as a control when testing effects on Smoothened in the cilia. As an in vivo researcher he was concerned about applying antibodies in murine or other live models, explaining that in vitro cancer lines lose ciliary response quite quickly. He also asked what advantages the system offers over cheap pre-existing small molecules, pointing to less druggable targets such as PTCH1 or GPR161, and noted the lack of quantitative live cell imaging in vivo at molecular or single cell resolution.",
           changed:
             "The team decided to use minibinders for its linker system, giving an easier delivery route for in vivo researchers studying downregulation of transmembrane ciliary proteins while remaining usable in cell culture.",
+          photo: "ihp/stakeholders/vokes.jpg",
         },
         {
           id: "chamberlain",
@@ -2192,6 +2191,7 @@ const humanPractices: Page = {
           said: "He emphasised flexibility, awareness of the target audience, and simplifying the project down to its core point of innovation. On funding, he explained that investors want to see robust proof and results but also evidence that a team is flexible and aware of its surrounding environment, rather than locked into building a perfect product before ever engaging with its target audience.",
           changed:
             "The team plans to keep its scope realistic and grounded in what its current data actually supports, focusing on demonstrating a clear pain point the platform solves for cilia researchers.",
+          photo: "ihp/stakeholders/chamberlain.jpg",
         },
         {
           id: "eisenkot",
@@ -2202,6 +2202,7 @@ const humanPractices: Page = {
           said: "He emphasised that the first step is defining the end goal, since patenting, open sourcing or distributing directly to researchers depend heavily on whether the priority is commercial sustainability or broad nonprofit dissemination. He noted that patents require significant resources and a plausible mechanism for recovering that investment, while distributing a biological technology as a black box may limit adoption because users cannot understand or adapt the system. His major recommendation was to ramp up customer discovery, since actions speak louder than words, and to define the minimum features the platform must have.",
           changed:
             "Wet lab and modelling teams will focus on establishing convincing and reproducible proof of concept and clarifying what the minimum viable research tool should contain, while Human Practices will expand customer discovery around existing workflows and unmet needs.",
+          photo: "ihp/stakeholders/eisenkot.jpg",
         },
         {
           id: "bothwell",
@@ -2212,6 +2213,51 @@ const humanPractices: Page = {
           said: "He said a major gap in cilia research is that existing approaches typically disrupt formation of the entire cilium rather than selectively manipulating the localisation or abundance of an individual ciliary receptor. He identified promising systems including the GLP-1 receptor in pancreatic beta cells, ciliary GPCRs in hypothalamic control of appetite and body weight, PC1 in renal epithelial cells, somatostatin receptor 3 and serotonin receptor 6, and suggested eventually expanding beyond GPCRs to cilia enriched receptor tyrosine kinases such as FGF and PDGF. He recommended moving beyond HEK293T cells after initial proof of concept toward iPSC derived neuronal, renal or pancreatic beta cell models, stressed selectivity as a critical control, and said developmental and unintended effects should be carefully evaluated but are not unique to this platform.",
           changed:
             "The wet lab team can incorporate localisation and negative control assays and consider a disease relevant cell model after the SMO proof of concept, modelling teams can evaluate adapting the platform to additional receptor classes, and Human Practices will sharpen the proposed user need around selective receptor level perturbation.",
+          photo: "ihp/stakeholders/bothwell.jpg",
+        },
+        {
+          id: "reiter",
+          name: "Dr. Jeremy Reiter",
+          role: "Professor and chair in the Departments of Biochemistry and Biophysics at the University of California San Francisco, whose lab works on ciliogenesis, compartmentalisation in cilia and signal transduction",
+          group: "ciliary biologist",
+          why: "To learn how the platform could be used in research and taken up by scientists studying ciliary transmembrane proteins, and where the wet lab proof of concept could be strengthened.",
+          said: "He advised presenting the platform for pathological and mature settings of Hedgehog signalling, which are far less characterised than developmental ones, and noted that while loss-of-function tools are plentiful, few can act on the protein pool in a single subcompartment of a cell. For the SMO proof of concept he suggested using it alongside pharmacological inhibitors such as vismodegib, to get past second-site resistance where SMO gains mutations that block inhibitor binding. At the bench he asked whether the position of our protein tags changes how much ubiquitination we see, which confounders could be moving the result, such as linker length, and pressed for more controls: a knowingly ineffective binder for the binding assay, existing SMO nanobodies as a positive control for the dimerisation system, and cyclopamine or vismodegib as positive controls for downstream signalling.",
+          changed:
+            "The experiments gained controls on his advice, including a nonbinding design for the binder screen and pharmacological positive controls for the signalling readout, and subcompartment specificity is now stated as the thing existing loss-of-function tools cannot do.",
+          photo: "ihp/stakeholders/reiter.jpg",
+        },
+        {
+          id: "johnson",
+          name: "Professor Teddy Johnson",
+          role: "Clinical associate professor at the University of Washington School of Pharmacy and Director of Technology Development at the UW Institute of Translational Health Sciences",
+          group: "startup or industry",
+          why: "To understand the regulatory landscape for research tools, and for advice on commercialising the platform, on fundraising, and on the trade-off between open and proprietary development.",
+          said: "He cautioned that grant funding moves slowly, follows the political climate and comes in waves of popularity, so he recommended identifying a specific market opportunity before approaching investors for gap funding, and building binders against proteins people are already interested in. He noted that research tools are lightly regulated next to medicines and devices: a Research Use Only label is generally acceptable so long as the product is not falsely advertised and its results do not drive clinical decisions. On marketing he suggested approaching labs that enjoy trying new things rather than arguing with labs that resist change, and reducing friction by selling through major vendors and staying compatible with equipment labs already own. On distribution he proposed a hybrid: an open developer community to draw research and agency attention, with proprietary products for specialised work to keep investors comfortable. He also warned that ego and team discord waste more money than overspending does.",
+          changed:
+            "Human Practices will analyse how the platform fits existing research workflows and identify the labs most likely to test it, and the wet lab will review the ciliary literature and design binders against a small number of high-impact targets.",
+          photo: "ihp/stakeholders/johnson.jpg",
+        },
+        {
+          id: "bergman",
+          name: "Dr. Margo Bergman",
+          role: "Professor of computer science at The Evergreen State College, working on AI, public health and human decision-making in economic systems",
+          group: "bioethics",
+          why: "To understand how researchers decide whether to adopt a new tool, and to have our market estimate checked by someone who works on decision-making.",
+          said: "She expected scientists to choose tools the way anyone does, on trust and on what they already know, and warned about the information cascade: people stay with sources that appear better informed, which here means colleagues, mentors and whatever those people already use. She suggested a small pilot with a limited number of labs, then asking them how likely they would be to adopt it and what they would change. On the market estimate she agreed with the approach but cautioned against using NIH funding as a proxy given current reductions, suggesting instead counting primary cilium publications and splitting them into grant-funded and non-grant-funded work. She noted that both methods miss funded research that never reaches publication, so both underestimate the market. On AI and dual use she said how far mitigation should go depends on what we and regulatory boards accept as risk, and recommended building guardrails with biosecurity experts and enforcing them as a condition of use.",
+          changed:
+            "The drylab teams will consult AI developers and biosecurity experts on limiting misuse, and the market estimate now carries her caution about using grant funding as a proxy.",
+          photo: "ihp/stakeholders/bergman.jpg",
+        },
+        {
+          id: "nuukbio",
+          name: "Changho Chun and Justin Lee",
+          role: "Co-founders of NuukBio, an early stage biotechnology company developing a live-cell phenotyping platform",
+          group: "startup or industry",
+          why: "The team's own platform is at a similar early stage, so they wanted to learn how NuukBio translated an academic scientific capability into a broader research platform.",
+          said: "They emphasised that deep tech platforms cannot rely on assumed value and that the underlying science first needs rigorous experimental validation, with researchers acting as the first users. They encouraged the team to define the specific unanswered scientific questions the platform enables before identifying broad markets, users or applications, and to develop an evolving founder's theory, a clear hypothesis of why the platform is useful and what problem it solves, refined repeatedly through stakeholder feedback.",
+          changed:
+            "Wet lab and modelling teams will organise validation around clearly defined scientific questions, Human Practices will develop an initial value hypothesis and test it through interviews with potential end users, and the team will broaden outreach through referrals and local life science networks.",
+          logo: "nuukbio",
         },
       ],
     },
@@ -2445,7 +2491,8 @@ const humanPractices: Page = {
           gap: "While cilia-targeted ubiquitination can be restricted to the primary cilium instead of the entire cell, current approaches change the ubiquitination environment of the cilium broadly, rather than directing ubiquitination toward one selected receptor. They also give limited ability to adjust the abundance of one specific protein in the ciliary membrane precisely, leaving a gap for a system with target specificity and tunable control over protein abundance in the primary cilium.",
         },
       ],
-      source: "References [8] to [20] below.",
+      source:
+        "References [8] to [20] below. Photographs are from each person's institutional or company page.",
     },
 {
       kind: "prose",
