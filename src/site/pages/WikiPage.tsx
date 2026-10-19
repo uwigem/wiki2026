@@ -38,6 +38,7 @@ import BorrowStrip from "../components/BorrowStrip";
 import VideoRow from "../components/VideoRow";
 import PdfEmbed from "../components/PdfEmbed";
 import MedalCriteria from "../components/MedalCriteria";
+import AdaptDiagram from "../components/AdaptDiagram";
 import Gallery from "../components/Gallery";
 import LinkCards from "../components/LinkCards";
 import StageRail from "../components/StageRail";
@@ -590,6 +591,9 @@ function BlockView({ block }: { block: Block }) {
 
     case "pdf":
       return <PdfEmbed file={block.file} title={block.title} pages={block.pages} />;
+
+    case "adapt":
+      return <AdaptDiagram />;
 
     case "medals":
       return <MedalCriteria tier={block.tier} intro={block.intro} items={block.items} />;
