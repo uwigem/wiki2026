@@ -12,7 +12,7 @@
  * are defined here instead.
  */
 import type { CreditLogoId } from './creditLogos'
-import { PRINCIPAL_INVESTIGATORS, ROSTER, SUBTEAM_NAME, type Investigator, type Profile } from './team'
+import { PRINCIPAL_INVESTIGATORS, ROSTER, SUBTEAM_NAME, type Investigator, type Profile, type SubteamId } from './team'
 
 export type Task =
   | 'analysis'
@@ -84,6 +84,11 @@ export const ADVISORS: Investigator[] = [...PRINCIPAL_INVESTIGATORS, ...MENTORS]
 /** Every student, in the team page's order, then anyone above. */
 export const STUDENTS: Profile[] = [...ROSTER, ...ROSTER_EXTRAS]
 
+/** Subteams to show on this page, where they differ from the team page's. */
+const SUBTEAMS_HERE: Record<string, SubteamId[]> = {
+  'Iris Guo': ['human-practices'],
+}
+
 /**
  * What someone is to the project, in a few words: shown under their name on
  * the card and over it in the opened card.
@@ -91,7 +96,7 @@ export const STUDENTS: Profile[] = [...ROSTER, ...ROSTER_EXTRAS]
 export function roleOf(person: Profile): string {
   if (PRINCIPAL_INVESTIGATORS.some((p) => p.name === person.name)) return 'principal investigator'
   if (MENTORS.some((p) => p.name === person.name)) return 'mentor'
-  return (person.subteams ?? []).map((id) => SUBTEAM_NAME[id]).join(' · ')
+  return (SUBTEAMS_HERE[person.name] ?? person.subteams ?? []).map((id) => SUBTEAM_NAME[id]).join(' · ')
 }
 
 /**
@@ -236,7 +241,7 @@ export const CONTRIBUTIONS: Record<string, Contribution[]> = {
     { task: 'background-research', did: 'Contributed to the literature review behind the project’s background.' },
     {
       task: 'project-administration',
-      did: 'Led the Web Development subteam and coordinated the wiki’s content and deadlines across subteams.',
+      did: 'Led the Wiki Development subteam and coordinated the wiki’s content and deadlines across subteams.',
     },
   ],
   'Trevor White': [
@@ -266,7 +271,7 @@ export const CONTRIBUTIONS: Record<string, Contribution[]> = {
     },
     {
       task: 'wiki-coding',
-      did: 'Contributed to the wiki’s code as a member of the Web Development subteam, mainly on the dry lab pages.',
+      did: 'Contributed to the wiki’s code as a member of the Wiki Development subteam, mainly on the dry lab pages.',
     },
     { task: 'visualisation', did: 'Planned the layouts and visual designs of several wiki pages.' },
     {
@@ -279,7 +284,7 @@ export const CONTRIBUTIONS: Record<string, Contribution[]> = {
     { task: 'conceptualisation', did: 'Helped with project ideation.' },
     {
       task: 'project-administration',
-      did: 'Helped with overall club planning through operations meetings, and helped run Web Development meetings.',
+      did: 'Helped with overall club planning through operations meetings, and helped run Wiki Development meetings.',
     },
     { task: 'public-engagement', did: 'Volunteered at Washington iGEM events.' },
     { task: 'wiki-coding', did: 'Helped code and build the wiki, including the Engineering page.' },
@@ -334,7 +339,7 @@ export const CONTRIBUTIONS: Record<string, Contribution[]> = {
   'Ruhi Gottumukkala': [
     {
       task: 'wiki-coding',
-      did: 'Contributed to the early gameplay of iGEM Alchemy as a member of the Web Development subteam.',
+      did: 'Contributed to the early gameplay of iGEM Alchemy as a member of the Wiki Development subteam.',
     },
   ],
   'Iris Guo': [

@@ -55,19 +55,19 @@ export const TIMELINE: TimelineEntry[] = [
   {
     date: '20–28 Jan 2026',
     title: 'Subteams launch',
-    body: 'Human Practices, Kinetic Modeling, Operations, Web Development, Fundraising and Creative all hold their first meetings of the season.',
+    body: 'Human Practices, Kinetic Modeling, Operations, Wiki Development, Fundraising and Creative all hold their first meetings of the season.',
   },
   {
     date: '26 Jan 2026',
-    title: 'Web Dev kickoff',
+    title: 'Wiki Dev kickoff',
     body: 'Wiki research assignment, moodboards, and a refresh of the team website put on the board.',
-    team: 'Web Development',
+    team: 'Wiki Development',
   },
   {
     date: '11 Feb 2026',
     title: 'New site published',
     body: 'The team website goes live and the source moves onto GitHub.',
-    team: 'Web Development',
+    team: 'Wiki Development',
   },
   {
     date: '12 & 19–25 Feb 2026',
@@ -77,9 +77,9 @@ export const TIMELINE: TimelineEntry[] = [
   },
   {
     date: '2 Mar 2026',
-    title: 'Joint Creative × HP × WebDev',
+    title: 'Joint Creative × HP × Wiki Dev',
     body: 'iGEM Alchemy asset pipeline agreed: 512×512 PNGs, darker outlines, finals into the shared Drive by week four.',
-    team: 'Web Development',
+    team: 'Wiki Development',
   },
   {
     date: '5 Mar 2026',
@@ -102,8 +102,8 @@ export const TIMELINE: TimelineEntry[] = [
   {
     date: '9 Apr 2026',
     title: 'iGEM Alchemy begins',
-    body: 'Web Dev starts building the synbio combination game.',
-    team: 'Web Development',
+    body: 'Wiki Dev starts building the synbio combination game.',
+    team: 'Wiki Development',
   },
   {
     date: '15 Apr 2026',
@@ -133,8 +133,8 @@ export const TIMELINE: TimelineEntry[] = [
   {
     date: '30 Apr 2026',
     title: 'Homepage done, pixel art next',
-    body: 'Web Dev finishes the home page. The to-do list reads: more alchemy stuff, pixel art.',
-    team: 'Web Development',
+    body: 'Wiki Dev finishes the home page. The to-do list reads: more alchemy stuff, pixel art.',
+    team: 'Wiki Development',
   },
   {
     date: '26 May 2026',
@@ -163,15 +163,15 @@ export const TIMELINE: TimelineEntry[] = [
   {
     date: '16 Jul 2026',
     title: 'Wiki theme chosen',
-    body: 'Web Dev and Creative land on the garden: "hedgehog trimming hedge, garden, sonic the hedgehog." The Engineering page becomes the hub, with direct links out to each subteam.',
-    team: 'Web Development',
+    body: 'Wiki Dev and Creative land on the garden: "hedgehog trimming hedge, garden, sonic the hedgehog." The Engineering page becomes the hub, with direct links out to each subteam.',
+    team: 'Wiki Development',
     milestone: true,
   },
   {
     date: '18 Aug 2026',
-    title: 'Web Dev presents',
-    body: 'Web Dev\'s slot in the August all-hands rotation (HP 8/4, Creative + Wet Lab 8/11, Web Dev 8/18, Kinetic Modeling 8/25).',
-    team: 'Web Development',
+    title: 'Wiki Dev presents',
+    body: 'Wiki Dev\'s slot in the August all-hands rotation (HP 8/4, Creative + Wet Lab 8/11, Wiki Dev 8/18, Kinetic Modeling 8/25).',
+    team: 'Wiki Development',
   },
   {
     date: 'Nov 2026',
