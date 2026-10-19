@@ -226,15 +226,6 @@ reach figure, the speaker series has no speaker names or poll results, and the
 Scientists You Might Not Know profiles name no scientists. Fill those in the
 draft first.
 
-### Tending Safely (`/safety-and-security`)
-
-**Now:** what can honestly be stated, and an admission that no biosafety document
-exists yet.
-
-**Still needed:** the official iGEM Safety and Security form, mirrored here. A
-real dual-use paragraph. This is a tool that changes a developmental pathway, so
-boilerplate will not do.
-
 ### Notebook (`/notebook`)
 
 **Now:** the season as a timeline, built from `content/timeline.ts`.
@@ -275,6 +266,26 @@ Recipes carry over: one learned in a level keeps working in the levels after it.
 **Still needed:** Creative's eye on the icons, which are 24-pixel art drawn in
 code to match the garden, and a science check of the recipes by Human
 Practices.
+
+## There is no Safety page, on purpose
+
+Removed on 19 Oct 2026 after checking the 2026 Judge Handbook. Safety is not a
+medal criterion: Bronze is deliverables, attributions and contribution (p. 42),
+Silver is engineering success and human practices (p. 43), Gold is three
+Special Awards (p. 44). Safety is judged from the **Project Safety Form**,
+submitted through the Deliverables Dashboard and published on the team page
+(p. 24), not from the wiki.
+
+`/safety-and-security` is a standard URL only for the Safety and Security
+Special Award (p. 48). Our three declared awards are Model, Integrated Human
+Practices and Education, so nothing on the ballot points at it.
+
+The page that existed opened by saying it was unfinished, which worked against
+the Best Wiki nomination for no medal gain. If the Judging Form ever changes to
+include Safety and Security, put the path back in `STANDARD_PAGES` in
+`content/nav.ts` and write the page properly: biosafety level per cell line,
+hazards, training, approvals, a link to the public Safety Form, and a real
+dual-use paragraph built on the melanocortin result.
 
 ## Things in the drafts that are not on the wiki yet
 

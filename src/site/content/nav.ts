@@ -75,7 +75,6 @@ export const NAV: NavGroup[] = [
       { label: 'Judging', to: '/judging' },
       { label: 'The Team', to: '/team' },
       { label: 'Attributions', to: '/attributions' },
-      { label: 'Safety', to: '/safety-and-security' },
     ],
   },
   { label: 'Playground', to: '/playground' },
@@ -90,9 +89,22 @@ export function activeGroup(path: string): NavGroup | undefined {
 }
 
 /**
- * The iGEM Standard Pages this wiki is judged on (judge handbook, pp. 45 and
- * 48). The ballot links straight to these paths, so each one must be a real
- * route with that exact name; the dev content check fails loudly if one is not.
+ * The iGEM Standard Pages this wiki is judged on. The ballot links straight to
+ * these paths, so each one must be a real route with that exact name; the dev
+ * content check fails loudly if one is not.
+ *
+ * Two sources, and the list is exactly the union of them for the awards we
+ * actually declared. From the medal table (judge handbook p. 45):
+ * `/contribution` for Bronze 3, `/engineering` for Silver 1 and
+ * `/human-practices` for Silver 2. From the special-award table (p. 48), one
+ * per declared award: `/model` and `/education`, with `/human-practices`
+ * serving Best Integrated Human Practices as well.
+ *
+ * `/safety-and-security` is NOT here. It is a standard page only for the
+ * Safety and Security Special Award (p. 48), which we did not pick, and safety
+ * itself is judged from the Project Safety Form on the team dashboard (p. 24)
+ * rather than from the wiki. Add the path back only if the Judging Form
+ * changes.
  */
 export const STANDARD_PAGES = [
   '/contribution',
@@ -100,7 +112,6 @@ export const STANDARD_PAGES = [
   '/human-practices',
   '/model',
   '/education',
-  '/safety-and-security',
 ]
 
 /**
@@ -124,5 +135,4 @@ export const OLD_PATHS: Record<string, string> = {
   '/team/contribution': '/contribution',
   '/team/judging': '/judging',
   '/team/attributions': '/attributions',
-  '/team/safety': '/safety-and-security',
 }
