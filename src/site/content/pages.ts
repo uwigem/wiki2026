@@ -415,7 +415,6 @@ const description: Page = {
         "How much SMO sits in that cilium is not fixed. A transmembrane complex called **MMM**, made of **MEGF8, MOSMO and MGRN1**, tags SMO for degradation and clears it out. MEGF8 brings the complex to its target, MGRN1 ubiquitinates the target to tag it for degradation, and MOSMO is needed for complex stability.",
         "We build a device out of two modular parts, a **disruptor protein** and an **inducible linker**, that borrows this natural machinery to raise or lower how much of a receptor stays in the cilium.",
       ],
-      source: "How to frame the project (Wet Lab wiki notes), 2026.",
     },
     { kind: "mechanism", id: "mechanism" },
     {
@@ -448,7 +447,7 @@ const description: Page = {
         "Dr. Ning Zheng, a ubiquitination expert we interviewed, pointed out that because we strengthen an interaction that already exists rather than forcing a brand new one, the right name for this is a **LockTAC**, not a PROTAC. He also noted a transmembrane version of this has not been shown in the literature, which is where the novelty sits.",
       ],
       source:
-        "Interview with Dr. Ning Zheng (UW Pharmacology); IHP wiki outline.",
+        "Interview with Dr. Ning Zheng (UW Pharmacology).",
     },
   ],
 };
@@ -525,7 +524,7 @@ const designBlocks: Block[] = [
       "We picked this interface because the Kong lab has cryo-EM of the MMM complex and a preprint that points to a specific site whose mutation breaks the complex. That gives us a real structure and a real binding site to design toward, which is what a good target needs.",
     ],
     source:
-      "Kong lab MMM structure and interface preprint (biorxiv 2025.09.11.675358); target-selection notes from Dr. Frank DiMaio.",
+      "Kong lab MMM structure and interface preprint (biorxiv 2025.09.11.675358).",
   },
   {
     kind: "steps",
@@ -554,8 +553,6 @@ const designBlocks: Block[] = [
         body: "Survivors get **pLDDT** for per-residue confidence, where we treat 80 as satisfactory, and **ddG** as a computational stand-in for binding strength, where we want a negative number. **PyRosetta InterfaceAnalyzer** adds buried surface area, unsatisfied hydrogen bonds and shape complementarity, and **PyMOL** is used to look at each one by hand.",
       },
     ],
-    source:
-      "Protein Design pipeline docs (RFD3, MPNN, RF3 how-to; Hyak minidocs) and DiMaio mentorship sessions.",
   },
   {
     kind: "narration",
@@ -590,8 +587,6 @@ const designBlocks: Block[] = [
     goal: { label: "what we want to order and test", count: 96 },
     footnote:
       "The drop from 255 to about 25 is the interesting one. Our first filters were passing designs that bound a part of the target buried inside the membrane, where no protein could ever reach them. That is [the third engineering cycle](/engineering#cycles).",
-    source:
-      "Protein Design: binder design pipeline and engineering cycles, 2026.",
   },
   {
     kind: "structure",
@@ -616,7 +611,7 @@ const designBlocks: Block[] = [
       "MOSMO and MEGF8 are awkward targets because their surfaces are mostly **beta sheet**, and binder design tools are tuned for helical targets. We are testing **beta-strand-conditioned RFdiffusion** to design binders that pair against an exposed edge strand instead of a helix.",
     ],
     source:
-      "BindCraft runbook; Principles of Minibinder Design (beta-strand method, Nat Commun 2025 s41467-025-67866-3).",
+      "Principles of Minibinder Design (beta-strand method, Nat Commun 2025 s41467-025-67866-3).",
   },
   {
     kind: "facts",
@@ -642,8 +637,6 @@ const designBlocks: Block[] = [
     body: [
       "We have about **24 MOSMO binder backbones** carried through sequence design, most with two or three candidate sequences of roughly 160 residues. The MEGF8 binders are still in progress.",
     ],
-    source:
-      "Minibinder sequence sheet (Mosmo/MEGF8), Protein Design, summer 2026.",
   },
 ];
 
@@ -860,7 +853,6 @@ const engineering: Page = {
         "The first real change came before any protein was made. We began aiming at ATRN, then switched to the **MMM complex** once it was clear MMM had cryo-EM and an accessible interface while ATRN only had an AlphaFold model. Better data to design against was worth the switch.",
         "A second problem showed up in the pipeline itself. RoseTTAFold3 could not fold our targets well because the sequence databases were thin, so the designs were failing the fold check for the wrong reason. We fixed it by **templating MOSMO and MEGF8** during forward folding. We now have about 24 MOSMO binder backbones through sequence design. [The pipeline](/engineering#pipeline) above has every step.",
       ],
-      source: "Protein Design ideation notes and pipeline docs, 2026.",
     },
     {
       kind: "trail",
@@ -895,8 +887,6 @@ const engineering: Page = {
           body: "A common way to express two proteins from one construct leaves a proline scar. On SMO that scar would affect signalling, so the SMO arm avoids it.",
         },
       ],
-      source:
-        "Wet Lab construct planning and Induced Proximity Assay protocol.",
     },
   ],
 };
@@ -1226,8 +1216,6 @@ const model: Page = {
         "The whole point of the device is graded control. Acting on the three-part MMM complex should let us dial the amount of **SMO in the primary cilium**, where blocking SMO directly only gives on or off. That is a claim about rates, so it has to survive a kinetic model.",
         "Version 0 is a small **ODE model** of the Hedgehog and MMM system. We track MMM, SMO in its active and ubiquitinated states, the linker, the designed binder, and the parts of the pathway that read SMO out. The chosen output is ciliary SMO over time rather than the downstream transcription factors, because adding the GLI layer made the model less trustworthy, not more.",
       ],
-      source:
-        "Kinetic Modeling: Version 0 Construction doc and Project Design Document.",
     },
     {
       kind: "prose",
@@ -1240,7 +1228,7 @@ const model: Page = {
         "To be considered active, SMO must enter the primary cilium, so the network centres on ciliary SMO concentration, which is what the intervention acts on directly. The upstream system is restricted to PTCH1 and the MMM complex because one is the natural intervention and the other is ours. Since our intervention aims to restrict the SMO population in the cilium, the MMM shuttle is coupled to an existing downstream Hedgehog model from BioModels, to check whether reductions in SMO through targeted ubiquitination are enough to actually change the output of the system.",
       ],
       source:
-        "Kinetic Modelling: Version 0 construction and the 2026 wiki draft. Downstream model after Sivakumar, 2011; ciliary entry after Wilson, 2009.",
+        "Downstream model after Sivakumar, 2011; ciliary entry after Wilson, 2009.",
     },
     {
       kind: "figure",
@@ -1250,7 +1238,6 @@ const model: Page = {
       caption:
         "The upstream network the homeostasis model represents: the MMM complex and PTCH1 acting on the pool of SMO that enters the cilium, with the two arms of our device entering on the left.",
       ratio: "wide",
-      source: "Kinetic Modelling, 2026.",
     },
     {
       kind: "details",
@@ -1299,7 +1286,6 @@ const model: Page = {
               "Linker release",
             ],
           ],
-          source: "Kinetic Modelling: Version 0 state definitions.",
         },
       ],
     },
@@ -1310,8 +1296,6 @@ const model: Page = {
         "We run the model twice. Once as **wild type**, and once with **PTCH1 set to zero**, which is the most common mutation in basal cell carcinoma and drives SMO too high. The **tunability window** is the range where adding the binder brings the second run back onto the first run over time.",
         "The team goal, in one line, is a model-guided recruitment platform that lets us dial SMO levels in the cilium instead of simply blocking SMO activity.",
       ],
-      source:
-        "Kinetic Modeling Version 0; mid-quarter check-in with Dr. Jennifer Kong.",
     },
     {
       kind: "facts",
@@ -1361,7 +1345,6 @@ const model: Page = {
           ],
           caption:
             "Four of the twelve are stand-ins rather than measurements. They are swept across a range in every result rather than being treated as known.",
-          source: "Kinetic Modelling: parameter database, 2026.",
         },
       ],
     },
@@ -1410,8 +1393,6 @@ const model: Page = {
         "Dr. Herbert Sauro, a systems biologist at UW, met with the subteam twice and reset how we work. Instead of building one big model, we build a **set of candidate models** that each change one relationship, then use **AIC and BIC** to see which is best supported by the data we have. He also had us move to **Tellurium and Antimony**, run **Morris and Sobol sensitivity analysis**, sample uncertain parameters and report the spread rather than a single line, and use fold changes from knockouts as constraints, since we only have relative data.",
         "His framing stuck with us. As he put it, you can only really show how models are wrong.",
       ],
-      source:
-        "Kinetic Modeling: Dr. Herbert Sauro meeting notes (two meetings, summer 2026).",
     },
     {
       kind: "links",
@@ -1454,7 +1435,7 @@ const model: Page = {
         "Our model expands on previous ones by treating the distribution of cholesterol as something that changes, with cholesterol acting as SMO's own ligand. Cholesterol naturally distributes unevenly between the inner and outer layers of a membrane, and PTCH1 has been proposed to shift that distribution by acting as a rare transporter of sterols. Its close relative NPC1 does the same job in the lysosome. Once at the cilium, SMO needs a cholesterol binding step to activate, and signalling in the model is proportional to the amount of cholesterol-bound SMO. Because SMO binds at a domain that faces outward, its signalling is sensitive to which side of the membrane the cholesterol is on.",
       ],
       source:
-        "Kinetic Modelling: the GPCR system, 2026. After Kinnebrew 2022, Luchetti 2016, Taipale 2002 and Hasnovic and Mus-Veteau 2018.",
+        "After Kinnebrew 2022, Luchetti 2016, Taipale 2002 and Hasnovic and Mus-Veteau 2018.",
     },
     {
       kind: "figure",
@@ -1464,7 +1445,7 @@ const model: Page = {
       caption:
         "The reactions in the GPCR model: cholesterol moving between the membrane leaflets, PTCH1 acting on that distribution, and SMO activating when it binds cholesterol at the domain facing outward.",
       ratio: "wide",
-      source: "Kinetic Modelling, 2026. Structure inset after the published Smoothened cryo-EM models.",
+      source: "Structure inset after the published Smoothened cryo-EM models.",
     },
     {
       kind: "prose",
@@ -1482,7 +1463,6 @@ const model: Page = {
       caption:
         "The route we did not implement. Here SMO reaches the cilium by diffusing along the membrane rather than travelling through the cell, and the red cross marks the path that version closes off.",
       ratio: "wide",
-      source: "Kinetic Modelling, 2026.",
     },
     {
       kind: "table",
@@ -1511,7 +1491,7 @@ const model: Page = {
         ],
       ],
       source:
-        "Kinetic Modelling: GPCR objectives. Sources include Wustner 2023, Kinnebrew 2021 and 2022.",
+        "Sources include Wustner 2023, Kinnebrew 2021 and 2022.",
     },
     {
       kind: "prose",
@@ -1522,7 +1502,6 @@ const model: Page = {
         "Both simulations hold details we would want to confirm against real data. Although a target half-life for SMO in the cytoplasm should have forced a realistic response, the linear model shows an immediate spike in activated SMO. In the Michaelis-Menten simulation, activated SMO is very low. The sensitivity analysis reflects the same split: the ciliary degradation rate dominates the linear model, while the forward rate for SMO embedding into the membrane dominates the other. Given the adequate fit, we expect to go forward with the linear approximation of PTCH1 kinetics.",
         "The most useful thing now would be wet lab data on how SMO migrates at the cilium, and on whether that immediate rise in activated SMO is seen under a microscope at all.",
       ],
-      source: "Kinetic Modelling: GPCR simulations and observations, 2026.",
     },
     {
       kind: "figure",
@@ -1575,8 +1554,6 @@ const model: Page = {
       negativeMeans: "more of it means less SMO in the cilium",
       footnote:
         "Supply and disposal, almost exactly balanced. Turn the MMM pool up one percent and ciliary SMO falls about 1.3 percent, which is the graded response the whole device depends on. Note what is **missing** from the top of this list: how fast SMO enters the cilium, and PTCH1 itself, both come out near 0.28 or below. At these settings ciliary SMO sits around 3.1 nM against 17.9 nM in the cytoplasm.",
-      source:
-        "Kinetic Modeling: local sensitivity analysis of the recruitment model, run in Tellurium over a 120 hour simulation.",
     },
     {
       kind: "details",
@@ -1591,8 +1568,6 @@ const model: Page = {
             "For every quantity and every parameter, the derivative of one with respect to the other was obtained from libRoadRunner's forward sensitivity solver, which integrates the sensitivity equations alongside the model itself. Every coefficient was then normalised so the parameters could be compared directly. For the chart above, each parameter was moved by ten percent either way, one at a time, and the whole model re-simulated.",
             "A **global** analysis is also under way, using Morris screening followed by Sobol analysis, on the principle that a parameter flagged as uninfluential by both can be dropped from the model. The Morris pass has run; the Sobol results are not finished.",
           ],
-          source:
-            "Kinetic Modelling: local sensitivity analysis of the recruitment model, Tellurium, 120 hour simulation.",
         },
         {
           kind: "figure",
@@ -1615,7 +1590,7 @@ const model: Page = {
         "The useful part is that this holds regardless of how good our binder turns out to be. In the global sensitivity analysis the binder's own binding strength had **zero** influence on the MC4R result, which means we do not have to trade therapeutic dose against this particular risk.",
       ],
       source:
-        "Kinetic Modeling: MC4R safety model, mass-action kinetics in Tellurium. Abundances from PaxDb; Kong et al. 2020 and 2025.",
+        "Abundances from PaxDb; Kong et al. 2020 and 2025.",
     },
     {
       kind: "details",
@@ -1661,7 +1636,7 @@ const model: Page = {
           ],
           caption:
             "A sixth quantity, ubiquitinated MC4R on its way to the lysosome, is tracked only so the mass balance closes.",
-          source: "Kinetic Modelling: MC4R safety model. Abundances from PaxDb.",
+          source: "Abundances from PaxDb.",
         },
       ],
     },
@@ -1688,7 +1663,6 @@ const model: Page = {
       },
       footnote:
         "The curve flattens by about 50 nM. Past that, adding more binder changes nothing, because MGRN1 is the scarce part at roughly 0.18 nM in total and there is only so much of it to redistribute.",
-      source: "Kinetic Modeling: MC4R safety model.",
     },
     {
       kind: "prose",
@@ -1699,7 +1673,6 @@ const model: Page = {
         "The binder design process is technically finished once a backbone and a sequence exist. In practice it would rarely produce a binder that works at a bench without a third step: predicting the structure back and checking it. We used **RoseTTAFold3** alongside molecular visualisation software to improve hotspot selection run by run, and to choose which 96 of several thousand designs to order and test. The pipeline that produces them is written up on [contribution](/contribution#pipeline).",
         "RoseTTAFold3 is an open-source deep learning model built jointly by the Institute for Protein Design and Microsoft AI for Good, trained on processed protein structural data. It is not a physics model. It is very good at predicting protein to protein interactions of the kind this project depends on, but its scores are empirically useful rather than estimates of the physical constants that describe how tightly two molecules hold each other.",
       ],
-      source: "Protein Modelling: notes on model choice, 2026.",
     },
     {
       kind: "prose",
@@ -1709,7 +1682,6 @@ const model: Page = {
         "Our targets sit in a membrane, and many of our designs tried to bind the part of them buried inside it. **MOSMO has four helices crossing the membrane and MEGF8 has one.** A binder reaching those helices is impossible in a living cell, so every such design had to go, and no published filter does this.",
         "So we wrote one. We identified by hand which residues of MOSMO and MEGF8 sit within the membrane, then drew a radius of **5 to 10 Angstrom** around them. A design whose own atoms enter that region is treated as membrane-embedded and fails the filter, which takes it out of both the final set and the redesign pool. This is the step that cut the surviving designs from 255 to about 25, described as it happened in [the second design cycle](/engineering#cycles).",
       ],
-      source: "Protein Modelling: transmembrane exclusion script, 2026.",
     },
     {
       kind: "details",
@@ -2091,7 +2063,6 @@ const humanPractices: Page = {
             "The wet lab team can incorporate localisation and negative control assays and consider a disease relevant cell model after the SMO proof of concept, modelling teams can evaluate adapting the platform to additional receptor classes, and Human Practices will sharpen the proposed user need around selective receptor level perturbation.",
         },
       ],
-      source: "Integrated Human Practices: stakeholder interview write-ups, 2026.",
     },
       {
         kind: "details",
@@ -2226,7 +2197,6 @@ const humanPractices: Page = {
           ],
         },
       ],
-      source: "Ciliary membrane landscape, Integrated Human Practices. Sprites for each protein are being drawn by Creative.",
     },
       {
         kind: "details",
@@ -2319,7 +2289,7 @@ const humanPractices: Page = {
           gap: "While cilia-targeted ubiquitination can be restricted to the primary cilium instead of the entire cell, current approaches change the ubiquitination environment of the cilium broadly, rather than directing ubiquitination toward one selected receptor. They also give limited ability to adjust the abundance of one specific protein in the ciliary membrane precisely, leaving a gap for a system with target specificity and tunable control over protein abundance in the primary cilium.",
         },
       ],
-      source: "Community Need, Integrated Human Practices. References [8] to [20] below.",
+      source: "References [8] to [20] below.",
     },
 {
       kind: "prose",
@@ -2360,7 +2330,7 @@ const humanPractices: Page = {
         { label: "Our design goal", levels: ["full", "full", "full", "full"], isGoal: true },
       ],
       source:
-        "Opportunity matrix, Integrated Human Practices. Capability assessment based on the literature review above, indicating a biological opportunity for a technology with tunable, target specific, timely control in the primary cilium.",
+        "Capability assessment based on the literature review above, indicating a biological opportunity for a technology with tunable, target specific, timely control in the primary cilium.",
     },
 {
       kind: "callout",
@@ -2393,7 +2363,6 @@ const humanPractices: Page = {
       body: [
         "We believe that understanding ciliary signalling requires more than knowing whether a protein is present or not. A useful research tool should give researchers control over the target protein, and over when, where, and by how much its abundance changes. In the primary cilium, these factors shape the impact of signalling proteins on cellular pathways. A research tool that can independently control these variables lets scientists uncover signalling thresholds and cilium-specific functions that are difficult to separate with current methods. As we continue speaking with researchers and validating our platform, this theory will also continue to evolve alongside the needs of the community.",
       ],
-      source: "Written after the interviews, and still being revised as we speak to more researchers.",
     },
 {
       kind: "prose",
@@ -3033,7 +3002,6 @@ const education: Page = {
         { src: "education/trivia-3.jpg", alt: "A student stopping at the table to try a trivia question." },
         { src: "education/trivia-1.jpg", alt: "The table set up indoors, with laptops showing the team's work beside the trivia wheel." },
       ],
-      source: "Trivia tabling at club fairs, autumn 2026.",
     },
     {
       kind: "cards",
@@ -3099,7 +3067,6 @@ const education: Page = {
         { src: "education/discovery-days-1.jpg", alt: "The Can You Beat DNA Polymerase tent at Engineering Discovery Days, with a crowd of schoolchildren around the table." },
         { src: "education/discovery-days-2.jpg", alt: "Students at the table racing to build a complementary strand on the bead-and-dowel stations." },
       ],
-      source: "Engineering Discovery Days, University of Washington, 2026.",
     },
     {
       kind: "links",
@@ -3130,7 +3097,6 @@ const education: Page = {
         { id: "RrI6ntMJaOw", title: "Episode 1: Dr. Swati Mishra, UW Medicine", note: "Reading a paper with its first author." },
         { id: "EPahLOWcFTI", title: "Episode 2: Clay Kosonocky, Dr. Nikol Kaderabkova and Kangsan Kim, UT Austin", note: "Three authors on how they read, and write, a paper." },
       ],
-      source: "Washington iGEM on YouTube.",
     },
 
     {
@@ -3238,7 +3204,6 @@ const education: Page = {
         { src: "education/speakers-1.jpg", alt: "Four panellists at the front of a classroom under a slide reading Guided Q&A, with students listening." },
         { src: "education/speakers-2.jpg", alt: "A full classroom, with students standing at the back, during the panel discussion." },
       ],
-      source: "Conversations in Synthetic Biology, welcome week 2026.",
     },
     {
       kind: "prose",
@@ -3487,7 +3452,6 @@ const parts: Page = {
       groups: RECRUITMENT_CONSTRUCTS,
       footnote:
         "Domain widths are not to scale. The catalytically inactive MGRN1 carries the C279A and C282A substitutions, and the MEGF8 construct carries only its intracellular domain, residues 2602 to 2778.",
-      source: "Wet Lab: GenScript order, 2026.",
     },
     {
       kind: "prose",
@@ -3507,7 +3471,6 @@ const parts: Page = {
       groups: SCREENING_CONSTRUCTS,
       footnote:
         "Which half of the transcription factor sits on the binder and which on the target follows the final plasmid designs, so the halves are drawn here without being assigned. The exact names go in once those designs are settled.",
-      source: "Wet Lab: Twist Bioscience order, 2026.",
     },
     {
       kind: "table",
@@ -3529,7 +3492,6 @@ const parts: Page = {
         ["GPR161_GFP_ALFA", "ALFA-tagged GPR161 receptor"],
         ["DmrA_mCherry_proximity_only_control", "Proximity-only control"],
       ],
-      source: "Wet Lab: GenScript order, 2026.",
     },
     {
       kind: "table",
@@ -3545,7 +3507,6 @@ const parts: Page = {
       ],
       caption:
         "Individual binder sequences and identifiers go in once the final design list is settled, as do the exact names and sources of the GAL4 and VP16 components, the GFP reporter, the BFP marker and the GB1 control.",
-      source: "Wet Lab: Twist Bioscience order, 2026.",
     },
 
     {
@@ -3843,7 +3804,6 @@ const contribution: Page = {
           output: "a second generation of sequences, filtered the same way",
         },
       ],
-      source: "Protein Design: binder design pipeline, 2026.",
     },
     {
       kind: "prose",
@@ -3887,7 +3847,7 @@ const contribution: Page = {
         "We also wrote a validation script that pulls metrics out of the output files of each design and out of the structure files themselves.",
       ],
       source:
-        "Protein Design: pipeline scripts and timings, 2026. Timing measured on Hyak.",
+        "Timing measured on Hyak.",
     },
     {
       kind: "table",
@@ -3918,7 +3878,6 @@ const contribution: Page = {
           "Negative, and more negative than the ddG of the MOSMO to MEGF8 interface itself.",
         ],
       ],
-      source: "Protein Design: validation script and filter definitions, 2026.",
     },
     {
       kind: "links",
