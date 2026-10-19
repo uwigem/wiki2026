@@ -1,20 +1,24 @@
-import { MISSING_DATES, NEXT_STEPS, TIMELINE, WETLAB_MILESTONES } from '../content/timeline'
+import { MISSING_DATES, NEXT_STEPS, WETLAB_MILESTONES } from '../content/timeline'
 import { RECRUITMENT_CONSTRUCTS } from '../content/constructs'
+import Callout from '../components/Callout'
 import ConstructDiagram from '../components/ConstructDiagram'
-import Details from '../components/Details'
 import GardenSection, { Reveal, SectionDivider } from '../components/GardenSection'
 import StageRail, { type Stage } from '../components/StageRail'
 import PixelSign, { TodoPanel } from '../components/PixelSign'
+import RichText from '../components/RichText'
 import { Link } from '../router'
 
 /**
- * The notebook.
+ * The wet-lab notebook.
  *
- * The page leads with the wet lab's engineering record, because that is what
- * the Notebook is under in the navigation and what a judge looking for it
- * expects: what was designed, what was ordered, and what has not happened yet.
- * The whole team's season follows underneath, closed, so that none of it is
- * lost and none of it buries the part above.
+ * Four parts, in the order a reader needs them: the development timeline, the
+ * constructs that came out of it, the workflow waiting on delivery, and what
+ * is on record so far.
+ *
+ * This page is the wet lab's and only the wet lab's. An earlier version also
+ * carried the whole team's season week by week, which buried the lab record
+ * under outreach, web development and ideation meetings. Those entries still
+ * live in `content/timeline.ts` for whichever page takes them on.
  *
  * Nothing here may read as though the experiments have been run. The
  * constructs are on order.
@@ -29,7 +33,7 @@ import { Link } from '../router'
 const STAGES: Stage[] = WETLAB_MILESTONES.map((m) => ({
   title: m.title,
   meta: m.date,
-  body: [m.body],
+  body: m.body,
   here: m.status === 'upcoming' ? true : undefined,
 }))
 
@@ -40,11 +44,13 @@ export default function NotebookPage() {
         <div className="flex flex-col items-center gap-4 text-center">
           <PixelSign>
             <p className="pixel text-tag tracking-[0.2em]">notebook</p>
-            <h1 className="mt-1 text-2xl sm:text-4xl">The Season, In Order</h1>
+            <h1 className="mt-1 text-2xl sm:text-4xl">Wet-Lab Notebook</h1>
           </PixelSign>
           <p className="panel measure px-5 py-4 text-body leading-relaxed">
-            Where the wet lab has got to: the system designed, the constructs drawn up and ordered, and the
-            experiments waiting on delivery. The whole team's season is at the bottom.
+            This notebook documents the development of HedgehogSense's experimental strategy, from the
+            initial investigation of the MGRN1, MEGF8 and MOSMO (MMM) complex to the design of mammalian
+            expression constructs and proposed validation assays. It provides a chronological record of our
+            wet-lab planning, construct development, and experimental milestones.
           </p>
         </div>
       </GardenSection>
@@ -54,8 +60,8 @@ export default function NotebookPage() {
       <GardenSection>
         <Reveal>
           <StageRail
-            heading="Wet lab, start to here"
-            intro="Design work is finished and the orders are placed. Above the line is what is done; below it is what happens once the materials arrive."
+            heading="Wet-lab development timeline"
+            intro="The following timeline summarises completed work and upcoming experimental milestones. Activities are distinguished according to their completion status."
             stages={STAGES}
             hereLabel="where we are"
           />
@@ -64,30 +70,33 @@ export default function NotebookPage() {
         <div className="mt-6 flex flex-col gap-5">
           <Reveal>
             <ConstructDiagram
-              heading="What we designed"
-              intro="The ten mammalian expression constructs, ordered from GenScript in pcDNA3.1(+)-based expression vectors. The same parts are listed, with what each one is for, on [parts and registry](/parts)."
+              heading="Engineered recruitment constructs"
+              intro="Ten mammalian expression constructs were designed and ordered to evaluate MGRN1 recruitment, catalytic activity, and the regulation of SMO and GPR161. Detailed construct architectures, sequences and intended functions are documented on [parts and registry](/parts)."
               groups={RECRUITMENT_CONSTRUCTS}
-              footnote="Domain widths are not to scale."
-              source="Wet Lab: GenScript order, 2026."
+              footnote="Schematic representation of the ten engineered mammalian expression constructs. Protein domains and tags are shown for illustration and are not drawn to scale."
             />
           </Reveal>
 
           <Reveal>
             <div className="panel px-5 py-5 sm:px-7 sm:py-6">
-              <h3 className="text-xl">When they arrive</h3>
+              <h2 className="text-xl">Planned experimental workflow</h2>
               <p className="measure mt-1 text-body leading-relaxed">
-                The order the work happens in, once there is something to work with.
+                Following delivery of the synthesised constructs, experimental validation will proceed
+                through the following stages.
               </p>
-              <ol className="measure mt-4 flex flex-col gap-2">
+              <ol className="measure mt-4 flex flex-col gap-3">
                 {NEXT_STEPS.map((step, i) => (
-                  <li key={step} className="flex gap-3 text-body-sm leading-relaxed">
-                    <span className="badge shrink-0">{i + 1}</span>
-                    <span className="pt-0.5">{step}</span>
+                  <li key={step.title} className="flex gap-3">
+                    <span className="badge mt-0.5 shrink-0">{i + 1}</span>
+                    <span>
+                      <span className="block text-body font-semibold leading-snug">{step.title}</span>
+                      <span className="mt-0.5 block text-body-sm leading-relaxed">{step.body}</span>
+                    </span>
                   </li>
                 ))}
               </ol>
               <p className="measure mt-4 text-body-sm leading-relaxed">
-                What each experiment is for, and the controls it runs against, are on{' '}
+                Detailed experimental methods, controls and expected outcomes are provided on{' '}
                 <Link to="/experiments" className="cross-link">
                   experiments
                 </Link>
@@ -101,32 +110,31 @@ export default function NotebookPage() {
       <SectionDivider />
 
       <GardenSection className="pb-10">
-        <Details
-          heading="The whole season, week by week"
-          summary={`Every subteam's record, from November 2025. ${TIMELINE.length} entries.`}
-        >
-          <ol className="flex flex-col gap-4">
-            {TIMELINE.map((entry, i) => (
-              <li key={i}>
-                <div
-                  className={
-                    'panel px-5 py-4 ' + (entry.milestone ? 'border-l-[10px] border-l-pool-400' : '')
-                  }
-                >
-                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <span className="badge">{entry.date}</span>
-                    <h3 className="text-lg">{entry.title}</h3>
-                    {entry.team && <span className="kicker normal-case">{entry.team}</span>}
-                    {entry.milestone && (
-                      <span className="pixel ml-auto text-tag tracking-widest text-leaf-800">milestone</span>
-                    )}
-                  </div>
-                  <p className="measure mt-2 text-body-sm leading-relaxed">{entry.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </Details>
+        <div className="flex flex-col gap-5">
+          <Reveal>
+            <div className="panel px-5 py-5 sm:px-7 sm:py-6">
+              <h2 className="text-xl">Experimental documentation</h2>
+              <div className="measure prose-garden mt-2 text-body">
+                <RichText
+                  paragraphs={[
+                    'The wet lab subteam maintains records of construct development, experimental planning and laboratory activities. The current documentation covers the mammalian expression construct designs and sequence information, the GenScript and Twist Bioscience synthesis orders, and the proposed experimental protocols and assay controls.',
+                    'As laboratory experiments are performed, this section will be expanded with dated experimental records, observations, troubleshooting notes and supporting results.',
+                  ]}
+                />
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal>
+            <Callout
+              label="current experimental status"
+              heading="Nothing has been run at the bench yet"
+              body={[
+                'Construct design, experimental planning and DNA synthesis orders have been completed. Functional validation experiments remain pending, and no hypothetical results presented elsewhere on the wiki should be interpreted as experimentally measured data.',
+              ]}
+            />
+          </Reveal>
+        </div>
 
         {/* A drafting aid: shown by `npm run dev`, left out of the published
             site. What is missing is also tracked in docs/CONTENT_MAP.md. */}
@@ -136,6 +144,7 @@ export default function NotebookPage() {
               items={[
                 `TODO(ops): dates still missing (${MISSING_DATES.join(', ')}). Get these off the official iGEM calendar.`,
                 'Wet-lab protocol summaries, linked out to the Benchling record.',
+                'TODO(content): the whole-team season log is no longer on this page. TIMELINE in content/timeline.ts is kept for whichever page takes it on.',
               ]}
             />
           </div>

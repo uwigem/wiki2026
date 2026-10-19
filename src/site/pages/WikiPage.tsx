@@ -89,9 +89,9 @@ export default function WikiPage({ page }: { page: Page }) {
           ? [{ id: headed[0].id, label: headed[0].label, items: headed.slice(1) }]
           : [];
       })(),
-      ...layout.sections.map(({ id, label, blocks }) => ({
+      ...layout.sections.map(({ id, label, navLabel, blocks }) => ({
         id,
-        label,
+        label: navLabel ?? label,
         // Every headed block after the first is a subsection. The first block
         // opens the section, so the section's own entry already stands for it.
         items: blocks.slice(1).flatMap((b) => {
@@ -245,6 +245,8 @@ function blockKey(b: Block): string | undefined {
 interface SectionGroup {
   id: string;
   label: string;
+  /** What the outline calls this section, where the printed title is long. */
+  navLabel?: string;
   blocks: Block[];
 }
 
@@ -257,7 +259,12 @@ function groupSections(blocks: Block[]): { lead: Block[]; sections: SectionGroup
   const lead: Block[] = [];
   const sections: SectionGroup[] = [];
   for (const b of blocks) {
-    if (b.section) sections.push({ id: "section-" + slugify(b.section), label: b.section, blocks: [b] });
+    // `navLabel` shortens the outline entry the same way it does for a
+    // subsection, which a long section title needs more than a short one:
+    // the page prints the full "Experiment 4: Functional Validation of MEGF8-
+    // and MOSMO-Targeting Binders" while the outline stays scannable.
+    if (b.section)
+      sections.push({ id: "section-" + slugify(b.section), label: b.section, navLabel: b.navLabel, blocks: [b] });
     else if (sections.length > 0) sections[sections.length - 1].blocks.push(b);
     else lead.push(b);
   }

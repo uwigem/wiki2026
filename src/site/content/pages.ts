@@ -905,19 +905,16 @@ const experiments: Page = {
   slug: "/experiments",
   title: "Experiments",
   kicker: "chapter 05 · experiments",
-  storyBeat:
-    "You cannot tell whether a seed took by reading the packet. You plant it, and then you go and look.",
   intro:
-    "Five experiments, each answering one question, in the order the questions have to be answered.",
+    "This page outlines four proposed experiments designed to validate the individual components of HedgehogSense and its ability to regulate Hedgehog signalling.",
   blocks: [
     {
       kind: "prose",
       heading: "Overview",
       body: [
         "The Hedgehog pathway is essential to embryonic development, tissue organisation and cellular differentiation. Its activity is controlled by how much **Smoothened (SMO)** there is and by where that SMO sits: SMO is a seven-transmembrane protein that transmits Hedgehog signals from the primary cilium.",
-        "Under normal conditions the **MGRN1, MEGF8 and MOSMO (MMM) complex** sets SMO abundance by ubiquitinating it, which sends it on for trafficking and turnover. We are engineering that naturally occurring mechanism into a modular system that can raise or lower SMO abundance in response to an external input.",
-        "Five experiments follow from that. The first asks whether chemically induced proximity can recruit MGRN1 to SMO and promote its ubiquitination. The second screens computationally designed binders against MEGF8 and MOSMO for binding inside cells. The third measures what happens to SMO over six hours once recruitment is induced. The fourth tests whether purified binders change ciliary SMO and downstream signalling. The fifth puts both arms in the same cells and asks whether they work as a bidirectional rheostat.",
-        "Each section below gives the rationale, the proposed design, and what each outcome would and would not tell us.",
+        "Building on the naturally occurring regulatory activity of the **MGRN1, MEGF8 and MOSMO (MMM) complex**, we propose a modular system designed to increase or decrease ciliary SMO abundance through two complementary mechanisms.",
+        "Together, these experiments evaluate induced SMO ubiquitination, intracellular binder recognition, receptor trafficking, and functional MMM inhibition.",
       ],
     },
     {
@@ -927,29 +924,30 @@ const experiments: Page = {
       srcMobile: "wetlab/overview-mobile.svg",
       alt: "A cross-section of the cell membrane. MEGF8 spans the membrane with MOSMO beside it, and MGRN1, labelled E3 ligase, sits on the cytoplasmic side. To the right, SMO is drawn as a seven-pass receptor being tagged with three ubiquitin marks. An arrow leads to two boxes: ciliary SMO down, then Hedgehog signalling down.",
       caption:
-        "The mechanism the whole project redirects: the MMM complex ubiquitinates SMO, which lowers how much of it stays in the cilium, and Hedgehog signalling falls with it.",
-      source: "Wet Lab figure package, 2026.",
+        "Schematic representation of MMM-mediated SMO regulation. The MMM complex promotes SMO ubiquitination, limiting SMO accumulation in the primary cilium and reducing downstream Hedgehog pathway activity.",
     },
     {
       kind: "callout",
-      label: "where this stands",
-      heading: "None of this has been run yet",
+      label: "experimental status",
+      heading: "Proposed Experimental Work",
       body: [
-        "Construct design is finished and the orders are placed with GenScript and Twist Bioscience. They have not arrived. Everything on this page is a proposed design.",
-        "What we designed and ordered is on [parts and registry](/parts), and the dates are in the [notebook](/notebook).",
+        "The four experiments presented below outline the proposed validation strategy for HedgehogSense. Construct design has been completed, and the required DNA constructs have been ordered from GenScript and Twist Bioscience. Experimental work is pending delivery of these materials.",
+        "All experimental workflows are presented as proposed methods. Figures containing illustrative or simulated data are explicitly identified and do not represent experimentally measured results.",
+        "Detailed construct information and project documentation are available in [parts and registry](/parts) and the [notebook](/notebook).",
       ],
     },
 
     {
       kind: "prose",
-      section: "Experiment 1: Induced recruitment",
+      section: "Experiment 1: Chemically Induced Recruitment and SMO Ubiquitination",
+      navLabel: "Experiment 1: Induced recruitment",
       id: "experiments",
       heading: "Rationale",
       body: [
-        "The MMM complex regulates Hedgehog signalling by ubiquitinating SMO, which promotes its internalisation and degradation. **MGRN1** is the E3 ubiquitin ligase that does the ubiquitinating. **MEGF8** recruits MGRN1 and contributes to its activity. **MOSMO** interacts with MEGF8 and helps regulate the complex at the cell surface.",
+        "**MGRN1** functions as the E3 ubiquitin ligase within the MMM complex, while **MEGF8** and **MOSMO** contribute to complex assembly, substrate recognition, and regulation of SMO ubiquitination.",
         "Kong et al. [1] showed that MGRN1 on its own does not significantly increase SMO ubiquitination when overexpressed in HEK293T cells. MEGF8 on its own produces a small increase, probably by working through endogenous MGRN1. Expressing both together produces substantially more.",
-        "So we want to know whether we can control that process by bringing individual components of the complex directly to SMO. There are two questions. Is recruiting MGRN1 straight to SMO enough to increase SMO ubiquitination? And can recruiting MEGF8 to SMO pull endogenous MGRN1 into proximity and increase ubiquitination without expressing any extra MGRN1 at all?",
-        "Recruitment is controlled chemically. The **FKBP and FRB** system lets two engineered proteins associate once **AP21967**, a rapalog, is added. We also use the **ALFA tag**, a short peptide recognised by a high-affinity nanobody (NbALFA), to detect and isolate the engineered proteins. The same pair is used in protein detection, affinity purification and engineered recruitment systems including bioPROTAC work, and it lets us compare how much of each tagged protein we recover.",
+        "This experiment evaluates whether direct recruitment of MGRN1 to SMO is sufficient to enhance ubiquitination, and whether recruitment of the MEGF8 intracellular domain can promote SMO ubiquitination through endogenous MGRN1.",
+        "Two recruitment strategies will be evaluated: **AP21967**-dependent **DmrA/DmrC** heterodimerisation, and **ALFA/NbALFA**-mediated recruitment. The latter uses specific recognition of the ALFA peptide by its corresponding nanobody without requiring a chemical inducer.",
       ],
     },
     {
@@ -958,41 +956,40 @@ const experiments: Page = {
       src: "wetlab/exp1-recruitment-routes.svg",
       alt: "Two labelled panels. Panel A, rapalog-gated recruitment: AP21967 brings SMO-DmrC and MGRN1-DmrA together, shown before recruitment, during recruitment, and at the measurement step. Panel B, ALFA and NbALFA recruitment: NbALFA binds the ALFA tag on SMO with no chemical inducer, in the same three steps.",
       caption:
-        "The two recruitment routes tested in this experiment. The rapalog route is switched on chemically; the ALFA route needs no inducer.",
-      source: "Wet Lab figure package, 2026.",
+        "Schematic of the proposed DmrA/DmrC and ALFA/NbALFA recruitment strategies. AP21967 enables chemically induced proximity in the DmrA/DmrC system, whereas ALFA/NbALFA provides a constitutive protein-recognition mechanism.",
     },
     {
       kind: "steps",
       id: "exp1-design",
-      heading: "Proposed design",
-      intro: "Both recruitment strategies are tested in HEK293T cells, using engineered SMO, MGRN1 and MEGF8 constructs.",
+      heading: "Proposed Experimental Design",
+      intro: "Both recruitment strategies will be evaluated in HEK293T cells, using engineered SMO, MGRN1 and MEGF8 constructs.",
       items: [
         {
-          title: "Direct recruitment of MGRN1",
-          body: "SMO and MGRN1 carry compatible chemically inducible dimerisation domains, and AP21967 brings them together. Co-immunoprecipitation measures the association, and we then ask whether recruitment increases SMO ubiquitination. Wild-type MGRN1 is compared against a catalytically inactive mutant, which tests whether any ubiquitination actually depends on ligase activity.",
+          title: "Direct Recruitment of MGRN1",
+          body: "SMO and MGRN1 carry compatible chemically inducible dimerisation domains, and AP21967 brings them together. Co-immunoprecipitation will measure the association, and recruitment will then be assessed for its effect on SMO ubiquitination. Wild-type MGRN1 will be compared against a catalytically inactive mutant, which tests whether any ubiquitination depends on ligase activity.",
         },
         {
-          title: "MEGF8-mediated recruitment",
-          body: "MEGF8 is recruited to SMO through the same system. Its cytoplasmic region binds MGRN1, so this asks whether bringing MEGF8 across pulls in the cell's own MGRN1. Nothing here overexpresses MGRN1. Co-immunoprecipitation shows whether endogenous MGRN1 associates with the recruited MEGF8 and SMO, and ubiquitination then shows whether that association does anything.",
+          title: "MEGF8-Mediated Recruitment",
+          body: "Recruitment of the MEGF8 intracellular domain to SMO will be evaluated without exogenous MGRN1 expression, to determine whether endogenous MGRN1 can associate with the recruited complex and promote SMO ubiquitination. Co-immunoprecipitation will show whether endogenous MGRN1 associates with the recruited MEGF8 and SMO, and the ubiquitination readout will show whether that association has a functional consequence.",
         },
         {
-          title: "ALFA-tag detection",
-          body: "ALFA-tagged constructs let us isolate the engineered proteins specifically with ALFA-binding nanobodies and compare expression, recovery and association across conditions. Normalising the co-immunoprecipitated amounts against the recovered tagged protein accounts for differences in expression or in pull-down recovery rather than in recruitment.",
+          title: "ALFA-Tag Detection",
+          body: "ALFA-tagged constructs allow the engineered proteins to be isolated specifically with ALFA-binding nanobodies, and expression, recovery and association to be compared across conditions. Normalising the co-immunoprecipitated amounts against the recovered tagged protein accounts for differences in expression or in pull-down recovery rather than in recruitment.",
         },
         {
-          title: "Measuring ubiquitination",
-          body: "SMO is isolated under denaturing conditions and the ubiquitin signal read by Western blot. The conditions compared are SMO with vehicle, SMO with direct MGRN1 recruitment, SMO with a catalytically inactive MGRN1 recruited the same way, SMO with MEGF8 recruitment relying on endogenous MGRN1, and recruitment-deficient and dimeriser-only controls.",
+          title: "Measurement of SMO Ubiquitination",
+          body: "SMO will be isolated under denaturing conditions and the ubiquitin signal read by Western blot. The conditions compared are SMO with vehicle, SMO with direct MGRN1 recruitment, SMO with a catalytically inactive MGRN1 recruited the same way, SMO with MEGF8 recruitment relying on endogenous MGRN1, and recruitment-deficient and dimeriser-only controls.",
         },
       ],
     },
     {
       kind: "prose",
       id: "exp1-outcome",
-      heading: "Expected outcome",
+      heading: "Expected Outcomes and Interpretation",
       body: [
-        "We expect AP21967 to increase association between proteins carrying compatible FKBP and FRB domains. For direct recruitment, more SMO ubiquitination would show that artificially bringing the ligase to SMO is sufficient under these conditions. For MEGF8-mediated recruitment, pulling down endogenous MGRN1 along with recruited MEGF8, and seeing more ubiquitination, would support the idea that MEGF8 can recruit the machinery the cell already has.",
-        "If direct recruitment does not increase ubiquitination, proximity alone is not enough. If MEGF8 recruitment does produce a response, that points to MEGF8 doing something beyond carrying MGRN1 over, such as positioning or activating it.",
-        "If both work, we have evidence that engineered proximity can control a receptor-associated ubiquitination system, and we can choose whichever strategy is cleaner for the rest of the project. Either way, this is the experiment that decides the shape of the downregulation arm.",
+        "AP21967 is expected to increase association between proteins carrying compatible DmrA and DmrC domains. For direct recruitment, increased SMO ubiquitination would indicate that bringing the ligase to SMO is sufficient under these conditions.",
+        "Increased SMO ubiquitination following MEGF8 recruitment would support a functional role for the recruited MEGF8 domain. Additional experiments would be required to distinguish enhanced MGRN1 recruitment from changes in ligase positioning or catalytic activity. If direct recruitment does not increase ubiquitination, proximity alone is not sufficient under the conditions tested.",
+        "The results will inform selection of the most effective recruitment strategy for subsequent characterisation of SMO trafficking and Hedgehog pathway regulation.",
       ],
     },
 
@@ -1000,20 +997,21 @@ const experiments: Page = {
       kind: "figure",
       id: "fig-1b",
       src: "wetlab/exp1-ubiquitination.svg",
+      hypothetical: true,
       alt: "A bar chart of relative SMO ubiquitination, as fold change against SMO alone. Five control bars sit at about 1: SMO only, an inert mCherry control, an inactive MGRN1 mutant, and MGRN1 and MEGF8 with no inducer. Two recruited bars rise above them: MEGF8 recruited at 2.9 times and MGRN1 recruited at 4.4 times. The figure is labelled illustrative, not measured.",
       caption:
-        "What a working result would look like: the controls flat, and only the recruited conditions rising. The numbers are illustrative, not measurements, and the figure says so.",
-      source: "Wet Lab figure package, 2026.",
+        "Hypothetical SMO ubiquitination following induced recruitment of MGRN1 or MEGF8, compared with matched negative controls. Increased ubiquitination in the recruitment conditions would support functional engagement of the ubiquitination machinery. All plotted values are simulated and do not represent experimental measurements.",
     },
     {
       kind: "prose",
-      section: "Experiment 2: Binder screen",
+      section: "Experiment 2: Intracellular Screening of Computationally Designed Binders",
+      navLabel: "Experiment 2: Binder screen",
       id: "exp2",
       heading: "Rationale",
       body: [
-        "The other arm needs protein binders that interfere with the MMM complex and stop it clearing SMO. Before any of that, a narrower question: do the designs we generated recognise their targets inside a cell at all?",
-        "We screen binders against both MEGF8 and MOSMO in a 96-well mammalian protein interaction assay. It measures binding. It does not show that a binder disrupts the complex, and a positive result here should not be read as though it does.",
-        "The assay splits a transcription factor in two. One half is fused to a designed binder, the other to MEGF8 or MOSMO. If the binder finds its target, the two halves are brought together and switch on a GFP reporter, so GFP expression stands in for the interaction.",
+        "The upregulation strategy requires computationally designed binders capable of recognising MEGF8 or MOSMO. We will first evaluate intracellular target recognition using a mammalian split-transcription-factor assay, before assessing whether candidate binders disrupt MMM function.",
+        "Binders will be screened against both MEGF8 and MOSMO in a 96-well mammalian protein interaction assay. The assay measures binding. It does not establish that a binder disrupts the complex, and a positive result should not be read as evidence that it does.",
+        "Binder and target interaction brings the complementary transcription-factor fragments into proximity, enabling GFP reporter activation. Reporter expression therefore provides an indirect measure of intracellular interaction.",
       ],
     },
     {
@@ -1022,39 +1020,38 @@ const experiments: Page = {
       src: "wetlab/exp2-screen-workflow.svg",
       alt: "A four-step workflow. One, design and clone two target-specific binder libraries against MEGF8 and MOSMO, each fused to one half of a split transcription factor. Two, set up a 96-well screen in HEK293T cells with three plasmids per well. Three, binding reconstitutes the transcription factor and switches on a GFP reporter. Four, read by flow cytometry and prioritise candidates by their GFP and BFP double-positive fold change against a GB1-only control.",
       caption:
-        "The screen, from design to readout. A raised double-positive population shows that a binder meets its target inside a cell; it does not show that the complex has been disrupted.",
-      source: "Wet Lab figure package, 2026.",
+        "Proposed workflow for screening computationally designed MEGF8- and MOSMO-targeting binders using a mammalian split-transcription-factor assay. Binder and target interactions induce GFP reporter expression, which is quantified by flow cytometry alongside BFP expression. Candidates are evaluated relative to matched GB1-only negative controls.",
     },
     {
       kind: "steps",
       id: "exp2-design",
-      heading: "Proposed design",
+      heading: "Proposed Experimental Design",
       items: [
         {
-          title: "Clone the designs",
-          body: "The computationally designed MEGF8 and MOSMO binding sequences go into the assay vector carrying one half of the split transcription factor. MEGF8 and MOSMO are tested as separate target fusions carrying the complementary half.",
+          title: "Construction of Binder and Target Expression Vectors",
+          body: "The computationally designed MEGF8 and MOSMO binding sequences will be cloned into the assay vector carrying one half of the split transcription factor. MEGF8 and MOSMO will be expressed as separate target fusions carrying the complementary half.",
         },
         {
-          title: "Run the plate",
-          body: "A 96-well format in HEK293T cells. Each well receives the binder construct, its corresponding target construct and the GFP reporter plasmid, so every candidate is screened under comparable conditions.",
+          title: "96-Well Mammalian Interaction Screening",
+          body: "The screen will run in a 96-well format in HEK293T cells. Each well will receive the binder construct, its corresponding target construct and the GFP reporter plasmid, so that every candidate is screened under comparable conditions.",
         },
         {
-          title: "Read by flow cytometry",
-          body: "Once the reporter has had time to express, cells are collected and read by flow cytometry. Binding is scored from the double-positive population, GFP and BFP, as a percentage of cells, which is a quantitative measure of reporter activation.",
+          title: "Flow-Cytometric Quantification of Reporter Activation",
+          body: "Once the reporter has had time to express, cells will be collected and read by flow cytometry. Binding will be scored from the GFP and BFP double-positive population as a percentage of cells, which gives a quantitative measure of reporter activation.",
         },
         {
-          title: "Compare against the carrier control",
-          body: "Every binder has a matched GB1-only carrier control containing no MEGF8 or MOSMO target, which gives the background reporter signal. Binding fold change is the double-positive population for a binder and target pair over its own GB1 control. The MEGF8 and MOSMO screens are analysed separately, and the stronger candidates go forward.",
+          title: "Background Normalisation and Candidate Prioritisation",
+          body: "Every binder has a matched GB1-only carrier control containing no MEGF8 or MOSMO target, which gives the background reporter signal. Binding fold change is the double-positive population for a binder and target pair over its own GB1 control. The MEGF8 and MOSMO screens will be analysed separately, and the stronger candidates taken forward.",
         },
       ],
     },
     {
       kind: "prose",
       id: "exp2-outcome",
-      heading: "Expected outcome",
+      heading: "Expected Outcomes and Interpretation",
       body: [
         "A binder that interacts with its intended target should raise GFP activation, and the double-positive population, above its matched GB1 control, giving a fold change greater than one.",
-        "A candidate that does not differ from its control gives us no evidence of binding under the conditions tested, which is not the same thing as evidence that it does not bind.",
+        "A candidate that does not differ from its control provides no evidence of binding under the conditions tested, which is not the same as evidence that it does not bind.",
         "Background reporter activity and differences in how well each fusion protein is expressed both move this number, so fold change has to be read alongside the underlying flow-cytometry populations and the assay controls rather than on its own.",
       ],
     },
@@ -1063,20 +1060,21 @@ const experiments: Page = {
       kind: "figure",
       id: "fig-2b",
       src: "wetlab/exp2-flow-fold-change.svg",
+      hypothetical: true,
       alt: "Panel A shows four flow cytometry plots of GFP against BFP. The two GB1-only controls sit at about 4 percent double positive; the MEGF8 binder reaches 28.5 percent and the MOSMO binder 23.4 percent. Panel B plots binding fold change for each binder against its own matched GB1 control. The figure is labelled simulated data.",
       caption:
-        "The shape of a positive screen: a binder lifts its double-positive population well above its own matched control. Every number here is simulated for layout, and the figure says so.",
-      source: "Wet Lab figure package, 2026.",
+        "Hypothetical flow-cytometry results illustrating differences in GFP and BFP double-positive populations between matched negative controls and candidate binders. Binding fold change is calculated relative to the corresponding GB1-only control. All values and distributions are simulated for illustrative purposes.",
     },
     {
       kind: "prose",
-      section: "Experiment 3: SMO trafficking",
+      section: "Experiment 3: Quantifying SMO Trafficking and Depletion Kinetics",
+      navLabel: "Experiment 3: SMO trafficking",
       id: "exp3",
       heading: "Rationale",
       body: [
-        "Experiment 1 asks whether recruitment increases ubiquitination. This one asks what then happens to SMO: how quickly it leaves the primary cilium, and whether the amount in the cell as a whole changes too.",
-        "Those are different questions. Ciliary SMO is what matters for signalling, but a fall in ciliary fluorescence does not prove SMO was degraded. It may simply have moved elsewhere in the cell. To tell the two apart, we measure SMO at the cilium and in the rest of the cell from the same images, across the same time course.",
-        "The [kinetic model](/model) also needs time-resolved measurements to describe how the system responds to AP21967, which is why the series runs out to 360 minutes.",
+        "Following the ubiquitination measurements in Experiment 1, this experiment investigates the temporal response of SMO localisation and cellular abundance to induced MGRN1 recruitment.",
+        "Ciliary SMO is what matters for signalling, but a fall in ciliary fluorescence does not establish that SMO was degraded: it may have been redistributed elsewhere in the cell. To separate the two, SMO will be measured at the cilium and across the rest of the cell from the same images, over the same time course.",
+        "The [kinetic model](/model) also requires time-resolved measurements to describe how the system responds to AP21967, which is why the series runs out to 360 minutes.",
       ],
     },
     {
@@ -1086,40 +1084,39 @@ const experiments: Page = {
       srcMobile: "wetlab/exp3-imaging-workflow-mobile.svg",
       alt: "A proposed imaging experiment in three parts. One, an AP21967 time course against vehicle, with separate fixed wells at 0, 30, 60, 120, 240 and 360 minutes. Two, a schematic cell marking two regions of interest: the ciliary region, identified by a marker, and the whole cell. Three, quantify ciliary SMO, whole-cell SMO and the ratio between them. A note reads that ciliary SMO loss can reflect trafficking without degradation.",
       caption:
-        "How the time course is collected and measured. Both regions come off the same images, which is what lets the two readings be compared.",
-      source: "Wet Lab figure package, 2026.",
+        "Proposed fluorescence imaging workflow for quantifying SMO localisation over a six-hour time course following AP21967 treatment. Ciliary and whole-cell regions of interest are analysed independently to distinguish changes in ciliary accumulation from changes in overall cellular abundance.",
     },
     {
       kind: "steps",
       id: "exp3-design",
-      heading: "Proposed design",
+      heading: "Proposed Experimental Design",
       items: [
         {
-          title: "A six-hour time course",
-          body: "Ciliated NIH/3T3 cells carrying the direct MGRN1 recruitment system are treated with AP21967 or vehicle, then imaged at baseline and at roughly 30, 60, 120, 240 and 360 minutes. Separate wells fixed at each timepoint make the series practical without continuous live-cell imaging. We would use a validated fluorescent SMO readout, such as SMO-GFP or a suitable immunofluorescence assay, together with a ciliary marker.",
+          title: "Six-Hour Imaging Time Course",
+          body: "Ciliated NIH/3T3 cells carrying the direct MGRN1 recruitment system will be treated with AP21967 or vehicle, then imaged at baseline and at roughly 30, 60, 120, 240 and 360 minutes. Separate wells fixed at each timepoint make the series practical without continuous live-cell imaging. We would use a validated fluorescent SMO readout, such as SMO-GFP or a suitable immunofluorescence assay, together with a ciliary marker.",
         },
         {
-          title: "Measure cilium and cell separately",
-          body: "For each cell we identify the cilium and measure background-corrected SMO fluorescence there, then measure a whole-cell region and, where possible, the non-ciliary part. Both use the same imaging channel and acquisition settings so the signals are directly comparable. Cilium length and area are tracked as well, so that a change in cilium size is not mistaken for a change in SMO.",
+          title: "Separate Quantification of Ciliary and Whole-Cell SMO",
+          body: "For each cell the cilium will be identified and background-corrected SMO fluorescence measured there, then a whole-cell region and, where possible, the non-ciliary part. Both use the same imaging channel and acquisition settings so the signals are directly comparable. Cilium length and area will be tracked as well, so that a change in cilium size is not mistaken for a change in SMO.",
         },
         {
-          title: "Then vary the dose",
-          body: "The first pass is a single AP21967 concentration against vehicle. If that produces a measurable response, key timepoints are repeated at further concentrations to see whether depletion depends on dose. A longer series of six to eight concentrations could follow if the model needs it, particularly to test whether the response plateaus or falls away at high concentrations. A hook effect is a question we would be asking, not a property we are assuming.",
+          title: "Dimeriser Dose-Response Characterisation",
+          body: "The first pass uses a single AP21967 concentration against vehicle. If that produces a measurable response, key timepoints will be repeated at further concentrations to determine whether depletion depends on dose. A longer series of six to eight concentrations could follow if the model requires it, particularly to test whether the response plateaus or falls away at high concentrations. A hook effect is a question we would be asking, not a property we are assuming.",
         },
         {
           title: "Controls",
-          body: "Vehicle gives the baseline trafficking profile. Catalytically inactive MGRN1 tests whether the response needs ligase activity. A recruitment-deficient condition tests whether it needs the engineered interaction at all, and a dimeriser-only control catches anything AP21967 does by itself. We also monitor cell health and the proportion of cells that have a primary cilium.",
+          body: "Vehicle gives the baseline trafficking profile. Catalytically inactive MGRN1 tests whether the response requires ligase activity. A recruitment-deficient condition tests whether it requires the engineered interaction at all. A dimeriser-only control will be included to identify AP21967-dependent changes unrelated to productive MGRN1 recruitment. Cell health and the proportion of cells carrying a primary cilium will be monitored throughout.",
         },
       ],
     },
     {
       kind: "prose",
       id: "exp3-outcome",
-      heading: "Expected outcome",
+      heading: "Expected Outcomes and Interpretation",
       body: [
-        "If recruitment drives SMO down, ciliary SMO fluorescence should fall after AP21967 relative to vehicle. What the whole-cell measurement does at the same time is what tells us what that fall means.",
-        "Ciliary signal down with little change in the whole cell would be consistent with SMO being redistributed, or leaving the cilium. Both falling together would be consistent with less SMO in the cell overall, though confirming degradation would need a biochemical abundance assay rather than imaging. No change at all, with recruitment verified, would say that recruitment does not produce a measurable trafficking response under these conditions.",
-        "These measurements let the modelling team estimate how fast and how far ciliary SMO falls, and constrain a model of how SMO is distributed between compartments. They cannot separate ciliary entry and exit rate constants on their own: that would need another method, such as fluorescence recovery or photoconversion.",
+        "A reduction in ciliary SMO fluorescence following AP21967 treatment would indicate a change in ciliary receptor abundance. Comparison with whole-cell fluorescence will help distinguish ciliary redistribution from a broader decrease in cellular SMO.",
+        "Ciliary signal down with little change in the whole cell would be consistent with SMO being redistributed, or leaving the cilium. Both falling together would be consistent with less SMO in the cell overall, although confirming degradation would require a biochemical abundance assay rather than imaging. No change at all, with recruitment verified, would indicate that recruitment does not produce a measurable trafficking response under these conditions.",
+        "These measurements would let the modelling team estimate how fast and how far ciliary SMO falls, and constrain a model of how SMO is distributed between compartments. They cannot separate ciliary entry and exit rate constants on their own: that would require another method, such as fluorescence recovery or photoconversion.",
       ],
     },
 
@@ -1128,20 +1125,21 @@ const experiments: Page = {
       id: "fig-3c",
       src: "wetlab/exp3-kinetics.svg",
       srcMobile: "wetlab/exp3-kinetics-mobile.svg",
+      hypothetical: true,
       alt: "Two plots of SMO fluorescence over 360 minutes, normalised to baseline, comparing vehicle with AP21967 at matched timepoints. One plot is ciliary SMO, the other whole-cell SMO. The figure is labelled hypothetical data.",
       caption:
-        "The two curves read together, not separately: ciliary signal falling while the whole cell holds steady would mean SMO moved rather than went. Simulated curves, labelled as such on the figure.",
-      source: "Wet Lab figure package, 2026.",
+        "Hypothetical time-dependent changes in normalised ciliary and whole-cell SMO fluorescence following induced MGRN1 recruitment. A greater reduction in ciliary fluorescence relative to whole-cell fluorescence would be consistent with receptor redistribution or ciliary exit. All plotted values are simulated.",
     },
     {
       kind: "prose",
-      section: "Experiment 4: Binder validation",
+      section: "Experiment 4: Functional Validation of MEGF8- and MOSMO-Targeting Binders",
+      navLabel: "Experiment 4: Binder validation",
       id: "exp4",
       heading: "Rationale",
       body: [
-        "A GFP signal in Experiment 2 says a candidate interacts with its target in the screening system. It does not say the binder interferes with MMM function or changes Hedgehog signalling. This experiment asks that.",
+        "Although the split-transcription-factor assay evaluates intracellular target recognition, it does not establish whether a candidate interferes with MMM activity. Functional validation is therefore required to determine whether selected binders alter SMO localisation and Hedgehog pathway signalling.",
         "The complex drives SMO ubiquitination and limits how much SMO accumulates in the cilium. Our binders are designed against extracellular-facing regions of human MEGF8 and MOSMO, so they can be applied to cells from the outside as purified protein rather than expressed inside them.",
-        "Selected candidates are expressed in Expi293F cells, purified, and added to ciliated NIH/3T3 cells, where we measure ciliary SMO and downstream Hedgehog signalling. NIH/3T3 is a well-established mouse model for these assays, and that is also the catch: a binder designed against the human proteins has to recognise accessible sites on the mouse ones to act on endogenous MMM here at all.",
+        "Selected candidates will be expressed in Expi293F cells, purified, and applied to ciliated NIH/3T3 cells, where ciliary SMO and downstream Hedgehog signalling will be measured. Because the binders were designed against human MEGF8 and MOSMO, activity in NIH/3T3 cells will depend on recognition of the corresponding mouse proteins and accessibility of their targeted extracellular epitopes.",
       ],
     },
     {
@@ -1151,39 +1149,38 @@ const experiments: Page = {
       srcMobile: "wetlab/exp4-validation-workflow-mobile.svg",
       alt: "A workflow in two halves. Along the top, select MEGF8 and MOSMO candidates, express them in Expi293F cells, and purify by affinity chromatography followed by size exclusion. Below, two readouts branch off: ciliary SMO by fluorescence imaging in NIH/3T3 cells, and GLI activity in Shh-LIGHT2 cells as firefly over Renilla under a submaximal SHH stimulus. A footer notes that everything is compared against nonbinding protein controls.",
       caption:
-        "From a hit in the screen to a protein you can put on cells, and the two things measured once it is there.",
-      source: "Wet Lab figure package, 2026.",
+        "Proposed workflow for functional validation of MEGF8- and MOSMO-targeting binders. Selected candidates are expressed and purified from Expi293F cells before evaluation of ciliary SMO accumulation in NIH/3T3 cells and GLI-dependent reporter activity in Shh-LIGHT2 cells.",
     },
     {
       kind: "steps",
       id: "exp4-design",
-      heading: "Proposed design",
+      heading: "Proposed Experimental Design",
       items: [
         {
-          title: "Produce and purify",
-          body: "Candidates are chosen on their fold change in the double-positive population against the matched GB1 control. Sequences go into mammalian expression vectors built for secreted production and purification, and are expressed in Expi293F cells. Secreted binders are collected from the culture medium, purified by an appropriate affinity method, and assessed for purity and recovery. Size-exclusion chromatography removes aggregates if needed, and concentrations are standardised before any functional testing.",
+          title: "Recombinant Binder Expression and Purification",
+          body: "Candidates will be chosen on their fold change in the double-positive population against the matched GB1 control. Sequences go into mammalian expression vectors built for secreted production and purification, and are expressed in Expi293F cells. Secreted binders will be collected from the culture medium, purified by an appropriate affinity method, and assessed for purity and recovery. Size-exclusion chromatography removes aggregates if needed, and concentrations will be standardised before any functional testing.",
         },
         {
-          title: "Ciliary SMO",
-          body: "Purified binders go onto ciliated NIH/3T3 cells, each against a matched nonbinding purified protein and a buffer-only control, at several concentrations so that dose dependence is visible. SMO localisation is read by immunofluorescence against a primary-cilium marker, and SMO fluorescence within the cilium is quantified across many cells and independent experiments. We also monitor viability and the proportion of ciliated cells, so that a change unrelated to MMM regulation shows up.",
+          title: "Quantification of Ciliary SMO Accumulation",
+          body: "Purified binders will be applied to ciliated NIH/3T3 cells, each against a matched nonbinding purified protein and a buffer-only control, at several concentrations so that dose dependence is visible. SMO localisation will be read by immunofluorescence against a primary-cilium marker, and SMO fluorescence within the cilium quantified across many cells and independent experiments. Viability and the proportion of ciliated cells will also be monitored, so that a change unrelated to MMM regulation is detectable.",
         },
         {
-          title: "Pathway activity",
-          body: "Promising candidates go into Shh-LIGHT2 cells, an NIH/3T3-derived line carrying a GLI-responsive firefly luciferase reporter and a constitutive Renilla control, under the same submaximal SHH stimulation. Firefly normalised to Renilla compares signalling across conditions, and we check whether any change is consistent with what ciliary SMO did. Gli1 measured by RT-qPCR would give a second readout where feasible.",
+          title: "Assessment of GLI-Dependent Hedgehog Signalling",
+          body: "Promising candidates will go into Shh-LIGHT2 cells, an NIH/3T3-derived line carrying a GLI-responsive firefly luciferase reporter and a constitutive Renilla control, under the same submaximal SHH stimulation. Firefly normalised to Renilla compares signalling across conditions, and any change will be checked for consistency with the ciliary SMO measurement. Gli1 measured by RT-qPCR would give a second readout where feasible.",
         },
         {
-          title: "Specificity, and reading a negative",
-          body: "Responses are compared against the nonbinding control and checked for dose dependence. A target-dependent control, or a direct test of whether MEGF8 and MOSMO still associate, is what would show that a response comes from disrupting the complex rather than from something else the purified protein does.",
+          title: "Specificity Controls and Interpretation of Negative Results",
+          body: "Responses will be compared against the nonbinding control and checked for dose dependence. A target-dependent control, or a direct test of whether MEGF8 and MOSMO still associate, is what would show that a response comes from disrupting the complex rather than from something else the purified protein does.",
         },
       ],
     },
     {
       kind: "prose",
       id: "exp4-outcome",
-      heading: "Expected outcome",
+      heading: "Expected Outcomes and Interpretation",
       body: [
-        "A candidate that interferes with MMM regulation should raise ciliary SMO fluorescence relative to the nonbinding control, and under a matched submaximal SHH stimulus should raise normalised GLI reporter activity as well. A dose-dependent response in both is what would make it the upregulation arm.",
-        "A binder that raises ciliary SMO without raising GLI activity would be telling us that more SMO in the cilium does not automatically produce more signal.",
+        "A candidate that interferes with MMM regulation should raise ciliary SMO fluorescence relative to the nonbinding control, and under a matched submaximal SHH stimulus should raise normalised GLI reporter activity as well. A dose-dependent response in both would support functional inhibition of MMM-mediated regulation. It would not, on its own, establish direct disruption of the MEGF8 and MOSMO interaction, which would require a separate test of whether the two proteins still associate.",
+        "A binder that raises ciliary SMO without raising GLI activity would indicate that more SMO in the cilium does not automatically produce more signal.",
         "A candidate that does nothing may have failed to reach or recognise the mouse target, or may be binding without disrupting anything. The functional assay alone cannot separate those, and a flat result here would not establish that a binder is nonfunctional against its intended human target.",
       ],
     },
@@ -1193,65 +1190,11 @@ const experiments: Page = {
       id: "fig-4b",
       src: "wetlab/exp4-sec-readouts.svg",
       srcMobile: "wetlab/exp4-sec-readouts-mobile.svg",
+      hypothetical: true,
       alt: "A size exclusion chromatography trace of absorbance at 280 nanometres against elution volume, with a single main peak marked as the putative monomer, shown beside the functional readouts for ciliary SMO and GLI reporter activity. The figure is labelled simulated data.",
       caption:
-        "What a usable purification and a working binder would look like together: a clean monomer peak, then movement in both cell readouts. Simulated, and labelled as such.",
-      source: "Wet Lab figure package, 2026.",
+        "Hypothetical size-exclusion chromatography profile and functional characterisation of selected binders. The SEC trace illustrates a predominant putative monomeric species, while the functional assays show potential changes in ciliary SMO abundance and normalised GLI reporter activity. All data are simulated and do not represent experimental measurements.",
     },
-    {
-      kind: "prose",
-      section: "Experiment 5: The rheostat",
-      id: "exp5",
-      heading: "Rationale",
-      body: [
-        "This is the last experiment, and it only happens if the others work. It needs induced recruitment to have changed SMO regulation, and at least one designed binder to have reduced MMM function and raised SMO abundance. Binding in the Experiment 2 screen does not qualify a binder for this on its own.",
-        "Experiments 1 to 4 stop short of the thing the project claims. They measure recruitment, ubiquitination, binding and SMO localisation. None of them measures Hedgehog signalling across a range of inputs, which is what a rheostat has to do.",
-        "So both mechanisms go into the same cells, pushing in opposite directions: induced recruitment of MGRN1 or MEGF8 to drive SMO down, and a validated binder against MEGF8 or MOSMO to let SMO accumulate. The readout is a GLI-responsive luciferase reporter, which measures pathway output rather than SMO abundance.",
-      ],
-    },
-    {
-      kind: "steps",
-      id: "exp5-design",
-      heading: "Proposed design",
-      items: [
-        {
-          title: "Each arm on its own",
-          body: "Shh-LIGHT2 cells, firefly luciferase normalised to Renilla, under a submaximal SHH stimulus so that both increases and decreases in signalling can be detected. First the recruitment strategy that gave the clearest effect on SMO, AP21967 against vehicle, to see whether it lowers GLI reporter activity. Then, separately, a binder already shown to interfere with MMM function, against a nonbinding control, to see whether it raises GLI activity.",
-        },
-        {
-          title: "Both arms together",
-          body: "If each arm works alone, four conditions follow: neither input active, recruitment alone, MMM disruption alone, and both. That shows whether both still function when combined, and whether one can counteract the other. Controls are the recruitment-deficient or catalytically inactive construct for the down arm, the nonbinding protein for the up arm, and AP21967 on its own. Viability and reporter normalisation are watched throughout.",
-        },
-        {
-          title: "Then the matrix",
-          body: "If the four-condition version holds, it expands to three levels of each input. Binder levels have to be validated independently, because putting in more plasmid does not reliably produce proportionally more protein. Every condition is read as normalised GLI activity, with ciliary SMO and endogenous Gli1 measured as well where that is feasible, under the same SHH stimulation throughout.",
-        },
-      ],
-    },
-    {
-      kind: "table",
-      id: "exp5-matrix",
-      heading: "The two-input matrix",
-      intro: "AP21967 concentration sets the down arm. The amount of a validated MMM-disrupting binder sets the up arm. The input levels are illustrative, and would be defined after each mechanism is tested on its own.",
-      columns: ["MMM disruptor", "No AP21967", "Low AP21967", "High AP21967"],
-      rows: [
-        ["None", "Baseline", "Down arm, low input", "Down arm, high input"],
-        ["Low", "Up arm, low input", "Both inputs, low and low", "Both inputs, low and high"],
-        ["High", "Up arm, high input", "Both inputs, high and low", "Both inputs, high and high"],
-      ],
-      caption: "These are experimental conditions, not predicted results.",
-    },
-    {
-      kind: "prose",
-      id: "exp5-outcome",
-      heading: "Expected outcome",
-      body: [
-        "If the downregulation arm works, GLI reporter activity falls after recruitment relative to its control. If a designed binder inhibits MMM function, GLI activity rises relative to a nonbinding control. Showing both independently would establish bidirectional regulation, which is not yet a rheostat.",
-        "The harder question is what happens when both inputs are active. An intermediate response would support the idea that the two can be balanced against each other, but the combined response may also favour one arm. Direct recruitment may bypass the particular interaction a binder blocks, so the two effects should not be assumed to cancel.",
-        "The strongest result available here is several reproducible levels of GLI activity produced by varying the two inputs. That would be graded control rather than two directions. It still would not establish that the system is reversible, or that it works on any ciliary receptor other than SMO.",
-      ],
-    },
-
     {
       kind: "references",
       heading: "References",
@@ -3001,9 +2944,9 @@ const education: Page = {
       id: "imagining",
       heading: "Imagining SynBio education",
       body: [
-        "Before we start imagining all the exciting technology synthetic biology can create, we need to first understand it. For many people, science feels distant. At the start of the year, we asked our peers how accessible learning science was to them. The most common response we received was that it was simply too daunting: complicated terminology, expensive laboratories, and the commitment of years of education were some of the reasons cited. We believe it shouldn't have to feel that way.",
-        "To reimagine scientific education, throughout the year we asked ourselves: what should synthetic biology education look like?",
-        "From all the events that we hosted, we kept four themes in mind. Our biggest takeaway: there is no single way to learn science, and anyone can become a scientist. Here is our imagination.",
+        "Before we start imagining all the exciting technology synthetic biology can create, we need to first understand it. For many people, **science feels distant**. At the start of the year, we asked our peers how accessible learning science was to them. The most common response we received was that it was simply too daunting: complicated terminology, expensive laboratories, and the commitment of years of education were some of the reasons cited. We believe **it shouldn't have to feel that way**.",
+        "To reimagine scientific education, throughout the year we asked ourselves: **what should synthetic biology education look like?**",
+        "From all the events that we hosted, we kept four themes in mind. Our biggest takeaway: there is no single way to learn science, and anyone can become a scientist. **Here is our imagination.**",
       ],
     },
     {
@@ -3025,7 +2968,7 @@ const education: Page = {
         },
         {
           title: "Inspiring",
-          body: "Showing people not only what scientists have already accomplished, but also what they themselves can accomplish one day. [A speaker series and the scientists you might not know](/education#speakers).",
+          body: "Showing people not only what scientists have already accomplished, but also what they themselves can **accomplish one day**. [A speaker series and the scientists you might not know](/education#speakers).",
         },
       ],
     },
@@ -3047,8 +2990,8 @@ const education: Page = {
       id: "hotline",
       heading: "SynBio Hotline",
       body: [
-        "While some STEM concepts have been widely elucidated for the wider public, we've found that synthetic biology has not been commonly understood, leading to the field often feeling out of reach for a general audience. This could perhaps be due to a lack of familiarity with the phrase in popular media, confusion surrounding what SynBio is, or hesitation from individuals to jump into a new, unknown field of study. As a result, we wanted to create an interactive, judgement-free space where anyone could ask anything about SynBio and get a detailed answer and explanation to their question. We challenged our viewers to consider what they were curious about and to learn more about the life sciences. By doing so, we aimed to open dialogue with the general public in the most open forum in history: the internet. By taking inquiries seriously and engaging in scientific conversation, we hoped to be in constant conversation with public perceptions of science.",
-        "For our answers, we wanted to create content that would be both engaging and informative. One of the biggest barriers to science for the general public is that most people do not have a scientist in their life; that, combined with our interactive format, eventually became the SynBio Hotline. We asked people to email in their questions about SynBio for us to research and respond to publicly through short-form content, an approach we were inspired to take by the journal Nature. It recently published an article stating that \"social-first and visual content is likely to become the dominant form of news. If science communicators want to remain relevant, they need to embrace this change\" [1]. The choice of platform was led in part by wanting to lower barriers to access, and in part by wanting to meet audiences where they were. Science as a field has slowly been adapting to social media, and with most people using these platforms to access information, we wanted to open up the forum and answer scientific questions ourselves.",
+        "While some STEM concepts have been widely elucidated for the wider public, we've found that **synthetic biology has not been commonly understood**, leading to the field often feeling out of reach for a general audience. This could perhaps be due to a lack of familiarity with the phrase in popular media, confusion surrounding what SynBio is, or hesitation from individuals to jump into a new, unknown field of study. As a result, we wanted to create an **interactive, judgement-free space** where anyone could ask anything about SynBio and get a detailed answer and explanation to their question. We challenged our viewers to consider what they were curious about and to learn more about the life sciences. By doing so, we aimed to **open dialogue** with the general public in the most open forum in history: **the internet**. By taking inquiries seriously and engaging in scientific conversation, we hoped to be in constant conversation with public perceptions of science.",
+        "For our answers, we wanted to create content that would be both **engaging and informative**. One of the biggest barriers to science for the general public is that most people do not have a scientist in their life; that, combined with our interactive format, eventually became the **SynBio Hotline**. We asked people to email in their questions about SynBio for us to research and respond to publicly through **short-form content**, an approach we were inspired to take by the journal **Nature**. It recently published an article stating that \"**social-first and visual content** is likely to become the dominant form of news. If science communicators want to remain relevant, they need to embrace this change\" [1]. The choice of platform was led in part by wanting to **lower barriers to access**, and in part by wanting to **meet audiences where they were**. Science as a field has slowly been adapting to social media, and with most people using these platforms to access information, we wanted to open up the forum and answer scientific questions ourselves.",
       ],
     },
     {
@@ -3077,8 +3020,8 @@ const education: Page = {
       id: "trivia",
       heading: "Trivia tabling",
       body: [
-        "Although students learn the fundamental concepts of each science subject in school, they often have fewer chances to explore the real-world applications of science. To fill this gap, we hosted an interactive trivia challenge at club fairs, giving local high school and college students a fun, low-stakes introduction to the world of SynBio. By asking participants to come in with an open mind, we wanted to build enthusiasm for and awareness of the field of synthetic biology.",
-        "Participants began by spinning a wheel to choose their trivia category. Four of the categories, Sustainable Synthetic Biology, (Bio)Ethics and Policy, Synthetic Biology Techniques, and Famous Scientists, quizzed participants on everything from lab procedures to ethical considerations, representing the considerations made by members of every iGEM subteam. We wanted to open the floor to dialogue around public perceptions of SynBio through our ethics section, with questions that asked participants to rethink how science affects our everyday lives. Alongside these more general questions, we included a fifth wild-card category, Washington iGEM, about the design principles behind our team's past projects, to give real-world examples of how anyone can get involved in SynBio. By preparing and presenting a diverse range of trivia questions, we aimed to show the public that synthetic biology can be fun and for everyone, whatever their background.",
+        "Although students learn the fundamental concepts of each science subject in school, they often have fewer chances to explore the **real-world applications of science**. To fill this gap, we hosted an interactive trivia challenge at club fairs, giving local high school and college students a **fun, low-stakes introduction to the world of SynBio**. By asking participants to come in with an open mind, we wanted to build enthusiasm for and awareness of the field of synthetic biology.",
+        "Participants began by spinning a wheel to choose their trivia category. Four of the categories, Sustainable Synthetic Biology, (Bio)Ethics and Policy, Synthetic Biology Techniques, and Famous Scientists, quizzed participants on everything from lab procedures to ethical considerations, representing the considerations made by members of every iGEM subteam. We wanted to open the floor to dialogue around **public perceptions** of SynBio through our ethics section, with questions that asked participants to rethink how science affects our everyday lives. Alongside these more general questions, we included a fifth wild-card category, Washington iGEM, about the design principles behind our team's past projects, to give real-world examples of how **anyone can get involved in SynBio**. By preparing and presenting a diverse range of trivia questions, we aimed to show the public that synthetic biology can be fun and for everyone, whatever their background.",
       ],
     },
     {
@@ -3117,9 +3060,9 @@ const education: Page = {
       id: "alchemy",
       heading: "iGEM Alchemy",
       body: [
-        "Students are rarely excited by rote memorisation, especially in a subject like biology, where so much of the early material is vocabulary. Yet that is often how the molecules of life are first introduced: as a list of terms to learn, not as things that are built from one another. We've found that some of the best ways to connect with younger students, from middle to high school, are through games. This year, we set out to fill the niche of an interactive synthetic biology browser game.",
-        "Little Alchemy is a classic browser game in which players start with a handful of base elements and combine them to create new ones, eventually unlocking almost any concept or physical object. Our version has players start with the basic building blocks of life: carbon, hydrogen, oxygen and nitrogen. Each level has a specific target to reach, such as synthesising a protein, DNA, or a cell organelle.",
-        "We chose this format because it mirrors how biology works, with complex structures built up from simpler pieces. Instead of being told that amino acids make up proteins, players find it out for themselves by trying combinations and seeing what they get. A combination that doesn't work costs nothing, so students are free to guess, experiment and try again, a cycle that echoes the engineering cycle we practised this year. The stage targets give newer students a clear direction, while those with more background can explore what else they can build along the way. Our goal was to make the molecules of life feel less like vocabulary words and more like something students can put together themselves.",
+        "Students are rarely excited by rote memorisation, especially in a subject like biology, where so much of the early material is vocabulary. Yet that is often how the molecules of life are first introduced: as a list of terms to learn, not as things that are built from one another. We've found that some of the best ways to **connect with younger students**, from middle to high school, are through games. This year, we set out to fill the niche of an interactive synthetic biology browser game.",
+        "**Little Alchemy** is a classic browser game in which players start with a handful of base elements and combine them to create new ones, eventually unlocking almost any concept or physical object. Our version has players start with the **basic building blocks of life**: carbon, hydrogen, oxygen and nitrogen. Each level has a specific target to reach, such as synthesising a protein, DNA, or a cell organelle.",
+        "We chose this format because it **mirrors how biology works**, with complex structures built up from simpler pieces. Instead of being told that amino acids make up proteins, players find it out for themselves by trying combinations and seeing what they get. A combination that doesn't work costs nothing, so students are free to **guess, experiment and try again**, a cycle that echoes the **engineering cycle** we practised this year. The stage targets give newer students a clear direction, while those with more background can explore what else they can build along the way. Our goal was to make the molecules of life feel less like vocabulary words and more like something students can put together themselves.",
       ],
     },
     {
@@ -3144,7 +3087,7 @@ const education: Page = {
       heading: "Can you beat DNA polymerase?",
       body: [
         "Whether through news broadcasts, science fiction or school, people of all ages and backgrounds have become familiar with the term \"DNA\". However, despite widespread awareness of DNA as the \"blueprint of life\" and of its importance in genetics, public understanding largely stops there.",
-        "Our activity, Can You Beat DNA Polymerase, was designed to introduce elementary and middle school students to the foundations of synthetic biology by guiding them through the process of DNA replication. Using the basis of widely recognised stacking toys, we challenged students to act as DNA polymerase, attaching the corresponding base pairs to a given template strand. This pushed students to think beyond common notions of DNA as \"the information encoding ourselves\" and to ask questions about how and when it is used. By pairing a complicated topic like DNA replication with the simple task of racing another player to build a complementary strand, we hoped to break these concepts down into more tangible ideas.",
+        "Our activity, **Can You Beat DNA Polymerase**, was designed to introduce elementary and middle school students to the foundations of synthetic biology by guiding them through the process of DNA replication. Using the basis of widely recognised stacking toys, we challenged students to act as DNA polymerase, attaching the corresponding base pairs to a given template strand. This pushed students to think beyond common notions of DNA as \"the information encoding ourselves\" and to ask questions about how and when it is used. By pairing a complicated topic like DNA replication with the simple task of racing another player to build a complementary strand, we hoped to break these concepts down into more tangible ideas.",
         "We brought this activity to life at the University of Washington's Engineering Discovery Days, a free two-day campus festival that invited over 12,000 students in grades 4 to 8, parents and educators from across Washington State. Given the broad age range of participants, we adapted the activity to be more versatile. Throughout the event we encouraged participants to ask questions, and took the opportunity to discuss how errors in the activity correspond to mutations. Older participants were told to use uracil instead of thymine, acting as RNA polymerase instead. These adjustments let us tailor each session to our participants' level and build from where they were, making SynBio far more accessible than a fixed lecture would.",
         "While tabling, many educators and parents said they were interested in reproducing our event themselves. Inspired by the success of Engineering Discovery Days, and by educators' feedback about wanting to build their own kits, we created a pamphlet describing how to recreate the activity. To widen access further, our handbooks follow universal design principles while providing the scientific explanations users need. They include written and visual instructions for constructing each station, colourblind-friendly graphics, and recommended materials that let each kit be built for less than five dollars a set.",
       ],
@@ -3176,8 +3119,8 @@ const education: Page = {
       id: "papers",
       heading: "How to read scientific papers",
       body: [
-        "Science is often inaccessible because of jargon-filled literature and institutional paywalls. Undergraduate students often struggle to get started on reading scientific literature, so we aimed to build a foundational understanding of how to interpret research articles. The result was a tutorial series on how to read research papers, which became recorded interviews with first authors of academic publications: Dr. Swati Mishra of UW Medicine, and UT Austin graduate students Kangsan Kim and Clay Kosonocky with postdoc Dr. Nikol Kaderabkova. By putting a face to the technical terminology, we aimed to improve scientific literacy and make innovations in research more approachable. Our goal was to make science a fun and exciting conversation, showing middle and high school students that academia does not have to be daunting or unfeeling.",
-        "Along with the videos, we provided short worksheets for educators to distribute to students, to improve their engagement with and understanding of the publications presented. The series has reached over 2,700 views across YouTube and Instagram.",
+        "Science is often inaccessible because of jargon-filled literature and institutional paywalls. Undergraduate students often struggle to get started on reading scientific literature, so we aimed to build a **foundational understanding** of how to interpret research articles. The result was a tutorial series on how to read research papers, which became recorded **interviews** with first authors of **academic publications**: Dr. Swati Mishra of UW Medicine, and UT Austin graduate students Kangsan Kim and Clay Kosonocky with postdoc Dr. Nikol Kaderabkova. By putting a face to the technical terminology, we aimed to **improve scientific literacy** and make innovations in research more **approachable**. Our goal was to make science a **fun and exciting conversation**, showing middle and high school students that academia does not have to be daunting or unfeeling.",
+        "Along with the videos, we provided short worksheets for **educators** to distribute to students, to improve their **engagement** with and understanding of the publications presented. The series has reached over **2,700 views** across YouTube and Instagram.",
       ],
     },
     {
@@ -3270,9 +3213,9 @@ const education: Page = {
       items: [
         {
           title: "SYNBIngO: the presentation, the boards and the prompts",
-          body: "Goals, the talk on everyday medications, the bingo boards, and the discussion questions for the end.",
+          body: "Goals, the talk on everyday medications, the bingo boards, and the discussion questions for the end, followed by the slides themselves.",
           href: "education/synbingo.pdf",
-          tag: "PDF, 4 pages",
+          tag: "PDF, 17 pages",
         },
       ],
     },
@@ -3303,8 +3246,8 @@ const education: Page = {
       heading: "Scientists you might not know",
       body: [
         "When we hear about major scientific accomplishments, we tend to hear the same few names. Yet many discoveries we take for granted are already woven into everyday science, in wet lab protocols, new therapeutics and medical practice, without our knowing the people behind them.",
-        "Here we highlight scientists whose work changed medicine and biotechnology, even though their names do not always appear in textbooks. Their stories show that scientific progress does not always hinge on one famous discovery or one famous person. It can come from asking an unexpected question, challenging what people thought was possible, or continuing to investigate when others might have stopped.",
-        "The material is written for chemistry and biology educators. By tying each story to lessons that already appear across the curriculum, we hoped to bridge the gap between the science and the human story behind it. Beyond introducing important innovations, we hope these stories show students that science is shaped by people with many different backgrounds and paths, and that progress can start with something as simple as staying curious and wanting to keep learning.",
+        "Here we highlight scientists whose work changed medicine and biotechnology, even though their names do not always appear in textbooks. Their stories show that **scientific progress** does not always hinge on one famous discovery or one famous person. It can come from asking an unexpected question, challenging what people thought was possible, or continuing to investigate when others might have stopped.",
+        "The material is written for chemistry and biology **educators**. By tying each story to lessons that already appear across the curriculum, we hoped to **bridge the gap** between the science and the human story behind it. Beyond introducing important innovations, we hope these stories show students that science is shaped by people with many different backgrounds and paths. **Scientific progress** can start with something as simple as staying curious and wanting to keep learning.",
       ],
     },
     {
@@ -3316,8 +3259,20 @@ const education: Page = {
           title: "Scientists You Might Not Know",
           body: "Profiles for chemistry and biology lessons: the people behind aspirin, thalidomide's halt at the FDA, and more. The [latest version](https://docs.google.com/document/d/1oJpNNe-DBpYJ4tP-zd76KM0-249qbn9j4jQ6PlO33eQ/edit?usp=sharing) is kept as a Google Doc.",
           href: "education/scientists.pdf",
-          tag: "PDF, 31 pages",
+          tag: "PDF, 13 pages",
         },
+      ],
+    },
+
+    {
+      kind: "prose",
+      section: "What education taught us",
+      id: "taught-us",
+      heading: "What education taught us",
+      body: [
+        "We are proud of all the work to come out of our education efforts this year. We created effective spaces for conversation and engagement online through our outreach; we developed adaptable lesson plans and events for other educators to build on; and we fostered community engagement with our peers through several campus events.",
+        "Despite that, we have a lot to reflect on. The choice to use short-form content was thoroughly discussed, and while the format found us an audience, we understand that we have to be careful with a platform of such wide reach. We have always tried our best to research our videos thoroughly, and in future we aim to keep using these spaces to foster a dialogue rather than to lecture a mass audience. We also hope to take our lesson plans into a wide variety of community spaces, to reach outside the university.",
+        "Our biggest challenge was getting attention. While we did our best not to sensationalise synthetic biology, we struggled to find an audience that was truly excited to hear from us. In future we hope to hold the need for engagement with synthetic biology together with the need to avoid over-promising.",
       ],
     },
 
@@ -3638,7 +3593,7 @@ const protocols: Page = {
       label: "where this stands",
       heading: "One protocol of five, and none of them run yet",
       body: [
-        "Experiment 1 is written up below. The procedures for experiments 2 to 5 are still being drafted and go up as they are finished.",
+        "Experiment 1 is written up below. The procedures for experiments 2 to 4 are still being drafted and go up as they are finished.",
         "A few instrument settings are still being confirmed with the lab, and are marked where they appear rather than filled with a guess. What each experiment is for, and the controls it runs against, are on [experiments](/experiments).",
       ],
     },
@@ -3791,7 +3746,7 @@ const protocols: Page = {
       kind: "prose",
       heading: "The rest",
       body: [
-        "Protocols for experiments 2 to 5, covering the binder screen, the trafficking time course, purified binder validation and the rheostat assay, are being written and go up here as they are finished. The experiments themselves are already described on [experiments](/experiments).",
+        "Protocols for experiments 2 to 4, covering the binder screen, the trafficking time course and purified binder validation, are being written and go up here as they are finished. The experiments themselves are already described on [experiments](/experiments).",
       ],
     },
   ],
