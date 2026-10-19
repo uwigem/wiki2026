@@ -37,6 +37,7 @@ import ScienceFigure from "../components/ScienceFigure";
 import BorrowStrip from "../components/BorrowStrip";
 import VideoRow from "../components/VideoRow";
 import PdfEmbed from "../components/PdfEmbed";
+import MedalCriteria from "../components/MedalCriteria";
 import Gallery from "../components/Gallery";
 import LinkCards from "../components/LinkCards";
 import StageRail from "../components/StageRail";
@@ -589,6 +590,9 @@ function BlockView({ block }: { block: Block }) {
 
     case "pdf":
       return <PdfEmbed file={block.file} title={block.title} pages={block.pages} />;
+
+    case "medals":
+      return <MedalCriteria tier={block.tier} intro={block.intro} items={block.items} />;
 
     case "gallery":
       return <Gallery heading={block.heading} intro={block.intro} images={block.images} source={block.source} />;

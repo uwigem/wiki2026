@@ -39,6 +39,8 @@ import {
   type ConstructGroup,
 } from "./constructs";
 import type { ProcedureGroup } from "../components/Procedure";
+import type { MedalCriterion } from "../components/MedalCriteria";
+import type { MedalTier } from "./medals";
 import { ADVISORS, INSPIRATION, SOFTWARE, SPONSORS, STUDENTS } from "./attributions";
 import type { CreditSet } from "../components/AttributionGroups";
 import type { FlowerKind, Profile } from "./team";
@@ -353,6 +355,13 @@ export type Block = Anchored &
      * finished PDF, such as the wet lab's protocols, rather than as copy.
      */
     | { kind: "pdf"; file: string; title: string; pages?: number }
+    /** One medal tier, and the criteria claimed under it. */
+    | {
+        kind: "medals";
+        tier: MedalTier;
+        intro?: string;
+        items: MedalCriterion[];
+      }
     /** A few photographs side by side. */
     | { kind: "gallery"; heading?: string; intro?: string; images: GalleryImage[]; source?: string }
     /** Things to open or download: handbooks, posts, documents. */
@@ -4048,17 +4057,74 @@ const judging: Page = {
   slug: "/judging",
   title: "The Checklist",
   kicker: "chapter 11 · judging",
-  storyBeat: "Everything we claim, and where on this wiki to check it.",
   intro:
-    "Where each medal criterion is evidenced, so nothing has to be hunted for.",
+    "Every medal criterion we are claiming, what iGEM asks for, and the page on this wiki that shows it.",
   blocks: [
     {
-      kind: "todo",
-      body: [
-        "Not written yet. What belongs here:",
-        "One row per medal criterion we are claiming, each with a link straight to the page and section that evidences it.",
-        "The safety and security form, the attributions, and the deliverables, each ticked off or honestly marked as outstanding.",
-        "Cross-check against the official 2026 requirements before the wiki freeze.",
+      kind: "medals",
+      section: "Bronze",
+      navLabel: "Bronze",
+      id: "bronze",
+      tier: "bronze",
+      items: [
+        {
+          title: "Competition Deliverables",
+          asks: "Complete the competition deliverables: the wiki, the presentation video, the judging form and the judging session.",
+          met: "All of our work this year is on this wiki. The required materials are submitted, and we are looking forward to telling you about the project in the session.",
+        },
+        {
+          title: "Project Attributions",
+          asks: "Describe what work your team members did, and what other people did for your project, using the standard Project Attributions Form.",
+          met: "Who did what, and everything we had help with, is on [attributions](/attributions). The standard form is submitted alongside it.",
+        },
+        {
+          title: "Contribution",
+          asks: "Make a useful contribution for future iGEM teams.",
+          met: "Our education, Human Practices, wet lab, modelling and engineering work is documented so that it can be picked up rather than repeated. What we are leaving behind is on [contribution](/contribution).",
+        },
+      ],
+    },
+    {
+      kind: "medals",
+      section: "Silver",
+      navLabel: "Silver",
+      id: "silver",
+      tier: "silver",
+      items: [
+        {
+          title: "Engineering Success",
+          asks: "Demonstrate engineering success in a technical aspect of your project by going through at least one iteration of the engineering design cycle.",
+          met: "Three loops, one per subteam, each with the design, build, test and learn steps written out and the hand-offs between them recorded. They are on [engineering](/engineering), including the [wet lab's cycles](/engineering#wet-lab-cycles), where the kinetic model changed the gene design before anything was ordered.",
+        },
+        {
+          title: "Human Practices",
+          asks: "Explain how you have determined that your work is responsible and good for the world.",
+          met: "We interviewed **16 stakeholders** and wrote down what each one changed about the project. How a responsible platform was arrived at, and what it is still missing, is on [human practices](/human-practices#stakeholders).",
+        },
+      ],
+    },
+    {
+      kind: "medals",
+      section: "Gold",
+      navLabel: "Gold",
+      id: "gold",
+      tier: "gold",
+      items: [
+        {
+          title: "Excellence in Model",
+          asks: "Build a model that helps you understand and design your system, and document it so others can use it.",
+          met: "A kinetic model of the Hedgehog and MMM system, refined over several versions, with the sensitivity analysis that told the wet lab which rates to measure. The model, its equations and its limits are on [model](/model).",
+        },
+        {
+          title: "Excellence in Education",
+          asks: "Develop educational work that goes beyond outreach, and document it so that others can run it.",
+          met: "Online outreach, adaptable lesson plans and campus events, each written up with the handbooks to run them again. What we did and what it taught us is on [education](/education).",
+        },
+        {
+          title: "Excellence in Integrated Human Practices",
+          asks: "Show how your project was shaped by the people it affects, through work integrated into the design.",
+          met: "The same 16 interviews, read alongside the literature, shaped the platform, the market model and the deliverables. Each conversation on [human practices](/human-practices#stakeholders) says what changed because of it.",
+        },
       ],
     },
   ],
