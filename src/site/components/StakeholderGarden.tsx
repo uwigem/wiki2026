@@ -99,7 +99,7 @@ export default function StakeholderGarden({ heading, intro, people, pending, sou
   return (
     <section className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
       {heading && <h2 className="text-xl sm:text-2xl">{heading}</h2>}
-      {intro && <p className="mt-1 max-w-2xl text-body leading-relaxed">{inline(intro)}</p>}
+      {intro && <p className="mt-1 text-body leading-relaxed">{inline(intro)}</p>}
 
       {/* One swipeable row on a phone, wrapping from there up. */}
       <ul

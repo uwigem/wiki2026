@@ -49,7 +49,7 @@ export default function StageRail({
   return (
     <section className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
       {heading && <h2 className="text-xl sm:text-2xl">{heading}</h2>}
-      {intro && <p className="measure mt-1 text-body leading-relaxed">{inline(intro)}</p>}
+      {intro && <p className="mt-1 text-body leading-relaxed">{inline(intro)}</p>}
 
       <div className="mt-5">
         <ol className="flex min-w-0 flex-col gap-2">

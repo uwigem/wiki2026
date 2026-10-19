@@ -28,7 +28,7 @@ export default function Gallery({
   return (
     <section className="min-w-0">
       {heading && <h2 className="text-xl">{heading}</h2>}
-      {intro && <p className="mt-1 max-w-2xl text-body leading-relaxed">{inline(intro)}</p>}
+      {intro && <p className="mt-1 text-body leading-relaxed">{inline(intro)}</p>}
       <div className={'grid gap-3 ' + cols + (heading || intro ? ' mt-4' : '')}>
         {images.map((im) => (
           <figure key={im.src} className="min-w-0">

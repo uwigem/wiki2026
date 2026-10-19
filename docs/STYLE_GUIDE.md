@@ -276,7 +276,7 @@ Defined in `src/index.css`. Most are in `@layer components`; `.pixel` and
 | `.pixel-btn` | A button or a link styled as a button |
 | `.pixel-btn-primary` | The same in water blue, for the one main action |
 | `.nav-link`, `.nav-group` | Navigation items. Used only by `TopNav` |
-| `.prose-garden` | Paragraph spacing and measure inside a panel |
+| `.prose-garden` | Paragraph spacing inside a panel. Sets no width |
 | `.quote-sign` | Adds the curly quote marks to a quote block |
 | `.kicker` | The small spaced pixel label above a heading |
 | `.numeral` | Body font with tabular figures, for digits |
@@ -326,6 +326,16 @@ button.
 7. **Reduced motion stops the game loop after one still frame.** You still get
    the real garden, it just does not move. Anything you add that moves must
    honour the same setting.
+8. **Body text fills its container.** A paragraph, a heading, an intro box and
+   the box around any of them run the full width of the panel, card or column
+   they sit in, on every page. There is no reading measure: no `max-w-*` on
+   text or on its wrapper, no `ch` widths, no `max-w-prose`, no width token in
+   the stylesheet, no balanced wrapping. In the widest card that means about
+   104 characters a line of body text, and that is intended. Only boxes that
+   are not body text may be narrow (dialogs, graphics, tiles, the header and
+   footer, the reading column itself), and each one is listed by name in
+   `scripts/check-conventions.mjs`. If text looks too long somewhere, raise it
+   with Web Dev; do not cap it.
 
 ## Accessibility rules
 
@@ -350,7 +360,7 @@ keyboards. These are not optional polish.
 ## House rules the checker enforces
 
 `npm run check` runs the TypeScript compiler and then
-`scripts/check-conventions.mjs`, which enforces two rules a compiler cannot:
+`scripts/check-conventions.mjs`, which enforces three rules a compiler cannot:
 
 1. No em dashes in any `.ts`, `.tsx`, `.css`, `.html`, `.md` or `.mjs` file
    under `src/`, `docs/` or `scripts/`, or anywhere at the repo root.
@@ -358,6 +368,14 @@ keyboards. These are not optional polish.
    `src/`, except `src/engine/` (which is the palette) and the two pixel-art
    files. A `color-mix` line is allowed, and a line ending in `colour-ok` is an
    explicit, documented opt-out.
+3. No width cap on text (design rule 8). Any `max-w-*`, fractional or arbitrary
+   width, inline `maxWidth`, or `text-balance` in a `.ts` or `.tsx` file, and any
+   `max-width`, `--measure` or `--container-*` token, `@apply max-w-*` or
+   `text-wrap: balance` in a `.css` file under `src/`, fails, unless that exact
+   box is listed in `WIDTH_ALLOWLIST` with its exact count. There is no comment
+   that switches it off on a line. The list only holds boxes that are not body
+   text; one more copy of an allowed cap, or an entry that no longer matches
+   anything, also fails.
 
 It reads files from disk rather than from git, so a file you have not committed
 yet is still checked.

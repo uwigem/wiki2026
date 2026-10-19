@@ -31,7 +31,7 @@ export default function Workflow({
   return (
     <section className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
       {heading && <h2 className="text-xl">{heading}</h2>}
-      {intro && <p className="mt-1 max-w-2xl text-body leading-relaxed">{inline(intro)}</p>}
+      {intro && <p className="mt-1 text-body leading-relaxed">{inline(intro)}</p>}
 
       <div id="workflow-stage" className="panel-flat mt-4 px-5 py-4" aria-live="polite">
         <h3 className="text-lg">{stages[open].title}</h3>

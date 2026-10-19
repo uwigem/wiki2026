@@ -119,7 +119,7 @@ export default function WikiPage({ page }: { page: Page }) {
           </PixelSign>
 
           {/* One introduction, not two stacked boxes. */}
-          <div className="panel max-w-2xl px-5 py-4 sm:px-7 sm:py-5">
+          <div className="panel w-full px-5 py-4 sm:px-7 sm:py-5">
             {page.storyBeat && (
               <p className="text-body leading-relaxed text-leaf-800">{page.storyBeat}</p>
             )}
@@ -286,7 +286,7 @@ function referenceScopes(blocks: Block[]): ReadonlySet<string> {
 /** The "navigation tips" bar long pages open with: closed, one line, there when wanted. */
 function ReadingTips({ hasPeople }: { hasPeople: boolean }) {
   return (
-    <details className="panel-flat group w-full max-w-2xl text-left">
+    <details className="panel-flat group w-full text-left">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-2.5">
         <span className="pixel text-sm">How to read this page</span>
         <span aria-hidden className="pixel text-xs transition-transform group-open:rotate-180">
@@ -324,7 +324,7 @@ function BlockView({ block }: { block: Block }) {
         <div className="panel px-5 py-5 sm:px-7 sm:py-6">
           {block.heading && <h2 className="text-xl">{block.heading}</h2>}
           {block.intro && (
-            <p className="mt-1 max-w-2xl text-body">{block.intro}</p>
+            <p className="mt-1 text-body">{block.intro}</p>
           )}
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {block.items.map((item, i) => (
@@ -354,7 +354,7 @@ function BlockView({ block }: { block: Block }) {
         <div className="panel px-5 py-5 sm:px-7 sm:py-6">
           {block.heading && <h2 className="text-xl">{block.heading}</h2>}
           {block.intro && (
-            <p className="mt-1 max-w-2xl text-body">{block.intro}</p>
+            <p className="mt-1 text-body">{block.intro}</p>
           )}
           <ol className="mt-4 grid gap-4 sm:grid-cols-2">
             {block.items.map((item, i) => (

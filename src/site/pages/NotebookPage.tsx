@@ -46,7 +46,7 @@ export default function NotebookPage() {
             <p className="pixel text-tag tracking-[0.2em]">notebook</p>
             <h1 className="mt-1 text-2xl sm:text-4xl">Wet-Lab Notebook</h1>
           </PixelSign>
-          <p className="panel measure px-5 py-4 text-body leading-relaxed">
+          <p className="panel w-full px-5 py-4 text-body leading-relaxed">
             This notebook documents the development of HedgehogSense's experimental strategy, from the
             initial investigation of the MGRN1, MEGF8 and MOSMO (MMM) complex to the design of mammalian
             expression constructs and proposed validation assays. It provides a chronological record of our
@@ -80,11 +80,11 @@ export default function NotebookPage() {
           <Reveal>
             <div className="panel px-5 py-5 sm:px-7 sm:py-6">
               <h2 className="text-xl">Planned experimental workflow</h2>
-              <p className="measure mt-1 text-body leading-relaxed">
+              <p className="mt-1 text-body leading-relaxed">
                 Following delivery of the synthesised constructs, experimental validation will proceed
                 through the following stages.
               </p>
-              <ol className="measure mt-4 flex flex-col gap-3">
+              <ol className="mt-4 flex flex-col gap-3">
                 {NEXT_STEPS.map((step, i) => (
                   <li key={step.title} className="flex gap-3">
                     <span className="badge mt-0.5 shrink-0">{i + 1}</span>
@@ -95,7 +95,7 @@ export default function NotebookPage() {
                   </li>
                 ))}
               </ol>
-              <p className="measure mt-4 text-body-sm leading-relaxed">
+              <p className="mt-4 text-body-sm leading-relaxed">
                 Detailed experimental methods, controls and expected outcomes are provided on{' '}
                 <Link to="/experiments" className="cross-link">
                   experiments
@@ -114,7 +114,7 @@ export default function NotebookPage() {
           <Reveal>
             <div className="panel px-5 py-5 sm:px-7 sm:py-6">
               <h2 className="text-xl">Experimental documentation</h2>
-              <div className="measure prose-garden mt-2 text-body">
+              <div className="prose-garden mt-2 text-body">
                 <RichText
                   paragraphs={[
                     'The wet lab subteam maintains records of construct development, experimental planning and laboratory activities. The current documentation covers the mammalian expression construct designs and sequence information, the GenScript and Twist Bioscience synthesis orders, and the proposed experimental protocols and assay controls.',

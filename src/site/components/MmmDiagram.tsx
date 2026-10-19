@@ -108,7 +108,7 @@ export default function MmmDiagram() {
   return (
     <section className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
       <h2 className="text-xl">What the complex does, and what we do to it</h2>
-      <p className="measure mt-1 text-body leading-relaxed">
+      <p className="mt-1 text-body leading-relaxed">
         Pick one of the two arms to see what changes. The resting state is what a cell does on its own.
       </p>
 
@@ -286,7 +286,7 @@ export default function MmmDiagram() {
         ))}
       </ul>
 
-      <p className="measure mt-3 text-body-sm leading-relaxed" aria-live="polite">
+      <p className="mt-3 text-body-sm leading-relaxed" aria-live="polite">
         {current.caption}
       </p>
     </section>

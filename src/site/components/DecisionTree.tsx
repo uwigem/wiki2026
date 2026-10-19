@@ -46,7 +46,7 @@ export default function DecisionTree({
   return (
     <section className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
       {heading && <h2 className="text-xl">{heading}</h2>}
-      {intro && <p className="mt-1 max-w-2xl text-body leading-relaxed">{inline(intro)}</p>}
+      {intro && <p className="mt-1 text-body leading-relaxed">{inline(intro)}</p>}
 
       {path.length > 0 && (
         <ol className="mt-4 flex flex-wrap items-center gap-1.5 text-xs" aria-label="Your answers so far">
