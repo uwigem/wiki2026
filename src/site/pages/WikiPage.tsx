@@ -36,6 +36,7 @@ import References from "../components/References";
 import ScienceFigure from "../components/ScienceFigure";
 import BorrowStrip from "../components/BorrowStrip";
 import VideoRow from "../components/VideoRow";
+import PdfEmbed from "../components/PdfEmbed";
 import Gallery from "../components/Gallery";
 import LinkCards from "../components/LinkCards";
 import StageRail from "../components/StageRail";
@@ -124,6 +125,7 @@ export default function WikiPage({ page }: { page: Page }) {
               <p className="text-body leading-relaxed text-leaf-800">{page.storyBeat}</p>
             )}
             {page.intro && <p className="mt-3 text-lg leading-relaxed">{page.intro}</p>}
+            {page.note && <p className="mt-3 text-note leading-relaxed text-leaf-800">{page.note}</p>}
           </div>
 
           {long && <ReadingTips hasPeople={people.length > 0} />}
@@ -580,6 +582,9 @@ function BlockView({ block }: { block: Block }) {
 
     case "video":
       return <VideoRow heading={block.heading} intro={block.intro} videos={block.videos} source={block.source} />;
+
+    case "pdf":
+      return <PdfEmbed file={block.file} title={block.title} pages={block.pages} />;
 
     case "gallery":
       return <Gallery heading={block.heading} intro={block.intro} images={block.images} source={block.source} />;
