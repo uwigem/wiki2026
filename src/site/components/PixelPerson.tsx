@@ -39,7 +39,7 @@ const JEANS = '#3f5fa0'
 type Recolor = Partial<Record<'skin' | 'hair' | 'top' | 'pants' | 'eyes', string>>
 
 /** Small additions people asked for on the avatar form. */
-export type Extra = 'glasses' | 'flower' | 'stripe' | 'necklace' | 'scarf' | 'check'
+export type Extra = 'glasses' | 'flower' | 'stripe' | 'necklace' | 'scarf' | 'check' | 'cable'
 
 export interface Look {
   base: number
@@ -138,6 +138,12 @@ export const LOOK_OVERRIDES: Record<string, Look> = {
     base: 2,
     recolor: { hair: BROWN_HAIR, skin: SKIN[0], top: '#7fa8c9', pants: JEANS },
     extras: ['check', 'glasses'],
+  },
+  // The wet lab's mentor: straight white-blonde hair, a white cable-knit sweater.
+  'Kirsten Thompson': {
+    base: 8,
+    recolor: { hair: '#efe9d9', skin: SKIN[0], top: '#f4f0e6', pants: JEANS, eyes: BLUE_EYES },
+    extras: ['cable'],
   },
   'Samaira Bakshi': { base: 9, recolor: { hair: BLACK_HAIR, skin: '#edc9af', top: WHITE_TOP, pants: BLACK_PANTS } },
   'Alex Devgan': {
@@ -302,6 +308,19 @@ function extraPixels(look: Look, cells: (x: number, y: number) => Role | null, o
         for (let x = 0; x < sp.w; x++) {
           if (cells(x, y) !== 'top') continue
           if ((Math.floor(x / 2) + Math.floor(y / 2)) % 2 === 1) px.push([x, y, dark])
+        }
+      }
+    } else if (extra === 'cable') {
+      // A cable knit: ribs every four pixels, a shade down from the person's
+      // own top, stepping one pixel left and right on alternate rows so each
+      // rib reads as a twisted cable rather than a stripe.
+      if (!look.recolor.top) continue
+      const [th, ts, tl] = rgb2hsl(look.recolor.top)
+      const dark = hsl2rgb(th, clamp01(ts + 0.1), clamp01(tl - 0.16))
+      for (let y = 0; y < sp.h; y++) {
+        for (let x = 0; x < sp.w; x++) {
+          if (cells(x, y) !== 'top') continue
+          if (x % 4 === 1 + (y % 2)) px.push([x, y, dark])
         }
       }
     }

@@ -12,7 +12,18 @@
  * so every profile reads the same way.
  */
 
-export type FlowerKind = 'lilac' | 'bluebell' | 'white' | 'daisy' | 'pink' | 'heart' | 'fern' | 'berry' | 'tree'
+export type FlowerKind =
+  | 'lilac'
+  | 'bluebell'
+  | 'white'
+  | 'daisy'
+  | 'pink'
+  | 'heart'
+  | 'fern'
+  | 'berry'
+  | 'tree'
+  | 'bush'
+  | 'reed'
 
 export type SubteamId =
   | 'protein-design'

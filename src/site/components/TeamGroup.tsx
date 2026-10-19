@@ -1,17 +1,19 @@
 import {
   BERRY_BUSH,
   BLUEBELL,
+  BUSH,
   DAISY,
   FERN,
   HEART_PLANT,
   LILAC,
   PINK_BELL,
+  REED,
   TREE,
   WHITE_FLOWER,
   type Sprite,
 } from '../../engine/sprites'
 import { hashStr, mulberry32 } from '../rng'
-import type { FlowerKind, Member, SubteamId } from '../content/team'
+import type { FlowerKind, Profile, SubteamId } from '../content/team'
 import PixelPerson, { looksFor } from './PixelPerson'
 import PixelSprite from './PixelSprite'
 
@@ -22,7 +24,7 @@ import PixelSprite from './PixelSprite'
  */
 
 /** The group's emblem, shown once beside its name. */
-const FLOWER_SPRITE: Record<FlowerKind, Sprite> = {
+export const FLOWER_SPRITE: Record<FlowerKind, Sprite> = {
   lilac: LILAC,
   bluebell: BLUEBELL,
   white: WHITE_FLOWER,
@@ -32,6 +34,13 @@ const FLOWER_SPRITE: Record<FlowerKind, Sprite> = {
   fern: FERN,
   berry: BERRY_BUSH,
   tree: TREE,
+  bush: BUSH,
+  reed: REED,
+}
+
+/** How much to enlarge an emblem. The tall sprites get less, so every emblem sits beside its heading at about the same size. */
+export function emblemScale(flower: FlowerKind): number {
+  return flower === 'tree' || flower === 'reed' ? 2 : 3
 }
 
 /** The tile colours a person can get. Shuffled per group by `tileTints`, so a
@@ -48,7 +57,7 @@ const TILE_TINTS = [
 
 /** One tile colour per person, the palette shuffled per group so neighbouring
  *  tiles differ. */
-function tileTints(id: string, count: number): string[] {
+export function tileTints(id: string, count: number): string[] {
   const rng = mulberry32(hashStr('plot:' + id))
   const bag = [...TILE_TINTS]
   for (let i = bag.length - 1; i > 0; i--) {
@@ -64,17 +73,28 @@ interface Props {
   heading: string
   blurb?: string
   flower: FlowerKind
-  people: Member[]
+  people: Profile[]
   /** Tag the people who lead this subteam. */
   subteam?: SubteamId
-  onPick: (member: Member) => void
+  onPick: (person: Profile) => void
+  /** What a tile does, for screen readers: `Open profile: Name`. */
+  openLabel?: string
 }
 
 /**
  * The people are real <button>s labelled with the person's name, so the card is
  * an ordinary keyboard-navigable list of people.
  */
-export default function TeamGroup({ id, heading, blurb, flower, people, subteam, onPick }: Props) {
+export default function TeamGroup({
+  id,
+  heading,
+  blurb,
+  flower,
+  people,
+  subteam,
+  onPick,
+  openLabel = 'Open profile',
+}: Props) {
   const tints = tileTints(id, people.length)
 
   return (
@@ -83,7 +103,7 @@ export default function TeamGroup({ id, heading, blurb, flower, people, subteam,
         <div className="shrink-0 border-b-[3px] border-leaf-300 px-5 py-4 sm:w-64 sm:border-b-0 sm:border-r-[3px]">
           <div className="flex items-start gap-3">
             <span className="shrink-0">
-              <PixelSprite sprite={FLOWER_SPRITE[flower]} scale={flower === 'tree' ? 2 : 3} />
+              <PixelSprite sprite={FLOWER_SPRITE[flower]} scale={emblemScale(flower)} />
             </span>
             <h2 className="min-w-0 text-lg sm:text-xl">{heading}</h2>
             <span className="badge ml-auto" aria-label={`${people.length} people`}>
@@ -106,7 +126,7 @@ export default function TeamGroup({ id, heading, blurb, flower, people, subteam,
                       'flex h-full w-28 flex-col items-center gap-1 rounded-sm border-[3px] px-1 pb-2 pt-2 shadow-[3px_3px_0_var(--p-shadow)] transition duration-150 hover:brightness-[1.06] ' +
                       tints[i]
                     }
-                    aria-label={`Open profile: ${m.name}${leadsHere ? ', lead' : ''}`}
+                    aria-label={`${openLabel}: ${m.name}${leadsHere ? ', lead' : ''}`}
                   >
                     {/* A fixed slot, so a taller character (curly hair) does not push
                         their name below the rest of the row. Fits 20 rows at scale 4. */}

@@ -203,7 +203,8 @@ Everyone who filled in the avatar form has their character pinned in
 `LOOK_OVERRIDES` in
 [`src/site/components/PixelPerson.tsx`](src/site/components/PixelPerson.tsx):
 hair length and colour, skin, top, trousers, eye colour, and a few extras
-(glasses, a beard, a hair flower, a shirt stripe, a necklace). To change yours,
+(glasses, a beard, a hair flower, a shirt stripe, a necklace, a scarf, a
+checked shirt, a cable knit). To change yours,
 edit your line there or ask Web Dev. Anyone without a pin gets colours picked
 from their name, the same on every visit.
 
@@ -242,6 +243,26 @@ of the file:
 The allowed `flower` values are listed in `FlowerKind` in `team.ts`, and
 anything else is a build error. `fern` is currently free. The tile colours come
 from the `id`, so changing an `id` reshuffles that subteam's colours.
+
+## Change what the attributions page says you did
+
+Each person's card on `/attributions` opens a list from `CONTRIBUTIONS` in
+[`src/site/content/attributions.ts`](src/site/content/attributions.ts), keyed
+by your name exactly as it is in `team.ts`. Your photo, subteam and pixel
+character come from `team.ts` as usual.
+
+```ts
+'Your Name': [
+  { task: 'investigation', did: 'Ran the HEK293T binder screen.' },
+  { task: 'writing', did: 'Wrote the Wet Lab pages.' },
+],
+```
+
+- `task` is one of iGEM's task names, listed in `Task` at the top of the file.
+- `did` is one or two sentences, past tense, starting with the verb. Every
+  entry is written this way so the cards read alike: no numbering, no lists.
+- Mentors go in `MENTORS`. Sponsors and software go in `SPONSORS` and
+  `SOFTWARE`, each with a logo from `creditLogos.ts`.
 
 ## Add an entry to the notebook timeline
 
@@ -299,7 +320,7 @@ tab title, and changing it here changes all of them.
 **Yours, edit freely.** These are text files. The worst you can do is a typo
 that `npm run check` catches.
 
-- `src/site/content/pages.ts`, `nav.ts`, `team.ts`, `timeline.ts`, `site.ts`
+- `src/site/content/pages.ts`, `nav.ts`, `team.ts`, `attributions.ts`, `timeline.ts`, `site.ts`
 - `docs/`, `README.md`, this file
 
 **Ask Web Dev first.** A mistake here breaks every page at once rather than one

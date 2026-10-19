@@ -29,6 +29,7 @@ Find the thing you want to change, then open that file.
 | --- | --- |
 | Text on any Project or Impact page | [`src/site/content/pages.ts`](src/site/content/pages.ts) |
 | My name, role, or bio on the Team page | [`src/site/content/team.ts`](src/site/content/team.ts) |
+| What I did, on the Attributions page | [`src/site/content/attributions.ts`](src/site/content/attributions.ts) |
 | An entry on the Notebook timeline | [`src/site/content/timeline.ts`](src/site/content/timeline.ts) |
 | The project title, tagline, or footer links | [`src/site/content/site.ts`](src/site/content/site.ts) |
 | A link in the top menu | [`src/site/content/nav.ts`](src/site/content/nav.ts) |

@@ -157,6 +157,8 @@ wiki.
 | `src/site/content/pages.ts` | The ten wiki pages, as data |
 | `src/site/content/nav.ts` | Navigation groups, and the footer sitemap |
 | `src/site/content/team.ts` | Subteams and members |
+| `src/site/content/attributions.ts` | The attributions page: what each person did, sponsors, software |
+| `src/site/content/creditLogos.ts` | The attributions page's logos, as pixel art |
 | `src/site/content/timeline.ts` | The notebook page's season timeline |
 | `src/site/content/site.ts` | Project title, tagline, CTAs, footer links |
 
