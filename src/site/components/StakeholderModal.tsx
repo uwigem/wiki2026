@@ -2,6 +2,9 @@ import { useEffect, useRef } from 'react'
 import { useEscape } from '../hooks'
 import { inline } from './RichText'
 import type { Stakeholder } from './StakeholderGarden'
+import { asset } from '../router'
+import PixelPerson, { looksFor } from './PixelPerson'
+import CreditLogo from './CreditLogo'
 
 /** Everything a keyboard can land on inside the dialog. */
 const FOCUSABLE = 'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -55,12 +58,31 @@ export default function StakeholderModal({ person, onClose }: { person: Stakehol
         className="panel relative flex max-h-full w-full max-w-xl flex-col overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="border-b-[3px] border-leaf-300 px-5 py-3 pr-12">
-          <p className="kicker">who we asked</p>
-          <h2 id="stakeholder-title" className="text-lg sm:text-xl">
-            {person.name}
-          </h2>
-          <p className="mt-1 text-note text-leaf-800">{person.role}</p>
+        {/* Photograph beside the name, in the frame the team and attributions
+            profiles use, falling back to the pixel person without one. */}
+        <div className="flex items-start gap-4 border-b-[3px] border-leaf-300 px-5 py-4 pr-12">
+          {person.logo ? (
+            <span className="flex aspect-[4/5] w-20 shrink-0 items-center justify-center rounded-sm border-[3px] border-petal-daisy bg-petal-cream/60 sm:w-24">
+              <CreditLogo id={person.logo} scale={2} />
+            </span>
+          ) : person.photo ? (
+            <img
+              src={asset(person.photo)}
+              alt={person.name}
+              className="aspect-[4/5] w-20 shrink-0 rounded-sm border-[3px] border-leaf-700 object-cover sm:w-24"
+            />
+          ) : (
+            <span className="flex aspect-[4/5] w-20 shrink-0 items-end justify-center overflow-hidden rounded-sm border-[3px] border-leaf-300 bg-leaf-100 pb-1 sm:w-24">
+              <PixelPerson traits={looksFor(person)} scale={3} />
+            </span>
+          )}
+          <span className="min-w-0 flex-1 self-center">
+            <p className="kicker">who we asked</p>
+            <h2 id="stakeholder-title" className="text-lg sm:text-xl">
+              {person.name}
+            </h2>
+            <p className="mt-1 text-note text-leaf-800">{person.role}</p>
+          </span>
           <button
             ref={closeRef}
             type="button"

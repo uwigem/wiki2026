@@ -108,6 +108,8 @@ const LONG_HAIR_FALLBACK = new Set<string>(['Charlotte Hsu', 'Ruhi Gottumukkala'
 const BLACK_HAIR = '#211d29'
 const DARK_BROWN_HAIR = '#3a2a1e'
 const BROWN_HAIR = '#5f4027'
+/** Greying hair. The HAIR ramp runs blonde to black with no grey in it. */
+const GREY_HAIR = '#b4ada1'
 const BLACK_TOP = '#34323d'
 const BLACK_PANTS = '#2a2932'
 const LIGHT_BLUE = '#9cc3e6'
@@ -127,6 +129,67 @@ const GREEN_EYES = '#3f8f5a'
  * what the sprite already draws.
  */
 export const LOOK_OVERRIDES: Record<string, Look> = {
+  /*
+   * The Human Practices stakeholders.
+   *
+   * Pinned rather than hashed. The name-based fallback assigns a skin tone at
+   * random, which for real, named people outside the team means misrepresenting
+   * them on a public page. These are set from their own photographs, the same
+   * way the principal investigators above are set.
+   */
+  'Dr. Samuel Miller': {
+    base: 0,
+    recolor: { hair: GREY_HAIR, skin: SKIN[2], top: '#2f3a4a', pants: '#565b70', eyes: BLUE_EYES },
+  },
+  'Dr. Paul Pottinger': {
+    base: 2,
+    recolor: { hair: '#8a6a45', skin: SKIN[2], top: '#3f6b8a', pants: '#565b70' },
+    beard: true,
+  },
+  'Dr. Herbert Sauro': {
+    base: 4,
+    recolor: { hair: GREY_HAIR, skin: SKIN[1], top: '#4a5a6a', pants: '#565b70' },
+    extras: ['glasses'],
+  },
+  'Dr. John B. Wallingford': {
+    base: 6,
+    recolor: { hair: GREY_HAIR, skin: SKIN[2], top: '#4a7a5a', pants: JEANS },
+    beard: true,
+    extras: ['glasses'],
+  },
+  'Dr. Stacey Ogden': {
+    base: 5,
+    recolor: { hair: '#e3c169', skin: SKIN[1], top: BLACK_TOP, pants: BLACK_PANTS },
+  },
+  'Dr. Ning Zheng': {
+    base: 0,
+    recolor: { hair: BLACK_HAIR, skin: SKIN[2], top: '#3f5068', pants: '#565b70', eyes: DARK_BROWN_EYES },
+  },
+  'Dr. Thomas Matula': {
+    base: 2,
+    recolor: { hair: GREY_HAIR, skin: SKIN[2], top: '#2f3a4a', pants: '#565b70' },
+  },
+  'Dr. David Younger': {
+    base: 4,
+    recolor: { hair: BROWN_HAIR, skin: SKIN[1], top: '#7fa8c9', pants: JEANS, eyes: BLUE_EYES },
+  },
+  'Dr. Steven Vokes': {
+    base: 6,
+    recolor: { hair: '#4a3220', skin: SKIN[2], top: '#8aa6bd', pants: JEANS },
+  },
+  'Zach Chamberlain': {
+    base: 0,
+    recolor: { hair: '#c9a855', skin: SKIN[1], top: '#5fb0a8', pants: JEANS, eyes: BLUE_EYES },
+  },
+  'Roi Eisenkot': {
+    base: 2,
+    recolor: { hair: '#332417', skin: SKIN[2], top: '#c9a0c0', pants: '#565b70' },
+    extras: ['glasses'],
+  },
+  'Dr. Mark Bothwell': {
+    base: 4,
+    recolor: { hair: GREY_HAIR, skin: SKIN[2], top: '#7a8a5a', pants: '#5b3a2a' },
+  },
   // The two principal investigators, from the descriptions on the feedback doc.
   'Dr. Jennifer Kong': {
     base: 5,
