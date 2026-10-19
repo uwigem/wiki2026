@@ -2315,13 +2315,6 @@ const humanPractices: Page = {
         "By moving from the cell-wide protein regulation of current methods to controlling ciliary abundance in our platform, we aim to give researchers the tools to better understand GPCRs, and ciliary membrane proteins that are not GPCRs, such as PTCH1, and to accelerate the development of GPCR-targeting therapeutics. And since most GPCR-targeting drugs act by occupying a receptor's binding site, altering GPCR levels through targeted ubiquitination is a novel alternative, opening opportunities for future treatments for ciliopathies.",
       ],
     },
-{
-      kind: "diagram",
-      id: "cell-vs-cilium-figure",
-      figure: "cell-vs-cilium",
-      caption:
-        "Why the place matters. CRISPR and RNAi take the receptor out of the whole cell; we are aiming to change how much of it sits in the cilium, leaving the rest alone.",
-    },
         ],
       },
 {

@@ -1,12 +1,9 @@
 import { useEffect, useRef } from 'react'
-import { LEGEND, type Sprite } from '../../engine/sprites'
 import { SITE_PALETTE } from '../theme'
-import { PROTEINS, rotateCW } from './gardenArt'
 
 /**
- * The two diagrams the Human Practices background needs: the Hedgehog
- * pathway off and on, and the difference between switching a protein off in
- * the whole cell and tuning how much of it sits in the cilium.
+ * The diagram the Human Practices background needs: the Hedgehog pathway
+ * off and on, and the cell's own way of clearing SMO out of the cilium.
  *
  * Drawn the way the rest of the site draws explanatory pictures (see
  * `StoryArt` and `SignalDial`): one still image on a canvas, no animation and
@@ -19,7 +16,7 @@ import { PROTEINS, rotateCW } from './gardenArt'
  * between existing methods and the control we are aiming for.
  */
 
-export type ScienceFigureKind = 'pathway' | 'cell-vs-cilium'
+export type ScienceFigureKind = 'pathway'
 
 type Rgb = [number, number, number]
 
@@ -53,11 +50,6 @@ interface Figure {
   alt: string
 }
 
-const SMO = PROTEINS['gpcr-blue']
-const SMO_UP = rotateCW(SMO)
-const GPCR = PROTEINS['gpcr-lilac']
-const GPCR_UP = rotateCW(GPCR)
-const PTCH_UP = rotateCW(PROTEINS.ptch)
 
 /* ------------------------------------------------------------- the pathway */
 
@@ -82,54 +74,24 @@ const PATHWAY: Figure = {
   labels: [
     { text: 'no ligand', x: 86, y: 2, anchor: 'centre', tone: 'title' },
     { text: 'Hedgehog ligand bound', x: 274, y: 2, anchor: 'centre', tone: 'title' },
-    { text: 'PTCH1', x: 18, y: 30 },
-    { text: 'SMO kept out', x: 96, y: 74 },
+    { text: 'PTCH1', x: 60, y: 104, anchor: 'centre' },
+    { text: 'SMO', x: 146, y: 74, anchor: 'centre' },
     { text: 'genes off', x: 96, y: 128, tone: 'caption' },
-    { text: 'Hh', x: 206, y: 28 },
-    { text: 'SMO', x: 286, y: 20 },
+    { text: 'Hh', x: 196, y: 68 },
+    { text: 'PTCH1', x: 227, y: 104, anchor: 'centre' },
+    { text: 'SMO', x: 265, y: 20, anchor: 'centre' },
     { text: 'GLI', x: 284, y: 112 },
     { text: 'genes on', x: 284, y: 128, tone: 'caption' },
     { text: 'one SMO stays in the flat membrane in both', x: 180, y: 156, anchor: 'centre', tone: 'caption' },
     { text: 'MEGF8, MOSMO and MGRN1 find SMO', x: 60, y: 240, anchor: 'centre', tone: 'caption' },
     { text: 'MGRN1 tags it', x: 180, y: 240, anchor: 'centre', tone: 'caption' },
-    { text: 'the cell degrades it', x: 300, y: 240, anchor: 'centre', tone: 'caption' },
+    { text: 'SMO is removed', x: 300, y: 240, anchor: 'centre', tone: 'caption' },
   ],
   alt:
-    'Two panels of the same cell, side by side. With no ligand, PTCH1 sits in the wall of the cilium, a bar closes the base, no SMO is in the cilium and the genes in the nucleus are dim. With a Hedgehog ligand bound to PTCH1, SMO stands in the ciliary membrane, an arrow labelled GLI runs down to the nucleus and the genes are lit. One SMO sits in the flat cell membrane in both panels, unchanged. Below, three steps: MEGF8 with MOSMO and MGRN1 beside SMO in a membrane, then MGRN1 putting a tag on SMO, then SMO broken up.',
+    'Two panels of the same cell, side by side. With no ligand, PTCH1 sits as a lump across the mouth of the cilium, and an arrow from SMO in the flat membrane towards the cilium is crossed out: SMO cannot get in, and the genes in the nucleus are dim. With a Hedgehog ligand bound to it, PTCH1 has moved off the mouth, SMO now stands inside the cilium, an arrow labelled GLI runs down to the nucleus and the genes are lit. Below, three steps of the cell clearing SMO on its own: MEGF8, MOSMO and MGRN1 gathered at SMO in a membrane, then a tag placed under the membrane on the cytoplasmic side, then SMO gone from the membrane and its pieces drifting away.'
 }
 
-/* ------------------------------------------------- cell against cilium */
-
-const C = {
-  w: 150,
-  h: 118,
-  /** Left edge of each panel, and how far down the panels start. */
-  at: [0, 166],
-  top: 16,
-  membrane: 76,
-  tube: { x0: 56, x1: 86, top: 10 },
-  /** Where the receptors stand: along the flat membrane, and in the walls. */
-  flat: [12, 32, 104],
-  wall: [
-    [52, 22],
-    [82, 46],
-  ],
-}
-
-const CELL_VS_CILIUM: Figure = {
-  w: 316,
-  h: 158,
-  minPx: 440,
-  labels: [
-    { text: 'same receptor, different place', x: 158, y: 0, anchor: 'centre', tone: 'title' },
-    { text: 'CRISPR or RNAi: gone from the whole cell', x: 75, y: 140, anchor: 'centre', tone: 'caption' },
-    { text: 'what we are aiming for: less of it in the cilium', x: 241, y: 140, anchor: 'centre', tone: 'caption' },
-  ],
-  alt:
-    'Two identical cells side by side, each with three receptors in its flat membrane and two in the wall of its cilium. In the first, every receptor is faded and struck through: the protein is gone from the whole cell. In the second, the three receptors in the flat membrane are untouched and only the two in the cilium are faded.',
-}
-
-const FIGURES: Record<ScienceFigureKind, Figure> = { pathway: PATHWAY, 'cell-vs-cilium': CELL_VS_CILIUM }
+const FIGURES: Record<ScienceFigureKind, Figure> = { pathway: PATHWAY }
 
 export default function ScienceFigure({
   kind,
@@ -160,8 +122,14 @@ export default function ScienceFigure({
     const GOLD_HI = toRgb(pal.daisyPetal)
     const ALGAE = toRgb(pal.algae)
     const BERRY = toRgb(pal.berry)
-    const STONE = toRgb(pal.stoneMid)
     const ROCK_D = toRgb(pal.rockDark)
+    const LILAC = toRgb(pal.lilacPetal)
+    const LILAC_D = toRgb(pal.quillDark)
+    const WATER = toRgb(pal.waterLight)
+    const WATER_D = toRgb(pal.waterDeep)
+    const LEAF = toRgb(pal.leaf)
+    // The palette has no true red; this rose is the closest it goes.
+    const ROSE = toRgb(pal.pinkDark)
 
     const set = (x: number, y: number, c: Rgb) => {
       x = Math.round(x)
@@ -201,33 +169,37 @@ export default function ScienceFigure({
       if (down) {
         box(x, y, 2, len - 5, c)
         for (let i = 0; i < 5; i++) box(x - 4 + i, y + len - 5 + i, 10 - 2 * i, 1, c)
+      } else if (len < 0) {
+        // Pointing left: the same arrow, mirrored.
+        const n = -len
+        box(x - n + 5, y, n - 5, 2, c)
+        for (let i = 0; i < 5; i++) box(x - n + 5 - i, y - 4 + i, 1, 10 - 2 * i, c)
       } else {
         box(x, y, len - 5, 2, c)
         for (let i = 0; i < 5; i++) box(x + len - 5 + i, y - 4 + i, 1, 10 - 2 * i, c)
       }
     }
-    /**
-     * Stamps one of the engine's sprites. `tint` paints every set pixel one
-     * colour (a protein shown faded); `strike` rules a line through it.
-     */
-    const stamp = (sp: Sprite, x: number, y: number, opts: { tint?: Rgb; strike?: boolean } = {}) => {
-      sp.rows.forEach((row, j) => {
-        for (let i = 0; i < row.length; i++) {
-          const key = LEGEND[row[i]]
-          if (!key) continue
-          set(x + i, y + j, opts.tint ?? toRgb(pal[key]))
+    /** A rounded lump: how the description page draws a protein. */
+    const blob = (x: number, y: number, w: number, h: number, fill: Rgb, edge: Rgb) => {
+      const r = Math.min(w, h) / 2
+      for (let j = 0; j < h; j++)
+        for (let i = 0; i < w; i++) {
+          const dx = Math.min(i, w - 1 - i)
+          const dy = Math.min(j, h - 1 - j)
+          const corner = dx < r && dy < r
+          const d2 = corner ? (r - dx) * (r - dx) + (r - dy) * (r - dy) : 0
+          if (corner && d2 > r * r) continue
+          const rim = dx < 1 || dy < 1 || (corner && d2 > (r - 1.4) * (r - 1.4))
+          set(x + i, y + j, rim ? edge : fill)
         }
-      })
-      if (opts.strike) {
-        // Ruled past the edges of the sprite, or at this size it reads as
-        // part of the protein rather than a line through it.
-        const n = sp.w + 6
-        for (let i = -3; i < n; i++) {
-          const px = x + i
-          const py = y + Math.round(((sp.h + 4) * (i + 3)) / n) - 2
-          set(px, py, LINE)
-          set(px, py + 1, LINE)
-        }
+    }
+    /** A cross over something, for a route that is closed. */
+    const cross = (cx: number, cy: number, r: number, c: Rgb) => {
+      for (let i = -r; i <= r; i++) {
+        set(cx + i, cy + i, c)
+        set(cx + i + 1, cy + i, c)
+        set(cx + i, cy - i, c)
+        set(cx + i + 1, cy - i, c)
       }
     }
 
@@ -256,21 +228,23 @@ export default function ScienceFigure({
         // The nucleus, and the genes inside it.
         disc(px + P.nucleus.x, P.nucleus.y, P.nucleus.r, PAPER, LINE)
         for (let k = 0; k < 3; k++) box(px + P.nucleus.x - 8, P.nucleus.y - 5 + k * 5, 16, 2, on ? GOLD : DIM)
-        // PTCH1 in the wall of the cilium, the same in both panels.
-        stamp(PTCH_UP, px + x0 - 4, 26)
         // One SMO out in the flat cell membrane, the same in both panels.
-        stamp(SMO, px + 122, P.membrane - 1)
+        blob(px + 136, P.membrane - 5, 20, 14, WATER, WATER_D)
         if (on) {
-          // A ligand on the outer face of PTCH1, and SMO now in the wall.
-          box(px + 50, 34, 7, 7, GOLD)
-          frame(px + 50, 34, 7, 7, GOLD_HI)
-          stamp(SMO_UP, px + x1 - 4, 22)
-          stamp(SMO_UP, px + x1 - 4, 52)
-          stamp(SMO_UP, px + x0 - 4, 56)
+          // PTCH1 has the ligand on it and has moved off the mouth of the
+          // cilium, so SMO can get in and is now standing in its wall.
+          blob(px + 24, P.membrane - 7, 30, 16, LILAC, LILAC_D)
+          box(px + 32, P.membrane - 18, 8, 8, GOLD)
+          frame(px + 32, P.membrane - 18, 8, 8, GOLD_HI)
+          blob(px + mid - 10, 34, 20, 14, WATER, WATER_D)
+          blob(px + mid - 10, 56, 20, 14, WATER, WATER_D)
           arrow(px + mid - 1, P.membrane + 8, 14, true, LINE)
         } else {
-          // Nothing gets in.
-          box(px + x0 + 3, P.membrane - 10, x1 - x0 - 6, 3, SOFT)
+          // PTCH1 sits across the mouth of the cilium. SMO tries to get in
+          // from the flat membrane, and cannot: the route is crossed out.
+          blob(px + mid - 18, P.membrane - 9, 36, 18, LILAC, LILAC_D)
+          arrow(px + 132, P.membrane - 1, -26, false, SOFT)
+          cross(px + 120, P.membrane, 7, ROSE)
         }
       })
 
@@ -281,59 +255,26 @@ export default function ScienceFigure({
         box(bx, MMM.y, MMM.w, 60, CREAM)
         frame(bx, MMM.y, MMM.w, 60, SOFT)
         membrane(bx + 1, my, MMM.w - 2)
-        // SMO in that membrane: whole for the first two steps, broken in the last.
-        const sx = bx + 58
+        // Everything here is a lump, the way the description page draws it.
+        const sx = bx + 62
         if (step === 2) {
-          stamp(SMO, sx, my - 1, { tint: ROCK_D })
-          for (let k = 0; k < 4; k++) box(sx + 1 + k * 4, my - 1 + (k % 2) * 5, 3, 4, CREAM)
+          // The protein is gone: a gap in the membrane where it stood, and
+          // the pieces of it drifting off underneath.
+          box(sx - 2, my, 20, 6, CREAM)
+          for (let k = 0; k < 3; k++) blob(sx - 2 + k * 7, my + 14 + (k % 2) * 6, 5, 5, DIM, ROCK_D)
         } else {
-          stamp(SMO, sx, my - 1)
+          blob(sx, my - 5, 18, 16, WATER, WATER_D)
         }
         if (step < 2) {
-          // MEGF8 spans the membrane, MOSMO beside it, MGRN1 underneath.
-          box(bx + 20, my - 5, 20, 16, STONE)
-          frame(bx + 20, my - 5, 20, 16, ROCK_D)
-          box(bx + 12, my - 3, 7, 7, ALGAE)
-          box(bx + 26, my + 13, 8, 8, BERRY)
-          if (step === 1) {
-            // The tag, now on SMO.
-            box(sx + 4, my - 8, 7, 5, GOLD)
-            frame(sx + 4, my - 8, 7, 5, GOLD_HI)
-          } else {
-            box(bx + 27, my + 9, 6, 4, GOLD)
-          }
+          // MEGF8 across the membrane, MOSMO beside it, MGRN1 underneath.
+          blob(bx + 22, my - 6, 22, 18, LILAC, LILAC_D)
+          blob(bx + 12, my - 4, 12, 14, LEAF, ALGAE)
+          blob(bx + 18, my + 14, 24, 12, GOLD, BERRY)
+          // The tag goes on under the membrane, which is the side MGRN1 is on.
+          const tag = step === 1 ? [sx + 5, my + 14] : [bx + 28, my + 17]
+          blob(tag[0], tag[1], 7, 7, GOLD, GOLD_HI)
         }
         if (step < 2) arrow(bx + MMM.w + 3, MMM.y + 28, 16, false, SOFT)
-      })
-    } else {
-      C.at.forEach((cx, side) => {
-        const out = side === 0
-        const { x0, x1, top } = C.tube
-        const mid = (x0 + x1) / 2
-        const r = (x1 - x0) / 2
-        box(cx, C.top, C.w, C.h, PAPER)
-        frame(cx, C.top, C.w, C.h, SOFT)
-        // The cell body, under its flat membrane.
-        box(cx + 1, C.top + C.membrane + 6, C.w - 2, C.h - C.membrane - 7, CREAM)
-        membrane(cx + 1, C.top + C.membrane, C.w - 2)
-        // The cilium, the same shape as the one in the pathway figure.
-        for (let y = top; y < C.membrane; y++)
-          for (let i = x0; i < x1; i++) {
-            const dy = y < top + r ? top + r - y : 0
-            const dx = i + 0.5 - mid
-            const d = dx * dx + dy * dy
-            if (d > r * r) continue
-            set(cx + i, C.top + y, d > (r - 2) * (r - 2) ? LINE : PAPER)
-          }
-        // Three receptors in the flat membrane, two in the ciliary wall. On
-        // the left the whole cell loses them; on the right only the cilium
-        // changes, and nothing is struck out because nothing is deleted.
-        C.flat.forEach((x) =>
-          stamp(GPCR, cx + x, C.top + C.membrane - 1, out ? { tint: DIM, strike: true } : {}),
-        )
-        C.wall.forEach(([x, y]) =>
-          stamp(GPCR_UP, cx + x, C.top + y, out ? { tint: DIM, strike: true } : { tint: DIM }),
-        )
       })
     }
 
