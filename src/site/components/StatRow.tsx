@@ -32,12 +32,19 @@ interface Props {
 }
 
 export default function StatRow({ heading, intro, items, footnote, source }: Props) {
+  /**
+   * The columns follow the count. A four-up row wants four columns, but a pair
+   * in a four-column grid sits in the first two and leaves the right half of
+   * the panel empty, which reads as a layout fault rather than as two figures.
+   */
+  const columns = items.length <= 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-4'
+
   return (
     <section className="panel px-5 py-5 sm:px-7 sm:py-6">
       {heading && <h2 className="text-xl">{heading}</h2>}
       {intro && <p className="mt-1 text-body leading-relaxed">{inline(intro)}</p>}
 
-      <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <dl className={'mt-4 grid gap-3 ' + columns}>
         {items.map((s) => (
           <div
             key={s.label}
