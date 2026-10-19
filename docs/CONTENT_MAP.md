@@ -240,8 +240,9 @@ and a complete or in-progress mark on each entry.
 
 **Now:** three cards. Advisors (the two principal investigators and the
 mentor), then the whole team, each tile opening what that person did (from
-the team's iGEM Attributions Form, in one style). Then sponsors, support and
-software, each with a pixel-art logo and a link.
+the team's iGEM Attributions Form, in one style). Then sponsors, support,
+software and the game that inspired the wiki's look, each with a pixel-art
+logo and a link.
 
 **Still needed:** per-part and per-page attribution, if the team wants it
 beyond the form.
