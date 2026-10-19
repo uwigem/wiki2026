@@ -81,14 +81,14 @@ export const SUBTEAMS: Subteam[] = [
     name: 'Kinetic Modeling',
     flower: 'bluebell',
     blurb:
-      'Builds the ODE model of the Hedgehog and MMM system, and tests whether the binder can bring ciliary SMO back to a normal level. Advised by Dr. Herbert Sauro.',
+      'Builds the ODE model of the Hedgehog and MMM system, and tests whether the binder can bring ciliary SMO back to a normal level.',
   },
   {
     id: 'wet-lab',
     name: 'Wet Lab',
     flower: 'white',
     blurb:
-      'Cloning, transfection, and the induced-proximity and two-hybrid assays in NIH/3T3 and HEK293T cells. Advised by Dr. Jennifer Kong and Dr. Claudia Vasquez.',
+      'Cloning, transfection, and the induced-proximity and two-hybrid assays in NIH/3T3 and HEK293T cells. Advised by Dr. Jennifer Kong.',
   },
   {
     id: 'human-practices',
