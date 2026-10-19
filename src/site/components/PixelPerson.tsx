@@ -186,6 +186,21 @@ export const LOOK_OVERRIDES: Record<string, Look> = {
     recolor: { hair: '#332417', skin: SKIN[2], top: '#c9a0c0', pants: '#565b70' },
     extras: ['glasses'],
   },
+  'Dr. Jeremy Reiter': {
+    base: 0,
+    recolor: { hair: '#8a6a45', skin: SKIN[1], top: '#b0453f', pants: '#565b70' },
+    extras: ['glasses'],
+  },
+  'Professor Teddy Johnson': {
+    base: 2,
+    recolor: { hair: '#5a544e', skin: SKIN[10], top: '#2f3a4a', pants: '#565b70', eyes: DARK_BROWN_EYES },
+    beard: true,
+  },
+  'Dr. Margo Bergman': {
+    base: 5,
+    recolor: { hair: '#4a3220', skin: SKIN[1], top: '#5a6f8a', pants: '#565b70' },
+    extras: ['glasses'],
+  },
   'Dr. Mark Bothwell': {
     base: 4,
     recolor: { hair: GREY_HAIR, skin: SKIN[2], top: '#7a8a5a', pants: '#5b3a2a' },

@@ -2072,7 +2072,7 @@ const humanPractices: Page = {
       id: "integration",
       heading: "Integration counter",
       items: [
-        { value: "13", label: "stakeholders consulted" },
+        { value: "16", label: "stakeholders consulted" },
         { value: "6", label: "professional communities represented" },
         { value: "5", label: "shared adoption needs" },
         { value: "5", label: "design requirements defined", emphasis: true },
@@ -2214,6 +2214,39 @@ const humanPractices: Page = {
           changed:
             "The wet lab team can incorporate localisation and negative control assays and consider a disease relevant cell model after the SMO proof of concept, modelling teams can evaluate adapting the platform to additional receptor classes, and Human Practices will sharpen the proposed user need around selective receptor level perturbation.",
           photo: "ihp/stakeholders/bothwell.jpg",
+        },
+        {
+          id: "reiter",
+          name: "Dr. Jeremy Reiter",
+          role: "Professor and chair in the Departments of Biochemistry and Biophysics at the University of California San Francisco, whose lab works on ciliogenesis, compartmentalisation in cilia and signal transduction",
+          group: "ciliary biologist",
+          why: "To learn how the platform could be used in research and taken up by scientists studying ciliary transmembrane proteins, and where the wet lab proof of concept could be strengthened.",
+          said: "He advised presenting the platform for pathological and mature settings of Hedgehog signalling, which are far less characterised than developmental ones, and noted that while loss-of-function tools are plentiful, few can act on the protein pool in a single subcompartment of a cell. For the SMO proof of concept he suggested using it alongside pharmacological inhibitors such as vismodegib, to get past second-site resistance where SMO gains mutations that block inhibitor binding. At the bench he asked whether the position of our protein tags changes how much ubiquitination we see, which confounders could be moving the result, such as linker length, and pressed for more controls: a knowingly ineffective binder for the binding assay, existing SMO nanobodies as a positive control for the dimerisation system, and cyclopamine or vismodegib as positive controls for downstream signalling.",
+          changed:
+            "The experiments gained controls on his advice, including a nonbinding design for the binder screen and pharmacological positive controls for the signalling readout, and subcompartment specificity is now stated as the thing existing loss-of-function tools cannot do.",
+          photo: "ihp/stakeholders/reiter.jpg",
+        },
+        {
+          id: "johnson",
+          name: "Professor Teddy Johnson",
+          role: "Clinical associate professor at the University of Washington School of Pharmacy and Director of Technology Development at the UW Institute of Translational Health Sciences",
+          group: "startup or industry",
+          why: "To understand the regulatory landscape for research tools, and for advice on commercialising the platform, on fundraising, and on the trade-off between open and proprietary development.",
+          said: "He cautioned that grant funding moves slowly, follows the political climate and comes in waves of popularity, so he recommended identifying a specific market opportunity before approaching investors for gap funding, and building binders against proteins people are already interested in. He noted that research tools are lightly regulated next to medicines and devices: a Research Use Only label is generally acceptable so long as the product is not falsely advertised and its results do not drive clinical decisions. On marketing he suggested approaching labs that enjoy trying new things rather than arguing with labs that resist change, and reducing friction by selling through major vendors and staying compatible with equipment labs already own. On distribution he proposed a hybrid: an open developer community to draw research and agency attention, with proprietary products for specialised work to keep investors comfortable. He also warned that ego and team discord waste more money than overspending does.",
+          changed:
+            "Human Practices will analyse how the platform fits existing research workflows and identify the labs most likely to test it, and the wet lab will review the ciliary literature and design binders against a small number of high-impact targets.",
+          photo: "ihp/stakeholders/johnson.jpg",
+        },
+        {
+          id: "bergman",
+          name: "Dr. Margo Bergman",
+          role: "Professor of computer science at The Evergreen State College, working on AI, public health and human decision-making in economic systems",
+          group: "bioethics",
+          why: "To understand how researchers decide whether to adopt a new tool, and to have our market estimate checked by someone who works on decision-making.",
+          said: "She expected scientists to choose tools the way anyone does, on trust and on what they already know, and warned about the information cascade: people stay with sources that appear better informed, which here means colleagues, mentors and whatever those people already use. She suggested a small pilot with a limited number of labs, then asking them how likely they would be to adopt it and what they would change. On the market estimate she agreed with the approach but cautioned against using NIH funding as a proxy given current reductions, suggesting instead counting primary cilium publications and splitting them into grant-funded and non-grant-funded work. She noted that both methods miss funded research that never reaches publication, so both underestimate the market. On AI and dual use she said how far mitigation should go depends on what we and regulatory boards accept as risk, and recommended building guardrails with biosecurity experts and enforcing them as a condition of use.",
+          changed:
+            "The drylab teams will consult AI developers and biosecurity experts on limiting misuse, and the market estimate now carries her caution about using grant funding as a proxy.",
+          photo: "ihp/stakeholders/bergman.jpg",
         },
         {
           id: "nuukbio",
