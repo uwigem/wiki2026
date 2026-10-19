@@ -39,14 +39,9 @@ import {
   type ConstructGroup,
 } from "./constructs";
 import type { ProcedureGroup } from "../components/Procedure";
-import { MENTORS, SOFTWARE, SPONSORS, creditedMembersOf, type Credit } from "./attributions";
-import {
-  PRINCIPAL_INVESTIGATORS,
-  SUBTEAMS,
-  type FlowerKind,
-  type Profile,
-  type SubteamId,
-} from "./team";
+import { ADVISORS, SOFTWARE, SPONSORS, STUDENTS } from "./attributions";
+import type { CreditSet } from "../components/AttributionGroups";
+import type { FlowerKind, Profile } from "./team";
 
 /**
  * Anything with an `id` can be linked to from anywhere else in the wiki, with
@@ -392,22 +387,16 @@ export type Block = Anchored &
         blurb?: string;
         flower: FlowerKind;
         people: Profile[];
-        /** Tag the people who lead this subteam. */
-        subteam?: SubteamId;
-        /** Wider cards, with each person's post under their name. */
-        titled?: boolean;
-        /** The label over a name in the opened card. Without one, their subteams. */
-        kicker?: string;
+        /** Only names on the tiles; the opened card gives each person's post and role. */
+        nameOnly?: boolean;
       }
-    /** Organisations or software, a logo each; a card opens what it gave us. */
+    /** Organisations and software in labelled sets, a logo each; a card opens what it gave us. */
     | {
         kind: "credits";
         heading: string;
         blurb?: string;
         flower: FlowerKind;
-        items: Credit[];
-        /** The label over a name in the opened card. */
-        kicker: string;
+        sets: CreditSet[];
       }
     | { kind: "todo"; body: string[] }
   );
@@ -3447,53 +3436,31 @@ const attributions: Page = {
   blocks: [
     {
       kind: "people",
-      id: "investigators",
-      heading: "Principal Investigators",
-      blurb: "The faculty who advise the project and host the work.",
+      id: "advisors",
+      heading: "Advisors",
+      blurb: "The principal investigators who advise the project and host the work, and the mentors who guided us.",
       flower: "fern",
-      people: PRINCIPAL_INVESTIGATORS,
-      titled: true,
-      kicker: "principal investigator",
+      people: ADVISORS,
+      nameOnly: true,
     },
     {
       kind: "people",
-      id: "mentors",
-      heading: "Mentors",
-      blurb: "Researchers who guided our work at the bench.",
+      id: "team",
+      heading: "The Team",
+      blurb: "Every student on the team, from every subteam.",
       flower: "tree",
-      people: MENTORS,
-      titled: true,
-      kicker: "mentor",
+      people: STUDENTS,
     },
-    // The students, one group per subteam, as on the team page.
-    ...SUBTEAMS.map(
-      (s): Block => ({
-        kind: "people",
-        id: "students-" + s.id,
-        heading: s.name,
-        blurb: s.blurb,
-        flower: s.flower,
-        people: creditedMembersOf(s.id),
-        subteam: s.id,
-      }),
-    ),
     {
       kind: "credits",
-      id: "sponsors",
-      heading: "Support and sponsors",
-      blurb: "The departments, funds and companies that paid for the work or gave us what it needed.",
+      id: "support",
+      heading: "Support and Software",
+      blurb: "The departments, funds and companies that paid for the work or gave us what it needed, and the software our design pipeline and model are built on.",
       flower: "bush",
-      items: SPONSORS,
-      kicker: "support",
-    },
-    {
-      kind: "credits",
-      id: "software",
-      heading: "Software we did not write",
-      blurb: "The tools our design pipeline and model are built on.",
-      flower: "reed",
-      items: SOFTWARE,
-      kicker: "software",
+      sets: [
+        { label: "Sponsors and support", items: SPONSORS },
+        { label: "Software", items: SOFTWARE },
+      ],
     },
   ],
 };

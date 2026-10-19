@@ -674,9 +674,7 @@ function BlockView({ block }: { block: Block }) {
           blurb={block.blurb}
           flower={block.flower}
           people={block.people}
-          subteam={block.subteam}
-          titled={block.titled}
-          kicker={block.kicker}
+          nameOnly={block.nameOnly}
         />
       );
 
@@ -686,8 +684,7 @@ function BlockView({ block }: { block: Block }) {
           heading={block.heading}
           blurb={block.blurb}
           flower={block.flower}
-          items={block.items}
-          kicker={block.kicker}
+          sets={block.sets}
         />
       );
 
