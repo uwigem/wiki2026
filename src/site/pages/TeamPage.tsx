@@ -25,7 +25,7 @@ export default function TeamPage() {
             <p className="pixel text-tag tracking-[0.2em]">washington igem 2026</p>
             <h1 className="mt-1 text-2xl sm:text-4xl">Meet the Team</h1>
           </PixelSign>
-          <p className="panel-flat max-w-2xl px-4 py-3 text-body-sm leading-relaxed">{TEAM_PAGE_INTRO}</p>
+          <p className="panel-flat w-full px-4 py-3 text-body-sm leading-relaxed">{TEAM_PAGE_INTRO}</p>
         </div>
       </GardenSection>
 

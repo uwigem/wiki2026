@@ -37,11 +37,11 @@ export default function LinkCards({
   items: LinkItem[]
   source?: string
 }) {
-  const cols = items.length === 1 ? 'max-w-xl' : items.length === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'
+  const cols = items.length === 1 ? '' : items.length === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'
   return (
     <section className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
       {heading && <h2 className="text-xl">{heading}</h2>}
-      {intro && <p className="mt-1 max-w-2xl text-body leading-relaxed">{inline(intro)}</p>}
+      {intro && <p className="mt-1 text-body leading-relaxed">{inline(intro)}</p>}
       <ul className={'mt-4 grid gap-3 ' + cols}>
         {items.map((it) => {
           const local = !/^https?:\/\//.test(it.href)

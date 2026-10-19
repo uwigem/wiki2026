@@ -51,14 +51,14 @@ export default function ConstructDiagram({
     // push the whole page sideways instead of letting its labels wrap.
     <section className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
       {heading && <h2 className="text-xl">{heading}</h2>}
-      {intro && <p className="mt-1 max-w-2xl text-body leading-relaxed">{inline(intro)}</p>}
+      {intro && <p className="mt-1 text-body leading-relaxed">{inline(intro)}</p>}
 
       <div className="mt-6 flex flex-col gap-7">
         {groups.map((group) => (
           <div key={group.id}>
             <h3 className="pixel text-base text-leaf-950">{group.name}</h3>
             {group.blurb && (
-              <p className="mt-1 max-w-2xl text-body-sm leading-relaxed text-leaf-900">{inline(group.blurb)}</p>
+              <p className="mt-1 text-body-sm leading-relaxed text-leaf-900">{inline(group.blurb)}</p>
             )}
 
             <ul className="mt-4 flex flex-col gap-5">
@@ -109,8 +109,8 @@ export default function ConstructDiagram({
         ))}
       </ul>
 
-      {footnote && <p className="measure mt-3 text-body-sm leading-relaxed text-leaf-900">{inline(footnote)}</p>}
-      {source && <p className="measure mt-3 text-note text-leaf-800">{source}</p>}
+      {footnote && <p className="mt-3 text-body-sm leading-relaxed text-leaf-900">{inline(footnote)}</p>}
+      {source && <p className="mt-3 text-note text-leaf-800">{source}</p>}
     </section>
   )
 }

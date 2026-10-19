@@ -63,7 +63,7 @@ export default function CapabilityMatrix({ heading, intro, columns, rows, source
     // instead of scrolling inside its own box below.
     <section className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
       {heading && <h2 className="text-xl">{heading}</h2>}
-      {intro && <p className="mt-1 max-w-2xl text-body leading-relaxed">{inline(intro)}</p>}
+      {intro && <p className="mt-1 text-body leading-relaxed">{inline(intro)}</p>}
 
       {/* The table is wider than a phone. It scrolls inside this box rather
           than making the whole page scroll sideways. `relative` matters: the

@@ -56,7 +56,7 @@ export default function TornadoChart({
   return (
     <section className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
       {heading && <h2 className="text-xl">{heading}</h2>}
-      {intro && <p className="mt-1 max-w-2xl text-body leading-relaxed">{inline(intro)}</p>}
+      {intro && <p className="mt-1 text-body leading-relaxed">{inline(intro)}</p>}
 
       <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-note">
         <span className="flex items-center gap-1.5">
@@ -131,7 +131,7 @@ export default function TornadoChart({
 
       <p className="mt-3 text-note">Bar length is {unit}.</p>
 
-      {footnote && <p className="mt-3 max-w-2xl text-body-sm leading-relaxed">{inline(footnote)}</p>}
+      {footnote && <p className="mt-3 text-body-sm leading-relaxed">{inline(footnote)}</p>}
       {source && (
         <p className="mt-4 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{source}</p>
       )}

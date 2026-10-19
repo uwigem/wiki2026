@@ -35,7 +35,7 @@ export default function StatRow({ heading, intro, items, footnote, source }: Pro
   return (
     <section className="panel px-5 py-5 sm:px-7 sm:py-6">
       {heading && <h2 className="text-xl">{heading}</h2>}
-      {intro && <p className="mt-1 max-w-2xl text-body leading-relaxed">{inline(intro)}</p>}
+      {intro && <p className="mt-1 text-body leading-relaxed">{inline(intro)}</p>}
 
       <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((s) => (
@@ -55,7 +55,7 @@ export default function StatRow({ heading, intro, items, footnote, source }: Pro
         ))}
       </dl>
 
-      {footnote && <p className="mt-4 max-w-2xl text-body-sm leading-relaxed">{inline(footnote)}</p>}
+      {footnote && <p className="mt-4 text-body-sm leading-relaxed">{inline(footnote)}</p>}
       {source && (
         <p className="mt-4 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{source}</p>
       )}

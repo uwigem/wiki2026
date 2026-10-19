@@ -77,7 +77,8 @@ Serves on <http://localhost:5173> and reloads on save.
 npm run check
 ```
 
-Type-checks the whole project and enforces the two house rules. **Run this
+Type-checks the whole project and enforces the three house rules (no em dashes,
+no hard-coded colours, body text fills its column). **Run this
 before you push.** `npm run dev` does not type-check, so it will keep serving a
 page whose file would fail the real build.
 
