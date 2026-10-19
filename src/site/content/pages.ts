@@ -3544,12 +3544,8 @@ const implementation: Page = {
 
 const parts: Page = {
   slug: "/parts",
-  title: "Seeds We Logged",
+  title: "Parts and Registry",
   kicker: "chapter 06 · parts and registry",
-  storyBeat:
-    "Every seed saved and labelled, so the next gardener can plant it.",
-  intro:
-    "The genetic parts we designed for HedgehogSense: what each one is, what it is for, and where it came from.",
   blocks: [
     {
       kind: "prose",

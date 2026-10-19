@@ -120,14 +120,17 @@ export default function WikiPage({ page }: { page: Page }) {
             <h1 className="mt-1 text-2xl sm:text-4xl">{page.title}</h1>
           </PixelSign>
 
-          {/* One introduction, not two stacked boxes. */}
-          <div className="panel w-full px-5 py-4 sm:px-7 sm:py-5">
-            {page.storyBeat && (
-              <p className="text-body leading-relaxed text-leaf-800">{page.storyBeat}</p>
-            )}
-            {page.intro && <p className="mt-3 text-lg leading-relaxed">{page.intro}</p>}
-            {page.note && <p className="mt-3 text-note leading-relaxed text-leaf-800">{page.note}</p>}
-          </div>
+          {/* One introduction, not two stacked boxes, and no box at all on a
+              page that opens straight into its content. */}
+          {(page.storyBeat || page.intro || page.note) && (
+            <div className="panel w-full px-5 py-4 sm:px-7 sm:py-5">
+              {page.storyBeat && (
+                <p className="text-body leading-relaxed text-leaf-800">{page.storyBeat}</p>
+              )}
+              {page.intro && <p className="mt-3 text-lg leading-relaxed">{page.intro}</p>}
+              {page.note && <p className="mt-3 text-note leading-relaxed text-leaf-800">{page.note}</p>}
+            </div>
+          )}
 
           {long && <ReadingTips hasPeople={people.length > 0} />}
         </div>
