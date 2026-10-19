@@ -115,7 +115,7 @@ export const SUBTEAMS: Subteam[] = [
   },
   {
     id: 'web-dev',
-    name: 'Web Development',
+    name: 'Wiki Development',
     flower: 'heart',
     blurb: 'The team website, this wiki, and iGEM Alchemy.',
   },
@@ -240,13 +240,13 @@ export const ROSTER: Member[] = [
   },
   {
     name: 'Rishabh Goenka',
-    titles: ['Web Development Lead'],
+    titles: ['Wiki Development Lead'],
     email: 'rish9@uw.edu',
     subteams: ['web-dev'],
     leads: ['web-dev'],
     leader: true,
     bio:
-      'Hi, I’m Rishabh! I’m an Electrical and Computer Engineering major, and I lead Web Development. I’m passionate about research and photography.',
+      'Hi, I’m Rishabh! I’m an Electrical and Computer Engineering major, and I lead Wiki Development. I’m passionate about research and photography.',
     linkedin: 'https://www.linkedin.com/in/rishabh-goenkx',
     website: 'https://www.rishabhgoenka.com/',
     photo: 'team/rishabh-goenka.jpg',
@@ -257,7 +257,7 @@ export const ROSTER: Member[] = [
     subteams: ['protein-design', 'web-dev'],
     leader: true,
     bio:
-      'Hi, I’m Trevor! I’m a second-year Computer Science and Biology major on the Protein Design and Web Development subteams. I write and organize the scripts for our de novo protein design pipelines, and I helped build this wiki. Outside of school, I love to read, cook, and play games.',
+      'Hi, I’m Trevor! I’m a second-year Computer Science and Biology major on the Protein Design and Wiki Development subteams. I write and organize the scripts for our de novo protein design pipelines, and I helped build this wiki. Outside of school, I love to read, cook, and play games.',
     linkedin: 'https://www.linkedin.com/in/trevor-white-aa40123bb',
     photo: 'team/trevor-white.jpg',
   },
@@ -267,7 +267,7 @@ export const ROSTER: Member[] = [
     subteams: ['web-dev'],
     leader: true,
     bio:
-      'Hi, I’m Neel! I’m a third-year Human Centered Design and Engineering major on Web Development. I joined iGEM because I love making science easy for everyone to understand. Fun fact: I finished this iGEM season studying abroad in Hong Kong.',
+      'Hi, I’m Neel! I’m a third-year Human Centered Design and Engineering major on Wiki Development. I joined iGEM because I love making science easy for everyone to understand. Fun fact: I finished this iGEM season studying abroad in Hong Kong.',
     linkedin: 'https://www.linkedin.com/in/neel-sundar',
     photo: 'team/neel-sundar.jpg',
   },
@@ -320,14 +320,14 @@ export const ROSTER: Member[] = [
     email: 'rgottu@uw.edu',
     subteams: ['web-dev'],
     bio:
-      'Hi, I’m Ruhi! I’m a Computer Science major on the Web Development subteam.',
+      'Hi, I’m Ruhi! I’m a Computer Science major on the Wiki Development subteam.',
   },
   {
     name: 'Iris Guo',
     email: 'iguo@uw.edu',
     subteams: ['human-practices', 'web-dev'],
     bio:
-      'Hi, I’m Iris! I’m a third-year Computer Science and Mathematics major on the Web Development and Human Practices subteams. I enjoy video games, drawing, and reading.',
+      'Hi, I’m Iris! I’m a third-year Computer Science and Mathematics major on the Wiki Development and Human Practices subteams. I enjoy video games, drawing, and reading.',
     photo: 'team/iris-guo.jpg',
   },
   {

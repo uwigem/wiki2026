@@ -3173,7 +3173,7 @@ const education: Page = {
         },
         {
           title: "Washington iGEM students come from many backgrounds. Which of these majors has been represented on the team: electrical engineering, computer science, finance, anthropology, or all of the above?",
-          body: "**All of the above!** Although most students answered this question correctly, many were still surprised to see finance and anthropology majors taking part in a synthetic biology competition. By discussing everything an iGEM team does, from web development to fundraising, many students realised how much of our project, and of synthetic biology as a whole, happens outside the lab. Students of all majors were excited to realise that iGEM had a place for them too.",
+          body: "**All of the above!** Although most students answered this question correctly, many were still surprised to see finance and anthropology majors taking part in a synthetic biology competition. By discussing everything an iGEM team does, from wiki development to fundraising, many students realised how much of our project, and of synthetic biology as a whole, happens outside the lab. Students of all majors were excited to realise that iGEM had a place for them too.",
         },
         {
           title: "Which two women scientists discovered a way to edit the human genome with CRISPR-Cas9 and won the 2020 Nobel Prize in Chemistry?",
