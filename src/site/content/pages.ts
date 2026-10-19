@@ -2198,6 +2198,11 @@ const humanPractices: Page = {
         kind: "details",
         id: "where-this-started",
         section: "Background",
+        // Open on arrival. This block is the whole of the Background section,
+        // so collapsed it left the section looking empty. The Show and Hide
+        // control stays, so a reader who already knows the pathway can fold it
+        // away; it just starts the other way round.
+        open: true,
         heading: "Where this started: the Hedgehog pathway, and why we pivoted",
         summary: "Hedgehog signalling runs through the primary cilium; the cell's MMM complex clears SMO out of it; we began as a therapy and became a platform for controlling what stays in the cilium.",
         blocks: [
@@ -2904,7 +2909,9 @@ const humanPractices: Page = {
       id: "responsible",
       heading: "Responsible platform development",
       body: [
-        "Any exciting scientific advancement must also be used with the utmost responsibility. Tampering with the cilium could have unintended consequences throughout the body, or be used unethically. We aim to prevent unintended consequences by modelling off-target effects and by using custom technology such as de novo protein design to reach a high level of target specificity. We likewise aim to keep our protocols open source, so that other scientists can reach a high level of specificity for their own target of interest.",
+        "Any exciting scientific advancement must also be used with the utmost responsibility. Tampering with the cilium could have unintended consequences throughout the body, or be used unethically. We aim to prevent unintended consequences by [modelling off-target effects](/model#mc4r-safety) and by using custom technology such as de novo protein design to reach a high level of target specificity. We likewise aim to keep our protocols open source, so that other scientists can reach a high level of specificity for their own target of interest.",
+        "That is a claim we have tested once, on ourselves. The clearest predictable off-target risk in our own design is the melanocortin pathway: the up arm works by prising the MMM complex apart, which frees MGRN1, and MGRN1 has a second job with a different partner regulating **MC4R**, and so appetite and body weight. We modelled it before building anything. The effect is small and it saturates, reaching [2.75 percent at 500 nM](/model#mc4r-dose), a dose ten times higher than anything we would use, against the 20 percent we had set in advance as the point where an effect becomes biologically meaningful. It also does not depend on how good our binder turns out to be, because MGRN1 is the scarce component at roughly 0.18 nM and there is only so much of it to redistribute.",
+        "One worked example is not a guarantee about every protein a future user might point this at. What it does give is a method we can hand on: before going near a bench, name the other partners the ligase already has, and model the competition for it. That check belongs in what we give anyone adopting the platform, not just in our own notes.",
         "The possibility that a target of interest could be detrimental to someone's health also deserves consideration. The cilium is responsible for far more than cancer: it is implicated in wound healing, phototransduction, mechanosensation, cardiovascular fibrosis, bone development, kidney health, and much more [1]. Just as our technology can bring the cilium into homeostasis, it can also be used to cause dysregulation. A complete understanding of the target mutation is a prerequisite for using our technology, along with transparency and informed consent among any clinical candidates that come from our platform.",
         "Further, the cilium is foundational to early developmental processes. While our technology opens the possibility of tuning ciliary receptors with a precision other therapeutics lack, using it to fine tune developmental biology raises a number of ethical alarm bells. Given that many of the conditions our tool could be adapted to treat are diagnosed before birth, and given the histories of developmental biology in eugenicist movements, we must stay critical of the technology we create. The most straightforward recommendation we often see is that such a technology should only be used as an intervention when the health of an individual could reasonably be compromised. But that leaves much to common notions of health and of the individual. The exclusionary box of traditional health often fails to recognise disability as anything but an avenue of suffering; we maintain that our technology is not, and will never be, a cure for developmental conditions, but a tool that can be used to develop treatments for life-threatening conditions. And the only individual typically discussed is the child; we maintain that more research is needed on the effects of ciliary signalling on the health of birthing mothers.",
         "Given this long list of concerns about our platform, a question arises: is it ethical to leave a technology this foundational open source? We hope a direct comparison can help.",
@@ -3389,35 +3396,6 @@ const education: Page = {
               href: "https://doi.org/10.1038/d41586-026-01723-1",
             },
           ],
-        },
-      ],
-    },
-  ],
-};
-
-const safety: Page = {
-  slug: "/safety-and-security",
-  title: "Tending Safely",
-  kicker: "chapter 13 · safety",
-  storyBeat: "Gloves on. Some things in a garden bite.",
-  intro:
-    "This page is not finished. It records what we can state now, and the rest follows once the iGEM safety form is done.",
-  blocks: [
-    {
-      kind: "facts",
-      heading: "What we can state now",
-      items: [
-        {
-          title: "Where we work",
-          body: "Cloning in E. coli plasmids, and mammalian cell culture in NIH/3T3 and HEK293T lines. Work is done in the advising lab under its existing protocols.",
-        },
-        {
-          title: "Reagents",
-          body: "Any hazardous reagents come through the advising lab under its protocols, rather than being bought on a student grant.",
-        },
-        {
-          title: "The honest state",
-          body: "There is no biosafety document written yet. The exact biosafety level and a dual-use statement will be set out here once the safety form is done.",
         },
       ],
     },
@@ -4095,7 +4073,6 @@ export const PAGES: Page[] = [
   contribution,
   judging,
   attributions,
-  safety,
 ];
 
 export function pageBySlug(slug: string): Page | undefined {
