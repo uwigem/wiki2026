@@ -39,6 +39,14 @@ import {
   type ConstructGroup,
 } from "./constructs";
 import type { ProcedureGroup } from "../components/Procedure";
+import { MENTORS, SOFTWARE, SPONSORS, creditedMembersOf, type Credit } from "./attributions";
+import {
+  PRINCIPAL_INVESTIGATORS,
+  SUBTEAMS,
+  type FlowerKind,
+  type Profile,
+  type SubteamId,
+} from "./team";
 
 /**
  * Anything with an `id` can be linked to from anywhere else in the wiki, with
@@ -376,6 +384,30 @@ export type Block = Anchored &
         intro?: string;
         stages: PipelineStage[];
         source?: string;
+      }
+    /** A group of people, a pixel character each; a card opens what that person did. */
+    | {
+        kind: "people";
+        heading: string;
+        blurb?: string;
+        flower: FlowerKind;
+        people: Profile[];
+        /** Tag the people who lead this subteam. */
+        subteam?: SubteamId;
+        /** Wider cards, with each person's post under their name. */
+        titled?: boolean;
+        /** The label over a name in the opened card. Without one, their subteams. */
+        kicker?: string;
+      }
+    /** Organisations or software, a logo each; a card opens what it gave us. */
+    | {
+        kind: "credits";
+        heading: string;
+        blurb?: string;
+        flower: FlowerKind;
+        items: Credit[];
+        /** The label over a name in the opened card. */
+        kicker: string;
       }
     | { kind: "todo"; body: string[] }
   );
@@ -3411,82 +3443,57 @@ const attributions: Page = {
   title: "Who Helped Us Dig",
   kicker: "chapter 12 · attributions",
   storyBeat: "None of this was one hedgehog.",
-  intro: "What we did ourselves, and what we had help with.",
+  intro: "What we did ourselves, and what we had help with. Select any card to see the details.",
   blocks: [
     {
-      kind: "cards",
-      heading: "Advisors and mentors",
-      items: [
-        {
-          title: "Dr. Frank DiMaio",
-          body: "Protein design mentor at the Institute for Protein Design. Set the tool choices, the filter metrics, and the target-selection rules, and gave us a seat on the DIGS cluster.",
-        },
-        {
-          title: "Dr. Jennifer Kong",
-          body: "Wet lab advisor. The MMM complex comes from her lab, and she guides the biology and supplies reagents.",
-        },
-        {
-          title: "Dr. Claudia Vasquez",
-          body: "Wet lab advisor. Feasibility review and experimental design.",
-        },
-        {
-          title: "Dr. Herbert Sauro",
-          body: "Systems biology advisor. Reshaped the kinetic modelling into a model-selection approach.",
-        },
-        {
-          title: "Dr. Stacey Ogden",
-          body: "Hedgehog signalling researcher at St. Jude. Gave us the disease picture and the honest limits of the approach.",
-        },
-        {
-          title: "Adam Chazin-Gray",
-          body: "PhD student at the Institute for Protein Design who mentored hands-on lab work.",
-        },
-      ],
+      kind: "people",
+      id: "investigators",
+      heading: "Principal Investigators",
+      blurb: "The faculty who advise the project and host the work.",
+      flower: "fern",
+      people: PRINCIPAL_INVESTIGATORS,
+      titled: true,
+      kicker: "principal investigator",
     },
     {
-      kind: "cards",
+      kind: "people",
+      id: "mentors",
+      heading: "Mentors",
+      blurb: "Researchers who guided our work at the bench.",
+      flower: "tree",
+      people: MENTORS,
+      titled: true,
+      kicker: "mentor",
+    },
+    // The students, one group per subteam, as on the team page.
+    ...SUBTEAMS.map(
+      (s): Block => ({
+        kind: "people",
+        id: "students-" + s.id,
+        heading: s.name,
+        blurb: s.blurb,
+        flower: s.flower,
+        people: creditedMembersOf(s.id),
+        subteam: s.id,
+      }),
+    ),
+    {
+      kind: "credits",
+      id: "sponsors",
       heading: "Support and sponsors",
-      items: [
-        {
-          title: "Institute for Protein Design",
-          body: "Lab space, mentorship, and funding.",
-        },
-        {
-          title: "Biochemistry Department",
-          body: "Recurring annual support and the lab that hosts us.",
-        },
-        {
-          title: "Student Technology Fee",
-          body: "Funds the Hyak compute we run the design pipeline on.",
-        },
-        { title: "Biology and Microbiology", body: "Departmental support." },
-        {
-          title: "Reagent grants",
-          body: "DNA and reagents in kind from Twist Bioscience, IDT, GenScript, NEB, and Zymo.",
-        },
-        {
-          title: "Research Computing Club",
-          body: "Access to the Hyak cluster.",
-        },
-      ],
+      blurb: "The departments, funds and companies that paid for the work or gave us what it needed.",
+      flower: "bush",
+      items: SPONSORS,
+      kicker: "support",
     },
     {
-      kind: "cards",
+      kind: "credits",
+      id: "software",
       heading: "Software we did not write",
-      items: [
-        { title: "RFdiffusion3", body: "Backbone generation." },
-        { title: "ProteinMPNN", body: "Sequence design." },
-        { title: "RoseTTAFold3", body: "Forward folding to check designs." },
-        {
-          title: "BindCraft",
-          body: "The second, more stringent design track.",
-        },
-        {
-          title: "Rosetta and PyMOL",
-          body: "Interface scoring and structural inspection.",
-        },
-        { title: "Tellurium and SciPy", body: "Modelling the ODE system." },
-      ],
+      blurb: "The tools our design pipeline and model are built on.",
+      flower: "reed",
+      items: SOFTWARE,
+      kicker: "software",
     },
   ],
 };

@@ -48,6 +48,7 @@ import RecipeStrip from "../components/RecipeStrip";
 import ResultsSoon from "../components/ResultsSoon";
 import Hog from "../components/alchemy/Hog";
 import { StakeholderContext, stakeholderId } from "../components/stakeholders";
+import { CreditGroup, PeopleCredits } from "../components/AttributionGroups";
 
 /**
  * Generic content page, rendered from data in `content/pages.ts`.
@@ -664,6 +665,30 @@ function BlockView({ block }: { block: Block }) {
             </div>
           ))}
         </Details>
+      );
+
+    case "people":
+      return (
+        <PeopleCredits
+          heading={block.heading}
+          blurb={block.blurb}
+          flower={block.flower}
+          people={block.people}
+          subteam={block.subteam}
+          titled={block.titled}
+          kicker={block.kicker}
+        />
+      );
+
+    case "credits":
+      return (
+        <CreditGroup
+          heading={block.heading}
+          blurb={block.blurb}
+          flower={block.flower}
+          items={block.items}
+          kicker={block.kicker}
+        />
       );
 
     case "todo":

@@ -233,8 +233,10 @@ pixel art on grass, not for small text on a panel. If you re-theme the palette,
 re-check both against a contrast checker.
 
 The one place raw colour values are allowed is pixel-art data:
-`src/site/refSprites.ts` and the skin, hair and clothing arrays in
-`src/site/components/PixelPerson.tsx`. Those are artwork, not theme.
+`src/site/refSprites.ts`, the skin, hair and clothing arrays in
+`src/site/components/PixelPerson.tsx`, and the logo files in
+`src/site/content/` (`balanceLogo.ts`, `teamLogo.ts`, `creditLogos.ts`). Those
+are artwork, not theme.
 
 ## Type
 
@@ -365,9 +367,11 @@ keyboards. These are not optional polish.
 1. No em dashes in any `.ts`, `.tsx`, `.css`, `.html`, `.md` or `.mjs` file
    under `src/`, `docs/` or `scripts/`, or anywhere at the repo root.
 2. No hex colour (3, 6 or 8 digit) in any `.ts`, `.tsx` or `.css` file under
-   `src/`, except `src/engine/` (which is the palette) and the two pixel-art
-   files. A `color-mix` line is allowed, and a line ending in `colour-ok` is an
-   explicit, documented opt-out.
+   `src/`, except `src/engine/` (which is the palette) and the pixel-art data
+   files: `src/site/refSprites.ts`, `PixelPerson.tsx`, and `balanceLogo.ts`,
+   `teamLogo.ts` and `creditLogos.ts` in `src/site/content/`. A `color-mix`
+   line is allowed, and a line ending in `colour-ok` is an explicit,
+   documented opt-out.
 3. No width cap on text (design rule 8). Any `max-w-*`, fractional or arbitrary
    width, inline `maxWidth`, or `text-balance` in a `.ts` or `.tsx` file, and any
    `max-width`, `--measure` or `--container-*` token, `@apply max-w-*` or

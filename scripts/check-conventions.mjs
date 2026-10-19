@@ -29,7 +29,7 @@ const SKIP_DIRS = new Set(['node_modules', 'dist', '.git', '.vite'])
  * Files whose colour literals are the point.
  *
  * `src/engine/` is the palette itself: every colour on the site is derived from
- * it, so of course it is full of hex. The other two are pixel-art data.
+ * it, so of course it is full of hex. The rest are pixel-art data.
  */
 const COLOUR_EXEMPT = [
   'src/engine/',
@@ -37,6 +37,7 @@ const COLOUR_EXEMPT = [
   'src/site/components/PixelPerson.tsx',
   'src/site/content/balanceLogo.ts',
   'src/site/content/teamLogo.ts',
+  'src/site/content/creditLogos.ts',
 ]
 
 /** The character itself, by code point, so this file does not trip its own rule. */
@@ -119,6 +120,7 @@ const WIDTH_ALLOWLIST = {
   'src/site/components/SectionRail.tsx': { 'max-w-[11rem]': 1, 'sm:max-w-[15rem]': 1 }, // the outline button
   'src/site/components/MemberModal.tsx': { 'max-w-2xl': 1 }, // dialog
   'src/site/components/StakeholderModal.tsx': { 'max-w-xl': 1 }, // dialog
+  'src/site/components/CreditModal.tsx': { 'max-w-2xl': 1 }, // dialog
   'src/site/components/alchemy/FieldGuide.tsx': { 'max-w-xl': 1 }, // dialog
   'src/site/components/alchemy/Workbench.tsx': { 'md:max-w-md': 1, 'max-w-sm': 1 }, // game bubble and dialog
   'src/site/pages/AlchemyPage.tsx': { 'max-w-5xl': 1 },
