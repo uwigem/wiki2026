@@ -3429,7 +3429,7 @@ const education: Page = {
 
 const attributions: Page = {
   slug: "/attributions",
-  title: "Who Helped Us Dig",
+  title: "Attributions",
   kicker: "chapter 12 · attributions",
   storyBeat: "None of this was one hedgehog.",
   intro: "What we did ourselves, and what we had help with. Select any card to see the details.",
