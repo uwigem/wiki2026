@@ -23,7 +23,6 @@ export type FlowerKind =
   | 'berry'
   | 'tree'
   | 'bush'
-  | 'reed'
 
 export type SubteamId =
   | 'protein-design'

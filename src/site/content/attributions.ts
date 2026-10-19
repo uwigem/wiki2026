@@ -12,7 +12,7 @@
  * are defined here instead.
  */
 import type { CreditLogoId } from './creditLogos'
-import { membersOf, type Investigator, type Profile, type SubteamId } from './team'
+import { PRINCIPAL_INVESTIGATORS, ROSTER, SUBTEAM_NAME, type Investigator, type Profile } from './team'
 
 export type Task =
   | 'analysis'
@@ -78,9 +78,20 @@ export const MENTORS: Investigator[] = [
  */
 export const ROSTER_EXTRAS: Profile[] = [{ name: 'Arhan', subteams: ['wet-lab'] }]
 
-/** A subteam's students for this page: the team page's list, then anyone above. */
-export function creditedMembersOf(id: SubteamId): Profile[] {
-  return [...membersOf(id), ...ROSTER_EXTRAS.filter((p) => p.subteams?.includes(id))]
+/** The principal investigators, then the mentors. */
+export const ADVISORS: Investigator[] = [...PRINCIPAL_INVESTIGATORS, ...MENTORS]
+
+/** Every student, in the team page's order, then anyone above. */
+export const STUDENTS: Profile[] = [...ROSTER, ...ROSTER_EXTRAS]
+
+/**
+ * What someone is to the project, in a few words: shown under their name on
+ * the card and over it in the opened card.
+ */
+export function roleOf(person: Profile): string {
+  if (PRINCIPAL_INVESTIGATORS.some((p) => p.name === person.name)) return 'principal investigator'
+  if (MENTORS.some((p) => p.name === person.name)) return 'mentor'
+  return (person.subteams ?? []).map((id) => SUBTEAM_NAME[id]).join(' · ')
 }
 
 /**

@@ -1,7 +1,7 @@
-import type { FlowerKind, Investigator } from '../content/team'
+import { FERN } from '../../engine/sprites'
+import type { Investigator } from '../content/team'
 import PixelPerson, { looksFor } from './PixelPerson'
 import PixelSprite from './PixelSprite'
-import { FLOWER_SPRITE, emblemScale } from './TeamGroup'
 
 /**
  * The principal investigators, at the top of the team page.
@@ -11,39 +11,30 @@ import { FLOWER_SPRITE, emblemScale } from './TeamGroup'
  * difference is that a tile carries their post under their name, because two
  * names with no context at the head of the page say nothing. The photograph
  * appears in the profile the tile opens, never on the tile itself.
- *
- * The attributions page uses it for the mentors too, with its own heading.
  */
 export default function InvestigatorCards({
   people,
   onPick,
-  heading = 'Principal Investigators',
-  blurb = 'The faculty who advise the project and host the work.',
-  flower = 'fern',
-  openLabel = 'Open profile',
 }: {
   people: Investigator[]
   onPick: (person: Investigator) => void
-  heading?: string
-  blurb?: string
-  flower?: FlowerKind
-  /** What a tile does, for screen readers: `Open profile: Name`. */
-  openLabel?: string
 }) {
   return (
-    <section className="panel overflow-hidden" aria-label={heading}>
+    <section className="panel overflow-hidden" aria-label="Principal investigators">
       <div className="flex flex-col sm:flex-row">
         <div className="shrink-0 border-b-[3px] border-leaf-300 px-5 py-4 sm:w-64 sm:border-b-0 sm:border-r-[3px]">
           <div className="flex items-start gap-3">
             <span className="shrink-0">
-              <PixelSprite sprite={FLOWER_SPRITE[flower]} scale={emblemScale(flower)} />
+              <PixelSprite sprite={FERN} scale={3} />
             </span>
-            <h2 className="min-w-0 text-lg sm:text-xl">{heading}</h2>
+            <h2 className="min-w-0 text-lg sm:text-xl">Principal Investigators</h2>
             <span className="badge ml-auto" aria-label={`${people.length} people`}>
               {people.length}
             </span>
           </div>
-          <p className="mt-3 text-body-sm leading-relaxed">{blurb}</p>
+          <p className="mt-3 text-body-sm leading-relaxed">
+            The faculty who advise the project and host the work.
+          </p>
         </div>
 
         <div className="flex-1 p-4">
@@ -54,7 +45,7 @@ export default function InvestigatorCards({
                   type="button"
                   onClick={() => onPick(p)}
                   className="flex h-full w-40 flex-col items-center gap-1 rounded-sm border-[3px] border-petal-daisy bg-petal-cream/60 px-2 pb-2 pt-2 shadow-[3px_3px_0_var(--p-shadow)] transition duration-150 hover:brightness-[1.06]"
-                  aria-label={`${openLabel}: ${p.name}`}
+                  aria-label={`Open profile: ${p.name}`}
                 >
                   {/* The pixel character, always, exactly as on a student tile.
                       The photograph belongs inside the profile, not out here. */}

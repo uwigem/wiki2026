@@ -7,13 +7,12 @@ import {
   HEART_PLANT,
   LILAC,
   PINK_BELL,
-  REED,
   TREE,
   WHITE_FLOWER,
   type Sprite,
 } from '../../engine/sprites'
 import { hashStr, mulberry32 } from '../rng'
-import type { FlowerKind, Profile, SubteamId } from '../content/team'
+import type { FlowerKind, Member, SubteamId } from '../content/team'
 import PixelPerson, { looksFor } from './PixelPerson'
 import PixelSprite from './PixelSprite'
 
@@ -35,12 +34,11 @@ export const FLOWER_SPRITE: Record<FlowerKind, Sprite> = {
   berry: BERRY_BUSH,
   tree: TREE,
   bush: BUSH,
-  reed: REED,
 }
 
-/** How much to enlarge an emblem. The tall sprites get less, so every emblem sits beside its heading at about the same size. */
+/** How much to enlarge an emblem: the tree is tall, so it gets less. */
 export function emblemScale(flower: FlowerKind): number {
-  return flower === 'tree' || flower === 'reed' ? 2 : 3
+  return flower === 'tree' ? 2 : 3
 }
 
 /** The tile colours a person can get. Shuffled per group by `tileTints`, so a
@@ -73,28 +71,17 @@ interface Props {
   heading: string
   blurb?: string
   flower: FlowerKind
-  people: Profile[]
+  people: Member[]
   /** Tag the people who lead this subteam. */
   subteam?: SubteamId
-  onPick: (person: Profile) => void
-  /** What a tile does, for screen readers: `Open profile: Name`. */
-  openLabel?: string
+  onPick: (member: Member) => void
 }
 
 /**
  * The people are real <button>s labelled with the person's name, so the card is
  * an ordinary keyboard-navigable list of people.
  */
-export default function TeamGroup({
-  id,
-  heading,
-  blurb,
-  flower,
-  people,
-  subteam,
-  onPick,
-  openLabel = 'Open profile',
-}: Props) {
+export default function TeamGroup({ id, heading, blurb, flower, people, subteam, onPick }: Props) {
   const tints = tileTints(id, people.length)
 
   return (
@@ -126,7 +113,7 @@ export default function TeamGroup({
                       'flex h-full w-28 flex-col items-center gap-1 rounded-sm border-[3px] px-1 pb-2 pt-2 shadow-[3px_3px_0_var(--p-shadow)] transition duration-150 hover:brightness-[1.06] ' +
                       tints[i]
                     }
-                    aria-label={`${openLabel}: ${m.name}${leadsHere ? ', lead' : ''}`}
+                    aria-label={`Open profile: ${m.name}${leadsHere ? ', lead' : ''}`}
                   >
                     {/* A fixed slot, so a taller character (curly hair) does not push
                         their name below the rest of the row. Fits 20 rows at scale 4. */}

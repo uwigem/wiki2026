@@ -67,8 +67,8 @@ All page content is data in `src/site/content/pages.ts`. Each item in a page's
 | `video` | YouTube videos as stills with a play button; the player loads only on click | Recorded talks, tutorial episodes |
 | `gallery` | Two to four photographs side by side, lazy-loaded | An event as it looked |
 | `links` | Cards that each end in one button: a file under `public/` downloads, an https:// address opens in a new tab | Handbooks, posts, documents to take home |
-| `people` | A group of people as pixel characters; a card opens what that person did, from `content/attributions.ts` | Crediting people |
-| `credits` | Organisations or software as pixel-art logos; a card opens what each gave us | Crediting sponsors and tools |
+| `people` | One card of people as pixel characters; a tile opens what that person did, from `content/attributions.ts` | Crediting people |
+| `credits` | One card of organisations and software in labelled sets, as pixel-art logos; a tile opens what each gave us | Crediting sponsors and tools |
 | `todo` | A visible "still to come" panel | Drafting only. No page ships one. |
 
 **Link between pages.** Any block can take an `id`, and any body text can then
@@ -238,10 +238,10 @@ and a complete or in-progress mark on each entry.
 
 ### Attributions
 
-**Now:** the two principal investigators, the mentor, and every student by
-subteam, each card opening what that person did (from the team's iGEM
-Attributions Form, in one style). Then sponsors and software, each with a
-pixel-art logo and a link.
+**Now:** three cards. Advisors (the two principal investigators and the
+mentor), then the whole team, each tile opening what that person did (from
+the team's iGEM Attributions Form, in one style). Then sponsors, support and
+software, each with a pixel-art logo and a link.
 
 **Still needed:** per-part and per-page attribution, if the team wants it
 beyond the form.
