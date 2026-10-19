@@ -110,7 +110,6 @@ const DARK_BROWN_HAIR = '#3a2a1e'
 const BROWN_HAIR = '#5f4027'
 const BLACK_TOP = '#34323d'
 const BLACK_PANTS = '#2a2932'
-const WHITE_TOP = '#f7f4ee'
 const LIGHT_BLUE = '#9cc3e6'
 const BLUE = '#4f86bd'
 const RED = '#cc4a3e'
@@ -145,7 +144,7 @@ export const LOOK_OVERRIDES: Record<string, Look> = {
     recolor: { hair: '#efe9d9', skin: SKIN[0], top: '#f4f0e6', pants: JEANS, eyes: BLUE_EYES },
     extras: ['cable'],
   },
-  'Samaira Bakshi': { base: 9, recolor: { hair: BLACK_HAIR, skin: '#edc9af', top: WHITE_TOP, pants: BLACK_PANTS } },
+  'Samaira Bakshi': { base: 9, recolor: { hair: BLACK_HAIR, skin: '#e5bca4', pants: '#f2efe8' } },
   'Alex Devgan': {
     base: 8,
     recolor: { hair: BLACK_HAIR, skin: SKIN[5], top: BLACK_TOP, pants: JEANS, eyes: BROWN_EYES },
@@ -154,7 +153,7 @@ export const LOOK_OVERRIDES: Record<string, Look> = {
   'Eliza Dawley': { base: 5, recolor: { hair: '#b58a45', skin: SKIN[1], top: '#d9603a', pants: JEANS, eyes: BLUE_EYES } },
   'Aimee Furlan': { base: 5, recolor: { hair: '#c4562a', skin: SKIN[1], top: GREEN, pants: JEANS, eyes: BLUE_EYES } },
   'Jaiden Poon': { base: 4, recolor: { hair: BLACK_HAIR, skin: SKIN[4], top: BLACK_TOP, pants: '#c9b48a' } },
-  'Rishabh Goenka': { base: 10, recolor: { hair: BLACK_HAIR, skin: SKIN[6], top: BLACK_TOP, pants: BLACK_PANTS, eyes: BROWN_EYES } },
+  'Rishabh Goenka': { base: 10, recolor: { hair: BLACK_HAIR, skin: '#e0ad84', top: BLACK_TOP, pants: BLACK_PANTS, eyes: BROWN_EYES } },
   'Neel Sundar': {
     base: 0,
     recolor: { hair: BLACK_HAIR, skin: SKIN[8], top: RED, pants: '#6b6e78', eyes: DARK_BROWN_EYES },
