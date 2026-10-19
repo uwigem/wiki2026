@@ -325,6 +325,6 @@ belongs on them, so the structure is right from the first day:
 | --- | --- | --- |
 | Out of the Greenhouse | `/implementation` | proposed implementation: who it is for, plus the deliverables shared with Human Practices |
 | Seeds We Logged | `/parts` | parts and registry |
-| Protocols | `/protocols` | **has no procedures yet on purpose.** Same hedgehog as Results; replace the `resultsSoon` block as each protocol is validated and written up |
+| Protocols | `/protocols` | the seven finalised wet-lab PDFs, four experiment sections, one `details` row each holding a `pdf` block. The files live in `public/protocols/`; add a protocol by dropping the PDF there and adding a row |
 | Results | `/results` | **has no data yet on purpose.** The hedgehog says so; replace the `resultsSoon` block the moment there are numbers |
 | The Checklist | `/judging` | where each criterion is evidenced |
