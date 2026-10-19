@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { PAGES, pageBySlug } from './site/content/pages'
 import { PROJECT_TITLE, TEAM_NAME } from './site/content/site'
 import { Link, currentAnchor, useRoute } from './site/router'
@@ -49,13 +49,21 @@ export default function App() {
   const [announced, setAnnounced] = useState('')
   const lastPath = useRef<string | null>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // A new page normally starts at the top. The exception is a link that
     // named a section: `/model#sensitivity` is a request to land part
     // way down, and jumping to the top first would fight the scroll that
     // `useSectionJump` is about to do.
+    //
+    // Instant, and before the browser paints. `behavior: 'auto'` is not a
+    // jump on this site: it defers to `html { scroll-behavior: smooth }`, so
+    // the new page used to glide up from wherever the last one was left. The
+    // homepage story reads the scroll position to choose its scene, so that
+    // glide showed later scenes (the person outline, the garden closing) on
+    // the way up before the title. A layout effect also means no frame of the
+    // new page is ever drawn at the old page's depth.
     if (currentAnchor()) return
-    window.scrollTo({ top: 0, behavior: 'auto' })
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }, [path])
 
   useEffect(() => {

@@ -18,6 +18,17 @@ import { OLD_PATHS } from './content/nav'
 /** The site's base path with no trailing slash: `''`, `/washington` or `/wiki2026`. */
 const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '')
 
+/*
+ * The app decides where every page starts: at the top, or at the section a
+ * link named (see App.tsx and useSectionJump). The browser's own scroll
+ * restoration is switched off so it cannot overrule that. Left on, it put the
+ * old position back just after the app had moved to the top, so pressing Back
+ * onto the homepage drew the title scene and then jumped to a later one.
+ */
+if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+  window.history.scrollRestoration = 'manual'
+}
+
 /** A route as a URL: `/model#sensitivity` becomes `/washington/model#sensitivity`. */
 export function href(to: string): string {
   const [path, anchor] = to.split('#')
