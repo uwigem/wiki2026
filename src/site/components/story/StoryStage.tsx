@@ -415,6 +415,22 @@ export default function StoryStage() {
     }
   }, [layout])
 
+  /*
+   * The snapping above is set on <html>, so it outlives this component until
+   * that effect is cleaned up, and React cleans it up only after the next
+   * page's layout effects have run. App puts the next page at the top in one
+   * of those, and with mandatory snapping still on and the story gone, the
+   * only snap point left is the footer, so the next page landed at its bottom.
+   * A layout effect's cleanup runs as this component is removed, before any of
+   * that, so the snapping is switched off here first.
+   */
+  useLayoutEffect(
+    () => () => {
+      document.documentElement.style.scrollSnapType = ''
+    },
+    [],
+  )
+
   // Leaving a scene resets what the reader did in it.
   useEffect(() => {
     if (STORY[pos.idx].id !== 'diseases') setOpenCond(null)
