@@ -761,7 +761,7 @@ const engineering: Page = {
             },
             {
               title: "Learn",
-              body: "By reviewing the outputs of sensitivity analysis, parameter sweeps and model selection tools, we clear away gaps in knowledge and stand-in values, and set the direction for future adaptations: the most informative yet least complex form, an ideal model.",
+              body: "By reviewing the outputs of sensitivity analysis, parameter sweeps and model selection tools, we clear away gaps in knowledge and stand-in values, and set the direction for future adaptations: the most informative yet least complex form, an ideal model. One of the gaps the model closed before the bench was the dimeriser: our first choice, rapamycin, would also have inhibited mTORC1 and confounded the result. [See the wet lab cycles](/engineering#wet-lab-cycles).",
             },
           ],
         },
@@ -852,7 +852,7 @@ const engineering: Page = {
             },
             {
               title: "Learn",
-              body: "Too early for a rescue rate, but one cost is already clear. Redesigning sequences onto backbones that already passed means more of the final set comes from the **same few backbone shapes**, so the plate is less diverse than the count suggests.",
+              body: "Too early for a rescue rate, but one cost is already clear. Redesigning sequences onto backbones that already passed means more of the final set comes from the **same few backbone shapes**, so the plate is less diverse than the count suggests. The survivors become the plate the bench screens in [Experiment 2](/experiments#exp2-design), and the hits go on to purified testing in [Experiment 4](/experiments#exp4-design).",
             },
           ],
         },
@@ -877,7 +877,85 @@ const engineering: Page = {
       kind: "prose",
       heading: "Where the bench work fits",
       body: [
-        "The third loop is the one that decides whether any of the first two were right. It is the least far along, because it starts once there are constructs to put into cells. What is settled already is the shape of those constructs, and every decision below was forced on us by the biology rather than chosen. The assays themselves, with their controls, are on [experiments](/experiments).",
+        "The third loop is the one that decides whether any of the first two were right. It is the least far along, because it starts once there are constructs to put into cells, and none of the assays have run yet. What it has done so far is turn the other two loops into a gene design and an experiment plan. The kinetic modelling subteam told us which dimeriser to avoid, which rates to measure, and how to measure them. The protein modelling subteam told us which part of the target a binder can reach, and how many designs we had to work with. The assays themselves, with their controls, are on [experiments](/experiments).",
+      ],
+    },
+    {
+      kind: "cycles",
+      id: "wet-lab-cycles",
+      heading: "How the models shaped the wet lab",
+      intro:
+        "Each cycle below follows one hand-off, from the model, to the construct, to the experiment.",
+      cycles: [
+        {
+          heading: "Cycle 1: Choosing the dimeriser",
+          intro:
+            "Complete. The kinetic modelling subteam caught a problem with our first dimeriser before any construct was ordered.",
+          items: [
+            {
+              title: "Design",
+              body: "The [down arm](/description#two-arms) rests on one question: can **MGRN1** ubiquitinate **SMO**, and lower it, if it is forced next to it? Targeted degraders only work when the E3 ligase they recruit can productively ubiquitinate the particular target, and a ligase that binds is not guaranteed to do that. So we planned to fuse SMO to **FKBP12** and MGRN1 to **FRB**, and add a dimeriser to pull them together. If SMO falls, MGRN1 is a candidate E3 for a SMO-targeting degrader. The dimeriser we planned to use first was rapamycin.",
+            },
+            {
+              title: "Build",
+              body: "The kinetic modelling subteam took the system into the [kinetic model](/model): rapamycin bridging FKBP12 and FRB to bring SMO and MGRN1 together, alongside the cell's own FKBP12 and mTOR as competing binders for the same rapamycin. They then read our draft protocol against the literature.",
+            },
+            {
+              title: "Test",
+              body: "**FRB is the rapamycin-binding domain of mTOR**, so native FKBP12 and mTOR would compete for the rapamycin we added, and rapamycin would inhibit **mTORC1**. Any fall in SMO could then be an mTOR side effect and not MGRN1 degrading SMO. That is a problem we would otherwise have met at the bench, with a result we could not interpret. Thanks to the kinetic modelling subteam, we met it on paper.",
+            },
+            {
+              title: "Learn",
+              body: "The fix changed the gene design, not just the reagent. We moved to **AP21967** with an engineered **FRB(T2098L)** domain, designed so that AP21967 binds the engineered domain and not native mTOR. That put SMO on the FRB(T2098L) side (DmrC) and MGRN1 on its partner domain (DmrA), and it set the recruitment constructs we ordered from GenScript. A catalytically inactive MGRN1 and a DmrA-mCherry proximity-only control sit beside the wild-type pair. Lowering the risk is not removing it, so a dimeriser-only condition in [Experiment 1](/experiments#exp1-design) catches anything AP21967 does by itself. We also built a second route that needs no small molecule: MGRN1 fused to an ALFA-binding nanobody, with an ALFA tag on SMO.",
+            },
+          ],
+        },
+        {
+          heading: "Cycle 2: Deciding what to measure",
+          intro:
+            "In progress. The model told us which rates matter, and the experiments are built to measure them. No assay has run yet.",
+          items: [
+            {
+              title: "Design",
+              body: "The [kinetic model](/model) is only as good as its numbers, and most of them are stand-ins. The kinetic modelling subteam ran a sensitivity analysis to show which numbers actually move **ciliary SMO**, and said plainly what would help most: wet lab data on how SMO moves at the cilium. Two rates stood out. One is how fast MGRN1 tags SMO once it is bound. The other, in the linear model, is the rate at which ciliary SMO is cleared. Dr. Sauro also had the subteam work from relative data such as fold changes, which is what a bench can give.",
+            },
+            {
+              title: "Build",
+              body: "Those two rates became two experiments. [Experiment 1](/experiments#exp1-design) asks whether forced recruitment raises SMO ubiquitination. [Experiment 3](/experiments#exp3-design) follows ciliary SMO over six hours after AP21967, with separate fixed wells at each timepoint, and SMO carries a GFP in the construct so the same images give both readings. After reading the protocol, the kinetic modelling subteam asked for three changes, and all three shaped the plan. A whole-cell region is measured beside the ciliary one from the same images, so we can read the ratio between them and not just an exit rate. A timepoint at **360 minutes** was added, so the series runs well past a reported half-life of about two hours. And a dose series of six to eight AP21967 concentrations is planned as a second stage, because it is the only way to see whether the response plateaus or falls away at high dose. A hook effect is a question we are asking, not a property we are assuming, and the answer is a key input for how the model treats dosing of the linker.",
+            },
+            {
+              title: "Test",
+              body: "The assays have not run, so what we could test was the plan. A member of the kinetic modelling subteam reviewed the shared protocol and sent back the changes above, which is the first outside check the plan has had.",
+            },
+            {
+              title: "Learn",
+              body: "The review left us two limits we now state up front. A fall in ciliary SMO does not show that SMO was degraded, because it may only have moved, so imaging is paired with the whole-cell measurement and, to confirm degradation, a biochemical abundance assay. And these measurements cannot separate ciliary entry from exit on their own, which would need a method such as fluorescence recovery or photoconversion. The kinetic modelling subteam's work is why the experiment asks for the right numbers, and why we know which questions it cannot answer.",
+            },
+          ],
+        },
+        {
+          heading: "Cycle 3: From designed binders to a screen",
+          intro:
+            "In progress. Protein modelling set what the binders can reach, and the bench plan is built around that. Orders are placed and no assay has run.",
+          items: [
+            {
+              title: "Design",
+              body: "We aimed at the **MMM complex** and not at ATRN because MMM had cryo-EM structures and an accessible interface. The binders are designed against the extracellular-facing regions of human MEGF8 and MOSMO, so they can be applied to cells from the outside as purified protein.",
+            },
+            {
+              title: "Build",
+              body: "The protein modelling subteam's filters decided what could be ordered. Most early designs bound parts of MOSMO and MEGF8 buried in the membrane, so they re-folded every survivor against only the extracellular parts and wrote a filter that rejects anything near the transmembrane helices. About 25 designs survived, and a rescue cycle is working toward a full 96-well plate. That plate is also the format of the bench screen: [Experiment 2](/experiments#exp2-design) is a 96-well assay in mammalian cells, with each binder and its target fused to one half of a split transcription factor, a GFP reporter, and a matched GB1-only control for every binder. The kinetic modelling subteam's off-target check gave the binder doses a ceiling: the effect on MC4R stays small and saturates, about 2.3 percent at 50 nM and 2.75 percent at 500 nM.",
+            },
+            {
+              title: "Test",
+              body: "Nothing has been screened yet. The binder plate is ordered from Twist Bioscience and has not arrived. What we could test was whether the plan could mislead us, and it could in three ways.",
+            },
+            {
+              title: "Learn",
+              body: "A hit in the screen shows binding inside a cell and nothing more, so disruption is tested separately, in [Experiment 4](/experiments#exp4-design), with a direct check of whether MEGF8 and MOSMO still associate. The binders were designed against human proteins, so activity in NIH/3T3 cells depends on recognising the mouse ones, and a flat result would not mean a binder fails against its intended target. And because the rescue cycle reuses a few backbone shapes, hits may cluster, so we will read them with that in mind. Binders that pass are re-cloned into a vector built for secretion and expressed in Expi293F cells, and they become the purified proteins tested in [Experiment 4](/experiments#exp4-design).",
+            },
+          ],
+        },
       ],
     },
     {
@@ -898,6 +976,46 @@ const engineering: Page = {
           title: "No P2A on the SMO arm",
           body: "A common way to express two proteins from one construct leaves a proline scar. On SMO that scar would affect signalling, so the SMO arm avoids it.",
         },
+      ],
+    },
+    {
+      kind: "table",
+      id: "loops-fed-each-other",
+      heading: "How the loops fed each other",
+      intro:
+        "Every row is a hand-off that changed something. The last one is the direction that has not happened yet.",
+      columns: ["From", "To", "What was handed over", "What it changed at the bench"],
+      rows: [
+        [
+          "Kinetic modelling",
+          "Wet lab",
+          "The mTOR problem with rapamycin.",
+          "The gene design moved to AP21967 with FRB(T2098L) and DmrA/DmrC arms, with a dimeriser-only control in the experiments.",
+        ],
+        [
+          "Kinetic modelling",
+          "Wet lab",
+          "A sensitivity analysis, and a call for time-resolved SMO data.",
+          "[Experiment 3](/experiments#exp3-design): a six-hour time course to 360 minutes, a whole-cell region beside the ciliary one, and a dose series as a second stage.",
+        ],
+        [
+          "Kinetic modelling",
+          "Wet lab",
+          "An off-target check: the MC4R effect stays small and saturates between 50 and 500 nM.",
+          "A ceiling for the binder doses in Experiment 4.",
+        ],
+        [
+          "Protein modelling",
+          "Wet lab",
+          "Extracellular-only targets, and about 25 filtered designs working toward a 96-well plate.",
+          "The format of the [Experiment 2](/experiments#exp2-design) screen, matched GB1 controls, and secreted expression of hits for [Experiment 4](/experiments#exp4-design).",
+        ],
+        [
+          "Wet lab",
+          "Kinetic and protein modelling",
+          "Not yet. Time-resolved SMO from Experiment 3 and the screen hits from Experiment 2 are pending.",
+          "These will update the model's rates and show which binder designs worked.",
+        ],
       ],
     },
   ],
