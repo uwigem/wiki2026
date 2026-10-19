@@ -355,6 +355,8 @@ export type Block = Anchored &
      * finished PDF, such as the wet lab's protocols, rather than as copy.
      */
     | { kind: "pdf"; file: string; title: string; pages?: number }
+    /** How another team swaps our receptor for theirs, as one drawing. */
+    | { kind: "adapt" }
     /** One medal tier, and the criteria claimed under it. */
     | {
         kind: "medals";
@@ -3815,7 +3817,7 @@ const contribution: Page = {
   medal: true,
   storyBeat: "The part of the garden that is for whoever comes next.",
   intro:
-    "A de novo binder design pipeline that runs end to end from one command, the scripts behind it, and the filters we learned to trust. All of it is open, and none of it is specific to our target.",
+    "Two things another team can pick up: a de novo binder design pipeline that runs end to end from one command, and a set of mammalian constructs for recruiting an E3 ligase to a receptor of their choosing. All of it is open, and none of it is specific to our target.",
   blocks: [
     {
       kind: "prose",
@@ -3824,6 +3826,7 @@ const contribution: Page = {
         "Designing a protein binder means driving three separate models in turn and throwing away almost everything they produce. The models are published and free. The part that is not written down anywhere is the plumbing: how to get them onto a cluster you are allowed to use, how to hand each one's output to the next, and which numbers are worth filtering on.",
         "That plumbing is our contribution. We built it on **Hyak**, the University of Washington's shared cluster, so it runs somewhere any student here can reach rather than on a lab machine nobody else can book. It is driven by **one script** that takes a target, a batch size and a set of hotspot residues. And it is **not specific to MOSMO or MEGF8**: a team with a different target and a structure to aim at can point the same pipeline at it.",
         "Below is the pipeline stage by stage, what each tool in it does, the scripts themselves, and the four numbers we use to decide whether a design is worth ordering. The whole thing is on [GitHub](https://github.com/uwigem/protein_design_2026).",
+        "The second half of the page is the wet lab's: [a toolkit of ten constructs](/contribution#toolkit) for bringing an E3 ligase to a receptor, built so that the receptor is the only part another team has to change.",
       ],
     },
     {
@@ -4009,6 +4012,42 @@ const contribution: Page = {
           "Scripts from earlier rounds, kept for reproducing old results. Not part of the active workflow.",
         ],
       ],
+    },
+    {
+      kind: "prose",
+      section: "Wet lab: a construct toolkit",
+      navLabel: "Wet lab: the toolkit",
+      id: "toolkit",
+      heading: "A genetic toolkit for receptor-targeted E3 recruitment",
+      body: [
+        "The second contribution is a set of **ten modular mammalian expression constructs**, designed as a starting point for recruiting an E3 ligase to a receptor you choose. Rather than building something that only works on **Smoothened (SMO)**, we designed two recruitment strategies that can be adapted to other membrane receptors.",
+        "The first uses **chemically induced dimerisation**, with DmrA and DmrC(T2098L) domains brought together by the rapalog **AP21967**. The second uses **ALFA-based recruitment**, pairing an ALFA-tagged receptor with an MGRN1 fusion carrying an ALFA-binding nanobody. Both bring the E3 ligase MGRN1 into proximity with a chosen receptor, and both let the recruitment components be changed independently of the receptor.",
+        "We designed receptor constructs for **SMO and GPR161**, which is the same recruitment architecture built into two different ciliary receptors. The set also includes catalytically inactive MGRN1 variants and a recruitment-only control, so a later team can tell the effect of induced proximity apart from the effect of MGRN1 actually doing its job.",
+      ],
+    },
+    {
+      kind: "adapt",
+      id: "adapt",
+      navLabel: "Adapting it",
+    },
+    {
+      kind: "prose",
+      id: "what-you-can-do",
+      heading: "What another team can do with this",
+      body: [
+        "A team working on a different membrane receptor can take these constructs as design templates, replace the receptor-specific part, and keep the MGRN1 recruitment machinery as it is. The construct architectures are documented on [parts and registry](/parts), and the assays for testing recruitment, ubiquitination and any change in receptor localisation or abundance are on [protocols](/protocols) and [experiments](/experiments).",
+        "**These constructs have been designed and ordered. Their biological function has not been tested.** So we cannot claim that MGRN1 recruitment will regulate every membrane receptor, and a different target may need its fusion orientation, its recruitment-domain placement or its cellular localisation changed. What we are handing over is a tested design process and a set of parts, not a result.",
+      ],
+    },
+    {
+      kind: "constructs",
+      id: "toolkit-constructs",
+      navLabel: "The ten constructs",
+      heading: "The ten constructs",
+      intro:
+        "Ordered from GenScript in pcDNA3.1(+)-based expression vectors. Each one is listed with its intended function, its domains and its sequence on [parts and registry](/parts).",
+      groups: RECRUITMENT_CONSTRUCTS,
+      footnote: "Domain widths are not to scale.",
     },
     {
       kind: "details",
