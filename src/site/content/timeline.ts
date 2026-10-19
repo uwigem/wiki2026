@@ -1,12 +1,14 @@
 /**
- * Season timeline for the Notebook page.
+ * The wet lab's milestones, and the whole team's season.
  *
- * Every entry is dated from the 2026 Notion meeting-notes database. This is the
- * team's *project* timeline, not a lab notebook: wet-lab protocol records live
- * in Benchling and should be summarised (and linked) here rather than retyped.
+ * `WETLAB_MILESTONES` and `NEXT_STEPS` are the Notebook page. `TIMELINE` is
+ * the team's *project* timeline, which the Notebook used to carry as well; it
+ * no longer does, because the lab record was the thing a judge came for and
+ * the outreach, web development and ideation entries buried it. The data is
+ * kept here for whichever page takes it on.
  *
- * TODO(content): add the wet-lab protocol summaries, and mark which entries are
- * complete vs in-progress once the season is further along.
+ * TODO(content): add the wet-lab protocol summaries, and decide where the
+ * whole-team season log belongs now.
  */
 
 export interface TimelineEntry {
@@ -191,50 +193,92 @@ export interface Milestone {
   /** Free text, shown as a tag: "August to September 2026", or "Upcoming". */
   date: string
   title: string
-  body: string
+  /** One or more paragraphs. Inline formatting works. */
+  body: string[]
   status: 'done' | 'upcoming'
 }
 
 export const WETLAB_MILESTONES: Milestone[] = [
   {
-    date: 'Mar to Jun 2026',
+    date: 'March to June 2026',
     title: 'Project conceptualisation',
-    body: 'Two approaches chosen: recruit MGRN1 to SMO, or block the MMM complex with designed binders.',
+    body: [
+      'Our initial research focused on the role of the MMM complex in regulating Smoothened (SMO) ubiquitination and Hedgehog signalling.',
+      'Following discussions with our advisors, we identified two complementary strategies for engineering SMO regulation. **Downregulation:** induced recruitment of MGRN1 to SMO to promote ubiquitination. **Upregulation:** disruption of MMM-mediated SMO regulation using computationally designed MEGF8- and MOSMO-targeting binders.',
+      'These strategies formed the basis of the HedgehogSense bidirectional signalling platform.',
+    ],
     status: 'done',
   },
   {
-    date: 'Jul to Aug 2026',
-    title: 'Experimental planning',
-    body: 'Experiments worked out with the Kong Lab and the modelling team, from recruitment through to signalling.',
+    date: 'July to August 2026',
+    title: 'Experimental workflow development',
+    body: [
+      'In consultation with the Kong Lab, we developed experimental strategies to evaluate the two proposed regulatory mechanisms.',
+      'For induced recruitment, we established plans to test DmrA/DmrC-mediated heterodimerisation and ALFA/NbALFA-based recruitment. We identified appropriate negative and catalytic controls, and developed assays to assess SMO ubiquitination and abundance.',
+      'In parallel, we planned a 96-well mammalian split-transcription-factor assay to screen computationally designed binders against MEGF8 and MOSMO. The proposed assay uses GFP and BFP expression to quantify intracellular binder and target interactions relative to matched negative controls.',
+      'We also outlined subsequent functional assays, including ciliary SMO imaging and GLI-responsive luciferase measurements.',
+    ],
     status: 'done',
   },
   {
-    date: 'Aug to Sep 2026',
-    title: 'Construct design',
-    body: 'Ten mammalian expression constructs designed, in four groups.',
+    date: 'August to September 2026',
+    title: 'Mammalian expression construct design',
+    body: [
+      'We designed ten mammalian expression constructs for evaluating chemically induced recruitment, ALFA/NbALFA-mediated recruitment, and the regulation of ciliary receptors.',
+      'The constructs included SMO and GPR161 receptor fusions, MGRN1 recruitment constructs, catalytically inactive MGRN1 controls, MEGF8 intracellular-domain recruitment constructs, and a proximity-only control.',
+      'Construct architectures were selected to evaluate recruitment efficiency, ubiquitination activity, and the potential applicability of the system to multiple ciliary receptors.',
+    ],
     status: 'done',
   },
   {
-    date: 'Oct 2026',
-    title: 'Orders placed',
-    body: 'Placed with GenScript and Twist Bioscience. Both are awaiting delivery.',
+    date: 'October 2026',
+    title: 'DNA synthesis and cloning orders',
+    body: [
+      'Following construct design and sequence review, we submitted ten mammalian expression constructs to GenScript for synthesis and cloning into pcDNA3.1(+)-based expression vectors.',
+      'Additional DNA fragments encoding computationally designed MEGF8 and MOSMO binders, and components of the mammalian interaction-screening system, were ordered from Twist Bioscience.',
+      'These materials will support the proposed recruitment assays, intracellular binder screening, and downstream functional validation.',
+      '**Status:** orders placed, delivery pending.',
+    ],
     status: 'done',
   },
   {
     date: 'Upcoming',
     title: 'Experimental validation',
-    body: 'Nothing at the bench yet. Plasmid preparation comes first, then the assays.',
+    body: [
+      'Following construct delivery, the next stage will focus on plasmid preparation and verification, mammalian expression, and evaluation of the engineered recruitment systems.',
+      'Subsequent experiments will investigate SMO ubiquitination, binder and target recognition, ciliary SMO localisation, and Hedgehog pathway activity.',
+      'Experimental observations and results will be documented as the work progresses.',
+    ],
     status: 'upcoming',
   },
 ]
 
 /** What happens once the orders land, in order. */
-export const NEXT_STEPS: string[] = [
-  'Plasmid preparation and verification.',
-  'Mammalian protein expression and recruitment assays.',
-  'SMO ubiquitination measurements.',
-  'MEGF8 and MOSMO binder screening.',
-  'SMO trafficking and Hedgehog signalling assays.',
+export const NEXT_STEPS: { title: string; body: string }[] = [
+  {
+    title: 'Plasmid preparation and verification',
+    body: 'Prepare and verify mammalian expression plasmids for subsequent transfection experiments.',
+  },
+  {
+    title: 'Mammalian expression and recruitment assays',
+    body: 'Evaluate construct expression and recruitment using the DmrA/DmrC and ALFA/NbALFA systems.',
+  },
+  {
+    title: 'SMO ubiquitination analysis',
+    body: 'Determine whether induced recruitment increases SMO ubiquitination relative to matched negative and catalytic controls.',
+  },
+  {
+    title: 'Computational binder screening',
+    body: 'Screen MEGF8- and MOSMO-targeting designs in HEK293T cells using the 96-well split-transcription-factor assay.',
+  },
+  {
+    title: 'SMO trafficking and functional characterisation',
+    body: 'Quantify ciliary SMO abundance and evaluate downstream Hedgehog signalling using fluorescence imaging and GLI-responsive reporter assays. Selected binders will undergo additional functional testing following expression and purification.',
+  },
+  {
+    title: 'Combined regulatory system',
+    body: 'If both regulatory mechanisms are independently validated, evaluate their combined effects on Hedgehog pathway activity.',
+  },
 ]
 
 /**

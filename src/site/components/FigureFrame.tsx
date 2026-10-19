@@ -38,7 +38,7 @@ interface Props {
    * The figure plots made-up numbers, drawn to show the shape a result would
    * take. Several of the wet lab figures do, and a plotted curve on a wiki
    * reads as a measurement unless the page says otherwise, so this marks it
-   * on the figure as well as in the caption.
+   * above the figure as well as in the caption.
    */
   hypothetical?: true
   source?: string
@@ -54,9 +54,12 @@ export default function FigureFrame({ src, alt, caption, owner, srcMobile, ratio
   return (
     <figure className="panel m-0 px-5 py-5 sm:px-7 sm:py-6">
       {src ? (
-        <div className="relative">
+        <div>
+          {/* Above the figure, not over it. Laid over the top-left corner it
+              covered the figure's own title, and every figure that needs this
+              label has a title there. */}
           {hypothetical && (
-            <p className="pixel absolute left-2 top-2 rounded-sm border-2 border-leaf-700 bg-petal-daisy px-2 py-0.5 text-tag tracking-wide text-leaf-950">
+            <p className="pixel mb-2 inline-block rounded-sm border-2 border-leaf-700 bg-petal-daisy px-2 py-0.5 text-tag tracking-wide text-leaf-950">
               hypothetical data
             </p>
           )}
