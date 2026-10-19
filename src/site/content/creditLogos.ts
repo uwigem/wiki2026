@@ -2,9 +2,9 @@
  * The logos on the attributions page, redrawn as pixel art.
  *
  * Each was made from the organisation's own logo file, shrunk onto a grid of
- * at most 34 by 28 pixels and kept to the logo's own colours. `software` is
- * the exception: a plain terminal window, for a tool that has no logo of its
- * own.
+ * at most 34 by 28 pixels and kept to the logo's own colours. `software` and
+ * `game` are the exceptions: plain glyphs (a terminal window, a gamepad) for
+ * credits that have no logo of their own.
  *
  * Like the other artwork files this one is exempt from the no-hex rule in
  * scripts/check-conventions.mjs: the colours are the artwork.
@@ -436,6 +436,23 @@ export const CREDIT_LOGOS = {
       '022222222222222222222220',
       '000000000000000000000000',
       '.0000000000000000000000.',
+    ],
+  },
+  game: {
+    name: 'A game, with no logo of its own',
+    w: 20,
+    h: 9,
+    pal: ['#3e5b47', '#eef3e6', '#e88aa8', '#7cc08a', '#e6c35c', '#6aa8d8'],
+    rows: [
+      '...0000......0000...',
+      '..0111100000011110..',
+      '.011011111111112110.',
+      '01100011111111314110',
+      '01110111111111151110',
+      '01111111111111111110',
+      '01111110000001111110',
+      '.011110......011110.',
+      '..0000........0000..',
     ],
   },
 } satisfies Record<string, PixelLogo>

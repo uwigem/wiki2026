@@ -614,3 +614,18 @@ export const SOFTWARE: Credit[] = [
     links: [{ label: 'SciPy', href: 'https://scipy.org/' }],
   },
 ]
+
+/** Work that inspired the wiki's look, credited for the inspiration only. */
+export const INSPIRATION: Credit[] = [
+  {
+    name: 'mellowminx',
+    logos: ['game'],
+    did: 'The look of this wiki’s garden is loosely inspired by *Reincarnated As An Adorable Walking Rock In A Peaceful Gardening Sim Game*, a cosy top-down pixel-art gardening game by the indie artist mellowminx, made for My First Game Jam: Winter 2023. We credit them for the inspiration.',
+    links: [
+      {
+        label: 'The game on itch.io',
+        href: 'https://mellowminx.itch.io/reincarnated-as-an-adorable-walking-rock-in-a-peaceful-gardening-sim-game',
+      },
+    ],
+  },
+]

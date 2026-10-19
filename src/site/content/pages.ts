@@ -39,7 +39,7 @@ import {
   type ConstructGroup,
 } from "./constructs";
 import type { ProcedureGroup } from "../components/Procedure";
-import { ADVISORS, SOFTWARE, SPONSORS, STUDENTS } from "./attributions";
+import { ADVISORS, INSPIRATION, SOFTWARE, SPONSORS, STUDENTS } from "./attributions";
 import type { CreditSet } from "../components/AttributionGroups";
 import type { FlowerKind, Profile } from "./team";
 
@@ -3454,12 +3454,13 @@ const attributions: Page = {
     {
       kind: "credits",
       id: "support",
-      heading: "Support and Software",
-      blurb: "The departments, funds and companies that paid for the work or gave us what it needed, and the software our design pipeline and model are built on.",
+      heading: "Support, Software and Inspiration",
+      blurb: "The departments, funds and companies that paid for the work or gave us what it needed, the software our design pipeline and model are built on, and the game that inspired the look of this wiki.",
       flower: "bush",
       sets: [
         { label: "Sponsors and support", items: SPONSORS },
         { label: "Software", items: SOFTWARE },
+        { label: "Inspiration", items: INSPIRATION },
       ],
     },
   ],
