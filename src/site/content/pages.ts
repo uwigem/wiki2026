@@ -32,6 +32,15 @@ import type { LinkItem } from "../components/LinkCards";
 import type { TreeNode } from "../components/DecisionTree";
 import type { MembraneProtein } from "../components/MembraneLandscape";
 import type { WorkflowStage } from "../components/Workflow";
+import {
+  ALPHA_SERIES,
+  MORRIS_POINTS,
+  NORMSENS_TABLE,
+  SOBOL_ROWS,
+  SOBOL_S2_ROWS,
+  SWEEP_PANELS,
+  TIME_RESOLVED_SERIES,
+} from "./modelData";
 import type { PipelineStage } from "../components/Pipeline";
 import type { TrailStep } from "../components/PartTrail";
 import type { RecipePart } from "../components/RecipeStrip";
@@ -1458,16 +1467,17 @@ const model: Page = {
     },
     {
       kind: "prose",
-      section: "Kinetic modelling",
+      section: "The tuner model",
+      navLabel: "KM: the tuner",
       id: "homeostasis",
-      heading: "The homeostasis model",
+      heading: "What the tuner model is for",
       body: [
-        "Because the tuner was assembled with adjustability in mind, understanding how it behaves under varying conditions and doses is part of building it. To approach that, the modelling subteam built dedicated deterministic **ordinary differential equation** models: one for the intervention itself, and others for the systems attached to it.",
-        "To address the use of our system as a bidirectional network, including strategic dosing of both the linker and the binder, we implemented an ODE network representing the SMO signalling system upstream of the cilium itself. It includes the **MMM complex** (MGRN1, MEGF8, MOSMO) and the natural inhibitor **PTCH1**, the components most central to the trafficking of SMO into the cilium.",
-        "To be considered active, SMO must enter the primary cilium, so the network centres on ciliary SMO concentration, which is what the intervention acts on directly. The upstream system is restricted to PTCH1 and the MMM complex because one is the natural intervention and the other is ours. Since our intervention aims to restrict the SMO population in the cilium, the MMM shuttle is coupled to an existing downstream Hedgehog model from BioModels, to check whether reductions in SMO through targeted ubiquitination are enough to actually change the output of the system.",
+        "The tuner was assembled with adjustability in mind, so how it behaves under different conditions and doses is part of building it rather than something to check at the end. The modelling subteam wrote deterministic **ordinary differential equation** models to predict how the intervention, and the systems attached to it, behave across a range of cell states.",
+        "To treat the device as the bidirectional network it is meant to be, with both the linker and the binder dosed deliberately, we wrote an ODE network for the SMO signalling system upstream of the cilium. It carries the **MMM complex** (MGRN1, MEGF8 and MOSMO) and the natural inhibitor **PTCH1**, the two things most responsible for how much SMO reaches the cilium.",
+        "SMO has to enter the primary cilium to count as active, so ciliary SMO is the model's readout, and it is also what the intervention acts on directly. The upstream system is deliberately narrow: of everything SMO touches, PTCH1 is the body's own way of restricting it and the MMM complex is ours. Narrowing it this way rests on the finding that restricting SMO reduces downstream Hedgehog activation, so the model does not have to carry the transcription factors to know which way its result points.",
       ],
       source:
-        "Downstream model after Sivakumar, 2011; ciliary entry after Wilson, 2009.",
+        "Ciliary entry after Wilson, 2009. Downstream effect of restricting SMO after Zhang, 2021.",
     },
     {
       kind: "figure",
@@ -1475,12 +1485,86 @@ const model: Page = {
       src: "model/homeostasis-network.webp",
       alt: "A reaction diagram. SMO is made in the cytoplasm and enters the primary cilium at a rate k in, leaving again at k out. Inside the cilium sits the MMM complex, drawn as MOSMO, MGRN1 the E3 ligase, and MEGF8 the membrane protein. The complex ubiquitinates ciliary SMO, which is then degraded by the proteasome. A de novo binder arrow points at MGRN1 and is labelled disrupts MMM. A proximity linker bridges the complex to ciliary SMO. PTCH1 blocks SMO entry, on in wild type and off in basal cell carcinoma. Ciliary SMO activates downstream Hedgehog signalling.",
       caption:
-        "The upstream network the homeostasis model represents: the MMM complex and PTCH1 acting on the pool of SMO that enters the cilium, with the two arms of our device entering on the left.",
+        "The upstream network the tuner model represents: the MMM complex and PTCH1 acting on the pool of SMO that enters the cilium, with the two arms of our device entering on the left.",
       ratio: "wide",
+    },
+    {
+      kind: "prose",
+      id: "rate-law",
+      navLabel: "The rate law",
+      heading: "Two ways to write the tagging step",
+      body: [
+        "We built two versions of the same system. They differ in one place: how fast the MMM complex tags ciliary SMO for removal.",
+        "The first assumes that tagging follows **Michaelis-Menten kinetics**. That is a reasonable first pass, but it cannot see the things the device is actually made of. How tightly the linker holds SMO, how tightly it holds the complex, and how much linker and complex are present all disappear into one lumped rate.",
+        "The second replaces that step with the ternary-complex rate law from Wurz et al., derived for **PROTACs**: molecules that work the way our linker does, by holding a target and an E3 ligase together until the target is tagged. It brings back the concentrations of the linker and the ligase and the affinity of each arm separately, and it reproduced a PROTAC system close enough to ours that we took it as the better description. We kept the simpler version so the two could be compared rather than assumed.",
+        "Both versions treat the MMM and linker complex as being at **quasi-steady state**: it settles within moments of the reaction starting, so its concentration is taken as unchanging while the slower parts of the system move. That is what makes it possible to write the designed components into the system without tracking every intermediate.",
+      ],
+      source:
+        "Ternary-complex rate law from Wurz et al., 2023, Nature Communications, equation 7.",
+    },
+    {
+      kind: "prose",
+      id: "bundling",
+      navLabel: "Bundling",
+      heading: "Why the model we run is a bundled one",
+      body: [
+        "Published measurements for the MMM complex are thin. It was only recently described as a ciliary complex, and most of the numbers the equations above ask for have never been measured. Rather than invent them, the version we actually run bundles the system down to what the literature can support.",
+        "Parameters with no credible source were dropped instead of guessed, and the ones that survived are **swept across a range in every result below** rather than trusted at a single value. Cytoplasmic SMO becomes a constant influx instead of a tracked pool. Michaelis-Menten and the ternary rate law both collapse into mass action. What remains of the unknowns is re-expressed in terms of fold changes measured between a knockout and wild type, which is the kind of number the literature does have.",
+        "Each of those moves is a simplification with a cost, and each one is written out below along with what it would take to stop making it.",
+      ],
+    },
+    {
+      kind: "prose",
+      id: "modelling-advice",
+      navLabel: "Advice we acted on",
+      heading: "What a systems biologist told us to do differently",
+      body: [
+        "A systems biologist at UW met the subteam twice and reset how we work. Instead of building one big model, we build a **set of candidate models** that each change one relationship, then ask which is best supported by the data we have. The same advice moved us to **Tellurium and Antimony**, had us run **Morris and Sobol** sensitivity analysis rather than only local sensitivity, sample uncertain parameters and report the spread instead of a single line, and use fold changes from knockouts as constraints, since relative data is most of what we have.",
+        "Nearly everything on this page follows from those two conversations: the two rate laws kept side by side, the sweeps rather than single runs, the calibration on a knockout fold change, and the two sensitivity analyses below. The line that stuck with us was that you can only really show how models are wrong.",
+      ],
+    },
+    {
+      kind: "graph",
+      id: "wire-diagram",
+      navLabel: "Wire diagram",
+      heading: "The model, as it is wired",
+      intro:
+        "Every species the bundled model tracks and every reaction between them. Solid arrows are flows of material; dashed arrows are one species acting on another. The two coloured arrows are the two arms of the device, and they point in opposite directions, which is the whole claim.",
+      nodes: [
+        { id: "influx", lines: ["influx"], x: 44, y: 250, shape: "text", nx: 44, ny: 300 },
+        { id: "scil", lines: ["S_cil", "ciliary SMO", "(readout)"], x: 200, y: 250, tone: "strong", nx: 150, ny: 300 },
+        { id: "void", lines: ["X"], x: 560, y: 250, shape: "circle", nx: 310, ny: 390 },
+        { id: "mmm", lines: ["MMM", "active ligase"], x: 64, y: 110, tone: "filled", nx: 62, ny: 70 },
+        { id: "mmmi", lines: ["MMM*", "taken apart"], x: 272, y: 100, nx: 272, ny: 70 },
+        { id: "tern", lines: ["SMO·L·MMM", "ternary"], x: 262, y: 185, nx: 172, ny: 180 },
+        { id: "sub", lines: ["S_ub", "tagged"], x: 560, y: 160, nx: 300, ny: 250 },
+      ],
+      edges: [
+        { from: "influx", to: "scil" },
+        { from: "scil", to: "sub", label: "ubiquitination", labelSide: "right" },
+        {
+          from: "scil",
+          to: "void",
+          label: "exit · basal loss · PTCH1 gate",
+          nLabel: "exit · loss · gate",
+          nLabelSide: "right",
+        },
+        { from: "mmm", to: "sub", label: "tags SMO", dashed: true, bend: 42 },
+        { from: "tern", to: "sub", label: "tags SMO faster", dashed: true, labelSide: "left" },
+        { from: "mmm", to: "mmmi", label: "binder: SMO up", colour: "stem", labelSide: "right" },
+        { from: "mmm", to: "tern", label: "linker: SMO down", colour: "pinkDark", labelSide: "right" },
+      ],
+      width: 640,
+      height: 310,
+      narrow: { width: 360, height: 420 },
+      alt: "A wiring diagram of the bundled model. Ciliary SMO is fed by a constant influx and leaves three ways: tagged for degradation, or lost to exit, basal degradation and the PTCH1 gate. The active MMM ligase tags SMO. The binder converts active MMM into a taken-apart form, which raises SMO. The linker converts active MMM into a ternary SMO, linker and MMM complex, which tags SMO faster and so lowers it.",
+      caption:
+        "The binder and the linker act on the same pool of active complex and pull it in opposite directions. Everything else in the picture is the cell's own machinery.",
     },
     {
       kind: "details",
       id: "states",
+      navLabel: "What it tracks",
       heading: "What the model tracks",
       summary: "The six quantities the equations follow, and how each one changes.",
       blocks: [
@@ -1497,70 +1581,124 @@ const model: Page = {
             [
               "**S_cil**",
               "Ciliary SMO. The active form, and the model's readout.",
-              "Entry from the cytoplasm",
-              "Exit, degradation, PTCH1 inhibition, and MMM-supported ubiquitination",
+              "Entry from the cytoplasm, and a small amount made there directly",
+              "Exit, degradation, the PTCH1 gate, and tagging by the MMM complex",
             ],
             [
               "**S_ub**",
-              "Ubiquitinated SMO, on its way to the proteasome.",
-              "Michaelis-Menten interaction with MGRN1",
-              "Degradation",
+              "Tagged SMO, on its way to the proteasome.",
+              "Tagging by the complex, with or without the linker",
+              "Nothing. It is a running total of everything tagged, not a pool.",
             ],
             [
               "**MMM**",
-              "The functional complex that ubiquitinates ciliary SMO.",
-              "Assembly from the non-functional form",
-              "Interaction with the de novo binder",
+              "The active complex that tags ciliary SMO.",
+              "Synthesis, reassembly from the taken-apart form, and release of the linker",
+              "Turnover, the binder pulling it apart, and the linker binding it",
             ],
             [
               "**M_nf**",
-              "The non-functional complex, pulled apart.",
-              "De novo binder interaction",
-              "Reassembly, reversibly",
+              "The complex pulled apart by the binder, and unable to tag anything.",
+              "The binder binding the complex",
+              "Reassembly, reversibly, and turnover",
             ],
             [
               "**M_link**",
-              "The complex joined to the linker. Measures an accelerated ubiquitination rate.",
-              "Linker binding",
+              "The complex joined to the linker. This is the form that tags SMO faster.",
+              "The linker binding the complex",
               "Linker release",
             ],
+          ],
+          caption:
+            "The bundled version folds **S_cyto** into a single constant influx rather than tracking it, which is the first of the assumptions below. The other five quantities are tracked in every version.",
+        },
+      ],
+    },
+    {
+      kind: "details",
+      id: "assumptions",
+      navLabel: "Assumptions",
+      heading: "The assumptions the model rests on",
+      summary:
+        "Six places where the biology was simplified, and what would be needed to stop simplifying.",
+      blocks: [
+        {
+          kind: "facts",
+          items: [
+            {
+              title: "The cytoplasm is a non-depleting source",
+              body: "The cilium is a very small compartment, so ciliary SMO is a small fraction of the cell's total and the data are too sparse to fix the ratio. The cytoplasmic to ciliary transit is bundled into one influx rate. A SAG ciliary trafficking time course from wet lab would let us measure it properly, and the GPCR model below treats the same transit explicitly.",
+            },
+            {
+              title: "The MMM complex is treated as one ligase",
+              body: "MEGF8, MGRN1 and MOSMO are represented as a single structure. The literature says they do not act on SMO independently, and no published binding data exists to separate their rates, so the complex is reduced to its rate-limiting form.",
+            },
+            {
+              title: "Ubiquitination is linear, not Michaelis-Menten",
+              body: "The database value for a general ring E3 ligase gives a Km of about 3 x 10^5 nM, far larger than our calculated ciliary SMO concentration. When Km greatly exceeds the substrate, Michaelis-Menten collapses to a first-order relationship, so that is what the model uses.",
+            },
+            {
+              title: "The linker clears at the same rate as the natural complex",
+              body: "With no measured kinetics for a designed molecule, the linker is given the complex's own rate and a neutral ternary enhancement of one. Measuring it would need binding data for the real linker.",
+            },
+            {
+              title: "Binder and linker constants are stand-ins",
+              body: "The real constraints of our binder and linker are unknown. Some are estimated from the FKBP and FRB system; the rest are preset and swept across a range in every result rather than being trusted as values.",
+            },
+            {
+              title: "The catalytic rate is derived, not measured",
+              body: "MGRN1 is a ring ligase, so its reactivity is coupled to its E2 partner and is hard to express as a single enzyme's catalytic rate. The model derives it from the fold change in SMO ubiquitination between MEGF8 knockout and wild type.",
+            },
           ],
         },
       ],
     },
     {
-      kind: "prose",
-      heading: "The test",
-      body: [
-        "We run the model twice. Once as **wild type**, and once with **PTCH1 set to zero**, which is the most common mutation in basal cell carcinoma and drives SMO too high. The **tunability window** is the range where adding the binder brings the second run back onto the first run over time.",
-        "The team goal, in one line, is a model-guided recruitment platform that lets us dial SMO levels in the cilium instead of simply blocking SMO activity.",
-      ],
-    },
-    {
-      kind: "facts",
-      heading: "Where the parameters come from",
-      items: [
+      kind: "details",
+      id: "equations",
+      navLabel: "Equations",
+      heading: "The equations the code solves",
+      summary:
+        "The bundled system in full, as five rate equations and one steady state.",
+      blocks: [
         {
-          title: "Concentrations",
-          body: "Protein abundances from PaxDb, BioNumbers, and DepMap. The MMM complex sits around 28.8 copies per cell, which is low enough that we had to check whether a deterministic model is even fair.",
+          kind: "prose",
+          body: [
+            "Concentrations in nM, time in seconds. These are the names the code uses: `Mm` is the active complex, called MMM above, `M_nf` is the form the binder has taken apart, and `MLc` is the complex joined to the linker, called M_link above.",
+            "`PTCH1`, `Linker` and `DeNovo` are held constant: they are the conditions a run is set to, not quantities the model tracks. `alpha` is the ternary enhancement, the factor by which the linked complex tags SMO faster than the complex alone.",
+          ],
         },
         {
-          title: "Enzyme kinetics",
-          body: "Km and kcat from BRENDA, looked up by EC number. MGRN1 comes out around Km 0.30 mM and kcat 1.24 per mM per second.",
+          kind: "table",
+          columns: ["Quantity", "Rate of change"],
+          rows: [
+            [
+              "**S_cil**",
+              "`kin - (kout + kdeg_SMO_cil + kPTCH_SMO*PTCH1)*S_cil - kMMM*Mm*S_cil - alpha*kMMM*MLc*S_cil`",
+            ],
+            ["**S_ub**", "`kMMM*Mm*S_cil + alpha*kMMM*MLc*S_cil`"],
+            [
+              "**Mm**",
+              "`kform_MMM - kdeg_MMM*Mm - k3*Mm*DeNovo + k_minus3*M_nf - kf_MMM_Linker*Mm*Linker + koff*MLc`",
+            ],
+            ["**M_nf**", "`k3*Mm*DeNovo - k_minus3*M_nf - kdeg_MMM*M_nf`"],
+            ["**MLc**", "`kf_MMM_Linker*Mm*Linker - koff*MLc`"],
+          ],
         },
         {
-          title: "Degradation rates",
-          body: "Pulled from specific papers, for example SMO at about 8.6e-5 per second and PTCH1 losing about 45 percent over 3 hours.",
-        },
-        {
-          title: "Every value is sourced",
-          body: "The parameter database records a source and an assumption for each number, so the table can be audited.",
+          kind: "prose",
+          body: [
+            "Setting the first equation to zero gives the quantity the whole model exists to predict, the level ciliary SMO settles at:",
+            "`S_cil* = kin / (kout + kdeg_SMO_cil + kPTCH_SMO*PTCH1 + kMMM*(Mm* + alpha*MLc*))`",
+            "Read it as supply over disposal. The binder raises ciliary SMO by moving active complex into **M_nf**, which takes it out of the denominator. The linker lowers it by moving active complex into **MLc**, which enters the denominator multiplied by `alpha`. The two arms act on the same term from opposite sides, which is why a single device can push the readout either way.",
+          ],
         },
       ],
     },
     {
       kind: "details",
       id: "parameters",
+      navLabel: "Parameters",
       heading: "Every parameter, and where it came from",
       summary:
         "Twelve values, each marked as measured, calculated from other values, or standing in until something better exists.",
@@ -1572,95 +1710,241 @@ const model: Page = {
             ["SMO_cil", "Ciliary SMO concentration", "1 nM", "Normalisation anchor. Sets the scale only."],
             ["M_free", "Active MMM complex", "0.148 nM", "Literature, Kong 2021, derived from densitometry"],
             ["PTCH1", "PTCH1 concentration", "0.15 nM", "PaxDb, 0.01 ppm"],
-            ["Influx", "Ciliary influx", "0.116 nM per second", "Calculated from the other ciliary rates"],
-            ["k_out", "Ciliary transit, exit", "9.63e-5 per second", "Literature, Milenkovic 2014, from a half-life"],
-            ["kdeg_SMO_cil", "SMO degradation rate", "3.21e-5 per second", "Literature, Milenkovic 2014, from a half-life"],
-            ["kPTCH1_SMO", "PTCH1 removal strength", "4.8e-4 per nM per second", "**Stand-in.** Ye 2018, based on GPR161, a non-Smoothened Hedgehog inhibitor"],
-            ["kMMM", "MMM-mediated ubiquitination rate", "0.42 per nM per second", "Calculated from a fold change"],
+            ["Influx", "Ciliary influx", "0.0691 nM per second", "Calculated, as ciliary SMO times every rate that removes it"],
+            ["k_out", "Ciliary transit, exit", "9.63e-5 per second", "Literature, Kim 2014, from a 2.0 hour half-life"],
+            ["kdeg_SMO_cil", "SMO degradation rate", "3.21e-5 per second", "Literature, Kim 2014, from a 6.0 hour half-life"],
+            ["kPTCH1_SMO", "PTCH1 removal strength", "0.05 per nM per second", "**Stand-in.** Order of magnitude after Ye 2018, based on GPR161, a non-Smoothened Hedgehog inhibitor"],
+            ["kMMM", "MMM-mediated ubiquitination rate", "0.42 per nM per second", "Calculated from the MEGF8 knockout fold change of 9.06"],
             ["alpha_L", "Ternary enhancement rate", "1", "**Stand-in.** Assumes the linker is non-cooperative"],
             ["kdeg_MMM", "MMM degradation, turnover", "8.86e-6 per second", "Literature, Kong 2021"],
-            ["kform_MMM", "MMM synthesis", "1.3e-6 nM per second", "Calculated from degradation and abundance"],
+            ["kform_MMM", "MMM synthesis", "1.31e-6 nM per second", "Calculated from degradation and abundance"],
             ["k3, k_minus3, kf_MMM_linker, koff", "Binder and linker on and off rates", "Preset", "**Stand-ins**, swept rather than trusted"],
           ],
           caption:
-            "Four of the twelve are stand-ins rather than measurements. They are swept across a range in every result rather than being treated as known.",
-        },
-      ],
-    },
-    {
-      kind: "details",
-      id: "assumptions",
-      heading: "The assumptions the model rests on",
-      summary:
-        "Six places where the biology was simplified, and what would be needed to stop simplifying.",
-      blocks: [
-        {
-          kind: "facts",
-          items: [
-            {
-              title: "The cytoplasm is a non-depleting source",
-              body: "The cilium is a very small compartment, so ciliary SMO is a small fraction of the cell's total and the data are too sparse to fix the ratio. The cytoplasmic to ciliary transit is bundled into one influx rate. A SAG ciliary trafficking time course from wet lab would let us measure it properly.",
-            },
-            {
-              title: "The MMM complex is treated as one ligase",
-              body: "MEGF8, MGRN1 and MOSMO are represented as a single structure. The literature says they do not act on SMO independently, and no published binding data exists to separate their rates, so the complex is reduced to its rate-limiting form.",
-            },
-            {
-              title: "Ubiquitination is linear, not Michaelis-Menten",
-              body: "The database value for a general ring E3 ligase gives a Km far larger than our calculated ciliary SMO concentration. When Km greatly exceeds the substrate, Michaelis-Menten collapses to a first-order relationship, so that is what the model uses.",
-            },
-            {
-              title: "The linker clears at the same rate as the natural complex",
-              body: "With no measured kinetics for a designed molecule, the linker is given the complex's own rate and a neutral cooperativity of one. Measuring it would need binding data for the real linker.",
-            },
-            {
-              title: "Binder and linker constants are stand-ins",
-              body: "The real constraints of our binder and linker are unknown. Some are estimated from the FKBP and FRP system; the rest are preset and swept across a range in every result rather than being trusted as values.",
-            },
-            {
-              title: "The catalytic rate is derived, not measured",
-              body: "MGRN1 is a ring ligase, so its reactivity is coupled to its E2 partner and is hard to express as a single enzyme's catalytic rate. The model derives it from the fold change in SMO ubiquitination between MEGF8 knockout and wild type.",
-            },
-          ],
+            "Six of these are stand-ins rather than measurements: the PTCH1 gate, the ternary enhancement, and the four binder and linker rates on the last row. Those are swept across a range in every result rather than being treated as known. Three more rows are calculated from the rows above them, so the table rests on fewer independent numbers than its twelve rows suggest.",
         },
       ],
     },
     {
       kind: "prose",
-      heading: "What Dr. Sauro told us to do differently",
+      id: "results",
+      navLabel: "Preliminary results",
+      heading: "What the model does when we sweep it",
       body: [
-        "Dr. Herbert Sauro, a systems biologist at UW, met with the subteam twice and reset how we work. Instead of building one big model, we build a **set of candidate models** that each change one relationship, then use **AIC and BIC** to see which is best supported by the data we have. He also had us move to **Tellurium and Antimony**, run **Morris and Sobol sensitivity analysis**, sample uncertain parameters and report the spread rather than a single line, and use fold changes from knockouts as constraints, since we only have relative data.",
-        "His framing stuck with us. As he put it, you can only really show how models are wrong.",
+        "The model was written in **Antimony** and solved in Python's **Tellurium** library. Because six of its constants are stand-ins, no single run of it means much. What means something is the shape of the response across the range those constants could plausibly take, which is what the next two figures show.",
+        "The first sweeps the binding strength of each arm, from a tenth of the baseline to ten times it, across doses from 0.1 to 1000 nM. The off-rates are held at a median value so that only the on-rates move.",
       ],
     },
     {
-      kind: "links",
-      id: "equations",
-      heading: "The equations themselves",
+      kind: "line",
+      id: "dose-sweep",
+      navLabel: "Dose sweep",
+      heading: "What each arm can do to ciliary SMO",
       intro:
-        "Written out in full, outside this page. These are the working for the models above and the safety model below.",
-      items: [
+        "Ciliary SMO against dose, as a multiple of the untreated level, at five settings of the arm's on-rate. Left, the binder. Right, the linker. Both panels share one scale, so the two arms can be compared by eye. Both axes are logarithmic, which puts a doubling and a halving the same distance from the untreated line, the same reason the global analysis below works in log fold change.",
+      panels: SWEEP_PANELS,
+      xLabel: "dose (nM)",
+      yLabel: "ciliary SMO, as a multiple of untreated",
+      xLog: true,
+      yLog: true,
+      legendTitle: "on-rate, as a multiple of the baseline",
+      references: [{ axis: "y", value: 1, label: "untreated" }],
+      footnote:
+        "The binder raises ciliary SMO towards a ceiling of about **nine times** untreated; the linker drives it down towards about **0.06 times**. Both ends are reachable from the same device, which is what tunable has to mean. The ceiling itself is not a prediction: the model's tagging rate was calibrated on the MEGF8 knockout fold change of 9.06, so the binder arriving at about nine times is the model agreeing with its own calibration. What the sweep adds is that the on-rate sets the **dose needed**, not the destination. Every setting heads for the same ceiling, and a tenfold weaker on-rate simply takes more dose to get there: at the top of this range it has only reached five times, while the three strongest settings are already at the ceiling. The linker behaves the same way in the other direction.",
+      source: "Regenerated from the current model rather than reusing an earlier figure.",
+    },
+    {
+      kind: "line",
+      id: "alpha-sweep",
+      navLabel: "Ternary enhancement",
+      heading: "What the linker's ternary enhancement changes",
+      intro:
+        "The same dose range, now holding the binding rates at a median value and sweeping **alpha**, the factor by which the linked complex tags SMO faster than the complex alone. Read at 2 x 10^6 seconds, about 23 days.",
+      panels: [{ series: ALPHA_SERIES }],
+      xLabel: "linker dose (nM)",
+      yLabel: "ciliary SMO, as a multiple of untreated",
+      xLog: true,
+      yLog: true,
+      references: [{ axis: "y", value: 1, label: "untreated" }],
+      footnote:
+        "At **alpha = 0** the linker does the opposite of its job: binding the complex without speeding up tagging simply sequesters the complex, and ciliary SMO rises. For any alpha above zero the linker lowers SMO, and lowers it further the larger alpha is. A high ternary enhancement is what would let the linker outcompete SMO in a cell where SMO is overproduced, which is the condition the device is for. One caveat on reading it: unlike the binder, this arm is **not settled** at the time these curves are read. Run far enough and the alpha = 0 case relaxes back to the untreated level while the others fall further still, so the rise at alpha = 0 is a slow transient rather than a new resting state.",
+    },
+    {
+      kind: "narration",
+      id: "sensitivity-analysis",
+      label: "what a sensitivity analysis is",
+      body: [
+        "The model has dozens of numbers in it, and most of them we had to look up or stand in for. So before trusting any prediction, we nudge each number and see which ones actually move the answer.",
+        "The ones that move it are the ones worth measuring properly at a bench. The ones that do not, we can stop worrying about, or drop from the model altogether.",
+      ],
+    },
+    {
+      kind: "prose",
+      id: "local-sensitivity",
+      navLabel: "Sensitivity analysis",
+      heading: "Which parameters move the answer",
+      body: [
+        "We ran the model through both **local** and **global** sensitivity analysis, to rank its components by how much each contributes to the output. Local analysis asks what happens near the settings we are using; global analysis asks what happens across the whole range the parameters could take. They answer different questions, and a parameter that both call uninfluential is one we can remove.",
+        "The local pass moves each parameter by ten percent either way, one at a time, and re-simulates the whole model over 120 hours.",
+      ],
+    },
+    {
+      kind: "tornado",
+      id: "sensitivity",
+      navLabel: "Local sensitivity",
+      heading: "What actually controls ciliary SMO",
+      intro:
+        "Every parameter in the model, ranked by how far a ten percent change moves ciliary SMO. A bar of 1.3 means SMO moves about 1.3 percent for every one percent change in that parameter.",
+      rows: [
+        { label: "SMO made in the cytoplasm", note: "k form, SMO-cyt", value: 1.3 },
+        { label: "MMM complex made", note: "k form, MMM", value: -1.28 },
+        { label: "Tagging rate once bound", note: "kcat", value: -1.28 },
+        { label: "MMM complex degraded", note: "k deg, MMM", value: 1.26 },
+        { label: "Ternary enhancement", note: "alpha", value: -0.87 },
+        { label: "Linker's grip on SMO", note: "K SMO-Linker", value: 0.51 },
+        { label: "Linker's grip on the complex", note: "K MMM-Linker", value: 0.31 },
+        { label: "SMO entering the cilium", note: "k in", value: 0.28 },
+        { label: "SMO cleared from the cytoplasm", note: "k deg, SMO-cyt", value: -0.28 },
+        { label: "SMO made in the cilium", note: "k form, SMO-cil", value: 0.08 },
+        { label: "Linker dose", note: "Linker", value: 0.07 },
+        { label: "PTCH1 present", note: "PTCH1", value: -0.05 },
+        { label: "PTCH1 gate strength", note: "k PTCH-SMO", value: -0.05 },
+        { label: "SMO leaving the cilium", note: "k out", value: -0.03 },
+        { label: "SMO degraded in the cilium", note: "k deg, SMO-cil", value: -0.03 },
+        { label: "Binder letting go", note: "k minus 3", value: -0.02 },
+        { label: "Binder dose", note: "DeNovo", value: 0.01 },
+        { label: "Binder binding the complex", note: "k 3", value: 0.01 },
+        { label: "Linker letting go", note: "k off", value: 0.0 },
+        { label: "Linker binding the complex", note: "k f, MMM-Linker", value: 0.0 },
+      ],
+      positiveMeans: "more of it means more SMO in the cilium",
+      negativeMeans: "more of it means less SMO in the cilium",
+      footnote:
+        "The shape is the finding: four parameters carry the answer and eleven barely register.",
+    },
+    {
+      kind: "prose",
+      id: "local-findings",
+      body: [
+        "Ciliary SMO is controlled in equal parts by supply and by how much active complex there is. SMO synthesis raises it most strongly (1.30), and its ten percent swing is about 0.81 nM, roughly a quarter of the baseline. The complex pulls the other way: **the tagging rate and complex synthesis have identical sensitivities (-1.28), because both enter only through the same product**, and complex degradation has the opposite sign (+1.26). In this run ciliary SMO settles at about 3.1 nM, with 17.9 nM in the cytoplasm and 24.9 nM of free complex.",
+        "A second tier holds the ternary terms: the enhancement alpha (-0.87), the linker's grip on SMO (+0.51) and on the complex (+0.31). Stronger cooperativity means more tagging and less ciliary SMO, while weaker binding to either partner does the reverse. Trafficking and PTCH1 come next and are already weak, at about 0.28 and below.",
+        "What is at the bottom is as useful as what is at the top. The on and off rates of both the binder and the linker barely move the readout at all, which says the device's behaviour is set by how much is dosed and how well the ternary complex works, not by how quickly the parts find each other.",
+      ],
+    },
+    {
+      kind: "details",
+      id: "how-sensitivity-was-run",
+      navLabel: "How it was run",
+      heading: "How the local analysis was run",
+      summary: "The solver, the method and the window, for anyone reproducing it.",
+      blocks: [
         {
-          title: "Core ODE model",
-          body: "The full equation set for the homeostasis model, before the simplifications above.",
-          href: "https://www.overleaf.com/2243395337mdzbkdpkpczw#7f8ec6", // colour-ok: an Overleaf link fragment, not a colour
-          label: "Read on Overleaf",
-          tag: "LaTeX",
+          kind: "prose",
+          body: [
+            "Six quantities were tracked over a simulated 120 hours: cytoplasmic, ciliary and tagged SMO, the MMM complex, its taken-apart form, and the complex joined to the linker. The model was written in **Antimony** and run in **Tellurium**, using libRoadRunner's CVODES integrator at tolerances of 1e-10 and 1e-12.",
+            "For every quantity and every parameter, the derivative of one with respect to the other came from libRoadRunner's forward sensitivity solver, which integrates the sensitivity equations alongside the model itself. Every coefficient was then normalised, so that parameters measured in different units can be compared directly. For the chart above, each parameter was moved by ten percent either way, one at a time, and the whole model re-simulated.",
+          ],
         },
         {
-          title: "The GPCR system",
-          body: "Reactions, initialisations and literature values for both candidate formulations of PTCH1.",
-          href: "https://www.overleaf.com/read/zvpbnkppkrzd#274249", // colour-ok: an Overleaf link fragment, not a colour
-          label: "Read on Overleaf",
-          tag: "LaTeX",
+          kind: "line",
+          id: "time-resolved-sensitivity",
+          heading: "How the ranking settles over time",
+          intro:
+            "The same normalised sensitivities, hour by hour rather than at the end, for the six parameters that matter. The names are the ones used in the chart above.",
+          panels: [{ series: TIME_RESOLVED_SERIES }],
+          xLabel: "hours",
+          yLabel: "percent change in ciliary SMO per percent change in the parameter",
+          footnote:
+            "The order settles inside the first day and does not change after it, which is why reporting a single number at 120 hours is fair. SMO synthesis overshoots early and falls back. Complex degradation is the slowest of them: it is at 1.02 after a day and only reaches 1.26 towards the end of the window, which is why 120 hours was the window chosen. The tagging rate is drawn dashed because it lies exactly on top of MMM complex made: the two are the same line, for the reason given above.",
         },
         {
-          title: "Melanocortin safety model",
-          body: "The mass-action equations behind the MC4R result at the foot of this page.",
-          href: "https://drive.google.com/file/d/1PONnAZG1bpua0B07ge6KFhOMH_L61SFm/view",
-          label: "Open the document",
-          tag: "PDF, 2 pages",
+          kind: "table",
+          id: "normalised-sensitivities",
+          heading: "The same analysis, for every quantity the model tracks",
+          intro:
+            "Normalised sensitivity at 120 hours: the percent change in that quantity per percent change in that rate. One row per rate, one column per quantity. The five rates left out never reach 0.1 against anything.",
+          columns: NORMSENS_TABLE.columns,
+          rows: NORMSENS_TABLE.rows,
+          heat: true,
+          caption:
+            "Reading across a row shows everything one rate does; reading down a column shows what controls that quantity. The useful part is where the zeros are. Nothing about SMO changes how much complex there is, so the three right-hand columns stay flat for every SMO rate. Further down, the binder rates move only the taken-apart complex and the linker rates move only the linker-bound complex: each arm does its own job and nothing else, which is what lets the two be dosed independently.",
         },
+      ],
+    },
+    {
+      kind: "prose",
+      id: "global-sensitivity",
+      navLabel: "Global sensitivity",
+      heading: "The same question, asked across the whole range",
+      body: [
+        "Local analysis only describes the neighbourhood of the settings we chose. Since six of those settings are stand-ins, we also ran a **global** analysis, which samples the whole plausible range at once. We used Morris screening and Sobol analysis together, on the principle that a parameter both methods call uninfluential can be dropped.",
+        "Because the device is meant to push the readout in either direction, the output here is the **log fold change** of ciliary SMO rather than its concentration, so that an increase and a decrease of the same size count the same.",
+        "One thing to know before reading the next two figures: the global analysis was run on an **earlier parameterisation** of the same model, with a different ciliary exit rate and complex abundance, and has not been re-run since. The ordering it gives is what we rely on, and that ordering agrees with the local analysis above. The index values themselves belong to that earlier run.",
+      ],
+    },
+    {
+      kind: "bars",
+      id: "sobol",
+      navLabel: "Sobol indices",
+      heading: "How much of the spread each parameter explains",
+      intro:
+        "Sobol indices for ciliary SMO. **ST** counts everything a parameter does, including through its interactions with others; **S1** counts only what it does on its own. The whiskers are the run's own confidence intervals.",
+      series: [{ label: "ST, with interactions" }, { label: "S1, on its own" }],
+      rows: SOBOL_ROWS,
+      axisLabel: "share of the spread in ciliary SMO",
+      footnote:
+        "Clearance by the complex leads at ST = 0.281, then the two doses (linker 0.253, binder 0.228) and the ternary enhancement (0.125). The PTCH1 gate is effectively nothing at 0.003, and the four binding rates sit between 0.064 and 0.077. Both arms work mostly through direct effects but carry a secondary interaction component: the binder runs S1 = 0.166 against ST = 0.228, the linker S1 = 0.164 against ST = 0.253. The wider gap on the linker is what a ternary complex should look like, since its effect depends on alpha and on both of its binding rates.",
+      source: "Sobol analysis with SALib, N = 1024 including second order, 22,528 model runs.",
+    },
+    {
+      kind: "scatter",
+      id: "morris",
+      navLabel: "Morris screening",
+      heading: "Which parameters act on their own, and which act through the rest",
+      intro:
+        "Morris screening. Along the bottom, how much each parameter moves the output on average. Up the side, how much that effect varies depending on where the rest of the model is set. The dashed line is where those two are equal, so a point above it has an influence that is non-linear or tangled up with the other parameters.",
+      panels: [{ points: MORRIS_POINTS }],
+      groups: [
+        { id: "named", label: "name certain", shape: "square" },
+        { id: "crowded", label: "name read from a crowded cluster", shape: "diamond" },
+      ],
+      xLabel: "average effect on the output",
+      yLabel: "how much that effect varies",
+      diagonal: true,
+      footnote:
+        "Morris agrees with Sobol on the order: clearance by the complex first, then the two doses, then the ternary enhancement, with the PTCH1 gate last. Most of the smaller parameters sit on or above the dashed line, so their apparent influence depends heavily on where everything else is set, and a single ranking number flatters them. Clearance by the complex is the opposite case: it sits well below the line, which means it moves the readout on its own, whatever the rest of the model is doing.",
+      source:
+        "Four of the ten names sit in one cluster in the run's own figure. Those four are our reading of which point is which, and are marked as such.",
+    },
+    {
+      kind: "details",
+      id: "sobol-second-order",
+      navLabel: "Second-order interactions",
+      heading: "The interactions themselves",
+      summary: "Every pair's confidence interval crosses zero, which is the result.",
+      blocks: [
+        {
+          kind: "bars",
+          intro:
+            "Second-order Sobol indices: how much of the spread each **pair** of parameters explains together, beyond what each explains alone.",
+          series: [{ label: "S2" }],
+          rows: SOBOL_S2_ROWS,
+          axisLabel: "share of the spread explained by the pair together",
+          footnote:
+            "Every interval crosses zero, so none of these pairs is distinguishable from no interaction at this sample size. What survives is the direction rather than the size: the leading pairs all involve the linker, which is consistent with a ternary complex whose effect depends on several of its own constants at once. Conclusions from this chart should be read as linker-centred, not as measured magnitudes.",
+        },
+      ],
+    },
+    {
+      kind: "prose",
+      id: "tuner-discussion",
+      navLabel: "Discussion",
+      heading: "What this tells us to do next",
+      body: [
+        "Measuring the binder and linker binding constants by **SPR**, and the ternary enhancement by an **in-cell degradation assay**, would turn this feasibility envelope into an actual prediction. A second, independent MEGF8 knockout fold change would harden the single-point calibration that the tagging rate currently rests on.",
+        "The sensitivity ranking tells us which of those to do first. Dose and the ternary enhancement dominate the readout while the precise binding kinetics do not, so wet lab effort is better spent on the degradation assay and a dose response than on high-resolution SPR.",
+        "The bundled model uses a simplified single-arm ternary term, which loses something real. Reimplementing the full two-arm cooperative rate law would capture the **hook effect**, where too much linker saturates both arms separately instead of bridging them, and the amount of degradation falls again. That matters for choosing a dosing window, since it means more is not always better.",
+        "The one result we distrust is our own PTCH1 term. PTCH1 loss is what defines basal cell carcinoma, yet the gate comes out as effectively nothing in the global analysis and near the bottom of the local one. That is more likely to be a sign that a simple mass-action gate under-represents what PTCH1 actually does, which is transport cholesterol, than a sign that PTCH1 does not matter. The GPCR model below is where we treat that mechanism properly.",
       ],
     },
     {
@@ -1751,70 +2035,18 @@ const model: Page = {
       ratio: "wide",
     },
     {
-      kind: "narration",
-      section: "Sensitivity analysis",
-      id: "sensitivity-analysis",
-      label: "what a sensitivity analysis is",
-      body: [
-        "The model has dozens of numbers in it, and most of them we had to look up or guess. So before trusting any prediction, we nudge each number by ten percent and see which ones actually move the answer.",
-        "The ones that move it are the ones worth measuring properly at a bench. The ones that do not, we can stop worrying about.",
-      ],
-    },
-    {
-      kind: "tornado",
-      id: "sensitivity",
-      heading: "What actually controls ciliary SMO",
+      kind: "links",
+      id: "gpcr-equations",
+      heading: "The equations for this model",
       intro:
-        "Each bar shows how strongly ciliary SMO responds when that one parameter is raised: a bar of 1.3 means SMO moves about 1.3 percent for every one percent change in the parameter.",
-      rows: [
+        "Reactions, initialisations and literature values for both candidate formulations of PTCH1, written out in full.",
+      items: [
         {
-          label: "SMO made in the cytoplasm",
-          note: "k form, SMO-cyt",
-          value: 1.3,
-        },
-        { label: "MMM complex made", note: "k form, MMM", value: -1.28 },
-        { label: "Tagging rate once bound", note: "kcat", value: -1.28 },
-        { label: "MMM complex degraded", note: "k deg, MMM", value: 1.26 },
-        {
-          label: "Cooperativity in the three-way complex",
-          note: "alpha",
-          value: -0.87,
-        },
-        { label: "Binder holding onto SMO", note: "K SMO-Linker", value: 0.51 },
-        { label: "Binder holding onto MMM", note: "K MMM-Linker", value: 0.31 },
-        { label: "SMO entering the cilium", note: "k in", value: 0.28 },
-        {
-          label: "SMO cleared from the cytoplasm",
-          note: "k deg, SMO-cyt",
-          value: -0.28,
-        },
-      ],
-      positiveMeans: "more of it means more SMO in the cilium",
-      negativeMeans: "more of it means less SMO in the cilium",
-      footnote:
-        "Supply and disposal, almost exactly balanced. Turn the MMM pool up one percent and ciliary SMO falls about 1.3 percent, which is the graded response the whole device depends on. Note what is **missing** from the top of this list: how fast SMO enters the cilium, and PTCH1 itself, both come out near 0.28 or below. At these settings ciliary SMO sits around 3.1 nM against 17.9 nM in the cytoplasm.",
-    },
-    {
-      kind: "details",
-      id: "how-sensitivity-was-run",
-      heading: "How the analysis was run",
-      summary: "The solver, the method and the window, for anyone reproducing it.",
-      blocks: [
-        {
-          kind: "prose",
-          body: [
-            "Six quantities were tracked over a simulated 120 hours: cytoplasmic, ciliary and ubiquitinated SMO, the MMM complex, its non-functional form, and the complex joined to the linker. The model was written in **Antimony** and run in **Tellurium**, using libRoadRunner's CVODES integrator at tight tolerances.",
-            "For every quantity and every parameter, the derivative of one with respect to the other was obtained from libRoadRunner's forward sensitivity solver, which integrates the sensitivity equations alongside the model itself. Every coefficient was then normalised so the parameters could be compared directly. For the chart above, each parameter was moved by ten percent either way, one at a time, and the whole model re-simulated.",
-            "A **global** analysis is also under way, using Morris screening followed by Sobol analysis, on the principle that a parameter flagged as uninfluential by both can be dropped from the model. The Morris pass has run; the Sobol results are not finished.",
-          ],
-        },
-        {
-          kind: "figure",
-          id: "global-sensitivity",
-          caption:
-            "The global analysis: Morris screening and Sobol indices side by side, with the parameters both methods find uninfluential marked.",
-          owner: "Kinetic Modelling",
-          ratio: "wide",
+          title: "The GPCR system",
+          body: "Both variants of the model, with every reaction and the values each one was given.",
+          href: "https://www.overleaf.com/read/zvpbnkppkrzd#274249", // colour-ok: a link fragment, not a colour
+          label: "Read on Overleaf",
+          tag: "LaTeX",
         },
       ],
     },
@@ -1902,6 +2134,20 @@ const model: Page = {
       },
       footnote:
         "The curve flattens by about 50 nM. Past that, adding more binder changes nothing, because MGRN1 is the scarce part at roughly 0.18 nM in total and there is only so much of it to redistribute.",
+    },
+    {
+      kind: "links",
+      id: "mc4r-equations",
+      heading: "The equations for the safety model",
+      items: [
+        {
+          title: "Melanocortin safety model",
+          body: "The mass-action equations and the parameter table behind the result above.",
+          href: "https://drive.google.com/file/d/1PONnAZG1bpua0B07ge6KFhOMH_L61SFm/view",
+          label: "Open the document",
+          tag: "PDF, 2 pages",
+        },
+      ],
     },
     {
       kind: "prose",
