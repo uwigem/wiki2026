@@ -540,8 +540,6 @@ const description: Page = {
   slug: "/description",
   title: "The Idea",
   kicker: "chapter 01 · description",
-  storyBeat:
-    "Every garden has someone deciding how tall the hedge grows. In your cells, that someone is a small protein complex, and we built a way to lean on it.",
   intro:
     "We are building a modular device that controls how much of a receptor stays in the primary cilium. We prove it on Hedgehog signalling, then show the same parts work on other receptors.",
   blocks: [
@@ -560,7 +558,7 @@ const description: Page = {
       id: "two-arms",
       heading: "Two arms, opposite directions",
       intro:
-        "Both arms are engineered, both are genetically encodable, and they push the same pathway in opposite directions.",
+        "Our engineered linker and breaker provide two complementary ways to tune the ciliary abundance of the target protein.",
       items: [
         {
           title: "Down arm",
@@ -592,17 +590,13 @@ const description: Page = {
 
 const background: Page = {
   slug: "/background",
-  title: "A Problem in the Garden",
+  title: "Background",
   kicker: "chapter 02 · background",
-  storyBeat:
-    "The hedge can grow too tall or not grow at all, and both are a problem. The tools we have today can only cut, not trim.",
-  intro:
-    "Hedgehog signalling has to be kept in a narrow band. Too much drives cancer, too little breaks development, and the drugs we have can only shut it off.",
   blocks: [
     {
       kind: "logo",
       caption:
-        "Hedgehog signalling is a balance, and both ends of it are dangerous. Tip it one way and you get cancer; tip it the other and development goes wrong. The drugs we have can only take one hedgehog off the scale entirely. What is missing is a way to set where the beam sits.",
+        "Hedgehog signalling is a balance and both ends of it are problematic. Tipping it too far one way leads to ciliopathies associated with excess signalling, like medulloblastoma or basal cell carcinoma; tipping it too far the other way can lead to issues with development or injury repair. Current clinical routes are only able to either fully remove or fully enforce Hedgehog signalling. What is missing is a way to finely tune both.",
     },
     {
       kind: "prose",
@@ -620,7 +614,7 @@ const background: Page = {
       body: [
         "The approved SMO inhibitors, vismodegib and sonidegib, block the receptor directly. Tumours mutate SMO and become resistant, and the drugs carry harsh side effects, which is why they are not given to children. Blocking is a blunt move on a pathway that is really about amount.",
         "We also state the limit up front, from the same interview. This approach works on cases driven by too much SMO. It does not help cases driven by mutations further down the pathway, in **SUFU** or **GLI**.",
-        "What we propose instead is [a device with two arms](/description#two-arms), which sets the amount rather than blocking the receptor.",
+        "What we propose instead is [a device with two arms](/description#two-arms), which allows us to tune the abundance of SMO rather than outright blocking the receptor.",
       ],
       source: "Interview with Dr. Stacey Ogden (St. Jude).",
     },
@@ -629,16 +623,16 @@ const background: Page = {
       heading: "What we get to build on",
       items: [
         {
-          title: "A membrane E3 ligase",
-          body: "The Kong lab identified the MMM complex, a membrane-bound E3 ubiquitin ligase that naturally controls SMO levels. That is the machine our device borrows.",
+          title: "A membrane-bound E3 ubiquitin ligase",
+          body: "The Kong lab identified the MOSMO, MEGF8 and MGRN1 (MMM) complex, a membrane-bound E3 ubiquitin ligase that naturally controls SMO levels by tagging the protein for ubiquitination. This is the biological machine our platform borrows.",
         },
         {
-          title: "MEGF8, MOSMO, MGRN1",
-          body: "MGRN1 is the enzyme. MEGF8 and MOSMO are adapters, and MOSMO stabilises the MEGF8 to MGRN1 binding. Take a part away and the complex stops working, which is what the up arm exploits.",
+          title: "The MMM complex",
+          body: "All three proteins have their own purpose in the membrane. MGRN1 provides the enzymatic behaviour of the complex, while its structure comes primarily from MOSMO, which promotes the abundance and stabilisation of the third protein it is bound to, MEGF8.",
         },
         {
-          title: "A real structure",
-          body: "The Kong lab has cryo-EM of the complex and a preprint identifying a site whose mutation breaks it, so we have something concrete to design a binder against.",
+          title: "Experimental structure",
+          body: "The Kong lab has solved the cryo-EM structure of the complex and identified residues whose mutation affects the protein's folding, which suggests the [hotspots we design binders against](/model#hotspot-selection).",
         },
       ],
       source:
@@ -658,7 +652,7 @@ const designBlocks: Block[] = [
     kind: "prose",
     heading: "What we are designing against",
     body: [
-      "The up arm of the device is a **de novo minibinder** that sits on the **MEGF8 to MOSMO interface**. Break that interface and the MMM complex cannot assemble, so it stops ubiquitinating **Smoothened (SMO)**, so SMO stays in the cilium and Hedgehog signalling goes up.",
+      "The up arm of the device is a **de novo minibinder** that sits on the **MEGF8 to MOSMO interface**. Break that interface and the MMM complex cannot assemble. It stops ubiquitinating **Smoothened (SMO)**, so SMO stays in the cilium and Hedgehog signalling goes up.",
       "We picked this interface because the Kong lab has cryo-EM of the MMM complex and a preprint that points to a specific site whose mutation breaks the complex. That gives us a real structure and a real binding site to design toward, which is what a good target needs.",
     ],
     source:
@@ -794,10 +788,6 @@ const engineering: Page = {
   title: "Build, Test, Learn",
   kicker: "chapter 03 · engineering",
   medal: true,
-  storyBeat:
-    "Nothing in a garden works the first time. You plant, you watch, you move it two feet to the left.",
-  intro:
-    "Three subteams ran the same loop, one after the other: the kinetic model first, then the designed binder, then the bench. These are those cycles in the order we actually ran them, including the parts that did not work the first time.",
   blocks: [
     {
       kind: "cards",
@@ -829,7 +819,6 @@ const engineering: Page = {
       cycles: [
         {
           heading: "Choosing the target: How the project became the project",
-          intro: "This cycle is complete.",
           items: [
             {
               title: "Design",
@@ -862,7 +851,7 @@ const engineering: Page = {
       kind: "prose",
       heading: "Where the modelling fits",
       body: [
-        "The project starts as arithmetic. Before any protein is designed, the modelling subteam has to show that acting on the MMM complex could move **SMO in the cilium** by a useful amount, and that the rates in the literature support it. [The model](/model) is where that work is written up; this is the loop that produced it.",
+        "Before any protein is designed, the modelling subteam has to show that acting on the MMM complex could move **SMO in the cilium** by a useful amount, and that the rates in the literature support it. [The model](/model) is where that work is written up; this is the loop that produced it.",
       ],
     },
     {
@@ -904,7 +893,7 @@ const engineering: Page = {
       kind: "prose",
       heading: "Where the design work fits",
       body: [
-        "With a target worth acting on, the second loop is the binder itself. Generate candidates, throw almost all of them away, and work out why the survivors survived. The pipeline below is the machinery; the cycles after it are what we learned by running it. The general version, written so another team can run it, is on [contribution](/contribution#pipeline).",
+        "With a target worth acting on, the second loop is the binder itself. It generates candidates, throws almost all of them away, and works out why the survivors survived. The pipeline below is the machinery; the cycles after it are what we learned by running it. The general version, written so another team can run it, is on [contribution](/contribution#pipeline).",
       ],
     },
     ...designBlocks,
@@ -932,7 +921,7 @@ const engineering: Page = {
             },
             {
               title: "Learn",
-              body: "The result was flat. How often a hotspot succeeded tracked **how many designs we had attempted with it**, and not the chemistry of the residues. Talking it through with Dr. DiMaio, the reading is that hotspots tell RFdiffusion3 roughly where to aim rather than specifying residue to residue contacts. We also folded the separate scripts into one that runs the whole pipeline, so any future Washington iGEM team can design binders with a single command.",
+              body: "How often a hotspot succeeded tracked **how many designs we had attempted with it**, and not the chemistry of the residues. Talking it through with Dr. DiMaio, the reading is that hotspots tell RFdiffusion3 roughly where to aim rather than specifying residue to residue contacts. We also folded the separate scripts into one that runs the whole pipeline, so any future Washington iGEM team can design binders with a single command.",
             },
           ],
         },
@@ -1171,16 +1160,6 @@ const experiments: Page = {
       alt: "A cross-section of the cell membrane. MEGF8 spans the membrane with MOSMO beside it, and MGRN1, labelled E3 ligase, sits on the cytoplasmic side. To the right, SMO is drawn as a seven-pass receptor being tagged with three ubiquitin marks. An arrow leads to two boxes: ciliary SMO down, then Hedgehog signalling down.",
       caption:
         "Schematic representation of MMM-mediated SMO regulation. The MMM complex promotes SMO ubiquitination, limiting SMO accumulation in the primary cilium and reducing downstream Hedgehog pathway activity.",
-    },
-    {
-      kind: "callout",
-      label: "experimental status",
-      heading: "Proposed Experimental Work",
-      body: [
-        "The four experiments presented below outline the proposed validation strategy for HedgehogSense. Construct design has been completed, and the required DNA constructs have been ordered from GenScript and Twist Bioscience. Experimental work is pending delivery of these materials.",
-        "All experimental workflows are presented as proposed methods. Figures containing illustrative or simulated data are explicitly identified and do not represent experimentally measured results.",
-        "Detailed construct information and project documentation are available in [parts and registry](/parts) and the [notebook](/notebook).",
-      ],
     },
 
     {
@@ -1664,6 +1643,70 @@ const model: Page = {
     },
     {
       kind: "details",
+      id: "core-equations",
+      navLabel: "The core equations",
+      heading: "The equations before the adaptation",
+      summary:
+        "The original system in full, both forms of the tagging step, and what each symbol is.",
+      blocks: [
+        {
+          kind: "prose",
+          body: [
+            "This is the model as it was first written, before the parameters were bundled. It tracks six quantities rather than five, and it writes the tagging step the two ways described above. The version the code actually runs is the bundled one below; this is what it was bundled from.",
+            "`DeNovo` is the binder and `Linker` the linker, both held constant: they are the conditions a run is set to. `MMM_nf` is the complex after the binder has taken it apart, and `MMM_L` is the complex joined to the linker.",
+          ],
+        },
+        {
+          kind: "table",
+          columns: ["Quantity", "Rate of change"],
+          rows: [
+            [
+              "**SMO_cyt**",
+              "`(kform_SMO_cyt + kout*SMO_cil) - (kdeg_SMO_cyt + kin)*SMO_cyt`",
+            ],
+            [
+              "**SMO_cil**",
+              "`kin*SMO_cyt - (kdeg_SMO_cil + Vmax*SMO_cil/(Km + SMO_cil))`",
+            ],
+            ["**SMO_ub**", "`Vmax*SMO_cil/(Km + SMO_cil)`"],
+            [
+              "**MMM**",
+              "`(k3*MMM_nf + kform_MMM + koff*MMM_L) - (k3*MMM*DeNovo + kdeg_MMM + kform_MMM_L*MMM*Linker)`",
+            ],
+            ["**MMM_nf**", "`k3*MMM*DeNovo - k_minus3*MMM_nf`"],
+            ["**MMM_L**", "`kf_MMM*MMM*Linker - koff*MMM_L`"],
+          ],
+          caption:
+            "The source document writes the influx term of the second equation against ciliary SMO rather than cytoplasmic SMO. It is transcribed here as cytoplasmic, which is what the first equation and the bundled version both treat it as, and is an open question for the subteam.",
+        },
+        {
+          kind: "prose",
+          body: [
+            "The tagging step in the second and third equations is **Michaelis-Menten**, with `Vmax = kcat*MMM` and `Km = (k_minus1 + kcat)/k1`. `k1` is the rate at which the complex and ciliary SMO meet, `k_minus1` the rate that pairing comes apart again, and `kcat` the rate at which a bound SMO is tagged.",
+            "The sixth equation was added for the linker, and is the quasi-steady-state assumption written out: the complex joined to the linker settles within moments, so its level depends only on how much linker and complex there is, and on the rates of forming and clearing it.",
+            "The second version replaces the tagging step with the ternary-complex rate law from Wurz et al. [3]. In their terms, **alpha** is the cooperativity coefficient, `K_MMM_Linker` the ligase and linker affinity, and `K_SMO_Linker` the target and linker affinity:",
+            "`v/Vmax = alpha / (alpha + 2*(K_MMM_Linker + Linker) / (Linker + SMO + K_SMO_Linker - sqrt((Linker + SMO + K_SMO_Linker)^2 - 4*Linker*SMO)))`",
+            "Which rewrites the third equation, and with it the tagging term of the second, as:",
+            "`d(SMO_ub)/dt = Vmax*alpha / (alpha + 2*(K_MMM_Linker + Linker) / (Linker + SMO + K_SMO_Linker - sqrt((Linker + SMO + K_SMO_Linker)^2 - 4*Linker*SMO)))`",
+            "Written this way the tagging rate carries how much linker and complex are present, and how tightly each arm binds, instead of hiding all of it in one lumped constant. That is the whole reason for preferring it, and the reason the bundled version keeps **alpha** as a separate factor.",
+          ],
+        },
+        {
+          kind: "prose",
+          body: [
+            "The subteam's own write-up of this system, as it was handed over.",
+          ],
+        },
+        {
+          kind: "pdf",
+          file: "model/core-ode-model.pdf",
+          title: "An Overview of the Core Deterministic ODE Model",
+          pages: 2,
+        },
+      ],
+    },
+    {
+      kind: "details",
       id: "equations",
       navLabel: "Equations",
       heading: "The equations the code solves",
@@ -1705,14 +1748,8 @@ const model: Page = {
         {
           kind: "prose",
           body: [
-            "The subteam's own write-up of the model, as it was handed over. The first document derives the core model and both forms of the tagging step; the second is the short list of changes that produced the bundled version the code actually runs.",
+            "The short list of changes that produced this version from the core model above.",
           ],
-        },
-        {
-          kind: "pdf",
-          file: "model/core-ode-model.pdf",
-          title: "An Overview of the Core Deterministic ODE Model",
-          pages: 2,
         },
         {
           kind: "pdf",
@@ -2946,7 +2983,7 @@ const DELIVERABLES: Block[] = [
       },
       {
         id: "other-tool",
-        text: "Another tool may be more suitable. Have a look at [what is already in the shed](/human-practices#toolbox).",
+        text: "Another tool may be more suitable. [Have a look at existing methods](/human-practices#toolbox).",
         stop: true,
       },
       {
@@ -3061,8 +3098,6 @@ const humanPractices: Page = {
   title: "Who the Garden Is For",
   kicker: "chapter 06 · integrated human practices",
   medal: true,
-  intro:
-    "We are handing other researchers a tool that changes what stays in the primary cilium. Our guiding question: how do we make it easy for them to adopt, and encourage responsible use in biologically sensitive systems? This page is what they told us, and what we changed.",
   blocks: [
 {
       kind: "stats",
@@ -3303,13 +3338,6 @@ const humanPractices: Page = {
     },
         ],
       },
-{
-      kind: "narration",
-      body: [
-        "Nearly every cell in you grows a single tiny antenna, called the **primary cilium**. It is not decoration. Certain receptors only do their job while they are sitting in it.",
-        "So a protein can be in the right cell and still be in the wrong place. That one idea is what the next part of this page is about.",
-      ],
-    },
 {
       kind: "landscape",
       section: "Community need",
@@ -4096,10 +4124,9 @@ const humanPractices: Page = {
 
 const education: Page = {
   slug: "/education",
-  title: "Sharing the Garden",
+  title: "Education",
   kicker: "chapter 07 · education",
   medal: true,
-  storyBeat: "The best part of a garden is showing someone else around it.",
   intro:
     "Science is everywhere in the world around us. The medicine we take, the food we eat and many of the technologies we rely on to survive are all shaped by biology. Synthetic biology expands on this: given what we know about biology, how could we use that knowledge to make something impactful?",
   blocks: [
@@ -4264,15 +4291,22 @@ const education: Page = {
       ],
     },
     {
-      kind: "links",
+      kind: "details",
       id: "polymerase-handbook",
-      intro: "Run it yourself.",
-      items: [
+      heading: "Can You Beat DNA Polymerase? Instructional manual",
+      summary: "Everything needed to run it, six pages.",
+      blocks: [
         {
+          kind: "prose",
+          body: [
+            "How to build each station for under five dollars, run the race, and talk about mutations along the way. Written and visual instructions, colourblind-friendly graphics, and the science behind the activity. Also as an editable [Word document](/education/dna-polymerase.docx).",
+          ],
+        },
+        {
+          kind: "pdf",
+          file: "education/dna-polymerase.pdf",
           title: "Can You Beat DNA Polymerase? Instructional manual",
-          body: "How to build each station for under five dollars, run the race, and talk about mutations along the way. Written and visual instructions, colourblind-friendly graphics, and the science behind the activity. Also as an editable [Word document](/education/dna-polymerase.docx).",
-          href: "education/dna-polymerase.pdf",
-          tag: "PDF, 6 pages",
+          pages: 6,
         },
       ],
     },
@@ -4323,15 +4357,22 @@ const education: Page = {
       ],
     },
     {
-      kind: "links",
+      kind: "details",
       id: "whodunnit-guide",
-      intro: "To keep the activity open and easy to adopt, we wrote up the whole procedure.",
-      items: [
+      heading: "The whodunnit, station by station",
+      summary: "The whole procedure, so the activity can be picked up and run, five pages.",
+      blocks: [
         {
+          kind: "prose",
+          body: [
+            "The script for the coordinator, what each of the three stations needs, and how the clues come together at the end.",
+          ],
+        },
+        {
+          kind: "pdf",
+          file: "education/whodunnit.pdf",
           title: "The whodunnit, station by station",
-          body: "The script for the coordinator, what each of the three stations needs, and how the clues come together at the end.",
-          href: "education/whodunnit.pdf",
-          tag: "PDF, 5 pages",
+          pages: 5,
         },
       ],
     },
@@ -4347,15 +4388,22 @@ const education: Page = {
       ],
     },
     {
-      kind: "links",
+      kind: "details",
       id: "baselet-handbook",
-      intro: "Run it yourself.",
-      items: [
+      heading: "Build a Baselet handbook",
+      summary: "Everything needed to run it, six pages.",
+      blocks: [
         {
+          kind: "prose",
+          body: [
+            "Ages 8 to 18, 30 to 45 minutes. The bead colours, the base-pairing rules, the amino acid chart, and the mutations to try. The [latest version](https://docs.google.com/document/d/10bECEVQb0TbHe4U1os_mHrUxQAWD1wqZIO4Ia7t5ic4/edit?usp=sharing) is kept as a Google Doc.",
+          ],
+        },
+        {
+          kind: "pdf",
+          file: "education/baselet.pdf",
           title: "Build a Baselet handbook",
-          body: "Ages 8 to 18, 30 to 45 minutes. The bead colours, the base-pairing rules, the amino acid chart, and the mutations to try. The [latest version](https://docs.google.com/document/d/10bECEVQb0TbHe4U1os_mHrUxQAWD1wqZIO4Ia7t5ic4/edit?usp=sharing) is kept as a Google Doc.",
-          href: "education/baselet.pdf",
-          tag: "PDF, 6 pages",
+          pages: 6,
         },
       ],
     },
@@ -4368,15 +4416,22 @@ const education: Page = {
       ],
     },
     {
-      kind: "links",
+      kind: "details",
       id: "synbingo-guide",
-      intro: "Run it yourself.",
-      items: [
+      heading: "SYNBIngO: the presentation, the boards and the prompts",
+      summary: "Everything needed to run it, seventeen pages.",
+      blocks: [
         {
+          kind: "prose",
+          body: [
+            "Goals, the talk on everyday medications, the bingo boards, and the discussion questions for the end, followed by the slides themselves.",
+          ],
+        },
+        {
+          kind: "pdf",
+          file: "education/synbingo.pdf",
           title: "SYNBIngO: the presentation, the boards and the prompts",
-          body: "Goals, the talk on everyday medications, the bingo boards, and the discussion questions for the end, followed by the slides themselves.",
-          href: "education/synbingo.pdf",
-          tag: "PDF, 17 pages",
+          pages: 17,
         },
       ],
     },
@@ -4411,15 +4466,22 @@ const education: Page = {
       ],
     },
     {
-      kind: "links",
+      kind: "details",
       id: "scientists-doc",
-      intro: "For the classroom.",
-      items: [
+      heading: "Scientists You Might Not Know",
+      summary: "For the classroom, thirteen pages.",
+      blocks: [
         {
+          kind: "prose",
+          body: [
+            "Profiles for chemistry and biology lessons: the people behind aspirin, thalidomide\'s halt at the FDA, and more. The [latest version](https://docs.google.com/document/d/1oJpNNe-DBpYJ4tP-zd76KM0-249qbn9j4jQ6PlO33eQ/edit?usp=sharing) is kept as a Google Doc.",
+          ],
+        },
+        {
+          kind: "pdf",
+          file: "education/scientists.pdf",
           title: "Scientists You Might Not Know",
-          body: "Profiles for chemistry and biology lessons: the people behind aspirin, thalidomide's halt at the FDA, and more. The [latest version](https://docs.google.com/document/d/1oJpNNe-DBpYJ4tP-zd76KM0-249qbn9j4jQ6PlO33eQ/edit?usp=sharing) is kept as a Google Doc.",
-          href: "education/scientists.pdf",
-          tag: "PDF, 13 pages",
+          pages: 13,
         },
       ],
     },
@@ -4428,7 +4490,6 @@ const education: Page = {
       kind: "prose",
       section: "What education taught us",
       id: "taught-us",
-      heading: "What education taught us",
       body: [
         "We are proud of all the work to come out of our education efforts this year. We created effective spaces for conversation and engagement online through our outreach; we developed adaptable lesson plans and events for other educators to build on; and we fostered community engagement with our peers through several campus events.",
         "Despite that, we have a lot to reflect on. The choice to use short-form content was thoroughly discussed, and while the format found us an audience, we understand that we have to be careful with a platform of such wide reach. We have always tried our best to research our videos thoroughly, and in future we aim to keep using these spaces to foster a dialogue rather than to lecture a mass audience. We also hope to take our lesson plans into a wide variety of community spaces, to reach outside the university.",
@@ -4441,7 +4502,6 @@ const education: Page = {
       id: "references",
       section: "References",
       heading: "References",
-      summary: "The source cited on this page.",
       blocks: [
         {
           kind: "references",
@@ -4468,8 +4528,6 @@ const attributions: Page = {
   slug: "/attributions",
   title: "Attributions",
   kicker: "chapter 12 · attributions",
-  storyBeat: "None of this was one hedgehog.",
-  intro: "What we did ourselves, and what we had help with. Select any card to see the details.",
   blocks: [
     {
       kind: "people",
@@ -4513,18 +4571,15 @@ const attributions: Page = {
 
 const implementation: Page = {
   slug: "/implementation",
-  title: "Out of the Greenhouse",
+  title: "Proposed Implementation",
   kicker: "chapter 04 · proposed implementation",
-  storyBeat: "A seedling is not a garden. Who plants this, and where?",
-  intro:
-    "Who would use this tool outside our lab, how it would reach them, and what has to be true first.",
   blocks: [
     {
       kind: "prose",
       heading: "Who this is for",
       body: [
         "Developing this technology was only part of our work. Through conversations with stakeholders, we realised the importance of supplying a reproducible and responsible method for adoption. We aimed to create a platform that would be as easily accessible as possible and could be largely expanded for other usages outside of our Smoothened proof of concept.",
-        "The thinking behind that sits on Human Practices: [six kinds of researcher](/human-practices#who-would-use-this) told us what each would need before trusting a tool like this, those needs became our [design requirements](/human-practices#design-requirements), and the [delivery selection](/human-practices#implementation-strategy) compares the small molecule, antibody and protein routes to the component that recognises the target.",
+        "The thinking behind that sits on Human Practices: [six kinds of researchers](/human-practices#who-would-use-this) told us what each would need before trusting a tool like this, those needs became our [design requirements](/human-practices#design-requirements), and the [delivery selection](/human-practices#implementation-strategy) compares the small molecule, antibody and protein routes to the component that recognises the target.",
       ],
     },
     ...DELIVERABLES,
@@ -4547,16 +4602,6 @@ const parts: Page = {
         "This page documents the design, the components and the intended function of each part. What they are used for is on [experiments](/experiments), and when each piece was designed and ordered is in the [notebook](/notebook).",
       ],
     },
-    {
-      kind: "callout",
-      label: "where this stands",
-      heading: "Designed and ordered, not yet built",
-      body: [
-        "Construct design is complete and the GenScript and Twist Bioscience orders are placed. They have not arrived, so nothing here has been assembled, validated or characterised, and no part has been submitted to the Registry yet.",
-        "Everything below is a designed and ordered part. Nothing on this page should be read as a characterised one.",
-      ],
-    },
-
     {
       kind: "constructs",
       section: "Engineered recruitment constructs",
@@ -4625,17 +4670,6 @@ const parts: Page = {
         "Individual binder sequences and identifiers go in once the final design list is settled, as do the exact names and sources of the GAL4 and VP16 components, the GFP reporter, the BFP marker and the GB1 control.",
     },
 
-    {
-      kind: "prose",
-      section: "iGEM Parts Registry",
-      id: "registry",
-      navLabel: "Registry",
-      heading: "What we will submit",
-      body: [
-        "No part on this page has a Registry number yet. The constructs were designed and ordered this autumn and have not arrived, so none has been assembled or characterised, and we are not claiming any of them as a Registry part until that has happened.",
-        "When the parts are submitted, this section gets the number, the type and the characterisation data for each one, with a link to the experiment the data came from.",
-      ],
-    },
   ],
 };
 
@@ -4794,25 +4828,21 @@ const contribution: Page = {
   title: "What We Leave Behind",
   kicker: "chapter 10 · contribution",
   medal: true,
-  storyBeat: "The part of the garden that is for whoever comes next.",
-  intro:
-    "Two things another team can pick up: a de novo binder design pipeline that runs end to end from one command, and a set of mammalian constructs for recruiting an E3 ligase to a receptor of their choosing. All of it is open, and none of it is specific to our target.",
   blocks: [
     {
       kind: "prose",
-      heading: "What another team gets",
+      heading: "What we are handing over",
       body: [
         "Designing a protein binder means driving three separate models in turn and throwing away almost everything they produce. The models are published and free. The part that is not written down anywhere is the plumbing: how to get them onto a cluster you are allowed to use, how to hand each one's output to the next, and which numbers are worth filtering on.",
-        "That plumbing is our contribution. We built it on **Hyak**, the University of Washington's shared cluster, so it runs somewhere any student here can reach rather than on a lab machine nobody else can book. It is driven by **one script** that takes a target, a batch size and a set of hotspot residues. And it is **not specific to MOSMO or MEGF8**: a team with a different target and a structure to aim at can point the same pipeline at it.",
-        "Below is the pipeline stage by stage, what each tool in it does, the scripts themselves, and the four numbers we use to decide whether a design is worth ordering. The whole thing is on [GitHub](https://github.com/uwigem/protein_design_2026).",
-        "The second half of the page is the wet lab's: [a toolkit of ten constructs](/contribution#toolkit) for bringing an E3 ligase to a receptor, built so that the receptor is the only part another team has to change.",
+        "That plumbing is our contribution. We built it on Hyak, the University of Washington's shared cluster, so it runs somewhere any student here can reach rather than on a lab machine nobody else can book. It is driven by **one command** that takes a target, a batch size and a set of hotspot residues, and it is **not specific to MOSMO or MEGF8**: a team with a different target and a structure to aim at can point the same pipeline at it.",
+        "This page has two halves. The first is that pipeline: what each tool does, the four numbers we filter on, and where [the code](https://github.com/uwigem/protein_design_2026) lives. The second is the wet lab's [toolkit of ten constructs](/contribution#toolkit) for bringing an E3 ligase to a receptor, built so the receptor is the only part another team has to change.",
       ],
     },
     {
       kind: "prose",
       section: "Protein design",
       id: "summary",
-      heading: "De novo protein design, briefly",
+      heading: "What is de novo protein design?",
       body: [
         "De novo protein design broadly refers to the development of new proteins with novel functions. The designs of these new proteins do not rely on existing protein structures. Instead they use biochemical principles and recent breakthrough computational methods, such as deep learning models trained on large-scale collections of experimental protein structural data [1]. One use case is the de novo design of novel **binders**, where custom proteins are computationally optimised to associate, or bind, with specific molecular targets. Use cases for these binders vary, but in this project we focus on a therapeutic use: the disruption of wild-type protein complex formation. De novo binders have also proved useful in the neutralisation of toxins or venoms, and in the precise modulation of immune responses such as inflammation [2].",
         "For our project this year we are focusing on disrupting the binding interface between two proteins, **MOSMO** and **MEGF8**. We aim to prevent formation of the MOSMO, MEGF8 and MGRN1 (**MMM**) complex through a competitively inhibitory, high affinity de novo binder. For our binder design pipeline we used RosettaCommons Foundry models: **RFdiffusion3**, **ProteinMPNN** and **RoseTTAFold3**, developed in-house at the University of Washington's Institute for Protein Design [3]. How we used them against this particular target is on [the model](/model); what follows is the general version.",
@@ -4823,23 +4853,22 @@ const contribution: Page = {
       id: "pipeline",
       heading: "The pipeline, stage by stage",
       intro:
-        "One command runs all of it. Each stage below names the script that does the work and what it hands to the next stage, so the chain can be picked apart and re-run from any point.",
+        "One command runs all of it. Each stage names the tool that does the work and what it hands to the next one, so the chain can be picked apart and re-run from any point. The scripts themselves are [in the repository](/contribution#code).",
       stages: [
         {
           title: "Set the target and the hotspots",
-          script: "pipeline/batch_design.sh",
           body: [
-            "The whole run is started by one script, which takes a run name, a batch size, a set of hotspot residues and which target to aim at. Everything after this is automatic.",
+            "A run is started with four things: a name for it, how many designs to make, the residues on the target to aim at, and which target that is. Everything after this is automatic.",
           ],
           input: "a target structure and the residues to aim at",
           output: "a configured run on the cluster",
-          note: "The input and output directories are set at the top of the script, so it can be pointed at any file layout.",
+          note: "The input and output folders are set in one place, so the pipeline can be pointed at any file layout.",
         },
         {
           title: "Generate backbones",
-          script: "RFdiffusion3, through the Foundry container",
+          script: "RFdiffusion3",
           body: [
-            "RFdiffusion3 denoises around the fixed target to produce the coordinates of a small protein expected to interact favourably with it. These backbones are the geometric framework of the design, with no sequence yet.",
+            "RFdiffusion3 is a diffusion-based model that arrives at protein structures by iterative denoising, a process known as backbone generation or fold design [3]. Given a fixed target, it denoises around it to produce the coordinates of a small protein expected to interact favourably with it. These backbones are the geometric framework of the design, with no sequence yet.",
           ],
           input: "target structure and hotspot residues",
           output: "candidate binder backbones",
@@ -4848,34 +4877,32 @@ const contribution: Page = {
           title: "Design sequences onto them",
           script: "ProteinMPNN",
           body: [
-            "ProteinMPNN takes the coordinates of a structure and generates a sequence of amino acids predicted to fold into it, a process known as inverse folding. The output carries the complete sequence for the generated minibinder alongside the existing sequence of the target.",
+            "ProteinMPNN is a neural network that takes the coordinates of a structure and generates a sequence of amino acids predicted to fold into it, a process known as inverse folding [4]. The output carries the complete sequence for the generated minibinder alongside the existing sequence of the target.",
           ],
           input: "backbones",
           output: "amino acid sequences for each backbone",
         },
         {
           title: "Fold the sequences back",
-          script: "RoseTTAFold3, through fold.sh",
+          script: "RoseTTAFold3",
           body: [
-            "RoseTTAFold3 predicts how the designed sequence will actually fold, together with the target. Comparing that prediction against the backbone we asked for is what tells us whether the sequence recapitulates the shape, and whether the binder still lands where it was diffused.",
+            "RoseTTAFold3 takes a sequence and predicts how the protein will fold, a process known as forward folding [5]. Running the designed sequence through it together with the target, and comparing against the backbone we asked for, is what tells us whether the sequence recapitulates the shape. It also tells us whether the binder still lands where it was diffused: one that refolds in the same place on the target is a strong indicator it has affinity for it.",
           ],
           input: "sequences and the target",
           output: "predicted complexes and their confidence files",
         },
         {
-          title: "Pull the metrics out and filter",
-          script: "pipeline/scripts, redesign/batch_confidences_fixed.py",
+          title: "Measure every design and filter",
           body: [
-            "A script aligns each folded output against the backbone it came from to calculate the deviation, and reads the confidence values out of the prediction's own summary files. Designs are then kept or dropped on [the four numbers below](/contribution#metrics).",
+            "Each folded design is aligned against the backbone it came from to measure how far it drifted, and the confidence values are read out of the prediction's own summary files. Designs are then kept or dropped on [the four numbers below](/contribution#metrics).",
           ],
           input: "predicted complexes",
           output: "a table of metrics, and a list of designs worth keeping",
         },
         {
           title: "Rescue the near misses",
-          script: "redesign/select_redesign.py, redesign/redesign_all_dirs.sh",
           body: [
-            "Designs that came close to the cutoffs get a second pass: the first script finds them, the second sends them back through sequence design and folding. Giving a backbone a fresh sequence is known to lower deviation and raise prediction confidence, so a near miss gets another chance to settle into the shape that was asked for.",
+            "Designs that came close to the cutoffs get a second pass: they are found automatically and sent back through sequence design and folding. Giving a backbone a fresh sequence is known to lower deviation and raise prediction confidence, so a near miss gets another chance to settle into the shape that was asked for.",
           ],
           input: "near misses and designs that already passed",
           output: "a second generation of sequences, filtered the same way",
@@ -4892,39 +4919,13 @@ const contribution: Page = {
     },
     {
       kind: "prose",
-      id: "rfdiffusion3",
-      heading: "RFdiffusion3",
-      body: [
-        "RoseTTAFoldDiffusion3 is a diffusion-based protein structure-generating model that uses iterative denoising to arrive at protein structures, a process known as backbone generation or fold design [3]. These backbones can be thought of as just the geometric framework for a design: the scaffold we aim to recreate through an amino acid sequence from ProteinMPNN, and hopefully match with a RoseTTAFold3 prediction. By providing fixed protein input structures, it denoises around the fixed target to generate the coordinates of a small protein expected to interact favourably with it.",
-      ],
-    },
-    {
-      kind: "prose",
-      id: "proteinmpnn",
-      heading: "ProteinMPNN",
-      body: [
-        "ProteinMPNN is a neural network that takes the coordinates of a given protein structure as input and generates a sequence of amino acids predicted to fold into that structure, a process known as inverse folding [4]. The output of this step is a file containing the complete sequence for the generated minibinder and the pre-existing sequence of the target protein.",
-      ],
-    },
-    {
-      kind: "prose",
-      id: "rosettafold3",
-      heading: "RoseTTAFold3",
-      body: [
-        "RoseTTAFold3 is a protein structure prediction model that takes an input sequence of amino acids and predicts how the specified protein will fold, a process known as forward folding [5]. Running the ProteinMPNN output through it and comparing against the initial backbone validates that the generated sequence recapitulates the structure we diffused. Further, the comparison tells us whether the binder is predicted to bind where it was initially placed. If the binder refolds in a similar position on the target as it was generated in, that is a strong indicator it has affinity for the target.",
-      ],
-    },
-    {
-      kind: "prose",
       section: "The scripts and the code",
       id: "our-scripts",
       heading: "The scripts, and what they saved us",
       body: [
-        "To achieve high-throughput de novo binder design we wrote Bash and Python scripts that automate the pipeline. Our design script lets a user input just the name of the target protein, the batch size, and the selected hotspots. This brought generation times down to about **45 minutes per 75 binder designs**, from about 75 minutes for the same batch at the start.",
+        "To achieve high-throughput de novo binder design we wrote Bash and Python scripts that automate the pipeline. Our design script lets a user input just the name of the target protein, the batch size, and the selected hotspots. On Hyak this brought generation times down to about **45 minutes per 75 binder designs**, from about 75 minutes for the same batch at the start.",
         "We also wrote a validation script that pulls metrics out of the output files of each design and out of the structure files themselves.",
       ],
-      source:
-        "Timing measured on Hyak.",
     },
     {
       kind: "table",
@@ -5073,10 +5074,8 @@ const contribution: Page = {
 
 const judging: Page = {
   slug: "/judging",
-  title: "The Checklist",
+  title: "Judging",
   kicker: "chapter 11 · judging",
-  intro:
-    "Every medal criterion we are claiming, what iGEM asks for, and the page on this wiki that shows it.",
   blocks: [
     {
       kind: "medals",
@@ -5088,7 +5087,7 @@ const judging: Page = {
         {
           title: "Competition Deliverables",
           asks: "Complete the competition deliverables: the wiki, the presentation video, the judging form and the judging session.",
-          met: "All of our work this year is on this wiki. The required materials are submitted, and we are looking forward to telling you about the project in the session.",
+          met: "All of our work this year is on this wiki, starting at [the home page](/). The required materials are submitted, and we are looking forward to telling you about the project in the session.",
         },
         {
           title: "Project Attributions",
@@ -5098,7 +5097,7 @@ const judging: Page = {
         {
           title: "Contribution",
           asks: "Make a useful contribution for future iGEM teams.",
-          met: "Our education, Human Practices, wet lab, modelling and engineering work is documented so that it can be picked up rather than repeated. What we are leaving behind is on [contribution](/contribution).",
+          met: "Our education, Human Practices, wet lab, modelling and engineering work is documented thoroughly, so that another team can pick it up and build on it rather than repeat it. What we are leaving behind is on [contribution](/contribution).",
         },
       ],
     },
@@ -5112,7 +5111,7 @@ const judging: Page = {
         {
           title: "Engineering Success",
           asks: "Demonstrate engineering success in a technical aspect of your project by going through at least one iteration of the engineering design cycle.",
-          met: "Three loops, one per subteam, each with the design, build, test and learn steps written out and the hand-offs between them recorded. They are on [engineering](/engineering), including the [wet lab's cycles](/engineering#wet-lab-cycles), where the kinetic model changed the gene design before anything was ordered.",
+          met: "We iterated on the project several times over the year: three loops, one per subteam, each with the design, build, test and learn steps written out and the hand-offs between them recorded. They are on [engineering](/engineering), including the [wet lab's cycles](/engineering#wet-lab-cycles), where the kinetic model changed the gene design before anything was ordered.",
         },
         {
           title: "Human Practices",
@@ -5130,18 +5129,18 @@ const judging: Page = {
       items: [
         {
           title: "Excellence in Model",
-          asks: "Build a model that helps you understand and design your system, and document it so others can use it.",
-          met: "A kinetic model of the Hedgehog and MMM system, refined over several versions, with the sensitivity analysis that told the wet lab which rates to measure. The model, its equations and its limits are on [model](/model).",
+          asks: "Build a model that helps you understand and design your system, state the assumptions it rests on, and document it so others can use it.",
+          met: "A kinetic model of the Hedgehog and MMM system, refined over several versions, with the sensitivity analysis that told the wet lab which rates to measure. The model, its equations and the assumptions it rests on are on [model](/model).",
         },
         {
           title: "Excellence in Education",
           asks: "Develop educational work that goes beyond outreach, and document it so that others can run it.",
-          met: "Online outreach, adaptable lesson plans and campus events, each written up with the handbooks to run them again. What we did and what it taught us is on [education](/education).",
+          met: "Online outreach, adaptable lesson plans and campus events, each written up with the handbooks to run them again, and **[iGEM Alchemy](/alchemy)**, a browser game we built that teaches the molecules behind the project by combining them. What we did and what it taught us is on [education](/education).",
         },
         {
           title: "Excellence in Integrated Human Practices",
           asks: "Show how your project was shaped by the people it affects, through work integrated into the design.",
-          met: "The same 16 interviews, read alongside the literature, shaped the platform, the market model and the deliverables. Each conversation on [human practices](/human-practices#stakeholders) says what changed because of it.",
+          met: "The same 16 interviews, read alongside an extensive literature review, shaped our understanding of community needs, responsible platform development and designing for adoption, and from them came the market model and the deliverables. Each conversation on [human practices](/human-practices#stakeholders) says what changed because of it.",
         },
       ],
     },

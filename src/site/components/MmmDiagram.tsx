@@ -44,13 +44,13 @@ const MODES: { id: Mode; label: string; caption: string }[] = [
     id: 'linker',
     label: 'Recruit linker',
     caption:
-      'The down arm. An inducible linker forces the whole complex onto a receptor we choose, so that receptor is tagged and cleared instead of SMO.',
+      'An engineered linker brings the selected ciliary membrane receptor into proximity with the MMM complex. This positions MGRN1 near the target, promoting ubiquitination and reducing the amount of receptor available to accumulate in the primary cilium, and so decreasing downstream signalling.',
   },
   {
     id: 'breaker',
     label: 'Recruit breaker',
     caption:
-      'The up arm. A designed minibinder wedges into the MEGF8 and MOSMO interface. The complex comes apart, nothing is tagged, and SMO stays in the cilium.',
+      'A designed minibinder disrupts the MEGF8 and MOSMO interaction within the MMM complex, limiting ubiquitination of the target.',
   },
 ]
 
@@ -107,9 +107,9 @@ export default function MmmDiagram() {
 
   return (
     <section className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
-      <h2 className="text-xl">What the complex does, and what we do to it</h2>
+      <h2 className="text-xl">MMM Complex Overview</h2>
       <p className="mt-1 text-body leading-relaxed">
-        Pick one of the two arms to see what changes. The resting state is what a cell does on its own.
+        Select Inhibition and Linker to see how we plan to modulate SMO abundance in the primary cilium.
       </p>
 
       <div className="mt-4 overflow-hidden rounded-sm border-[3px] border-leaf-700 bg-leaf-50">

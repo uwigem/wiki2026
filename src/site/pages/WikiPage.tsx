@@ -139,7 +139,6 @@ export default function WikiPage({ page }: { page: Page }) {
             </div>
           )}
 
-          {long && <ReadingTips hasPeople={people.length > 0} />}
         </div>
       </GardenSection>
 
@@ -314,30 +313,6 @@ function referenceScopes(blocks: Block[]): ReadonlySet<string> {
     });
   walk(blocks);
   return out;
-}
-
-/** The "navigation tips" bar long pages open with: closed, one line, there when wanted. */
-function ReadingTips({ hasPeople }: { hasPeople: boolean }) {
-  return (
-    <details className="panel-flat group w-full text-left">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-2.5">
-        <span className="pixel text-sm">How to read this page</span>
-        <span aria-hidden className="pixel text-xs transition-transform group-open:rotate-180">
-          ▾
-        </span>
-      </summary>
-      <ul className="list-disc space-y-1.5 border-t-2 border-leaf-300 py-3 pl-8 pr-4 text-body-sm leading-relaxed">
-        <li>The list beside the page (the button in the corner on a phone) jumps to any section.</li>
-        {hasPeople && (
-          <li>Open any person&apos;s card to read that conversation and what changed because of it. Their names in the text open the same card.</li>
-        )}
-        <li>
-          Parts with a <strong>Show</strong> button hold the working behind a point. Open them only if you want the detail.
-        </li>
-        <li>Numbers in brackets link to the sources at the foot of the page.</li>
-      </ul>
-    </details>
-  );
 }
 
 function BlockView({ block }: { block: Block }) {

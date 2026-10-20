@@ -72,7 +72,7 @@ const PATHWAY: Figure = {
   h: 258,
   minPx: 560,
   labels: [
-    { text: 'no ligand', x: 86, y: 2, anchor: 'centre', tone: 'title' },
+    { text: 'No Hedgehog ligand', x: 86, y: 2, anchor: 'centre', tone: 'title' },
     { text: 'Hedgehog ligand bound', x: 274, y: 2, anchor: 'centre', tone: 'title' },
     { text: 'PTCH1', x: 60, y: 104, anchor: 'centre' },
     { text: 'SMO', x: 146, y: 74, anchor: 'centre' },
@@ -82,7 +82,6 @@ const PATHWAY: Figure = {
     { text: 'SMO', x: 265, y: 20, anchor: 'centre' },
     { text: 'GLI', x: 284, y: 112 },
     { text: 'genes on', x: 284, y: 128, tone: 'caption' },
-    { text: 'one SMO stays in the flat membrane in both', x: 180, y: 156, anchor: 'centre', tone: 'caption' },
     { text: 'MEGF8, MOSMO and MGRN1 find SMO', x: 60, y: 240, anchor: 'centre', tone: 'caption' },
     { text: 'MGRN1 tags it', x: 180, y: 240, anchor: 'centre', tone: 'caption' },
     { text: 'SMO is removed', x: 300, y: 240, anchor: 'centre', tone: 'caption' },
