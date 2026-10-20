@@ -59,6 +59,11 @@ const REWIND_ENTRY_SECONDS = 0.5
 const CLOSING_SHOWN = 0.65
 /** Input events closer together than this are one gesture. */
 const GESTURE_GAP_MS = 200
+/**
+ * While a scene is still playing, the first swipe onward is absorbed. Another
+ * swipe, at least this long after it, goes through.
+ */
+const HOLD_AGAIN_MS = 700
 /** The longest the closing holds the page before it has appeared, in case it never gets drawn. */
 const HOLD_LIMIT_MS = 4000
 
@@ -210,6 +215,14 @@ export default function StoryStage() {
    * A scroll this page asks for is made with the snapping off as well, so the
    * browser cannot fight it halfway, and it goes back on once the page has
    * come to rest.
+   *
+   * A scene that is still playing holds on to the page against the wheel. The
+   * first swipe onward is absorbed, so a brush of the trackpad, or a second
+   * swipe made out of habit straight after the first, cannot skip what is on
+   * screen. A second, separate swipe means it, and moves on as usual,
+   * fast-forwarding the rest of the scene. Going back up is never held. The
+   * scroll cue appears when a scene has finished, which is when one swipe is
+   * enough again.
    */
   useEffect(() => {
     if (!layout) return
@@ -319,6 +332,10 @@ export default function StoryStage() {
     let lockedUntil = 0
     let goingTo = -1
     let arriveBy = 0
+    /** The swipe last absorbed by a playing scene: which scene, which gesture, and when. */
+    let held = { scene: -1, gesture: 0, at: 0 }
+    const stillPlaying = (i: number) =>
+      !reducedRef.current && STORY[i].seconds > 0 && !(play.current.idx === i && play.current.t >= 1)
     const mean = (n: number) => {
       const xs = recent.slice(-n)
       return xs.reduce((a, b) => a + b, 0) / xs.length
@@ -353,6 +370,16 @@ export default function StoryStage() {
         }
       const next = clamp(at + Math.sign(e.deltaY), 0, list.length - 1)
       if (next === at) return
+      if (next > at && next <= LAST && stillPlaying(at)) {
+        const gesture = landing.current.gestureAt
+        // Older than the scene is long, the absorbed swipe belonged to an
+        // earlier visit to it.
+        if (held.scene !== at || now - held.at > STORY[at].seconds * 1000) {
+          held = { scene: at, gesture, at: now }
+          return
+        }
+        if (held.gesture === gesture || now - held.at < HOLD_AGAIN_MS) return
+      }
       // The closing holds the page: finish it in place rather than leave it.
       if (next === STORY.length && holdingAtEnd(landing.current, now)) {
         landing.current.finish = true
@@ -364,6 +391,7 @@ export default function StoryStage() {
       }
       goingTo = next
       arriveBy = now + 900
+      held.scene = -1
       lockedUntil = now + 550
       glideTo(list[next])
     }
@@ -696,11 +724,8 @@ export default function StoryStage() {
             {PROJECT_TITLE}
           </h1>
           <p className="pixel mt-4 text-lg leading-snug text-leaf-800 sm:text-2xl">{HERO.tagline}</p>
-          <p className="pixel mt-10 flex flex-col items-center text-sm text-leaf-800">
-            scroll
-            <span aria-hidden className="motion-safe:animate-bounce mt-1 text-lg leading-none">
-              &darr;
-            </span>
+          <p className="mt-10">
+            <ScrollCue size="lg" />
           </p>
         </div>
 
@@ -795,7 +820,7 @@ export default function StoryStage() {
         <div
           ref={progressRef}
           className={
-            'pointer-events-none absolute bottom-4 flex items-center justify-between gap-4 ' +
+            'pointer-events-none absolute bottom-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 ' +
             (layout?.wide ? 'left-10 w-[calc(40%-5rem)] xl:left-14 xl:w-[calc(40%-7rem)]' : 'inset-x-6')
           }
         >
@@ -818,18 +843,39 @@ export default function StoryStage() {
               </button>
             ))}
           </nav>
-          <p
-            ref={hintRef}
-            aria-hidden
-            className="pixel flex items-center gap-1 text-sm text-leaf-800 transition-opacity duration-500"
-            style={{ opacity: 0 }}
-          >
-            scroll
-            <span className="motion-safe:animate-bounce leading-none">&darr;</span>
+          <p ref={hintRef} aria-hidden className="transition-opacity duration-500" style={{ opacity: 0 }}>
+            <ScrollCue size="md" />
           </p>
         </div>
       </div>
     </div>
+  )
+}
+
+/**
+ * The nudge to scroll on: the word and an arrow that bobs, drawn as pixel art
+ * on whole-pixel steps so it matches the picture, and big enough to be seen
+ * from the corner of the eye while reading the words above it.
+ */
+function ScrollCue({ size }: { size: 'md' | 'lg' }) {
+  const lg = size === 'lg'
+  return (
+    <span
+      aria-hidden
+      className={
+        'pixel flex items-center justify-center text-leaf-900 ' +
+        (lg ? 'gap-3 text-lg sm:text-xl' : 'gap-2 text-lg xl:gap-3 xl:text-xl')
+      }
+    >
+      scroll
+      <svg
+        viewBox="0 0 8 7"
+        shapeRendering="crispEdges"
+        className={'motion-safe:animate-bounce ' + (lg ? 'h-[21px] w-6' : 'h-3.5 w-4 xl:h-[21px] xl:w-6')}
+      >
+        <path fill="currentColor" d="M3 0h2v4H3zM0 3h2v1H0zM6 3h2v1H6zM1 4h6v1H1zM2 5h4v1H2zM3 6h2v1H3z" />
+      </svg>
+    </span>
   )
 }
 

@@ -1,13 +1,12 @@
 import { useEffect, useRef } from 'react'
-import { WORLD_H, WORLD_W, Water } from '../../engine/config'
 import { Player, type Input } from '../../engine/player'
-import type { WorldData } from '../../engine/world'
+import { getFlatWorld } from '../flatWorld'
 import { useReducedMotion } from '../hooks'
 import { LG_BREAKPOINT, contentBand, pixelScale } from '../layout'
 import { SITE_PALETTE } from '../theme'
 
 /**
- * The scroll-following hedgehog.
+ * The scroll-following hedgehog, Sprout.
  *
  * It walks down the page margin, but it is clipped to the band between the green
  * fold line (top) and the footer (bottom). So it is not toggled on and off: it
@@ -19,32 +18,6 @@ import { SITE_PALETTE } from '../theme'
  * hedgehog, positioned by transform. The animation itself is the engine's:
  * a headless `Player` drawing its own hop-walk and blink.
  */
-
-/**
- * A world of nothing but land, so the guide never collides with anything.
- *
- * `Player.update` only ever reads `waterMap`, so the rest of a real `WorldData`
- * (ponds, the waterfall, decor, the spawn point) is not needed and would cost a
- * full world bake to produce. Everything else is filled in with the empty value
- * of its type rather than cast away, so adding a field to `WorldData` shows up
- * here as a type error instead of as undefined at runtime.
- */
-let flatWorld: WorldData | null = null
-function getFlatWorld(): WorldData {
-  if (!flatWorld) {
-    flatWorld = {
-      waterMap: new Uint8Array(WORLD_W * WORLD_H).fill(Water.LAND),
-      shoreField: new Int8Array(WORLD_W * WORLD_H),
-      decor: [],
-      objects: [],
-      waterfall: { x: 0, y: 0, w: 0, h: 0 },
-      splash: { x: 0, y: 0 },
-      ripplePts: [],
-      spawn: { x: WORLD_W / 2, y: WORLD_H / 2 },
-    }
-  }
-  return flatWorld
-}
 
 /** Fraction of the viewport height it travels between, top to bottom. */
 const TOP = 0.2
