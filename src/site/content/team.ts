@@ -409,6 +409,7 @@ export const ROSTER: Member[] = [
     subteams: ['creative'],
     bio:
       'Hi, I’m Gurnoor! I’m a senior Biology major on the Creative subteam. I helped create our informational and promotional posts and worked with the other subteams on outreach.',
+    photo: 'team/gurnoor-sandhu.jpg',
   },
   {
     name: 'Selina Shah',
