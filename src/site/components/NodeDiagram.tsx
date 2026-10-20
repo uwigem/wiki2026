@@ -159,7 +159,8 @@ function Arrangement({
           const q = (k: 0 | 1) =>
             bend ? (1 - u) ** 2 * s[k] + 2 * (1 - u) * u * c[k] + u ** 2 * t[k] : s[k] + (t[k] - s[k]) * u
           const side = (narrow ? e.nLabelSide ?? e.labelSide : e.labelSide) ?? 'left'
-          const off = side === 'left' ? 9 : -9
+          // Far enough off the line that a halo is not doing all the work.
+          const off = side === 'left' ? 12 : -12
           const lx = q(0) + nxv * off
           const ly = q(1) + nyv * off
           // Anchor the label so it grows away from the line rather than across it.

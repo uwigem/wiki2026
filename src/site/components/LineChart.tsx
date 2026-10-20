@@ -158,7 +158,10 @@ export default function LineChart({
                         strokeWidth={1.5}
                         strokeDasharray="5 4"
                       />
-                      <text x={VW - PAD.right - 2} y={Y(r.value) - 4} textAnchor="end" {...CHART_TEXT}>
+                      {/* Kept well inside the right edge: on a phone the chart
+                          scrolls sideways and the last stripe of it is hidden,
+                          which would otherwise cut this label in half. */}
+                      <text x={VW - PAD.right - 30} y={Y(r.value) - 4} textAnchor="end" {...CHART_TEXT}>
                         {r.label}
                       </text>
                     </g>
