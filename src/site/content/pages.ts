@@ -921,7 +921,7 @@ const engineering: Page = {
             },
             {
               title: "Learn",
-              body: "The result was flat. How often a hotspot succeeded tracked **how many designs we had attempted with it**, and not the chemistry of the residues. Talking it through with Dr. DiMaio, the reading is that hotspots tell RFdiffusion3 roughly where to aim rather than specifying residue to residue contacts. We also folded the separate scripts into one that runs the whole pipeline, so any future Washington iGEM team can design binders with a single command.",
+              body: "How often a hotspot succeeded tracked **how many designs we had attempted with it**, and not the chemistry of the residues. Talking it through with Dr. DiMaio, the reading is that hotspots tell RFdiffusion3 roughly where to aim rather than specifying residue to residue contacts. We also folded the separate scripts into one that runs the whole pipeline, so any future Washington iGEM team can design binders with a single command.",
             },
           ],
         },
@@ -1160,16 +1160,6 @@ const experiments: Page = {
       alt: "A cross-section of the cell membrane. MEGF8 spans the membrane with MOSMO beside it, and MGRN1, labelled E3 ligase, sits on the cytoplasmic side. To the right, SMO is drawn as a seven-pass receptor being tagged with three ubiquitin marks. An arrow leads to two boxes: ciliary SMO down, then Hedgehog signalling down.",
       caption:
         "Schematic representation of MMM-mediated SMO regulation. The MMM complex promotes SMO ubiquitination, limiting SMO accumulation in the primary cilium and reducing downstream Hedgehog pathway activity.",
-    },
-    {
-      kind: "callout",
-      label: "experimental status",
-      heading: "Proposed Experimental Work",
-      body: [
-        "The four experiments presented below outline the proposed validation strategy for HedgehogSense. Construct design has been completed, and the required DNA constructs have been ordered from GenScript and Twist Bioscience. Experimental work is pending delivery of these materials.",
-        "All experimental workflows are presented as proposed methods. Figures containing illustrative or simulated data are explicitly identified and do not represent experimentally measured results.",
-        "Detailed construct information and project documentation are available in [parts and registry](/parts) and the [notebook](/notebook).",
-      ],
     },
 
     {
@@ -4496,7 +4486,7 @@ const implementation: Page = {
       heading: "Who this is for",
       body: [
         "Developing this technology was only part of our work. Through conversations with stakeholders, we realised the importance of supplying a reproducible and responsible method for adoption. We aimed to create a platform that would be as easily accessible as possible and could be largely expanded for other usages outside of our Smoothened proof of concept.",
-        "The thinking behind that sits on Human Practices: [six kinds of researcher](/human-practices#who-would-use-this) told us what each would need before trusting a tool like this, those needs became our [design requirements](/human-practices#design-requirements), and the [delivery selection](/human-practices#implementation-strategy) compares the small molecule, antibody and protein routes to the component that recognises the target.",
+        "The thinking behind that sits on Human Practices: [six kinds of researchers](/human-practices#who-would-use-this) told us what each would need before trusting a tool like this, those needs became our [design requirements](/human-practices#design-requirements), and the [delivery selection](/human-practices#implementation-strategy) compares the small molecule, antibody and protein routes to the component that recognises the target.",
       ],
     },
     ...DELIVERABLES,
@@ -4519,16 +4509,6 @@ const parts: Page = {
         "This page documents the design, the components and the intended function of each part. What they are used for is on [experiments](/experiments), and when each piece was designed and ordered is in the [notebook](/notebook).",
       ],
     },
-    {
-      kind: "callout",
-      label: "where this stands",
-      heading: "Designed and ordered, not yet built",
-      body: [
-        "Construct design is complete and the GenScript and Twist Bioscience orders are placed. They have not arrived, so nothing here has been assembled, validated or characterised, and no part has been submitted to the Registry yet.",
-        "Everything below is a designed and ordered part. Nothing on this page should be read as a characterised one.",
-      ],
-    },
-
     {
       kind: "constructs",
       section: "Engineered recruitment constructs",
@@ -4597,17 +4577,6 @@ const parts: Page = {
         "Individual binder sequences and identifiers go in once the final design list is settled, as do the exact names and sources of the GAL4 and VP16 components, the GFP reporter, the BFP marker and the GB1 control.",
     },
 
-    {
-      kind: "prose",
-      section: "iGEM Parts Registry",
-      id: "registry",
-      navLabel: "Registry",
-      heading: "What we will submit",
-      body: [
-        "No part on this page has a Registry number yet. The constructs were designed and ordered this autumn and have not arrived, so none has been assembled or characterised, and we are not claiming any of them as a Registry part until that has happened.",
-        "When the parts are submitted, this section gets the number, the type and the characterisation data for each one, with a link to the experiment the data came from.",
-      ],
-    },
   ],
 };
 
