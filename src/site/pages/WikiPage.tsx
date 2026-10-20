@@ -32,6 +32,7 @@ import Procedure from "../components/Procedure";
 import DataTable from "../components/DataTable";
 import DecisionTree from "../components/DecisionTree";
 import MembraneLandscape from "../components/MembraneLandscape";
+import IntegrationCounter from "../components/IntegrationCounter";
 import { SectionAside, SectionMenu, type RailItem, type RailSection } from "../components/SectionRail";
 import { CitationContext, slugify } from "../components/citations";
 import Details from "../components/Details";
@@ -397,6 +398,9 @@ function BlockView({ block }: { block: Block }) {
       return <HedgehogNote body={block.body} label={block.label} />;
 
     case "stats":
+      if (block.look === "counter") {
+        return <IntegrationCounter heading={block.heading} items={block.items} />;
+      }
       return (
         <StatRow
           heading={block.heading}

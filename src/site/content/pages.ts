@@ -152,6 +152,8 @@ export type Block = Anchored &
         items: Stat[];
         footnote?: string;
         source?: string;
+        /** Draw the row as Human Practices' integration counter. */
+        look?: "counter";
       }
     /** What existing tools can and cannot do, side by side. */
     | {
@@ -3106,6 +3108,7 @@ const humanPractices: Page = {
       kind: "stats",
       id: "integration",
       heading: "Integration counter",
+      look: "counter",
       items: [
         { value: "16", label: "stakeholders consulted" },
         { value: "6", label: "professional communities represented" },
