@@ -2169,7 +2169,9 @@ const model: Page = {
       heading: "What the two models did",
       body: [
         "Both reproduced the five objectives. Scored as the total distance from all five targets at once, the **linear model reached 0.14 and the Michaelis-Menten model 0.2**. Neither is ruled out by that, which is the case we said in advance would send us to the simpler of the two.",
-        "That score is a sum of squared differences between what the model does and what the literature reports, one term per objective. Each term is read off the run the same way the experiment was: for the migration half-life, we fit an exponential to the cytoplasmic SMO the model produces, take its half-life, and compare that with the 20 minutes, or 1,200 seconds, the literature gives. A lower total means every objective is closer at once, so the two numbers can be compared with each other but not read as a percentage or an error bar.",
+        "That score is one term per objective, summed:",
+        "`Loss = sum over i of (observed_i - actual_i)^2 / actual_i^2`",
+        "**observed** is the value read off the simulation and **actual** the value the literature gives. Dividing by the literature value squared makes each term a relative error, so objectives measured in different units count equally and the total is a plain number rather than a quantity with units. Each observed value is taken from the run the same way the experiment took it: for the migration half-life we fit an exponential to the cytoplasmic SMO the model produces, take its half-life, and compare that with the 20 minutes, or 1,200 seconds, the literature reports. A lower total means every objective is closer at once.",
         "The figures below show each model under three conditions: no Hedgehog, enough to half-activate the pathway, and a saturating dose. The top row is PTCH1, the middle row cholesterol on each side of the membrane, and the bottom row the SMO pools, including the activated one that carries the signal.",
       ],
     },
