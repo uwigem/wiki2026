@@ -2527,9 +2527,9 @@ const model: Page = {
         {
           kind: "scatter",
           id: "hotspot-charts",
-          heading: "Uses against successes, one point per candidate residue",
+          heading: "Uses against successes, one point per residue of the target",
           intro:
-            "Every residue on each target that was a candidate hotspot: how many times it was named in a design run, and how many of those runs produced a design that passed the filters. The dashed line is fitted through the origin.",
+            "Every residue of each target: how many times it was named as a hotspot in a design run, and how many of those runs produced a design that passed the filters. The dashed line is fitted through the origin.",
           panels: [
             { title: "MEGF8", points: HOTSPOT_MEGF8 },
             { title: "MOSMO", points: HOTSPOT_MOSMO },
@@ -2538,7 +2538,7 @@ const model: Page = {
           yLabel: "successes credited to it",
           trend: "origin",
           footnote:
-            "A design is generated against a **list** of hotspots, not one, so a run is credited to every residue in its list. These axes therefore count uses rather than designs, and they cannot be added up and compared with the funnel: MOSMO's column alone comes to 34,068 uses across 8,300 designs. Read as a rate, MEGF8 returns 34 successes from 1,658 uses and MOSMO 308 from 34,068. The fits are tight, and that is the finding: the rate is close to constant whichever residue was named. Most of the candidate residues were never used at all and sit together at the origin, which is honest but does flatter the fit; among the residues actually used the spread is wider. The points are not named, because which numbering they are given in is still a question for the design subteam.",
+            "A design is generated against a **list** of hotspots, not one, so a run is credited to every residue in its list. These axes therefore count uses rather than designs, and they cannot be added up and compared with the funnel: MOSMO's column alone comes to 34,068 uses across 8,300 designs. Read as a rate, MEGF8 returns 34 successes from 1,658 uses and MOSMO 308 from 34,068. The fits are tight, and that is the finding: the rate is close to constant whichever residue was named. Read the fit with its caveat, though. Only 20 of MEGF8's residues and 30 of MOSMO's were ever named as a hotspot; the rest of the points are residues that were never tried, piled at the origin, and they carry much of the fit. Over the residues actually used, the same line gives 0.67 on MEGF8 and 0.92 on MOSMO. The MOSMO panel therefore makes the case on its own and the MEGF8 panel does not, which is worth saying out loud. The points are not named, because which numbering they are given in is still a question for the design subteam.",
         },
       ],
     },
