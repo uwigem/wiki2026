@@ -95,7 +95,10 @@ export default function DataTable({
         {rows.map((row, r) => (
           <li key={r} className="panel-flat px-4 py-3">
             <p className="font-semibold">{inline(row[0])}</p>
-            {row.slice(1).map((cell, c) => (
+            {/* An empty cell says nothing, so it does not get a line of its own
+                here: a half-filled table would otherwise become a stack of
+                column names with no values after them. */}
+            {row.slice(1).map((cell, c) => (cell.trim() === '' ? null : (
               <p key={c} className="mt-2 text-body-sm leading-relaxed">
                 <span className="kicker mr-1.5 normal-case">{columns[c + 1]}</span>
                 {heat ? (
@@ -106,7 +109,7 @@ export default function DataTable({
                   inline(cell)
                 )}
               </p>
-            ))}
+            )))}
           </li>
         ))}
       </ul>

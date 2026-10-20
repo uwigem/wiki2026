@@ -34,6 +34,7 @@ import type { MembraneProtein } from "../components/MembraneLandscape";
 import type { WorkflowStage } from "../components/Workflow";
 import {
   ALPHA_SERIES,
+  MC4R_PANELS,
   MORRIS_POINTS,
   NORMSENS_TABLE,
   SOBOL_ROWS,
@@ -1062,7 +1063,7 @@ const engineering: Page = {
             },
             {
               title: "Build",
-              body: "The protein modelling subteam's filters decided what could be ordered. Most early designs bound parts of MOSMO and MEGF8 buried in the membrane, so they re-folded every survivor against only the extracellular parts and wrote a filter that rejects anything near the transmembrane helices. About 25 designs survived, and a rescue cycle is working toward a full 96-well plate. That plate is also the format of the bench screen: [Experiment 2](/experiments#exp2-design) is a 96-well assay in mammalian cells, with each binder and its target fused to one half of a split transcription factor, a GFP reporter, and a matched GB1-only control for every binder. The kinetic modelling subteam's off-target check gave the binder doses a ceiling: the effect on MC4R stays small and saturates, about 2.3 percent at 50 nM and 2.75 percent at 500 nM.",
+              body: "The protein modelling subteam's filters decided what could be ordered. Most early designs bound parts of MOSMO and MEGF8 buried in the membrane, so they re-folded every survivor against only the extracellular parts and wrote a filter that rejects anything near the transmembrane helices. About 25 designs survived, and a rescue cycle is working toward a full 96-well plate. That plate is also the format of the bench screen: [Experiment 2](/experiments#exp2-design) is a 96-well assay in mammalian cells, with each binder and its target fused to one half of a split transcription factor, a GFP reporter, and a matched GB1-only control for every binder. The kinetic modelling subteam's off-target check gave the binder doses a ceiling: the effect on MC4R stays small, about 6.8 percent at 50 nM and 8.0 percent at 500 nM once the system has settled, against a ceiling of 8.2 percent that no dose can pass.",
             },
             {
               title: "Test",
@@ -1119,7 +1120,7 @@ const engineering: Page = {
         [
           "Kinetic modelling",
           "Wet lab",
-          "An off-target check: the MC4R effect stays small and saturates between 50 and 500 nM.",
+          "An off-target check: the MC4R effect stays small, and has a ceiling set by how little MGRN1 there is.",
           "A ceiling for the binder doses in Experiment 4.",
         ],
         [
@@ -1951,6 +1952,7 @@ const model: Page = {
     {
       kind: "prose",
       section: "The GPCR system",
+      navLabel: "KM: the GPCR system",
       id: "gpcr",
       heading: "How best to model SMO itself",
       body: [
@@ -1959,23 +1961,24 @@ const model: Page = {
         "Our model expands on previous ones by treating the distribution of cholesterol as something that changes, with cholesterol acting as SMO's own ligand. Cholesterol naturally distributes unevenly between the inner and outer layers of a membrane, and PTCH1 has been proposed to shift that distribution by acting as a rare transporter of sterols. Its close relative NPC1 does the same job in the lysosome. Once at the cilium, SMO needs a cholesterol binding step to activate, and signalling in the model is proportional to the amount of cholesterol-bound SMO. Because SMO binds at a domain that faces outward, its signalling is sensitive to which side of the membrane the cholesterol is on.",
       ],
       source:
-        "After Kinnebrew 2022, Luchetti 2016, Taipale 2002 and Hasnovic and Mus-Veteau 2018.",
+        "After Kinnebrew 2022, Luchetti 2016, Taipale 2002 and Hasanovic and Mus-Veteau 2018.",
     },
     {
       kind: "figure",
       id: "gpcr-schematic",
       src: "model/gpcr-schematic.webp",
-      alt: "A schematic of the model's reactions. A primary cilium rises out of the plasma membrane, with cholesterol, SMO, PTCH1 and the Hedgehog ligand marked in a key. PTCH1 is labelled as importing cholesterol from the outer leaflet to the inner one. SMO is made in the cytoplasm by a first-order process and diffuses between the cytoplasm and the cilium. SMO binds cholesterol at its extracellular cysteine-rich domain, and the model assumes that binding increases SMO's affinity for the membrane and that signalling is proportional to the amount of SMO there. A fast decay rate removes SMO from the membrane. An inset on the right shows the Smoothened structure shifting from inactive and locked to active and unlocked when cholesterol binds.",
+      alt: "A schematic of the model's reactions. A primary cilium rises out of the plasma membrane, with cholesterol, SMO, PTCH1 and the Hedgehog ligand marked in a key. PTCH1 is labelled as importing cholesterol from the outer leaflet to the inner one. SMO is made in the cytoplasm by a first-order process and diffuses between the cytoplasm and the cilium. SMO binds cholesterol at its extracellular cysteine-rich domain, and the model assumes that binding increases SMO's affinity for the membrane and that signalling is proportional to the amount of SMO there. A fast decay rate removes SMO from the membrane.",
       caption:
-        "The reactions in the GPCR model: cholesterol moving between the membrane leaflets, PTCH1 acting on that distribution, and SMO activating when it binds cholesterol at the domain facing outward.",
-      ratio: "wide",
-      source: "Structure inset after the published Smoothened cryo-EM models.",
+        "The reactions in the GPCR model: cholesterol moving between the membrane leaflets, PTCH1 acting on that distribution, and SMO activating when it binds cholesterol at the domain facing outward. Everything above the plasma membrane is outside the cell. One callout drawn on the figure has been overtaken: in the model as fitted, the signal comes from cholesterol-bound SMO alone, not from all SMO at the membrane.",
+      ratio: "square",
     },
     {
       kind: "prose",
+      id: "gpcr-choices",
+      navLabel: "Two open questions",
       heading: "Two things we could not decide from the literature",
       body: [
-        "Rather than pick, we built both and let the results choose. **PTCH1's action** is implemented once as a linear relationship and once with enzyme kinetics. On Dr. Sauro's advice on model formulation, we implemented both and looked for disagreement with the objectives below; if neither could be ruled out on performance, we would favour the linear one for simplicity.",
+        "Rather than pick, we built both and let the results choose. **PTCH1's action** is implemented once as a linear relationship and once with enzyme kinetics. This follows the same advice that shaped the tuner model: build candidates that differ in one relationship, then look for disagreement with the objectives below. If neither could be ruled out on performance, we would favour the linear one for simplicity.",
         "**How SMO reaches the cilium** is the second. One account has SMO move into the membrane and diffuse along it to the cilium; the other has it travel inside the cell. We implement the second as a diffusion equation, where SMO moves between the cell body and the cilium to balance the two concentrations, and intend to implement the first as well and see which better matches experiment.",
       ],
     },
@@ -1986,14 +1989,122 @@ const model: Page = {
       alt: "The alternative route for SMO reaching the cilium. The same cilium and plasma membrane as the previous figure, with cholesterol, SMO, PTCH1 and the Hedgehog ligand in a key. SMO is synthesised in the cytoplasm and migrates to the plasma membrane, then reaches the ciliary membrane by lateral diffusion along it. A red cross marks the base of the cilium, showing that the intracellular route between the cytoplasm and the cilium is closed in this version of the model.",
       caption:
         "The route we did not implement. Here SMO reaches the cilium by diffusing along the membrane rather than travelling through the cell, and the red cross marks the path that version closes off.",
-      ratio: "wide",
+      ratio: "square",
+    },
+    {
+      kind: "details",
+      id: "gpcr-assumptions",
+      navLabel: "Assumptions",
+      heading: "The assumptions this model rests on",
+      summary: "Six simplifications, and what each one costs.",
+      blocks: [
+        {
+          kind: "facts",
+          items: [
+            {
+              title: "Only cholesterol-bound SMO signals",
+              body: "Signalling could in principle come from SMO at the ciliary membrane whether or not cholesterol is bound. We set the unbound contribution to zero, so the signal in the model is proportional to cholesterol-bound SMO alone.",
+            },
+            {
+              title: "Ciliary cholesterol behaves like cholesterol in synthetic vesicles",
+              body: "The split of cholesterol between the two leaflets inside the cilium is taken from measurements in synthetic vesicles, because nobody has measured it in a cilium.",
+            },
+            {
+              title: "Total PTCH1 is constant",
+              body: "PTCH1 is neither made nor degraded here. Only the conversion between its active and inhibited forms is modelled, which is the part the Hedgehog ligand acts on.",
+            },
+            {
+              title: "Whole-cell concentrations from counts and a sphere",
+              body: "Cholesterol concentration comes from a molecule count per cell divided by the volume of a sphere of 13 micrometre radius. That gives sensible ratios of cholesterol to PTCH1 and to SMO, which is what the model needs.",
+            },
+            {
+              title: "One scalar converts abundance into rate",
+              body: "Reactions between a membrane-bound species and a soluble one need a conversion between a surface quantity and a volume one. The model uses a single tunable parameter for all of them rather than a separate factor each time.",
+            },
+            {
+              title: "Transport is diffusion between compartments",
+              body: "Movement between the cytoplasm and the cilium is proportional to the difference in concentration between them. The same rule would govern lateral movement along the membrane if the other migration route above is ever built; it is not in the model as it stands. First-order kinetics would describe the same exchange.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      kind: "details",
+      id: "gpcr-equations",
+      navLabel: "The two candidates",
+      heading: "Where the two candidate models differ",
+      summary: "One reaction, written two ways. Everything else in the two models is identical.",
+      blocks: [
+        {
+          kind: "prose",
+          body: [
+            "The whole comparison turns on a single reaction: cholesterol moving from the outer leaflet to the inner one, which is what PTCH1 is proposed to drive. Written as reactions, with concentrations in nM and time in seconds:",
+          ],
+        },
+        {
+          kind: "table",
+          columns: ["Reaction", "Rate, linear", "Rate, Michaelis-Menten"],
+          rows: [
+            [
+              "outer leaflet to inner",
+              "`import_rate*PTCH1*chol_outer + exchange_in*chol_outer`",
+              "`PTCH1*V_max*chol_outer/(K_m + chol_outer) + exchange_in*chol_outer`",
+            ],
+            ["inner leaflet to outer", "`exchange_out*chol_inner`", "the same"],
+            ["PTCH1 binds Hedgehog", "`ptch1_rate*PTCH1*SHh`", "the same"],
+            ["the complex comes apart", "`30*ptch1_rate*PTCH1_i`", "the same"],
+          ],
+          caption:
+            "Only the first row differs between the two candidates, and only in its first term. The second term of that row, with the second row, is the cell's own movement of cholesterol between the leaflets, which happens with or without PTCH1; the two are balanced so that **10 percent** of the cholesterol rests in the outer leaflet. The factor 30 is the dissociation constant for PTCH1 and Hedgehog in nM.",
+        },
+        {
+          kind: "prose",
+          body: [
+            "The rest of the system, which both versions share, is the one the schematic above draws: SMO is made in the cytoplasm, exchanges with the cilium by diffusion, embeds in the ciliary membrane, binds cholesterol there to become active, and decays. Runs are simulated over 10,000 seconds.",
+            "Two geometric quantities set the scale of everything else. A cell of 13 micrometre radius holds about 9.2 picolitres, while a cilium of 0.2 micrometre radius and 6.5 micrometres length holds about 0.8 femtolitres, so the cell is roughly **11,000 times** the volume of its own cilium. A count of 10 to the 9 cholesterol molecules in that cell volume works out at about **180,000 nM**, which is why cholesterol dwarfs every protein in the model.",
+          ],
+        },
+      ],
+    },
+    {
+      kind: "details",
+      id: "gpcr-values",
+      navLabel: "Literature values",
+      heading: "The values taken from the literature",
+      summary: "Fourteen quantities, with the source of each.",
+      blocks: [
+        {
+          kind: "table",
+          columns: ["Quantity", "Value", "Source"],
+          rows: [
+            ["PTCH1 and Hedgehog dissociation constant", "30 nM", "Rudolf 2019. A second source gives 2 nM"],
+            ["PTCH1 abundance", "1.5 ppm", "PaxDb"],
+            ["PTCH1 degradation", "retains 0.45 of itself over 3 hours, or 7.39e-5 per second", "Chen 2014"],
+            ["Apparent cholesterol transport rate for PTCH1", "0.0935 per minute", "Wustner 2023, a fitted value"],
+            ["SMO abundance", "2.604 ppm", "PaxDb"],
+            ["SMO degradation", "8.63e-5 per second, a half-life of 2.2 hours", "Li 2012"],
+            ["SMO basal activity", "one sixty-fourth of its activated level", "Kinnebrew 2022"],
+            ["SMO and cholesterol dissociation constant", "138 nM", "Huang 2016, measured for an oxysterol and assumed similar"],
+            ["Cholesterol in the outer leaflet", "10 percent of the total", "Zhu 2024, from synthetic vesicles"],
+            ["Cholesterol molecules per cell", "10 to the 9", "Alberts 2002"],
+            ["Protein molecules per cell", "10 to the 9", "Milo 2013"],
+            ["Human cell diameter", "25 micrometres", "Carr and Murgel 2010"],
+            ["Cilium radius", "0.2 micrometres", "Long 2024"],
+            ["Cilium length", "3 to 10 micrometres", "Long 2024"],
+          ],
+          caption:
+            "These are the values looked up before fitting. Several of the rate constants in the model are not in this table because no measurement of them exists: those were tuned against the objectives below.",
+        },
+      ],
     },
     {
       kind: "table",
       id: "objectives",
+      navLabel: "What it has to reproduce",
       heading: "What the model has to reproduce",
       intro:
-        "Five observations from the literature, chosen before fitting. A set of parameters is scored on how closely the simulation reproduces all five.",
+        "Five targets, chosen before fitting. Four come from published measurements and one, the cytoplasmic half-life, is a figure the subteam set. A set of parameters is scored on how closely the simulation reproduces all five.",
       columns: ["Observation", "The target"],
       rows: [
         [
@@ -2001,7 +2112,7 @@ const model: Page = {
           "A decay rate of 0.09 per minute for outer-leaflet cholesterol after activation",
         ],
         [
-          "How much outer-leaflet cholesterol is removed on activation",
+          "How much outer-leaflet cholesterol is removed on activation, measured by stripping it with methyl-beta-cyclodextrin",
           "Abundance falls to 0.429 of its original amount",
         ],
         [
@@ -2014,66 +2125,182 @@ const model: Page = {
           "A half-life of 2 hours at the ciliary membrane, measured after the peak",
         ],
       ],
-      source:
-        "Sources include Wustner 2023, Kinnebrew 2021 and 2022.",
+      source: "Sources include Wustner 2023, Kinnebrew 2021 and 2022, and Milenkovic 2009.",
     },
     {
       kind: "prose",
       id: "gpcr-results",
+      navLabel: "What the two did",
       heading: "What the two models did",
       body: [
-        "Both replicated the five objectives with accuracy, and the **linear model reached a total error of 0.14**. The Michaelis-Menten figure is quoted differently in two versions of the analysis, so it is not published here until the subteam settles which run is right.",
-        "Both simulations hold details we would want to confirm against real data. Although a target half-life for SMO in the cytoplasm should have forced a realistic response, the linear model shows an immediate spike in activated SMO. In the Michaelis-Menten simulation, activated SMO is very low. The sensitivity analysis reflects the same split: the ciliary degradation rate dominates the linear model, while the forward rate for SMO embedding into the membrane dominates the other. Given the adequate fit, we expect to go forward with the linear approximation of PTCH1 kinetics.",
-        "The most useful thing now would be wet lab data on how SMO migrates at the cilium, and on whether that immediate rise in activated SMO is seen under a microscope at all.",
+        "Both reproduced the five objectives. Scored as the total distance from all five targets at once, the **linear model reached 0.14 and the Michaelis-Menten model 0.2**. Neither is ruled out by that, which is the case we said in advance would send us to the simpler of the two.",
+        "The figures below show each model under three conditions: no Hedgehog, enough to half-activate the pathway, and a saturating dose. The top row is PTCH1, the middle row cholesterol on each side of the membrane, and the bottom row the SMO pools, including the activated one that carries the signal.",
       ],
     },
     {
       kind: "figure",
-      id: "gpcr-simulations",
-      caption:
-        "The two candidate models run against the five objectives, with their sensitivity analyses side by side.",
-      owner: "Kinetic Modelling",
-      ratio: "wide",
+      id: "gpcr-linear-simulations",
+      src: "model/gpcr-linear-simulations.webp",
+      alt: "Nine panels in three rows and three columns, for the linear model, over 10,000 seconds. The columns are basal, half-maximal and saturating Hedgehog. In the top row, activated and inhibited PTCH1 hold steady in the first two columns; under saturating Hedgehog, inhibited PTCH1 jumps almost vertically at the start and stays high while activated PTCH1 drops to a low level. The middle row is the same in all three columns: inner-leaflet cholesterol rises and settles while outer-leaflet cholesterol falls to a small fraction of it. In the bottom row, cytoplasmic SMO falls away, total and membrane SMO in the cilium rise to a peak in the first few thousand seconds and then decline slowly, and activated SMO is lowest in the basal column and higher in the other two.",
+      caption: "The linear model: PTCH1 acts on the cholesterol distribution through a simple rate.",
+      ratio: "square",
+      source: "Produced by the modelling subteam.",
     },
     {
-      kind: "links",
-      id: "gpcr-equations",
-      heading: "The equations for this model",
-      intro:
-        "Reactions, initialisations and literature values for both candidate formulations of PTCH1, written out in full.",
-      items: [
+      kind: "figure",
+      id: "gpcr-mm-simulations",
+      src: "model/gpcr-mm-simulations.webp",
+      alt: "The same nine panels for the Michaelis-Menten model. The cholesterol row behaves as in the linear model. The top row differs under saturating Hedgehog, where inhibited PTCH1 climbs over a few hundred seconds rather than jumping. In the bottom row the ciliary SMO pools peak earlier and then fall away more steeply than in the linear model, cytoplasmic SMO falls throughout, and activated SMO stays low in all three columns.",
+      caption:
+        "The Michaelis-Menten model, where PTCH1 saturates. Its switch is gradual rather than immediate, the SMO pools peak earlier and fall away faster, and activated SMO stays low throughout.",
+      ratio: "square",
+      source: "Produced by the modelling subteam.",
+    },
+    {
+      kind: "prose",
+      id: "gpcr-observations",
+      navLabel: "What we make of it",
+      heading: "What we make of the difference",
+      body: [
+        "Both simulations hold details we would want to confirm against real data. Although giving SMO a target half-life in the cytoplasm should have forced a realistic response, the linear model shows an immediate spike in activated SMO. In the Michaelis-Menten simulation, activated SMO is very low throughout. At a glance the two fits are quite different, and the sensitivity analysis below reflects the same split: the ciliary degradation rate dominates the linear model, while the rate at which SMO embeds into the membrane dominates the other.",
+        "Given the adequate fit, we expect to go forward with the linear approximation of PTCH1 kinetics. One observation we did not use would be a good test of that choice: a sixty-fourfold difference in SMO signalling with and without Hedgehog has been measured, and neither of our models produces much difference between the basal and half-maximal runs. The most useful thing now would be wet lab data on how SMO migrates at the cilium, and on whether that immediate rise in activated SMO is seen under a microscope at all.",
+        "With that said, we can reproduce several experimental conditions with a model in which SMO is activated by bound cholesterol and reaches the cilium from inside the cell.",
+      ],
+    },
+    {
+      kind: "details",
+      id: "gpcr-sensitivity",
+      navLabel: "Sensitivity",
+      heading: "Which parameters each model leans on",
+      summary: "Morris and Sobol for both candidates, and the interactions between pairs.",
+      blocks: [
         {
-          title: "The GPCR system",
-          body: "Both variants of the model, with every reaction and the values each one was given.",
-          href: "https://www.overleaf.com/read/zvpbnkppkrzd#274249", // colour-ok: a link fragment, not a colour
-          label: "Read on Overleaf",
-          tag: "LaTeX",
+          kind: "prose",
+          body: [
+            "The same two methods used on the tuner model, run on each candidate. The bars below are the subteam's own output. We have not redrawn them here because the underlying values have not been recovered from the run, so what we take from them is the **ordering**, not the heights.",
+            "For the linear model the ciliary degradation rate leads under Morris, with the cytoplasm-to-membrane rate just behind, and Sobol puts those two first in the other order. For the Michaelis-Menten model the embedding rate leads under both methods. The PTCH1 exchange rate stays in the bottom group of every one of the four rankings.",
+          ],
+        },
+        {
+          kind: "figure",
+          id: "gpcr-linear-morris",
+          src: "model/gpcr-linear-morris.webp",
+          alt: "A bar chart titled Linear Model Morris Significances, each bar with an error bar. The bars fall from left to right in this order: ciliary degradation rate, cytoplasm to membrane, cholesterol exchange rate, compartment diffusion, PTCH1 import rate. The last three, the embedding rate, the PTCH1 exchange rate and the SMO exchange rate, are at zero.",
+          caption: "Morris screening of the linear model.",
+          ratio: "square",
+          source: "Produced by the modelling subteam.",
+        },
+        {
+          kind: "figure",
+          id: "gpcr-linear-sobol",
+          src: "model/gpcr-linear-sobol.webp",
+          alt: "A bar chart of Sobol indices for the linear model, with the parameters in a fixed order along the bottom rather than sorted. Cytoplasm to membrane is much the tallest bar and ciliary degradation the next, each with a wide interval. Every other parameter sits near zero with an interval that crosses it.",
+          caption: "Sobol indices for the linear model. Every interval but the leading one crosses zero.",
+          ratio: "square",
+          source: "Produced by the modelling subteam.",
+        },
+        {
+          kind: "figure",
+          id: "gpcr-mm-morris",
+          src: "model/gpcr-mm-morris.webp",
+          alt: "A bar chart titled Michaelis-Menten Model Morris Significances, each bar with an error bar. The bars fall from left to right in this order: the embedding forward rate, the SMO exchange rate, the cytoplasm to membrane rate, the ciliary degradation rate, then V max and K m, then the PTCH1 exchange rate and compartment diffusion, with cholesterol exchange at zero.",
+          caption: "Morris screening of the Michaelis-Menten model. The vertical scale here is far below the linear model's, so the two charts cannot be compared by bar height: read the ordering. The output barely moves in this model, which fits the near-zero activated SMO above.",
+          ratio: "square",
+          source: "Produced by the modelling subteam.",
+        },
+        {
+          kind: "figure",
+          id: "gpcr-mm-sobol",
+          src: "model/gpcr-mm-sobol.webp",
+          alt: "A bar chart of Sobol indices for the Michaelis-Menten model, with the parameters in a fixed order along the bottom. The SMO exchange rate and the embedding forward rate are much the tallest, and the SMO exchange rate carries an enormous interval running from well below zero to several times its own height. Three smaller bars, V max, the ciliary degradation rate and the cytoplasm to membrane rate, each carry an interval that crosses zero. The PTCH1 exchange rate, K m, compartment diffusion and cholesterol exchange sit on the axis.",
+          caption: "Sobol indices for the Michaelis-Menten model.",
+          ratio: "square",
+          source: "Produced by the modelling subteam.",
+        },
+        {
+          kind: "table",
+          id: "gpcr-s2-linear",
+          heading: "Interactions between pairs, linear model",
+          intro:
+            "Second-order Sobol indices: how much of the spread each pair explains together, beyond what each one explains alone. Read a row against a column.",
+          columns: [
+            "",
+            "import",
+            "SMO exch",
+            "embed",
+            "comp diff",
+            "deg",
+            "chol exch",
+            "to membrane",
+          ],
+          rows: [
+            ["PTCH1 exchange", "0", "0", "0", "0", "0", "0", "0"],
+            ["PTCH1 import", "", "0.020", "0.020", "0.037", "0.025", "0.005", "0.160"],
+            ["SMO exchange", "", "", "0", "0", "0", "0", "0"],
+            ["embedding", "", "", "", "0.0005", "0.0005", "0.0003", "0.0008"],
+            ["compartment diffusion", "", "", "", "", "0.062", "0.072", "0.046"],
+            ["ciliary degradation", "", "", "", "", "", "0.032", "0.110"],
+            ["cholesterol exchange", "", "", "", "", "", "", "0.160"],
+          ],
+          heat: true,
+          caption:
+            "Everything involving the cytoplasm-to-membrane rate is where the interaction sits, and the PTCH1 and SMO exchange rates interact with nothing: the entries shown as zero are all below one part in a hundred thousand. No confidence intervals were produced for these, and the negative entries in the other model suggest they would be wide.",
+        },
+        {
+          kind: "table",
+          id: "gpcr-s2-mm",
+          heading: "Interactions between pairs, Michaelis-Menten model",
+          columns: [
+            "",
+            "K m",
+            "V max",
+            "SMO exch",
+            "embed",
+            "comp diff",
+            "deg",
+            "chol exch",
+            "to membrane",
+          ],
+          rows: [
+            ["PTCH1 exchange", "-0.010", "0.002", "0.006", "0.0005", "-0.011", "-0.013", "-0.009", "-0.023"],
+            ["K m", "", "0.016", "0.019", "-0.045", "-0.003", "-0.004", "0", "-0.015"],
+            ["V max", "", "", "-0.005", "-0.019", "0.057", "0.093", "0.044", "0.150"],
+            ["SMO exchange", "", "", "", "-0.170", "-0.072", "-0.097", "-0.078", "-0.050"],
+            ["embedding", "", "", "", "", "-0.007", "0.021", "-0.012", "-0.017"],
+            ["compartment diffusion", "", "", "", "", "", "-0.008", "-0.007", "-0.003"],
+            ["ciliary degradation", "", "", "", "", "", "", "0", "0.071"],
+            ["cholesterol exchange", "", "", "", "", "", "", "", "0"],
+          ],
+          heat: true,
+          caption:
+            "A second-order index cannot really be negative, so the negative entries here are the estimator's noise. They are as large as the positive ones, which is the useful finding: at this sample size none of these interactions is measured, only bounded.",
         },
       ],
     },
     {
       kind: "prose",
       section: "Safety: the melanocortin pathway",
+      navLabel: "KM: safety",
       id: "mc4r-safety",
       heading: "Checking it cannot do harm somewhere else",
       body: [
         "[The up arm](/description#two-arms) works by pulling the MMM complex apart. That frees MGRN1, and MGRN1 has another job: with a different partner called ATRN it controls **MC4R**, a receptor in the pathway that regulates appetite and body weight. If our binder released a flood of MGRN1 into that other role, we could be causing a metabolic side effect while congratulating ourselves on the ciliary result.",
-        "So we modelled it. Adding binder does shift MC4R, but the effect is **small and it saturates**: about 2.3 percent at 50 nM, and still only **2.75 percent at 500 nM**, well under the 20 percent we had set as the point where an effect becomes biologically meaningful. Past about 50 nM, adding more binder changes nothing. The reason is that MGRN1 is the scarce component at roughly 0.18 nM in total, so there is only so much of it to redistribute no matter how hard we push.",
-        "The useful part is that this holds regardless of how good our binder turns out to be. In the global sensitivity analysis the binder's own binding strength had **zero** influence on the MC4R result, which means we do not have to trade therapeutic dose against this particular risk.",
+        "So we modelled it. Adding binder does shift MC4R, and the shift is **small and slow**. At 500 nM, the top of the range we swept, surface MC4R falls by 0.1 percent after half an hour, 2.7 percent after fourteen hours, and **8.0 percent** once the system has fully settled. That last figure is the one to judge against the **20 percent** we set in advance as the point where an effect becomes biologically meaningful, and it is well under it.",
+        "The ceiling exists because MGRN1 is the scarce component, at roughly 0.18 nM in total. There is only so much of it to redistribute however hard the binder pushes, and the model's own ceiling, with every MEGF8 site occupied, is 8.2 percent.",
       ],
-      source:
-        "Abundances from PaxDb; Kong et al. 2020 and 2025.",
+      source: "Abundances from PaxDb; Kong et al. 2020 and Parashara et al. 2025.",
     },
     {
       kind: "details",
       id: "mc4r-variables",
+      navLabel: "How it is built",
       heading: "How the safety model is built",
       summary: "Why mass action rather than Michaelis-Menten, and the five quantities it follows.",
       blocks: [
         {
           kind: "prose",
           body: [
-            "The model is written in Python through the Tellurium interface built by the Sauro lab, and uses **mass-action kinetics**. MGRN1 and MC4R are both membrane-bound, so they do not satisfy the assumption of freely diffusing soluble reactants that classical Michaelis-Menten rests on. More decisively, MC4R sits at about 0.06 nM, orders of magnitude below the usual Km of a ring E3 ligase, and in that regime mass action is the exact simplification of Michaelis-Menten rather than an approximation of it.",
+            "The model is written in Python through the Tellurium interface built by the Sauro lab, and uses **mass-action kinetics**. The reason is the concentrations. MC4R sits at about 0.06 nM, orders of magnitude below the usual Km of a ring E3 ligase, and that far below Km the Michaelis-Menten rate reduces to a first-order one: mass action here is the limit the fuller equation takes rather than a convenient approximation of it. The geometry points the same way, since MC4R is in the membrane and MGRN1 is recruited to it rather than meeting it in free solution, which is the picture Michaelis-Menten assumes.",
           ],
         },
         {
@@ -2083,17 +2310,17 @@ const model: Page = {
             [
               "**M_free**",
               "Free cytoplasmic MGRN1, bound to nothing. The competition point: any MGRN1 the binder frees passes through here before it can reach ATRN.",
-              "PaxDb, 0.03 ppm",
+              "Whatever is left of the 0.18 nM of MGRN1 once the complex has taken its share, which is 0.032 nM",
             ],
             [
               "**M_MMM**",
               "MGRN1 held inside the full complex at the plasma membrane. This is what the binder reduces.",
-              "PaxDb, scaled by the share of MGRN1 in the complex measured from the published MOSMO figure",
+              "MEGF8's PaxDb abundance before the membrane factor, 0.24 nM, times the 0.617 share of it found carrying MGRN1 in a published figure, which gives 0.148 nM",
             ],
             [
               "**M_ATRN**",
               "MGRN1 bound to ATRN, the complex that ubiquitinates MC4R. The off-target effector: if this rises when binder is added, MC4R is affected.",
-              "Kong et al. 2025",
+              "Starts empty. The interaction itself is from Parashara et al. 2025",
             ],
             [
               "**MC4R_s**",
@@ -2113,41 +2340,123 @@ const model: Page = {
       ],
     },
     {
+      kind: "details",
+      id: "mc4r-equations",
+      navLabel: "Equations",
+      heading: "The equations the safety model solves",
+      summary: "Five rate equations and the one term the binder acts through.",
+      blocks: [
+        {
+          kind: "table",
+          columns: ["Quantity", "Rate of change"],
+          rows: [
+            [
+              "**M_free**",
+              "`k_release_MMM*M_MMM - k_bind_MEGF8*MEGF8*M_free*(1 - f_MB) - k_bind_ATRN*ATRN*M_free + k_release_ATRN*M_ATRN - k_deg_MGRN1*M_free + k_synth_MGRN1`",
+            ],
+            [
+              "**M_MMM**",
+              "`k_bind_MEGF8*MEGF8*M_free*(1 - f_MB) - k_release_MMM*M_MMM - k_deg_MGRN1*M_MMM`",
+            ],
+            [
+              "**M_ATRN**",
+              "`k_bind_ATRN*ATRN*M_free - k_release_ATRN*M_ATRN - k_deg_MGRN1*M_ATRN`",
+            ],
+            [
+              "**MC4R_s**",
+              "`k_synth_MC4R - k_ub_MC4R*M_ATRN*MC4R_s - k_deg_MC4R*MC4R_s`",
+            ],
+            [
+              "**MC4R_ub**",
+              "`k_ub_MC4R*M_ATRN*MC4R_s - k_deg_ub_MC4R*MC4R_ub`",
+            ],
+            ["**f_MB**", "`MB / (MB + K_d_MB)`"],
+          ],
+          caption:
+            "The binder enters in one place only, through `f_MB`, which closes off a share of the MEGF8 sites that MGRN1 would otherwise bind. Everything downstream of that follows from the competition between MEGF8 and ATRN for the same MGRN1.",
+        },
+      ],
+    },
+    {
+      kind: "details",
+      id: "mc4r-parameters",
+      navLabel: "Parameters",
+      heading: "Every parameter in the safety model",
+      summary: "Fifteen values, each either measured, derived from a measurement, or calibrated, and one modelling choice.",
+      blocks: [
+        {
+          kind: "table",
+          columns: ["Parameter", "Value", "Where it comes from"],
+          rows: [
+            ["k_release_MMM", "0.01 per second", "A dissociation constant of 10 nM times the binding rate below"],
+            ["k_bind_MEGF8", "0.001 per nM per second", "The diffusion limit, after Berg and Purcell 1977"],
+            ["k_bind_ATRN", "0.01 per nM per second", "An assumption, set an order of magnitude above the rate above; the shared binding motif is why ATRN binds MGRN1 at all, not why it binds faster"],
+            ["k_release_ATRN", "0.5 per second", "A dissociation constant of 50 nM times the binding rate above"],
+            ["k_deg_MGRN1", "9.26e-6 per second", "Mathieson 2018, a half-life of 20.8 hours"],
+            ["k_synth_MGRN1", "1.67e-6 nM per second", "Set so that MGRN1 rests at the 0.18 nM that PaxDb implies"],
+            ["k_ub_MC4R", "7.35e-5 per nM per second", "Calibrated to the threefold rise in MC4R when ATRN is knocked out"],
+            ["k_deg_MC4R", "2.57e-6 per second", "A surface-protein half-life of about 75 hours"],
+            ["k_deg_ub_MC4R", "1.93e-4 per second", "Lysosomal degradation of a GPCR, a half-life of about 1 hour"],
+            ["k_synth_MC4R", "4.63e-7 nM per second", "Calibrated with the rate above, to the same knockout"],
+            ["K_d_MB", "10.0 nM", "Benchmarked against a published nanobody against the same site"],
+            ["MEGF8", "2.4 nM", "PaxDb, raised tenfold for being concentrated at the membrane"],
+            ["ATRN", "39.4 nM", "PaxDb"],
+            ["MGRN1, total", "0.18 nM", "PaxDb"],
+            ["MC4R at the surface, at the start", "0.06 nM", "PaxDb"],
+            ["MEGF8 and ATRN", "held constant", "Both are in large excess over MGRN1, so neither is depleted"],
+          ],
+          caption:
+            "Two of these are calibrated rather than looked up: the rate at which the ATRN complex tags MC4R, and the rate at which MC4R is made. The pair is set together so that removing ATRN raises MC4R threefold, which is what the measurement shows.",
+          source: "Literature sources as named; abundances from PaxDb.",
+        },
+      ],
+    },
+    {
+      kind: "line",
+      id: "mc4r-timecourse",
+      navLabel: "Time courses",
+      heading: "What happens in the first half hour",
+      intro:
+        "Every quantity the model follows, without binder and at 500 nM of it. The three MGRN1 lines are the same molecule in three places. Both runs start from the same measured distribution and settle into the model's own resting state, so the binder's contribution is the **difference between the panels**, not the movement within either. The two panels share one scale.",
+      panels: MC4R_PANELS,
+      xLabel: "seconds",
+      yLabel: "concentration (nM)",
+      footnote:
+        "Most of the movement here happens with no binder at all. The starting distribution, taken from a published figure, is not where this model rests, so the complex empties and the ATRN arm fills within about ten minutes either way. What the binder adds is the gap between the panels: MGRN1 on ATRN ends at 0.070 nM without it and 0.079 nM with it. Surface MC4R, the flat line near 0.06 nM, has barely moved by the end of either run, because MC4R turns over slowly enough that the consequence of that extra MGRN1 takes days to show. That is why the dose response below is read at the settled state rather than here.",
+    },
+    {
       kind: "dose",
       id: "mc4r-dose",
+      navLabel: "Dose response",
       heading: "How far off-target it actually goes",
       points: [
         { label: "0", value: 0 },
-        { label: "1", value: 0.23 },
-        { label: "5", value: 0.87 },
-        { label: "10", value: 1.33 },
-        { label: "50", value: 2.3 },
-        { label: "100", value: 2.53 },
-        { label: "250", value: 2.69 },
-        { label: "500", value: 2.75 },
+        { label: "1", value: 0.72 },
+        { label: "5", value: 2.66 },
+        { label: "10", value: 4.02 },
+        { label: "50", value: 6.8 },
+        { label: "100", value: 7.44 },
+        { label: "250", value: 7.88 },
+        { label: "500", value: 8.04 },
       ],
-      xLabel: "minibinder added (nM)",
+      xLabel: "binder added (nM)",
       yLabel: "drop in surface MC4R (percent)",
       threshold: {
         value: 20,
         label:
-          "We set twenty percent as the point where an effect becomes biologically meaningful. The worst case, at a dose ten times higher than anything we would use, reaches 2.75 percent.",
+          "We set twenty percent as the point where an effect becomes biologically meaningful. The worst case here, at the top of the dose range and after the system has fully settled, reaches 8.0 percent.",
       },
       footnote:
-        "The curve flattens by about 50 nM. Past that, adding more binder changes nothing, because MGRN1 is the scarce part at roughly 0.18 nM in total and there is only so much of it to redistribute.",
+        "Read at the settled state, which is the worst case; at fourteen hours the same doses give about a third of these figures. The curve flattens by about 50 nM, which already reaches five sixths of the ceiling, and a tenfold higher dose adds only a fifth again. Dose and binder strength enter the model through one quantity, the fraction of MEGF8 sites the binder occupies, which is already 0.98 at 500 nM. Nothing can push it past 1, and that limit is where the 8.2 percent ceiling comes from. A binder ten times weaker would sit at the same occupancy as the 50 nM point and so do **less** off-target harm, not more.",
     },
     {
-      kind: "links",
-      id: "mc4r-equations",
-      heading: "The equations for the safety model",
-      items: [
-        {
-          title: "Melanocortin safety model",
-          body: "The mass-action equations and the parameter table behind the result above.",
-          href: "https://drive.google.com/file/d/1PONnAZG1bpua0B07ge6KFhOMH_L61SFm/view",
-          label: "Open the document",
-          tag: "PDF, 2 pages",
-        },
+      kind: "prose",
+      id: "mc4r-observations",
+      navLabel: "What it means",
+      heading: "What the safety result means",
+      body: [
+        "Three things carry over from this model. More binder does mean more off-target effect, up to a point, but that point is **set by how little MGRN1 there is**: no dose and no binder, however good, can free more MGRN1 than the cell holds. The curve **flattens** well before the top of the range, with most of the effect in place by 50 nM. And the ceiling itself is **8.2 percent of surface MC4R**, against a threshold of 20 percent.",
+        "What would change that conclusion is a measurement rather than a model: how much MGRN1 a cell really holds, and how much of it is in the complex to begin with. Both are taken here from a protein abundance database and one published figure. If MGRN1 were far more abundant than 0.18 nM, the ceiling would rise with it.",
       ],
     },
     {
@@ -2180,25 +2489,25 @@ const model: Page = {
           kind: "references",
           heading: "Sources",
           items: [
-            { n: "1", text: "Zie et al., 2014. Annals of Neuroscience.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4117150/" },
-            { n: "2", text: "Arensdorf et al., 2017. Trends in Pharmacological Sciences.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4593303/" },
+            { n: "1", text: "Choudhry et al., 2014. Annals of Neurosciences.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4117150/" },
+            { n: "2", text: "Arensdorf et al., 2016. Trends in Pharmacological Sciences.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4593303/" },
             { n: "3", text: "Taipale et al., 2002. Nature.", href: "https://doi.org/10.1038/nature00989" },
             { n: "4", text: "Kinnebrew et al., 2022. Science Advances.", href: "https://doi.org/10.1126/sciadv.abm5563" },
             { n: "5", text: "Luchetti et al., 2016. eLife.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC5123864/" },
             { n: "6", text: "Zhu et al., 2024. Biophysical Journal.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11617633/" },
-            { n: "7", text: "Hasnovic and Mus-Veteau, 2018. Cells.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6115939/" },
+            { n: "7", text: "Hasanovic and Mus-Veteau, 2018. Cells.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6115939/" },
             { n: "8", text: "Wang et al., 2009. Proceedings of the National Academy of Sciences.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC2650314/" },
             { n: "9", text: "Rohatgi et al., 2009. Proceedings of the National Academy of Sciences.", href: "https://doi.org/10.1073/pnas.0813373106" },
             { n: "10", text: "Wustner et al., 2023. Frontiers in Cell and Developmental Biology.", href: "https://doi.org/10.3389/fcell.2023.1144936" },
             { n: "11", text: "Kinnebrew et al., 2021.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8654371/" },
             { n: "12", text: "Milenkovic et al., 2009. Journal of Cell Biology.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC2779247/" },
             { n: "13", text: "Kong et al., 2020. Developmental Cell.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC7686252/" },
-            { n: "14", text: "Kong et al., 2025.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12752501/" },
+            { n: "14", text: "Parashara et al., 2025.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12752501/" },
             { n: "15", text: "Mathieson et al., 2018. Nature Communications.", href: "https://doi.org/10.1038/s41467-018-03106-1" },
-            { n: "16", text: "Choi et al., 2018. PLOS Computational Biology. The Tellurium environment." },
+            { n: "16", text: "Choi et al., 2018. Biosystems. The Tellurium environment." },
             { n: "17", text: "Berg and Purcell, 1977. Biophysical Journal." },
-            { n: "18", text: "Shenoy, 2007.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3463220/" },
-            { n: "19", text: "Doherty and McMahon, 2009.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3727619/" },
+            { n: "18", text: "Dores and Trejo, 2012. Molecular Pharmacology.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3463220/" },
+            { n: "19", text: "Yewdell et al., 2011. Cell Biology International.", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3727619/" },
             { n: "20", text: "PaxDb, the protein abundance database.", href: "https://pax-db.org" },
           ],
         },
@@ -3306,7 +3615,7 @@ const humanPractices: Page = {
       heading: "Responsible platform development",
       body: [
         "Any exciting scientific advancement must also be used with the utmost responsibility. Tampering with the cilium could have unintended consequences throughout the body, or be used unethically. We aim to prevent unintended consequences by [modelling off-target effects](/model#mc4r-safety) and by using custom technology such as de novo protein design to reach a high level of target specificity. We likewise aim to keep our protocols open source, so that other scientists can reach a high level of specificity for their own target of interest.",
-        "That is a claim we have tested once, on ourselves. The clearest predictable off-target risk in our own design is the melanocortin pathway: the up arm works by prising the MMM complex apart, which frees MGRN1, and MGRN1 has a second job with a different partner regulating **MC4R**, and so appetite and body weight. We modelled it before building anything. The effect is small and it saturates, reaching [2.75 percent at 500 nM](/model#mc4r-dose), a dose ten times higher than anything we would use, against the 20 percent we had set in advance as the point where an effect becomes biologically meaningful. It also does not depend on how good our binder turns out to be, because MGRN1 is the scarce component at roughly 0.18 nM and there is only so much of it to redistribute.",
+        "That is a claim we have tested once, on ourselves. The clearest predictable off-target risk in our own design is the melanocortin pathway: the up arm works by prising the MMM complex apart, which frees MGRN1, and MGRN1 has a second job with a different partner regulating **MC4R**, and so appetite and body weight. We modelled it before building anything. The effect is small and it has a ceiling, reaching [8.2 percent of surface MC4R at most](/model#mc4r-dose), against the 20 percent we had set in advance as the point where an effect becomes biologically meaningful. The ceiling holds whatever the dose and however good the binder turns out to be, because MGRN1 is the scarce component at roughly 0.18 nM and there is only so much of it to redistribute.",
         "One worked example is not a guarantee about every protein a future user might point this at. What it does give is a method we can hand on: before going near a bench, name the other partners the ligase already has, and model the competition for it. That check belongs in what we give anyone adopting the platform, not just in our own notes.",
         "The possibility that a target of interest could be detrimental to someone's health also deserves consideration. The cilium is responsible for far more than cancer: it is implicated in wound healing, phototransduction, mechanosensation, cardiovascular fibrosis, bone development, kidney health, and much more [1]. Just as our technology can bring the cilium into homeostasis, it can also be used to cause dysregulation. A complete understanding of the target mutation is a prerequisite for using our technology, along with transparency and informed consent among any clinical candidates that come from our platform.",
         "Further, the cilium is foundational to early developmental processes. While our technology opens the possibility of tuning ciliary receptors with a precision other therapeutics lack, using it to fine tune developmental biology raises a number of ethical alarm bells. Given that many of the conditions our tool could be adapted to treat are diagnosed before birth, and given the histories of developmental biology in eugenicist movements, we must stay critical of the technology we create. The most straightforward recommendation we often see is that such a technology should only be used as an intervention when the health of an individual could reasonably be compromised. But that leaves much to common notions of health and of the individual. The exclusionary box of traditional health often fails to recognise disability as anything but an avenue of suffering; we maintain that our technology is not, and will never be, a cure for developmental conditions, but a tool that can be used to develop treatments for life-threatening conditions. And the only individual typically discussed is the child; we maintain that more research is needed on the effects of ciliary signalling on the health of birthing mothers.",

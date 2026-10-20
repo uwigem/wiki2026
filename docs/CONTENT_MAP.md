@@ -177,25 +177,28 @@ reader can see which predictions held.
 
 ### The Model (`/model`), a medal page
 
-**Now:** four sections. Kinetic modelling (what the model is for, the homeostasis
-model and the six quantities it tracks, the wild-type against PTCH1-knockout
-test, where the parameters come from, the parameter table and the assumptions as
-drop-downs, Dr. Sauro's guidance, and the equations); the GPCR system (cholesterol
-as SMO's own ligand, the two formulations we could not choose between, the five
-objectives, and what the two models did); sensitivity analysis (the tornado plot
-and how it was run); and the melanocortin safety result as a dose curve.
+**Now:** five sections. The tuner model (what it is for, the two rate laws, why the
+version we run is bundled, the wire diagram, and drop-downs for what it tracks,
+the assumptions, the equations and the parameters; then the dose and ternary
+sweeps, the tornado, the global sensitivity analysis and the discussion); the
+GPCR system (cholesterol as SMO's own ligand, the two formulations we could not
+choose between, the five targets, the two sets of simulations, and a drop-down
+with both sensitivity analyses and the pairwise interactions); safety, the
+melanocortin pathway (the time courses, the dose response and the ceiling, with
+the equations and the parameter table as drop-downs); protein modelling; and
+sources.
 
-**Still needed:** four figures, all marked on the page with their owner: the
-upstream network, the GPCR schematic, the two SMO migration routes, and the
-simulation panels. The Michaelis-Menten total error, which two versions of the
-analysis disagree on and which the page therefore does not quote. The Sobol half
-of the global sensitivity analysis. A consolidated reference list, which the
-draft currently holds as about twenty loose URLs. The protein design half of the
-page, which has a heading in the planning doc and no text.
+Charts on this page are drawn from the run output rather than hosted, except the
+GPCR simulations and sensitivity analyses, whose underlying values have not been
+recovered. Those are hosted and their heights must not be quoted anywhere,
+including in alt text.
 
-The equations live on Overleaf and Drive. **That is a problem worth fixing before
-the freeze**: the judging handbook says content on sites outside iGEM cannot be
-judged, so anything we want credit for needs a copy hosted here.
+**Still needed:** the protein modelling section, which is still the old short
+text. A consolidated reference list per section, which the page currently holds
+as one list of about twenty. The equations as figures rather than as code-styled
+tables. Figure numbering. Alvin's GPCR data, which would let the four hosted
+sensitivity charts be redrawn natively, and the replication section and fitted
+parameters, which do not exist in any source yet and are deliberately not shown.
 
 ### Who the Garden Is For (`/human-practices`), a medal page
 
