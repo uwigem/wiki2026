@@ -2062,7 +2062,7 @@ const model: Page = {
           kind: "prose",
           body: [
             "The rest of the system, which both versions share, is the one the schematic above draws: SMO is made in the cytoplasm, exchanges with the cilium by diffusion, embeds in the ciliary membrane, binds cholesterol there to become active, and decays. Runs are simulated over 10,000 seconds.",
-            "Two geometric quantities set the scale of everything else. A cell of 13 micrometre radius holds about 9.2 picolitres, while a cilium 0.2 micrometres across and 6.5 micrometres long holds about 0.8 femtolitres, so the cell is roughly **11,000 times** the volume of its own cilium. A count of 10 to the 9 cholesterol molecules in that cell volume works out at about **180,000 nM**, which is why cholesterol dwarfs every protein in the model.",
+            "Two geometric quantities set the scale of everything else. A cell of 13 micrometre radius holds about 9.2 picolitres, while a cilium of 0.2 micrometre radius and 6.5 micrometres length holds about 0.8 femtolitres, so the cell is roughly **11,000 times** the volume of its own cilium. A count of 10 to the 9 cholesterol molecules in that cell volume works out at about **180,000 nM**, which is why cholesterol dwarfs every protein in the model.",
           ],
         },
       ],
@@ -2104,7 +2104,7 @@ const model: Page = {
       navLabel: "What it has to reproduce",
       heading: "What the model has to reproduce",
       intro:
-        "Five observations from the literature, chosen before fitting. A set of parameters is scored on how closely the simulation reproduces all five.",
+        "Five targets, chosen before fitting. Four come from published measurements and one, the cytoplasmic half-life, is a figure the subteam set. A set of parameters is scored on how closely the simulation reproduces all five.",
       columns: ["Observation", "The target"],
       rows: [
         [
@@ -2141,7 +2141,7 @@ const model: Page = {
       kind: "figure",
       id: "gpcr-linear-simulations",
       src: "model/gpcr-linear-simulations.webp",
-      alt: "Nine panels in three rows and three columns, for the linear model. The columns are basal, half-maximal and saturating Hedgehog. The top row shows activated and inhibited PTCH1 holding steady except under saturating Hedgehog, where inhibited PTCH1 jumps immediately and stays high. The middle row shows inner-leaflet cholesterol rising to about 170,000 nM while outer-leaflet cholesterol falls to a low level. The bottom row shows cytoplasmic SMO falling, total and membrane SMO in the cilium rising to a peak of about 4,000 to 5,000 nM near 2,000 seconds and then declining, and activated SMO low in the basal panel but rising with the dose.",
+      alt: "Nine panels in three rows and three columns, for the linear model, over 10,000 seconds. The columns are basal, half-maximal and saturating Hedgehog. In the top row, activated and inhibited PTCH1 hold steady in the first two columns; under saturating Hedgehog, inhibited PTCH1 jumps almost vertically at the start and stays high while activated PTCH1 drops to a low level. The middle row is the same in all three columns: inner-leaflet cholesterol rises and settles while outer-leaflet cholesterol falls to a small fraction of it. In the bottom row, cytoplasmic SMO falls away, total and membrane SMO in the cilium rise to a peak in the first few thousand seconds and then decline slowly, and activated SMO is lowest in the basal column and higher in the other two.",
       caption: "The linear model: PTCH1 acts on the cholesterol distribution through a simple rate.",
       ratio: "wide",
       source: "Produced by the modelling subteam.",
@@ -2150,9 +2150,9 @@ const model: Page = {
       kind: "figure",
       id: "gpcr-mm-simulations",
       src: "model/gpcr-mm-simulations.webp",
-      alt: "The same nine panels for the Michaelis-Menten model. PTCH1 and cholesterol behave much as in the linear model. The bottom row differs: cytoplasmic SMO and the ciliary pools rise to a peak near 1,500 seconds and then fall away more steeply, and activated SMO stays low in every panel.",
+      alt: "The same nine panels for the Michaelis-Menten model. The cholesterol row behaves as in the linear model. The top row differs under saturating Hedgehog, where inhibited PTCH1 climbs over a few hundred seconds rather than jumping. In the bottom row the ciliary SMO pools peak earlier and then fall away more steeply than in the linear model, cytoplasmic SMO falls throughout, and activated SMO stays low in all three columns.",
       caption:
-        "The Michaelis-Menten model, where PTCH1 saturates. The SMO pools peak earlier and fall away faster, and activated SMO stays low throughout.",
+        "The Michaelis-Menten model, where PTCH1 saturates. Its switch is gradual rather than immediate, the SMO pools peak earlier and fall away faster, and activated SMO stays low throughout.",
       ratio: "wide",
       source: "Produced by the modelling subteam.",
     },
@@ -2178,14 +2178,14 @@ const model: Page = {
           kind: "prose",
           body: [
             "The same two methods used on the tuner model, run on each candidate. The bars below are the subteam's own output. We have not redrawn them here because the underlying values have not been recovered from the run, so what we take from them is the **ordering**, not the heights.",
-            "For the linear model the ciliary degradation rate leads under Morris, with the cytoplasm-to-membrane rate just behind, and Sobol puts those two first in the other order. For the Michaelis-Menten model the embedding rate leads under both methods. The rates governing PTCH1's own exchange come last in every ranking.",
+            "For the linear model the ciliary degradation rate leads under Morris, with the cytoplasm-to-membrane rate just behind, and Sobol puts those two first in the other order. For the Michaelis-Menten model the embedding rate leads under both methods. In the linear model the rates governing PTCH1's own exchange come last; in the other, compartment diffusion and cholesterol exchange fall below them.",
           ],
         },
         {
           kind: "figure",
           id: "gpcr-linear-morris",
           src: "model/gpcr-linear-morris.webp",
-          alt: "A bar chart titled Linear Model Morris Significances. Bars with error bars, in order: ciliary degradation rate at about 2,700, cytoplasm to membrane at about 2,300, cholesterol exchange rate at about 900, compartment diffusion at about 700, PTCH1 import rate at about 430, and three bars at zero for the embedding rate, the PTCH1 exchange rate and the SMO exchange rate.",
+          alt: "A bar chart titled Linear Model Morris Significances, each bar with an error bar. The bars fall from left to right in this order: ciliary degradation rate, cytoplasm to membrane, cholesterol exchange rate, compartment diffusion, PTCH1 import rate. The last three, the embedding rate, the PTCH1 exchange rate and the SMO exchange rate, are at zero.",
           caption: "Morris screening of the linear model.",
           ratio: "wide",
           source: "Produced by the modelling subteam.",
@@ -2194,7 +2194,7 @@ const model: Page = {
           kind: "figure",
           id: "gpcr-linear-sobol",
           src: "model/gpcr-linear-sobol.webp",
-          alt: "A bar chart of Sobol indices for the linear model. Cytoplasm to membrane leads at about 0.36 with an interval running from 0.13 to 0.59, ciliary degradation follows at about 0.26 with an interval that just touches zero, and the remaining parameters sit near zero with intervals that cross it.",
+          alt: "A bar chart of Sobol indices for the linear model, with the parameters in a fixed order along the bottom rather than sorted. Cytoplasm to membrane is much the tallest bar and ciliary degradation the next, each with a wide interval. Every other parameter sits near zero with an interval that crosses it.",
           caption: "Sobol indices for the linear model. Every interval but the leading one crosses zero.",
           ratio: "wide",
           source: "Produced by the modelling subteam.",
@@ -2203,8 +2203,8 @@ const model: Page = {
           kind: "figure",
           id: "gpcr-mm-morris",
           src: "model/gpcr-mm-morris.webp",
-          alt: "A bar chart titled Michaelis-Menten Model Morris Significances. The embedding forward rate leads, followed by the SMO exchange rate, the cytoplasm to membrane rate and the ciliary degradation rate, with V max, K m, the PTCH1 exchange rate, compartment diffusion and cholesterol exchange much smaller.",
-          caption: "Morris screening of the Michaelis-Menten model. Note the scale: these significances are four orders of magnitude below the linear model's, because the two were scored on different quantities.",
+          alt: "A bar chart titled Michaelis-Menten Model Morris Significances, each bar with an error bar. The bars fall from left to right in this order: the embedding forward rate, the SMO exchange rate, the cytoplasm to membrane rate, the ciliary degradation rate, then V max and K m, then the PTCH1 exchange rate and compartment diffusion, with cholesterol exchange at zero.",
+          caption: "Morris screening of the Michaelis-Menten model. Read the order, not the scale: these significances are millions of times smaller than the linear model's, and the quantity each run scored is not recorded, so the two cannot be put side by side.",
           ratio: "wide",
           source: "Produced by the modelling subteam.",
         },
@@ -2212,7 +2212,7 @@ const model: Page = {
           kind: "figure",
           id: "gpcr-mm-sobol",
           src: "model/gpcr-mm-sobol.webp",
-          alt: "A bar chart of Sobol indices for the Michaelis-Menten model. The embedding forward rate leads at about 0.16, the SMO exchange rate follows at about 0.14 with an interval running from below zero to above 0.5, and everything else sits near zero.",
+          alt: "A bar chart of Sobol indices for the Michaelis-Menten model, with the parameters in a fixed order along the bottom. Only the SMO exchange rate and the embedding forward rate have bars of any size, and both carry intervals several times the height of the bar that reach well below zero. Everything else sits on the axis.",
           caption: "Sobol indices for the Michaelis-Menten model.",
           ratio: "wide",
           source: "Produced by the modelling subteam.",
@@ -2285,7 +2285,7 @@ const model: Page = {
       heading: "Checking it cannot do harm somewhere else",
       body: [
         "[The up arm](/description#two-arms) works by pulling the MMM complex apart. That frees MGRN1, and MGRN1 has another job: with a different partner called ATRN it controls **MC4R**, a receptor in the pathway that regulates appetite and body weight. If our binder released a flood of MGRN1 into that other role, we could be causing a metabolic side effect while congratulating ourselves on the ciliary result.",
-        "So we modelled it. Adding binder does shift MC4R, and the shift is **small and slow**. At 500 nM, a dose far beyond anything we would use, surface MC4R falls by 0.1 percent after half an hour, 2.7 percent after fourteen hours, and **8.0 percent** once the system has fully settled. That last figure is the one to judge against the **20 percent** we set in advance as the point where an effect becomes biologically meaningful, and it is well under it.",
+        "So we modelled it. Adding binder does shift MC4R, and the shift is **small and slow**. At 500 nM, the top of the range we swept, surface MC4R falls by 0.1 percent after half an hour, 2.7 percent after fourteen hours, and **8.0 percent** once the system has fully settled. That last figure is the one to judge against the **20 percent** we set in advance as the point where an effect becomes biologically meaningful, and it is well under it.",
         "The ceiling exists because MGRN1 is the scarce component, at roughly 0.18 nM in total. There is only so much of it to redistribute however hard the binder pushes, and the model's own ceiling, with every MEGF8 site occupied, is 8.2 percent.",
       ],
       source: "Abundances from PaxDb; Kong et al. 2020 and Parashara et al. 2025.",
@@ -2300,7 +2300,7 @@ const model: Page = {
         {
           kind: "prose",
           body: [
-            "The model is written in Python through the Tellurium interface built by the Sauro lab, and uses **mass-action kinetics**. MGRN1 and MC4R are both membrane-bound, so they do not satisfy the assumption of freely diffusing soluble reactants that classical Michaelis-Menten rests on. More decisively, MC4R sits at about 0.06 nM, orders of magnitude below the usual Km of a ring E3 ligase, and in that regime mass action is the exact simplification of Michaelis-Menten rather than an approximation of it.",
+            "The model is written in Python through the Tellurium interface built by the Sauro lab, and uses **mass-action kinetics**. MGRN1 and MC4R are both membrane-bound, so they do not satisfy the assumption of freely diffusing soluble reactants that classical Michaelis-Menten rests on. More decisively, MC4R sits at about 0.06 nM, orders of magnitude below the usual Km of a ring E3 ligase, and that far below Km the Michaelis-Menten rate reduces to a first-order one, so mass action here is the limit the fuller equation takes rather than a convenient approximation of it.",
           ],
         },
         {
@@ -2310,17 +2310,17 @@ const model: Page = {
             [
               "**M_free**",
               "Free cytoplasmic MGRN1, bound to nothing. The competition point: any MGRN1 the binder frees passes through here before it can reach ATRN.",
-              "PaxDb, 0.03 ppm",
+              "Whatever is left of the 0.18 nM of MGRN1 once the complex has taken its share, which is 0.032 nM",
             ],
             [
               "**M_MMM**",
               "MGRN1 held inside the full complex at the plasma membrane. This is what the binder reduces.",
-              "PaxDb, scaled by the share of MGRN1 in the complex measured from the published MOSMO figure",
+              "MEGF8's PaxDb abundance before the membrane factor, 0.24 nM, times the 0.617 share of it found carrying MGRN1 in a published figure, which gives 0.148 nM",
             ],
             [
               "**M_ATRN**",
               "MGRN1 bound to ATRN, the complex that ubiquitinates MC4R. The off-target effector: if this rises when binder is added, MC4R is affected.",
-              "Parashara et al. 2025",
+              "Starts empty. The interaction itself is from Parashara et al. 2025",
             ],
             [
               "**MC4R_s**",
@@ -2382,7 +2382,7 @@ const model: Page = {
       id: "mc4r-parameters",
       navLabel: "Parameters",
       heading: "Every parameter in the safety model",
-      summary: "Sixteen values, each either measured, derived from a measurement, or calibrated.",
+      summary: "Fifteen values, each either measured, derived from a measurement, or calibrated, and one modelling choice.",
       blocks: [
         {
           kind: "table",
@@ -2444,7 +2444,7 @@ const model: Page = {
       threshold: {
         value: 20,
         label:
-          "We set twenty percent as the point where an effect becomes biologically meaningful. The worst case, at a dose ten times higher than anything we would use and after the system has fully settled, reaches 8.0 percent.",
+          "We set twenty percent as the point where an effect becomes biologically meaningful. The worst case here, at the top of the dose range and after the system has fully settled, reaches 8.0 percent.",
       },
       footnote:
         "Read at the settled state, which is the worst case; at fourteen hours the same doses give about a third of these figures. The curve flattens by about 50 nM, which already reaches five sixths of the ceiling, and a tenfold higher dose adds only a fifth again. Dose and binder strength enter the model through one quantity, the fraction of MEGF8 sites the binder occupies, which is already 0.98 at 500 nM. Nothing can push it past 1, and that limit is where the 8.2 percent ceiling comes from. A binder ten times weaker would sit at the same occupancy as the 50 nM point and so do **less** off-target harm, not more.",
@@ -2455,7 +2455,7 @@ const model: Page = {
       navLabel: "What it means",
       heading: "What the safety result means",
       body: [
-        "Three things carry over from this model. The off-target effect is **bounded by how little MGRN1 there is**, not by how well the binder works, so it cannot be made worse by a better binder or a larger dose. It **saturates**, with most of the effect in place by 50 nM. And at its worst it is **8 percent of surface MC4R**, against a threshold of 20 percent.",
+        "Three things carry over from this model. More binder does mean more off-target effect, up to a point, but that point is **set by how little MGRN1 there is**: no dose and no binder, however good, can free more MGRN1 than the cell holds. The curve **flattens** well before the top of the range, with most of the effect in place by 50 nM. And the ceiling itself is **8.2 percent of surface MC4R**, against a threshold of 20 percent.",
         "What would change that conclusion is a measurement rather than a model: how much MGRN1 a cell really holds, and how much of it is in the complex to begin with. Both are taken here from a protein abundance database and one published figure. If MGRN1 were far more abundant than 0.18 nM, the ceiling would rise with it.",
       ],
     },
