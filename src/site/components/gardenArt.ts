@@ -468,3 +468,83 @@ export const ANTIBODY = s([
   '.....yyyy.....',
   '.....yyyy.....',
 ])
+
+/* ------------------------------------------------------------ pixel numerals */
+
+/** Numerals drawn as sprites, five pixels by seven, so 5 and S, 0 and 8 cannot be confused. */
+const DIGITS: Record<string, string[]> = {
+  '0': ['.###.', '#...#', '#..##', '#.#.#', '##..#', '#...#', '.###.'],
+  '1': ['..#..', '.##..', '..#..', '..#..', '..#..', '..#..', '.###.'],
+  '2': ['.###.', '#...#', '....#', '...#.', '..#..', '.#...', '#####'],
+  '3': ['####.', '....#', '....#', '.###.', '....#', '....#', '####.'],
+  '4': ['...#.', '..##.', '.#.#.', '#..#.', '#####', '...#.', '...#.'],
+  '5': ['#####', '#....', '####.', '....#', '....#', '#...#', '.###.'],
+  '6': ['..##.', '.#...', '#....', '####.', '#...#', '#...#', '.###.'],
+  '7': ['#####', '....#', '...#.', '..#..', '.#...', '.#...', '.#...'],
+  '8': ['.###.', '#...#', '#...#', '.###.', '#...#', '#...#', '.###.'],
+  '9': ['.###.', '#...#', '#...#', '.####', '....#', '...#.', '.##..'],
+}
+
+/** A figure such as "16" as one sprite in `ink`, each stroke doubled to the right for weight. */
+export function numeral(value: string, ink = 'e'): Sprite {
+  const glyphs = [...value].map((c) => DIGITS[c]).filter(Boolean)
+  const rows = Array.from({ length: 7 }, (_, y) =>
+    glyphs
+      .map((g) => {
+        const r = g[y] + '.'
+        return [...r].map((c, x) => (c === '#' || r[x - 1] === '#' ? ink : '.')).join('')
+      })
+      .join('.'),
+  )
+  return s(rows)
+}
+
+/* -------------------------------------------------------- the counter's icons */
+
+/* One picture per figure in the integration counter. `e` is the ink. */
+
+/** A conversation: stakeholders consulted. */
+export const ICON_TALK = s([
+  '.eeeeeeeeeee.',
+  'ellllllllllle',
+  'ellllllllllle',
+  'elleeleeleele',
+  'elleeleeleele',
+  'ellllllllllle',
+  'ellllllllllle',
+  '.eeelleeeeee.',
+  '...elle......',
+  '...ele.......',
+  '...ee........',
+])
+
+
+/** Three people, one in front: professional communities. */
+export const ICON_GROUP = s([
+  '.........eee.........',
+  '..mmm...eeeee...mmm..',
+  '.mmmmm..eeeee..mmmmm.',
+  '.mmmmm..eeeee..mmmmm.',
+  '.mmmmm...eee...mmmmm.',
+  '..mmm...........mmm..',
+  '.......eeeeeee.......',
+  '.mmmm.eeeeeeeee.mmmm.',
+  'mmmmm.eeeeeeeee.mmmmm',
+  'mmmmm.eeeeeeeee.mmmmm',
+  'mmmmm.eeeeeeeee.mmmmm',
+  'mmmmm.eeeeeeeee.mmmmm',
+])
+
+/** A checklist on a clipboard: shared adoption needs. */
+export const ICON_LIST = s([
+  '...eeeee...',
+  'eeeemmmeeee',
+  'ellllllllle',
+  'elmmleeeele',
+  'ellllllllle',
+  'elmmleeeele',
+  'ellllllllle',
+  'elmmleeeele',
+  'ellllllllle',
+  'eeeeeeeeeee',
+])
