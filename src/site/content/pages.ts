@@ -3068,7 +3068,7 @@ const DELIVERABLES: Block[] = [
 {
     kind: "figure",
     id: "flyer",
-    src: "ihp/flyer.jpg",
+    src: "implementation/flyer.png",
     alt: "The HedgehogSense flyer. It introduces a research platform for studying the effects of ciliary abundance of transmembrane proteins, explains that the MMM complex is used as an E3 ubiquitin ligase for targeted ubiquitination, lists the two components (a linker system that upregulates ubiquitination by bringing a protein into proximity with the MMM complex, and an inhibitor system that downregulates it by disrupting the MEGF8 and MOSMO interface), shows a structure of the MMM complex, lists potential targets SMO, GPR161, PTCH1, SSTR3 and ARL13B, and gives a QR code and a contact email.",
     caption:
       "The flyer we hand out: what the platform is, its two components, the targets it could be pointed at, and how to reach us.",
