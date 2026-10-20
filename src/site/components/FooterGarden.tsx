@@ -51,7 +51,29 @@ export default function FooterGarden({ onReplayIntro }: { onReplayIntro?: () => 
           </ul>
         </div>
       </div>
-      {/* TODO(pre-publish): add iGEM's required competition attribution + CC licence line. */}
+      {/* iGEM requires both of these on every page: the licence the content is
+          released under, and a visible link to the repository it is built from. */}
+      <p className="mt-6 border-t-2 border-dashed border-leaf-300 pt-3 text-note text-leaf-800">
+        Content on this wiki is released under a{' '}
+        <a
+          href="https://creativecommons.org/licenses/by/4.0/"
+          target="_blank"
+          rel="noreferrer noopener"
+          className="underline"
+        >
+          Creative Commons Attribution 4.0 International licence
+        </a>
+        , except where another source is credited beside it. The source code is at{' '}
+        <a
+          href="https://gitlab.igem.org/2026/washington"
+          target="_blank"
+          rel="noreferrer noopener"
+          className="underline"
+        >
+          gitlab.igem.org/2026/washington
+        </a>
+        .
+      </p>
     </footer>
   )
 }
