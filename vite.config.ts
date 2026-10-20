@@ -31,7 +31,7 @@ function pagePerRoute(): Plugin {
         // alongside the script, so the background is ready when the page is.
         const garden = gardenFile(to)
         const source = garden
-          ? String(html.source).replace('</head>', `  <link rel="preload" as="image" href="${base}${garden}" />\n  </head>`)
+          ? String(html.source).replace('</head>', `  <link rel="preload" as="image" href="https://static.igem.wiki/teams/6229/wiki/${garden.replace(/\.png$/, '.avif')}" />\n  </head>`)
           : html.source
         this.emitFile({ type: 'asset', fileName: `${to.slice(1)}/index.html`, source })
       }
