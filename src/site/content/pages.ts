@@ -4799,9 +4799,8 @@ const contribution: Page = {
       heading: "What we are handing over",
       body: [
         "Designing a protein binder means driving three separate models in turn and throwing away almost everything they produce. The models are published and free. The part that is not written down anywhere is the plumbing: how to get them onto a cluster you are allowed to use, how to hand each one's output to the next, and which numbers are worth filtering on.",
-        "That plumbing is our contribution. We built it on **Hyak**, the University of Washington's shared cluster, so it runs somewhere any student here can reach rather than on a lab machine nobody else can book. It is driven by **one script** that takes a target, a batch size and a set of hotspot residues. And it is **not specific to MOSMO or MEGF8**: a team with a different target and a structure to aim at can point the same pipeline at it.",
-        "Below is the pipeline stage by stage, what each tool in it does, the scripts themselves, and the four numbers we use to decide whether a design is worth ordering. The whole thing is on [GitHub](https://github.com/uwigem/protein_design_2026).",
-        "The second half of the page is the wet lab's: [a toolkit of ten constructs](/contribution#toolkit) for bringing an E3 ligase to a receptor, built so that the receptor is the only part another team has to change.",
+        "That plumbing is our contribution. We built it on Hyak, the University of Washington's shared cluster, so it runs somewhere any student here can reach rather than on a lab machine nobody else can book. It is driven by **one command** that takes a target, a batch size and a set of hotspot residues, and it is **not specific to MOSMO or MEGF8**: a team with a different target and a structure to aim at can point the same pipeline at it.",
+        "This page has two halves. The first is that pipeline: what each tool does, the four numbers we filter on, and where [the code](https://github.com/uwigem/protein_design_2026) lives. The second is the wet lab's [toolkit of ten constructs](/contribution#toolkit) for bringing an E3 ligase to a receptor, built so the receptor is the only part another team has to change.",
       ],
     },
     {
@@ -4819,23 +4818,22 @@ const contribution: Page = {
       id: "pipeline",
       heading: "The pipeline, stage by stage",
       intro:
-        "One command runs all of it. Each stage below names the script that does the work and what it hands to the next stage, so the chain can be picked apart and re-run from any point.",
+        "One command runs all of it. Each stage names the tool that does the work and what it hands to the next one, so the chain can be picked apart and re-run from any point. The scripts themselves are [in the repository](/contribution#code).",
       stages: [
         {
           title: "Set the target and the hotspots",
-          script: "pipeline/batch_design.sh",
           body: [
-            "The whole run is started by one script, which takes a run name, a batch size, a set of hotspot residues and which target to aim at. Everything after this is automatic.",
+            "A run is started with four things: a name for it, how many designs to make, the residues on the target to aim at, and which target that is. Everything after this is automatic.",
           ],
           input: "a target structure and the residues to aim at",
           output: "a configured run on the cluster",
-          note: "The input and output directories are set at the top of the script, so it can be pointed at any file layout.",
+          note: "The input and output folders are set in one place, so the pipeline can be pointed at any file layout.",
         },
         {
           title: "Generate backbones",
-          script: "RFdiffusion3, through the Foundry container",
+          script: "RFdiffusion3",
           body: [
-            "RFdiffusion3 denoises around the fixed target to produce the coordinates of a small protein expected to interact favourably with it. These backbones are the geometric framework of the design, with no sequence yet.",
+            "RFdiffusion3 is a diffusion-based model that arrives at protein structures by iterative denoising, a process known as backbone generation or fold design [3]. Given a fixed target, it denoises around it to produce the coordinates of a small protein expected to interact favourably with it. These backbones are the geometric framework of the design, with no sequence yet.",
           ],
           input: "target structure and hotspot residues",
           output: "candidate binder backbones",
@@ -4844,34 +4842,32 @@ const contribution: Page = {
           title: "Design sequences onto them",
           script: "ProteinMPNN",
           body: [
-            "ProteinMPNN takes the coordinates of a structure and generates a sequence of amino acids predicted to fold into it, a process known as inverse folding. The output carries the complete sequence for the generated minibinder alongside the existing sequence of the target.",
+            "ProteinMPNN is a neural network that takes the coordinates of a structure and generates a sequence of amino acids predicted to fold into it, a process known as inverse folding [4]. The output carries the complete sequence for the generated minibinder alongside the existing sequence of the target.",
           ],
           input: "backbones",
           output: "amino acid sequences for each backbone",
         },
         {
           title: "Fold the sequences back",
-          script: "RoseTTAFold3, through fold.sh",
+          script: "RoseTTAFold3",
           body: [
-            "RoseTTAFold3 predicts how the designed sequence will actually fold, together with the target. Comparing that prediction against the backbone we asked for is what tells us whether the sequence recapitulates the shape, and whether the binder still lands where it was diffused.",
+            "RoseTTAFold3 takes a sequence and predicts how the protein will fold, a process known as forward folding [5]. Running the designed sequence through it together with the target, and comparing against the backbone we asked for, is what tells us whether the sequence recapitulates the shape. It also tells us whether the binder still lands where it was diffused: one that refolds in the same place on the target is a strong indicator it has affinity for it.",
           ],
           input: "sequences and the target",
           output: "predicted complexes and their confidence files",
         },
         {
-          title: "Pull the metrics out and filter",
-          script: "pipeline/scripts, redesign/batch_confidences_fixed.py",
+          title: "Measure every design and filter",
           body: [
-            "A script aligns each folded output against the backbone it came from to calculate the deviation, and reads the confidence values out of the prediction's own summary files. Designs are then kept or dropped on [the four numbers below](/contribution#metrics).",
+            "Each folded design is aligned against the backbone it came from to measure how far it drifted, and the confidence values are read out of the prediction's own summary files. Designs are then kept or dropped on [the four numbers below](/contribution#metrics).",
           ],
           input: "predicted complexes",
           output: "a table of metrics, and a list of designs worth keeping",
         },
         {
           title: "Rescue the near misses",
-          script: "redesign/select_redesign.py, redesign/redesign_all_dirs.sh",
           body: [
-            "Designs that came close to the cutoffs get a second pass: the first script finds them, the second sends them back through sequence design and folding. Giving a backbone a fresh sequence is known to lower deviation and raise prediction confidence, so a near miss gets another chance to settle into the shape that was asked for.",
+            "Designs that came close to the cutoffs get a second pass: they are found automatically and sent back through sequence design and folding. Giving a backbone a fresh sequence is known to lower deviation and raise prediction confidence, so a near miss gets another chance to settle into the shape that was asked for.",
           ],
           input: "near misses and designs that already passed",
           output: "a second generation of sequences, filtered the same way",
@@ -4884,30 +4880,6 @@ const contribution: Page = {
       heading: "Running it on a shared cluster",
       body: [
         "To interface with these models we pulled the Foundry container created by RosettaCommons from DockerHub onto **Hyak**, the University of Washington's high-performance computing cluster. Previously our use of protein design platforms was split between local installation and the Institute for Protein Design's own cluster. Moving the entire pipeline onto Hyak, a system widely available to all University of Washington students, establishes a platform where any future team here can run automated, high throughput computational protein design.",
-      ],
-    },
-    {
-      kind: "prose",
-      id: "rfdiffusion3",
-      heading: "RFdiffusion3",
-      body: [
-        "RoseTTAFoldDiffusion3 is a diffusion-based protein structure-generating model that uses iterative denoising to arrive at protein structures, a process known as backbone generation or fold design [3]. These backbones can be thought of as just the geometric framework for a design: the scaffold we aim to recreate through an amino acid sequence from ProteinMPNN, and hopefully match with a RoseTTAFold3 prediction. By providing fixed protein input structures, it denoises around the fixed target to generate the coordinates of a small protein expected to interact favourably with it.",
-      ],
-    },
-    {
-      kind: "prose",
-      id: "proteinmpnn",
-      heading: "ProteinMPNN",
-      body: [
-        "ProteinMPNN is a neural network that takes the coordinates of a given protein structure as input and generates a sequence of amino acids predicted to fold into that structure, a process known as inverse folding [4]. The output of this step is a file containing the complete sequence for the generated minibinder and the pre-existing sequence of the target protein.",
-      ],
-    },
-    {
-      kind: "prose",
-      id: "rosettafold3",
-      heading: "RoseTTAFold3",
-      body: [
-        "RoseTTAFold3 is a protein structure prediction model that takes an input sequence of amino acids and predicts how the specified protein will fold, a process known as forward folding [5]. Running the ProteinMPNN output through it and comparing against the initial backbone validates that the generated sequence recapitulates the structure we diffused. Further, the comparison tells us whether the binder is predicted to bind where it was initially placed. If the binder refolds in a similar position on the target as it was generated in, that is a strong indicator it has affinity for the target.",
       ],
     },
     {
