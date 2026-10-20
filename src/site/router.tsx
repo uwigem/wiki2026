@@ -36,9 +36,21 @@ export function href(to: string): string {
   return anchor ? `${url}#${anchor}` : url
 }
 
-/** A file in `public/` as a URL, for example `asset('team/ana.jpg')`. */
+/**
+ * Where images live. A wiki repository may not store them: iGEM rejects the
+ * push, and asks for them on their CDN instead. The Uploads tool keeps the
+ * directory and file name but re-encodes JPEG and PNG as AVIF, so a `.jpg` or
+ * `.png` here becomes a `.avif` there. WebP and SVG are left as they are.
+ */
+const CDN = 'https://static.igem.wiki/teams/6229/wiki/'
+const TO_AVIF = /\.(jpe?g|png)$/i
+
+/** A file as a URL, for example `asset('team/ana.jpg')`. */
 export function asset(path: string): string {
-  return `${BASE}/${path.replace(/^\.?\//, '')}`
+  const file = path.replace(/^\.?\//, '')
+  if (TO_AVIF.test(file)) return CDN + file.replace(TO_AVIF, '.avif')
+  if (/\.(webp|svg)$/i.test(file)) return CDN + file
+  return `${BASE}/${file}`
 }
 
 /** A path with the base, trailing slashes and old names taken off. */
