@@ -1643,6 +1643,70 @@ const model: Page = {
     },
     {
       kind: "details",
+      id: "core-equations",
+      navLabel: "The core equations",
+      heading: "The equations before the adaptation",
+      summary:
+        "The original system in full, both forms of the tagging step, and what each symbol is.",
+      blocks: [
+        {
+          kind: "prose",
+          body: [
+            "This is the model as it was first written, before the parameters were bundled. It tracks six quantities rather than five, and it writes the tagging step the two ways described above. The version the code actually runs is the bundled one below; this is what it was bundled from.",
+            "`DeNovo` is the binder and `Linker` the linker, both held constant: they are the conditions a run is set to. `MMM_nf` is the complex after the binder has taken it apart, and `MMM_L` is the complex joined to the linker.",
+          ],
+        },
+        {
+          kind: "table",
+          columns: ["Quantity", "Rate of change"],
+          rows: [
+            [
+              "**SMO_cyt**",
+              "`(kform_SMO_cyt + kout*SMO_cil) - (kdeg_SMO_cyt + kin)*SMO_cyt`",
+            ],
+            [
+              "**SMO_cil**",
+              "`kin*SMO_cyt - (kdeg_SMO_cil + Vmax*SMO_cil/(Km + SMO_cil))`",
+            ],
+            ["**SMO_ub**", "`Vmax*SMO_cil/(Km + SMO_cil)`"],
+            [
+              "**MMM**",
+              "`(k3*MMM_nf + kform_MMM + koff*MMM_L) - (k3*MMM*DeNovo + kdeg_MMM + kform_MMM_L*MMM*Linker)`",
+            ],
+            ["**MMM_nf**", "`k3*MMM*DeNovo - k_minus3*MMM_nf`"],
+            ["**MMM_L**", "`kf_MMM*MMM*Linker - koff*MMM_L`"],
+          ],
+          caption:
+            "The source document writes the influx term of the second equation against ciliary SMO rather than cytoplasmic SMO. It is transcribed here as cytoplasmic, which is what the first equation and the bundled version both treat it as, and is an open question for the subteam.",
+        },
+        {
+          kind: "prose",
+          body: [
+            "The tagging step in the second and third equations is **Michaelis-Menten**, with `Vmax = kcat*MMM` and `Km = (k_minus1 + kcat)/k1`. `k1` is the rate at which the complex and ciliary SMO meet, `k_minus1` the rate that pairing comes apart again, and `kcat` the rate at which a bound SMO is tagged.",
+            "The sixth equation was added for the linker, and is the quasi-steady-state assumption written out: the complex joined to the linker settles within moments, so its level depends only on how much linker and complex there is, and on the rates of forming and clearing it.",
+            "The second version replaces the tagging step with the ternary-complex rate law from Wurz et al. [3]. In their terms, **alpha** is the cooperativity coefficient, `K_MMM_Linker` the ligase and linker affinity, and `K_SMO_Linker` the target and linker affinity:",
+            "`v/Vmax = alpha / (alpha + 2*(K_MMM_Linker + Linker) / (Linker + SMO + K_SMO_Linker - sqrt((Linker + SMO + K_SMO_Linker)^2 - 4*Linker*SMO)))`",
+            "Which rewrites the third equation, and with it the tagging term of the second, as:",
+            "`d(SMO_ub)/dt = Vmax*alpha / (alpha + 2*(K_MMM_Linker + Linker) / (Linker + SMO + K_SMO_Linker - sqrt((Linker + SMO + K_SMO_Linker)^2 - 4*Linker*SMO)))`",
+            "Written this way the tagging rate carries how much linker and complex are present, and how tightly each arm binds, instead of hiding all of it in one lumped constant. That is the whole reason for preferring it, and the reason the bundled version keeps **alpha** as a separate factor.",
+          ],
+        },
+        {
+          kind: "prose",
+          body: [
+            "The subteam's own write-up of this system, as it was handed over.",
+          ],
+        },
+        {
+          kind: "pdf",
+          file: "model/core-ode-model.pdf",
+          title: "An Overview of the Core Deterministic ODE Model",
+          pages: 2,
+        },
+      ],
+    },
+    {
+      kind: "details",
       id: "equations",
       navLabel: "Equations",
       heading: "The equations the code solves",
@@ -1684,14 +1748,8 @@ const model: Page = {
         {
           kind: "prose",
           body: [
-            "The subteam's own write-up of the model, as it was handed over. The first document derives the core model and both forms of the tagging step; the second is the short list of changes that produced the bundled version the code actually runs.",
+            "The short list of changes that produced this version from the core model above.",
           ],
-        },
-        {
-          kind: "pdf",
-          file: "model/core-ode-model.pdf",
-          title: "An Overview of the Core Deterministic ODE Model",
-          pages: 2,
         },
         {
           kind: "pdf",
