@@ -369,6 +369,8 @@ export type Block = Anchored &
         heading: string;
         summary?: string;
         open?: boolean;
+        /** Marks a standardised parameter or assumption drop-down. */
+        tone?: "lilac";
         /** Its place in a sequence, when a run of these is one procedure. */
         step?: number;
         blocks: Block[];
@@ -1458,8 +1460,6 @@ const model: Page = {
   title: "The Model",
   kicker: "chapter 07 · model",
   medal: true,
-  storyBeat:
-    "Before you dig, it helps to know how fast things grow. So we did the maths, and then we asked a systems biologist to tell us where the maths was wrong.",
   intro:
     "A kinetic model of the Hedgehog and MMM system, built to answer one question. Can the device set ciliary SMO where we want it rather than only switching it off, or is tunable just a nice word.",
   blocks: [
@@ -1628,9 +1628,8 @@ const model: Page = {
       kind: "details",
       id: "assumptions",
       navLabel: "Assumptions",
-      heading: "The assumptions the model rests on",
-      summary:
-        "Six places where the biology was simplified, and what would be needed to stop simplifying.",
+      heading: "Assumptions",
+      tone: "lilac",
       blocks: [
         {
           kind: "facts",
@@ -1703,15 +1702,32 @@ const model: Page = {
             "Read it as supply over disposal. The binder raises ciliary SMO by moving active complex into **M_nf**, which takes it out of the denominator. The linker lowers it by moving active complex into **MLc**, which enters the denominator multiplied by `alpha`. The two arms act on the same term from opposite sides, which is why a single device can push the readout either way.",
           ],
         },
+        {
+          kind: "prose",
+          body: [
+            "The subteam's own write-up of the model, as it was handed over. The first document derives the core model and both forms of the tagging step; the second is the short list of changes that produced the bundled version the code actually runs.",
+          ],
+        },
+        {
+          kind: "pdf",
+          file: "model/core-ode-model.pdf",
+          title: "An Overview of the Core Deterministic ODE Model",
+          pages: 2,
+        },
+        {
+          kind: "pdf",
+          file: "model/core-ode-updated.pdf",
+          title: "Updated equations, bundled form",
+          pages: 1,
+        },
       ],
     },
     {
       kind: "details",
       id: "parameters",
       navLabel: "Parameters",
-      heading: "Every parameter, and where it came from",
-      summary:
-        "Twelve rows, each marked as measured, calculated from other values, or standing in until something better exists.",
+      heading: "Parameters",
+      tone: "lilac",
       blocks: [
         {
           kind: "table",
@@ -1871,7 +1887,7 @@ const model: Page = {
         {
           kind: "table",
           id: "normalised-sensitivities",
-          heading: "The same analysis, for every quantity that version tracks",
+          heading: "The same analysis, every quantity",
           intro:
             "Normalised sensitivity at 120 hours: the percent change in that quantity per percent change in that rate. One row per rate, one column per quantity, for the same un-bundled version as the chart above, which is why cytoplasmic SMO has a column here. The five rates left out never reach 0.1 against anything.",
           columns: NORMSENS_TABLE.columns,
@@ -1886,7 +1902,7 @@ const model: Page = {
       kind: "prose",
       id: "global-sensitivity",
       navLabel: "Global sensitivity",
-      heading: "The same question, asked across the whole range",
+      heading: "The same question, across the whole range",
       body: [
         "Local analysis only describes the neighbourhood of the settings we chose. Since six of those settings are stand-ins, we also ran a **global** analysis, which samples the whole plausible range at once. We used Morris screening [11] and Sobol analysis [12] together, on the principle that a parameter both methods call uninfluential can be dropped.",
         "Because the device is meant to push the readout in either direction, the output here is the **log fold change** of ciliary SMO rather than its concentration, so that an increase and a decrease of the same size count the same.",
@@ -1911,7 +1927,7 @@ const model: Page = {
       kind: "scatter",
       id: "morris",
       navLabel: "Morris screening",
-      heading: "Which parameters act on their own, and which act through the rest",
+      heading: "Which parameters act on their own",
       intro:
         "Morris screening. Along the bottom, how much each parameter moves the output on average. Up the side, how much that effect varies depending on where the rest of the model is set. The dashed line is where those two are equal, so a point above it has an influence that is non-linear or tangled up with the other parameters.",
       panels: [{ points: MORRIS_POINTS }],
@@ -2003,8 +2019,8 @@ const model: Page = {
       kind: "details",
       id: "gpcr-assumptions",
       navLabel: "Assumptions",
-      heading: "The assumptions this model rests on",
-      summary: "Six simplifications, and what each one costs.",
+      heading: "Assumptions",
+      tone: "lilac",
       blocks: [
         {
           kind: "facts",
@@ -2073,14 +2089,26 @@ const model: Page = {
             "Two geometric quantities set the scale of everything else. A cell of 13 micrometre radius holds about 9.2 picolitres, while a cilium of 0.2 micrometre radius and 6.5 micrometres length holds about 0.8 femtolitres, so the cell is roughly **11,000 times** the volume of its own cilium. A count of 10 to the 9 cholesterol molecules in that cell volume works out at about **180,000 nM**, which is why cholesterol dwarfs every protein in the model.",
           ],
         },
+        {
+          kind: "prose",
+          body: [
+            "The subteam's own write-up, with both candidate models written out in full, the assumptions behind them, and the volume and concentration calculations they rest on.",
+          ],
+        },
+        {
+          kind: "pdf",
+          file: "model/gpcr-full-model.pdf",
+          title: "The GPCR model, in full",
+          pages: 3,
+        },
       ],
     },
     {
       kind: "details",
       id: "gpcr-values",
-      navLabel: "Literature values",
-      heading: "The values taken from the literature",
-      summary: "Fourteen quantities, with the source of each.",
+      navLabel: "Parameters",
+      heading: "Parameters",
+      tone: "lilac",
       blocks: [
         {
           kind: "table",
@@ -2141,6 +2169,7 @@ const model: Page = {
       heading: "What the two models did",
       body: [
         "Both reproduced the five objectives. Scored as the total distance from all five targets at once, the **linear model reached 0.14 and the Michaelis-Menten model 0.2**. Neither is ruled out by that, which is the case we said in advance would send us to the simpler of the two.",
+        "That score is a sum of squared differences between what the model does and what the literature reports, one term per objective. Each term is read off the run the same way the experiment was: for the migration half-life, we fit an exponential to the cytoplasmic SMO the model produces, take its half-life, and compare that with the 20 minutes, or 1,200 seconds, the literature gives. A lower total means every objective is closer at once, so the two numbers can be compared with each other but not read as a percentage or an error bar.",
         "The figures below show each model under three conditions: no Hedgehog, enough to half-activate the pathway, and a saturating dose. The top row is PTCH1, the middle row cholesterol on each side of the membrane, and the bottom row the SMO pools, including the activated one that carries the signal.",
       ],
     },
@@ -2382,14 +2411,26 @@ const model: Page = {
           caption:
             "The binder enters in one place only, through `f_MB`, which closes off a share of the MEGF8 sites that MGRN1 would otherwise bind. Everything downstream of that follows from the competition between MEGF8 and ATRN for the same MGRN1.",
         },
+        {
+          kind: "prose",
+          body: [
+            "The subteam's own write-up, with the five rate equations and the parameter table behind them.",
+          ],
+        },
+        {
+          kind: "pdf",
+          file: "model/melanocortin-model.pdf",
+          title: "Melanocortin Model EQ",
+          pages: 2,
+        },
       ],
     },
     {
       kind: "details",
       id: "mc4r-parameters",
       navLabel: "Parameters",
-      heading: "Every parameter in the safety model",
-      summary: "Fifteen values, each either measured, derived from a measurement, or calibrated, and one modelling choice.",
+      heading: "Parameters",
+      tone: "lilac",
       blocks: [
         {
           kind: "table",
@@ -2525,7 +2566,7 @@ const model: Page = {
         {
           kind: "scatter",
           id: "hotspot-charts",
-          heading: "Uses against successes, one point per residue of the target",
+          heading: "Uses against successes, per residue",
           intro:
             "Every residue of each target: how many times it was named as a hotspot in a design run, and how many of those runs produced a design that passed the filters. The dashed line is fitted through the origin.",
           panels: [
@@ -2564,7 +2605,7 @@ const model: Page = {
       kind: "details",
       id: "metrics",
       navLabel: "The metrics",
-      heading: "What each metric is, and where we drew the line",
+      heading: "The metrics, and where we drew the line",
       summary:
         "Six quantities, in the subteam's own words. The first four carry the cutoffs the filtering code applies; the last two were used to rank rather than to cut.",
       blocks: [

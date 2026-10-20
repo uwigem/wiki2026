@@ -235,6 +235,14 @@
     border-radius: 2px;
     box-shadow: 4px 4px 0 var(--p-shadow);
   }
+  /* The standardised parameter and assumption drop-downs, which judges are
+     told to look for. Lilac so they are findable at a glance among the rest. */
+  .panel-lilac {
+    background: var(--p-lilacHi);
+    border: 3px solid var(--p-lilacPetal);
+    border-radius: 2px;
+    box-shadow: 4px 4px 0 var(--p-shadow);
+  }
   .panel-flat {
     background: var(--p-bushHi);
     border: 3px solid var(--p-grass4);

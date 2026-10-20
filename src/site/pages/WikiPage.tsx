@@ -780,6 +780,7 @@ function BlockView({ block }: { block: Block }) {
           summary={block.summary}
           open={block.open ?? holdsFigure(block.blocks)}
           step={block.step}
+          tone={block.tone}
         >
           {block.blocks.map((inner, i) => (
             <div key={i} id={inner.id} className="section-block min-w-0">
