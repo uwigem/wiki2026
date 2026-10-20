@@ -1150,7 +1150,7 @@ const engineering: Page = {
 const experiments: Page = {
   slug: "/experiments",
   title: "Experiments",
-  kicker: "chapter 05 · experiments",
+  kicker: "chapter 08 · experiments",
   intro:
     "This page outlines four proposed experiments designed to validate the individual components of HedgehogSense and its ability to regulate Hedgehog signalling.",
   blocks: [
@@ -1458,7 +1458,7 @@ const experiments: Page = {
 const model: Page = {
   slug: "/model",
   title: "The Model",
-  kicker: "chapter 07 · model",
+  kicker: "chapter 05 · model",
   medal: true,
   intro:
     "A kinetic model of the Hedgehog and MMM system, built to answer one question. Can the device set ciliary SMO where we want it rather than only switching it off, or is tunable just a nice word.",
@@ -3059,7 +3059,7 @@ const NEXT_STEPS: Block[] = [
 const humanPractices: Page = {
   slug: "/human-practices",
   title: "Who the Garden Is For",
-  kicker: "chapter 08 · integrated human practices",
+  kicker: "chapter 06 · integrated human practices",
   medal: true,
   intro:
     "We are handing other researchers a tool that changes what stays in the primary cilium. Our guiding question: how do we make it easy for them to adopt, and encourage responsible use in biologically sensitive systems? This page is what they told us, and what we changed.",
@@ -4097,7 +4097,7 @@ const humanPractices: Page = {
 const education: Page = {
   slug: "/education",
   title: "Sharing the Garden",
-  kicker: "chapter 09 · education",
+  kicker: "chapter 07 · education",
   medal: true,
   storyBeat: "The best part of a garden is showing someone else around it.",
   intro:
@@ -4535,7 +4535,7 @@ const implementation: Page = {
 const parts: Page = {
   slug: "/parts",
   title: "Parts and Registry",
-  kicker: "chapter 06 · parts and registry",
+  kicker: "chapter 09 · parts and registry",
   blocks: [
     {
       kind: "prose",
@@ -5165,13 +5165,13 @@ export const PAGES: Page[] = [
   background,
   engineering,
   implementation,
+  model,
+  humanPractices,
+  education,
   experiments,
   protocols,
   parts,
   results,
-  model,
-  humanPractices,
-  education,
   contribution,
   judging,
   attributions,

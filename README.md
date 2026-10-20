@@ -18,8 +18,8 @@ hedgehog and the site is a garden being tended.
 > `src/site/pages/archive/`: the code is kept and nothing routes to it.
 
 > **The site structure is the team's final architecture** (agreed 2026-10-08):
-> Home, Project, Wetlab, Drylab, Human Practices, and Team and Resources, plus
-> the Playground. It lives in `src/site/content/nav.ts`, and every page in
+> Home, Project, Drylab, Human Practices, Wetlab, and Team and Resources. It
+> lives in `src/site/content/nav.ts`, and every page in
 > `src/site/content/pages.ts` has to appear in it. Running `npm run dev` warns
 > in the browser console about a page missing from the nav, a nav link with no
 > page, or a link in the copy pointing at an address that moved.
