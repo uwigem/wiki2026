@@ -1586,9 +1586,9 @@ const model: Page = {
             ],
             [
               "**S_ub**",
-              "Tagged SMO, on its way to the proteasome.",
+              "Tagged SMO, on its way to the proteasome. Counted cumulatively: a running total of everything the complex has ever tagged, not a standing pool, which is why it reaches hundreds of nM while ciliary SMO sits near three.",
               "Tagging by the complex, with or without the linker",
-              "Nothing. It is a running total of everything tagged, not a pool.",
+              "Nothing. The model stops following SMO once it is tagged.",
             ],
             [
               "**MMM**",
@@ -1701,7 +1701,7 @@ const model: Page = {
       navLabel: "Parameters",
       heading: "Every parameter, and where it came from",
       summary:
-        "Twelve values, each marked as measured, calculated from other values, or standing in until something better exists.",
+        "Twelve rows, each marked as measured, calculated from other values, or standing in until something better exists.",
       blocks: [
         {
           kind: "table",
@@ -1721,7 +1721,7 @@ const model: Page = {
             ["k3, k_minus3, kf_MMM_linker, koff", "Binder and linker on and off rates", "Preset", "**Stand-ins**, swept rather than trusted"],
           ],
           caption:
-            "Six of these are stand-ins rather than measurements: the PTCH1 gate, the ternary enhancement, and the four binder and linker rates on the last row. Those are swept across a range in every result rather than being treated as known. Three more rows are calculated from the rows above them, so the table rests on fewer independent numbers than its twelve rows suggest.",
+            "Six of these are stand-ins rather than measurements: the PTCH1 gate, the ternary enhancement, and the four binder and linker rates on the last row. The four rates are swept across a range in every result below rather than treated as known, and the ternary enhancement gets a figure of its own. Three further rows are calculated from the rows above them. What is left is five values from the literature and one normalisation anchor, so the twelve rows rest on six numbers.",
         },
       ],
     },
@@ -1784,8 +1784,9 @@ const model: Page = {
       navLabel: "Sensitivity analysis",
       heading: "Which parameters move the answer",
       body: [
-        "We ran the model through both **local** and **global** sensitivity analysis, to rank its components by how much each contributes to the output. Local analysis asks what happens near the settings we are using; global analysis asks what happens across the whole range the parameters could take. They answer different questions, and a parameter that both call uninfluential is one we can remove.",
+        "We ran the model through both **local** and **global** sensitivity analysis, to rank its components by how much each contributes to the output. Local analysis asks what happens near one set of settings; global analysis asks what happens across the whole range the parameters could take. They answer different questions, and a parameter that both call uninfluential is one we can remove.",
         "The local pass moves each parameter by ten percent either way, one at a time, and re-simulates the whole model over 120 hours.",
+        "It was run on the **un-bundled ternary version** described above, in nM and hours, at that script's own preset nominals rather than the calibrated values in the table. So what we take from it is the **ranking and the signs**, not the levels: which rates matter, and which way each one pushes.",
       ],
     },
     {
@@ -1794,7 +1795,7 @@ const model: Page = {
       navLabel: "Local sensitivity",
       heading: "What actually controls ciliary SMO",
       intro:
-        "Every parameter in the model, ranked by how far a ten percent change moves ciliary SMO. A bar of 1.3 means SMO moves about 1.3 percent for every one percent change in that parameter.",
+        "Every parameter in the ternary version, ranked by how far a ten percent change moves ciliary SMO. A bar of 1.3 means SMO moves about 1.3 percent for every one percent change in that parameter. Several of these rows are parameters the bundled model folds away, which is why they are not all in the table above.",
       rows: [
         { label: "SMO made in the cytoplasm", note: "k form, SMO-cyt", value: 1.3 },
         { label: "MMM complex made", note: "k form, MMM", value: -1.28 },
@@ -1826,7 +1827,7 @@ const model: Page = {
       kind: "prose",
       id: "local-findings",
       body: [
-        "Ciliary SMO is controlled in equal parts by supply and by how much active complex there is. SMO synthesis raises it most strongly (1.30), and its ten percent swing is about 0.81 nM, roughly a quarter of the baseline. The complex pulls the other way: **the tagging rate and complex synthesis have identical sensitivities (-1.28), because both enter only through the same product**, and complex degradation has the opposite sign (+1.26). In this run ciliary SMO settles at about 3.1 nM, with 17.9 nM in the cytoplasm and 24.9 nM of free complex.",
+        "Ciliary SMO is controlled in equal parts by supply and by how much active complex there is. SMO synthesis raises it most strongly (1.30), and its ten percent swing is about 0.81 nM, roughly a quarter of the baseline. The complex pulls the other way: **the tagging rate and complex synthesis have identical sensitivities (-1.28), because both enter only through the same product**, and complex degradation has the opposite sign (+1.26). That run's own baseline is 3.1 nM of ciliary SMO, with 17.9 nM in the cytoplasm and 24.9 nM of free complex, which is what the swings here are measured against rather than the 1 nM anchor in the table above.",
         "A second tier holds the ternary terms: the enhancement alpha (-0.87), the linker's grip on SMO (+0.51) and on the complex (+0.31). Stronger cooperativity means more tagging and less ciliary SMO, while weaker binding to either partner does the reverse. Trafficking and PTCH1 come next and are already weak, at about 0.28 and below.",
         "What is at the bottom is as useful as what is at the top. The on and off rates of both the binder and the linker barely move the readout at all, which says the device's behaviour is set by how much is dosed and how well the ternary complex works, not by how quickly the parts find each other.",
       ],
@@ -1860,9 +1861,9 @@ const model: Page = {
         {
           kind: "table",
           id: "normalised-sensitivities",
-          heading: "The same analysis, for every quantity the model tracks",
+          heading: "The same analysis, for every quantity that version tracks",
           intro:
-            "Normalised sensitivity at 120 hours: the percent change in that quantity per percent change in that rate. One row per rate, one column per quantity. The five rates left out never reach 0.1 against anything.",
+            "Normalised sensitivity at 120 hours: the percent change in that quantity per percent change in that rate. One row per rate, one column per quantity, for the same un-bundled version as the chart above, which is why cytoplasmic SMO has a column here. The five rates left out never reach 0.1 against anything.",
           columns: NORMSENS_TABLE.columns,
           rows: NORMSENS_TABLE.rows,
           heat: true,
