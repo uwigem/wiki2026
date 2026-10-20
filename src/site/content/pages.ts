@@ -17,6 +17,10 @@ import type { FunnelStage } from "../components/FunnelChart";
 import type { Pillar } from "../components/ProgrammePillars";
 import type { Stakeholder } from "../components/StakeholderGarden";
 import type { TornadoRow } from "../components/TornadoChart";
+import type { ChartReference, LinePanel } from "../components/LineChart";
+import type { ScatterGroup, ScatterPanel } from "../components/ScatterChart";
+import type { IntervalRow, IntervalSeries } from "../components/IntervalBars";
+import type { DiagramEdge, DiagramNode } from "../components/NodeDiagram";
 import type { ToolEntry } from "../components/ToolShed";
 import type { Reference } from "../components/References";
 import type { Stage } from "../components/StageRail";
@@ -173,6 +177,75 @@ export type Block = Anchored &
         footnote?: string;
         source?: string;
       }
+    /** Lines against a shared axis: a dose sweep, a time course, a sensitivity over time. */
+    | {
+        kind: "line";
+        heading?: string;
+        intro?: string;
+        panels: LinePanel[];
+        xLabel: string;
+        yLabel: string;
+        xLog?: boolean;
+        yLog?: boolean;
+        xMin?: number;
+        xMax?: number;
+        yMin?: number;
+        yMax?: number;
+        references?: ChartReference[];
+        legendTitle?: string;
+        footnote?: string;
+        source?: string;
+      }
+    /** Points against two measured quantities, with an optional fitted line. */
+    | {
+        kind: "scatter";
+        heading?: string;
+        intro?: string;
+        panels: ScatterPanel[];
+        groups?: ScatterGroup[];
+        xLabel: string;
+        yLabel: string;
+        xLog?: boolean;
+        yLog?: boolean;
+        xMin?: number;
+        xMax?: number;
+        yMin?: number;
+        yMax?: number;
+        trend?: "ols" | "origin";
+        references?: ChartReference[];
+        diagonal?: boolean;
+        sharedAxes?: boolean;
+        footnote?: string;
+        source?: string;
+      }
+    /** Bars with an uncertainty whisker on each: sensitivity indices and their intervals. */
+    | {
+        kind: "bars";
+        heading?: string;
+        intro?: string;
+        series: IntervalSeries[];
+        rows: IntervalRow[];
+        axisLabel: string;
+        min?: number;
+        max?: number;
+        digits?: number;
+        footnote?: string;
+        source?: string;
+      }
+    /** A wiring diagram: named species in boxes, reactions as arrows. */
+    | {
+        kind: "graph";
+        heading?: string;
+        intro?: string;
+        nodes: DiagramNode[];
+        edges: DiagramEdge[];
+        width: number;
+        height: number;
+        narrow?: { width: number; height: number };
+        alt: string;
+        caption?: string;
+        source?: string;
+      }
     /** How many candidates survive each filter. */
     | {
         kind: "funnel";
@@ -224,6 +297,8 @@ export type Block = Anchored &
         intro?: string;
         columns: string[];
         rows: string[][];
+        /** Shade every number after the first column by its size and sign. */
+        heat?: boolean;
         caption?: string;
         source?: string;
       }
@@ -285,6 +360,8 @@ export type Block = Anchored &
       }
     /** A protein structure, drawn from coordinates. */
     | { kind: "structure"; structure: Structure }
+    /** Several structures in one viewer, with a button per structure. */
+    | { kind: "structures"; structures: Structure[]; label: string }
     /** The animated project mark, with a line saying what it is getting at. */
     | { kind: "logo"; caption: string }
     /**

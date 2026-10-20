@@ -23,7 +23,7 @@
  */
 
 export interface Structure {
-  /** PDB identifier, shown as a credit in the viewer. */
+  /** PDB identifier, shown as a credit in the viewer, or our own name for a design. */
   id: string
   name: string
   caption: string
@@ -32,8 +32,19 @@ export interface Structure {
   /** One letter per residue, aligned to `ca`. H helix, E strand, C coil. */
   ss: string
   /** Heavy atoms of the bound ligand, "x y z" per atom. */
-  ligand: string
-  ligandName: string
+  ligand?: string
+  ligandName?: string
+  /**
+   * A second chain bound to the first, drawn in one colour so it reads as a
+   * separate thing: one of our binders on its target. Same packed format as
+   * `ca`, in the same frame.
+   */
+  partner?: { name: string; ca: string }
+  /**
+   * Replaces the "published structure" credit, for a structure that is not a
+   * deposited one (a design model). Takes inline formatting.
+   */
+  credit?: string
 }
 
 export const SMO_5L7D: Structure = {
@@ -161,6 +172,8 @@ export interface ParsedStructure {
   resnum: Int16Array
   ss: string
   ligand: Float32Array
+  /** The second chain's alpha carbons, empty when there is none. */
+  partner: Float32Array
   /** Largest distance of any atom from the centre, for depth shading. */
   radius: number
   /**
@@ -184,14 +197,20 @@ export function parseStructure(s: Structure): ParsedStructure {
     xyz[i * 3 + 1] = Number(p[2])
     xyz[i * 3 + 2] = Number(p[3])
   })
-  const lig = s.ligand.split(';')
-  const ligand = new Float32Array(lig.length * 3)
-  lig.forEach((row, i) => {
-    const p = row.split(' ')
-    ligand[i * 3] = Number(p[0])
-    ligand[i * 3 + 1] = Number(p[1])
-    ligand[i * 3 + 2] = Number(p[2])
-  })
+  /** "x y z" rows, or "resnum x y z" rows when `numbered`, into a flat array. */
+  const points = (packed: string | undefined, numbered: boolean) => {
+    const list = packed ? packed.split(';') : []
+    const out = new Float32Array(list.length * 3)
+    list.forEach((row, i) => {
+      const p = row.split(' ').slice(numbered ? 1 : 0)
+      out[i * 3] = Number(p[0])
+      out[i * 3 + 1] = Number(p[1])
+      out[i * 3 + 2] = Number(p[2])
+    })
+    return out
+  }
+  const ligand = points(s.ligand, false)
+  const partner = points(s.partner?.ca, true)
   // Skip non-finite values and say so. One bad coordinate would otherwise
   // poison `radius` through Math.max, scale every atom to NaN, and leave the
   // viewer showing an empty box with no error anywhere.
@@ -199,15 +218,17 @@ export function parseStructure(s: Structure): ParsedStructure {
   let spanAcross = 1
   let spanUp = 1
   let broken = 0
-  for (let i = 0; i < xyz.length; i += 3) {
-    const r = Math.hypot(xyz[i], xyz[i + 1], xyz[i + 2])
-    if (Number.isFinite(r)) {
-      radius = Math.max(radius, r)
-      // The view spins about the vertical axis, so x and z trade places as it
-      // turns. The across-extent has to cover the worst case of both.
-      spanAcross = Math.max(spanAcross, Math.hypot(xyz[i], xyz[i + 2]))
-      spanUp = Math.max(spanUp, Math.abs(xyz[i + 1]))
-    } else broken++
+  for (const arr of [xyz, partner]) {
+    for (let i = 0; i < arr.length; i += 3) {
+      const r = Math.hypot(arr[i], arr[i + 1], arr[i + 2])
+      if (Number.isFinite(r)) {
+        radius = Math.max(radius, r)
+        // The view spins about the vertical axis, so x and z trade places as it
+        // turns. The across-extent has to cover the worst case of both.
+        spanAcross = Math.max(spanAcross, Math.hypot(arr[i], arr[i + 2]))
+        spanUp = Math.max(spanUp, Math.abs(arr[i + 1]))
+      } else broken++
+    }
   }
   if (broken > 0) {
     console.error(
@@ -216,5 +237,5 @@ export function parseStructure(s: Structure): ParsedStructure {
         'breaks on spaces will corrupt them.',
     )
   }
-  return { xyz, resnum, ss: s.ss, ligand, radius, spanAcross, spanUp }
+  return { xyz, resnum, ss: s.ss, ligand, partner, radius, spanAcross, spanUp }
 }

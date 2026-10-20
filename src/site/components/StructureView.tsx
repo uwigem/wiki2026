@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { parseStructure, type Structure } from '../content/structures'
 import { useReducedMotion } from '../hooks'
 import { SITE_PALETTE } from '../theme'
+import { inline } from './RichText'
 
 /**
  * A protein structure, drawn as pixel art.
@@ -32,6 +33,8 @@ interface Props {
   structure: Structure
   /** Height of the drawn area in CSS pixels. Width follows the aspect ratio. */
   height?: number
+  /** Controls drawn above the caption, for example buttons that switch structure. */
+  picker?: ReactNode
 }
 
 type Rgb = [number, number, number]
@@ -50,7 +53,7 @@ function spline(p0: number, p1: number, p2: number, p3: number, t: number): numb
   )
 }
 
-export default function StructureView({ structure, height = 320 }: Props) {
+export default function StructureView({ structure, height = 320, picker }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const reduced = useReducedMotion()
   const [spinning, setSpinning] = useState(true)
@@ -75,28 +78,33 @@ export default function StructureView({ structure, height = 320 }: Props) {
     // Narrowing does not survive into the draw closures below, which run later.
     const ctx = maybeCtx
 
-    const { xyz, ss, ligand, radius, spanAcross, spanUp } = parseStructure(structure)
-    const n = xyz.length / 3
+    const { xyz, ss, ligand, partner, radius, spanAcross, spanUp } = parseStructure(structure)
+    const chainLen = (a: Float32Array) => Math.max(0, a.length / 3 - 1) * SUB
 
-    // Backbone samples, each with a colour index: 0 coil, 1 helix, 2 strand.
-    const count = (n - 1) * SUB
+    // Backbone samples, each with a colour index: 0 coil, 1 helix, 2 strand,
+    // 4 the second chain. Each chain is its own tube, so the two never join.
+    const count = chainLen(xyz) + chainLen(partner)
     const px = new Float32Array(count)
     const py = new Float32Array(count)
     const pz = new Float32Array(count)
     const kind = new Uint8Array(count)
-    const at = (i: number, c: number) => xyz[Math.min(n - 1, Math.max(0, i)) * 3 + c]
     let w = 0
-    for (let i = 0; i < n - 1; i++) {
-      const code = ss[i]
-      for (let s = 0; s < SUB; s++) {
-        const t = s / SUB
-        px[w] = spline(at(i - 1, 0), at(i, 0), at(i + 1, 0), at(i + 2, 0), t)
-        py[w] = spline(at(i - 1, 1), at(i, 1), at(i + 1, 1), at(i + 2, 1), t)
-        pz[w] = spline(at(i - 1, 2), at(i, 2), at(i + 1, 2), at(i + 2, 2), t)
-        kind[w] = code === 'H' ? 1 : code === 'E' ? 2 : 0
-        w++
+    const addChain = (pts: Float32Array, colourOf: (i: number) => number) => {
+      const n = pts.length / 3
+      const at = (i: number, c: number) => pts[Math.min(n - 1, Math.max(0, i)) * 3 + c]
+      for (let i = 0; i < n - 1; i++) {
+        for (let s = 0; s < SUB; s++) {
+          const t = s / SUB
+          px[w] = spline(at(i - 1, 0), at(i, 0), at(i + 1, 0), at(i + 2, 0), t)
+          py[w] = spline(at(i - 1, 1), at(i, 1), at(i + 1, 1), at(i + 2, 1), t)
+          pz[w] = spline(at(i - 1, 2), at(i, 2), at(i + 1, 2), at(i + 2, 2), t)
+          kind[w] = colourOf(i)
+          w++
+        }
       }
     }
+    addChain(xyz, (i) => (ss[i] === 'H' ? 1 : ss[i] === 'E' ? 2 : 0))
+    addChain(partner, () => 4)
 
     const coil = toRgb(SITE_PALETTE.stoneMid)
     const helix = toRgb(SITE_PALETTE.lilacPetal)
@@ -106,7 +114,8 @@ export default function StructureView({ structure, height = 320 }: Props) {
     // green cast turns the lilac helices muddy where they fall away.
     const deep = toRgb(SITE_PALETTE.eye)
     const bg = toRgb(SITE_PALETTE.bushHi)
-    const palette: Rgb[] = [coil, helix, strand, lig]
+    const binder = toRgb(SITE_PALETTE.pinkBud)
+    const palette: Rgb[] = [coil, helix, strand, lig, binder]
 
     const img = ctx.createImageData(BUF_W, BUF_H)
     const depth = new Float32Array(BUF_W * BUF_H)
@@ -317,7 +326,7 @@ export default function StructureView({ structure, height = 320 }: Props) {
         <canvas
           ref={canvasRef}
           role="img"
-          aria-label={`Three dimensional structure of ${structure.name}, PDB ${structure.id}. ${structure.caption}`}
+          aria-label={`Three dimensional structure of ${structure.name}${structure.credit ? '' : `, PDB ${structure.id}`}. ${structure.caption}`}
           tabIndex={0}
           onMouseDown={(e) => {
             e.preventDefault()
@@ -357,14 +366,18 @@ export default function StructureView({ structure, height = 320 }: Props) {
         />
 
         <div className="min-w-0 flex-1">
-          <h3 className="text-lg">{structure.name}</h3>
-          <p className="mt-1 text-body-sm leading-relaxed">{structure.caption}</p>
+          {picker}
+          <h3 className={'text-lg' + (picker ? ' mt-3' : '')}>{structure.name}</h3>
+          <p className="mt-1 text-body-sm leading-relaxed">{inline(structure.caption)}</p>
 
           <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-note">
             <Key colour={SITE_PALETTE.lilacPetal} label="helix" />
             <Key colour={SITE_PALETTE.sparkle} label="strand" />
             <Key colour={SITE_PALETTE.stoneMid} label="loop" />
-            <Key colour={SITE_PALETTE.daisyCore} label={structure.ligandName} />
+            {structure.ligand && structure.ligandName && (
+              <Key colour={SITE_PALETTE.daisyCore} label={structure.ligandName} />
+            )}
+            {structure.partner && <Key colour={SITE_PALETTE.pinkBud} label={structure.partner.name} />}
           </ul>
 
           <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -381,16 +394,22 @@ export default function StructureView({ structure, height = 320 }: Props) {
           </p>
 
           <p className="mt-3 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">
-            Published structure{' '}
-            <a
-              className="underline"
-              href={`https://www.rcsb.org/structure/${structure.id}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              PDB {structure.id}
-            </a>
-            , drawn as an alpha-carbon trace. Not one of our own designs.
+            {structure.credit ? (
+              inline(structure.credit)
+            ) : (
+              <>
+                Published structure{' '}
+                <a
+                  className="underline"
+                  href={`https://www.rcsb.org/structure/${structure.id}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  PDB {structure.id}
+                </a>
+                , drawn as an alpha-carbon trace. Not one of our own designs.
+              </>
+            )}
           </p>
         </div>
       </div>
