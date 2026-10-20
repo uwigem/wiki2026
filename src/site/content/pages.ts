@@ -2178,7 +2178,7 @@ const model: Page = {
           kind: "prose",
           body: [
             "The same two methods used on the tuner model, run on each candidate. The bars below are the subteam's own output. We have not redrawn them here because the underlying values have not been recovered from the run, so what we take from them is the **ordering**, not the heights.",
-            "For the linear model the ciliary degradation rate leads under Morris, with the cytoplasm-to-membrane rate just behind, and Sobol puts those two first in the other order. For the Michaelis-Menten model the embedding rate leads under both methods. In the linear model the rates governing PTCH1's own exchange come last; in the other, compartment diffusion and cholesterol exchange fall below them.",
+            "For the linear model the ciliary degradation rate leads under Morris, with the cytoplasm-to-membrane rate just behind, and Sobol puts those two first in the other order. For the Michaelis-Menten model the embedding rate leads under both methods. The PTCH1 exchange rate stays in the bottom group of every one of the four rankings.",
           ],
         },
         {
@@ -2204,7 +2204,7 @@ const model: Page = {
           id: "gpcr-mm-morris",
           src: "model/gpcr-mm-morris.webp",
           alt: "A bar chart titled Michaelis-Menten Model Morris Significances, each bar with an error bar. The bars fall from left to right in this order: the embedding forward rate, the SMO exchange rate, the cytoplasm to membrane rate, the ciliary degradation rate, then V max and K m, then the PTCH1 exchange rate and compartment diffusion, with cholesterol exchange at zero.",
-          caption: "Morris screening of the Michaelis-Menten model. Read the order, not the scale: these significances are millions of times smaller than the linear model's, and the quantity each run scored is not recorded, so the two cannot be put side by side.",
+          caption: "Morris screening of the Michaelis-Menten model. The vertical scale here is far below the linear model's, so the two charts cannot be compared by bar height: read the ordering. The output barely moves in this model, which fits the near-zero activated SMO above.",
           ratio: "square",
           source: "Produced by the modelling subteam.",
         },
