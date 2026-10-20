@@ -3,8 +3,9 @@
 **You do not need to install anything.** You can change any words on the wiki
 from your browser, on github.com, in about five minutes.
 
-**See the site as it is right now:** <https://uwigem.github.io/wiki2026/>. It
-updates by itself a minute or two after any change is merged.
+**The wiki:** <https://2026.igem.wiki/washington/>. It is uploaded by the Web
+Dev team, so a merged change appears there at the next upload rather than
+straight away.
 
 This page is for changing text: fixing a sentence, adding a paragraph, writing
 your bio, filling in your subteam's section. If you want to add a whole new page
@@ -60,9 +61,8 @@ Everything else is the machinery that draws the site. You do not need it.
      nothing is damaged. The pull request cannot be merged until it is fixed,
      so a mistake cannot reach the live site by accident.
 
-Your change goes onto the live site when someone reviews and merges it. Give
-it a minute or two after the merge, then reload
-<https://uwigem.github.io/wiki2026/> to see it.
+Your change is accepted when someone reviews and merges it. It reaches
+<https://2026.igem.wiki/washington/> at the next upload, which Web Dev does.
 
 ## The three rules
 

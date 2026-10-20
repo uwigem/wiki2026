@@ -32,17 +32,11 @@ hedgehog and the site is a garden being tended.
 
 ## See it live
 
-**<https://uwigem.github.io/wiki2026/>** always shows what is on `main`.
+**<https://2026.igem.wiki/washington/>** is the wiki.
 
-It updates by itself. Every merge to `main` rebuilds the site and publishes it,
-usually within a minute or two, and a check every 10 minutes republishes if a
-deploy was ever missed. Nobody has to remember to do anything. The workflow is
-`.github/workflows/deploy.yml`; the Actions tab shows each publish, and its
-"Run workflow" button publishes on demand.
-
-This is the team's working preview, not the competition wiki. It is hidden from
-search engines, so a search for the project finds igem.wiki rather than this.
-The official wiki is uploaded separately, see
+That is the only published copy. To see a change before it is uploaded, run the
+site on your own machine with `npm run dev`, or build it and serve `dist/`.
+Uploading to igem.wiki is a deliberate step, see
 [Deploying to igem.wiki](#deploying-to-igemwiki).
 
 This repository is public. Everything in it, including its history, can be read
@@ -130,8 +124,8 @@ scripts/             the house-rule checker
 ```
 
 Every pull request runs `npm run check` and `npm run build`, and fails if it
-touches a frozen engine file. Every merge to `main` publishes the live preview.
-`.github/CODEOWNERS` requests a review from Web Dev on every pull request.
+touches a frozen engine file. `.github/CODEOWNERS` requests a review from Web
+Dev on every pull request.
 
 **`main` is protected**, and the rules apply to admins too:
 
@@ -215,8 +209,8 @@ on anyone remembering to type it.
 
 ## Deploying to igem.wiki
 
-The live preview above publishes itself. The competition wiki does not: it is a
-separate, deliberate step, done when the team is ready.
+Nothing publishes itself. The wiki is uploaded by hand: a separate, deliberate
+step, done when the team is ready.
 
 `npm run build` writes `dist/`. Upload its contents to the team's wiki space, so
 that `dist/index.html` is served at `https://2026.igem.wiki/washington/`.
@@ -225,9 +219,9 @@ Two things make that work, and both are easy to undo by accident:
 
 - **The base path.** iGEM serves the wiki from `/washington/`, and a build
   defaults to that base (`base` in `vite.config.ts`), so asset URLs and links
-  are absolute from it. The live preview builds with `BASE_PATH=/wiki2026/`
-  (see `.github/workflows/deploy.yml`). Building with the wrong base gives a
-  blank page with no obvious cause.
+  are absolute from it. `BASE_PATH` overrides that base if a build ever needs a
+  different one. Building with the wrong base gives a blank page with no
+  obvious cause.
 - **Real paths with iGEM's names.** Judges' ballots link to fixed Standard
   Page URLs such as `https://2026.igem.wiki/washington/model`, so those page
   names (`STANDARD_PAGES` in `src/site/content/nav.ts`) must never change. The

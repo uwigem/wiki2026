@@ -5,8 +5,7 @@ import { OLD_PATHS } from './content/nav'
  * A small path router.
  *
  * Pages live at real paths under the site's base: on iGEM that is
- * https://2026.igem.wiki/washington/model, on the preview
- * https://uwigem.github.io/wiki2026/model, and in `npm run dev` just /model.
+ * https://2026.igem.wiki/washington/model, and in `npm run dev` just /model.
  * The base comes from Vite (`base` in vite.config.ts). Judges reach the award
  * pages from fixed links on their ballot, which is why these are real paths and
  * not `#/` routes.
@@ -15,7 +14,7 @@ import { OLD_PATHS } from './content/nav'
  * dependency.
  */
 
-/** The site's base path with no trailing slash: `''`, `/washington` or `/wiki2026`. */
+/** The site's base path with no trailing slash: `''` or `/washington`. */
 const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '')
 
 /*

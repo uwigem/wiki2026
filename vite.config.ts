@@ -42,8 +42,8 @@ function pagePerRoute(): Plugin {
 
 export default defineConfig(({ command }) => ({
   // Pages live at real paths under this base, and asset URLs are absolute from
-  // it. A build defaults to iGEM's https://2026.igem.wiki/washington/; the
-  // preview workflow sets BASE_PATH=/wiki2026/ for GitHub Pages; `npm run dev`
+  // it. A build defaults to iGEM's https://2026.igem.wiki/washington/, which
+  // BASE_PATH overrides if a build ever needs a different base; `npm run dev`
   // serves from the root.
   base: process.env.BASE_PATH ?? (command === 'build' ? '/washington/' : '/'),
   plugins: [react(), tailwindcss(), pagePerRoute()],
