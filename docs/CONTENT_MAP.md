@@ -166,15 +166,6 @@ with the construct decisions, which is real but is not a cycle.
 cycle 3 is currently the strongest thing on the wiki because it describes
 something that went wrong.
 
-### What Grew (`/experiments`)
-
-**Now:** the four planned experiments, what we test in, and an honest note that
-there is no SPR access.
-
-**Still needed:** everything. This page is a frame waiting for data. Write the
-interpretation against what the Model and the design pipeline predicted, so a
-reader can see which predictions held.
-
 ### The Model (`/model`), a medal page
 
 **Now:** five sections. The tuner model (what it is for, the two rate laws, why the
@@ -241,6 +232,15 @@ placeholders in the draft and so carry no numbers here: the video series has no
 reach figure, the speaker series has no speaker names or poll results, and the
 Scientists You Might Not Know profiles name no scientists. Fill those in the
 draft first.
+
+### What Grew (`/experiments`)
+
+**Now:** the four planned experiments, what we test in, and an honest note that
+there is no SPR access.
+
+**Still needed:** everything. This page is a frame waiting for data. Write the
+interpretation against what the Model and the design pipeline predicted, so a
+reader can see which predictions held.
 
 ### Notebook (`/notebook`)
 
