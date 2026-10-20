@@ -111,7 +111,7 @@ is merged, or take the block out and list the figure under "Still needed" here.
 
 **Now:** the live garden hero; the interactive cilium, where Block and Recruit
 move the receptor count; a panel on why existing tools cannot do this; the
-hedgehog explaining the MMM trick; six story stops; team and playground cards.
+hedgehog explaining the MMM trick; six story stops; team cards.
 
 **Still needed:** nothing blocking. Once Creative delivers the project name and
 logo, change `PROJECT_TITLE` in `content/site.ts` and it updates everywhere.

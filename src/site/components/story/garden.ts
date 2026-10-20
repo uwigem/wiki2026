@@ -24,13 +24,13 @@ import { SITE_PALETTE } from '../../theme'
 import { mix, toRgb, type Painter, type Rgb } from './painter'
 
 /**
- * The landing-page garden: a pond garden built only from the playground's
+ * The landing-page garden: a pond garden built only from the overworld's
  * own pieces. Its plants, bushes, rocks, pond and flowers; its three grass
  * tones, dithered only along patch edges; its soft shadows baked into the
  * ground.
  *
  * The big things (the hedgehog, the pond, the tree, the bush) are placed by
- * hand. The flowers are scattered the way the playground scatters them: a
+ * hand. The flowers are scattered the way the overworld scatters them: a
  * seeded random walk over the meadow, thicker in some places and bare in
  * others, kinds mixed, with neighbours often matching so they mingle in
  * loose groups. The seed is fixed, so it is the same garden on every visit.
@@ -56,7 +56,7 @@ const legend = (ch: string) => {
 const clamp01 = (v: number) => Math.max(0, Math.min(1, v))
 const smooth = (v: number) => v * v * (3 - 2 * v)
 
-/** Sprites are drawn at twice native size, like the playground's. */
+/** Sprites are drawn at twice native size, like the overworld's. */
 const GS = 2
 /** Lower on a phone, so the title and the button above stay clear of the garden. */
 export const groundTop = (W: number, H: number) => Math.round(H * (W < 300 ? 0.74 : 0.66))
@@ -110,7 +110,7 @@ const SPRITE: Record<Exclude<Kind, 'hog' | 'plant'>, Sprite> = {
   big: BIG_FLOWER,
 }
 
-/** Shadow half-sizes in sprite cells, as the playground bakes them. */
+/** Shadow half-sizes in sprite cells, as the overworld bakes them. */
 const SHADOW: Partial<Record<Kind, [number, number]>> = {
   hog: [8, 2.5],
   plant: [8, 2.5],
@@ -153,7 +153,7 @@ const AT_POND: [Kind, number, number, boolean][] = [
 ]
 /** Where the healthy pot plant stands in the closing garden. */
 const PLANT_AT = [0.91, 0.42]
-/** The playground's mix of small flowers. */
+/** The overworld's mix of small flowers. */
 const FLOWERS: [Flower, number][] = [
   ['lilac', 0.3],
   ['white', 0.22],
@@ -204,7 +204,7 @@ function build(W: number, H: number, bloom: boolean): Built {
   const wide = W >= 300
   const at = (d: number) => Math.round(gy + d * DEPTH)
 
-  // Where a screen pixel lies on the ground, in playground cells: across, and
+  // Where a screen pixel lies on the ground, in overworld cells: across, and
   // away from you. Near the front one cell is two pixels; at the horizon one
   // row of pixels spans many cells.
   const R0 = 6
@@ -264,7 +264,7 @@ function build(W: number, H: number, bloom: boolean): Built {
           nearest = f
         }
       }
-      // Big star flowers stay single and far apart, as in the playground.
+      // Big star flowers stay single and far apart, as in the overworld.
       if (nearest && nearest.k !== 'big' && rand() < 0.32) k = nearest.k
       if (k === 'big' && flowers.some((f) => f.k === 'big' && Math.abs(f.x - x) < 80)) k = pick()
       const half = (SPRITE[k].w * GS) / 2
@@ -287,7 +287,7 @@ function build(W: number, H: number, bloom: boolean): Built {
   }
   const placed = [...fixed, ...flowers].sort((a, b) => a.base - b.base)
 
-  // The ground: the playground's recipe, big flat patches dithered only at
+  // The ground: the overworld's recipe, big flat patches dithered only at
   // their edges. Far away it settles to one green with no dither at all, and
   // a pale hill rolls along behind.
   const edge = (x: number) => gy + Math.round((valueNoise(x * 0.02 + 1.7, 3.3) - 0.5) * 4)

@@ -154,19 +154,6 @@ export default function Home({ at, stage, playing, onSkip }: Props) {
               </Link>
             </div>
           </Reveal>
-
-          <Reveal delay={0.06}>
-            <div className="panel flex h-full flex-col px-5 py-6">
-              <h3 className="text-xl sm:text-2xl">The playground</h3>
-              <p className="mt-2 text-body-sm leading-relaxed">
-                Take the controls. Walk the whole meadow yourself, switch the light from day to dusk to night, and turn
-                on the ambient soundscape.
-              </p>
-              <Link to="/playground" className="pixel-btn pixel-btn-primary mt-auto self-start">
-                Open the Playground &rarr;
-              </Link>
-            </div>
-          </Reveal>
         </div>
 
       </GardenSection>

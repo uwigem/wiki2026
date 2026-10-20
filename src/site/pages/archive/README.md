@@ -13,6 +13,10 @@ fall through to the "This bed is empty" page.
 
 The homepage that won is `../Home3.tsx`, at `/`.
 
+`Home.tsx` used to carry a third card opening the playground. The playground
+came off the wiki on 20 October 2026 and the card went with it, so restoring
+this page restores two cards rather than three.
+
 ## If you want one of these back
 
 Import it in `src/App.tsx` and give it a route in `RouteView`. `Home.tsx` also

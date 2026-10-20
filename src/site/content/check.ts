@@ -23,7 +23,7 @@ function flatten(blocks: Block[]): Block[] {
  */
 
 /** Routes that are real pages but are not built from `pages.ts`. */
-const HAND_WRITTEN_ROUTES = new Set(['/', '/team', '/notebook', '/playground', '/alchemy'])
+const HAND_WRITTEN_ROUTES = new Set(['/', '/team', '/notebook', '/alchemy'])
 
 /** `[label](/some/page#section)` inside any string of a page's content. */
 const LINK = /\]\((\/[^)\s]*)\)/g

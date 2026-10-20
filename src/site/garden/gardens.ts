@@ -42,10 +42,10 @@ export function variantFor(path: string): Variant {
 }
 
 /**
- * The pages that have a garden: all of them except the homepage, which
- * paints its own background, and the full-screen playground.
+ * The pages that have a garden: all of them except the homepage, which paints
+ * its own background.
  */
-export const GARDEN_ROUTES: string[] = ALL_ROUTES.map((r) => r.to).filter((to) => to !== '/' && to !== '/playground')
+export const GARDEN_ROUTES: string[] = ALL_ROUTES.map((r) => r.to).filter((to) => to !== '/')
 
 /** `/human-practices` becomes `human-practices`. */
 export function gardenName(path: string): string {

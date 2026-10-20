@@ -34,7 +34,6 @@ export interface Cta {
 export const HOME_CTAS: Cta[] = [
   { label: 'Explore Project', to: '/description', primary: true },
   { label: 'Meet the Team', to: '/team' },
-  { label: 'Playground', to: '/playground' },
 ]
 
 export const FOOTER_LINKS = [

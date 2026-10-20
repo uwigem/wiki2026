@@ -215,11 +215,6 @@
   a {
     color: inherit;
   }
-
-  /* The playground is the full-screen toy: lock the page behind it. */
-  body.playground-open {
-    overflow: hidden;
-  }
 }
 
 @layer components {
@@ -818,7 +813,7 @@
     color: var(--ink);
   }
 
-  /* The playground's sparkle slider. Its own look, kept as authored. */
+  /* The pixel slider: the model page's dose dial and the story's watering can. */
   .pond-range {
     -webkit-appearance: none;
     appearance: none;

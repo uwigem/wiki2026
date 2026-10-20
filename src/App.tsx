@@ -12,7 +12,6 @@ import TopNav from './site/components/TopNav'
 import AlchemyPage from './site/pages/AlchemyPage'
 import Home3 from './site/pages/Home3'
 import NotebookPage from './site/pages/NotebookPage'
-import PlaygroundPage from './site/pages/PlaygroundPage'
 import TeamPage from './site/pages/TeamPage'
 import WikiPage from './site/pages/WikiPage'
 
@@ -23,10 +22,6 @@ import WikiPage from './site/pages/WikiPage'
  * the engine's world is built a single time and the hedgehog keeps walking
  * continuously as you move between pages rather than respawning on every
  * navigation.
- *
- * The playground route is the full-screen toy and owns the whole viewport, so
- * the shell gets out of its way: nav, footer and background all step aside.
- * Two gardens would mean two requestAnimationFrame loops.
  */
 /** Whether the page at `path` is laid out with a section list (three or more declared sections). */
 function hasSectionList(path: string): boolean {
@@ -36,7 +31,6 @@ function hasSectionList(path: string): boolean {
 
 export default function App() {
   const path = useRoute()
-  const isPlayground = path === '/playground'
   // The homepage paints its own flat background: no garden in the margins and
   // no hedgehog walking down beside the text.
   const isHome = path === '/'
@@ -71,8 +65,6 @@ export default function App() {
     if (lastPath.current !== null && lastPath.current !== path) setAnnounced(titleFor(path))
     lastPath.current = path
   }, [path])
-
-  if (isPlayground) return <PlaygroundPage />
 
   return (
     // Relative, so the background below can span the whole document.
@@ -110,7 +102,7 @@ export default function App() {
         </main>
 
         {/* Every page ends with a way on to the next part of the site. The
-            homepage has its own ending, and the playground never gets here. */}
+            homepage has its own ending. */}
         {!isHome && <ExploreCards path={path} />}
 
         <FooterGarden />
@@ -134,7 +126,6 @@ function titleFor(path: string): string {
 /** Routes whose copy lives in a component rather than in `content/pages.ts`. */
 const SPECIAL_TITLES: Record<string, string> = {
   '/team': 'Team',
-  '/playground': 'Playground',
   '/notebook': 'Notebook',
   '/alchemy': 'iGEM Alchemy',
 }
