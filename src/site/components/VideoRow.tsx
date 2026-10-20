@@ -1,15 +1,13 @@
-import { useState } from 'react'
 import { inline } from './RichText'
 
 /**
- * Short videos, each shown as its still with a play button until the reader
- * clicks it; only then is YouTube's player loaded, into that one frame.
+ * Short videos, listed as links rather than embedded.
  *
- * A YouTube player is several hundred kilobytes of script and a dozen
- * requests before anyone has pressed play. A page with two of them would
- * spend more on players nobody started than on everything else put together,
- * so the stills come from YouTube's image host (a few kilobytes each) and
- * the player is fetched only on demand, through the no-cookie domain.
+ * iGEM only allows an iframe to embed something already hosted on iGEM
+ * infrastructure, and everything a wiki loads at runtime has to come from an
+ * iGEM domain. A YouTube player, and even YouTube's still image, are neither.
+ * Linking out is explicitly fine, so each video is a card that opens in a new
+ * tab, which also costs the page nothing until somebody wants it.
  */
 export interface VideoItem {
   /** The YouTube video id, the part after `v=`. */
@@ -20,46 +18,24 @@ export interface VideoItem {
 }
 
 function Video({ video, index }: { video: VideoItem; index: number }) {
-  const [playing, setPlaying] = useState(false)
   return (
     <figure className="panel-flat flex min-w-0 flex-col gap-2 p-3">
       <p className="kicker flex items-center gap-2">
         Episode
         <span className="badge">{String(index + 1).padStart(2, '0')}</span>
       </p>
-      <div className="relative aspect-video overflow-hidden rounded-sm border-[3px] border-leaf-700 bg-leaf-950">
-        {playing ? (
-          <iframe
-            className="absolute inset-0 h-full w-full"
-            src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0`}
-            title={video.title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          />
-        ) : (
-          <button
-            type="button"
-            onClick={() => setPlaying(true)}
-            className="group absolute inset-0 flex h-full w-full items-center justify-center"
-            aria-label={`Play: ${video.title}`}
-          >
-            <img
-              src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
-              alt=""
-              loading="lazy"
-              decoding="async"
-              className="absolute inset-0 h-full w-full object-cover transition-opacity group-hover:opacity-90"
-            />
-            <span className="pixel-btn pixel-btn-primary relative px-6 py-3 text-lg shadow-[4px_4px_0_var(--p-shadow)]">
-              ▶ Play
-            </span>
-          </button>
-        )}
-      </div>
       <figcaption className="text-body-sm leading-snug">
         <span className="font-semibold">{video.title}</span>
         {video.note && <span className="mt-0.5 block text-leaf-800">{inline(video.note)}</span>}
       </figcaption>
+      <a
+        href={`https://www.youtube.com/watch?v=${video.id}`}
+        target="_blank"
+        rel="noreferrer noopener"
+        className="pixel-btn mt-auto self-start"
+      >
+        Watch the episode ↗
+      </a>
     </figure>
   )
 }
