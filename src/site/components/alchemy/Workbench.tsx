@@ -119,6 +119,50 @@ export default function Workbench({ game }: { game: Alchemy }) {
   const drag = useRef<{ id: number; offX: number; offY: number; moved: boolean } | null>(null)
   const sideDrag = useRef<{ el: string; moved: boolean; ghost: HTMLDivElement } | null>(null)
 
+  /**
+   * Drop whatever drag is in flight and take its ghost off the page.
+   *
+   * The ghost is a plain node parented to `document.body`, so it sits outside
+   * React's tree and nothing else will ever tidy it: one that outlives its
+   * drag stays `position: fixed` over every page until a reload, because
+   * routing only replaces what is inside the root. Belt and braces, this
+   * sweeps every `.alc-ghost` rather than the one in the ref, since a ghost
+   * orphaned by a second drag is no longer reachable through it.
+   */
+  const endDrag = useCallback(() => {
+    sideDrag.current = null
+    drag.current = null
+    document.querySelectorAll('.alc-ghost').forEach((g) => g.remove())
+    setDragging(null)
+    setOver(null)
+  }, [])
+
+  /**
+   * A drag can end without the button it began on ever hearing about it: the
+   * pointer is released somewhere else because capture failed or was never
+   * taken (touch takes none), a second finger starts a drag of its own, the
+   * button unmounts because the list filtered or the level changed, or the
+   * reader navigates away mid-drag. The window hears all of those. React's
+   * own handler runs first on the way up to the root, so an ordinary drop
+   * still does its work and this only tidies up behind it.
+   */
+  useEffect(() => {
+    const done = () => {
+      if (sideDrag.current || drag.current) endDrag()
+    }
+    window.addEventListener('pointerup', done)
+    window.addEventListener('pointercancel', done)
+    // Released over the browser's own chrome, or the tab sent to the back.
+    window.addEventListener('blur', done)
+    return () => {
+      window.removeEventListener('pointerup', done)
+      window.removeEventListener('pointercancel', done)
+      window.removeEventListener('blur', done)
+      // Leaving mid-drag: the ghost would otherwise outlive the whole game.
+      endDrag()
+    }
+  }, [endDrag])
+
   useEscape(selected !== null || toast !== null || celebrate, () => {
     setSelected(null)
     setToast(null)
@@ -365,6 +409,9 @@ export default function Workbench({ game }: { game: Alchemy }) {
     if (e.button !== 0) return
     // On touch, a swipe on the list scrolls it, so only a tap places (see touch-action in index.css).
     if (e.pointerType === 'mouse' || e.pointerType === 'pen') e.preventDefault()
+    // A drag already in flight means its end was missed; clear it first, or
+    // replacing the ref below strands its ghost for good.
+    if (sideDrag.current) endDrag()
     const ghost = document.createElement('div')
     ghost.className = 'alc-ghost alc-piece flex flex-col items-center'
     ghost.style.left = `${e.clientX - PIECE_W / 2}px`
@@ -606,10 +653,7 @@ export default function Workbench({ game }: { game: Alchemy }) {
                   onPointerDown={(e) => onItemPointerDown(e, id)}
                   onPointerMove={onItemPointerMove}
                   onPointerUp={(e) => onItemPointerUp(e, id)}
-                  onPointerCancel={() => {
-                    sideDrag.current?.ghost.remove()
-                    sideDrag.current = null
-                  }}
+                  onPointerCancel={endDrag}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault()
