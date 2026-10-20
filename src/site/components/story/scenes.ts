@@ -111,8 +111,13 @@ function cam(f: Frame, dx: number, dy: number, z: number, ax = 0.5, ay = 0.5) {
   return k
 }
 
-/** The close-up on the cilium that scenes 4 and 6 to 9 share. */
-const CLOSE = { dx: 96, dy: 40, z: 2.2, ax: 0.38, ay: 0.5 }
+/**
+ * The close-up on the cilium that scenes 4 and 6 to 9 share. The zoom leaves a
+ * band of cell below the membrane in the picture, because the complex works on
+ * both sides of it: two of its parts stand in the wall and the third sits
+ * inside, and none of that reads if the inside is off the bottom of the frame.
+ */
+const CLOSE = { dx: 96, dy: 41, z: 1.95, ax: 0.38, ay: 0.5 }
 /** The whole cell, cilium and all. */
 const WHOLE = { dx: 102, dy: 73, z: 0.88, ax: 0.5, ay: 0.5 }
 const closeCam = (f: Frame) => cam(f, CLOSE.dx, CLOSE.dy, CLOSE.z, CLOSE.ax, CLOSE.ay)
@@ -290,17 +295,24 @@ function drawSmo(f: Frame, x: number, y: number) {
 
 /* ---------------------------------------------------------------- proteins */
 
+/**
+ * MEGF8 and MOSMO both cross the membrane, so both are drawn as long blocks of
+ * the same height, standing in the cell wall with part of them inside. MEGF8
+ * is the narrower of the two. MGRN1 never touches the membrane: it is the
+ * ligase on the inside of the cell, so it is a ball and it sits wholly within
+ * the cytoplasm, under the feet of the other two.
+ */
 function megf8(f: Frame, x: number, y: number) {
-  f.p.rounded(x - 2.6, y - 7, 5.2, 14, c('bluePetal'), c('eye'), 1)
-  f.p.rect(x - 1.6, y - 5.5, 1.2, 9, c('blueHi'))
+  f.p.rounded(x - 2.3, y - 7, 4.6, 14, c('bluePetal'), c('eye'), 1)
+  f.p.rect(x - 1.4, y - 5.5, 1.1, 9, c('blueHi'))
 }
 function mosmo(f: Frame, x: number, y: number) {
-  f.p.rounded(x - 2.6, y - 3, 5.2, 6, c('daisyPetal'), c('eye'), 1)
-  f.p.rect(x - 1.6, y - 2, 1.2, 3, c('daisyHi'))
+  f.p.rounded(x - 2.9, y - 7, 5.8, 14, c('daisyPetal'), c('eye'), 1)
+  f.p.rect(x - 1.8, y - 5.5, 1.3, 9, c('daisyHi'))
 }
 function mgrn1(f: Frame, x: number, y: number) {
-  f.p.ellipse(x, y, 4.6, 4.2, c('pinkBud'), c('pinkDark'), 1)
-  f.p.ellipse(x - 1.4, y - 1.4, 1.2, 1, c('pinkHi'))
+  f.p.ellipse(x, y, 3.9, 3.5, c('pinkBud'), c('pinkDark'), 1)
+  f.p.ellipse(x - 1.2, y - 1.2, 1, 0.9, c('pinkHi'))
 }
 function target(f: Frame, x: number, y: number) {
   f.p.rounded(x - 3, y - 3, 6, 6, c('sprout'), c('eye'), 1)
@@ -308,12 +320,12 @@ function target(f: Frame, x: number, y: number) {
 }
 
 /** Where the three parts float before they assemble, and where they dock. */
-const FLOAT = { megf8: [114, 40], mosmo: [125, 33], mgrn1: [136, 40] } as const
-const DOCK = { megf8: [107.5, 62], mosmo: [112, 56.5], mgrn1: [113.5, 49.5] } as const
+const FLOAT = { megf8: [114, 40], mosmo: [125, 37], mgrn1: [136, 40] } as const
+const DOCK = { megf8: [106.5, 59], mosmo: [112.5, 60.5], mgrn1: [108, 66.6] } as const
 const PART_NAMES = ['megf8', 'mosmo', 'mgrn1'] as const
 const PART_DRAW = { megf8, mosmo, mgrn1 }
 /** The "MMM complex" chip sits here in every scene, so it never jumps. */
-const MMM_AT = [123, 48] as const
+const MMM_AT = [121, 59] as const
 
 function partAt(f: Frame, name: (typeof PART_NAMES)[number], i: number, u: number) {
   const a = FLOAT[name]
@@ -324,11 +336,11 @@ function partAt(f: Frame, name: (typeof PART_NAMES)[number], i: number, u: numbe
 }
 
 /**
- * Each name next to its own part, where it cannot be read as another's. In
- * the docked complex MGRN1 sits directly over MOSMO, so MOSMO's name goes
- * below it and MGRN1's above; MEGF8's goes below its foot. Kept centred on
- * the part, because a name set off to one side runs out of the picture on
- * the right when the parts are still floating.
+ * Each name next to its own part, where it cannot be read as another's. The
+ * names are placed for the row of floating parts, which is where they are
+ * read: MEGF8's and MOSMO's go under their feet, MGRN1's above its head. Kept
+ * centred on the part, because a name set off to one side runs out of the
+ * picture on the right when the parts are still floating.
  */
 function partLabel(f: Frame, name: (typeof PART_NAMES)[number], x: number, y: number, alpha: number) {
   label(f, {
@@ -350,7 +362,7 @@ function mmmLabel(f: Frame, alpha: number, dx = 0, dy = 0) {
 function drawComplex(f: Frame, dx = 0, dy = 0, alpha = 1) {
   const { p } = f
   p.alpha = alpha
-  p.ellipse(110.5 + dx, 56 + dy, 8.5, 12.5, c('daisyHi'), c('daisyCore'), 1)
+  p.ellipse(109.6 + dx, 60.8 + dy, 8.2, 10, c('daisyHi'), c('daisyCore'), 1)
   for (const name of PART_NAMES) PART_DRAW[name](f, DOCK[name][0] + dx, DOCK[name][1] + dy)
   p.alpha = 1
 }
