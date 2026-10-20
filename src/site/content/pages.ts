@@ -4291,15 +4291,22 @@ const education: Page = {
       ],
     },
     {
-      kind: "links",
+      kind: "details",
       id: "polymerase-handbook",
-      intro: "Everything needed to run it:",
-      items: [
+      heading: "Can You Beat DNA Polymerase? Instructional manual",
+      summary: "Everything needed to run it, six pages.",
+      blocks: [
         {
+          kind: "prose",
+          body: [
+            "How to build each station for under five dollars, run the race, and talk about mutations along the way. Written and visual instructions, colourblind-friendly graphics, and the science behind the activity. Also as an editable [Word document](/education/dna-polymerase.docx).",
+          ],
+        },
+        {
+          kind: "pdf",
+          file: "education/dna-polymerase.pdf",
           title: "Can You Beat DNA Polymerase? Instructional manual",
-          body: "How to build each station for under five dollars, run the race, and talk about mutations along the way. Written and visual instructions, colourblind-friendly graphics, and the science behind the activity. Also as an editable [Word document](/education/dna-polymerase.docx).",
-          href: "education/dna-polymerase.pdf",
-          tag: "PDF, 6 pages",
+          pages: 6,
         },
       ],
     },
@@ -4350,15 +4357,22 @@ const education: Page = {
       ],
     },
     {
-      kind: "links",
+      kind: "details",
       id: "whodunnit-guide",
-      intro: "To keep the activity open and easy to adopt, we wrote up the whole procedure.",
-      items: [
+      heading: "The whodunnit, station by station",
+      summary: "The whole procedure, so the activity can be picked up and run, five pages.",
+      blocks: [
         {
+          kind: "prose",
+          body: [
+            "The script for the coordinator, what each of the three stations needs, and how the clues come together at the end.",
+          ],
+        },
+        {
+          kind: "pdf",
+          file: "education/whodunnit.pdf",
           title: "The whodunnit, station by station",
-          body: "The script for the coordinator, what each of the three stations needs, and how the clues come together at the end.",
-          href: "education/whodunnit.pdf",
-          tag: "PDF, 5 pages",
+          pages: 5,
         },
       ],
     },
@@ -4374,15 +4388,22 @@ const education: Page = {
       ],
     },
     {
-      kind: "links",
+      kind: "details",
       id: "baselet-handbook",
-      intro: "Everything needed to run it:",
-      items: [
+      heading: "Build a Baselet handbook",
+      summary: "Everything needed to run it, six pages.",
+      blocks: [
         {
+          kind: "prose",
+          body: [
+            "Ages 8 to 18, 30 to 45 minutes. The bead colours, the base-pairing rules, the amino acid chart, and the mutations to try. The [latest version](https://docs.google.com/document/d/10bECEVQb0TbHe4U1os_mHrUxQAWD1wqZIO4Ia7t5ic4/edit?usp=sharing) is kept as a Google Doc.",
+          ],
+        },
+        {
+          kind: "pdf",
+          file: "education/baselet.pdf",
           title: "Build a Baselet handbook",
-          body: "Ages 8 to 18, 30 to 45 minutes. The bead colours, the base-pairing rules, the amino acid chart, and the mutations to try. The [latest version](https://docs.google.com/document/d/10bECEVQb0TbHe4U1os_mHrUxQAWD1wqZIO4Ia7t5ic4/edit?usp=sharing) is kept as a Google Doc.",
-          href: "education/baselet.pdf",
-          tag: "PDF, 6 pages",
+          pages: 6,
         },
       ],
     },
@@ -4395,15 +4416,22 @@ const education: Page = {
       ],
     },
     {
-      kind: "links",
+      kind: "details",
       id: "synbingo-guide",
-      intro: "Everything needed to run it:",
-      items: [
+      heading: "SYNBIngO: the presentation, the boards and the prompts",
+      summary: "Everything needed to run it, seventeen pages.",
+      blocks: [
         {
+          kind: "prose",
+          body: [
+            "Goals, the talk on everyday medications, the bingo boards, and the discussion questions for the end, followed by the slides themselves.",
+          ],
+        },
+        {
+          kind: "pdf",
+          file: "education/synbingo.pdf",
           title: "SYNBIngO: the presentation, the boards and the prompts",
-          body: "Goals, the talk on everyday medications, the bingo boards, and the discussion questions for the end, followed by the slides themselves.",
-          href: "education/synbingo.pdf",
-          tag: "PDF, 17 pages",
+          pages: 17,
         },
       ],
     },
@@ -4438,15 +4466,22 @@ const education: Page = {
       ],
     },
     {
-      kind: "links",
+      kind: "details",
       id: "scientists-doc",
-      intro: "For the classroom:",
-      items: [
+      heading: "Scientists You Might Not Know",
+      summary: "For the classroom, thirteen pages.",
+      blocks: [
         {
+          kind: "prose",
+          body: [
+            "Profiles for chemistry and biology lessons: the people behind aspirin, thalidomide\'s halt at the FDA, and more. The [latest version](https://docs.google.com/document/d/1oJpNNe-DBpYJ4tP-zd76KM0-249qbn9j4jQ6PlO33eQ/edit?usp=sharing) is kept as a Google Doc.",
+          ],
+        },
+        {
+          kind: "pdf",
+          file: "education/scientists.pdf",
           title: "Scientists You Might Not Know",
-          body: "Profiles for chemistry and biology lessons: the people behind aspirin, thalidomide's halt at the FDA, and more. The [latest version](https://docs.google.com/document/d/1oJpNNe-DBpYJ4tP-zd76KM0-249qbn9j4jQ6PlO33eQ/edit?usp=sharing) is kept as a Google Doc.",
-          href: "education/scientists.pdf",
-          tag: "PDF, 13 pages",
+          pages: 13,
         },
       ],
     },
@@ -5052,7 +5087,7 @@ const judging: Page = {
         {
           title: "Competition Deliverables",
           asks: "Complete the competition deliverables: the wiki, the presentation video, the judging form and the judging session.",
-          met: "All of our work this year is on this wiki. The required materials are submitted, and we are looking forward to telling you about the project in the session.",
+          met: "All of our work this year is on this wiki, starting at [the home page](/). The required materials are submitted, and we are looking forward to telling you about the project in the session.",
         },
         {
           title: "Project Attributions",
@@ -5062,7 +5097,7 @@ const judging: Page = {
         {
           title: "Contribution",
           asks: "Make a useful contribution for future iGEM teams.",
-          met: "Our education, Human Practices, wet lab, modelling and engineering work is documented so that it can be picked up rather than repeated. What we are leaving behind is on [contribution](/contribution).",
+          met: "Our education, Human Practices, wet lab, modelling and engineering work is documented thoroughly, so that another team can pick it up and build on it rather than repeat it. What we are leaving behind is on [contribution](/contribution).",
         },
       ],
     },
@@ -5076,7 +5111,7 @@ const judging: Page = {
         {
           title: "Engineering Success",
           asks: "Demonstrate engineering success in a technical aspect of your project by going through at least one iteration of the engineering design cycle.",
-          met: "Three loops, one per subteam, each with the design, build, test and learn steps written out and the hand-offs between them recorded. They are on [engineering](/engineering), including the [wet lab's cycles](/engineering#wet-lab-cycles), where the kinetic model changed the gene design before anything was ordered.",
+          met: "We iterated on the project several times over the year: three loops, one per subteam, each with the design, build, test and learn steps written out and the hand-offs between them recorded. They are on [engineering](/engineering), including the [wet lab's cycles](/engineering#wet-lab-cycles), where the kinetic model changed the gene design before anything was ordered.",
         },
         {
           title: "Human Practices",
@@ -5094,18 +5129,18 @@ const judging: Page = {
       items: [
         {
           title: "Excellence in Model",
-          asks: "Build a model that helps you understand and design your system, and document it so others can use it.",
-          met: "A kinetic model of the Hedgehog and MMM system, refined over several versions, with the sensitivity analysis that told the wet lab which rates to measure. The model, its equations and its limits are on [model](/model).",
+          asks: "Build a model that helps you understand and design your system, state the assumptions it rests on, and document it so others can use it.",
+          met: "A kinetic model of the Hedgehog and MMM system, refined over several versions, with the sensitivity analysis that told the wet lab which rates to measure. The model, its equations and the assumptions it rests on are on [model](/model).",
         },
         {
           title: "Excellence in Education",
           asks: "Develop educational work that goes beyond outreach, and document it so that others can run it.",
-          met: "Online outreach, adaptable lesson plans and campus events, each written up with the handbooks to run them again. What we did and what it taught us is on [education](/education).",
+          met: "Online outreach, adaptable lesson plans and campus events, each written up with the handbooks to run them again, and **[iGEM Alchemy](/alchemy)**, a browser game we built that teaches the molecules behind the project by combining them. What we did and what it taught us is on [education](/education).",
         },
         {
           title: "Excellence in Integrated Human Practices",
           asks: "Show how your project was shaped by the people it affects, through work integrated into the design.",
-          met: "The same 16 interviews, read alongside the literature, shaped the platform, the market model and the deliverables. Each conversation on [human practices](/human-practices#stakeholders) says what changed because of it.",
+          met: "The same 16 interviews, read alongside an extensive literature review, shaped our understanding of community needs, responsible platform development and designing for adoption, and from them came the market model and the deliverables. Each conversation on [human practices](/human-practices#stakeholders) says what changed because of it.",
         },
       ],
     },
