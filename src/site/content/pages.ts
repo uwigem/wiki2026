@@ -4220,17 +4220,17 @@ const judging: Page = {
       tier: "gold",
       items: [
         {
-          title: "Excellence in Model",
+          title: "Best Model",
           asks: "Build a model that helps you understand and design your system, and document it so others can use it.",
           met: "A kinetic model of the Hedgehog and MMM system, refined over several versions, with the sensitivity analysis that told the wet lab which rates to measure. The model, its equations and its limits are on [model](/model).",
         },
         {
-          title: "Excellence in Education",
+          title: "Best Education",
           asks: "Develop educational work that goes beyond outreach, and document it so that others can run it.",
           met: "Online outreach, adaptable lesson plans and campus events, each written up with the handbooks to run them again. What we did and what it taught us is on [education](/education).",
         },
         {
-          title: "Excellence in Integrated Human Practices",
+          title: "Best Integrated Human Practices",
           asks: "Show how your project was shaped by the people it affects, through work integrated into the design.",
           met: "The same 16 interviews, read alongside the literature, shaped the platform, the market model and the deliverables. Each conversation on [human practices](/human-practices#stakeholders) says what changed because of it.",
         },
