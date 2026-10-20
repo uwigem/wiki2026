@@ -284,6 +284,17 @@ export default function ScatterChart({
                       // it, or the reader cannot tell which point it names.
                       const leader = placed && Math.hypot(dx, dy) > 16
                       const anchor = placed ? (dx < -2 ? 'end' : dx > 2 ? 'start' : 'middle') : at === 'left' ? 'end' : at === 'right' ? 'start' : 'middle'
+                      /*
+                       * Keep the whole label inside the plot. A point near an
+                       * edge would otherwise have its name cut in half by the
+                       * frame, which is worse than having it sit slightly off
+                       * centre over its marker.
+                       */
+                      const half = anchor === 'middle' ? width / 2 : 0
+                      const left = X(q.x) + dx - (anchor === 'end' ? width : half)
+                      const right = X(q.x) + dx + (anchor === 'start' ? width : half)
+                      const nudge =
+                        right > VW - PAD.right ? VW - PAD.right - right : left < PAD.left ? PAD.left - left : 0
                       return (
                         <g key={`l${i}`}>
                           {leader && (
@@ -297,7 +308,7 @@ export default function ScatterChart({
                             />
                           )}
                           <text
-                            x={X(q.x) + dx}
+                            x={X(q.x) + dx + nudge}
                             y={Y(q.y) + dy}
                             textAnchor={anchor}
                             stroke={SITE_PALETTE.bushHi}
