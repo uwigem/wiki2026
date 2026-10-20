@@ -53,6 +53,31 @@ const COL_X = [63, 96, 129, 162, 195]
 const ROW_Y = [28, 50, 72]
 const SLOTS = COL_X.length * ROW_Y.length
 
+/**
+ * How fast the chamber fills or empties at full deflection, in slots a second.
+ * Slow enough to watch the purple move, quick enough to reach an end.
+ */
+const LEVEL_RATE = SLOTS * 0.3
+
+/** Where the chamber sits when nothing is pushing it either way. */
+export const RESTING_LEVEL = (SLOTS - 1) / 2
+
+/**
+ * One step of the level.
+ *
+ * The slider sets the RATE of removal, not the level, so the level integrates
+ * it: off centre the chamber keeps filling or keeps emptying, and only the
+ * middle holds. Settling at a height fixed by the slider made the volume look
+ * static unless the reader was dragging, which is the opposite of the point.
+ *
+ * Exported so the behaviour can be checked without a canvas: the animation
+ * cannot run in a hidden tab, where requestAnimationFrame is suspended.
+ */
+export function stepLevel(filled: number, shown: number, dt: number): number {
+  const net = (shown - 0.5) * 2
+  return Math.max(1, Math.min(SLOTS - 1, filled + net * LEVEL_RATE * dt))
+}
+
 /** The level strip along the chamber floor. The storyboard's gauge, unrolled. */
 const STRIP_T = 92
 const STRIP_H = 7
@@ -249,7 +274,7 @@ export default function SignalDial({ bare = false }: DialProps) {
     }
 
     let shown = 0.5
-    let filled = (SLOTS - 1) / 2
+    let filled = RESTING_LEVEL
     let flow = 0
     let lastReset = 0
 
@@ -333,10 +358,9 @@ export default function SignalDial({ bare = false }: DialProps) {
       */
       if (st.resetSeq !== lastReset) {
         lastReset = st.resetSeq
-        filled = (SLOTS - 1) / 2
+        filled = RESTING_LEVEL
       }
-      const net = (shown - 0.5) * 2
-      filled = Math.max(1, Math.min(SLOTS - 1, filled + net * SLOTS * 0.3 * dt))
+      filled = stepLevel(filled, shown, dt)
       const removal = Math.max(0, 2 - 2 * shown)
       flow += dt
 
