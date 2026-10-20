@@ -538,7 +538,7 @@ export interface Page {
 
 const description: Page = {
   slug: "/description",
-  title: "The Idea",
+  title: "Project Description",
   kicker: "chapter 01 · description",
   intro:
     "We are building a modular device that controls how much of a receptor stays in the primary cilium. We prove it on Hedgehog signalling, then show the same parts work on other receptors.",
@@ -698,7 +698,7 @@ const designBlocks: Block[] = [
     id: "funnel",
     heading: "How much gets thrown away",
     intro:
-      "Almost all of it, which is the point. These are the numbers from our MOSMO and MEGF8 campaign.",
+      "Almost all of it. These are the numbers from our MOSMO and MEGF8 campaign.",
     stages: [
       {
         label: "binders generated",
@@ -785,7 +785,7 @@ const ENGINEERING_PARTS: TrailStep[] = [
 
 const engineering: Page = {
   slug: "/engineering",
-  title: "Build, Test, Learn",
+  title: "Engineering",
   kicker: "chapter 03 · engineering",
   medal: true,
   blocks: [
@@ -1187,7 +1187,7 @@ const experiments: Page = {
       kind: "steps",
       id: "exp1-design",
       heading: "Proposed Experimental Design",
-      intro: "Both recruitment strategies will be evaluated in HEK293T cells, using engineered SMO, MGRN1 and MEGF8 constructs.",
+      intro: "Both recruitment strategies will be evaluated in NIH/3T3 cells, using engineered SMO, MGRN1 and MEGF8 constructs.",
       items: [
         {
           title: "Direct Recruitment of MGRN1",
@@ -3095,7 +3095,7 @@ const NEXT_STEPS: Block[] = [
 
 const humanPractices: Page = {
   slug: "/human-practices",
-  title: "Who the Garden Is For",
+  title: "Integrated Human Practices",
   kicker: "chapter 06 · integrated human practices",
   medal: true,
   blocks: [
@@ -4677,7 +4677,6 @@ const results: Page = {
   slug: "/results",
   title: "Results",
   kicker: "wetlab · results",
-  storyBeat: "Nothing has come up yet. The seeds are in.",
   intro:
     "What the experiments actually produced. Check back after the wiki freeze is over, on 25 November.",
   blocks: [
@@ -4825,7 +4824,7 @@ const protocols: Page = {
 
 const contribution: Page = {
   slug: "/contribution",
-  title: "What We Leave Behind",
+  title: "Contribution",
   kicker: "chapter 10 · contribution",
   medal: true,
   blocks: [

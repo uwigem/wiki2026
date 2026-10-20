@@ -58,10 +58,14 @@ export default function FigureFrame({ src, alt, caption, owner, srcMobile, ratio
         <div>
           {/* Above the figure, not over it. Laid over the top-left corner it
               covered the figure's own title, and every figure that needs this
-              label has a title there. */}
+              label has a title there.
+
+              Red, full width and loud: this is the one thing a judge must not
+              miss about these figures, and the garden palette has no other
+              colour that reads as a warning. */}
           {hypothetical && (
-            <p className="pixel mb-2 inline-block rounded-sm border-2 border-leaf-700 bg-petal-daisy px-2 py-0.5 text-tag tracking-wide text-leaf-950">
-              hypothetical data
+            <p className="pixel mb-2 block rounded-sm border-[3px] border-warning bg-warning px-3 py-1.5 text-center text-base uppercase tracking-wide text-warning-ink sm:text-lg">
+              Hypothetical data, not measured results
             </p>
           )}
           <picture>

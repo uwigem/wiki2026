@@ -112,6 +112,14 @@
   --color-pool-400: var(--p-water);
   --color-pool-600: var(--p-waterDeep);
 
+  /* The one colour on the site that does not come from the engine palette.
+     The garden has no red, and the hypothetical-data banner has to read as a
+     warning rather than as scenery, so it is set here instead. The engine is
+     frozen, and tinting a petal colour toward red gave a pink that looked
+     decorative next to the figures it sits above. */
+  --color-warning: #c62f2f; /* colour-ok: no red exists in the engine palette */
+  --color-warning-ink: var(--p-petalWhiteHi);
+
   /* petals */
   --color-petal-lilac: var(--p-lilacPetal);
   --color-petal-pink: var(--p-pinkBud);
