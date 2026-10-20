@@ -540,8 +540,6 @@ const description: Page = {
   slug: "/description",
   title: "The Idea",
   kicker: "chapter 01 · description",
-  storyBeat:
-    "Every garden has someone deciding how tall the hedge grows. In your cells, that someone is a small protein complex, and we built a way to lean on it.",
   intro:
     "We are building a modular device that controls how much of a receptor stays in the primary cilium. We prove it on Hedgehog signalling, then show the same parts work on other receptors.",
   blocks: [
@@ -560,7 +558,7 @@ const description: Page = {
       id: "two-arms",
       heading: "Two arms, opposite directions",
       intro:
-        "Both arms are engineered, both are genetically encodable, and they push the same pathway in opposite directions.",
+        "Our engineered linker and breaker provide two complementary ways to tune the ciliary abundance of the target protein.",
       items: [
         {
           title: "Down arm",
@@ -592,17 +590,13 @@ const description: Page = {
 
 const background: Page = {
   slug: "/background",
-  title: "A Problem in the Garden",
+  title: "Background",
   kicker: "chapter 02 · background",
-  storyBeat:
-    "The hedge can grow too tall or not grow at all, and both are a problem. The tools we have today can only cut, not trim.",
-  intro:
-    "Hedgehog signalling has to be kept in a narrow band. Too much drives cancer, too little breaks development, and the drugs we have can only shut it off.",
   blocks: [
     {
       kind: "logo",
       caption:
-        "Hedgehog signalling is a balance, and both ends of it are dangerous. Tip it one way and you get cancer; tip it the other and development goes wrong. The drugs we have can only take one hedgehog off the scale entirely. What is missing is a way to set where the beam sits.",
+        "Hedgehog signalling is a balance and both ends of it are problematic. Tipping it too far one way leads to ciliopathies associated with excess signalling, like medulloblastoma or basal cell carcinoma; tipping it too far the other way can lead to issues with development or injury repair. Current clinical routes are only able to either fully remove or fully enforce Hedgehog signalling. What is missing is a way to finely tune both.",
     },
     {
       kind: "prose",
@@ -620,7 +614,7 @@ const background: Page = {
       body: [
         "The approved SMO inhibitors, vismodegib and sonidegib, block the receptor directly. Tumours mutate SMO and become resistant, and the drugs carry harsh side effects, which is why they are not given to children. Blocking is a blunt move on a pathway that is really about amount.",
         "We also state the limit up front, from the same interview. This approach works on cases driven by too much SMO. It does not help cases driven by mutations further down the pathway, in **SUFU** or **GLI**.",
-        "What we propose instead is [a device with two arms](/description#two-arms), which sets the amount rather than blocking the receptor.",
+        "What we propose instead is [a device with two arms](/description#two-arms), which allows us to tune the abundance of SMO rather than outright blocking the receptor.",
       ],
       source: "Interview with Dr. Stacey Ogden (St. Jude).",
     },
@@ -629,16 +623,16 @@ const background: Page = {
       heading: "What we get to build on",
       items: [
         {
-          title: "A membrane E3 ligase",
-          body: "The Kong lab identified the MMM complex, a membrane-bound E3 ubiquitin ligase that naturally controls SMO levels. That is the machine our device borrows.",
+          title: "A membrane-bound E3 ubiquitin ligase",
+          body: "The Kong lab identified the MOSMO, MEGF8 and MGRN1 (MMM) complex, a membrane-bound E3 ubiquitin ligase that naturally controls SMO levels by tagging the protein for ubiquitination. This is the biological machine our platform borrows.",
         },
         {
-          title: "MEGF8, MOSMO, MGRN1",
-          body: "MGRN1 is the enzyme. MEGF8 and MOSMO are adapters, and MOSMO stabilises the MEGF8 to MGRN1 binding. Take a part away and the complex stops working, which is what the up arm exploits.",
+          title: "The MMM complex",
+          body: "All three proteins have their own purpose in the membrane. MGRN1 provides the enzymatic behaviour of the complex, while its structure comes primarily from MOSMO, which promotes the abundance and stabilisation of the third protein it is bound to, MEGF8.",
         },
         {
-          title: "A real structure",
-          body: "The Kong lab has cryo-EM of the complex and a preprint identifying a site whose mutation breaks it, so we have something concrete to design a binder against.",
+          title: "Experimental structure",
+          body: "The Kong lab has solved the cryo-EM structure of the complex and identified residues whose mutation affects the protein's folding, which suggests the [hotspots we design binders against](/model#hotspot-selection).",
         },
       ],
       source:
@@ -658,7 +652,7 @@ const designBlocks: Block[] = [
     kind: "prose",
     heading: "What we are designing against",
     body: [
-      "The up arm of the device is a **de novo minibinder** that sits on the **MEGF8 to MOSMO interface**. Break that interface and the MMM complex cannot assemble, so it stops ubiquitinating **Smoothened (SMO)**, so SMO stays in the cilium and Hedgehog signalling goes up.",
+      "The up arm of the device is a **de novo minibinder** that sits on the **MEGF8 to MOSMO interface**. Break that interface and the MMM complex cannot assemble. It stops ubiquitinating **Smoothened (SMO)**, so SMO stays in the cilium and Hedgehog signalling goes up.",
       "We picked this interface because the Kong lab has cryo-EM of the MMM complex and a preprint that points to a specific site whose mutation breaks the complex. That gives us a real structure and a real binding site to design toward, which is what a good target needs.",
     ],
     source:
@@ -794,10 +788,6 @@ const engineering: Page = {
   title: "Build, Test, Learn",
   kicker: "chapter 03 · engineering",
   medal: true,
-  storyBeat:
-    "Nothing in a garden works the first time. You plant, you watch, you move it two feet to the left.",
-  intro:
-    "Three subteams ran the same loop, one after the other: the kinetic model first, then the designed binder, then the bench. These are those cycles in the order we actually ran them, including the parts that did not work the first time.",
   blocks: [
     {
       kind: "cards",
@@ -829,7 +819,6 @@ const engineering: Page = {
       cycles: [
         {
           heading: "Choosing the target: How the project became the project",
-          intro: "This cycle is complete.",
           items: [
             {
               title: "Design",
@@ -862,7 +851,7 @@ const engineering: Page = {
       kind: "prose",
       heading: "Where the modelling fits",
       body: [
-        "The project starts as arithmetic. Before any protein is designed, the modelling subteam has to show that acting on the MMM complex could move **SMO in the cilium** by a useful amount, and that the rates in the literature support it. [The model](/model) is where that work is written up; this is the loop that produced it.",
+        "Before any protein is designed, the modelling subteam has to show that acting on the MMM complex could move **SMO in the cilium** by a useful amount, and that the rates in the literature support it. [The model](/model) is where that work is written up; this is the loop that produced it.",
       ],
     },
     {
@@ -904,7 +893,7 @@ const engineering: Page = {
       kind: "prose",
       heading: "Where the design work fits",
       body: [
-        "With a target worth acting on, the second loop is the binder itself. Generate candidates, throw almost all of them away, and work out why the survivors survived. The pipeline below is the machinery; the cycles after it are what we learned by running it. The general version, written so another team can run it, is on [contribution](/contribution#pipeline).",
+        "With a target worth acting on, the second loop is the binder itself. It generates candidates, throws almost all of them away, and works out why the survivors survived. The pipeline below is the machinery; the cycles after it are what we learned by running it. The general version, written so another team can run it, is on [contribution](/contribution#pipeline).",
       ],
     },
     ...designBlocks,
@@ -3061,8 +3050,6 @@ const humanPractices: Page = {
   title: "Who the Garden Is For",
   kicker: "chapter 06 · integrated human practices",
   medal: true,
-  intro:
-    "We are handing other researchers a tool that changes what stays in the primary cilium. Our guiding question: how do we make it easy for them to adopt, and encourage responsible use in biologically sensitive systems? This page is what they told us, and what we changed.",
   blocks: [
 {
       kind: "stats",
@@ -3303,13 +3290,6 @@ const humanPractices: Page = {
     },
         ],
       },
-{
-      kind: "narration",
-      body: [
-        "Nearly every cell in you grows a single tiny antenna, called the **primary cilium**. It is not decoration. Certain receptors only do their job while they are sitting in it.",
-        "So a protein can be in the right cell and still be in the wrong place. That one idea is what the next part of this page is about.",
-      ],
-    },
 {
       kind: "landscape",
       section: "Community need",
@@ -4096,10 +4076,9 @@ const humanPractices: Page = {
 
 const education: Page = {
   slug: "/education",
-  title: "Sharing the Garden",
+  title: "Education",
   kicker: "chapter 07 · education",
   medal: true,
-  storyBeat: "The best part of a garden is showing someone else around it.",
   intro:
     "Science is everywhere in the world around us. The medicine we take, the food we eat and many of the technologies we rely on to survive are all shaped by biology. Synthetic biology expands on this: given what we know about biology, how could we use that knowledge to make something impactful?",
   blocks: [
@@ -4266,7 +4245,7 @@ const education: Page = {
     {
       kind: "links",
       id: "polymerase-handbook",
-      intro: "Run it yourself.",
+      intro: "Everything needed to run it:",
       items: [
         {
           title: "Can You Beat DNA Polymerase? Instructional manual",
@@ -4349,7 +4328,7 @@ const education: Page = {
     {
       kind: "links",
       id: "baselet-handbook",
-      intro: "Run it yourself.",
+      intro: "Everything needed to run it:",
       items: [
         {
           title: "Build a Baselet handbook",
@@ -4370,7 +4349,7 @@ const education: Page = {
     {
       kind: "links",
       id: "synbingo-guide",
-      intro: "Run it yourself.",
+      intro: "Everything needed to run it:",
       items: [
         {
           title: "SYNBIngO: the presentation, the boards and the prompts",
@@ -4413,7 +4392,7 @@ const education: Page = {
     {
       kind: "links",
       id: "scientists-doc",
-      intro: "For the classroom.",
+      intro: "For the classroom:",
       items: [
         {
           title: "Scientists You Might Not Know",
@@ -4428,7 +4407,6 @@ const education: Page = {
       kind: "prose",
       section: "What education taught us",
       id: "taught-us",
-      heading: "What education taught us",
       body: [
         "We are proud of all the work to come out of our education efforts this year. We created effective spaces for conversation and engagement online through our outreach; we developed adaptable lesson plans and events for other educators to build on; and we fostered community engagement with our peers through several campus events.",
         "Despite that, we have a lot to reflect on. The choice to use short-form content was thoroughly discussed, and while the format found us an audience, we understand that we have to be careful with a platform of such wide reach. We have always tried our best to research our videos thoroughly, and in future we aim to keep using these spaces to foster a dialogue rather than to lecture a mass audience. We also hope to take our lesson plans into a wide variety of community spaces, to reach outside the university.",
@@ -4441,7 +4419,6 @@ const education: Page = {
       id: "references",
       section: "References",
       heading: "References",
-      summary: "The source cited on this page.",
       blocks: [
         {
           kind: "references",
@@ -4468,8 +4445,6 @@ const attributions: Page = {
   slug: "/attributions",
   title: "Attributions",
   kicker: "chapter 12 · attributions",
-  storyBeat: "None of this was one hedgehog.",
-  intro: "What we did ourselves, and what we had help with. Select any card to see the details.",
   blocks: [
     {
       kind: "people",
@@ -4513,11 +4488,8 @@ const attributions: Page = {
 
 const implementation: Page = {
   slug: "/implementation",
-  title: "Out of the Greenhouse",
+  title: "Proposed Implementation",
   kicker: "chapter 04 · proposed implementation",
-  storyBeat: "A seedling is not a garden. Who plants this, and where?",
-  intro:
-    "Who would use this tool outside our lab, how it would reach them, and what has to be true first.",
   blocks: [
     {
       kind: "prose",
@@ -4794,13 +4766,10 @@ const contribution: Page = {
   title: "What We Leave Behind",
   kicker: "chapter 10 · contribution",
   medal: true,
-  storyBeat: "The part of the garden that is for whoever comes next.",
-  intro:
-    "Two things another team can pick up: a de novo binder design pipeline that runs end to end from one command, and a set of mammalian constructs for recruiting an E3 ligase to a receptor of their choosing. All of it is open, and none of it is specific to our target.",
   blocks: [
     {
       kind: "prose",
-      heading: "What another team gets",
+      heading: "What we are handing over",
       body: [
         "Designing a protein binder means driving three separate models in turn and throwing away almost everything they produce. The models are published and free. The part that is not written down anywhere is the plumbing: how to get them onto a cluster you are allowed to use, how to hand each one's output to the next, and which numbers are worth filtering on.",
         "That plumbing is our contribution. We built it on **Hyak**, the University of Washington's shared cluster, so it runs somewhere any student here can reach rather than on a lab machine nobody else can book. It is driven by **one script** that takes a target, a batch size and a set of hotspot residues. And it is **not specific to MOSMO or MEGF8**: a team with a different target and a structure to aim at can point the same pipeline at it.",
@@ -4812,7 +4781,7 @@ const contribution: Page = {
       kind: "prose",
       section: "Protein design",
       id: "summary",
-      heading: "De novo protein design, briefly",
+      heading: "What is de novo protein design?",
       body: [
         "De novo protein design broadly refers to the development of new proteins with novel functions. The designs of these new proteins do not rely on existing protein structures. Instead they use biochemical principles and recent breakthrough computational methods, such as deep learning models trained on large-scale collections of experimental protein structural data [1]. One use case is the de novo design of novel **binders**, where custom proteins are computationally optimised to associate, or bind, with specific molecular targets. Use cases for these binders vary, but in this project we focus on a therapeutic use: the disruption of wild-type protein complex formation. De novo binders have also proved useful in the neutralisation of toxins or venoms, and in the precise modulation of immune responses such as inflammation [2].",
         "For our project this year we are focusing on disrupting the binding interface between two proteins, **MOSMO** and **MEGF8**. We aim to prevent formation of the MOSMO, MEGF8 and MGRN1 (**MMM**) complex through a competitively inhibitory, high affinity de novo binder. For our binder design pipeline we used RosettaCommons Foundry models: **RFdiffusion3**, **ProteinMPNN** and **RoseTTAFold3**, developed in-house at the University of Washington's Institute for Protein Design [3]. How we used them against this particular target is on [the model](/model); what follows is the general version.",
@@ -4920,11 +4889,9 @@ const contribution: Page = {
       id: "our-scripts",
       heading: "The scripts, and what they saved us",
       body: [
-        "To achieve high-throughput de novo binder design we wrote Bash and Python scripts that automate the pipeline. Our design script lets a user input just the name of the target protein, the batch size, and the selected hotspots. This brought generation times down to about **45 minutes per 75 binder designs**, from about 75 minutes for the same batch at the start.",
+        "To achieve high-throughput de novo binder design we wrote Bash and Python scripts that automate the pipeline. Our design script lets a user input just the name of the target protein, the batch size, and the selected hotspots. On Hyak this brought generation times down to about **45 minutes per 75 binder designs**, from about 75 minutes for the same batch at the start.",
         "We also wrote a validation script that pulls metrics out of the output files of each design and out of the structure files themselves.",
       ],
-      source:
-        "Timing measured on Hyak.",
     },
     {
       kind: "table",
@@ -5073,10 +5040,8 @@ const contribution: Page = {
 
 const judging: Page = {
   slug: "/judging",
-  title: "The Checklist",
+  title: "Judging",
   kicker: "chapter 11 · judging",
-  intro:
-    "Every medal criterion we are claiming, what iGEM asks for, and the page on this wiki that shows it.",
   blocks: [
     {
       kind: "medals",
