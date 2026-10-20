@@ -18,6 +18,7 @@ export default function Details({
   summary,
   open,
   step,
+  tone,
   children,
 }: {
   heading: string
@@ -25,10 +26,21 @@ export default function Details({
   open?: boolean
   /** Its place in a sequence, shown as a numbered marker. */
   step?: number
+  /**
+   * `lilac` marks a parameter or assumption drop-down. Those are a standard
+   * form across the wiki because judging asks for them by name, so they are
+   * given one colour and one word as a heading wherever they appear.
+   */
+  tone?: 'lilac'
   children: ReactNode
 }) {
   return (
-    <details className="panel group px-5 py-4 sm:px-7 sm:py-5" open={open}>
+    <details
+      className={
+        (tone === 'lilac' ? 'panel-lilac' : 'panel') + ' group px-5 py-4 sm:px-7 sm:py-5'
+      }
+      open={open}
+    >
       <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
         <span className="min-w-0 flex-1">
           <span className="flex items-baseline gap-2">

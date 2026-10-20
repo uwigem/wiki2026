@@ -41,7 +41,7 @@ interface Props {
 
 const VW = 420
 const VH = 190
-const PAD = { left: 46, right: 14, top: 14, bottom: 34 }
+const PAD = { left: 62, right: 14, top: 14, bottom: 34 }
 
 export default function DoseCurve({
   heading,
@@ -175,10 +175,22 @@ export default function DoseCurve({
           >
             {xLabel}
           </text>
+          {/* Upright beside the axis and centred on the plot, the way the y
+              label reads on every other chart's axis. Rotated about its own
+              midpoint so it stays centred whatever its length. */}
+          <text
+            x={12}
+            y={PAD.top + plotH / 2}
+            transform={`rotate(-90 12 ${PAD.top + plotH / 2})`}
+            textAnchor="middle"
+            fontSize={9}
+            fill="currentColor"
+            opacity={0.7}
+          >
+            {yLabel}
+          </text>
         </svg>
       </div>
-
-      <p className="mt-1 text-note">{yLabel}</p>
 
       {threshold && (
         <div className="mt-4 panel-flat px-4 py-3">
