@@ -457,7 +457,7 @@ export type Block = Anchored &
         items: MedalCriterion[];
       }
     /** A few photographs side by side. */
-    | { kind: "gallery"; heading?: string; intro?: string; images: GalleryImage[]; source?: string }
+    | { kind: "gallery"; heading?: string; intro?: string; images: GalleryImage[]; ratio?: "wide" | "square" | "tall"; source?: string }
     /** Things to open or download: handbooks, posts, documents. */
     | { kind: "links"; heading?: string; intro?: string; items: LinkItem[]; source?: string }
     /** A visible "not written yet" marker. */
@@ -1559,7 +1559,7 @@ const model: Page = {
           nLabel: "exit · loss · gate",
           nLabelSide: "right",
         },
-        { from: "mmm", to: "sub", label: "tags SMO", dashed: true, bend: 42 },
+        { from: "mmm", to: "sub", label: "tags SMO", dashed: true, bend: 78, nBend: 42 },
         { from: "tern", to: "sub", label: "tags SMO faster", dashed: true, labelSide: "left" },
         { from: "mmm", to: "mmmi", label: "binder: SMO up", colour: "stem", labelSide: "right" },
         { from: "mmm", to: "tern", label: "linker: SMO down", colour: "pinkDark", labelSide: "right" },
@@ -1775,7 +1775,7 @@ const model: Page = {
       yLabel: "ciliary SMO, as a multiple of untreated",
       xLog: true,
       yLog: true,
-      references: [{ axis: "y", value: 1, label: "untreated" }],
+      references: [{ axis: "y", value: 1, label: "untreated", labelAt: 0.945 }],
       footnote:
         "At **alpha = 0** the linker does the opposite of its job: binding the complex without speeding up tagging simply sequesters the complex, and ciliary SMO rises. For any alpha above zero the linker lowers SMO, and lowers it further the larger alpha is. A high ternary enhancement is what would let the linker outcompete SMO in a cell where SMO is overproduced, which is the condition the device is for. One caveat on reading it: unlike the binder, this arm is **not settled** at the time these curves are read. Run far enough and the alpha = 0 case relaxes back to the untreated level while the others fall further still, so the rise at alpha = 0 is a slow transient rather than a new resting state.",
     },
@@ -2492,6 +2492,7 @@ const model: Page = {
     {
       kind: "gallery",
       id: "hotspot-views",
+      ratio: "tall",
       intro:
         "Each target with its chosen hotspots marked in pink. MEGF8 on the left, MOSMO on the right.",
       images: [
@@ -2718,6 +2719,7 @@ const model: Page = {
       id: "backbone-diversity",
       navLabel: "Backbone diversity",
       heading: "How much of the plate is really different",
+      open: false,
       summary: "Ninety-six designs, but fewer distinct starting shapes than that.",
       blocks: [
         {
@@ -2744,9 +2746,7 @@ const model: Page = {
       kind: "details",
       section: "Sources",
       id: "sources",
-      heading: "The literature this page rests on",
-      summary:
-        "Forty-nine entries in four lists, one per section. A numbered marker in the text points at the entry with that number in its own section's list, so the same number means different things in different sections.",
+      heading: "Sources",
       blocks: [
         {
           kind: "references",
