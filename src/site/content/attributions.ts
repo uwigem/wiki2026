@@ -76,7 +76,10 @@ export const MENTORS: Investigator[] = [
  * Students on the iGEM roster who are not on the team page. They appear here
  * with a generated pixel character and no photo.
  */
-export const ROSTER_EXTRAS: Profile[] = [{ name: 'Arhan', subteams: ['wet-lab'] }]
+export const ROSTER_EXTRAS: Profile[] = [
+  { name: 'Arhan', subteams: ['wet-lab'] },
+  { name: 'Ruhi Gottumukkala', subteams: ['web-dev'] },
+]
 
 /** The principal investigators, then the mentors. */
 export const ADVISORS: Investigator[] = [...PRINCIPAL_INVESTIGATORS, ...MENTORS]

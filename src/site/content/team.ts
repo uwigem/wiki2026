@@ -316,13 +316,6 @@ export const ROSTER: Member[] = [
     photo: 'team/alvin-fu.jpg',
   },
   {
-    name: 'Ruhi Gottumukkala',
-    email: 'rgottu@uw.edu',
-    subteams: ['web-dev'],
-    bio:
-      'Hi, I’m Ruhi! I’m a Computer Science major on the Wiki Development subteam.',
-  },
-  {
     name: 'Iris Guo',
     email: 'iguo@uw.edu',
     subteams: ['human-practices', 'web-dev'],
