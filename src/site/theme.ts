@@ -4,7 +4,7 @@ import { buildPalette, type Mode } from '../engine/palette'
  * The site's colour.
  *
  * The wiki is always painted in day light, even though the engine can also do
- * dusk and night (the playground lets you switch). Both values live here so
+ * dusk and night. Both values live here so
  * that "which palette is the site using" is one answer in one file rather than
  * a string typed into several.
  *

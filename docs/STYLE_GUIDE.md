@@ -289,7 +289,7 @@ Defined in `src/index.css`. Most are in `@layer components`; `.pixel` and
 | `.reveal` | Fades in once when scrolled into view |
 | `.pixel` | Puts the pixel font on something that is not a heading |
 | `.pixelated` | Keeps an upscaled image's pixels square |
-| `.pond-range` | The playground's slider. Used once, and nowhere else |
+| `.pond-range` | The pixel slider. The model page's dose dial and the story's watering can |
 
 A class that is not on this list and not a Tailwind utility does nothing. There
 is no warning when you misspell one: the element simply renders unstyled.

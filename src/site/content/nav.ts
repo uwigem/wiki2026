@@ -9,8 +9,9 @@
  * iGEM uses, so a judge can find a required page by its official name; the
  * titles inside the pages are written in the site's own voice.
  *
- * Playground is not in the architecture document. It is kept because it is the
- * team's own toy, as a single sign at the end rather than inside a group.
+ * iGEM Alchemy sits in Human Practices, where it belongs, and again as a single
+ * sign at the end: it is the one page people open for the fun of it, so it is
+ * worth reaching without opening a group first.
  *
  * Paths are flat and use iGEM's names (`/model`, `/human-practices`, ...), the
  * same as the iGEM wiki template. Judges reach the award and medal pages from
@@ -77,11 +78,17 @@ export const NAV: NavGroup[] = [
       { label: 'Attributions', to: '/attributions' },
     ],
   },
-  { label: 'Playground', to: '/playground' },
+  { label: 'iGEM Alchemy', to: '/alchemy' },
 ]
 
-/** Flat list of every routable path, for the footer sitemap. */
-export const ALL_ROUTES: NavItem[] = NAV.flatMap((g) => (g.items ? g.items : [{ label: g.label, to: g.to }]))
+/**
+ * Flat list of every routable path, for the footer sitemap. A page may be in
+ * the nav twice, the way iGEM Alchemy is in Human Practices and again at the
+ * end, so the list keeps the first sign for each path and drops the repeats.
+ */
+export const ALL_ROUTES: NavItem[] = NAV.flatMap((g) =>
+  g.items ? g.items : [{ label: g.label, to: g.to }],
+).filter((r, i, all) => all.findIndex((o) => o.to === r.to) === i)
 
 /** Which nav group owns a given path (drives the active-sprout marker). */
 export function activeGroup(path: string): NavGroup | undefined {
@@ -120,6 +127,7 @@ export const STANDARD_PAGES = [
  * arrive as old hash links such as `#/drylab/model`.
  */
 export const OLD_PATHS: Record<string, string> = {
+  '/playground': '/alchemy',
   '/project/description': '/description',
   '/project/background': '/background',
   '/project/engineering': '/engineering',

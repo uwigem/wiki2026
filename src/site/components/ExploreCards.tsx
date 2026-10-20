@@ -115,8 +115,8 @@ const SIGNPOST = [
 ]
 
 /**
- * The playground is deliberately not here. It is the team's own toy and is not
- * expected to ship, so it is not offered as a part of the project to explore.
+ * One card per family in the top navigation, in the same order, so the end of a
+ * page and the top of the window agree about how the site is laid out.
  */
 const SECTIONS: Section[] = [
   { to: '/description', label: 'Project', blurb: 'the idea and the build', colour: 'var(--p-stem)', icon: BALANCE },
