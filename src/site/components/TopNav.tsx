@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { PROJECT_TITLE, TEAM_NAME, TEAM_YEAR } from '../content/site'
 import TeamLogo from './TeamLogo'
+import ScrollSprout from './ScrollSprout'
 import { NAV, activeGroup, type NavGroup } from '../content/nav'
 import { Link, useRoute } from '../router'
 import { useEscape } from '../hooks'
@@ -22,6 +23,10 @@ export default function TopNav({ visible = true }: { visible?: boolean }) {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [openAccordion, setOpenAccordion] = useState<string | null>(null)
   const current = activeGroup(path)
+  // The homepage only: the line under the bar fills as the page is read, with
+  // the hedgehog walking along its end. Not while the phone menu is open,
+  // which moves the bar's bottom edge down to the foot of the menu.
+  const progress = path === '/' && !menuOpen
 
   // Close everything whenever the route changes.
   useEffect(() => {
@@ -40,11 +45,14 @@ export default function TopNav({ visible = true }: { visible?: boolean }) {
       inert={!visible || undefined}
       aria-hidden={!visible || undefined}
       className={
-        'sticky top-0 z-40 border-b-[3px] border-leaf-700 bg-leaf-100 transition-[opacity,transform] duration-500 ease-out ' +
+        'sticky top-0 z-40 border-b-[3px] bg-leaf-100 transition-[opacity,transform] duration-500 ease-out ' +
+        (progress ? 'border-leaf-300 ' : 'border-leaf-700 ') +
         (visible ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-full opacity-0')
       }
     >
-      <div className="mx-auto flex max-w-6xl items-center gap-3 px-3 py-2 sm:px-5">
+      {progress && <ScrollSprout />}
+      {/* Above the hedgehog, so a sign he walks under stays readable. */}
+      <div className="relative z-10 mx-auto flex max-w-6xl items-center gap-3 px-3 py-2 sm:px-5">
         <Link to="/" className="group flex shrink-0 items-center gap-2" title={PROJECT_TITLE}>
           {/* Decorative here: the team name beside it is the link text. */}
           <TeamLogo height={38} />

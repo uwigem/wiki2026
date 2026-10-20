@@ -267,9 +267,12 @@ function drawCell(f: Frame, o: CellOpts = {}) {
     p.ellipse(x, y, rx, rx * 0.7, c('bushMid'))
 
   if (glow > 0) {
-    p.alpha = glow * 0.55
+    // Back to the alpha it came in with, not to 1: a cell drawn while it fades
+    // out would otherwise draw its cilium and SMO solid over the next picture.
+    const keep = p.alpha
+    p.alpha = keep * glow * 0.55
     p.capsule(CIL_X, CIL_TOP - 3, CIL_BASE, CIL_W + 7, c('daisyHi'))
-    p.alpha = 1
+    p.alpha = keep
   }
   p.capsule(CIL_X, CIL_TOP, CIL_BASE, CIL_W, c('petalWhite'), mix(c('bushDark'), c('daisyCore'), glow))
   p.ellipse(CIL_X, CIL_BASE - 1.2, 2.4, 1.2, c('bushMid'))
@@ -450,7 +453,7 @@ function drawCan(f: Frame, w: number): [number, number] {
   // corners are the spout axis and its perpendicular, which keeps it square to
   // the spout at every tilt.
   p.poly([R(21.8, -13), R(27.7, -6.2), R(30.2, -8.3), R(24.3, -15.1)], hi, ink, 1)
-  p.line(22.9, -14, 25.4, -11.1, Math.max(1, p.k), mix(blue, ink, 0.3))
+  p.line(...R(23.6, -13.1), ...R(25.4, -11.1), Math.max(1, p.k), mix(blue, ink, 0.3))
   return R(27.4, -11.8)
 }
 
@@ -804,28 +807,48 @@ function sceneSmo(f: Frame) {
   drawReadout(f, level, enter, (1 - enter) * 16)
 }
 
+/**
+ * The cilium and the plant take turns rather than crossfading: the close-up
+ * dissolves away completely, readout and all, and only then do the plant and
+ * its can dissolve in. Two pictures this different on screen at once read as
+ * one muddled picture. The parts scene leaves the plant the same way.
+ */
 function sceneWater(f: Frame) {
   const { p, t } = f
-  const inAmt = smooth(span(t, 0, 0.12))
-  cam(f, 80, 64, 1)
-  drawPlant(f, f.water, { chipAlpha: span(t, 0.1, 0.16) })
-  if (inAmt < 1) {
-    // Dissolve out of the cilium close-up, readout and all.
-    p.alpha = 1 - inAmt
-    p.wash(c('bushHi'))
+  const out = smooth(span(t, 0, 0.06))
+  const inAmt = smooth(span(t, 0.08, 0.15))
+  if (out < 1) {
+    p.alpha = 1 - out
     closeCam(f)
     drawCell(f, { glow: 0.25, smo: SMO_HIGH, jiggle: true })
-    smoLabel(f, 1 - inAmt)
-    drawReadout(f, 1, 1 - inAmt)
+    smoLabel(f, 1 - out)
     p.alpha = 1
+    drawReadout(f, 1, 1 - out)
+    return
   }
+  p.alpha = inAmt
+  cam(f, 80, 64, 1)
+  drawPlant(f, f.water, { chipAlpha: inAmt })
+  p.alpha = 1
 }
 
 function sceneParts(f: Frame) {
   const { p, t } = f
-  const inAmt = smooth(span(t, 0, 0.16))
+  // Out of the watering scene the way it came in: the plant goes, then the
+  // cilium comes back.
+  const out = smooth(span(t, 0, 0.08))
+  const inAmt = smooth(span(t, 0.1, 0.18))
+  if (out < 1) {
+    p.alpha = 1 - out
+    cam(f, 80, 64, 1)
+    drawPlant(f, f.water, { chipAlpha: 1 - out })
+    p.alpha = 1
+    return
+  }
   closeCam(f)
+  p.alpha = inAmt
   drawCell(f, { smo: SMO_MID })
+  p.alpha = 1
   const show = [span(t, 0.2, 0.3), span(t, 0.4, 0.5), span(t, 0.6, 0.7)]
   PART_NAMES.forEach((name, i) => {
     if (show[i] <= 0) return
@@ -835,13 +858,6 @@ function sceneParts(f: Frame) {
     p.alpha = 1
     partLabel(f, name, x, y, show[i])
   })
-  if (inAmt < 1) {
-    p.alpha = 1 - inAmt
-    p.wash(c('bushHi'))
-    cam(f, 80, 64, 1)
-    drawPlant(f, f.water, { chipAlpha: 1 - inAmt })
-    p.alpha = 1
-  }
 }
 
 /**
@@ -1029,7 +1045,7 @@ function sceneClosing(f: Frame) {
 /**
  * Where each scene's entry ends, as progress through the scene: the stretch
  * that turns the previous scene's last frame into this scene (the garden
- * parting, the lens opening on the body, the dissolve out of the plant). The
+ * parting, the lens opening on the body, the plant giving way to the cilium). The
  * values are the windows the scene functions above use.
  *
  * Scrolling back up skims quickly through the rest of a scene and then plays
@@ -1041,8 +1057,8 @@ export const ENTRY_ENDS: Record<SceneId, number> = {
   diseases: 0.13,
   cilium: 0.38,
   smo: 0.14,
-  water: 0.12,
-  parts: 0.16,
+  water: 0.15,
+  parts: 0.18,
   mmm: 0,
   recruit: 0.1,
   release: 0,
