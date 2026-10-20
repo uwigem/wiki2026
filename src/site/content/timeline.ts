@@ -275,10 +275,6 @@ export const NEXT_STEPS: { title: string; body: string }[] = [
     title: 'SMO trafficking and functional characterisation',
     body: 'Quantify ciliary SMO abundance and evaluate downstream Hedgehog signalling using fluorescence imaging and GLI-responsive reporter assays. Selected binders will undergo additional functional testing following expression and purification.',
   },
-  {
-    title: 'Combined regulatory system',
-    body: 'If both regulatory mechanisms are independently validated, evaluate their combined effects on Hedgehog pathway activity.',
-  },
 ]
 
 /**

@@ -129,6 +129,16 @@ export default function MmmDiagram() {
           <text x={10} y={MEM_BOT + 20} fontSize={11} fill={P.bushDark} fontWeight={700}>
             Cytoplasm
           </text>
+          {/* The band itself is the ciliary membrane, which nothing said. */}
+          <text
+            x={10}
+            y={(MEM_TOP + MEM_BOT) / 2 + 4}
+            fontSize={10}
+            fill={P.bushDark}
+            fontWeight={700}
+          >
+            Primary cilium
+          </text>
 
           {/* MEGF8: one pass, two lobes above, a tail down to MGRN1 */}
           <g style={{ transform: megf8Shift, transition: ease }}>
@@ -145,6 +155,26 @@ export default function MmmDiagram() {
             <text x={88} y={52} fontSize={12} fontWeight={700} fill={P.shadow}>
               MEGF8
             </text>
+          </g>
+
+          {/*
+            MEGF8 and MOSMO hold each other: the interface the breaker is
+            designed against. Drawn as the bar between them so that there is
+            something visible for the breaker to cut, and it travels with the
+            two halves as they come apart.
+          */}
+          <g style={{ transform: megf8Shift, transition: ease }} aria-hidden>
+            <rect
+              x={118}
+              y={(MEM_TOP + MEM_BOT) / 2 - 2}
+              width={broken ? 20 : 26}
+              height={4}
+              rx={2}
+              fill={P.leafHi}
+              stroke={P.bushDark}
+              strokeWidth={1.2}
+              style={{ transition: ease }}
+            />
           </g>
 
           {/* MOSMO: four passes */}
@@ -252,15 +282,29 @@ export default function MmmDiagram() {
             </marker>
           </defs>
 
+          {/*
+            The interface, crossed out once the breaker is in. Drawn last so
+            the minibinder cannot cover it, and placed over the stub the
+            connector leaves behind rather than over the breaker itself.
+          */}
+          <g style={{ opacity: broken ? 1 : 0, transition: ease }} aria-hidden>
+            <path
+              d="M 106 100 L 124 118 M 124 100 L 106 118"
+              stroke="var(--color-warning)"
+              strokeWidth={3.6}
+              strokeLinecap="round"
+            />
+          </g>
+
           {/* the readout */}
           <g>
             <rect x={246} y={210} width={84} height={26} rx={5} fill={P.bushHi} stroke={P.grass4} strokeWidth={1.6} />
             <text x={288} y={227} fontSize={10.5} fontWeight={700} fill={P.shadow} textAnchor="middle">
-              {broken ? 'Ciliary SMO ↑' : linked ? 'Target down' : 'Ciliary SMO ↓'}
+              {broken ? 'Ciliary SMO ↑' : linked ? 'Target abundance ↓' : 'Ciliary SMO ↓'}
             </text>
             <rect x={344} y={210} width={88} height={26} rx={5} fill={P.bushHi} stroke={P.grass4} strokeWidth={1.6} />
             <text x={388} y={227} fontSize={10.5} fontWeight={700} fill={P.shadow} textAnchor="middle">
-              {broken ? 'HH signal ↑' : 'HH signal ↓'}
+              {broken ? 'HH signal ↑' : linked ? 'Receptor signalling ↓' : 'HH signal ↓'}
             </text>
           </g>
         </svg>

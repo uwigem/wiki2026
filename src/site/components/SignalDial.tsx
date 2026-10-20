@@ -53,6 +53,31 @@ const COL_X = [63, 96, 129, 162, 195]
 const ROW_Y = [28, 50, 72]
 const SLOTS = COL_X.length * ROW_Y.length
 
+/**
+ * How fast the chamber fills or empties at full deflection, in slots a second.
+ * Slow enough to watch the purple move, quick enough to reach an end.
+ */
+const LEVEL_RATE = SLOTS * 0.3
+
+/** Where the chamber sits when nothing is pushing it either way. */
+export const RESTING_LEVEL = (SLOTS - 1) / 2
+
+/**
+ * One step of the level.
+ *
+ * The slider sets the RATE of removal, not the level, so the level integrates
+ * it: off centre the chamber keeps filling or keeps emptying, and only the
+ * middle holds. Settling at a height fixed by the slider made the volume look
+ * static unless the reader was dragging, which is the opposite of the point.
+ *
+ * Exported so the behaviour can be checked without a canvas: the animation
+ * cannot run in a hidden tab, where requestAnimationFrame is suspended.
+ */
+export function stepLevel(filled: number, shown: number, dt: number): number {
+  const net = (shown - 0.5) * 2
+  return Math.max(1, Math.min(SLOTS - 1, filled + net * LEVEL_RATE * dt))
+}
+
 /** The level strip along the chamber floor. The storyboard's gauge, unrolled. */
 const STRIP_T = 92
 const STRIP_H = 7
@@ -160,8 +185,11 @@ export default function SignalDial({ bare = false }: DialProps) {
   const live = beat ? beat.setting : setting
   const showTraffic = !beat?.quiet
 
-  const stateRef = useRef({ setting: live, beatIdx, showTraffic })
-  stateRef.current = { setting: live, beatIdx, showTraffic }
+  /** Bumped by the reset button; the draw loop snaps the level back when it changes. */
+  const [resetSeq, setResetSeq] = useState(0)
+
+  const stateRef = useRef({ setting: live, beatIdx, showTraffic, resetSeq })
+  stateRef.current = { setting: live, beatIdx, showTraffic, resetSeq }
 
   const advanceRef = useRef(() => {})
   advanceRef.current = () => {
@@ -246,8 +274,9 @@ export default function SignalDial({ bare = false }: DialProps) {
     }
 
     let shown = 0.5
-    let filled = 7
+    let filled = RESTING_LEVEL
     let flow = 0
+    let lastReset = 0
 
     /** The chamber. Walls, two doorways, and a rounded cap at each end. */
     function drawCilium() {
@@ -320,7 +349,18 @@ export default function SignalDial({ bare = false }: DialProps) {
       // 3fps as at 60fps. A fixed fraction per frame never reached the ends.
       const k = 1 - Math.exp(-dt * 7)
       shown += (st.setting - shown) * k
-      filled += (1 + (SLOTS - 2) * shown - filled) * k
+      /*
+        The slider sets the rate of removal, not the level, so the level has to
+        INTEGRATE it: anywhere off centre the chamber keeps filling or keeps
+        emptying, and only the middle holds steady. Settling at a height fixed
+        by the slider made the volume look static unless the reader was
+        actually dragging, which is the opposite of what the dial is for.
+      */
+      if (st.resetSeq !== lastReset) {
+        lastReset = st.resetSeq
+        filled = RESTING_LEVEL
+      }
+      filled = stepLevel(filled, shown, dt)
       const removal = Math.max(0, 2 - 2 * shown)
       flow += dt
 
@@ -564,8 +604,8 @@ export default function SignalDial({ bare = false }: DialProps) {
           </span>
         </label>
         <div className="mt-1 flex justify-between text-note">
-          <span>removal recruited, level drops</span>
-          <span>removal blocked, level climbs</span>
+          <span>High ubiquitination, fast removal from the cilium</span>
+          <span>Low ubiquitination, the target builds up</span>
         </div>
 
         {/* A grid, not flex-wrap, so this row can never become two rows. */}
@@ -591,6 +631,17 @@ export default function SignalDial({ bare = false }: DialProps) {
             onClick={playing ? () => setBeatIdx(BEATS.length) : () => setBeatIdx(0)}
           >
             {playing ? 'Skip to controls' : 'Replay'}
+          </button>
+          <button
+            type="button"
+            disabled={playing}
+            className="pixel-btn py-1 text-xs disabled:opacity-50 sm:text-sm"
+            onClick={() => {
+              setSetting(0.5)
+              setResetSeq((v) => v + 1)
+            }}
+          >
+            Reset
           </button>
         </div>
 

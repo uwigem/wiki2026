@@ -92,6 +92,8 @@ export interface CardItem {
   /** One paragraph, or several when the card makes more than one point. */
   body: string | string[];
   note?: string;
+  /** Spans the grid, for a card that sums up the ones beside it. */
+  wide?: true;
 }
 
 /** One kind of researcher who might pick the platform up. */
@@ -570,6 +572,7 @@ const description: Page = {
         },
         {
           title: "A dial, not a switch",
+          wide: true,
           body: "Because the device works through a graded degradation step rather than blocking the receptor outright, the goal is to set the amount of receptor in the cilium, not just turn it off.",
         },
       ],
@@ -3323,7 +3326,7 @@ const humanPractices: Page = {
       id: "pathway-figure",
       figure: "pathway",
       caption:
-        "The pathway as it occurs. PTCH1 keeps SMO out of the cilium until a Hedgehog ligand binds; SMO then accumulates there and GLI turns genes on. Separately, the MMM complex tags SMO and the cell degrades it.",
+        "**Top left.** PTCH1 remains in the primary cilium and suppresses SMO activation, keeping Hedgehog target genes off. **Top right.** Hedgehog binding causes PTCH1 to leave the cilium, allowing SMO to accumulate and activate downstream GLI signalling. **Bottom left.** The MMM complex associates with SMO in the ciliary membrane, positioning the E3 ligase near the receptor. **Bottom middle.** MGRN1 marks SMO with a ubiquitination tag. **Bottom right.** Ubiquitinated SMO is internalised and degraded, reducing SMO abundance on the membrane.",
     },
 {
       kind: "prose",
