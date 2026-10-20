@@ -176,7 +176,7 @@ export default function StakeholderGarden({ heading, intro, people, pending, sou
       )}
 
       {source && (
-        <p className="mt-4 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{source}</p>
+        <p className="mt-4 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{inline(source)}</p>
       )}
     </section>
   )

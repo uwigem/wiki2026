@@ -1,4 +1,5 @@
 import { asset } from '../router'
+import { inline } from "./RichText"
 
 /**
  * A figure, or the clearly marked hole where one is going.
@@ -88,7 +89,7 @@ export default function FigureFrame({ src, alt, caption, owner, srcMobile, ratio
 
       {src && <figcaption className="mt-3 text-body-sm leading-relaxed">{caption}</figcaption>}
       {source && (
-        <p className="mt-3 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{source}</p>
+        <p className="mt-3 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{inline(source)}</p>
       )}
     </figure>
   )

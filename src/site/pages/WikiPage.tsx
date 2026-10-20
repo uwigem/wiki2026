@@ -350,7 +350,7 @@ function BlockView({ block }: { block: Block }) {
             ))}
           </div>
           {block.source && (
-            <p className="mt-3 text-note text-leaf-800">{block.source}</p>
+            <p className="mt-3 text-note text-leaf-800">{inline(block.source)}</p>
           )}
         </div>
       );
@@ -382,7 +382,7 @@ function BlockView({ block }: { block: Block }) {
             ))}
           </ol>
           {block.source && (
-            <p className="mt-3 text-note text-leaf-800">{block.source}</p>
+            <p className="mt-3 text-note text-leaf-800">{inline(block.source)}</p>
           )}
         </div>
       );
@@ -394,7 +394,7 @@ function BlockView({ block }: { block: Block }) {
             {block.items.map((f, i) => (
               <div key={i} className="border-l-[3px] border-leaf-400 pl-3">
                 <dt className="pixel text-sm">{f.title}</dt>
-                <dd className="text-body leading-relaxed">{f.body}</dd>
+                <dd className="text-body leading-relaxed">{inline(f.body)}</dd>
               </div>
             ))}
           </dl>
@@ -655,7 +655,7 @@ function BlockView({ block }: { block: Block }) {
           )}
           {block.source && (
             <p className="mt-3 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">
-              {block.source}
+              {inline(block.source)}
             </p>
           )}
         </figure>
@@ -915,7 +915,7 @@ function PersonaCarousel({
 
       {source && (
         <p className="mt-3 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">
-          {source}
+          {inline(source)}
         </p>
       )}
     </section>

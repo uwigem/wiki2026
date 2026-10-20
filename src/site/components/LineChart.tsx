@@ -254,7 +254,7 @@ export default function LineChart({
       )}
 
       {footnote && <p className="mt-3 text-body-sm leading-relaxed">{inline(footnote)}</p>}
-      {source && <p className="mt-4 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{source}</p>}
+      {source && <p className="mt-4 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{inline(source)}</p>}
     </section>
   )
 }

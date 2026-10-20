@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import RichText from './RichText'
+import RichText, { inline } from './RichText'
 
 /**
  * Signboards and reading panels.
@@ -50,7 +50,7 @@ export function TextPanel({
       {heading && <h2 className="mb-3 text-xl">{heading}</h2>}
       <div className="prose-garden text-body">{children}</div>
       {source && (
-        <p className="mt-4 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{source}</p>
+        <p className="mt-4 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{inline(source)}</p>
       )}
     </section>
   )
@@ -71,7 +71,7 @@ export function QuoteSign({ paragraphs, source }: { paragraphs: string[]; source
           <RichText paragraphs={paragraphs} />
         </blockquote>
       </PixelSign>
-      {source && <figcaption className="kicker mt-3 normal-case">{source}</figcaption>}
+      {source && <figcaption className="kicker mt-3 normal-case">{inline(source)}</figcaption>}
     </figure>
   )
 }

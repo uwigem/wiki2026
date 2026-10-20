@@ -733,7 +733,7 @@ const designBlocks: Block[] = [
     kind: "prose",
     heading: "Why this structure is here and not ours",
     body: [
-      "The receptor above is **Smoothened**, the protein the whole project is aimed at, with a molecule of **cholesterol** bound in the domain that sits outside the cell. The helices below it cross the membrane seven times, which is the shape that makes it a GPCR. Cholesterol binding is the activation step [our kinetic model argues about](/model#sensitivity), so this is the picture that page is describing in equations.",
+      "The receptor above is **Smoothened**, the protein the whole project is aimed at, with a molecule of **cholesterol** bound in the domain that sits outside the cell. The helices below it cross the membrane seven times, which is the shape that makes it a GPCR. Cholesterol binding is the activation step [our kinetic model argues about](/model#gpcr), so this is the picture that page is describing in equations.",
       "It is a published structure rather than one of ours, and labelled that way on purpose. Our own targets, the MOSMO and MEGF8 interface, were solved by the Kong lab by cryo-EM and are not ours to publish. **Our designed binders are not here yet** because none has been validated at a bench. When they are, they drop into the same viewer.",
     ],
     source:
@@ -771,7 +771,7 @@ const designBlocks: Block[] = [
     kind: "prose",
     heading: "Where the design stands",
     body: [
-      "We have about **24 MOSMO binder backbones** carried through sequence design, most with two or three candidate sequences of roughly 160 residues. The MEGF8 binders are still in progress.",
+      "The campaign against both targets has finished: about **8,300 designs** generated, and **96** ordered for wet lab validation after the filters. [What each filter removed](/model#binder-funnel) is on the Model page.",
     ],
   },
 ];
@@ -987,7 +987,7 @@ const engineering: Page = {
       heading: "Two changes of direction",
       body: [
         "The first real change came before any protein was made. We began aiming at ATRN, then switched to the **MMM complex** once it was clear MMM had cryo-EM and an accessible interface while ATRN only had an AlphaFold model. Better data to design against was worth the switch.",
-        "A second problem showed up in the pipeline itself. RoseTTAFold3 could not fold our targets well because the sequence databases were thin, so the designs were failing the fold check for the wrong reason. We fixed it by **templating MOSMO and MEGF8** during forward folding. We now have about 24 MOSMO binder backbones through sequence design. [The pipeline](/engineering#pipeline) above has every step.",
+        "A second problem showed up in the pipeline itself. RoseTTAFold3 could not fold our targets well because the sequence databases were thin, so the designs were failing the fold check for the wrong reason. We fixed it by **templating MOSMO and MEGF8** during forward folding. [The pipeline](/engineering#pipeline) above has every step.",
       ],
     },
     {
@@ -1068,7 +1068,7 @@ const engineering: Page = {
             },
             {
               title: "Build",
-              body: "The protein modelling subteam's filters decided what could be ordered. Most early designs bound parts of MOSMO and MEGF8 buried in the membrane, so they re-folded every survivor against only the extracellular parts and wrote a filter that rejects anything near the transmembrane helices. About 25 designs survived, and a rescue cycle is working toward a full 96-well plate. That plate is also the format of the bench screen: [Experiment 2](/experiments#exp2-design) is a 96-well assay in mammalian cells, with each binder and its target fused to one half of a split transcription factor, a GFP reporter, and a matched GB1-only control for every binder. The kinetic modelling subteam's off-target check gave the binder doses a ceiling: the effect on MC4R stays small, about 6.8 percent at 50 nM and 8.0 percent at 500 nM once the system has settled, against a ceiling of 8.2 percent that no dose can pass.",
+              body: "The protein modelling subteam's filters decided what could be ordered. Most early designs bound parts of MOSMO and MEGF8 buried in the membrane, so they re-folded every survivor against only the extracellular parts and wrote a filter that rejects anything near the transmembrane helices. About 25 designs survived that round, and a rescue cycle of sequence redesign then filled the plate: 96 designs were ordered. That plate is also the format of the bench screen: [Experiment 2](/experiments#exp2-design) is a 96-well assay in mammalian cells, with each binder and its target fused to one half of a split transcription factor, a GFP reporter, and a matched GB1-only control for every binder. The kinetic modelling subteam's off-target check cleared the dose range rather than narrowing it: the effect on MC4R stays small, about 6.8 percent at 50 nM and 8.0 percent at 500 nM once the system has settled, against a ceiling of 8.2 percent that no dose can pass.",
             },
             {
               title: "Test",
@@ -1126,12 +1126,12 @@ const engineering: Page = {
           "Kinetic modelling",
           "Wet lab",
           "An off-target check: the MC4R effect stays small, and has a ceiling set by how little MGRN1 there is.",
-          "A ceiling for the binder doses in Experiment 4.",
+          "Confidence that the dose range in Experiment 4 does not need narrowing.",
         ],
         [
           "Protein modelling",
           "Wet lab",
-          "Extracellular-only targets, and about 25 filtered designs working toward a 96-well plate.",
+          "Extracellular-only targets, and a filled 96-well plate of filtered designs.",
           "The format of the [Experiment 2](/experiments#exp2-design) screen, matched GB1 controls, and secreted expression of hits for [Experiment 4](/experiments#exp4-design).",
         ],
         [
@@ -1461,7 +1461,7 @@ const model: Page = {
   storyBeat:
     "Before you dig, it helps to know how fast things grow. So we did the maths, and then we asked a systems biologist to tell us where the maths was wrong.",
   intro:
-    "A kinetic model of the Hedgehog and MMM system, built to answer one question. Can the binder bring ciliary SMO back to a normal level, or is tunable just a nice word.",
+    "A kinetic model of the Hedgehog and MMM system, built to answer one question. Can the device set ciliary SMO where we want it rather than only switching it off, or is tunable just a nice word.",
   blocks: [
     {
       kind: "prose",
@@ -1471,8 +1471,8 @@ const model: Page = {
       body: [
         "The whole point of the device is graded control. Acting on the three-part MMM complex should let us set the amount of **SMO in the primary cilium**, where blocking SMO directly only gives on or off. That is a claim about rates, so it has to survive a kinetic model before it is worth building.",
         "There are four pieces of modelling on this page, and they answer four different questions. **The tuner model** asks whether the device can move ciliary SMO in both directions and by how much; it is the one that tests the central claim. **The GPCR model** asks what makes SMO signal in the first place, because the tuner treats SMO as a quantity to move around and something has to justify that simplification. **The safety model** asks what else the device touches, since freeing one protein from one complex necessarily offers it to another. And **the protein modelling** asks which of thousands of designed binders were worth the cost of ordering.",
-        "Each one changed what we did. The tuner model sent the wet lab after a dose response and an in-cell degradation assay rather than high-resolution binding kinetics, because those are the measurements its answer actually depends on. The safety model put a ceiling on the binder doses in the experiments. The protein modelling threw away more than 98 percent of what we generated, including a whole class of designs that scored well and could never have worked. The GPCR model is the one that has changed the least so far, and the section says where it still falls short.",
-        "What the models rest on is mostly other people's measurements, and they are marked throughout. Where a number is a stand-in rather than a measurement, the page says so and sweeps it rather than trusting it.",
+        "Each one changed what we did. The tuner model sent the wet lab after a dose response and an in-cell degradation assay rather than high-resolution binding kinetics, because those are the measurements its answer actually depends on. The safety model ran before anything was built, and found that the melanocortin side effect has a hard ceiling far below the level we had set in advance as meaningful, which is why it is not a reason to hold the dose down. The protein modelling threw away more than 98 percent of what we generated, including a whole class of designs that scored well and could never have worked. The GPCR model is the one that has changed the least so far, and the section says where it still falls short.",
+        "What the models rest on is mostly other people's measurements, and they are marked throughout. Where a number is a stand-in rather than a measurement, the page says so, and the tuner model sweeps its stand-ins across a range rather than trusting any one value for them.",
       ],
     },
     {
@@ -1718,7 +1718,7 @@ const model: Page = {
           columns: ["Parameter", "What it represents", "Value", "Where it comes from"],
           rows: [
             ["SMO_cil", "Ciliary SMO concentration", "1 nM", "Normalisation anchor. Sets the scale only."],
-            ["M_free", "Active MMM complex", "0.148 nM", "Literature [5], derived from densitometry"],
+            ["Mm", "Active MMM complex", "0.148 nM", "Literature [5], derived from densitometry"],
             ["PTCH1", "PTCH1 concentration", "0.15 nM", "PaxDb [6], 0.01 ppm"],
             ["Influx", "Ciliary influx", "0.0691 nM per second", "Calculated, as ciliary SMO times every rate that removes it"],
             ["k_out", "Ciliary transit, exit", "9.63e-5 per second", "Literature [7], from a 2.0 hour half-life"],
@@ -1731,7 +1731,7 @@ const model: Page = {
             ["k3, k_minus3, kf_MMM_linker, koff", "Binder and linker on and off rates", "Preset", "**Stand-ins**, swept rather than trusted"],
           ],
           caption:
-            "Six of these are stand-ins rather than measurements: the PTCH1 gate, the ternary enhancement, and the four binder and linker rates on the last row. The four rates are swept across a range in every result below rather than treated as known, and the ternary enhancement gets a figure of its own. Three further rows are calculated from the rows above them. What is left is five values from the literature and one normalisation anchor, so the twelve rows rest on six numbers.",
+            "Six of these are stand-ins rather than measurements: the PTCH1 gate, the ternary enhancement, and the four binder and linker rates on the last row. The four rates are swept across a range in every result below rather than treated as known, and the ternary enhancement gets a figure of its own. Three further rows are calculated: two from the rows above them, and the ubiquitination rate from a measured fold change of 9.06 that appears nowhere else in the table and that the binder's ceiling is calibrated against. What is left is five values from the literature and one normalisation anchor, so the twelve rows rest on seven numbers.",
         },
       ],
     },
@@ -1890,7 +1890,7 @@ const model: Page = {
       body: [
         "Local analysis only describes the neighbourhood of the settings we chose. Since six of those settings are stand-ins, we also ran a **global** analysis, which samples the whole plausible range at once. We used Morris screening [11] and Sobol analysis [12] together, on the principle that a parameter both methods call uninfluential can be dropped.",
         "Because the device is meant to push the readout in either direction, the output here is the **log fold change** of ciliary SMO rather than its concentration, so that an increase and a decrease of the same size count the same.",
-        "One thing to know before reading the next two figures: the global analysis was run on an **earlier parameterisation** of the same model, with a different ciliary exit rate and complex abundance, and has not been re-run since. The ordering it gives is what we rely on, and that ordering agrees with the local analysis above. The index values themselves belong to that earlier run.",
+        "One thing to know before reading the next two figures: the global analysis was run on an **earlier parameterisation** of the same model, with a different ciliary exit rate and complex abundance, and has not been re-run since. The ordering it gives is what we rely on; the index values themselves belong to that earlier run. That ordering matches the local analysis at both ends, with clearance by the complex at the top and the PTCH1 gate at the bottom, but the two disagree in the middle about the doses: locally the linker dose comes eleventh and the binder dose seventeenth, while here they come second and third. That is the two analyses asking different questions rather than contradicting each other. These figures sample each dose anywhere between 0.1 and 1000 nM, while the local pass nudges a fixed 5 nM dose by ten percent. The local pass also cannot tell the binder's dose apart from its on-rate, because the two enter the equations only as a product, which is why the pair scores identically there. Where dose is concerned the global ranking is the one to read, and the dose response sweeps above are what it rests on.",
       ],
     },
     {
@@ -1956,6 +1956,7 @@ const model: Page = {
         "The sensitivity ranking tells us which of those to do first. Dose and the ternary enhancement dominate the readout while the precise binding kinetics do not, so wet lab effort is better spent on the degradation assay and a dose response than on high-resolution SPR.",
         "The bundled model uses a simplified single-arm ternary term, which loses something real. Reimplementing the full two-arm cooperative rate law would capture the **hook effect**, where too much linker saturates both arms separately instead of bridging them, and the amount of degradation falls again. That matters for choosing a dosing window, since it means more is not always better.",
         "The one result we distrust is our own PTCH1 term. PTCH1 loss is what defines basal cell carcinoma, yet the gate comes out as effectively nothing in the global analysis and near the bottom of the local one. That is more likely to be a sign that a simple mass-action gate under-represents what PTCH1 actually does, which is transport cholesterol, than a sign that PTCH1 does not matter. The GPCR model below is where we treat that mechanism properly.",
+        "One discrepancy is worth flagging rather than hiding. This model reads PTCH1 out of PaxDb at 0.01 ppm, and the GPCR model reads the same protein out of the same database at 1.5 ppm. We have not reconciled the two. Because the gate barely moves this model's answer at either value, it does not change anything above it, but it is an open question for whichever version of the model ends up carrying PTCH1 seriously.",
       ],
     },
     {
@@ -1966,8 +1967,8 @@ const model: Page = {
       heading: "How best to model SMO itself",
       body: [
         "The model above treats SMO as a quantity to be moved around. This one asks a different question: what makes SMO signal at all, and when does that signalling become excessive [1]. SMO is regulated by the Hedgehog ligand and by **PTCH1**, which keeps SMO out of the ciliary membrane and so inhibits it. Hedgehog activates the pathway by inhibiting PTCH1 [2].",
-        "Despite a lot of study, there is no clear consensus on the detail. Earlier models had PTCH1 binding and inhibiting SMO directly [3]. More recent evidence suggests PTCH1 instead works by reducing the **accessibility of cholesterol** in the outer plasma membrane [4, 5], and others argue it expels cholesterol from the cell altogether [7]. Here we advance a model in which SMO signalling is modulated by outer-leaflet cholesterol, and test whether it can reproduce several experimental observations.",
-        "Our model expands on previous ones by treating the distribution of cholesterol as something that changes, with cholesterol acting as SMO's own ligand. Cholesterol naturally distributes unevenly between the inner and outer layers of a membrane [6], and PTCH1 has been proposed to shift that distribution by acting as a rare transporter of sterols. Its close relative NPC1 does the same job in the lysosome [7]. Once at the cilium, SMO needs a cholesterol binding step to activate, and signalling in the model is proportional to the amount of cholesterol-bound SMO. Because SMO binds at a domain that faces outward [5], its signalling is sensitive to which side of the membrane the cholesterol is on.",
+        "Despite a lot of study, there is no clear consensus on the detail. An early model had PTCH1 binding and inhibiting SMO directly, but PTCH1 suppresses SMO while present at far lower levels than SMO and without the two being appreciably associated, which points to an indirect, catalytic action rather than a one to one block [3]. More recent evidence suggests PTCH1 works by reducing the **accessibility of cholesterol** in the outer plasma membrane [4, 5], and others argue it expels cholesterol from the cell altogether [7]. Here we advance a model in which SMO signalling is modulated by outer-leaflet cholesterol, and test whether it can reproduce several experimental observations.",
+        "Our model expands on previous ones by treating the distribution of cholesterol as something that changes, with cholesterol acting as SMO's own ligand. Cholesterol naturally distributes unevenly between the inner and outer layers of a membrane [6], and PTCH1 has been proposed to shift that distribution by acting as a rare transporter of sterols [3]. Its close relative NPC1 does the same job in the lysosome [7]. Once at the cilium, SMO needs a cholesterol binding step to activate, and signalling in the model is proportional to the amount of cholesterol-bound SMO. Because SMO binds at a domain that faces outward [5], its signalling is sensitive to which side of the membrane the cholesterol is on.",
       ],
       source:
         "The sources for this section are listed with the rest at the foot of the page.",
@@ -2324,7 +2325,7 @@ const model: Page = {
             [
               "**M_MMM**",
               "MGRN1 held inside the full complex at the plasma membrane. This is what the binder reduces.",
-              "MEGF8's PaxDb abundance before the membrane factor, 0.24 nM, times the 0.617 share of it found carrying MGRN1 in a published figure, which gives 0.148 nM",
+              "MEGF8's PaxDb abundance before the membrane factor, 0.24 nM, times the 0.617 share of it found carrying MGRN1 in a published figure [3], which gives 0.148 nM",
             ],
             [
               "**M_ATRN**",
@@ -2465,7 +2466,7 @@ const model: Page = {
       heading: "What the safety result means",
       body: [
         "Three things carry over from this model. More binder does mean more off-target effect, up to a point, but that point is **set by how little MGRN1 there is**: no dose and no binder, however good, can free more MGRN1 than the cell holds. The curve **flattens** well before the top of the range, with most of the effect in place by 50 nM. And the ceiling itself is **8.2 percent of surface MC4R**, against a threshold of 20 percent.",
-        "What would change that conclusion is a measurement rather than a model: how much MGRN1 a cell really holds, and how much of it is in the complex to begin with. Both are taken here from a protein abundance database and one published figure. If MGRN1 were far more abundant than 0.18 nM, the ceiling would rise with it.",
+        "What would change that conclusion is a measurement rather than a model: how much MGRN1 a cell really holds, and how much of it is in the complex to begin with. Both are taken here from a protein abundance database and one published figure [3]. If MGRN1 were far more abundant than 0.18 nM, the ceiling would rise with it.",
       ],
     },
     {
@@ -2538,7 +2539,7 @@ const model: Page = {
           yLabel: "successes credited to it",
           trend: "origin",
           footnote:
-            "A design is generated against a **list** of hotspots, not one, so a run is credited to every residue in its list. These axes therefore count uses rather than designs, and they cannot be added up and compared with the funnel: MOSMO's column alone comes to 34,068 uses across 8,300 designs. Read as a rate, MEGF8 returns 34 successes from 1,658 uses and MOSMO 308 from 34,068. The fits are tight, and that is the finding: the rate is close to constant whichever residue was named. Read the fit with its caveat, though. Only 20 of MEGF8's residues and 30 of MOSMO's were ever named as a hotspot; the rest of the points are residues that were never tried, piled at the origin, and they carry much of the fit. Over the residues actually used, the same line gives 0.67 on MEGF8 and 0.92 on MOSMO. The MOSMO panel therefore makes the case on its own and the MEGF8 panel does not, which is worth saying out loud. The points are not named, because which numbering they are given in is still a question for the design subteam.",
+            "A design is generated against a **list** of hotspots, not one, so a run is credited to every residue in its list. These axes therefore count uses rather than designs, and they cannot be added up and compared with the funnel: MOSMO's column alone comes to 34,068 uses, many times over the number of designs that produced them. Read as a rate, MEGF8 returns 34 successes from 1,658 uses and MOSMO 308 from 34,068. The fits are tight, and that is the finding: the rate is close to constant whichever residue was named. Read the fit with its caveat, though. Only 20 of MEGF8's residues and 30 of MOSMO's were ever named as a hotspot; the rest of the points are residues that were never tried, piled at the origin, and they carry much of the fit. Over the residues actually used, the same line gives 0.67 on MEGF8 and 0.92 on MOSMO. The MOSMO panel therefore makes the case on its own and the MEGF8 panel does not, which is worth saying out loud. The points are not named, because which numbering they are given in is still a question for the design subteam.",
         },
       ],
     },
@@ -4907,7 +4908,7 @@ const contribution: Page = {
         [
           "**pLDDT**",
           "Per-residue prediction confidence, scored from 0 to 100.",
-          "Above **80** is satisfactory, but we do not filter designs out strictly on it.",
+          "Above **80**, applied over the binder's own residues. It removed 67 designs.",
         ],
         [
           "**ddG**",
