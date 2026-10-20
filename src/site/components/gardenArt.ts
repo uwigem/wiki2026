@@ -238,51 +238,106 @@ export const PROPS: Record<PropKey, Sprite> = {
 
 /* ------------------------------------------------- the membrane proteins */
 
-export type ProteinLook = 'gpcr-blue' | 'gpcr-lilac' | 'gpcr-pink' | 'ptch' | 'channel'
+export type ProteinLook = 'smo' | 'ptch' | 'gpr161' | 'glp1r' | 'mc4r' | 'sstr3' | 'pkd'
 
-/** Seven helices through the membrane: a GPCR. Three colourways so neighbours differ. */
-const gpcr = (a: string, b: string) =>
-  s([
-    `.W.W.W.W.W.W.W.`,
-    `.${a}.${a}.${a}.${a}.${a}.${a}.${a}.`,
-    `.${a}.${b}.${a}.${b}.${a}.${b}.${a}.`,
-    `.${a}.${a}.${a}.${a}.${a}.${a}.${a}.`,
-    `.${a}.${b}.${a}.${b}.${a}.${b}.${a}.`,
-    `.${a}.${a}.${a}.${a}.${a}.${a}.${a}.`,
-    `.${a}.${a}.${a}.${a}.${a}.${a}.${a}.`,
-    `.D.D.D.D.D.D.D.`,
-  ])
+/**
+ * A membrane protein, drawn as a chain of helices threaded through the
+ * membrane.
+ *
+ * Each helix is a lit cylinder two pixels wide. Loops join them in pairs above
+ * the membrane and on the offbeat below it, so the chain reads as one strand
+ * snaking back and forth rather than as a row of separate bars. How many
+ * helices, which way the loops start and what hangs off the ends is what tells
+ * a seven-pass receptor from a ten-pass transporter before the label is read.
+ */
+function helices(
+  n: number,
+  body: string,
+  hi: string,
+  foot: string,
+  opts: { phase?: 0 | 1; tail?: number } = {},
+): string[] {
+  const { phase = 0, tail = 0 } = opts
+  const W = 3 * n - 1
+  const col = (i: number) => 3 * i
+  const blank = () => '.'.repeat(W).split('')
+  const span = (line: string[], i: number, fill: string) => {
+    if (i + 1 >= n) return
+    for (let x = col(i); x <= col(i + 1) + 1; x++) line[x] = fill
+  }
+  const rows: string[] = []
 
-/** Twelve helices, a sterol-sensing transporter: Patched. */
-const PTCH = s([
-  'W.W.W.W.W.W.W.W.W.W.W.W',
-  'g.g.g.g.g.g.g.g.g.g.g.g',
-  'g.i.g.i.g.i.g.i.g.i.g.i',
-  'g.g.g.g.g.g.g.g.g.g.g.g',
-  'g.i.g.i.g.i.g.i.g.i.g.i',
-  'g.g.g.g.g.g.g.g.g.g.g.g',
-  'g.g.g.g.g.g.g.g.g.g.g.g',
-  'D.D.D.D.D.D.D.D.D.D.D.D',
-])
+  const top = blank()
+  for (let i = phase; i + 1 < n; i += 2) span(top, i, hi)
+  rows.push(top.join(''))
+
+  for (let r = 0; r < 8; r++) {
+    const line = blank()
+    for (let i = 0; i < n; i++) {
+      line[col(i)] = hi
+      line[col(i) + 1] = body
+    }
+    rows.push(line.join(''))
+  }
+
+  const bottom = blank()
+  for (let i = 0; i < n; i++) {
+    bottom[col(i)] = foot
+    bottom[col(i) + 1] = foot
+  }
+  for (let i = 1 - phase; i + 1 < n; i += 2) span(bottom, i, foot)
+  rows.push(bottom.join(''))
+
+  // A C-terminal tail off the last helix, so the two ends are not the same.
+  for (let t = 0; t < tail; t++) {
+    const line = blank()
+    line[col(n - 1)] = foot
+    rows.push(line.join(''))
+  }
+  return rows
+}
+
+/** A class B receptor: the helices under a tall extracellular domain. */
+function withEcd(rows: string[], body: string, hi: string): string[] {
+  const W = rows[0].length
+  const mid = Math.floor(W / 2)
+  const cap = (half: number, fill: string) => {
+    const line = '.'.repeat(W).split('')
+    for (let x = Math.max(0, mid - half); x <= Math.min(W - 1, mid + half); x++) line[x] = fill
+    return line.join('')
+  }
+  return [cap(2, hi), cap(4, body), cap(4, hi), cap(4, body), cap(1, body), ...rows]
+}
 
 /** Two subunits around a pore: the polycystin channel. */
-const CHANNEL = s([
-  '.ccccc...ccccc.',
-  '.cCCCc...cCCCc.',
-  '.cCCCc.U.cCCCc.',
-  '.cCCCc.u.cCCCc.',
-  '.cCCCc.U.cCCCc.',
-  '.cCCCc.u.cCCCc.',
-  '.ccccc...ccccc.',
-  '.DDDDD...DDDDD.',
-])
+function channel(body: string, hi: string, foot: string): string[] {
+  const w = (a: string, b: string, gap: string) => `${a}${b}${b}${b}${a}.${gap}.${a}${b}${b}${b}${a}`
+  return [
+    w(body, body, '.'),
+    w(body, hi, '.'),
+    w(body, hi, hi),
+    w(body, hi, body),
+    w(body, hi, hi),
+    w(body, hi, body),
+    w(body, hi, hi),
+    w(body, body, '.'),
+    w(foot, foot, '.'),
+  ]
+}
 
+/**
+ * One look per protein, so no two of the seven are the same drawing. The
+ * colours follow Creative's membrane figure: Patched teal, Smoothened orange,
+ * GPR161 magenta, SSTR3 purple, MC4R yellow.
+ */
 export const PROTEINS: Record<ProteinLook, Sprite> = {
-  'gpcr-blue': gpcr('u', 'U'),
-  'gpcr-lilac': gpcr('V', 'v'),
-  'gpcr-pink': gpcr('P', 'r'),
-  ptch: PTCH,
-  channel: CHANNEL,
+  smo: s(helices(7, 'b', 'O', 'b', { tail: 2 })),
+  ptch: s(helices(10, 'c', 'C', 'c')),
+  gpr161: s(helices(7, 'P', 'r', 'R', { phase: 1, tail: 3 })),
+  glp1r: s(withEcd(helices(7, 'f', 'F', 's'), 'f', 'F')),
+  mc4r: s(helices(6, 'J', 'Y', 'J', { tail: 1 })),
+  sstr3: s(helices(7, 'V', 'v', 'V', { phase: 1 })),
+  pkd: s(channel('u', 'U', 'u')),
 }
 
 /* ------------------------------------------------ the persona accessories */

@@ -3351,7 +3351,7 @@ const humanPractices: Page = {
       proteins: [
         {
           short: "SMO",
-          look: "gpcr-blue",
+          look: "smo",
           name: "SMO: Smoothened",
           family: "G protein-coupled receptor (GPCR)",
           body: [
@@ -3371,7 +3371,7 @@ const humanPractices: Page = {
         },
         {
           short: "GPR161",
-          look: "gpcr-lilac",
+          look: "gpr161",
           name: "GPR161: G protein-coupled receptor 161",
           family: "G protein-coupled receptor (GPCR)",
           body: [
@@ -3381,7 +3381,7 @@ const humanPractices: Page = {
         },
         {
           short: "GLP-1R",
-          look: "gpcr-pink",
+          look: "glp1r",
           name: "GLP-1R: Glucagon-like peptide-1 receptor",
           family: "Class B1 (secretin family) G protein-coupled receptor",
           body: [
@@ -3391,7 +3391,7 @@ const humanPractices: Page = {
         },
         {
           short: "MC4R",
-          look: "gpcr-blue",
+          look: "mc4r",
           name: "MC4R: Melanocortin-4 receptor",
           family: "Class A G protein-coupled receptor",
           body: [
@@ -3401,7 +3401,7 @@ const humanPractices: Page = {
         },
         {
           short: "PKD1/2",
-          look: "channel",
+          look: "pkd",
           name: "PKD1 and PKD2: Polycystin-1 and Polycystin-2",
           family: "A receptor and ion channel that function together as a complex",
           body: [
@@ -3411,7 +3411,7 @@ const humanPractices: Page = {
         },
         {
           short: "SSTR3",
-          look: "gpcr-lilac",
+          look: "sstr3",
           name: "SSTR3: Somatostatin receptor 3",
           family: "Class A G protein-coupled receptor",
           body: [
