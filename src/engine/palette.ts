@@ -79,6 +79,8 @@ export type ColorKey =
   | 'sparkle'
   | 'sparkleHi'
   | 'shadow'
+  // a true red, for warnings the garden palette has no colour for
+  | 'warning'
 
 export type Palette = Record<ColorKey, string>
 
@@ -158,6 +160,7 @@ const BASE: Palette = {
   sparkle: '#c2e7f5',
   sparkleHi: '#ffffff',
   shadow: '#3c5a4b',
+  warning: '#c62f2f',
 }
 
 export type Mode = 'day' | 'dusk' | 'night'
@@ -188,6 +191,7 @@ const GLOW_GRADES: Record<Mode, Grade> = {
 
 // Light sources / highlights that stay bright even at dusk / night.
 const LUMINOUS = new Set<ColorKey>([
+  'warning',
   'sparkle',
   'sparkleHi',
   'foam',

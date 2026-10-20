@@ -112,6 +112,11 @@
   --color-pool-400: var(--p-water);
   --color-pool-600: var(--p-waterDeep);
 
+  /* a true red, for warnings; the garden palette has no other, and the
+     white that goes on top of it */
+  --color-warning: var(--p-warning);
+  --color-warning-ink: var(--p-petalWhiteHi);
+
   /* petals */
   --color-petal-lilac: var(--p-lilacPetal);
   --color-petal-pink: var(--p-pinkBud);
