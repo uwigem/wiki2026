@@ -127,8 +127,19 @@ export default function ScienceFigure({
     const WATER = toRgb(pal.waterLight)
     const WATER_D = toRgb(pal.waterDeep)
     const LEAF = toRgb(pal.leaf)
-    // The palette has no true red; this rose is the closest it goes.
-    const ROSE = toRgb(pal.pinkDark)
+    /*
+      A closed route has to read as closed, so the cross is a true red rather
+      than the palette's rose. It is the one colour on the site not derived
+      from the engine, read back from the variable that defines it so there is
+      still only one place it is written down.
+    */
+    const ROSE = (() => {
+      const v =
+        typeof window === 'undefined'
+          ? ''
+          : getComputedStyle(document.documentElement).getPropertyValue('--color-warning').trim()
+      return /^#[0-9a-f]{6}$/i.test(v) ? toRgb(v) : toRgb(pal.pinkDark)
+    })()
 
     const set = (x: number, y: number, c: Rgb) => {
       x = Math.round(x)

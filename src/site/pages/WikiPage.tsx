@@ -336,12 +336,9 @@ function BlockView({ block }: { block: Block }) {
           )}
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {block.items.map((item, i) => (
-              <FlowerBedCard
-                key={i}
-                title={item.title}
-                body={item.body}
-                note={item.note}
-              />
+              <div key={i} className={item.wide ? "min-w-0 sm:col-span-2" : "min-w-0"}>
+                <FlowerBedCard title={item.title} body={item.body} note={item.note} />
+              </div>
             ))}
           </div>
           {block.source && (
