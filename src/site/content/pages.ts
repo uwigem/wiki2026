@@ -2640,9 +2640,8 @@ const model: Page = {
       navLabel: "The filters",
       heading: "What a design had to clear",
       body: [
-        "Through discussion with **Professor DiMaio** and others with experience in protein design, we settled on five filters. Four of them are confidence metrics taken from the folding model: **minPAE**, how far the predicted positions of the two chains might be out at their closest; **RMSD**, how far the folded result drifted from the backbone it was built on; **pLDDT**, the model's own per-residue confidence; and **monomer RMSD**.",
-        "For monomer RMSD, we refolded each binder **on its own, without the target**, and compared that to the backbone. A binder whose shape only appears when the target is there is being held in place by the thing it is supposed to grip, which is not a binder we trust.",
-        "Those four are general: they would apply to most de novo binder projects, which is why they are written up for other teams on [contribution](/contribution#pipeline). The fifth was ours alone, because our targets live in a membrane.",
+        "Through discussion with **Professor DiMaio** and other sources of experience in protein design, we determined a set of **filters** using these scores. These included minPAE, RMSD from the initial backbone, pLDDT, monomer RMSD (testing structural consistency by running RF3 on the binder itself, without the target, to ensure its structure is not being induced by the target), and a custom transmembrane filter.",
+        "The first four **confidence metrics** are used to single out binders and backbones which have particularly favourable interactions with the target, and can be applied to most de novo binder projects. For more on how our team's approach can be applied to other projects involving binder design, please see the [contributions page](/contribution#pipeline). The **transmembrane filter** was unique to this project, allowing us to better filter out results that may be high affinity binders, but would not work in practice due to the transmembrane portions of our specific targets.",
       ],
     },
     {
