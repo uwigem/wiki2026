@@ -45,17 +45,22 @@ All page content is data in `src/site/content/pages.ts`. Each item in a page's
 | `matrix` | A capability comparison table | Showing that nothing existing does the job |
 | `toolshed` | Expandable tool cards | Surveying existing methods |
 | `structure` | A rotatable 3D protein | You have coordinates worth looking at |
+| `structures` | Several structures in one viewer, a button per structure | A set to compare, for example one design per target site |
 | `figure` | An image, or a marked empty slot | Any diagram, including ones not drawn yet |
 | `logo` | The animated balance, with a caption | The "set it, do not switch it" idea |
 | `tornado` | Diverging bars from a centre line | Showing which inputs actually move a result |
 | `dose` | A response curve, with the limit it must stay under | Dose against effect, or anything that saturates |
+| `line` | Lines against a shared axis, with optional log scales and a labelled reference line. Several panels become small multiples sharing one scale | A dose sweep, a time course, a sensitivity that changes over time |
+| `scatter` | Points against two measured quantities, with an optional fitted line and its R squared, a reference line and the 1:1 diagonal | One point per design, or per parameter in a screen |
+| `bars` | Bars with an uncertainty whisker on each, one or two values per row | Sensitivity indices with their confidence intervals, where a whisker crossing zero is the point |
+| `graph` | Named boxes and labelled arrows, placed by hand, with its own arrangement for phones | A model's wiring: what turns into what, and what acts on it |
 | `funnel` | Stacked tapering bars with survival rates | How many candidates make it through each filter |
 | `stakeholders` | Flower beds of people, grouped by expertise | Interviews, each with what it changed |
 | `pillars` | Activities grouped under a stated principle | Outreach, or anything designed to a set of values |
 | `facts` | Compact key and value pairs | Reference details |
 | `quote` | A pulled-out quote on a sign | One sentence worth stopping on |
 | `callout` | A boxed statement with a daisy border | One paragraph the page's argument lands on: our system, the founder's theory |
-| `table` | A table of text; rows stack into cards on a phone | Anything with columns. Cells take links and bold |
+| `table` | A table of text; rows stack into cards on a phone. With `heat`, every number after the first column is shaded by its size and sign | Anything with columns. Cells take links and bold |
 | `references` | A numbered reference list with resolving links | After a section whose text carries `[n]` markers |
 | `rail` | A strategy in stages with a rail beside it and a "we are here" line | A plan that is partly done and partly ahead |
 | `flowchart` | A yes/no decision tree a reader answers one question at a time | "Is this right for your project" |

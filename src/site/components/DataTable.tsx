@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { inline } from './RichText'
 
 /**
@@ -14,6 +15,24 @@ export interface TableData {
   rows: string[][]
 }
 
+/** A cell's text as a number, or null when it is not one. Accepts a typographic minus. */
+function numeric(cell: string): number | null {
+  const t = cell.replace(/\u2212/g, '-').replace(/[*`]/g, '').trim()
+  return /^[-+]?(\d+\.?\d*|\.\d+)(e[-+]?\d+)?$/i.test(t) ? Number(t) : null
+}
+
+/**
+ * Shading for a numeric cell: pink for a positive value and blue for a
+ * negative one, the colours the tornado chart uses for the same two
+ * directions, deeper as the value grows. Mixed from the palette variables, so
+ * the table re-themes with the site.
+ */
+function shade(v: number | null, maxAbs: number): CSSProperties | undefined {
+  if (v === null || v === 0 || maxAbs === 0) return undefined
+  const pct = Math.round(Math.min(1, Math.abs(v) / maxAbs) * 85)
+  return { background: `color-mix(in srgb, var(--p-${v > 0 ? 'pinkBud' : 'water'}) ${pct}%, transparent)` }
+}
+
 export default function DataTable({
   heading,
   intro,
@@ -21,13 +40,21 @@ export default function DataTable({
   rows,
   caption,
   source,
+  heat,
 }: TableData & {
   heading?: string
   intro?: string
+  /** Shade every number after the first column by its size and sign, like a heat map. */
+  heat?: boolean
   /** One line under the table saying what it shows. */
   caption?: string
   source?: string
 }) {
+  const maxAbs = heat
+    ? Math.max(0, ...rows.flatMap((row) => row.slice(1).map((c) => Math.abs(numeric(c) ?? 0))))
+    : 0
+  const tint = (cell: string) => (heat ? shade(numeric(cell), maxAbs) : undefined)
+
   return (
     <section className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
       {heading && <h2 className="text-xl">{heading}</h2>}
@@ -53,7 +80,7 @@ export default function DataTable({
                       {inline(cell)}
                     </th>
                   ) : (
-                    <td key={c} className="px-3 py-2.5">
+                    <td key={c} className={'px-3 py-2.5' + (heat ? ' numeral' : '')} style={tint(cell)}>
                       {inline(cell)}
                     </td>
                   ),
@@ -71,7 +98,13 @@ export default function DataTable({
             {row.slice(1).map((cell, c) => (
               <p key={c} className="mt-2 text-body-sm leading-relaxed">
                 <span className="kicker mr-1.5 normal-case">{columns[c + 1]}</span>
-                {inline(cell)}
+                {heat ? (
+                  <span className="numeral px-1.5 py-0.5" style={tint(cell)}>
+                    {inline(cell)}
+                  </span>
+                ) : (
+                  inline(cell)
+                )}
               </p>
             ))}
           </li>

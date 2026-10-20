@@ -12,6 +12,10 @@ import BalanceLogo from "../components/BalanceLogo";
 import CapabilityMatrix from "../components/CapabilityMatrix";
 import DoseCurve from "../components/DoseCurve";
 import FunnelChart from "../components/FunnelChart";
+import LineChart from "../components/LineChart";
+import ScatterChart from "../components/ScatterChart";
+import IntervalBars from "../components/IntervalBars";
+import NodeDiagram from "../components/NodeDiagram";
 import TornadoChart from "../components/TornadoChart";
 import FigureFrame from "../components/FigureFrame";
 import HedgehogNote from "../components/HedgehogNote";
@@ -20,6 +24,7 @@ import MmmDiagram from "../components/MmmDiagram";
 import StakeholderGarden from "../components/StakeholderGarden";
 import StatRow from "../components/StatRow";
 import StructureView from "../components/StructureView";
+import StructurePicker from "../components/StructurePicker";
 import ToolShed from "../components/ToolShed";
 import Callout from "../components/Callout";
 import ConstructDiagram from "../components/ConstructDiagram";
@@ -459,6 +464,83 @@ function BlockView({ block }: { block: Block }) {
         />
       );
 
+    case "line":
+      return (
+        <LineChart
+          heading={block.heading}
+          intro={block.intro}
+          panels={block.panels}
+          xLabel={block.xLabel}
+          yLabel={block.yLabel}
+          xLog={block.xLog}
+          yLog={block.yLog}
+          xMin={block.xMin}
+          xMax={block.xMax}
+          yMin={block.yMin}
+          yMax={block.yMax}
+          references={block.references}
+          legendTitle={block.legendTitle}
+          footnote={block.footnote}
+          source={block.source}
+        />
+      );
+
+    case "scatter":
+      return (
+        <ScatterChart
+          heading={block.heading}
+          intro={block.intro}
+          panels={block.panels}
+          groups={block.groups}
+          xLabel={block.xLabel}
+          yLabel={block.yLabel}
+          xLog={block.xLog}
+          yLog={block.yLog}
+          xMin={block.xMin}
+          xMax={block.xMax}
+          yMin={block.yMin}
+          yMax={block.yMax}
+          trend={block.trend}
+          references={block.references}
+          diagonal={block.diagonal}
+          sharedAxes={block.sharedAxes}
+          footnote={block.footnote}
+          source={block.source}
+        />
+      );
+
+    case "bars":
+      return (
+        <IntervalBars
+          heading={block.heading}
+          intro={block.intro}
+          series={block.series}
+          rows={block.rows}
+          axisLabel={block.axisLabel}
+          min={block.min}
+          max={block.max}
+          digits={block.digits}
+          footnote={block.footnote}
+          source={block.source}
+        />
+      );
+
+    case "graph":
+      return (
+        <NodeDiagram
+          heading={block.heading}
+          intro={block.intro}
+          nodes={block.nodes}
+          edges={block.edges}
+          width={block.width}
+          height={block.height}
+          narrow={block.narrow}
+          alt={block.alt}
+          caption={block.caption}
+          source={block.source}
+        />
+      );
+
     case "funnel":
       return (
         <FunnelChart
@@ -503,6 +585,9 @@ function BlockView({ block }: { block: Block }) {
 
     case "structure":
       return <StructureView structure={block.structure} />;
+
+    case "structures":
+      return <StructurePicker structures={block.structures} label={block.label} />;
 
     case "logo":
       return (
@@ -635,6 +720,7 @@ function BlockView({ block }: { block: Block }) {
           intro={block.intro}
           columns={block.columns}
           rows={block.rows}
+          heat={block.heat}
           caption={block.caption}
           source={block.source}
         />

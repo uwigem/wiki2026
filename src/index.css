@@ -296,6 +296,11 @@
   .pixel-btn:active {
     box-shadow: 1px 1px 0 var(--p-shadow);
   }
+  /* A button in a set that is currently chosen, for example which structure is shown. */
+  .pixel-btn[aria-pressed='true'] {
+    background: var(--p-pinkBud);
+    box-shadow: 1px 1px 0 var(--p-shadow);
+  }
   .pixel-btn-primary {
     background: var(--p-water);
   }
