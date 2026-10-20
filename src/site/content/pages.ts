@@ -2925,7 +2925,7 @@ const DELIVERABLES: Block[] = [
       },
       {
         id: "other-tool",
-        text: "Another tool may be more suitable. Have a look at [what is already in the shed](/human-practices#toolbox).",
+        text: "Another tool may be more suitable. [Have a look at existing methods](/human-practices#toolbox).",
         stop: true,
       },
       {
