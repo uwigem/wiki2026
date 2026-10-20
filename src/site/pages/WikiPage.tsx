@@ -284,6 +284,26 @@ function groupSections(blocks: Block[]): { lead: Block[]; sections: SectionGroup
   return { lead, sections };
 }
 
+/**
+ * Block kinds that draw something. A `details` holding one of these opens by
+ * default: a figure nobody unfolds may as well not be on the page. Tables and
+ * prose are not in the set, so the working behind a point stays folded away.
+ * `pdf` is not either, since a protocol is a document to fetch, not a figure,
+ * and seven of them open at once would bury the page they sit on.
+ */
+const FIGURE_KINDS: ReadonlySet<Block["kind"]> = new Set([
+  "figure", "gallery", "scatter", "line", "bars", "tornado", "dose",
+  "funnel", "graph", "diagram", "flowchart", "mechanism", "landscape",
+  "trail", "structure", "structures", "video",
+]);
+
+/** Whether a `details` holds a figure anywhere inside it, including nested ones. */
+function holdsFigure(blocks: Block[]): boolean {
+  return blocks.some((b) =>
+    FIGURE_KINDS.has(b.kind) || (b.kind === "details" && holdsFigure(b.blocks)),
+  );
+}
+
 /** The sections that have a reference list of their own, so their markers can link to it. */
 function referenceScopes(blocks: Block[]): ReadonlySet<string> {
   const out = new Set<string>();
@@ -350,7 +370,7 @@ function BlockView({ block }: { block: Block }) {
             ))}
           </div>
           {block.source && (
-            <p className="mt-3 text-note text-leaf-800">{block.source}</p>
+            <p className="mt-3 text-note text-leaf-800">{inline(block.source)}</p>
           )}
         </div>
       );
@@ -382,7 +402,7 @@ function BlockView({ block }: { block: Block }) {
             ))}
           </ol>
           {block.source && (
-            <p className="mt-3 text-note text-leaf-800">{block.source}</p>
+            <p className="mt-3 text-note text-leaf-800">{inline(block.source)}</p>
           )}
         </div>
       );
@@ -394,7 +414,7 @@ function BlockView({ block }: { block: Block }) {
             {block.items.map((f, i) => (
               <div key={i} className="border-l-[3px] border-leaf-400 pl-3">
                 <dt className="pixel text-sm">{f.title}</dt>
-                <dd className="text-body leading-relaxed">{f.body}</dd>
+                <dd className="text-body leading-relaxed">{inline(f.body)}</dd>
               </div>
             ))}
           </dl>
@@ -655,7 +675,7 @@ function BlockView({ block }: { block: Block }) {
           )}
           {block.source && (
             <p className="mt-3 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">
-              {block.source}
+              {inline(block.source)}
             </p>
           )}
         </figure>
@@ -684,7 +704,7 @@ function BlockView({ block }: { block: Block }) {
       return <MedalCriteria tier={block.tier} intro={block.intro} items={block.items} />;
 
     case "gallery":
-      return <Gallery heading={block.heading} intro={block.intro} images={block.images} source={block.source} />;
+      return <Gallery heading={block.heading} intro={block.intro} images={block.images} ratio={block.ratio} source={block.source} />;
 
     case "links":
       return <LinkCards heading={block.heading} intro={block.intro} items={block.items} source={block.source} />;
@@ -755,7 +775,12 @@ function BlockView({ block }: { block: Block }) {
 
     case "details":
       return (
-        <Details heading={block.heading} summary={block.summary} open={block.open} step={block.step}>
+        <Details
+          heading={block.heading}
+          summary={block.summary}
+          open={block.open ?? holdsFigure(block.blocks)}
+          step={block.step}
+        >
           {block.blocks.map((inner, i) => (
             <div key={i} id={inner.id} className="section-block min-w-0">
               <BlockView block={inner} />
@@ -915,7 +940,7 @@ function PersonaCarousel({
 
       {source && (
         <p className="mt-3 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">
-          {source}
+          {inline(source)}
         </p>
       )}
     </section>

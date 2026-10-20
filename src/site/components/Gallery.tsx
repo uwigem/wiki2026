@@ -13,15 +13,25 @@ export interface GalleryImage {
   caption?: string
 }
 
+/** Matches FigureFrame, so a ratio means the same thing wherever it is set. */
+const RATIO = { wide: '16 / 9', square: '4 / 3', tall: '3 / 4' } as const
+
 export default function Gallery({
   heading,
   intro,
   images,
+  ratio,
   source,
 }: {
   heading?: string
   intro?: string
   images: GalleryImage[]
+  /**
+   * The shape of the box each image sits in. Left unset, a photograph fills a
+   * 4:3 box and is cropped to it. Set, the whole image is shown inside the
+   * box instead, which is what a tall diagram or a protein rendering needs.
+   */
+  ratio?: keyof typeof RATIO
   source?: string
 }) {
   const cols = images.length === 1 ? '' : images.length === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2'
@@ -37,14 +47,19 @@ export default function Gallery({
               alt={im.alt}
               loading="lazy"
               decoding="async"
-              className="aspect-[4/3] w-full rounded-sm border-[3px] border-leaf-700 object-cover"
+              className="w-full rounded-sm border-[3px] border-leaf-700"
+              style={
+                ratio
+                  ? { aspectRatio: RATIO[ratio], objectFit: 'contain' }
+                  : { aspectRatio: RATIO.square, objectFit: 'cover' }
+              }
             />
             {im.caption && <figcaption className="mt-1.5 text-note text-leaf-800">{inline(im.caption)}</figcaption>}
           </figure>
         ))}
       </div>
       {source && (
-        <p className="mt-4 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{source}</p>
+        <p className="mt-4 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{inline(source)}</p>
       )}
     </section>
   )

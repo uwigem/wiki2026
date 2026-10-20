@@ -33,6 +33,13 @@ export interface ChartReference {
   axis: 'x' | 'y'
   value: number
   label: string
+  /**
+   * Where along the plot to put the label, as a fraction of its width, when
+   * the default position would land on a curve. The label still ends at this
+   * point rather than starting there. Keep it under about 0.95: on a phone
+   * the chart scrolls sideways and the last stripe of it is not on screen.
+   */
+  labelAt?: number
 }
 
 interface Props {
@@ -161,7 +168,16 @@ export default function LineChart({
                       {/* Kept well inside the right edge: on a phone the chart
                           scrolls sideways and the last stripe of it is hidden,
                           which would otherwise cut this label in half. */}
-                      <text x={VW - PAD.right - 30} y={Y(r.value) - 4} textAnchor="end" {...CHART_TEXT}>
+                      <text
+                        x={r.labelAt === undefined ? VW - PAD.right - 30 : PAD.left + plotW * r.labelAt}
+                        y={Y(r.value) - 4}
+                        textAnchor="end"
+                        stroke={SITE_PALETTE.bushHi}
+                        strokeWidth={3.5}
+                        strokeLinejoin="round"
+                        paintOrder="stroke"
+                        {...CHART_TEXT}
+                      >
                         {r.label}
                       </text>
                     </g>
@@ -254,7 +270,7 @@ export default function LineChart({
       )}
 
       {footnote && <p className="mt-3 text-body-sm leading-relaxed">{inline(footnote)}</p>}
-      {source && <p className="mt-4 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{source}</p>}
+      {source && <p className="mt-4 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{inline(source)}</p>}
     </section>
   )
 }

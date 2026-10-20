@@ -193,12 +193,18 @@ GPCR simulations and sensitivity analyses, whose underlying values have not been
 recovered. Those are hosted and their heights must not be quoted anywhere,
 including in alt text.
 
-**Still needed:** the protein modelling section, which is still the old short
-text. A consolidated reference list per section, which the page currently holds
-as one list of about twenty. The equations as figures rather than as code-styled
-tables. Figure numbering. Alvin's GPCR data, which would let the four hosted
-sensitivity charts be redrawn natively, and the replication section and fitted
-parameters, which do not exist in any source yet and are deliberately not shown.
+Sources are four lists, one per section, each numbered from 1, all inside the
+Sources section at the foot. A numbered marker in a section resolves against its
+own section's list, so the same number means different things in different
+sections. Nothing on the page links out to Overleaf, Drive or Docs: every
+equation and parameter table is on the page itself, which is what the judging
+handbook asks for.
+
+**Still needed:** Alvin's GPCR data, which would let the four hosted sensitivity
+charts be redrawn natively; the replication section and the fitted parameters,
+which do not exist in any source yet and are deliberately not shown; and the
+answers to the questions drafted for the four subteam owners, which would settle
+the MC4R horizon, the hotspot residue numbering and two parameter values.
 
 ### Who the Garden Is For (`/human-practices`), a medal page
 

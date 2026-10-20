@@ -110,7 +110,7 @@ export default function ConstructDiagram({
       </ul>
 
       {footnote && <p className="mt-3 text-body-sm leading-relaxed text-leaf-900">{inline(footnote)}</p>}
-      {source && <p className="mt-3 text-note text-leaf-800">{source}</p>}
+      {source && <p className="mt-3 text-note text-leaf-800">{inline(source)}</p>}
     </section>
   )
 }

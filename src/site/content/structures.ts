@@ -25,6 +25,11 @@
 export interface Structure {
   /** PDB identifier, shown as a credit in the viewer, or our own name for a design. */
   id: string
+  /**
+   * Which set this belongs to, when several are shown in one viewer. Defaults
+   * to the first word of `id`, which is the target for our binders.
+   */
+  group?: string
   name: string
   caption: string
   /** "resnum x y z" per residue, semicolon separated. */

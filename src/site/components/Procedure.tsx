@@ -51,7 +51,7 @@ export default function Procedure({
         ))}
       </div>
 
-      {source && <p className="mt-3 text-note text-leaf-800">{source}</p>}
+      {source && <p className="mt-3 text-note text-leaf-800">{inline(source)}</p>}
     </section>
   )
 }
