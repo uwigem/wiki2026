@@ -3596,7 +3596,6 @@ const humanPractices: Page = {
       kind: "rail",
       id: "to-market",
       heading: "To-market strategy",
-      intro: "Five stages, in order. Above the line is what we have done; below it is what we are planning.",
       hereLabel: "we are here",
       stages: [
         {
