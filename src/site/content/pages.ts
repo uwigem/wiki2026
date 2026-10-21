@@ -668,21 +668,21 @@ const engineering: Page = {
     {
       kind: "cards",
       id: "three-parts",
-      heading: "Three parts, in the order they happened",
+      heading: "Here is the story of our engineering cycle",
       intro:
         "Each subteam ran its own design, build, test, learn loop, and each one handed the next something to work with.",
       items: [
         {
           title: "Part 1: Kinetics modelling",
-          body: "Turning the Hedgehog pathway into equations we can run, and finding out which rates actually move the answer. [Go to Part 1](/engineering#kinetics)",
+          body: "Cast prediction and feasibility envelopes to understand our interventions on the Hedgehog system by modelling our system as a set of equations. [Go to Part 1](/engineering#kinetics)",
         },
         {
           title: "Part 2: Protein modelling",
-          body: "Generating thousands of candidate binders, then learning to throw almost all of them away. [Go to Part 2](/engineering#protein-modelling)",
+          body: "Designing *de novo* protein disruptors of the MEGF8-MOSMO interface to modulate signalling changes in the \"breaker system\" of our ciliary receptor abundance platform. [Go to Part 2](/engineering#protein-modelling)",
         },
         {
           title: "Part 3: Wet lab",
-          body: "Building the constructs the biology allows, and testing whether the cilium responds. [Go to Part 3](/engineering#wet-lab)",
+          body: "Designing the chemically induced dimerisation system and the experimental design to test our protein binders. [Go to Part 3](/engineering#wet-lab)",
         },
       ],
     },
@@ -936,8 +936,6 @@ const engineering: Page = {
     {
       kind: "cards",
       heading: "Engineering the constructs",
-      intro:
-        "Real decisions forced by the biology, worth recording because each one shaped the build.",
       items: [
         {
           title: "MEGF8 is enormous",
@@ -957,8 +955,6 @@ const engineering: Page = {
       kind: "table",
       id: "loops-fed-each-other",
       heading: "How the loops fed each other",
-      intro:
-        "Every row is a hand-off that changed something. The last one is the direction that has not happened yet.",
       columns: ["From", "To", "What was handed over", "What it changed at the bench"],
       rows: [
         [
