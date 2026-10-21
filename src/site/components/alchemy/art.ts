@@ -745,4 +745,3 @@ export function draw(id: string): Grid {
   return c.g
 }
 
-export const DRAWN = Object.keys(DRAW)

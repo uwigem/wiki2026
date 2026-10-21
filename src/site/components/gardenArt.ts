@@ -439,21 +439,6 @@ export const ACCESSORIES: Record<PersonaKey, Sprite> = {
 
 /* --------------------------------------------------------- diagram parts */
 
-/**
- * A sprite turned a quarter turn clockwise, so a protein drawn standing in a
- * flat membrane can also stand in the vertical wall of a cilium. Nothing is
- * redrawn: the same art serves both orientations.
- */
-export function rotateCW(sprite: Sprite): Sprite {
-  const rows: string[] = []
-  for (let x = 0; x < sprite.w; x++) {
-    let row = ''
-    for (let y = sprite.h - 1; y >= 0; y--) row += sprite.rows[y][x] ?? '.'
-    rows.push(row)
-  }
-  return { w: sprite.h, h: sprite.w, rows }
-}
-
 /** A Y of two heavy chains: the antibody in the neighbouring-markets strip. */
 export const ANTIBODY = s([
   '..VV......VV..',
@@ -517,7 +502,6 @@ export const ICON_TALK = s([
   '...ele.......',
   '...ee........',
 ])
-
 
 /** Three people, one in front: professional communities. */
 export const ICON_GROUP = s([

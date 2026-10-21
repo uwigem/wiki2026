@@ -21,8 +21,6 @@ export const PROJECT_TAGLINE = 'A dial for the cell’s antenna, not a switch.'
 export const PROJECT_SUBTITLE =
   'Almost every cell grows a single antenna called the primary cilium, and some receptors only work while they are sitting in it. We are building a modular tool that sets how much of a chosen receptor stays there. Hedgehog signaling is where we prove it works.'
 
-/** One-sentence version for cards, meta description, and social previews. */
-export const PROJECT_BLURB =
   'We build a modular tool that sets how much of a chosen receptor stays in the primary cilium, by redirecting the cell’s own MMM degradation complex rather than blocking the receptor outright.'
 
 export interface Cta {

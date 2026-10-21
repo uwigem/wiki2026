@@ -22,8 +22,6 @@ export function registrySlug(part: string): string {
   return part.toLowerCase().replace(/_/g, "-");
 }
 
-/** Our team's organisation page, which lists every part we registered. */
-export const REGISTRY_ORG =
   "https://registry.igem.org/organisations/780ead9c-c73a-4a70-b847-d12a99c8771f";
 
 export type DomainRole = "receptor" | "machinery" | "recruitment" | "tag" | "marker" | "other";
