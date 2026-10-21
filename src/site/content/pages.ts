@@ -1310,7 +1310,6 @@ const model: Page = {
         "The whole point of the device is graded control. Acting on the three-part MMM complex should let us set the amount of **SMO in the primary cilium**, where blocking SMO directly only gives on or off. That is a claim about rates, so it has to survive a kinetic model before it is worth building.",
         "There are four pieces of modelling on this page, and they answer four different questions. **The tuner model** asks whether the device can move ciliary SMO in both directions and by how much; it is the one that tests the central claim. **The GPCR model** asks what makes SMO signal in the first place, because the tuner treats SMO as a quantity to move around and something has to justify that simplification. **The safety model** asks what else the device touches, since freeing one protein from one complex necessarily offers it to another. And **the protein modelling** asks which of thousands of designed binders were worth the cost of ordering.",
         "Each one changed what we did. The tuner model sent the wet lab after a dose response and an in-cell degradation assay rather than high-resolution binding kinetics, because those are the measurements its answer actually depends on. The safety model ran before anything was built, and found that the melanocortin side effect has a hard ceiling far below the level we had set in advance as meaningful, which is why it is not a reason to hold the dose down. The protein modelling threw away more than 98 percent of what we generated, including a whole class of designs that scored well and could never have worked. The GPCR model is the one that has changed the least so far, and the section says where it still falls short.",
-        "Most of the numbers come from other people's measurements, and each is marked with its source. The ones that are stand-ins rather than measurements are marked as that, and the tuner model sweeps them across a range rather than trusting any one value.",
       ],
     },
     {
@@ -1320,9 +1319,9 @@ const model: Page = {
       id: "homeostasis",
       heading: "What the tuner model is for",
       body: [
-        "The tuner was assembled with adjustability in mind, so how it behaves under different conditions and doses is part of building it rather than something to check at the end. The modelling subteam wrote deterministic **ordinary differential equation** models to predict how the intervention, and the systems attached to it, behave across a range of cell states.",
-        "To treat the device as the bidirectional network it is meant to be, with both the linker and the binder dosed deliberately, we wrote an ODE network for the SMO signalling system upstream of the cilium. It carries the **MMM complex** (MGRN1, MEGF8 and MOSMO) and the natural inhibitor **PTCH1**, the two things most responsible for how much SMO reaches the cilium.",
-        "SMO has to enter the primary cilium to count as active [1], so ciliary SMO is the model's readout, and it is also what the intervention acts on directly. The upstream system is deliberately narrow: of everything SMO touches, PTCH1 is the body's own way of restricting it and the MMM complex is ours. Narrowing it this way rests on the finding that restricting SMO reduces downstream Hedgehog activation [2], so the model does not have to carry the transcription factors to know which way its result points.",
+        "As the Smoothened (SMO) bidirectional tuner was assembled with adjustability in mind, understanding its behaviour under variable conditions and doses is integral to its development. To approach these needs, our modelling team has constructed dedicated deterministic **ordinary differential equation** (ODE) models to predict targeted preliminary behaviours of our intervention and of essential attached systems across a selection of cell-state conditions.",
+        "To estimate our system's function as a bidirectional network, including strategic dosing of both the linker and binder, we implemented a dedicated ODE network to represent the SMO signalling system upstream of the cilia itself. Included are the **MMM complex** (MGRN1, MEGF8, MOSMO) and natural inhibitor **PTCH1**, to most closely resemble the most integral components of upstream-to-SMO ciliary trafficking.",
+        "To be considered active, SMO must enter the primary cilia [1]. Consequently, the upstream network of Hedgehog signalling modelled here centres around adapting the ciliary SMO concentration, especially as the proposed intervention acts directly upon it. This upstream system is selectively restricted to PTCH1 and the MMM complex because, while SMO acts on multiple other systems, one is the natural intervention and the other is our adaptation to SMO regulation. This assumption is made based on the knowledge that restricting SMO reduces downstream Hedgehog activation [2].",
       ],
       source:
         "Ciliary entry from Wilson et al. [1]; the effect of restricting SMO from Zhang et al. [2].",
@@ -1342,10 +1341,10 @@ const model: Page = {
       navLabel: "The rate law",
       heading: "Two ways to write the tagging step",
       body: [
-        "We built two versions of the same system. They differ in one place: how fast the MMM complex tags ciliary SMO for removal.",
-        "The first assumes that tagging follows **Michaelis-Menten kinetics**. That is a reasonable first pass, but it cannot see the things the device is actually made of. How tightly the linker holds SMO, how tightly it holds the complex, and how much linker and complex are present all disappear into one lumped rate.",
-        "The second replaces that step with the ternary-complex rate law from Wurz et al. [3], derived for **PROTACs**: molecules that work the way our linker does, by holding a target and an E3 ligase together until the target is tagged. It brings back the concentrations of the linker and the ligase and the affinity of each arm separately, and it reproduced a PROTAC system close enough to ours that we took it as the better description. We kept the simpler version so the two could be compared rather than assumed.",
-        "Both versions treat the MMM and linker complex as being at **quasi-steady state**: it settles within moments of the reaction starting, so its concentration is taken as unchanging while the slower parts of the system move. That is what makes it possible to write the designed components into the system without tracking every intermediate.",
+        "We developed two versions of a deterministic ODE system to model how the de novo components would affect the rate of SMO ubiquitination.",
+        "The original model assumes the behaviour of SMO ubiquitination mediated via the MMM complex follows **Michaelis-Menten kinetics**. This is a simplistic assumption that works well for modelling purposes; however, it becomes inaccurate as it cannot account for SMO-linker binding affinity, linker-MMM binding affinity, and the concentrations of the MMM complex and linker proteins.",
+        "To resolve this, we came up with the second model. The second model implements an equation (equation 7) from the paper *Affinity and cooperativity modulate ternary complex formation to drive targeted protein degradation* by Wurz et al. [3]. This paper derives a more complete equation to model **PROTAC** systems from Michaelis-Menten reaction kinetics. This approach adds many new parameters, such as PROTAC concentration, E3 ubiquitin ligase concentration, and binding affinities for the respective complexes. This equation proved to be extremely accurate when applied to a PROTAC system similar to the MMM-SMO-linker system we developed. Thus, we incorporated this equation into our model and compared it to Michaelis-Menten reaction kinetics to see which performed better.",
+        "Both ODE systems developed follow the **quasi-steady state** assumption for the MMM-linker complex. This assumption states that the MMM-linker complex reaches a stable equilibrium after the reaction starts, and its rate of change remains zero as the reactions progress. This assumption made it easier to develop our model and incorporate the de novo components into the system.",
       ],
       source:
         "Ternary-complex rate law from Wurz et al., equation 7.",
@@ -1356,9 +1355,8 @@ const model: Page = {
       navLabel: "Bundling",
       heading: "Why the model we run is a bundled one",
       body: [
-        "Published measurements for the MMM complex are thin. It was only recently described as a ciliary complex, and most of the numbers the equations above ask for have never been measured. Rather than invent them, the version we actually run bundles the system down to what the literature can support.",
-        "Parameters with no credible source were dropped instead of guessed, and the ones that survived are **swept across a range in every result below** rather than trusted at a single value. Cytoplasmic SMO becomes a constant influx instead of a tracked pool. Michaelis-Menten and the ternary rate law both collapse into mass action. What remains of the unknowns is re-expressed in terms of fold changes measured between a knockout and wild type, which is the kind of number the literature does have.",
-        "Each of those moves is a simplification with a cost, and each one is written out below along with what it would take to stop making it.",
+        "As published information available in literature for the MMM complex (as a recently discovered ciliary complex) is relatively low, the computational adaptation of the model relies on a series of assumptions and certain relationships being collapsed via bundling.",
+        "Parameters with no credible source were dropped instead of guessed, and the ones that survived are **swept across a range in every result below** rather than trusted at a single value. Those that remained would need to be swept later in development. As such, we adapted the cytoplasmic SMO as a non-depleting source, resolved Michaelis-Menten (and PROTAC behaviour) into mass action kinetics and re-expressed select unknown parameters in terms of known fold changes.",
       ],
     },
     {
@@ -1407,7 +1405,7 @@ const model: Page = {
       narrow: { width: 360, height: 420 },
       alt: "A wiring diagram of the bundled model. Ciliary SMO is fed by a constant influx and leaves three ways: tagged for degradation, or lost to exit, basal degradation and the PTCH1 gate. The active MMM ligase tags SMO. The binder converts active MMM into a taken-apart form, which raises SMO. The linker converts active MMM into a ternary SMO, linker and MMM complex, which tags SMO faster and so lowers it.",
       caption:
-        "The binder and the linker act on the same pool of active complex and pull it in opposite directions. Everything else in the picture is the cell's own machinery.",
+        "Here, the binder and the linker components act on a shared pool of active MMM complexes and alternate directions. All other components are the most essential components of the cell's own machinery.",
     },
     {
       kind: "details",
@@ -1653,17 +1651,14 @@ const model: Page = {
       navLabel: "Preliminary results",
       heading: "What the model does when we sweep it",
       body: [
-        "The model was written in **Antimony** and solved in Python's **Tellurium** library [14]. Because six of its constants are stand-ins, no single run of it means much. What means something is the shape of the response across the range those constants could plausibly take, which is what the next two figures show.",
-        "The first sweeps the binding strength of each arm, from a tenth of the baseline to ten times it, across doses from 0.1 to 1000 nM. The off-rates are held at a median value so that only the on-rates move.",
+        "The equation system was adapted into **Antimony** before being solved in Python's **Tellurium** library [14]. Because six of its constants are stand-ins, we use parameter sweeps to estimate the shape of the response across the range those constants could plausibly take.",
+        "We conducted initial sweeps of on-rate (k3 and kf_MMM_Linker) binding parameters over a scalar strength range of 0.1x to 10.0x. Each binding strength was validated over a dose range from 0.1 to 1000 nM. The off-rates are held at a median value so that only the on-rates move.",
+        "Across this range we observe that the binder raises the SMO response matching the calibration threshold from MEGF8-KO, with an effect change of about **9.06x**. The linker observes a reduction of SMO toward 0. Within our operating terms, the linker and binder function as intended, increasing and decreasing SMO accordingly.",
       ],
     },
     {
       kind: "line",
       id: "dose-sweep",
-      navLabel: "Dose sweep",
-      heading: "What each arm can do to ciliary SMO",
-      intro:
-        "Ciliary SMO against dose, as a multiple of the untreated level, at five settings of the arm's on-rate. Left, the binder. Right, the linker. Both panels share one scale, so the two arms can be compared by eye. Both axes are logarithmic, which puts a doubling and a halving the same distance from the untreated line, the same reason the global analysis below works in log fold change.",
       panels: SWEEP_PANELS,
       xLabel: "dose (nM)",
       yLabel: "ciliary SMO, as a multiple of untreated",
@@ -1672,7 +1667,7 @@ const model: Page = {
       legendTitle: "on-rate, as a multiple of the baseline",
       references: [{ axis: "y", value: 1, label: "untreated" }],
       footnote:
-        "The binder raises ciliary SMO towards a ceiling of about **nine times** untreated; the linker drives it down towards about **0.06 times**. Both ends are reachable from the same device. The ceiling itself is not a prediction: the model's tagging rate was calibrated on the MEGF8 knockout fold change of 9.06, so the binder arriving at about nine times is the model agreeing with its own calibration. What the sweep adds is that the on-rate sets the **dose needed**, not the destination. Every setting heads for the same ceiling, and a tenfold weaker on-rate simply takes more dose to get there: at the top of this range it has only reached five times, while the three strongest settings are already at the ceiling. The linker behaves the same way in the other direction.",
+        "Ciliary SMO concentration vs intervention dose, relative to the untreated WT level. We observe five settings for each tuner arm, with binder (left) and linker (right). Both axes are logarithmic.",
       source: "Regenerated from the current model.",
     },
     {
@@ -1692,6 +1687,15 @@ const model: Page = {
         "At **alpha = 0** the linker does the opposite of its job: binding the complex without speeding up tagging simply sequesters the complex, and ciliary SMO rises. For any alpha above zero the linker lowers SMO, and lowers it further the larger alpha is. A high ternary enhancement is what would let the linker outcompete SMO in a cell where SMO is overproduced, which is the condition the device is for. One caveat on reading it: unlike the binder, this arm is **not settled** at the time these curves are read. Run far enough and the alpha = 0 case relaxes back to the untreated level while the others fall further still, so the rise at alpha = 0 is a slow transient rather than a new resting state.",
     },
     {
+      kind: "prose",
+      id: "local-sensitivity",
+      navLabel: "Sensitivity analysis",
+      heading: "Sensitivity analysis of our tuner",
+      body: [
+        "To evaluate the next steps in development of this model we ran it through global and local sensitivity analysis programs to rank included components based on their relative contribution to model output.",
+      ],
+    },
+    {
       kind: "narration",
       id: "sensitivity-analysis",
       label: "what a sensitivity analysis is",
@@ -1702,22 +1706,16 @@ const model: Page = {
     },
     {
       kind: "prose",
-      id: "local-sensitivity",
-      navLabel: "Sensitivity analysis",
-      heading: "Which parameters move the answer",
+      heading: "Local sensitivity analysis",
       body: [
-        "We ran the model through both **local** and **global** sensitivity analysis, to rank its components by how much each contributes to the output. Local analysis asks what happens near one set of settings; global analysis asks what happens across the whole range the parameters could take. They answer different questions, and a parameter that both call uninfluential is one we can remove.",
-        "The local pass moves each parameter by ten percent either way, one at a time, and re-simulates the whole model over 120 hours.",
-        "It was run on the **un-bundled ternary version** described above, in nM and hours, at that script's own preset nominals rather than the calibrated values in the table. So what we take from it is the **ranking and the signs**, not the levels: which rates matter, and which way each one pushes.",
+        "Local sensitivity analysis moves all parameters in the model by ten percent in both directions, one at a time. It re-simulates the full model at each term.",
+        "Our local sensitivity analysis was run on the un-bundled ternary version (pre-bundling), in nM and hours, at separate preset values from those included in the table. Since what we take from it is the ranking and the signs, not the levels, we use this to determine which rates matter and the direction each parameter pushes our SMO ciliary readout.",
       ],
     },
     {
       kind: "tornado",
       id: "sensitivity",
       navLabel: "Local sensitivity",
-      heading: "What actually controls ciliary SMO",
-      intro:
-        "Every parameter in the ternary version, ranked by how far a ten percent change moves ciliary SMO. A bar of 1.3 means SMO moves about 1.3 percent for every one percent change in that parameter. Several of these rows are parameters the bundled model folds away, which is why they are not all in the table above.",
       rows: [
         { label: "SMO made in the cytoplasm", note: "k form, SMO-cyt", value: 1.3 },
         { label: "MMM complex made", note: "k form, MMM", value: -1.28 },
@@ -1798,11 +1796,11 @@ const model: Page = {
       kind: "prose",
       id: "global-sensitivity",
       navLabel: "Global sensitivity",
-      heading: "The same question, across the whole range",
+      heading: "Global sensitivity analysis",
       body: [
-        "Local analysis only describes the neighbourhood of the settings we chose. Since six of those settings are stand-ins, we also ran a **global** analysis, which samples the whole plausible range at once. We used Morris screening [11] and Sobol analysis [12] together, on the principle that a parameter both methods call uninfluential can be dropped.",
-        "Because the device is meant to push the readout in either direction, the output here is the **log fold change** of ciliary SMO rather than its concentration, so that an increase and a decrease of the same size count the same.",
-        "The global analysis was run on an **earlier parameterisation** of the same model, with a different ciliary exit rate and complex abundance, and has not been re-run since. The ordering it gives is what we rely on; the index values themselves belong to that earlier run. That ordering matches the local analysis at both ends, with clearance by the complex at the top and the PTCH1 gate at the bottom, but the two disagree in the middle about the doses: locally the linker dose comes eleventh and the binder dose seventeenth, while here they come second and third. That is the two analyses asking different questions rather than contradicting each other. These figures sample each dose anywhere between 0.1 and 1000 nM, while the local pass nudges a fixed 5 nM dose by ten percent. The local pass also cannot tell the binder's dose apart from its on-rate, because the two enter the equations only as a product, which is why the pair scores identically there. Where dose is concerned the global ranking is the one to read, and the dose response sweeps above are what it rests on.",
+        "Local analysis only describes a pre-set range of settings we chose. Since six of those settings are stand-ins, we also ran a **global** analysis, which samples the whole plausible range at once. To do so, we apply a combination of both Morris [11] and Sobol [12] sensitivity analysis methods sequentially, where parameters flagged by both systems would eventually be dropped from the model.",
+        "Because our model is dependent on a complementary relationship through the tuner system, we adapted our output to the **log10 fold change** of ciliary SMO to ensure increases and decreases in SMO are weighted equally.",
+        "GSA was run on the bundled model including the parameter defaults outlined in the table.",
       ],
     },
     {
@@ -1823,9 +1821,9 @@ const model: Page = {
       kind: "scatter",
       id: "morris",
       navLabel: "Morris screening",
-      heading: "Which parameters act on their own",
+      heading: "Morris screening method",
       intro:
-        "Morris screening. Along the bottom, how much each parameter moves the output on average. Up the side, how much that effect varies depending on where the rest of the model is set. The dashed line is where those two are equal, so a point above it has an influence that is non-linear or tangled up with the other parameters.",
+        "We implement the Morris screening method to evaluate and rank parameters based on how much they move readout against variance.",
       panels: [{ points: MORRIS_POINTS }],
       groups: [
         { id: "named", label: "name certain", shape: "square" },
@@ -1835,7 +1833,7 @@ const model: Page = {
       yLabel: "how much that effect varies",
       diagonal: true,
       footnote:
-        "Morris agrees with Sobol on the order: clearance by the complex first, then the two doses, then the ternary enhancement, with the PTCH1 gate last. Most of the smaller parameters sit on or above the dashed line, so their apparent influence depends heavily on where everything else is set, and a single ranking number flatters them. Clearance by the complex is the opposite case: it sits well below the line, which means it moves the readout on its own, whatever the rest of the model is doing.",
+        "Morris screening, ranking by mean absolute elementary effect, labelled k_MMM as the most influential, followed by the doses of both linker and binder and ternary enhancement alpha. The least influential metric, per Morris, was the PTCH1 gate. Six of the measured rates (including the ternary enhancement) indicated high variance, implying non-linear effects inflating significance scoring through Morris and dependence on cooperativity with more influential terms.",
       source:
         "Four of the ten names sit in one cluster in the run's own figure. Those four are our reading of which point is which, and are marked as such.",
     },
@@ -1862,13 +1860,12 @@ const model: Page = {
       kind: "prose",
       id: "tuner-discussion",
       navLabel: "Discussion",
-      heading: "What this tells us to do next",
+      heading: "Future directions",
       body: [
-        "Measuring the binder and linker binding constants by **SPR**, and the ternary enhancement by an **in-cell degradation assay**, would turn this feasibility envelope into an actual prediction. A second, independent MEGF8 knockout fold change would harden the single-point calibration that the tagging rate currently rests on.",
-        "The sensitivity ranking tells us which of those to do first. Dose and the ternary enhancement dominate the readout while the precise binding kinetics do not, so wet lab effort is better spent on the degradation assay and a dose response than on high-resolution SPR.",
-        "The bundled model uses a simplified single-arm ternary term, which loses something real. Reimplementing the full two-arm cooperative rate law would capture the **hook effect**, where too much linker saturates both arms separately instead of bridging them, and the amount of degradation falls again. That matters for choosing a dosing window, since it means more is not always better.",
-        "The one result we distrust is our own PTCH1 term. PTCH1 loss is what defines basal cell carcinoma, yet the gate comes out as effectively nothing in the global analysis and near the bottom of the local one. That is more likely to be a sign that a simple mass-action gate under-represents what PTCH1 actually does, which is transport cholesterol, than a sign that PTCH1 does not matter. The GPCR model below is where we treat that mechanism properly.",
-        "This model reads PTCH1 out of PaxDb at 0.01 ppm, and the GPCR model reads the same protein out of the same database at 1.5 ppm. We have not reconciled the two. Because the gate barely moves this model's answer at either value, it does not change anything above it, but it is an open question for whichever version of the model ends up carrying PTCH1 seriously.",
+        "To advance the model, measuring the binder and linker binding constants (**SPR**) and the ternary enhancement alpha (in-cell degradation assay) would convert this feasibility envelope into a true prediction. On top of this, a second independent MEGF8-knockout fold change would further harden the single-point calibration, allowing us to move forward with more complex analytics. This would allow us to take sensitivity analysis results a step further and collapse unnecessary model components, preventing overdefinition of the model.",
+        "Because PTCH1 loss defines BCC, yet the gate term observed here is non-influential, our simplified mass-action gate under-represents PTCH1's true (cholesterol-transport) mechanism. By fixing the PTCH1 gateway mechanism explicitly, we can define the model to a greater extent as seen in the GPCR system model. Currently both models adopt alternate PTCH1 concentrations (according to model-specific sourced cell types), but both rate the relevance of PTCH1's gate term as non-influential.",
+        "The sensitivity ranking helps us prioritise which parameters to measure first. In GSA, we saw dose and the ternary enhancement alpha dominate the readout, while the precise binding kinetics do not; wet lab effort is best directed at the in-cell degradation assay (alpha) and dose response before high-resolution **SPR** to determine the on/off rates.",
+        "The current bundled model uses a simplified single-arm ternary term, which loses potentially valuable information. By reimplementing the full two-arm cooperative rate law we could capture the high-dose **hook (prozone) effect**, which is relevant for identifying the linker's optimal dosing window to ensure oversaturation does not occur.",
       ],
     },
     {
@@ -1878,9 +1875,10 @@ const model: Page = {
       id: "gpcr",
       heading: "How best to model SMO itself",
       body: [
-        "The model above treats SMO as a quantity to be moved around. This one asks a different question: what makes SMO signal at all, and when does that signalling become excessive [1]. SMO is regulated by the Hedgehog ligand and by **PTCH1**, which keeps SMO out of the ciliary membrane and so inhibits it. Hedgehog activates the pathway by inhibiting PTCH1 [2].",
-        "Despite a lot of study, there is no clear consensus on the detail. An early model had PTCH1 binding and inhibiting SMO directly, but PTCH1 suppresses SMO while present at far lower levels than SMO and without the two being appreciably associated, which points to an indirect, catalytic action rather than a one to one block [3]. More recent evidence suggests PTCH1 works by reducing the **accessibility of cholesterol** in the outer plasma membrane [4, 5], and others argue it expels cholesterol from the cell altogether [7]. Here we advance a model in which SMO signalling is modulated by outer-leaflet cholesterol, and test whether it can reproduce several experimental observations.",
-        "Our model expands on previous ones by treating the distribution of cholesterol as something that changes, with cholesterol acting as SMO's own ligand. Cholesterol naturally distributes unevenly between the inner and outer layers of a membrane [6], and PTCH1 has been proposed to shift that distribution by acting as a rare transporter of sterols [3]. Its close relative NPC1 does the same job in the lysosome [7]. Once at the cilium, SMO needs a cholesterol binding step to activate, and signalling in the model is proportional to the amount of cholesterol-bound SMO. Because SMO binds at a domain that faces outward [5], its signalling is sensitive to which side of the membrane the cholesterol is on.",
+        "In this section, we explore how to best model SMO signalling. In alignment with the core model, our primary objective is to probe when conditions result in excess signalling from SMO, which may potentially be oncogenic [1]. We also want to develop our model to reflect ciliary sensitivity to relevant physiological processes.",
+        "SMO is regulated in the body by the Hedgehog ligand and Patched (**PTCH1**), which prevents SMO from localising to the membrane of the primary cilium and ultimately inhibits SMO. Hedgehog activates the Hedgehog pathway by inhibiting PTCH1 [2]. Despite much study on the mechanisms of these different steps, there is not a clear consensus on how the pathway works in detail. For example, in lieu of previous models of PTCH1 where PTCH1 directly binds and inhibits SMO [3], recent evidence suggests that PTCH1 regulates SMO by reducing cholesterol accessibility in the outer plasma membrane [4, 5]. Meanwhile, others claim that PTCH1 expels cholesterol out of the cell altogether [7].",
+        "Here, we advance a model in which SMO signalling is modulated by outer-leaflet cholesterol in the plasma membrane and test the model's ability to replicate several experimental observations. We intend to select a model that accurately predicts SMO signalling and responds realistically to important stimuli within the body.",
+        "Our model expands on previous models by dynamically modelling the distribution of cholesterol as an endogenous SMO ligand. Cholesterol naturally distributes unevenly between the outer and inner layers of phospholipid bilayers [6]. Interestingly, PTCH1 has been proposed to alter the distribution across the inner and outer leaflets by being a rare transporter of sterols [7]. Indeed, Niemann-Pick disease type C1 protein (NPC1), a close relative of PTCH1, plays a similar role in the lysosome by transporting sterols from the lysosomal lumen to the outer leaflet of the lysosome [7]. We implemented PTCH1's action both as a linear relationship and with enzyme kinetics, and will rule one out on performance once the unknown parameters have been measured.",
       ],
     },
     {
@@ -2096,9 +2094,9 @@ const model: Page = {
       navLabel: "What we make of it",
       heading: "What we make of the difference",
       body: [
-        "Both simulations hold details we would want to confirm against real data. Although giving SMO a target half-life in the cytoplasm should have forced a realistic response, the linear model shows an immediate spike in activated SMO. In the Michaelis-Menten simulation, activated SMO is very low throughout. At a glance the two fits are quite different, and the sensitivity analysis below reflects the same split: the ciliary degradation rate dominates the linear model, while the rate at which SMO embeds into the membrane dominates the other.",
-        "Given the adequate fit, we expect to go forward with the linear approximation of PTCH1 kinetics. One observation we did not use would be a good test of that choice: a sixty-fourfold difference in SMO signalling with and without Hedgehog has been measured [4], and neither of our models produces much difference between the basal and half-maximal runs. The most useful thing now would be wet lab data on how SMO migrates at the cilium, and on whether that immediate rise in activated SMO is seen under a microscope at all.",
-        "With that said, we can reproduce several experimental conditions with a model in which SMO is activated by bound cholesterol and reaches the cilium from inside the cell.",
+        "While we originally believed implementing a target half-life for SMO in the cytoplasm would ensure a realistic response in signalling rate, we noticed an immediate spike in activated SMO concentration from the linear model. Meanwhile, activated SMO is very low in concentration in the Michaelis-Menten simulation. At a glance, the fits of both models are considerably different from each other. This difference is reflected in the sensitivity analysis, where the cilial degradation rate appears to most heavily influence simulations for the linear model while the forward rate of SMO membrane embedding is most significant in the Michaelis-Menten model.",
+        "Given the adequate fit of our current objectives with the linear model, we anticipate moving forward with a linear approximation of PTCH1 kinetics. Measured by Gli mRNA abundance, a 64-fold difference in SMO signalling with and without 50 nM SHh was observed by Kinnebrew et al. [21]. This might serve as a valuable objective given the lack of an observable difference in response between basal and EC50 simulations between our models. The most useful thing now would be wet lab data on how SMO migrates at the cilium, and on whether that immediate rise in activated SMO is seen under a microscope at all.",
+        "Without further revision of the objectives, we can replicate several experimental conditions using a model of cholesterol-liganded SMO where SMO diffuses to and from the cilium intracellularly.",
       ],
     },
     {
@@ -2218,9 +2216,8 @@ const model: Page = {
       id: "mc4r-safety",
       heading: "Checking it cannot do harm somewhere else",
       body: [
-        "[The up arm](/description#two-arms) works by pulling the MMM complex apart. That frees MGRN1, and MGRN1 has another job: with a different partner called ATRN it controls **MC4R** [2], a receptor in the pathway that regulates appetite and body weight. If our binder released a flood of MGRN1 into that other role, we could be causing a metabolic side effect while congratulating ourselves on the ciliary result.",
-        "So we modelled it. Adding binder does shift MC4R, and the shift is **small and slow**. At 500 nM, the top of the range we swept, surface MC4R falls by 0.1 percent after half an hour, 2.7 percent after fourteen hours, and **8.0 percent** once the system has fully settled. That last figure is the one to judge against the **20 percent** we set in advance as the point where an effect becomes biologically meaningful, and it is well under it.",
-        "The ceiling exists because MGRN1 is the scarce component, at roughly 0.18 nM in total. There is only so much of it to redistribute however hard the binder pushes, and the model's own ceiling, with every MEGF8 site occupied, is 8.2 percent.",
+        "In the MMM complex, MGRN1 and MEGF8 come together as part of the E3 ring ligase structure. Within this structure, MEGF8 concentration determines the full saturation of MMM [1]. So in a canonical fibroblast, excess MGRN1 remains unbound, potentially causing off-target effects.",
+        "Within the cilia, MGRN1 also interacts with ATRN to create an E3 ligase complex that controls **MC4R** and the melanocortin pathway [2]. When the minibinder breaks MMM apart, we can expect excess MGRN1 to be available for ATRN binding, which may disrupt the melanocortin pathway. In this model, we examine whether the redistribution of MGRN1 could result in side effects to the melanocortin pathway.",
       ],
       source: "Abundances from PaxDb [9]. The MMM complex after [1] and [4]; the melanocortin arm after [2].",
     },
@@ -2401,8 +2398,7 @@ const model: Page = {
       navLabel: "What it means",
       heading: "What the safety result means",
       body: [
-        "Three things carry over from this model. More binder does mean more off-target effect, up to a point, but that point is **set by how little MGRN1 there is**: no dose and no binder, however good, can free more MGRN1 than the cell holds. The curve **flattens** well before the top of the range, with most of the effect in place by 50 nM. And the ceiling itself is **8.2 percent of surface MC4R**, against a threshold of 20 percent.",
-        "What would change that conclusion is a measurement rather than a model: how much MGRN1 a cell really holds, and how much of it is in the complex to begin with. Both are taken here from a protein abundance database and one published figure [3]. If MGRN1 were far more abundant than 0.18 nM, the ceiling would rise with it.",
+        "Safety modelling results show that accelerated MMM recruitment has a limited impact on melanocortin pathway signalling. At steady state, the maximum predicted change in surface MC4R was an **8.0 percent** decrease at a minibinder concentration of 500 nM, which is below the **20 percent** threshold for biological significance. The observed off-target effect is a hyperbolic dose response with half-maximum effect at approximately 10 nM, as set by Kd_MB. The underlying constraint appears to be MGRN1 availability, which is maintained at about 0.18 nM total. MGRN1 levels act as a limiting component and limit the maximum possible redistribution to ATRN irrespective of effective minibinder concentration.",
       ],
     },
     {
@@ -2720,6 +2716,7 @@ const model: Page = {
             { n: "18", text: "A. F. Rudolf et al., The morphogen Sonic hedgehog inhibits its receptor Patched by a pincer grasp mechanism. Nat. Chem. Biol. 15, 975-982 (2019).", href: "https://doi.org/10.1038/s41589-019-0370-y" },
             { n: "19", text: "R. Milo, What is the total number of protein molecules per cell volume? A call to rethink some published values. BioEssays 35, 1050-1055 (2013).", href: "https://doi.org/10.1002/bies.201300066" },
             { n: "20", text: "M. Wang, C. J. Herrmann, M. Simonovic, D. Szklarczyk and C. von Mering, Version 4.0 of PaxDb: protein abundance data, integrated across model organisms, tissues, and cell-lines. Proteomics 15, 3163-3168 (2015).", href: "https://doi.org/10.1002/pmic.201400441" },
+            { n: "21", text: "M. Kinnebrew et al., Cholesterol accessibility at the ciliary membrane controls hedgehog signaling. eLife 8, e50051 (2019).", href: "https://doi.org/10.7554/eLife.50051" },
           ],
         },
         {
