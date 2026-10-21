@@ -4786,10 +4786,10 @@ const contribution: Page = {
         "Public, and laid out so the active pipeline is separate from the one-off scripts that are kept only for reference.",
       items: [
         {
-          title: "protein_design_2026",
+          title: "protein_design",
           body: "The pipeline, the redesign loop and the earlier exploratory scripts, with a quick start in the readme. Run `pipeline/batch_design.sh` from the project root.",
-          href: "https://github.com/uwigem/protein_design_2026",
-          label: "Open on GitHub",
+          href: "https://gitlab.igem.org/2026/software/washington/protein-design",
+          label: "Open on GitLab",
           tag: "Repository",
         },
       ],
