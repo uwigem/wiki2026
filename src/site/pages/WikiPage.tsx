@@ -20,7 +20,7 @@ import TornadoChart from "../components/TornadoChart";
 import FigureFrame from "../components/FigureFrame";
 import HedgehogNote from "../components/HedgehogNote";
 import ProgrammePillars from "../components/ProgrammePillars";
-import MmmDiagram from "../components/MmmDiagram";
+import MmmDiagram, { MmmScene } from "../components/MmmDiagram";
 import StakeholderGarden from "../components/StakeholderGarden";
 import StatRow from "../components/StatRow";
 import StructureView from "../components/StructureView";
@@ -637,7 +637,11 @@ function BlockView({ block }: { block: Block }) {
           ratio={block.ratio}
           hypothetical={block.hypothetical}
           source={block.source}
-        />
+        >
+          {block.scene === "mmm" ? (
+            <MmmScene mode="resting" label={block.alt} arrowLabel="SMO ubiquitination" />
+          ) : undefined}
+        </FigureFrame>
       );
 
     case "diagram":

@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { asset } from '../router'
 import { inline } from "./RichText"
 
@@ -13,6 +14,11 @@ import { inline } from "./RichText"
  * Images are plain `<img>` with real alt text. For the competition wiki they
  * have to be uploaded to the iGEM server rather than served from here, so
  * `src` is deliberately a bare string and not an import.
+ *
+ * A figure can also be drawn by the site itself rather than loaded: pass the
+ * drawing as `children` and it takes the place of the image, inside the same
+ * frame and above the same caption. That is how the MMM overview is drawn, so
+ * it cannot drift from the interactive version of the same scene.
  */
 
 interface Props {
@@ -43,6 +49,8 @@ interface Props {
    */
   hypothetical?: true
   source?: string
+  /** A drawing from the site's own components, in place of an image file. */
+  children?: ReactNode
 }
 
 const RATIO: Record<NonNullable<Props['ratio']>, string> = {
@@ -51,10 +59,11 @@ const RATIO: Record<NonNullable<Props['ratio']>, string> = {
   tall: '3 / 4',
 }
 
-export default function FigureFrame({ src, alt, caption, owner, srcMobile, ratio, hypothetical, source }: Props) {
+export default function FigureFrame({ src, alt, caption, owner, srcMobile, ratio, hypothetical, source, children }: Props) {
+  const drawn = Boolean(src || children)
   return (
     <figure className="panel m-0 px-5 py-5 sm:px-7 sm:py-6">
-      {src ? (
+      {drawn ? (
         <div>
           {/* Above the figure, not over it. Laid over the top-left corner it
               covered the figure's own title, and every figure that needs this
@@ -68,17 +77,21 @@ export default function FigureFrame({ src, alt, caption, owner, srcMobile, ratio
               Hypothetical data, not measured results
             </p>
           )}
-          <picture>
-            {srcMobile && <source media="(max-width: 639px)" srcSet={asset(srcMobile)} />}
-            <img
-              src={asset(src)}
-              alt={alt ?? ''}
-              loading="lazy"
-              decoding="async"
-              className="w-full rounded-sm border-[3px] border-leaf-700"
-              style={ratio ? { aspectRatio: RATIO[ratio], objectFit: 'contain' } : undefined}
-            />
-          </picture>
+          {children ? (
+            <div className="overflow-hidden rounded-sm border-[3px] border-leaf-700 bg-leaf-50">{children}</div>
+          ) : (
+            <picture>
+              {srcMobile && <source media="(max-width: 639px)" srcSet={asset(srcMobile)} />}
+              <img
+                src={asset(src!)}
+                alt={alt ?? ''}
+                loading="lazy"
+                decoding="async"
+                className="w-full rounded-sm border-[3px] border-leaf-700"
+                style={ratio ? { aspectRatio: RATIO[ratio], objectFit: 'contain' } : undefined}
+              />
+            </picture>
+          )}
         </div>
       ) : (
         <div
@@ -91,7 +104,7 @@ export default function FigureFrame({ src, alt, caption, owner, srcMobile, ratio
         </div>
       )}
 
-      {src && <figcaption className="mt-3 text-body-sm leading-relaxed">{caption}</figcaption>}
+      {drawn && <figcaption className="mt-3 text-body-sm leading-relaxed">{caption}</figcaption>}
       {source && (
         <p className="mt-3 border-t-2 border-dashed border-leaf-300 pt-2 text-note text-leaf-800">{inline(source)}</p>
       )}

@@ -119,8 +119,22 @@ const MEGF8_CHAIN: { x: number; y: number; kind: 'bead' | 'large' | 'propeller' 
   { x: 108, y: 13, kind: 'propeller' },
 ]
 
-export default function MmmDiagram() {
-  const [mode, setMode] = useState<Mode>('resting')
+/**
+ * The scene on its own, at one fixed state.
+ *
+ * The experiments page shows the resting complex as a plain figure, so the
+ * drawing lives here and the interactive panel below is a wrapper around it.
+ * One drawing, one set of shapes, both pages.
+ */
+export function MmmScene({
+  mode,
+  label,
+  arrowLabel,
+}: {
+  mode: Mode
+  label?: string
+  arrowLabel?: string
+}) {
   const reduced = useReducedMotion()
   const current = MODES.find((m) => m.id === mode) ?? MODES[0]
 
@@ -155,18 +169,11 @@ export default function MmmDiagram() {
   const targetName = linked ? 'Target receptor' : 'SMO'
 
   return (
-    <section className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
-      <h2 className="text-xl">MMM Complex Overview</h2>
-      <p className="mt-1 text-body leading-relaxed">
-        Select Inhibition and Linker to see how we plan to modulate SMO abundance in the primary cilium.
-      </p>
-
-      <div className="mt-4 overflow-hidden rounded-sm border-[3px] border-leaf-700 bg-leaf-50">
         <svg
           viewBox={`0 0 ${VW} ${VH}`}
           className="block h-auto w-full"
           role="img"
-          aria-label={current.caption}
+          aria-label={label ?? current.caption}
         >
           {/* membrane */}
           <rect x={0} y={MEM_TOP} width={VW} height={MEM_BOT - MEM_TOP} fill={P.bushLight} />
@@ -260,14 +267,16 @@ export default function MmmDiagram() {
           {/*
             The breaker, only once it is in. A de novo minibinder is a small
             helical bundle, so it is drawn as three helices like every other
-            protein here rather than as an abstract shape, and it sits
-            symmetrically in the gap it has opened.
+            protein here rather than as an abstract shape. It binds the
+            extracellular face of the interface, so it sits clear of the
+            membrane band rather than crossing it, above the gap it has
+            opened.
           */}
           <g style={{ opacity: broken ? 1 : 0, transition: ease }} aria-hidden>
             {[
-              [130, 94, 38],
-              [140, 87, 52],
-              [150, 94, 38],
+              [130, 44, 38],
+              [140, 37, 52],
+              [150, 44, 38],
             ].map(([x, y, h]) => (
               <rect
                 key={x}
@@ -281,7 +290,7 @@ export default function MmmDiagram() {
                 strokeWidth={1.6}
               />
             ))}
-            <text x={144} y={152} fontSize={11} fontWeight={700} fill={P.pinkDark} textAnchor="middle">
+            <text x={144} y={29} fontSize={11} fontWeight={700} fill={P.pinkDark} textAnchor="middle">
               minibinder
             </text>
           </g>
@@ -377,7 +386,30 @@ export default function MmmDiagram() {
               {broken ? 'HH signal ↑' : linked ? 'Receptor signalling ↓' : 'HH signal ↓'}
             </text>
           </g>
+
+          {/* Named on the figure, where there is no caption under the arrow. */}
+          {arrowLabel && !broken && (
+            <text x={254} y={172} fontSize={10.5} fontWeight={700} fill={P.shadow} textAnchor="middle">
+              {arrowLabel}
+            </text>
+          )}
         </svg>
+  )
+}
+
+export default function MmmDiagram() {
+  const [mode, setMode] = useState<Mode>('resting')
+  const current = MODES.find((m) => m.id === mode) ?? MODES[0]
+
+  return (
+    <section className="panel min-w-0 px-5 py-5 sm:px-7 sm:py-6">
+      <h2 className="text-xl">MMM Complex Overview</h2>
+      <p className="mt-1 text-body leading-relaxed">
+        Select Inhibition and Linker to see how we plan to modulate SMO abundance in the primary cilium.
+      </p>
+
+      <div className="mt-4 overflow-hidden rounded-sm border-[3px] border-leaf-700 bg-leaf-50">
+        <MmmScene mode={mode} />
       </div>
 
       <ul className="mt-3 flex flex-wrap gap-2">

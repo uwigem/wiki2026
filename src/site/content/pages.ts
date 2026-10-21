@@ -401,6 +401,8 @@ export type Block = Anchored &
     | {
         kind: "figure";
         src?: string;
+        /** Drawn by the site rather than loaded from a file. */
+        scene?: "mmm";
         /** A phone edition of the same figure, where the package ships one. */
         srcMobile?: string;
         alt?: string;
@@ -1160,9 +1162,8 @@ const experiments: Page = {
     {
       kind: "figure",
       id: "mmm-overview",
-      src: "wetlab/overview.svg",
-      srcMobile: "wetlab/overview-mobile.svg",
-      alt: "A cross-section of the cell membrane. MEGF8 spans the membrane with MOSMO beside it, and MGRN1, labelled E3 ligase, sits on the cytoplasmic side. To the right, SMO is drawn as a seven-pass receptor being tagged with three ubiquitin marks. An arrow leads to two boxes: ciliary SMO down, then Hedgehog signalling down.",
+      scene: "mmm",
+      alt: "A cross-section of the ciliary membrane. MEGF8 spans the membrane with MOSMO beside it, and MGRN1, labelled E3 ligase, sits on the cytoplasmic side. To the right, SMO is drawn as a seven-pass receptor being tagged with three ubiquitin marks. An arrow labelled SMO ubiquitination leads to two boxes: ciliary SMO down, then Hedgehog signal down.",
       caption:
         "Schematic representation of MMM-mediated SMO regulation. The MMM complex promotes SMO ubiquitination, limiting SMO accumulation in the primary cilium and reducing downstream Hedgehog pathway activity.",
     },
