@@ -2747,8 +2747,6 @@ const model: Page = {
         label: "ordered for wet lab validation",
         count: 96,
       },
-      footnote:
-        "The last step, 101 down to 96, is not a filter: it is the size of the plate. **The membrane filter** removes more than half of what reaches it, and nothing else in the pipeline would have caught those designs: they score well, they simply bind somewhere no protein can reach. That is the step described as it happened in [the second design cycle](/engineering#cycles). The stages are drawn in the order the funnel was built; the pipeline applies the last two the other way round, which changes the intermediate counts but not the 96 at the end.",
       source: "Counts from the subteam's own filtering workbook.",
     },
     {
@@ -2813,8 +2811,6 @@ const model: Page = {
           kind: "bars",
           id: "backbone-chart",
           heading: "Designs per backbone",
-          intro:
-            "Each backbone that reached the plate, and how many of the 96 came off it, most first. The long tail of single designs is the healthy part; the bar at the top is the one to watch.",
           series: [{ label: "designs on the plate" }],
           rows: BACKBONE_ROWS,
           axisLabel: "designs among the 96",
@@ -4835,11 +4831,10 @@ const contribution: Page = {
   blocks: [
     {
       kind: "prose",
-      heading: "What we are handing over",
+      heading: "Contributions Overview",
       body: [
-        "Designing a protein binder means driving three separate models in turn and throwing away almost everything they produce. The models are published and free. The part that is not written down anywhere is the plumbing: how to get them onto a cluster you are allowed to use, how to hand each one's output to the next, and which numbers are worth filtering on.",
-        "That plumbing is our contribution. We built it on Hyak, the University of Washington's shared cluster, so it runs somewhere any student here can reach rather than on a lab machine nobody else can book. It is driven by **one command** that takes a target, a batch size and a set of hotspot residues, and it is **not specific to MOSMO or MEGF8**: a team with a different target and a structure to aim at can point the same pipeline at it.",
-        "This page has two halves. The first is that pipeline: what each tool does, the four numbers we filter on, and where [the code](https://github.com/uwigem/protein_design_2026) lives. The second is the wet lab's [toolkit of ten constructs](/contribution#toolkit) for bringing an E3 ligase to a receptor, built so the receptor is the only part another team has to change.",
+        "The protein design process is computationally expensive, and although the models necessary for protein design are open source, it can be challenging to set up the necessary helper scripts to automate the process and efficiently sift through results. Our team contributes instructions detailing how to set up an automated protein design pipeline on any compute cluster and how to appropriately use the pipeline and filter results (aided by the scripts we developed in-house, which are public on our GitHub).",
+        "We also contribute the wet lab's toolkit of ten constructs for bringing an E3 ligase to a receptor, built so any team can modify our system to target other receptors.",
       ],
     },
     {
@@ -4855,19 +4850,10 @@ const contribution: Page = {
     {
       kind: "pipeline",
       id: "pipeline",
-      heading: "The pipeline, stage by stage",
+      heading: "Stepwise Protein Design Pipeline",
       intro:
-        "One command runs all of it. Each stage names the tool that does the work and what it hands to the next one, so the chain can be picked apart and re-run from any point. The scripts themselves are [in the repository](/contribution#code).",
+        "Although we use an automated script that encapsulates all elementary steps in the protein design process, it was born of many helper scripts that allow researchers to call each stage individually and analyse outputs before passing them along to the next model. We outline these steps below because the decision making at each step may be relevant to other researchers, and it provides a holistic view of our objectives and process. The scripts relevant to this automated step are located in the pipeline/ folder in our GitHub.",
       stages: [
-        {
-          title: "Set the target and the hotspots",
-          body: [
-            "A run is started with four things: a name for it, how many designs to make, the residues on the target to aim at, and which target that is. Everything after this is automatic.",
-          ],
-          input: "a target structure and the residues to aim at",
-          output: "a configured run on the cluster",
-          note: "The input and output folders are set in one place, so the pipeline can be pointed at any file layout.",
-        },
         {
           title: "Generate backbones",
           script: "RFdiffusion3",
@@ -4895,22 +4881,6 @@ const contribution: Page = {
           input: "sequences and the target",
           output: "predicted complexes and their confidence files",
         },
-        {
-          title: "Measure every design and filter",
-          body: [
-            "Each folded design is aligned against the backbone it came from to measure how far it drifted, and the confidence values are read out of the prediction's own summary files. Designs are then kept or dropped on [the four numbers below](/contribution#metrics).",
-          ],
-          input: "predicted complexes",
-          output: "a table of metrics, and a list of designs worth keeping",
-        },
-        {
-          title: "Rescue the near misses",
-          body: [
-            "Designs that came close to the cutoffs get a second pass: they are found automatically and sent back through sequence design and folding. Giving a backbone a fresh sequence is known to lower deviation and raise prediction confidence, so a near miss gets another chance to settle into the shape that was asked for.",
-          ],
-          input: "near misses and designs that already passed",
-          output: "a second generation of sequences, filtered the same way",
-        },
       ],
     },
     {
@@ -4919,24 +4889,16 @@ const contribution: Page = {
       heading: "Running it on a shared cluster",
       body: [
         "To interface with these models we pulled the Foundry container created by RosettaCommons from DockerHub onto **Hyak**, the University of Washington's high-performance computing cluster. Previously our use of protein design platforms was split between local installation and the Institute for Protein Design's own cluster. Moving the entire pipeline onto Hyak, a system widely available to all University of Washington students, establishes a platform where any future team here can run automated, high throughput computational protein design.",
-      ],
-    },
-    {
-      kind: "prose",
-      section: "The scripts and the code",
-      id: "our-scripts",
-      heading: "The scripts, and what they saved us",
-      body: [
-        "To achieve high-throughput de novo binder design we wrote Bash and Python scripts that automate the pipeline. Our design script lets a user input just the name of the target protein, the batch size, and the selected hotspots. On Hyak this brought generation times down to about **45 minutes per 75 binder designs**, from about 75 minutes for the same batch at the start.",
-        "We also wrote a validation script that pulls metrics out of the output files of each design and out of the structure files themselves.",
+        "To achieve high-throughput de novo binder design we wrote Bash and Python scripts that automate the pipeline outlined above. Our design script lets a user input just the name of the target protein, the batch size, and the selected hotspots. On Hyak this brought generation times down to about **45 minutes per 75 binder designs**, from about 75 minutes for the same batch at the start.",
       ],
     },
     {
       kind: "table",
+      section: "The scripts and the code",
       id: "metrics",
-      heading: "The four numbers we filter on",
+      heading: "Filtering designs",
       intro:
-        "Every design is judged on these, in this order. The first two are the published gold standards; the second two decide which of the survivors is worth ordering.",
+        "In addition to the automation script connecting the initial protein design process, we created a **validation script** that pulled metrics from the output files of each binder design and the binders' crystallographic information files (CIF) themselves (script can be found in the redesign/ folder in our GitHub). We extracted the following metrics from our outputs.",
       columns: ["Metric", "What it measures", "What we treat as good"],
       rows: [
         [
@@ -4959,6 +4921,14 @@ const contribution: Page = {
           "Change in Gibbs free energy, a computational stand-in for binding affinity.",
           "Negative, and more negative than the ddG of the MOSMO to MEGF8 interface itself.",
         ],
+      ],
+    },
+    {
+      kind: "prose",
+      id: "redesign",
+      heading: "Redesign",
+      body: [
+        "To generate more binders we re-ran ProteinMPNN and RosettaFold on two groups of designs: \"near-misses\" that were close to our RMSD-minPAE-pLDDT cutoffs, and currently passing designs. This process generated a new sequence for the binder, a process that has been shown to significantly lower RMSD and increase RosettaFold prediction confidence ([source](https://www.nature.com/articles/s42004-023-01029-7)). We created two scripts for this approach. The first script identifies the near-miss binders for an input folder representing a single run through the pipeline. Then, this folder is input to a second script that re-runs the files through ProteinMPNN and RosettaFold. Both scripts can be found in the redesign/ folder in our GitHub.",
       ],
     },
     {
