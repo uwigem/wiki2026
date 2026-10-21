@@ -1987,9 +1987,9 @@ const model: Page = {
         },
         {
           kind: "pdf",
-          file: "model/gpcr-full-model.pdf",
+          file: "model/gpcr-model-equations-parameters.pdf",
           title: "The GPCR model, in full",
-          pages: 3,
+          pages: 5,
         },
       ],
     },
