@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { OLD_PATHS } from './content/nav'
+import { cdnUrl } from './cdn'
 
 /**
  * A small path router.
@@ -36,19 +37,15 @@ export function href(to: string): string {
 }
 
 /**
- * Where images live. A wiki repository may not store them: iGEM rejects the
- * push, and asks for them on their CDN instead. The Uploads tool keeps the
- * directory and file name but re-encodes JPEG and PNG as AVIF, so a `.jpg` or
- * `.png` here becomes a `.avif` there. WebP and SVG are left as they are.
+ * A file as a URL, for example `asset('team/ana.jpg')`.
+ *
+ * Images come from iGEM's CDN (see `cdn.ts`), because a wiki repository may
+ * not store them. Anything else, such as a font, is served from this site
+ * under its base.
  */
-const CDN = 'https://static.igem.wiki/teams/6229/wiki/'
-const TO_AVIF = /\.(jpe?g|png)$/i
-
-/** A file as a URL, for example `asset('team/ana.jpg')`. */
 export function asset(path: string): string {
   const file = path.replace(/^\.?\//, '')
-  if (TO_AVIF.test(file)) return CDN + file.replace(TO_AVIF, '.avif')
-  if (/\.(webp|svg)$/i.test(file)) return CDN + file
+  if (/\.(jpe?g|png|webp|svg)$/i.test(file)) return cdnUrl(file)
   return `${BASE}/${file}`
 }
 

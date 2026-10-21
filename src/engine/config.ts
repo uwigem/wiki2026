@@ -5,12 +5,9 @@ export const WORLD_TY = 36
 export const WORLD_W = WORLD_TX * TILE // 768
 export const WORLD_H = WORLD_TY * TILE // 576
 
-// Logical viewport is dynamic (computed from window size ÷ pixel scale) so the
-// world always fills the screen at whatever aspect ratio. These are only the
-// initial defaults + the target on-screen height of one logical pixel-view.
-export const DEFAULT_VIEW_W = 256
-export const DEFAULT_VIEW_H = 192
-export const TARGET_VIEW_H = 188 // aim for ~this many logical rows; drives pixel scale
+// The on-screen height aimed for, in logical pixels. Drives the integer pixel
+// scale every canvas on the site is drawn at (see src/site/layout.ts).
+export const TARGET_VIEW_H = 188
 
 // Per-pixel water classification (precomputed into a map from a smooth field).
 export enum Water {

@@ -43,7 +43,7 @@ export default function FieldGuide({ game, onClose }: { game: Alchemy; onClose: 
       document.removeEventListener('keydown', onKeyDown)
       opener?.focus()
     }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [])
 
   const total = LEVELS.reduce((n, l) => n + game.foundIn(l.id).length, 0)
 

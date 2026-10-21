@@ -4,8 +4,10 @@
  *   npm run gardens
  *
  * Run it after adding a page, or after changing the garden recipe in
- * src/site/garden/generate.ts. The images are committed, so the site never
- * draws a garden at load time: it only shows these files.
+ * src/site/garden/generate.ts. The output directory is ignored by git: upload
+ * the PNGs through the wiki Uploads tool into the `gardens/` directory on the
+ * CDN, which re-encodes them as AVIF, and that is what the site shows (see
+ * src/site/cdn.ts). The site never draws a garden at load time.
  */
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { deflateSync } from 'node:zlib'

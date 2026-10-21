@@ -16,24 +16,6 @@ export const TEAM_LONG = 'Washington iGEM · University of Washington'
  */
 export const PROJECT_TITLE = 'HedgehogSense'
 
-export const PROJECT_TAGLINE = 'A dial for the cell’s antenna, not a switch.'
-
-export const PROJECT_SUBTITLE =
-  'Almost every cell grows a single antenna called the primary cilium, and some receptors only work while they are sitting in it. We are building a modular tool that sets how much of a chosen receptor stays there. Hedgehog signaling is where we prove it works.'
-
-  'We build a modular tool that sets how much of a chosen receptor stays in the primary cilium, by redirecting the cell’s own MMM degradation complex rather than blocking the receptor outright.'
-
-export interface Cta {
-  label: string
-  to: string
-  primary?: boolean
-}
-
-export const HOME_CTAS: Cta[] = [
-  { label: 'Explore Project', to: '/description', primary: true },
-  { label: 'Meet the Team', to: '/team' },
-]
-
 export const FOOTER_LINKS = [
   { label: 'Washington iGEM team', href: 'https://students.washington.edu/uwigem/' },
   { label: 'Linktree', href: 'https://linktr.ee/WAigem' },

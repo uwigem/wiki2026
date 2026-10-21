@@ -15,11 +15,10 @@
  *
  * Coordinates are rotated so the membrane normal runs up the screen, then
  * centred on the protein, and rounded to one decimal place. Generated once from
- * the deposited file. There is no script for it in the repo, so regenerating
- * means repeating the steps above by hand.
- *
- * TODO(protein design): add our own MOSMO and MEGF8 binder structures here once
- * they clear the filters. The viewer takes any structure in this shape.
+ * the deposited file, by hand: scripts/cif-to-structure.mjs came later and
+ * stands a chain on its longest axis rather than on the membrane normal, so it
+ * would not reproduce this pose. Our own binder designs are in
+ * `binderStructures.ts`, in the same shape.
  */
 
 export interface Structure {

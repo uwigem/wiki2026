@@ -266,19 +266,6 @@ export const ROCK = s([
   '..GGGGGGG...',
 ])
 
-// ---------------- flat grey stone ledge (frames the waterfall spill) ----------------
-export const STONE_LEDGE = s([
-  '.....tttttt.....',
-  '...ttTTTTTTtt...',
-  '..tTTTTTTTTTTt..',
-  '.tTTTKTTTTKTTTt.',
-  'tTTTTTTTTTTTTTTt',
-  'TTKTTTTTTTTTKTTT',
-  '.KTTTXTTTTTTKK..',
-  '..KKTTTTTTKKK...',
-  '....KKKKKKK.....',
-])
-
 // ---------------- lilypad (with a notch), plain + budding ----------------
 export const LILYPAD = s([
   '.xffx.',

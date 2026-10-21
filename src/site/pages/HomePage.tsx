@@ -14,11 +14,8 @@ import StoryStage from '../components/story/StoryStage'
  * row of gates that every other page ends with sits underneath it, after the
  * story is over. It renders here rather than in `App.tsx` so that it sits on
  * the page's own cream, instead of on the green the rest of the site uses.
- *
- * The animated explainer that the archived homepages open with lives on the
- * Description page instead; this page tells the same story its own way.
  */
-export default function Home3() {
+export default function HomePage() {
   return (
     <div className="bg-leaf-50 text-leaf-950">
       <StoryStage />

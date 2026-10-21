@@ -1,5 +1,5 @@
 /**
- * A tiny pixel rasteriser for the Home 3 story.
+ * A tiny pixel rasteriser for the homepage story.
  *
  * Every scene is drawn from simple shapes (rectangles, ellipses, capsules,
  * thick lines) and the team's sprites, rasterised straight into an ImageData
