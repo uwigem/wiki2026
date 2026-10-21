@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { SITE_PALETTE as P } from '../theme'
 import { useReducedMotion } from '../hooks'
+import { RAIL_PALETTE } from './railArt'
 
 /**
  * The MMM complex, and the two things our device does to it.
@@ -70,6 +71,54 @@ function Helix({ x, fill }: { x: number; fill: string }) {
   )
 }
 
+/** A corner-pointed polygon of `n` sides around a centre. */
+function points(cx: number, cy: number, r: number, n: number, turn = -90): string {
+  return Array.from({ length: n }, (_, i) => {
+    const a = ((turn + (360 / n) * i) * Math.PI) / 180
+    return `${(cx + r * Math.cos(a)).toFixed(2)},${(cy + r * Math.sin(a)).toFixed(2)}`
+  }).join(' ')
+}
+
+/** One of MEGF8's propeller domains: five blades turned about a centre, in a deeper lilac. */
+function Propeller({ cx, cy }: { cx: number; cy: number }) {
+  return (
+    <g>
+      {[0, 1, 2, 3, 4].map((k) => {
+        const a = ((k * 72 - 90) * Math.PI) / 180
+        return (
+          <polygon
+            key={k}
+            points={points(cx + 4.2 * Math.cos(a), cy + 4.2 * Math.sin(a), 5, 5, k * 72 - 90)}
+            fill={RAIL_PALETTE.lilacPetal}
+            stroke={P.bushDark}
+            strokeWidth={1.2}
+            strokeLinejoin="round"
+          />
+        )
+      })}
+    </g>
+  )
+}
+
+/*
+ * MEGF8 above the membrane, drawn the way the Kong lab draws it: a chain of
+ * small beads broken by larger domains and two propellers, winding up from
+ * its single pass through the membrane, with a wedge lying on the membrane on
+ * the side that faces MOSMO. Listed from the membrane up.
+ */
+const MEGF8_CHAIN: { x: number; y: number; kind: 'bead' | 'large' | 'propeller' }[] = [
+  { x: 108, y: 84, kind: 'bead' },
+  { x: 114, y: 79, kind: 'bead' },
+  { x: 118, y: 72, kind: 'bead' },
+  // The linker is drawn from this bead.
+  { x: 119.5, y: 64, kind: 'bead' },
+  { x: 113, y: 53, kind: 'propeller' },
+  { x: 105, y: 42.5, kind: 'bead' },
+  { x: 99, y: 36, kind: 'bead' },
+  { x: 99, y: 25.5, kind: 'large' },
+  { x: 108, y: 13, kind: 'propeller' },
+]
+
 export default function MmmDiagram() {
   const [mode, setMode] = useState<Mode>('resting')
   const reduced = useReducedMotion()
@@ -82,7 +131,7 @@ export default function MmmDiagram() {
   const ease = reduced ? 'none' : 'transform 420ms ease, opacity 420ms ease'
   // MEGF8 only edges left: any further and it sits on the Extracellular label.
   // MOSMO carries most of the separation instead, which reads the same.
-  const megf8Shift = broken ? 'translate(-12px, -6px)' : 'translate(0,0)'
+  const megf8Shift = broken ? 'translate(-12px, -2px)' : 'translate(0,0)'
   const mosmoShift = broken ? 'translate(46px, 0)' : 'translate(0,0)'
   const mgrn1Shift = broken
     ? 'translate(-14px, 40px)'
@@ -140,11 +189,32 @@ export default function MmmDiagram() {
             Primary cilium
           </text>
 
-          {/* MEGF8: one pass, two lobes above, a tail down to MGRN1 */}
+          {/* MEGF8: the chain above, one pass through, a tail down to MGRN1 */}
           <g style={{ transform: megf8Shift, transition: ease }}>
-            <circle cx={100} cy={74} r={11} fill={P.lilacPetal} stroke={P.bushDark} strokeWidth={1.6} />
-            <circle cx={116} cy={70} r={11} fill={P.lilacPetal} stroke={P.bushDark} strokeWidth={1.6} />
+            <polygon
+              points={`113,${MEM_TOP - 1} 128,${MEM_TOP - 15} 130,${MEM_TOP - 1}`}
+              fill={P.lilacHi}
+              stroke={P.bushDark}
+              strokeWidth={1.4}
+              strokeLinejoin="round"
+            />
             <Helix x={102} fill={P.lilacPetal} />
+            {MEGF8_CHAIN.map((d, i) =>
+              d.kind === 'propeller' ? (
+                <Propeller key={i} cx={d.x} cy={d.y} />
+              ) : d.kind === 'large' ? (
+                <polygon
+                  key={i}
+                  points={points(d.x, d.y, 7.5, 7)}
+                  fill={P.lilacPetal}
+                  stroke={P.bushDark}
+                  strokeWidth={1.4}
+                  strokeLinejoin="round"
+                />
+              ) : (
+                <circle key={i} cx={d.x} cy={d.y} r={4.2} fill={P.lilacPetal} stroke={P.bushDark} strokeWidth={1.3} />
+              ),
+            )}
             <path
               d={`M 107 ${MEM_BOT + 4} Q 109 158 122 168`}
               fill="none"
@@ -152,7 +222,7 @@ export default function MmmDiagram() {
               strokeWidth={4}
               strokeLinecap="round"
             />
-            <text x={88} y={52} fontSize={12} fontWeight={700} fill={P.shadow}>
+            <text x={46} y={40} fontSize={12} fontWeight={700} fill={P.shadow}>
               MEGF8
             </text>
           </g>
@@ -241,7 +311,7 @@ export default function MmmDiagram() {
           {/* the linker, only once it is on */}
           <g style={{ opacity: linked ? 1 : 0, transition: ease }} aria-hidden>
             <path
-              d="M 122 58 q 14 -8 28 0 q 14 8 28 0 q 14 -8 28 0 q 14 8 28 0 q 14 -8 28 0 q 14 8 28 0 q 14 -8 28 0"
+              d="M 123 62 q 14 -8 28 0 q 14 8 28 0 q 14 -8 28 0 q 14 8 28 0 q 14 -8 28 0 q 14 8 28 0 q 14 -8 28 0"
               fill="none"
               stroke={P.shadow}
               strokeWidth={3}
