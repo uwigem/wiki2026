@@ -46,6 +46,8 @@ export interface Look {
   recolor: Recolor
   /** The row under the jaw takes the hair colour instead of the skin's. */
   beard?: true
+  /** No hair. Drawn from BALD_HEAD for the template. */
+  bald?: true
   extras?: Extra[]
 }
 
@@ -193,8 +195,9 @@ export const LOOK_OVERRIDES: Record<string, Look> = {
   },
   'Professor Teddy Johnson': {
     base: 2,
-    recolor: { hair: '#5a544e', skin: SKIN[10], top: '#2f3a4a', pants: '#565b70', eyes: DARK_BROWN_EYES },
+    recolor: { hair: '#6c5f53', skin: SKIN[6], top: '#2f3a4a', pants: '#565b70', eyes: DARK_BROWN_EYES },
     beard: true,
+    bald: true,
   },
   'Dr. Margo Bergman': {
     base: 5,
@@ -317,6 +320,30 @@ const FLOWER_AT: Record<number, [number, number]> = { 5: [3, 3] }
 /** The pendant, per template: the bottom of the neckline. */
 const NECKLACE_AT: Record<number, [number, number][]> = { 5: [[9, 12], [10, 12]] }
 
+/**
+ * A bald head, per template: the top rows redrawn as a skull centred over the
+ * body, with ears. `0` outline, `s` scalp, `h` highlight, `r` ear, `c` the row
+ * under the jaw, `.` empty, `=` the template's pixel `shift` columns right.
+ */
+const BALD_HEAD: Record<number, { shift: number; rows: string[] }> = {
+  2: {
+    shift: 1,
+    rows: [
+      '...............',
+      '.....000000....',
+      '....0shhsss0...',
+      '...0shssssss0..',
+      '..0ssssssssss0.',
+      '..0ssssssssss0.',
+      '..0s========s0.',
+      '.0rs========sr0',
+      '.0rs========sr0',
+      '...0========0..',
+      '...0cccccccc0..',
+    ],
+  },
+}
+
 /** Pixels drawn over the recoloured sprite for each extra, as [x, y, colour]. */
 function extraPixels(look: Look, cells: (x: number, y: number) => Role | null, outline: string) {
   const sp = REF_SPRITES[look.base % REF_SPRITES.length]
@@ -426,6 +453,11 @@ function personURL(look: Look): string {
   const colours = sp.pal.map(([hex, role]) => {
     if (role === 'prop') return hex
     if (role === 'pupil') return rc.eyes ?? hex
+    if (look.bald && (role === 'hair' || role === 'shine') && rc.skin) {
+      // The face's own tone, without the hair's shading: recoloured strands and
+      // a parting would read as stripes across the scalp.
+      return rc.skin
+    }
     if (role === 'shine') {
       // White on the reference's blonde; on darker hair, a light shade of it.
       if (!rc.hair) return hex
@@ -463,9 +495,37 @@ function personURL(look: Look): string {
   canvas.height = sp.h
   const ctx = canvas.getContext('2d')!
   ctx.imageSmoothingEnabled = false
+  const head = look.bald && rc.skin ? BALD_HEAD[look.base % REF_SPRITES.length] : undefined
+  const chin = sp.pal.findIndex(([, role]) => role === 'chin')
+  // An ear sits a shade darker than the face, or it reads as a wider face.
+  const ear = rc.skin ? hsl2rgb(rgb2hsl(rc.skin)[0], rgb2hsl(rc.skin)[1], clamp01(rgb2hsl(rc.skin)[2] - 0.08)) : ''
+  const shine = rc.skin ? hsl2rgb(rgb2hsl(rc.skin)[0], rgb2hsl(rc.skin)[1] * 0.8, clamp01(rgb2hsl(rc.skin)[2] + 0.16)) : ''
   for (let y = 0; y < sp.h; y++) {
     const row = sp.rows[y]
     for (let x = 0; x < sp.w; x++) {
+      const drawn = head?.rows[y]?.[x]
+      if (drawn === '=') {
+        const ch = row[x + head!.shift] ?? '.'
+        if (ch === '.') continue
+        ctx.fillStyle = colours[parseInt(ch, 36)]
+        ctx.fillRect(x, y, 1, 1)
+        continue
+      }
+      if (drawn !== undefined) {
+        if (drawn === '.') continue
+        ctx.fillStyle =
+          drawn === '0'
+            ? colours[0]
+            : drawn === 'h'
+              ? shine
+              : drawn === 'r'
+                ? ear
+                : drawn === 'c'
+                  ? colours[chin]
+                  : rc.skin!
+        ctx.fillRect(x, y, 1, 1)
+        continue
+      }
       const ch = row[x]
       if (ch === '.') continue
       ctx.fillStyle = colours[parseInt(ch, 36)]
