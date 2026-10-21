@@ -6,8 +6,8 @@ import { FILE, inline } from './RichText'
 /**
  * Things to open or download, as a row of cards: a handbook to print, a
  * post to watch, a document to read. Each card says what it is, and ends in
- * one button. A file under `public/` is served from this site; anything else
- * opens where it lives, in a new tab.
+ * one button. A relative path is resolved with `asset()`, the same way an
+ * image is; a full address opens where it lives, in a new tab.
  *
  * Each card leads with a pixel glyph for the kind of thing behind it, picked
  * from the address rather than written into the content. On a page that is
@@ -18,7 +18,7 @@ import { FILE, inline } from './RichText'
 export interface LinkItem {
   title: string
   body: string
-  /** A path inside `public/` (for example `education/handbook.pdf`) or a full https:// address. */
+  /** A relative path, resolved with `asset()`, or a full https:// address. */
   href: string
   /** The button's words. Defaults to "Open". */
   label?: string

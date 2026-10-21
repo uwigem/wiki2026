@@ -2,7 +2,7 @@
 /**
  * House-rule checks, run by `npm run check` alongside the TypeScript compiler.
  *
- * These are the conventions in docs/STYLE_GUIDE.md that a compiler cannot
+ * These are the team's writing and design conventions that a compiler cannot
  * enforce: no em dashes, no hard-coded colours, and body text that fills its
  * column. There is no ESLint in this repo on purpose: it would add a few
  * hundred packages and a config to maintain. If a third rule ever earns its place,
@@ -19,8 +19,9 @@ const ROOT = fileURLToPath(new URL('..', import.meta.url))
 /**
  * Where to look. Walked from disk, so a brand new file is checked before it is
  * committed. Every file at the repo root is included as well, rather than a
- * hand-kept list: a list missed EDITING.md when it was added, which let an em
- * dash through in the guide most teammates read.
+ * hand-kept list, so a new guide or README cannot slip past the em dash rule.
+ * There is no `docs/` directory yet; it is listed so that a guide added there
+ * is checked from its first commit.
  */
 const ROOTS = ['src', 'docs', 'scripts']
 const SKIP_DIRS = new Set(['node_modules', 'dist', '.git', '.vite'])
@@ -46,13 +47,13 @@ const EM_DASH = String.fromCharCode(0x2014)
 const RULES = [
   {
     name: 'no em dashes',
-    why: 'The team writes with periods, commas, colons and brackets. See docs/STYLE_GUIDE.md.',
+    why: 'The team writes with periods, commas, colons and brackets.',
     files: (f) => /\.(ts|tsx|css|html|md|mjs|js)$/.test(f),
     test: (line) => line.includes(EM_DASH),
   },
   {
     name: 'no hard-coded colours',
-    why: 'Colour comes from the engine palette. Use a Tailwind token or a --p-* variable. See docs/STYLE_GUIDE.md.',
+    why: 'Colour comes from the engine palette. Use a Tailwind token or a --p-* variable.',
     files: (f) => /\.(ts|tsx|css)$/.test(f) && f.startsWith('src/') && !COLOUR_EXEMPT.some((e) => f.startsWith(e)),
     // 3-, 6- and 8-digit hex. color-mix lines are the two documented derived
     // inks in index.css; a line ending in `colour-ok` is an explicit opt-out.
@@ -64,7 +65,7 @@ const RULES = [
 ]
 
 /* ---------------------------------------------------------------------------
- * Body text fills its column (design rule 8 in docs/STYLE_GUIDE.md).
+ * Body text fills its column.
  *
  * Every time text stopped short of its card, the cause was a width cap: a
  * `max-w-*` on a paragraph or on the box around it, or a `max-width` in the
@@ -174,9 +175,9 @@ for (const [file, line, want] of WIDTH_SELF_TEST) {
 const WIDTH_RULE = {
   name: 'no width caps on text',
   why:
-    'Body text runs the full width of its panel, card or column on every page (design rule 8 in ' +
-    'docs/STYLE_GUIDE.md). Remove the width. Do not add to WIDTH_ALLOWLIST to get text through: ' +
-    'that list is only for boxes that are not body text, and Web Dev decides what goes on it.',
+    'Body text runs the full width of its panel, card or column on every page. Remove the width. ' +
+    'Do not add to WIDTH_ALLOWLIST to get text through: that list is only for boxes that are not ' +
+    'body text, and Web Dev decides what goes on it.',
 }
 const STALE_RULE = {
   name: 'stale width allowlist entries',

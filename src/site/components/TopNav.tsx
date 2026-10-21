@@ -13,7 +13,7 @@ import { useEscape } from '../hooks'
  * button opening a full-width accordion. The current page is marked both
  * visually (the `is-active` highlight) and for screen readers (`aria-current`).
  */
-export default function TopNav({ visible = true }: { visible?: boolean }) {
+export default function TopNav() {
   const path = useRoute()
   const [menuOpen, setMenuOpen] = useState(false)
   // Two separate pieces of state on purpose. The desktop dropdown and the
@@ -38,18 +38,7 @@ export default function TopNav({ visible = true }: { visible?: boolean }) {
   useEscape(openDropdown !== null, () => setOpenDropdown(null))
 
   return (
-    <header
-      // While the homepage intro plays the bar is faded out. `inert` keeps it
-      // out of the tab order too, so the first Tab press does not land on an
-      // invisible link.
-      inert={!visible || undefined}
-      aria-hidden={!visible || undefined}
-      className={
-        'sticky top-0 z-40 border-b-[3px] bg-leaf-100 transition-[opacity,transform] duration-500 ease-out ' +
-        (progress ? 'border-leaf-300 ' : 'border-leaf-700 ') +
-        (visible ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-full opacity-0')
-      }
-    >
+    <header className={'sticky top-0 z-40 border-b-[3px] bg-leaf-100 ' + (progress ? 'border-leaf-300' : 'border-leaf-700')}>
       {progress && <ScrollSprout />}
       {/* Above the hedgehog, so a sign he walks under stays readable. */}
       <div className="relative z-10 mx-auto flex max-w-6xl items-center gap-3 px-3 py-2 sm:px-5">

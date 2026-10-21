@@ -137,7 +137,7 @@ export default function NotebookPage() {
         </div>
 
         {/* A drafting aid: shown by `npm run dev`, left out of the published
-            site. What is missing is also tracked in docs/CONTENT_MAP.md. */}
+            site. */}
         {import.meta.env.DEV && (
           <div className="mt-6">
             <TodoPanel

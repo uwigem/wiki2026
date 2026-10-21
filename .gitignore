@@ -64,3 +64,7 @@ igem-alchemy-main/
 
 # Local scratch for figure comparison; never part of the published site.
 public/wetlab/_audit/
+
+# `npm run gardens` draws the page backgrounds here. They go up to iGEM's CDN
+# through the wiki Uploads tool and are not committed.
+public/gardens/

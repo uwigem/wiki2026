@@ -1,7 +1,7 @@
 /**
- * Home 3: the scroll-driven story, as data.
+ * The homepage: the scroll-driven story, as data.
  *
- * Every word on Home 3 lives here, in the order of the team's script
+ * Every word on the homepage lives here, in the order of the team's script
  * ("HedgehogSense Main Page (scroll-driven animation)"). The drawing for each
  * scene is in `components/story/scenes.ts`; this file is only what it says
  * and how long each scene holds the screen.
@@ -77,10 +77,10 @@ export const STORY: Scene[] = [
   },
   {
     id: 'smo',
-    seconds: 7.5,
+    seconds: 10,
     beats: [
       { from: 0, lead: 'Cells don’t just receive signals through the cilia. They need to regulate them.' },
-      { from: 0.32, lead: 'Meet Smoothened, a key regulator of the signaling pathway called Hedgehog.' },
+      { from: 0.45, lead: 'Meet Smoothened, a key regulator of the signaling pathway called Hedgehog.' },
     ],
   },
   {
@@ -102,7 +102,7 @@ export const STORY: Scene[] = [
   },
   {
     id: 'mmm',
-    seconds: 7,
+    seconds: 12,
     beats: [
       {
         from: 0,
