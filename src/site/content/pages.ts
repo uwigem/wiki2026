@@ -1666,6 +1666,8 @@ const model: Page = {
       yLog: true,
       legendTitle: "on-rate, as a multiple of the baseline",
       references: [{ axis: "y", value: 1, label: "untreated" }],
+      footnote:
+        "Ciliary SMO concentration vs intervention dose, relative to the untreated WT level. We observe five settings for each tuner arm, with binder (left) and linker (right). Both axes are logarithmic.",
       source: "Regenerated from the current model.",
     },
     {
@@ -2214,9 +2216,8 @@ const model: Page = {
       id: "mc4r-safety",
       heading: "Checking it cannot do harm somewhere else",
       body: [
-        "[The up arm](/description#two-arms) works by pulling the MMM complex apart. That frees MGRN1, and MGRN1 has another job: with a different partner called ATRN it controls **MC4R** [2], a receptor in the pathway that regulates appetite and body weight. If our binder released a flood of MGRN1 into that other role, we could be causing a metabolic side effect while congratulating ourselves on the ciliary result.",
-        "So we modelled it. Adding binder does shift MC4R, and the shift is **small and slow**. At 500 nM, the top of the range we swept, surface MC4R falls by 0.1 percent after half an hour, 2.7 percent after fourteen hours, and **8.0 percent** once the system has fully settled. That last figure is the one to judge against the **20 percent** we set in advance as the point where an effect becomes biologically meaningful, and it is well under it.",
-        "The ceiling exists because MGRN1 is the scarce component, at roughly 0.18 nM in total. There is only so much of it to redistribute however hard the binder pushes, and the model's own ceiling, with every MEGF8 site occupied, is 8.2 percent.",
+        "In the MMM complex, MGRN1 and MEGF8 come together as part of the E3 ring ligase structure. Within this structure, MEGF8 concentration determines the full saturation of MMM [1]. So in a canonical fibroblast, excess MGRN1 remains unbound, potentially causing off-target effects.",
+        "Within the cilia, MGRN1 also interacts with ATRN to create an E3 ligase complex that controls **MC4R** and the melanocortin pathway [2]. When the minibinder breaks MMM apart, we can expect excess MGRN1 to be available for ATRN binding, which may disrupt the melanocortin pathway. In this model, we examine whether the redistribution of MGRN1 could result in side effects to the melanocortin pathway.",
       ],
       source: "Abundances from PaxDb [9]. The MMM complex after [1] and [4]; the melanocortin arm after [2].",
     },
@@ -2397,8 +2398,7 @@ const model: Page = {
       navLabel: "What it means",
       heading: "What the safety result means",
       body: [
-        "Three things carry over from this model. More binder does mean more off-target effect, up to a point, but that point is **set by how little MGRN1 there is**: no dose and no binder, however good, can free more MGRN1 than the cell holds. The curve **flattens** well before the top of the range, with most of the effect in place by 50 nM. And the ceiling itself is **8.2 percent of surface MC4R**, against a threshold of 20 percent.",
-        "What would change that conclusion is a measurement rather than a model: how much MGRN1 a cell really holds, and how much of it is in the complex to begin with. Both are taken here from a protein abundance database and one published figure [3]. If MGRN1 were far more abundant than 0.18 nM, the ceiling would rise with it.",
+        "Safety modelling results show that accelerated MMM recruitment has a limited impact on melanocortin pathway signalling. At steady state, the maximum predicted change in surface MC4R was an **8.0 percent** decrease at a minibinder concentration of 500 nM, which is below the **20 percent** threshold for biological significance. The observed off-target effect is a hyperbolic dose response with half-maximum effect at approximately 10 nM, as set by Kd_MB. The underlying constraint appears to be MGRN1 availability, which is maintained at about 0.18 nM total. MGRN1 levels act as a limiting component and limit the maximum possible redistribution to ATRN irrespective of effective minibinder concentration.",
       ],
     },
     {
