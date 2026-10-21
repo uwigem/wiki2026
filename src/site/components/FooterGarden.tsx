@@ -4,7 +4,7 @@ import { Link } from '../router'
 import BalanceLogo from './BalanceLogo'
 
 /** The bottom of the page: opaque, quiet, and out of the garden's way. */
-export default function FooterGarden({ onReplayIntro }: { onReplayIntro?: () => void }) {
+export default function FooterGarden() {
   return (
     <footer className="mt-16 border-t-[3px] border-leaf-700 bg-leaf-200">
       <div className="mx-auto grid max-w-5xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr]">
@@ -18,11 +18,6 @@ export default function FooterGarden({ onReplayIntro }: { onReplayIntro?: () => 
               <p className="pixel text-tag tracking-[0.15em] text-leaf-800">{TEAM_LONG}</p>
             </div>
           </div>
-          {onReplayIntro && (
-            <button type="button" onClick={onReplayIntro} className="pixel-btn mt-4 text-xs">
-              ↻ replay the intro
-            </button>
-          )}
         </div>
 
         <nav aria-label="All pages">

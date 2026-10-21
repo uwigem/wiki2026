@@ -387,8 +387,8 @@ export type Block = Anchored &
     | { kind: "logo"; caption: string }
     /**
      * The interactive explainer: SMO in, SMO out, a blocker and a recruiter,
-     * and the hedgehog reading the level. It used to open Home 1 and Home 2;
-     * Home 3 tells the story its own way, so it lives here with the two arms.
+     * and the hedgehog reading the level. It used to open the earlier homepages;
+     * the current one tells the story its own way, so it lives here with the two arms.
      */
     | { kind: "explainer" }
     /**
@@ -468,7 +468,6 @@ export type Block = Anchored &
     | { kind: "gallery"; heading?: string; intro?: string; images: GalleryImage[]; ratio?: "wide" | "square" | "tall"; source?: string }
     /** Things to open or download: handbooks, posts, documents. */
     | { kind: "links"; heading?: string; intro?: string; items: LinkItem[]; source?: string }
-    /** A visible "not written yet" marker. */
     /** One combination from iGEM Alchemy, with the game's own pictures. */
     | {
         kind: "recipe";
@@ -509,6 +508,7 @@ export type Block = Anchored &
         flower: FlowerKind;
         sets: CreditSet[];
       }
+    /** A visible "not written yet" marker. */
     | { kind: "todo"; body: string[] }
   );
 
@@ -4397,11 +4397,11 @@ const attributions: Page = {
 };
 
 /* ===================================================================== *
- * PAGES THE ARCHITECTURE ASKS FOR THAT ARE NOT WRITTEN YET
+ * IMPLEMENTATION, WETLAB AND RESOURCES
  *
- * Each one is a real page with a real address, so the nav is the agreed
- * architecture from the first day rather than growing into it. Each says what
- * belongs on it. Delete the `todo` block as the content arrives.
+ * Proposed Implementation, then the wetlab and resources pages: Parts,
+ * Results, Protocols, Contribution and Judging. Results stays a single
+ * `resultsSoon` block until the experiments have run.
  * ===================================================================== */
 
 const implementation: Page = {

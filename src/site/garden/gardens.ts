@@ -5,10 +5,11 @@ import { ALL_ROUTES, activeGroup } from '../content/nav'
  *
  * Every page has its own garden down its margins, drawn once by
  * `npm run gardens` (scripts/bake-gardens.ts, using the recipe in
- * `generate.ts`) and saved under public/gardens/. Nothing is generated in the
- * browser: the page shows two images, a small tiling lawn for the whole page
- * and one tall picture holding that page's two margin strips, and the browser
- * paints them like any other background.
+ * `generate.ts`) and uploaded to iGEM's CDN through the wiki Uploads tool,
+ * which turns each PNG into an AVIF (see `cdn.ts`). Nothing is generated in
+ * the browser: the page shows two images, a small tiling lawn for the whole
+ * page and one tall picture holding that page's two margin strips, and the
+ * browser paints them like any other background.
  *
  * This file is the small part the site itself needs: which file belongs to
  * which page, and the sizes the images were drawn at. The drawing code lives

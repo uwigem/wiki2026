@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { cdnUrl } from '../cdn'
 
 /**
  * A PDF, read without leaving the page.
@@ -26,9 +27,6 @@ import { useEffect, useRef, useState } from 'react'
  * says so plainly, which beats guessing from the user agent, and the reader
  * gets the open and download controls and a line telling them why.
  */
-/** Where the wiki's documents live, uploaded through iGEM's Uploads tool. */
-const DOC_BASE = 'https://static.igem.wiki/teams/6229/wiki/'
-
 interface Props {
   /** A document, by directory and file name, for example `protocols/exp1-assay.pdf`. */
   file: string
@@ -42,7 +40,7 @@ export default function PdfEmbed({ file, title, pages }: Props) {
   const box = useRef<HTMLDivElement>(null)
   const [shown, setShown] = useState(false)
   const [inline, setInline] = useState(true)
-  const href = DOC_BASE + file
+  const href = cdnUrl(file)
 
   useEffect(() => {
     const nav = navigator as Navigator & { pdfViewerEnabled?: boolean }

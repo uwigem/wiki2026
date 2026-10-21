@@ -10,7 +10,7 @@ import { ENTRY_ENDS, drawStory, type Box, type Frame, type Label } from './scene
 import { href } from '../../router'
 
 /**
- * The Home 3 story: one picture pinned under the nav while the page scrolls
+ * The homepage story: one picture pinned under the nav while the page scrolls
  * past it.
  *
  * Scrolling. Every scene is one screen of scroll with a snap point at its
@@ -638,7 +638,16 @@ export default function StoryStage() {
 
   const scene = STORY[pos.idx]
   const ts = textScene(pos.idx)
-  const beat = ts >= 0 && pos.beat >= 0 ? STORY[ts].beats[pos.beat] : null
+  const beats = ts >= 0 ? STORY[ts].beats : []
+  const beat = ts >= 0 && pos.beat >= 0 ? beats[pos.beat] : null
+  /** New words, as opposed to the previous beat's lead with a body added under it. */
+  const leadIsNew = !!beat && (pos.beat === 0 || beats[pos.beat - 1].lead !== beat.lead)
+  /**
+   * The body under the lead: this beat's own, or the one a later beat will add
+   * under the same lead, laid out early (invisibly) so the block is already
+   * its final height and the lead does not move when the body appears.
+   */
+  const bodyText = beat ? (beat.body ?? beats.slice(pos.beat + 1).find((b) => b.lead === beat.lead && b.body)?.body) : undefined
   const cond = CONDITIONS.find((c) => c.id === openCond)
 
   const onLabelClick = (e: MouseEvent) => {
@@ -741,10 +750,29 @@ export default function StoryStage() {
           style={{ opacity: 0 }}
         >
           {beat && (
-            <div key={`${ts}:${pos.beat}`} className="reveal" aria-hidden>
-              {beat.eyebrow && <p className="pixel mb-2 text-sm text-leaf-800">{beat.eyebrow}</p>}
-              <p className="text-xl font-semibold leading-snug sm:text-2xl xl:text-3xl">{beat.lead}</p>
-              {beat.body && <p className="mt-3 text-base leading-relaxed text-leaf-800 sm:text-lg">{beat.body}</p>}
+            <div aria-hidden>
+              {/* Keyed by its words, not by beat number: a beat that only adds
+                  a body under the same lead must not remount the lead, or the
+                  lead fades in again and slides. */}
+              <div key={`${ts}:${beat.lead}`} className="reveal">
+                {beat.eyebrow && <p className="pixel mb-2 text-sm text-leaf-800">{beat.eyebrow}</p>}
+                <p className="text-xl font-semibold leading-snug sm:text-2xl xl:text-3xl">{beat.lead}</p>
+              </div>
+              {/* The body's place is held before it is said (see bodyText), so
+                  the centred block never changes height. A body arriving under
+                  a lead already on screen only fades, in place; one arriving
+                  with new words rises with them as one block. */}
+              {bodyText && (
+                <p
+                  key={beat.body ? `${ts}:${pos.beat}` : 'reserved'}
+                  className={
+                    (beat.body ? (leadIsNew ? 'reveal' : 'reveal-fade') : 'invisible') +
+                    ' mt-3 text-base leading-relaxed text-leaf-800 sm:text-lg'
+                  }
+                >
+                  {bodyText}
+                </p>
+              )}
             </div>
           )}
 

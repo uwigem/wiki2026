@@ -6,7 +6,7 @@ import { drawGarden as drawMeadow, plantK } from './garden'
 import { Painter, clamp01, mix, smooth, span, toRgb, type Rgb } from './painter'
 
 /**
- * The ten scenes of the Home 3 story, one drawing function each, in the order
+ * The ten scenes of the homepage story, one drawing function each, in the order
  * of the team's script.
  *
  * Each scene is a pure function of its progress `t` (0 to 1). The stage plays
@@ -780,7 +780,7 @@ function sceneCilium(f: Frame) {
 }
 
 /** Smooth steps between the three levels: low, intermediate, high. */
-const LEVEL_AT = [0.42, 0.7]
+const LEVEL_AT = [0.55, 0.78]
 const smoLevel = (t: number) =>
   smooth(span(t, LEVEL_AT[0], LEVEL_AT[0] + 0.1)) * 0.5 + smooth(span(t, LEVEL_AT[1], LEVEL_AT[1] + 0.1)) * 0.5
 const SMO_LOW = 2
@@ -798,11 +798,12 @@ function sceneSmo(f: Frame) {
   closeCam(f)
   const enter = smooth(span(t, 0, 0.14))
   const level = smoLevel(t)
-  // The first two SMO arrive one by one; then the level steps up twice.
-  const n = t < 0.32 ? SMO_LOW * span(t, 0.1, 0.32) : smoCount(level)
+  // The first two SMO arrive one by one; then, once the words have moved on
+  // to Smoothened (beat 2 of the scene, at 0.45), the level steps up twice.
+  const n = t < 0.45 ? SMO_LOW * span(t, 0.1, 0.4) : smoCount(level)
   drawCell(f, { glow: lerp(1, 0.25, enter), smo: n, jiggle: true })
   label(f, { id: 'cilium', kind: 'chip', text: 'primary cilium', dx: CIL_X + 9, dy: 18, align: 'left', alpha: 1 - enter })
-  smoLabel(f, span(t, 0.32, 0.4))
+  smoLabel(f, span(t, 0.45, 0.53))
   // The readout slides in instead of appearing from one frame to the next.
   drawReadout(f, level, enter, (1 - enter) * 16)
 }

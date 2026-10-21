@@ -492,7 +492,7 @@ export default function Workbench({ game }: { game: Alchemy }) {
     if (!hinted.length || !listRef.current) return
     const el = listRef.current.querySelector<HTMLElement>(`[data-hint]`)
     el?.scrollIntoView({ block: 'nearest', behavior: reduced ? 'auto' : 'smooth' })
-  }, [hinted.join('+'), reduced]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [hinted.join('+'), reduced])
 
   const q = search.trim().toLowerCase()
   // New finds first, so they are never below the fold; then everything else.

@@ -21,9 +21,9 @@
          paint instead of flashing a fallback first. -->
     <link rel="preload" as="font" type="font/woff2" href="%BASE_URL%fonts/pixelify-sans-latin.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="%BASE_URL%fonts/nunito-latin.woff2" crossorigin />
-    <!-- The lawn behind every page: one 1.7 KB tile. Each page's own garden
-         is preloaded from that page's HTML (see vite.config.ts). -->
-    <link rel="preload" as="image" href="https://static.igem.wiki/teams/6229/wiki/gardens/lawn.avif" />
+    <!-- The backgrounds (the lawn behind every page, and each page's own
+         garden) are preloaded by the page-per-route plugin in vite.config.ts.
+         The CDN they come from is named once, in src/site/cdn.ts. -->
   </head>
   <body>
     <div id="root"></div>

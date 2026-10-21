@@ -10,7 +10,7 @@ import GardenSection from './site/components/GardenSection'
 import PixelSign from './site/components/PixelSign'
 import TopNav from './site/components/TopNav'
 import AlchemyPage from './site/pages/AlchemyPage'
-import Home3 from './site/pages/Home3'
+import HomePage from './site/pages/HomePage'
 import NotebookPage from './site/pages/NotebookPage'
 import TeamPage from './site/pages/TeamPage'
 import WikiPage from './site/pages/WikiPage'
@@ -94,7 +94,7 @@ export default function App() {
           Skip to content
         </a>
 
-        <TopNav visible />
+        <TopNav />
 
         {/* tabIndex -1 so the skip link can move focus here. */}
         <main id="garden-main" ref={mainRef} tabIndex={-1} className="flex-1">
@@ -131,7 +131,7 @@ const SPECIAL_TITLES: Record<string, string> = {
 }
 
 function RouteView({ path }: { path: string }) {
-  if (path === '/') return <Home3 />
+  if (path === '/') return <HomePage />
   if (path === '/team') return <TeamPage />
   if (path === '/notebook') return <NotebookPage />
   if (path === '/alchemy') return <AlchemyPage />
