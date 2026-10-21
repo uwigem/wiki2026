@@ -51,7 +51,7 @@ import type { PipelineStage } from "../components/Pipeline";
 import type { TrailStep } from "../components/PartTrail";
 import type { RecipePart } from "../components/RecipeStrip";
 import type { PersonaKey } from "../components/gardenArt";
-import { SMO_5L7D, type Structure } from "./structures";
+import { type Structure } from "./structures";
 import {
   RECRUITMENT_CONSTRUCTS,
   SCREENING_CONSTRUCTS,
@@ -572,7 +572,7 @@ const description: Page = {
         },
         {
           title: "Up arm",
-          body: "A **de novo minibinder** pries apart the MEGF8 and MOSMO interface. [How we design one](/engineering#pipeline). The MMM complex can no longer assemble, so it stops clearing the targeted receptor. Doing this prevents over degradation and allows us a new vector to tune ciliary abundance.",
+          body: "A **de novo minibinder** pries apart the MEGF8 and MOSMO interface. [How we design one](/contribution#pipeline). The MMM complex can no longer assemble, so it stops clearing the targeted receptor. Doing this prevents over degradation and allows us a new vector to tune ciliary abundance.",
         },
         {
           title: "A dial, not a switch",
@@ -647,137 +647,6 @@ const background: Page = {
     },
   ],
 };
-
-/**
- * How the binder is designed. These were a Design page of their own until the
- * team settled its final architecture (2026-10-08), which has no Design page,
- * so they now open the Engineering page: first how a design is made and
- * filtered, then the cycles of what went wrong and what changed.
- */
-const designBlocks: Block[] = [
-  {
-    kind: "prose",
-    heading: "What we are designing against",
-    body: [
-      "The up arm of the device is a **de novo minibinder** that sits on the **MEGF8 to MOSMO interface**. Break that interface and the MMM complex cannot assemble. It stops ubiquitinating **Smoothened (SMO)**, so SMO stays in the cilium and Hedgehog signalling goes up.",
-      "We picked this interface because the Kong lab has cryo-EM of the MMM complex and a preprint that points to a specific site whose mutation breaks the complex. That gives us a real structure and a real binding site to design toward, which is what a good target needs.",
-    ],
-    source:
-      "Kong lab MMM structure and interface preprint (biorxiv 2025.09.11.675358).",
-  },
-  {
-    kind: "steps",
-    id: "pipeline",
-    heading: "The pipeline",
-    intro: "Every candidate walks this path. Most do not finish it.",
-    items: [
-      {
-        title: "Generate backbones",
-        body: "**RFdiffusion3** builds candidate binder backbones against the target, guided by hotspot residues and a length range. It runs on the UW Hyak cluster inside a RosettaCommons foundry container.",
-      },
-      {
-        title: "Design sequences",
-        body: "**ProteinMPNN** threads sequences onto each backbone, five sequences per backbone.",
-      },
-      {
-        title: "Forward fold",
-        body: "**RoseTTAFold3** folds each designed sequence together with the target to check that it is predicted to bind, at about 40 sequences per hour per GPU. MOSMO and MEGF8 are templated because the sequence databases were a bottleneck.",
-      },
-      {
-        title: "Filter hard",
-        body: "Keep a design only if it clears the **2 by 2 filter**: a **minPAE under 2** and a **backbone RMSD under 2 Angstrom** between the shape we asked for and the shape the sequence actually folds into. Both cutoffs are the published gold standard, and Dr. DiMaio told us minPAE is the single best predictor of a real binder. [What each number means](/contribution#metrics).",
-      },
-      {
-        title: "Score the interface",
-        body: "Survivors get **pLDDT** for per-residue confidence, where we treat 80 as satisfactory, and **ddG** as a computational stand-in for binding strength, where we want a negative number. **PyRosetta InterfaceAnalyzer** adds buried surface area, unsatisfied hydrogen bonds and shape complementarity, and **PyMOL** is used to look at each one by hand.",
-      },
-    ],
-  },
-  {
-    kind: "narration",
-    body: [
-      "Three programs, doing three jobs. The first **sculpts a shape** that should stick to the target. The second **picks an amino acid sequence** that might fold into that shape. The third **checks the sequence actually folds that way**, and still lands in the right place.",
-      "If the shape we asked for and the shape we got are more than about two atoms-widths apart, we throw it away.",
-    ],
-  },
-  {
-    kind: "funnel",
-    id: "funnel",
-    heading: "How much gets thrown away",
-    intro:
-      "Almost all of it. These are the numbers from our MOSMO and MEGF8 campaign.",
-    stages: [
-      {
-        label: "binders generated",
-        count: 8300,
-        note: "backbones from RFdiffusion3, sequences from ProteinMPNN, folded by RoseTTAFold3",
-      },
-      {
-        label: "cleared the confidence filters",
-        count: 344,
-        note: "minPAE and backbone RMSD within 2 Angstrom, then pLDDT of 80 or more",
-      },
-      {
-        label: "clear of the membrane",
-        count: 146,
-        note: "no atom reaching the part of the target buried in the membrane",
-      },
-    ],
-    goal: { label: "ordered for wet lab validation", count: 96 },
-    footnote:
-      "The membrane step is the interesting one. Our first filters were passing designs that bound a part of the target buried inside the membrane, where no protein could ever reach them, and it removes more than half of what gets to it. That is [the second design cycle](/engineering#cycles), and the full set of stages is on [the model page](/model#binder-funnel).",
-  },
-  {
-    kind: "structure",
-    id: "smo-structure",
-    structure: SMO_5L7D,
-  },
-  {
-    kind: "prose",
-    heading: "Why this structure is here and not ours",
-    body: [
-      "The receptor above is **Smoothened**, the protein the whole project is aimed at, with a molecule of **cholesterol** bound in the domain that sits outside the cell. The helices below it cross the membrane seven times, which is the shape that makes it a GPCR. Cholesterol binding is the activation step [our kinetic model argues about](/model#gpcr), so this is the picture that page is describing in equations.",
-      "It is a published structure rather than one of ours, and labelled that way on purpose. Our own targets, the MOSMO and MEGF8 interface, were solved by the Kong lab by cryo-EM and are not ours to publish. **Our designed binders are not here yet** because none has been validated at a bench. When they are, they drop into the same viewer.",
-    ],
-    source:
-      "PDB 5L7D, Byrne et al., Nature 2016. Viewer written for this site, no third-party 3D library.",
-  },
-  {
-    kind: "prose",
-    heading: "A second design track, and a twist",
-    body: [
-      "We also run **BindCraft**, which co-designs the backbone, sequence, and interface together through AlphaFold2 hallucination. It produces fewer designs but filters them more strictly, so we use it alongside the main pipeline.",
-      "MOSMO and MEGF8 are awkward targets because their surfaces are mostly **beta sheet**, and binder design tools are tuned for helical targets. We are testing **beta-strand-conditioned RFdiffusion** to design binders that pair against an exposed edge strand instead of a helix.",
-    ],
-    source:
-      "Principles of Minibinder Design (beta-strand method, Nat Commun 2025 s41467-025-67866-3).",
-  },
-  {
-    kind: "facts",
-    heading: "Where the compute runs",
-    items: [
-      {
-        title: "Hyak",
-        body: "UW's SLURM cluster, reached through the Research Computing Club and funded by the Student Technology Fee. Most design runs happen here.",
-      },
-      {
-        title: "DIGS",
-        body: "The Institute for Protein Design cluster. We have one seat, arranged through Dr. DiMaio.",
-      },
-      {
-        title: "Mentorship",
-        body: "Dr. Frank DiMaio at the Institute for Protein Design set the tool choices, the filter metrics, and the target-selection rules.",
-      },
-    ],
-  },
-  {
-    kind: "prose",
-    heading: "Where the design stands",
-    body: [
-      "The campaign against both targets has finished: about **8,300 designs** generated, and **96** ordered for wet lab validation after the filters. [What each filter removed](/model#binder-funnel) is on the Model page.",
-    ],
-  },
-];
 
 /**
  * The three parts of the Engineering page, in order. Each part opens with this
@@ -897,14 +766,6 @@ const engineering: Page = {
       current: 1,
     },
     {
-      kind: "prose",
-      heading: "Where the design work fits",
-      body: [
-        "With a target worth acting on, the second loop is the binder itself. It generates candidates, throws almost all of them away, and works out why the survivors survived. The pipeline below is the machinery; the cycles after it are what we learned by running it. The general version, written so another team can run it, is on [contribution](/contribution#pipeline).",
-      ],
-    },
-    ...designBlocks,
-    {
       kind: "cycles",
       id: "cycles",
       heading: "What running the pipeline taught us",
@@ -951,7 +812,7 @@ const engineering: Page = {
             },
             {
               title: "Learn",
-              body: "Good numbers are not the same as a good binder. We rebuilt the filtering around what is physically reachable: re-fold every survivor against only the **extracellular** parts of the targets and apply the 2 by 2 filter again, then run a custom check that rejects anything still sitting within 5 to 10 Angstrom of the transmembrane helices. Dr. DiMaio added a third test, folding the binder **on its own** with no target present, to confirm it holds its shape rather than being propped up by the thing it is supposed to bind. About **25 designs** survived all of it. The filters are listed in order in [the pipeline](/engineering#pipeline) above.",
+              body: "Good numbers are not the same as a good binder. We rebuilt the filtering around what is physically reachable: re-fold every survivor against only the **extracellular** parts of the targets and apply the 2 by 2 filter again, then run a custom check that rejects anything still sitting within 5 to 10 Angstrom of the transmembrane helices. Dr. DiMaio added a third test, folding the binder **on its own** with no target present, to confirm it holds its shape rather than being propped up by the thing it is supposed to bind. About **25 designs** survived all of it. The filters are listed in order in [the pipeline](/contribution#pipeline).",
             },
           ],
         },
@@ -978,14 +839,6 @@ const engineering: Page = {
             },
           ],
         },
-      ],
-    },
-    {
-      kind: "prose",
-      heading: "Two changes of direction",
-      body: [
-        "The first real change came before any protein was made. We began aiming at ATRN, then switched to the **MMM complex** once it was clear MMM had cryo-EM and an accessible interface while ATRN only had an AlphaFold model. Better data to design against was worth the switch.",
-        "A second problem showed up in the pipeline itself. RoseTTAFold3 could not fold our targets well because the sequence databases were thin, so the designs were failing the fold check for the wrong reason. We fixed it by **templating MOSMO and MEGF8** during forward folding. [The pipeline](/engineering#pipeline) above has every step.",
       ],
     },
     {
@@ -2559,7 +2412,7 @@ const model: Page = {
       id: "protein-modelling",
       heading: "Modelling the binder against its target",
       body: [
-        "The binder design process is technically finished once a backbone and a sequence exist. In practice it would rarely produce a binder that works at a bench without a third step: predicting the structure back and checking it. We used **RoseTTAFold3** alongside molecular visualisation software, **PyMOL** and **ChimeraX**, to improve hotspot selection run by run, and to choose which 96 of our thousands of designs to order and test. The pipeline that produces them is written up on [contribution](/contribution#pipeline).",
+        "Although the protein binder design process is technically complete after backbone and sequence generation (RFdiffusion3 and ProteinMPNN, see [contribution](/contribution#pipeline)) it would likely fail to yield experimentally successful binders without **computational validation** through **forward folding**. Our team used **RoseTTAFold3**, alongside molecular visualisation software like PyMOL and ChimeraX, to iteratively improve hotspot selection – an input to backbone generation – and to select which 96 of our thousands of designed binders to order for **experimental wet lab validation**.",
       ],
     },
     {
@@ -2603,9 +2456,8 @@ const model: Page = {
         {
           kind: "prose",
           body: [
-            "For the first backbone designs, PyMOL and ChimeraX gave us the tools to pick hotspots by hand, alongside the published description of the complex [1]. We looked at **target structure**, where the predictable shapes of helices and sheets are easier to design against than flexible loops, and at **hydrophobicity**, where a binder gains affinity through hydrophobic packing against the surface it sits on [2].",
-            "What made visualisation the right tool rather than an optimisation is that **RFdiffusion only loosely respects the hotspots it is given**. They steer it towards a region rather than templating one residue against another. Identifying the overall region of interest was therefore most of the work.",
-            "The two charts below are the evidence for that. If the properties of a particular hotspot residue drove success, the designs attempted against the best hotspots would succeed at a higher rate. Instead the number of successes rises almost in proportion to the number of designs attempted, whichever hotspot it was.",
+            "For our initial backbone design, molecular visualisation programs provided a variety of tools to help us select hotspots, alongside the findings from Kong et al. [1]. Analysis of **target structure**, where the predictable structures of alpha helices and beta sheets are easier to target than flexible loops, as well as residue **hydrophobicity**, where our binder would have greater binding affinity, allowed us to select a collection of hotspots to use as inputs [2].",
+            "Part of what made visualisation software so well suited to the task is that RFdiffusion only loosely respects hotspots, so identifying the **overall regions of interest** was most important. The following charts help demonstrate this, as it can be seen how the rate of success was fairly constant for any hotspots we used at high volumes.",
           ],
         },
         {
@@ -2632,7 +2484,7 @@ const model: Page = {
       navLabel: "What RoseTTAFold3 is",
       heading: "What the folding model can and cannot tell us",
       body: [
-        "RoseTTAFold3 is an open-source deep learning model built jointly by the Institute for Protein Design and Microsoft AI for Good, trained on processed protein structural data [3]. It is not a physics model. It is very good at predicting protein to protein interactions of the kind this project depends on, but its scores are **empirically useful rather than estimates of the physical constants** that describe how tightly two molecules hold each other. Rosetta has other software for that, and we used one of those separately for the energies at the end of this section.",
+        "RoseTTAFold3 is an open-source, deep learning model created jointly by the Institute for Protein Design and Microsoft AI for Good [3]. It has been trained on processed structural datasets for proteins using AtomWorks. Although RoseTTAFold3 is itself not a physics model, it is very good at predicting **protein-protein interactions** like those relevant to our project, as well as other biomolecular interactions. The scores provided by RoseTTAFold are therefore **empirically useful** but do not by themselves offer estimates of physical constants describing molecular affinities (although Rosetta offers other software that performs these tasks).",
       ],
     },
     {
@@ -2651,7 +2503,7 @@ const model: Page = {
       navLabel: "The metrics",
       heading: "The metrics, and where we drew the line",
       summary:
-        "Six quantities, in the subteam's own words. The first four carry the cutoffs the filtering code applies; the last two were used to rank rather than to cut.",
+        "Six quantities used to evaluate binder designs: the first four as filters, and the last two to rank the final batch.",
       blocks: [
         {
           kind: "table",
@@ -2697,15 +2549,12 @@ const model: Page = {
       kind: "details",
       id: "transmembrane",
       navLabel: "The membrane filter",
-      heading: "The filter we had to write ourselves",
-      summary: "No published filter throws out a binder for reaching into a membrane, so we wrote one.",
+      heading: "How we got around transmembrane protein-protein interactions",
       blocks: [
         {
           kind: "prose",
           body: [
-            "Our targets sit in a membrane, and many of our designs tried to bind the part of them buried inside it. **MOSMO has four helices crossing the membrane and MEGF8 has one**, as the two pictures above show. A binder reaching those helices is impossible in a living cell, so every such design had to go.",
-            "We identified by hand which residues of MOSMO and MEGF8 sit within the membrane: 64 residues of MOSMO, which the script holds as three stretches of its sequence, and a single 25-residue helix of MEGF8. Around those residues the script draws a forbidden region, and the radius is **not the same for the two targets**. MOSMO gets **10 Angstrom** and MEGF8 **5**, because MOSMO's four helices make a far wider wall to keep clear of than MEGF8's one.",
-            "Every atom of a design is then tested against every atom of the membrane region. A design passes only if the count of contacts is **exactly zero**: there is no partial credit. Failing takes a design out of both the final set and the pool we resequenced.",
+            "One issue that came up with our designs was the spatial intersection of our binders with the ciliary membrane, as we were targeting **transmembrane proteins**. MOSMO has four alpha helices within the membrane and MEGF8 has one. Because our binders would not be able to interact with these transmembrane helices **in vivo**, we had to find a way to eliminate all designs that either directly interacted with these helices or would be significantly embedded within the membrane. We designed a **script** to filter these designs out. We **manually identified** residues on MOSMO and MEGF8 as being within the membrane, and established a 5-10 Å radius around these residues we deemed within the membrane. If a binder intersected this defined region, we considered it as failing our transmembrane filter, meaning it would not be considered for our end-point designs or **redesigns** (resequencing).",
           ],
         },
       ],
@@ -2716,7 +2565,7 @@ const model: Page = {
       navLabel: "What survived",
       heading: "How much gets thrown away",
       intro:
-        "Almost all of it. Every design we generated for MOSMO and MEGF8, and what each stage of filtering left behind.",
+        "In total, we generated just **over 8300 binders** for this project. Selecting the 96 best ones for experimental validation required a number of filters and models. The following chart visualises how much each set of filters constrained the results.",
       stages: [
         {
           label: "binders generated",
@@ -2756,7 +2605,7 @@ const model: Page = {
       navLabel: "Binding energy",
       heading: "Ranking what survived",
       body: [
-        "Passing the filters says a design is believable, not that it is good. To rank the survivors we used **ddG**, the change in Gibbs free energy on binding, divided by **dSASA**, the surface area the two chains bury between them. Dividing by the area is what makes designs comparable: a large interface will accumulate a bigger total energy without being any better per unit of contact. The more negative that ratio, the denser the favourable interactions.",
+        "An additional energetic metric we used to predict success prior to wet lab validation was **ddG** – a measurement of change in Gibbs free energy – normalised by **dSASA**, a geometric measurement of the change in solvent-accessible surface area. The **more negative the normalised ddG**, the higher the density of favourable binder interactions. These results provide further confidence in the selection of binders for testing and are yet another way we used modelling to prepare the disruptive binder component of our project.",
         "The natural MOSMO and MEGF8 interface gives us something to beat, since it is a real interaction between the same two proteins we are designing against.",
       ],
     },
@@ -3747,7 +3596,6 @@ const humanPractices: Page = {
       kind: "rail",
       id: "to-market",
       heading: "To-market strategy",
-      intro: "Five stages, in order. Above the line is what we have done; below it is what we are planning.",
       hereLabel: "we are here",
       stages: [
         {

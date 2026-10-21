@@ -321,8 +321,18 @@ export const CONTRIBUTIONS: Record<string, Contribution[]> = {
     },
   ],
   'Teo Fine': [
-    { task: 'conceptualisation', did: 'Aided in the ideation process.' },
-    { task: 'background-research', did: 'Conducted literature review.' },
+    { task: 'analysis', did: 'Analysed data on de novo binders as well as on both potential binder targets.' },
+    { task: 'conceptualisation', did: 'Assisted in the ideation and feedback process.' },
+    {
+      task: 'background-research',
+      did: 'Did background research on the use, development and efficacy of various protein design and analysis software and pipelines.',
+    },
+    { task: 'investigation', did: 'Ran redesign pipelines and other analysis pipelines for production and testing.' },
+    {
+      task: 'software',
+      did: 'Wrote pipelines for de novo protein design and analysis of designed proteins. Configured the runtime environment and fixed existing software bugs.',
+    },
+    { task: 'writing', did: 'Contributed to the wiki writing process by writing, revising and giving feedback.' },
   ],
   'Alvin Fu': [
     {
