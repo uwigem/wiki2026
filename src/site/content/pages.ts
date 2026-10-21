@@ -1651,17 +1651,14 @@ const model: Page = {
       navLabel: "Preliminary results",
       heading: "What the model does when we sweep it",
       body: [
-        "The model was written in **Antimony** and solved in Python's **Tellurium** library [14]. Because six of its constants are stand-ins, no single run of it means much. What means something is the shape of the response across the range those constants could plausibly take, which is what the next two figures show.",
-        "The first sweeps the binding strength of each arm, from a tenth of the baseline to ten times it, across doses from 0.1 to 1000 nM. The off-rates are held at a median value so that only the on-rates move.",
+        "The equation system was adapted into **Antimony** before being solved in Python's **Tellurium** library [14]. Because six of its constants are stand-ins, we use parameter sweeps to estimate the shape of the response across the range those constants could plausibly take.",
+        "We conducted initial sweeps of on-rate (k3 and kf_MMM_Linker) binding parameters over a scalar strength range of 0.1x to 10.0x. Each binding strength was validated over a dose range from 0.1 to 1000 nM. The off-rates are held at a median value so that only the on-rates move.",
+        "Across this range we observe that the binder raises the SMO response matching the calibration threshold from MEGF8-KO, with an effect change of about **9.06x**. The linker observes a reduction of SMO toward 0. Within our operating terms, the linker and binder function as intended, increasing and decreasing SMO accordingly.",
       ],
     },
     {
       kind: "line",
       id: "dose-sweep",
-      navLabel: "Dose sweep",
-      heading: "What each arm can do to ciliary SMO",
-      intro:
-        "Ciliary SMO against dose, as a multiple of the untreated level, at five settings of the arm's on-rate. Left, the binder. Right, the linker. Both panels share one scale, so the two arms can be compared by eye. Both axes are logarithmic, which puts a doubling and a halving the same distance from the untreated line, the same reason the global analysis below works in log fold change.",
       panels: SWEEP_PANELS,
       xLabel: "dose (nM)",
       yLabel: "ciliary SMO, as a multiple of untreated",
@@ -1669,8 +1666,6 @@ const model: Page = {
       yLog: true,
       legendTitle: "on-rate, as a multiple of the baseline",
       references: [{ axis: "y", value: 1, label: "untreated" }],
-      footnote:
-        "The binder raises ciliary SMO towards a ceiling of about **nine times** untreated; the linker drives it down towards about **0.06 times**. Both ends are reachable from the same device. The ceiling itself is not a prediction: the model's tagging rate was calibrated on the MEGF8 knockout fold change of 9.06, so the binder arriving at about nine times is the model agreeing with its own calibration. What the sweep adds is that the on-rate sets the **dose needed**, not the destination. Every setting heads for the same ceiling, and a tenfold weaker on-rate simply takes more dose to get there: at the top of this range it has only reached five times, while the three strongest settings are already at the ceiling. The linker behaves the same way in the other direction.",
       source: "Regenerated from the current model.",
     },
     {
@@ -1799,11 +1794,11 @@ const model: Page = {
       kind: "prose",
       id: "global-sensitivity",
       navLabel: "Global sensitivity",
-      heading: "The same question, across the whole range",
+      heading: "Global sensitivity analysis",
       body: [
-        "Local analysis only describes the neighbourhood of the settings we chose. Since six of those settings are stand-ins, we also ran a **global** analysis, which samples the whole plausible range at once. We used Morris screening [11] and Sobol analysis [12] together, on the principle that a parameter both methods call uninfluential can be dropped.",
-        "Because the device is meant to push the readout in either direction, the output here is the **log fold change** of ciliary SMO rather than its concentration, so that an increase and a decrease of the same size count the same.",
-        "The global analysis was run on an **earlier parameterisation** of the same model, with a different ciliary exit rate and complex abundance, and has not been re-run since. The ordering it gives is what we rely on; the index values themselves belong to that earlier run. That ordering matches the local analysis at both ends, with clearance by the complex at the top and the PTCH1 gate at the bottom, but the two disagree in the middle about the doses: locally the linker dose comes eleventh and the binder dose seventeenth, while here they come second and third. That is the two analyses asking different questions rather than contradicting each other. These figures sample each dose anywhere between 0.1 and 1000 nM, while the local pass nudges a fixed 5 nM dose by ten percent. The local pass also cannot tell the binder's dose apart from its on-rate, because the two enter the equations only as a product, which is why the pair scores identically there. Where dose is concerned the global ranking is the one to read, and the dose response sweeps above are what it rests on.",
+        "Local analysis only describes a pre-set range of settings we chose. Since six of those settings are stand-ins, we also ran a **global** analysis, which samples the whole plausible range at once. To do so, we apply a combination of both Morris [11] and Sobol [12] sensitivity analysis methods sequentially, where parameters flagged by both systems would eventually be dropped from the model.",
+        "Because our model is dependent on a complementary relationship through the tuner system, we adapted our output to the **log10 fold change** of ciliary SMO to ensure increases and decreases in SMO are weighted equally.",
+        "GSA was run on the bundled model including the parameter defaults outlined in the table.",
       ],
     },
     {
@@ -1824,9 +1819,9 @@ const model: Page = {
       kind: "scatter",
       id: "morris",
       navLabel: "Morris screening",
-      heading: "Which parameters act on their own",
+      heading: "Morris screening method",
       intro:
-        "Morris screening. Along the bottom, how much each parameter moves the output on average. Up the side, how much that effect varies depending on where the rest of the model is set. The dashed line is where those two are equal, so a point above it has an influence that is non-linear or tangled up with the other parameters.",
+        "We implement the Morris screening method to evaluate and rank parameters based on how much they move readout against variance.",
       panels: [{ points: MORRIS_POINTS }],
       groups: [
         { id: "named", label: "name certain", shape: "square" },
@@ -1836,7 +1831,7 @@ const model: Page = {
       yLabel: "how much that effect varies",
       diagonal: true,
       footnote:
-        "Morris agrees with Sobol on the order: clearance by the complex first, then the two doses, then the ternary enhancement, with the PTCH1 gate last. Most of the smaller parameters sit on or above the dashed line, so their apparent influence depends heavily on where everything else is set, and a single ranking number flatters them. Clearance by the complex is the opposite case: it sits well below the line, which means it moves the readout on its own, whatever the rest of the model is doing.",
+        "Morris screening, ranking by mean absolute elementary effect, labelled k_MMM as the most influential, followed by the doses of both linker and binder and ternary enhancement alpha. The least influential metric, per Morris, was the PTCH1 gate. Six of the measured rates (including the ternary enhancement) indicated high variance, implying non-linear effects inflating significance scoring through Morris and dependence on cooperativity with more influential terms.",
       source:
         "Four of the ten names sit in one cluster in the run's own figure. Those four are our reading of which point is which, and are marked as such.",
     },
@@ -1863,13 +1858,12 @@ const model: Page = {
       kind: "prose",
       id: "tuner-discussion",
       navLabel: "Discussion",
-      heading: "What this tells us to do next",
+      heading: "Future directions",
       body: [
-        "Measuring the binder and linker binding constants by **SPR**, and the ternary enhancement by an **in-cell degradation assay**, would turn this feasibility envelope into an actual prediction. A second, independent MEGF8 knockout fold change would harden the single-point calibration that the tagging rate currently rests on.",
-        "The sensitivity ranking tells us which of those to do first. Dose and the ternary enhancement dominate the readout while the precise binding kinetics do not, so wet lab effort is better spent on the degradation assay and a dose response than on high-resolution SPR.",
-        "The bundled model uses a simplified single-arm ternary term, which loses something real. Reimplementing the full two-arm cooperative rate law would capture the **hook effect**, where too much linker saturates both arms separately instead of bridging them, and the amount of degradation falls again. That matters for choosing a dosing window, since it means more is not always better.",
-        "The one result we distrust is our own PTCH1 term. PTCH1 loss is what defines basal cell carcinoma, yet the gate comes out as effectively nothing in the global analysis and near the bottom of the local one. That is more likely to be a sign that a simple mass-action gate under-represents what PTCH1 actually does, which is transport cholesterol, than a sign that PTCH1 does not matter. The GPCR model below is where we treat that mechanism properly.",
-        "This model reads PTCH1 out of PaxDb at 0.01 ppm, and the GPCR model reads the same protein out of the same database at 1.5 ppm. We have not reconciled the two. Because the gate barely moves this model's answer at either value, it does not change anything above it, but it is an open question for whichever version of the model ends up carrying PTCH1 seriously.",
+        "To advance the model, measuring the binder and linker binding constants (**SPR**) and the ternary enhancement alpha (in-cell degradation assay) would convert this feasibility envelope into a true prediction. On top of this, a second independent MEGF8-knockout fold change would further harden the single-point calibration, allowing us to move forward with more complex analytics. This would allow us to take sensitivity analysis results a step further and collapse unnecessary model components, preventing overdefinition of the model.",
+        "Because PTCH1 loss defines BCC, yet the gate term observed here is non-influential, our simplified mass-action gate under-represents PTCH1's true (cholesterol-transport) mechanism. By fixing the PTCH1 gateway mechanism explicitly, we can define the model to a greater extent as seen in the GPCR system model. Currently both models adopt alternate PTCH1 concentrations (according to model-specific sourced cell types), but both rate the relevance of PTCH1's gate term as non-influential.",
+        "The sensitivity ranking helps us prioritise which parameters to measure first. In GSA, we saw dose and the ternary enhancement alpha dominate the readout, while the precise binding kinetics do not; wet lab effort is best directed at the in-cell degradation assay (alpha) and dose response before high-resolution **SPR** to determine the on/off rates.",
+        "The current bundled model uses a simplified single-arm ternary term, which loses potentially valuable information. By reimplementing the full two-arm cooperative rate law we could capture the high-dose **hook (prozone) effect**, which is relevant for identifying the linker's optimal dosing window to ensure oversaturation does not occur.",
       ],
     },
     {
