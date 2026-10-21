@@ -2905,14 +2905,6 @@ const DELIVERABLES: Block[] = [
     ],
   },
 {
-    kind: "todo",
-    body: [
-      "Two parts of the guide are written but not finished, and go here:",
-      "Troubleshooting: what to try when a stage does not give the readout it should.",
-      "Best practices: the habits that make the platform behave predictably from one lab to the next.",
-    ],
-  },
-{
     kind: "figure",
     id: "flyer",
     src: "implementation/flyer.png",
@@ -4530,8 +4522,7 @@ const parts: Page = {
         ["MEGF8 target fusion constructs", "MEGF8 components for the GAL4 and VP16 screening system"],
         ["MOSMO target fusion constructs", "MOSMO components for the GAL4 and VP16 screening system"],
       ],
-      caption:
-        "Individual binder sequences and identifiers go in once the final design list is settled, as do the exact names and sources of the GAL4 and VP16 components, the GFP reporter, the BFP marker and the GB1 control.",
+      caption: "Ordered from Twist Bioscience as linear gene fragments.",
     },
 
   ],
