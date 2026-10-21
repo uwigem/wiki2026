@@ -112,7 +112,7 @@ export const BINDER_STRUCTURES: Structure[] = [
     id: 'MEGF8 1',
     name: 'MEGF8 binder 1',
     caption:
-      'MEGF8 binder 1, drawn with its target. The target MEGF8 is coloured by secondary structure and the binder is in pink, so what the picture shows is where on MEGF8 the design lands. This one kept the sequence designed for its first backbone. It has no binding energy row in the set we scored, so there is no number to quote for it here.',
+      'MEGF8 binder 1, drawn with its target. The target MEGF8 is coloured by secondary structure and the binder is in pink, so what the picture shows is where on MEGF8 the design lands. This one kept the sequence designed for its first backbone. Its binding energy per unit of buried surface is -1.5585.',
     credit:
       'Our own design: backbone from RFdiffusion3, sequence from ProteinMPNN, and the complex ' +
       'predicted with RoseTTAFold3, drawn as an alpha-carbon trace. ' +
@@ -148,7 +148,7 @@ export const BINDER_STRUCTURES: Structure[] = [
     id: 'MEGF8 2',
     name: 'MEGF8 binder 2',
     caption:
-      'MEGF8 binder 2, drawn with its target. The target MEGF8 is coloured by secondary structure and the binder is in pink, so what the picture shows is where on MEGF8 the design lands. This one is a redesign: the backbone came out of the diffusion step and its sequence was then designed again. Its binding energy per unit of buried surface is -3.1623, the strongest in the whole set.',
+      'MEGF8 binder 2, drawn with its target. The target MEGF8 is coloured by secondary structure and the binder is in pink, so what the picture shows is where on MEGF8 the design lands. This one is a redesign: the backbone came out of the diffusion step and its sequence was then designed again. Its binding energy per unit of buried surface is -3.027.',
     credit:
       'Our own design: backbone from RFdiffusion3, sequence from ProteinMPNN, and the complex ' +
       'predicted with RoseTTAFold3, drawn as an alpha-carbon trace. ' +
@@ -175,7 +175,7 @@ export const BINDER_STRUCTURES: Structure[] = [
     id: 'MEGF8 3',
     name: 'MEGF8 binder 3',
     caption:
-      'MEGF8 binder 3, drawn with its target. The target MEGF8 is coloured by secondary structure and the binder is in pink, so what the picture shows is where on MEGF8 the design lands. This one is a redesign: the backbone came out of the diffusion step and its sequence was then designed again. Its binding energy per unit of buried surface is -2.4429.',
+      'MEGF8 binder 3, drawn with its target. The target MEGF8 is coloured by secondary structure and the binder is in pink, so what the picture shows is where on MEGF8 the design lands. This one is a redesign: the backbone came out of the diffusion step and its sequence was then designed again. Its binding energy per unit of buried surface is -2.609.',
     credit:
       'Our own design: backbone from RFdiffusion3, sequence from ProteinMPNN, and the complex ' +
       'predicted with RoseTTAFold3, drawn as an alpha-carbon trace. ' +
@@ -202,7 +202,7 @@ export const BINDER_STRUCTURES: Structure[] = [
     id: 'MOSMO 1',
     name: 'MOSMO binder 1',
     caption:
-      'MOSMO binder 1, drawn with its target. The target MOSMO is coloured by secondary structure and the binder is in pink, so what the picture shows is where on MOSMO the design lands. This one kept the sequence designed for its first backbone. Its binding energy per unit of buried surface is -2.1405.',
+      'MOSMO binder 1, drawn with its target. The target MOSMO is coloured by secondary structure and the binder is in pink, so what the picture shows is where on MOSMO the design lands. This one kept the sequence designed for its first backbone. Its binding energy per unit of buried surface is -2.451.',
     credit:
       'Our own design: backbone from RFdiffusion3, sequence from ProteinMPNN, and the complex ' +
       'predicted with RoseTTAFold3, drawn as an alpha-carbon trace. ' +
@@ -228,7 +228,7 @@ export const BINDER_STRUCTURES: Structure[] = [
     id: 'MOSMO 2',
     name: 'MOSMO binder 2',
     caption:
-      'MOSMO binder 2, drawn with its target. The target MOSMO is coloured by secondary structure and the binder is in pink, so what the picture shows is where on MOSMO the design lands. This one is a redesign: the backbone came out of the diffusion step and its sequence was then designed again. It has no binding energy row in the set we scored, so there is no number to quote for it here.',
+      'MOSMO binder 2, drawn with its target. The target MOSMO is coloured by secondary structure and the binder is in pink, so what the picture shows is where on MOSMO the design lands. This one is a redesign: the backbone came out of the diffusion step and its sequence was then designed again. Its binding energy per unit of buried surface is -2.28.',
     credit:
       'Our own design: backbone from RFdiffusion3, sequence from ProteinMPNN, and the complex ' +
       'predicted with RoseTTAFold3, drawn as an alpha-carbon trace. ' +
@@ -259,7 +259,7 @@ export const BINDER_STRUCTURES: Structure[] = [
     id: 'MOSMO 3',
     name: 'MOSMO binder 3',
     caption:
-      'MOSMO binder 3, drawn with its target. The target MOSMO is coloured by secondary structure and the binder is in pink, so what the picture shows is where on MOSMO the design lands. This one kept the sequence designed for its first backbone. Its binding energy per unit of buried surface is -2.1209.',
+      'MOSMO binder 3, drawn with its target. The target MOSMO is coloured by secondary structure and the binder is in pink, so what the picture shows is where on MOSMO the design lands. This one kept the sequence designed for its first backbone. Its binding energy per unit of buried surface is -1.949.',
     credit:
       'Our own design: backbone from RFdiffusion3, sequence from ProteinMPNN, and the complex ' +
       'predicted with RoseTTAFold3, drawn as an alpha-carbon trace. ' +

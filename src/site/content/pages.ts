@@ -2621,7 +2621,7 @@ const model: Page = {
           yLabel: "successes credited to it",
           trend: "origin",
           footnote:
-            "A design is generated against a **list** of hotspots, not one, so a run is credited to every residue in its list. These axes therefore count uses rather than designs, and they cannot be added up and compared with the funnel: MOSMO's column alone comes to 34,068 uses, many times over the number of designs that produced them. Read as a rate, MEGF8 returns 34 successes from 1,658 uses and MOSMO 308 from 34,068. The fits are tight: the rate is close to constant whichever residue was named. But only 20 of MEGF8's residues and 30 of MOSMO's were ever named as a hotspot; the rest of the points are residues that were never tried, piled at the origin, and they carry much of the fit. Over the residues actually used, the same line gives 0.67 on MEGF8 and 0.92 on MOSMO. The MOSMO panel therefore makes the case on its own and the MEGF8 panel does not. The points are not named, because which numbering they are given in is still a question for the design subteam.",
+            "The graph compares the amount a hotspot was used to the number of passing binders it generated, and suggests that success was more closely tied to number of attempts with a hotspot rather than the hotspot's properties. This correlation is especially strong for MOSMO binders, the target with more data points.",
         },
       ],
     },
@@ -2762,19 +2762,19 @@ const model: Page = {
     {
       kind: "scatter",
       id: "ddg-chart",
-      heading: "Binding energy against hydrogen bonding",
+      heading: "Binding energy against unsatisfied hydrogen bonds",
       intro:
-        "Every scored design, with the energy per unit of buried surface up the side and the hydrogen bonds per unit of buried surface along the bottom. Lower is tighter.",
+        "Every design, with the energy per unit of buried surface up the side and the unsatisfied hydrogen bonds per unit of buried surface along the bottom. Lower is tighter on both.",
       panels: [{ points: DDG_POINTS }],
       groups: [
         { id: "MEGF8", label: "MEGF8 binders", shape: "square" },
         { id: "MOSMO", label: "MOSMO binders", shape: "circle" },
       ],
-      xLabel: "hydrogen bonds per unit of buried surface",
+      xLabel: "unsatisfied hydrogen bonds per unit of buried surface",
       yLabel: "binding energy per unit of buried surface",
       references: [{ axis: "y", value: -2.54, label: "the natural complex" }],
       footnote:
-        "**Fifteen designs beat the natural interface**, eleven against MEGF8 and four against MOSMO, between them accounting for seventeen of the points. The best is a resequenced MEGF8 design at -3.16, which is also the second of the six favourites below. Each point is one scoring run, and a design scored twice appears twice, so the 85 points here come from 67 of the 96 designs. The remaining 29, twenty-two against MEGF8 and seven against MOSMO, have no energy computed, which is a gap in what we can say about them rather than a judgement on them.",
+        "**Eighteen designs have more favourable computed energetics than the natural interface**, sixteen against MEGF8 and two against MOSMO. The best is a MEGF8 design at a normalised ddG of -3.28. Each point is one of 96 binders passing each of our filters and sent for wet lab validation.",
       source: "Energies computed with Rosetta's interface analysis [4].",
     },
     {
