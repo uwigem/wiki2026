@@ -1,4 +1,4 @@
-import { DOMAIN_ROLES, type ConstructGroup, type DomainRole } from '../content/constructs'
+import { DOMAIN_ROLES, REGISTRY_PART, registrySlug, type ConstructGroup, type DomainRole } from '../content/constructs'
 import { inline } from './RichText'
 
 /**
@@ -16,6 +16,11 @@ import { inline } from './RichText'
  * roles.
  *
  * Segment widths are even, and are not to scale.
+ *
+ * A construct we registered carries a link to its entry on the iGEM Registry,
+ * under the bar. The link is outside the `aria-hidden` wrapper the bar sits
+ * in, so it can be reached from the keyboard and read out, and the part name
+ * is in the spoken description as well.
  */
 
 /**
@@ -69,6 +74,7 @@ export default function ConstructDiagram({
                   <span className="sr-only">
                     {c.name}
                     {c.purpose ? `. ${c.purpose}.` : '.'}
+                    {c.registry ? ` Registered as ${c.registry}.` : ''}
                   </span>
 
                   <div aria-hidden>
@@ -93,6 +99,19 @@ export default function ConstructDiagram({
                       <p className="mt-1.5 text-note leading-snug text-leaf-800">{c.purpose}</p>
                     )}
                   </div>
+
+                  {c.registry && (
+                    <p className="mt-1 text-note leading-snug">
+                      <a
+                        href={REGISTRY_PART + registrySlug(c.registry)}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="cross-link"
+                      >
+                        {c.registry} on the iGEM Registry &#8599;
+                      </a>
+                    </p>
+                  )}
                 </li>
               ))}
             </ul>
