@@ -77,8 +77,7 @@ const RULES = [
  * exception is an edit to this list, which shows up in review.
  * ------------------------------------------------------------------------- */
 
-/** Unrouted old pages kept for reference; nothing there is published. */
-const WIDTH_EXEMPT = ['src/site/pages/archive/']
+const WIDTH_EXEMPT = []
 const COMMENT_LINE = /^\s*(?:\/\/|\/\*|\*)/
 const VARIANTS = String.raw`(?<![\w\-[/])(?:(?:[\w-]+|[\w-]*\[[^\]\s]+\]):)*`
 const WIDTH_PATTERNS = {
@@ -130,14 +129,11 @@ const WIDTH_ALLOWLIST = {
   'src/site/components/VideoRow.tsx': { 'max-w-2xl': 1 }, // a lone video player, not text
   'src/site/components/ToolShed.tsx': { 'w-[7.25rem]': 1 }, // tool tiles
   'src/site/components/CycleWheel.tsx': { 'max-w-[16rem]': 1, 'w-[30%]': 1 }, // the ring graphic
-  'src/site/components/StoryArt.tsx': { 'max-w-[320px]': 1 },
   'src/site/components/story/StoryStage.tsx': { 'w-[40%]': 1, 'w-[calc(40%-5rem)]': 1, 'xl:w-[calc(40%-7rem)]': 1 },
   'src/site/components/BalanceLogo.tsx': { maxWidth: 1 },
   'src/site/components/ResultsSoon.tsx': { maxWidth: 1 },
   'src/site/components/ScienceFigure.tsx': { maxWidth: 1 },
   'src/site/components/SignalDial.tsx': { maxWidth: 1 },
-  // Only the unrouted archive home page uses this hero.
-  'src/site/components/GardenHero.tsx': { 'max-w-3xl': 1, 'max-w-xl': 1, 'max-w-2xl': 1 },
 }
 
 /** Every width cap on one line of one file. */
