@@ -11,6 +11,21 @@
  * Lengths are not to scale and are not meant to be.
  */
 
+/** Where a part lives on the iGEM Registry. */
+export const REGISTRY_PART = "https://registry.igem.org/parts/";
+
+/**
+ * A part name as its Registry slug: lowercased, and the underscore in
+ * `BBa_26ZIW1O0` becomes a hyphen. Lowercasing alone gives a 404.
+ */
+export function registrySlug(part: string): string {
+  return part.toLowerCase().replace(/_/g, "-");
+}
+
+/** Our team's organisation page, which lists every part we registered. */
+export const REGISTRY_ORG =
+  "https://registry.igem.org/organisations/780ead9c-c73a-4a70-b847-d12a99c8771f";
+
 export type DomainRole = "receptor" | "machinery" | "recruitment" | "tag" | "marker" | "other";
 
 export interface Domain {
@@ -26,6 +41,12 @@ export interface Construct {
   domains: Domain[];
   /** One line on what this construct is for. */
   purpose?: string;
+  /**
+   * Its part name on the iGEM Registry, for the constructs we registered.
+   * Registration records a design; it says nothing about whether the part has
+   * been tested.
+   */
+  registry?: string;
 }
 
 export interface ConstructGroup {
@@ -57,6 +78,7 @@ export const RECRUITMENT_CONSTRUCTS: ConstructGroup[] = [
     constructs: [
       {
         name: "SMO–DmrC(T2098L)–eGFP",
+        registry: "BBa_26ZIW1O0",
         purpose: "SMO fusion for chemically induced recruitment",
         domains: [
           { label: "SMO", role: "receptor" },
@@ -66,6 +88,7 @@ export const RECRUITMENT_CONSTRUCTS: ConstructGroup[] = [
       },
       {
         name: "MGRN1–DmrA–His6",
+        registry: "BBa_26FV24Q3",
         purpose: "Direct MGRN1 recruitment",
         domains: [
           { label: "MGRN1", role: "machinery" },
@@ -75,6 +98,7 @@ export const RECRUITMENT_CONSTRUCTS: ConstructGroup[] = [
       },
       {
         name: "MGRN1(C279A/C282A)–DmrA–His6",
+        registry: "BBa_26BW0BTF",
         purpose: "Catalytically inactive MGRN1 control",
         domains: [
           { label: "MGRN1", role: "machinery", note: "C279A/C282A" },
@@ -84,6 +108,7 @@ export const RECRUITMENT_CONSTRUCTS: ConstructGroup[] = [
       },
       {
         name: "MEGF8 ICD(2602–2778)–DmrA–His6",
+        registry: "BBa_26I05D6Z",
         purpose: "Recruitment of the MEGF8 intracellular domain",
         domains: [
           { label: "MEGF8 ICD", role: "machinery", note: "2602–2778" },
@@ -100,6 +125,7 @@ export const RECRUITMENT_CONSTRUCTS: ConstructGroup[] = [
     constructs: [
       {
         name: "HA–MGRN1–NbALFA",
+        registry: "BBa_26RCUW3V",
         purpose: "ALFA-based MGRN1 recruitment",
         domains: [
           { label: "HA", role: "tag" },
@@ -109,6 +135,7 @@ export const RECRUITMENT_CONSTRUCTS: ConstructGroup[] = [
       },
       {
         name: "HA–MGRN1(C279A/C282A)–NbALFA",
+        registry: "BBa_2609KVHF",
         purpose: "Catalytically inactive ALFA-recruitment control",
         domains: [
           { label: "HA", role: "tag" },
@@ -118,6 +145,7 @@ export const RECRUITMENT_CONSTRUCTS: ConstructGroup[] = [
       },
       {
         name: "SMO–His6–ALFA",
+        registry: "BBa_26QN3KUC",
         purpose: "ALFA-tagged SMO construct",
         domains: [
           { label: "SMO", role: "receptor" },
@@ -134,6 +162,7 @@ export const RECRUITMENT_CONSTRUCTS: ConstructGroup[] = [
     constructs: [
       {
         name: "GPR161–eGFP–DmrC(T2098L)",
+        registry: "BBa_26BOQVNQ",
         purpose: "Recruitment system for an additional ciliary receptor",
         domains: [
           { label: "GPR161", role: "receptor" },
@@ -143,6 +172,7 @@ export const RECRUITMENT_CONSTRUCTS: ConstructGroup[] = [
       },
       {
         name: "GPR161–GFP–ALFA",
+        registry: "BBa_26YKAU4R",
         purpose: "ALFA-tagged GPR161 receptor",
         domains: [
           { label: "GPR161", role: "receptor" },
@@ -159,6 +189,7 @@ export const RECRUITMENT_CONSTRUCTS: ConstructGroup[] = [
     constructs: [
       {
         name: "DmrA–mCherry",
+        registry: "BBa_266ZJ0I6",
         purpose: "Proximity-only control",
         domains: [
           { label: "DmrA", role: "recruitment" },
